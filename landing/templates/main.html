@@ -1,0 +1,12 @@
+<ul>
+{% for m in milestones %}
+<li>
+    <b>{{ m.label }}
+        {% if m.current %}
+        <span>Current</span>
+        {% endif %}
+    </b>
+    <p>{{ m.description }}</p>
+</li>
+{% endfor %}
+</ul>
