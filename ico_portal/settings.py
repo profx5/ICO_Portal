@@ -72,9 +72,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'user_office.User'
-
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Moscow'
@@ -85,9 +82,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'assets'),
-)
+AUTHENTICATION_BACKENDS = ['user_office.auth_backend.UserOfficeAuthBackend',
+                           'django.contrib.auth.backends.ModelBackend']

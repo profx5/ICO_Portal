@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<form action="/login/" method="POST">
+    <div class="container" id="main-container">
+        <label for="usernamname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username">
+        <p class="text-center"> or </p>
+        <label for="eht_account"><b>Etherium account</b></label>
+        <input type="text" placeholder="Enter etherium account" name="eth_addr">
+
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password">
+
+        <button type="submit">Login</button>
+        <p class="text-center"> or </p>
+        <a href="/signup/">
+SignUp
+        </a>
+
+        {% csrf_token %}
+    </div>
+</form>
+{% endblock %}
