@@ -18,7 +18,7 @@ export default class Header extends React.Component {
     }
 
     componentWillMount() {
-        axios.get('data.json').then((response) => {
+        axios.get('/api/getMe/').then((response) => {
             let data = response.data;
             this.setState({
                 currentAmount: data.tokens_amount,

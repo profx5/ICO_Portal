@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login
 
 class LoginView(View):
     auth_backend = 'user_office.auth_backend.UserOfficeAuthBackend'
-    template_name = "login.html"
+    template_name = "authentication/login.html"
 
     def get(self, request):
         return render(request, self.template_name)
@@ -14,7 +14,7 @@ class LoginView(View):
     def post(self, request):
         user = authenticate(request,
                             passwd=request.POST['password'],
-                            eth_addr=request.POST['eth_addr'],
+                            eht_account=request.POST['eht_account'],
                             username=request.POST['username'])
 
         if user is not None:

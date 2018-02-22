@@ -8,4 +8,4 @@ class LoginRequiredMixin:
         if request.user.is_authenticated and isinstance(request.user, Investor):
             return super().dispatch(request, *args, **kwargs)
         else:
-            return redirect('/login/')
+            return redirect('/login')

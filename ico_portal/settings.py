@@ -15,8 +15,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'webpack_loader',
+    'rest_framework',
     'landing',
-    'user_office'
+    'user_office',
 ]
 
 MIDDLEWARE = [

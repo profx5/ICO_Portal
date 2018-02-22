@@ -1,8 +1,4 @@
-from .login import LoginView
-from .signup import SignUpView
-from .logout import logout
 from .user_office import UserOfficeView
+from .authentication import login, logout, signup
 
-login = LoginView.as_view()
-signup = SignUpView.as_view()
 user_office = UserOfficeView.as_view()
