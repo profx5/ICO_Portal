@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'webpack_loader',
     'landing',
     'user_office'
 ]
@@ -86,3 +87,10 @@ STATIC_URL = '/static/'
 
 AUTHENTICATION_BACKENDS = ['user_office.auth_backend.UserOfficeAuthBackend',
                            'django.contrib.auth.backends.ModelBackend']
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+            'BUNDLE_DIR_NAME': 'bundles/',
+            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
+        }
+}
