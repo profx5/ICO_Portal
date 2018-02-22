@@ -8,7 +8,7 @@ Create user
 CREATE USER ico_portal@localhost IDENTIFIED BY "read_manual";
 ```
 
-Grant privilegies
+Grant privileges
 ```
 GRANT ALL PRIVILEGES ON ico_portal.* TO 'ico_portal_user'@'localhost';
 ```
