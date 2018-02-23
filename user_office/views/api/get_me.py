@@ -14,6 +14,6 @@ class GetMeView(RetrieveAPIView):
     serializer_class = InvestorSerializer
 
     def retrieve(self, request, *args, **kwargs):
-        serializer = self.get_serializer(request.user)
+        serialized = self.get_serializer(request.user)
 
-        return Response(serializer.data)
+        return Response(serialized.data)

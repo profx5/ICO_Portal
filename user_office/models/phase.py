@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.db.models.query import QuerySet
 from django.db.models.manager import BaseManager
@@ -18,6 +20,11 @@ class PhaseQuerySet(QuerySet):
 
         if overlaps:
             return [o.name for o in overlaps]
+
+    def get_current_phase(self):
+        utc_date = datetime.utcnow()
+
+        return self.get(begin_date__lte=utc_date, end_date__gte=utc_date)
 
 
 class Phase(models.Model):
