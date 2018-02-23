@@ -14,7 +14,7 @@ class LoginView(View):
     def post(self, request):
         user = authenticate(request,
                             passwd=request.POST['password'],
-                            eht_account=request.POST['eht_account'],
+                            eth_account=request.POST['eth_account'],
                             username=request.POST['username'])
 
         if user is not None:

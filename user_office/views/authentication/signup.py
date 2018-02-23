@@ -11,7 +11,7 @@ class SignUpView(View):
 
     def post(self, request):
         investor = Investor.objects.create(username=request.POST['username'],
-                                           eht_account=request.POST['eht_account'])
+                                           eth_account=request.POST['eth_account'])
 
         investor.set_password(request.POST['password'])
         investor.save()

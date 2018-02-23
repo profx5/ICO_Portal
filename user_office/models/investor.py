@@ -19,7 +19,7 @@ class InvestorManager(models.Manager):
         except Investor.DoesNotExist:
             return None
 
-    def find_for_auth(self, username=None, eht_account=None):
+    def find_for_auth(self, username=None, eth_account=None):
         if username is None and eth_account is None:
             raise NoAuthData()
 
