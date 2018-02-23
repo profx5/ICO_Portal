@@ -33,7 +33,7 @@ mysql -uroot
 ```
 ```
 CREATE DATABASE ico_portal CHARACTER SET utf8 COLLATE utf8_bin;
-CREATE USER ico_portal@localhost IDENTIFIED BY "read_manual";
+CREATE USER ico_portal_user@localhost IDENTIFIED BY "read_manual";
 GRANT ALL PRIVILEGES ON ico_portal.* TO 'ico_portal_user'@'localhost';
 ```
 
