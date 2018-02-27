@@ -89,7 +89,8 @@ gulp.task('styles', function() {
     .pipe(cssnano({
         zindex: false,
         autoprefixer: false,
-        discardComments: { removeAll: true }
+        discardComments: { removeAll: true },
+        discardUnused: {fontFace: false}
     }))
     .on('error', function(err) {
         notify({ title: 'CSS task error!' }).write(err.message);
