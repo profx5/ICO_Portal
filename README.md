@@ -54,3 +54,10 @@ Run npm server
 ```
 npm run start
 ```
+
+## Run landing in development environment
+
+gulp dev
+```
+gulp build
+```
