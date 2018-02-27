@@ -5,7 +5,15 @@ from django.contrib.auth.admin import UserAdmin
 from .models import Investor, Phase
 
 
+class InvestorAdmin(admin.ModelAdmin):
+    list_display = ('username', 'eth_account', 'tokens_amount',)
+    exclude = ('password',)
+
+    class Meta:
+        model = Investor
+
+
 admin.site.unregister(Group)
 
-admin.site.register(Investor)
+admin.site.register(Investor, InvestorAdmin)
 admin.site.register(Phase)
