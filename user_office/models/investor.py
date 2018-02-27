@@ -1,5 +1,9 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
+from django.db.models import Sum
+
+from .account import Account
+from .deposit import Deposit
 
 
 class NoAuthData(Exception):
@@ -55,3 +59,20 @@ class Investor(AbstractBaseUser):
     class Meta:
         ordering = ['id']
         db_table = 'investors'
+
+    def get_account(self, currency_code):
+        existing = [a for a in self.pay_accounts.all()
+                    if a.currency == currency_code]
+
+        if existing:
+            return existing[0]
+
+        else:
+            account = Account.objects.create_by_code(currency_code, self)
+
+            account.save()
+
+            return account
+
+    def recalc_balance(self):
+        self.tokens_amount = Deposit.objects.filter(investor=self).aggregate(amount=Sum('amount'))['amount']

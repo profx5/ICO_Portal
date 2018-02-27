@@ -21,10 +21,8 @@ class PhaseQuerySet(QuerySet):
         if overlaps:
             return [o.name for o in overlaps]
 
-    def get_current_phase(self):
-        utc_date = datetime.utcnow()
-
-        return self.get(begin_date__lte=utc_date, end_date__gte=utc_date)
+    def get_phase(self, date=datetime.utcnow()):
+        return self.get(begin_date__lte=date, end_date__gte=date)
 
 
 class Phase(models.Model):

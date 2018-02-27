@@ -16,10 +16,13 @@ class PhaseSerializer(ModelSerializer):
 
 
 class GetICOPhaseStats(RetrieveAPIView):
+    """
+    Return current ico state
+    """
     serializer_class = PhaseSerializer
 
     def retrieve(self, request, *args, **kwargs):
-        current_phase = Phase.objects.get_current_phase()
+        current_phase = Phase.objects.get_phase()
 
         serialized = self.get_serializer(current_phase)
 

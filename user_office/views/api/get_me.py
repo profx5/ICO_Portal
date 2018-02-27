@@ -11,9 +11,10 @@ class InvestorSerializer(ModelSerializer):
 
 
 class GetMeView(RetrieveAPIView):
+    """
+    Return information about current user
+    """
     serializer_class = InvestorSerializer
 
-    def retrieve(self, request, *args, **kwargs):
-        serialized = self.get_serializer(request.user)
-
-        return Response(serialized.data)
+    def get_object(self):
+        return self.request.user

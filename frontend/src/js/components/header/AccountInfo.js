@@ -11,7 +11,7 @@ export default class AccountInfo extends React.Component {
                 <a href="#" className="Header_link">
                     <button className="btn btn-info">PROFILE</button>
                 </a>
-                <a href="#" className="Header_link">
+                <a href="/logout/" className="Header_link">
                     <button className="btn btn-danger">LOG OUT</button>
                 </a>
             </div>
