@@ -35,6 +35,25 @@
         font-size 30px
         line-height 0.77
         text-align center
+    &_hours, &_minutes, &_seconds
+        &:before
+            content ':'
+            margin 0 7px
+        &:after
+            right 0
+            transform translateX(13%)
+    &_day, &_hours, &_minutes, &_seconds
+        position relative
+        &:after
+            content attr(data-text)
+            font-size 13px
+            color blue
+            position absolute
+            bottom - 20px
+    &_day
+        &:after
+            left 50%
+            transform translateX(-50%)
     &_fundsTitle, &_discountTitle, &_timerTitle
         padding-bottom 16px
         text-align center
