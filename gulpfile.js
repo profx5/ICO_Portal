@@ -29,8 +29,8 @@ svgSprite    			= require("gulp-svg-sprites"), // Get sprite from pack of images
 rename       		    = require('gulp-rename'), // Rename files
 del          			= require('del'), // Remove files
 notify				    = require('gulp-notify'), // Tell about error during task processing
-absolutePath		    = require('path'); // Create file's path
-
+absolutePath		    = require('path'), // Create file's path
+plumber                 = require('gulp-plumber');
 
  //MAIN MAIN MAIN
 
@@ -57,7 +57,7 @@ gulp.task('reload', function(done) {
 
 
 gulp.task('html', function() {
-    	return gulp.src(['frontend/landing/src/html/template/template.html'], { since: gulp.lastRun('html') })
+    	return gulp.src(['frontend/landing/src/html/template/template.html'])
         .pipe(include()).on('error', console.error)
         .pipe(rename('index.html'))
         .on('error', function(err) {
@@ -84,6 +84,7 @@ var processors = [
 gulp.task('styles', function() {
 	return gulp.src('frontend/landing/src/styles/*.styl')
 	.pipe(sourcemaps.init())
+    .pipe(plumber())
 	.pipe(stylus())
 	.pipe(postcss(processors))
     .pipe(cssnano({
@@ -106,6 +107,7 @@ gulp.task('styles', function() {
 // ———————————————————————————————————————————
 gulp.task('scripts:single', function() {
     return gulp.src('frontend/landing/src/js/*.js')
+        .pipe(plumber())
         .pipe(include()).on('error', console.error)
         .pipe(babel({
             presets: ['es2015']
@@ -200,7 +202,7 @@ gulp.task('watch', gulp.series('clean:dist', gulp.parallel('html', 'styles', 'sc
     gulp.watch('frontend/landing/src/styles/**/*.*', gulp.series('styles', 'reload'));
     gulp.watch(['frontend/landing/src/js/*.*', 'frontend/landing/src/js/pages/**/*.*'], gulp.series('scripts:single', 'reload'));
     gulp.watch(['frontend/landing/src/js/widgets/**/*.*', 'frontend/landing/src/js/chunks/**/*.*'], gulp.series('scripts:all', 'reload'));
-    gulp.watch(['frontend/landing/src/assets/**/*.*', '!frontend/landing/src/assets/img/**/*.*'], gulp.series('assets', 'reload'));
+    gulp.watch(['frontend/landing/src/assets/**/*.*'], gulp.series('assets', 'reload'));
     gulp.watch('frontend/landing/src/assets/img/**/*.*', gulp.series('images', 'reload'));
     gulp.watch('frontend/landing/src/vendor/**/*.css', gulp.series('vendor:css', 'reload'));
     gulp.watch('frontend/landing/src/vendor/**/*.js', gulp.series('vendor:js', 'reload'));
