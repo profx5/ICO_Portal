@@ -57,7 +57,6 @@ npm run start
 
 ## Run landing in development environment
 
+Run dev environment for landing
+```
 gulp dev
-```
-gulp build
-```

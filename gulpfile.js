@@ -57,7 +57,9 @@ gulp.task('reload', function(done) {
 
 
 gulp.task('html', function() {
-    	return gulp.src(['frontend/landing/src/html/*.html'], { since: gulp.lastRun('html') })
+    	return gulp.src(['frontend/landing/src/html/template/template.html'], { since: gulp.lastRun('html') })
+        .pipe(include()).on('error', console.error)
+        .pipe(rename('index.html'))
         .on('error', function(err) {
             notify({ title: 'template task error!' }).write(err.message);
             this.emit('end');
@@ -84,6 +86,11 @@ gulp.task('styles', function() {
 	.pipe(sourcemaps.init())
 	.pipe(stylus())
 	.pipe(postcss(processors))
+    .pipe(cssnano({
+        zindex: false,
+        autoprefixer: false,
+        discardComments: { removeAll: true }
+    }))
     .on('error', function(err) {
         notify({ title: 'CSS task error!' }).write(err.message);
         this.emit('end');
@@ -102,6 +109,7 @@ gulp.task('scripts:single', function() {
         .pipe(babel({
             presets: ['es2015']
         }))
+        .pipe(uglify())
         .on('error', function(err) {
             notify({ title: 'scripts:single task error!' }).write(err.message);
             this.emit('end');
@@ -115,6 +123,7 @@ gulp.task('scripts:all', function() {
         .pipe(babel({
             presets: ['es2015']
         }))
+        .pipe(uglify())
         .on('error', function(err) {
             notify({ title: 'scripts:all task error!' }).write(err.message);
             this.emit('end');
@@ -125,18 +134,18 @@ gulp.task('scripts:all', function() {
 gulp.task('vendor:js', function() {
     return gulp.src(['frontend/landing/src/vendor/jquery/**/*', 'frontend/landing/src/vendor/**/!(jquery)*.js'])
     .pipe(concat('vendor.js'))
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('frontend/landing/dist/js'))
 })
 
 gulp.task('vendor:css', function() {
     return gulp.src('frontend/landing/src/vendor/**/*.css')
     .pipe(concat('vendor.css'))
-    // .pipe(cssnano({
-    //     zindex: false,
-    //     autoprefixer: false,
-    //     discardComments: { removeAll: true }
-    // }))
+    .pipe(cssnano({
+        zindex: false,
+        autoprefixer: false,
+        discardComments: { removeAll: true }
+    }))
     .pipe(gulp.dest('frontend/landing/dist/styles'))
 })
 
@@ -186,7 +195,7 @@ gulp.task('clear', function (callback) {
 //DEV //DEV //DEV
 
 gulp.task('watch', gulp.series('clean:dist', gulp.parallel('html', 'styles', 'scripts:all', 'vendor:css', 'vendor:js', 'assets'), function() {
-    gulp.watch(['frontend/landing/src/html/**/*.html'], gulp.series('reload'));
+    gulp.watch(['frontend/landing/src/html/**/*.html'], gulp.series('html', 'reload'));
     gulp.watch('frontend/landing/src/styles/**/*.*', gulp.series('styles', 'reload'));
     gulp.watch(['frontend/landing/src/js/*.*', 'frontend/landing/src/js/pages/**/*.*'], gulp.series('scripts:single', 'reload'));
     gulp.watch(['frontend/landing/src/js/widgets/**/*.*', 'frontend/landing/src/js/chunks/**/*.*'], gulp.series('scripts:all', 'reload'));
@@ -205,28 +214,28 @@ gulp.task('dev', gulp.parallel('watch', 'browser-sync'));
 // BUILD  // BUILD  // BUILD  // BUILD
 
 
-gulp.task('reduce:js', function() {
-    return gulp.src('frontend/landing/dist/js/**/*')
-            .pipe(uglify())
-            .pipe(gulp.dest('frontend/landing/public/js'))
-})
+// gulp.task('reduce:js', function() {
+//     return gulp.src('frontend/landing/dist/js/**/*')
+//             .pipe(uglify())
+//             .pipe(gulp.dest('frontend/landing/public/js'))
+// })
 
-gulp.task('reduce:css', function() {
-    return gulp.src('frontend/landing/dist/styles/**/*')
-            .pipe(cssnano({
-                zindex: false,
-                autoprefixer: false,
-                discardComments: { removeAll: true }
-            }))
-            .pipe(gulp.dest('frontend/landing/public/styles'))
-})
+// gulp.task('reduce:css', function() {
+//     return gulp.src('frontend/landing/dist/styles/**/*')
+//             .pipe(cssnano({
+//                 zindex: false,
+//                 autoprefixer: false,
+//                 discardComments: { removeAll: true }
+//             }))
+//             .pipe(gulp.dest('frontend/landing/public/styles'))
+// })
 
-gulp.task('build', gulp.series('clean:public', gulp.parallel('reduce:css', 'reduce:js'), function() {
-    return gulp.src([
-        'frontend/landing/dist/!(styles|js)/**/*',
-        'frontend/landing/dist/*'
-        ])
-            .pipe(gulp.dest('public'))
-}))
+// gulp.task('build', gulp.series('clean:public', gulp.parallel('reduce:css', 'reduce:js'), function() {
+//     return gulp.src([
+//         'frontend/landing/dist/!(styles|js)/**/*',
+//         'frontend/landing/dist/*'
+//         ])
+//             .pipe(gulp.dest('public'))
+// }))
 
 // BUILD  // BUILD  // BUILD  // BUILD
