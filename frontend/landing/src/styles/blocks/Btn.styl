@@ -3,7 +3,7 @@
     height 43px
     color white
     text-transform uppercase
-    padding 0 20px
+    padding 0 35px
     position relative
     min-width 210px
     font-weight 300
@@ -12,7 +12,17 @@
     display block
     font-family 'Circe', 'Trebuchet MS', 'Tahoma', 'Arial', 'sans-serif'
     &-pink
-        background #f84f78
+        background pink
+    &-transparent
+        background transparent
+    &-pink&-transparent
+        border 1px solid pink
+        color pink
+        font-weight 400
+    &-blue&-transparent
+        border 1px solid blue
+        color blue
+        font-weight 400
     &_iconWrapper
         position absolute
         top 50%

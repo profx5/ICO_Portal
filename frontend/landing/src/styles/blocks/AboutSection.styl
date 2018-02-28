@@ -1,0 +1,43 @@
+.AboutSection
+    position relative
+    &_container
+        height 100%
+        padding-top 130px
+        padding-bottom 80px
+    &_header
+        color blue
+        font-weight 500
+        font-size 35px
+        z-index 10
+        position relative
+        text-align center
+        letter-spacing normal
+        margin-bottom 170px
+    &_headerPhantom
+        z-index 9
+        position relative
+        text-align center
+        bottom -10px
+    &_content
+        display: flex
+        flex-flow row nowrap
+        justify-content center
+        align-items flex-start
+    &_contentText
+        padding-right 90px
+        padding-left 60px
+    &_text
+        color #6b7c93
+        font-weight 400
+        &:not(:last-of-type)
+            padding-bottom 20px
+        &:last-of-type
+            padding-bottom 50px
+    &_img
+        size auto 750px
+        position relative
+        margin-top -230px
+    &_btn
+        display inline-block !important
+        &:last-of-type
+            margin-left 20px
