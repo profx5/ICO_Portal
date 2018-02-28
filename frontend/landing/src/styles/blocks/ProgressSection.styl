@@ -27,10 +27,12 @@
         justify-content center
     &_fundsTitle, &_fundsText, &_timerTitle, &_day, &_hours, &_minutes, &_seconds
         color blue
+        font-weight 400
     &_fundsText
         color blue
     &_discountTitle, &_discountText
         color pink
+        font-weight 400
     &_fundsText, &_discountText, &_day, &_hours, &_minutes, &_seconds
         font-size 30px
         line-height 0.77
@@ -113,6 +115,7 @@
         &:before
             content attr(data-state)
             bottom -60px
+            font-weight 400
     &_progressPoint-1
         left 0
         &:before, &:after
