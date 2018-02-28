@@ -6,4 +6,4 @@ from .models import Milestone
 def main(request):
     milestones = Milestone.objects.all()
 
-    return render(request, 'main.html', {'milestones': milestones})
+    return render(request, 'index.html', {'milestones': milestones})

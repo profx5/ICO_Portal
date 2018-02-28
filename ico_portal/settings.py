@@ -35,7 +35,7 @@ ROOT_URLCONF = 'ico_portal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['frontend/landing/dist'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,3 +114,7 @@ LOGGING = {
 }
 
 CELERY_BROKER_URL = 'amqp://ico_portal:read_manual@localhost:5672/ico_portal_vhost'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "frontend/landing/dist/static"),
+]
