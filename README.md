@@ -16,6 +16,12 @@ brew install mysql
 brew services start mysql
 ```
 
+4. (optional) rabbitmq
+```
+brew intsall rabbitmq
+brew services start rabbitmq
+```
+
 ## Installation
 Install python dependencies
 ```
@@ -41,6 +47,13 @@ Prepare database
 ```
 python manage.py makemigrations
 python manage.py migrate
+```
+
+(Optional) Configure rabbitmq
+```
+rabbitmqctl add_user ico_portal read_manual
+rabbitmqctl add_vhost ico_portal_vhost
+rabbitmqctl set_permissions -p ico_portal_vhost ico_portal ".*" ".*" ".*"
 ```
 
 ## Run app in development environment

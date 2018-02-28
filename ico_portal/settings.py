@@ -112,3 +112,5 @@ LOGGING = {
         },
     }
 }
+
+CELERY_BROKER_URL = 'amqp://ico_portal:read_manual@localhost:5672/ico_portal_vhost'
