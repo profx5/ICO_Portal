@@ -82,12 +82,17 @@
             background white
             transform translateY(-15px)
             box-shadow 1px 4px 20px 0 rgba(157, 155, 192, 0.24)
+    &_slideInnerContent:hover &_slideHeader
+        border-bottom-color #E9E9E9
+        transform translateY(-10px)
     &_slideHeader
         font-size 25px
         font-weight 400
         line-height normal
         color blue
         padding-bottom 5px
+        border-bottom 1px solid transparent
+        transition all .3s ease
     &_slideContent
         &:before
             content ''

@@ -1,0 +1,81 @@
+.NewsSection
+    background #FAFBFB
+    &_container
+        height 100%
+        padding-top 50px
+    &_headerPhantom
+        z-index 9
+        position relative
+        text-align center
+        text-transform uppercase
+        bottom -57px
+    &_header
+        color blue
+        font-weight 500
+        font-size 35px
+        z-index 10
+        position relative
+        text-align center
+        letter-spacing normal
+        margin-bottom 95px
+    &_newsWrapper
+        display: flex
+        flex-flow row wrap
+        justify-content space-between
+    &_newsCard
+        flex-basis 44%
+        margin-bottom 135px
+        position relative
+    &_newsCard:hover &_newsHeader, &_newsCard:hover &_newsDate
+        color white
+    &_newsCard:hover &_newsImg:after
+        animation-play-state running
+    &_newsCard:hover &_newsImg
+        opacity 1
+    &_newsHeader
+        font-size 35px
+        color #212121
+        font-weight 400
+        z-index 10
+        position relative
+        transition color .2s ease
+    &_newsDate
+        color #9fa3a7
+        font-size 14px
+        line-height 1.86
+        z-index 10
+        position relative
+        transition color .2s ease
+    &_newsImg
+        background-repeat no-repeat
+        background-size cover
+        background-position top left
+        display block
+        position absolute
+        size calc(100% + 130px) calc(100% + 140px)
+        top 50%
+        left 50%
+        transform translate(-50%, -50%)
+        z-index 9
+        opacity 0
+        transition opacity .3s ease
+        &:after
+            content url('../img/common/arrow-white.svg')
+            position absolute
+            top 50%
+            right 40px
+            transform translateY(-50%)
+            z-index 12
+            animation newsArrow 1s ease-out infinite
+            animation-play-state paused
+        &:before
+            content ''
+            display block
+            position absolute
+            left 0
+            top 0
+            size 100% 100%
+            background blue
+            opacity .8
+    &_btnMore
+        margin 0 auto 100px
