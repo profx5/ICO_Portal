@@ -20,7 +20,7 @@
         margin-bottom 35px
     &_timerWrapper
         position relative
-        margin-bottom 100px
+        margin-bottom 50px
     &_timerText
         color blue
         font-weight 400
@@ -53,7 +53,7 @@
             transform translateX(-53%)
             trasnform-origin 50% 50%
     &_sliderContainer
-        padding-left 250px
+        padding-left 160px
         padding-bottom 170px
     &_navBtn
         background-image none
@@ -67,8 +67,21 @@
     &_btnNext
         right 210px
     &_slideContent
-        width 300px !important
+        width 460px !important
         position relative
+        display flex
+        align-items flex-start
+        padding 0 40px
+    &_slideInnerContent
+        padding 40px 40px
+        position relative
+        z-index 250
+        border-radius 3px
+        transition box-shadow .3s ease-out, background .3s ease-out, transform .5s ease
+        &:hover
+            background white
+            transform translateY(-15px)
+            box-shadow 1px 4px 20px 0 rgba(157, 155, 192, 0.24)
     &_slideHeader
         font-size 25px
         font-weight 400
@@ -83,7 +96,7 @@
             width 150vw
             background blue
             position absolute
-            top 130px
+            top 170px
             right 150px
         &:after
             content ''
@@ -96,7 +109,7 @@
             left 50%
             transform translateX(-50%)
             border-radius 20px
-            top 121.5px
+            top 161.5px
             z-index 200
     &_slide-reached &_slideHeader
         color pink
@@ -118,7 +131,7 @@
         font-weight 400
     &_slideText:first-of-type
         height 46px
-        padding-bottom 50%
+        padding-bottom 45%
         
 
 

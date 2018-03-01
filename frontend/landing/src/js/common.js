@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     let sliderInst = new Swiper($('.swiper-container'), {
       slidesPerView: 4,
-      spaceBetween: 300,
+      spaceBetween: 350,
       // centeredSlides: true,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
