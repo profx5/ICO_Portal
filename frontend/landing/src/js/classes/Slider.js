@@ -1,6 +1,11 @@
 class Slider {
-	constructor (className) {
+	constructor (className, opts) {
+        let $el = $(className);
+
 		this.inited = false;
-		this.el = $(className);
+		this.el = $el;
+
+        this.inst = new Swiper($el,opts);
+
 	}
 }

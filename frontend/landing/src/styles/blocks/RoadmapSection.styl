@@ -1,0 +1,162 @@
+.RoadmapSection
+    padding-top 27px
+    position relative
+    &_pattern
+        background white url('../img/common/pattern.svg') no-repeat center
+    &_headerPhantom
+        z-index 9
+        position relative
+        text-align center
+        text-transform uppercase
+        bottom -57px
+    &_header
+        color blue
+        font-weight 500
+        font-size 35px
+        z-index 10
+        position relative
+        text-align center
+        letter-spacing normal
+        margin-bottom 35px
+    &_timerWrapper
+        position relative
+        margin-bottom 100px
+    &_timerText
+        color blue
+        font-weight 400
+        text-align center
+    &_countWrapper
+        display: flex
+        flex-flow row nowrap
+        justify-content center
+        & > span
+            font-size 30px
+            color blue
+            font-weight 400
+            text-align center
+            &:not(:first-of-type):before
+                content ':'
+                margin 0 7px
+    &_day, &_hours, &_minutes, &_seconds
+        position relative
+        &:after
+            content attr(data-text)
+            font-size 13px
+            color blue
+            position absolute
+            bottom -12px
+    &_day:after
+        left 1px
+    &_hours, &_minutes, &_seconds
+        &:after
+            left 74%
+            transform translateX(-53%)
+            trasnform-origin 50% 50%
+    &_sliderContainer
+        padding-left 250px
+        padding-bottom 170px
+    &_navBtn
+        background-image none
+        position absolute
+        display flex
+        align-items center
+        top 250px
+    &_btnPrev
+        transform rotate(180deg)
+        left 210px
+    &_btnNext
+        right 210px
+    &_slideContent
+        width 300px !important
+        position relative
+    &_slideHeader
+        font-size 25px
+        font-weight 400
+        line-height normal
+        color blue
+        padding-bottom 5px
+    &_slideContent
+        &:before
+            content ''
+            display block
+            height 4px
+            width 150vw
+            background blue
+            position absolute
+            top 130px
+            right 150px
+        &:after
+            content ''
+            display block
+            size 20px 20px
+            background blue
+            border solid 2px white
+            position absolute
+            top 50%
+            left 50%
+            transform translateX(-50%)
+            border-radius 20px
+            top 121.5px
+            z-index 200
+    &_slide-reached &_slideHeader
+        color pink
+    &_slide-reached &_slideContent
+        &:before
+            background pink
+        &:after
+            background pink
+    &_slide:first-of-type &_slideContent:before
+        width 150vw
+    &_slide:not(:first-of-type) &_slideContent:before
+        width 750px
+    &_slideText
+        color #000000
+        font-weight 400
+    &_slideList
+        list-style-type none
+        color #000000
+        font-weight 400
+    &_slideText:first-of-type
+        height 46px
+        padding-bottom 50%
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.RoadmapSection_slide:nth-of-type(1) .RoadmapSection_slideContent:before
+    z-index 100
+.RoadmapSection_slide:nth-of-type(2) .RoadmapSection_slideContent:before
+    z-index 99
+.RoadmapSection_slide:nth-of-type(3) .RoadmapSection_slideContent:before
+    z-index 98
+.RoadmapSection_slide:nth-of-type(4) .RoadmapSection_slideContent:before
+    z-index 97
+.RoadmapSection_slide:nth-of-type(5) .RoadmapSection_slideContent:before
+    z-index 96
+.RoadmapSection_slide:nth-of-type(6) .RoadmapSection_slideContent:before
+    z-index 95
+.RoadmapSection_slide:nth-of-type(7) .RoadmapSection_slideContent:before
+    z-index 94
+.RoadmapSection_slide:nth-of-type(8) .RoadmapSection_slideContent:before
+    z-index 93
+.RoadmapSection_slide:nth-of-type(9) .RoadmapSection_slideContent:before
+    z-index 92
+.RoadmapSection_slide:nth-of-type(10) .RoadmapSection_slideContent:before
+    z-index 91
+.RoadmapSection_slide:nth-of-type(11) .RoadmapSection_slideContent:before
+    z-index 90
+.RoadmapSection_slide:nth-of-type(12) .RoadmapSection_slideContent:before
+    z-index 89
+.RoadmapSection_slide:nth-of-type(11) .RoadmapSection_slideContent:before
+    z-index 88
