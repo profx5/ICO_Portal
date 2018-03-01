@@ -1,0 +1,129 @@
+.StructureSection
+    background-repeat no-repeat
+    background-size cover
+    position relative
+    &:before
+        content ''
+        display block
+        background rgba(50, 140, 255, 0.67);
+        position absolute
+        top 0
+        left 0
+        size 100% 100%
+    &_content
+        position relative
+        height 100%
+        padding-top 125px
+    &_headerPhantom
+        text-transform uppercase
+        text-align center
+        color white
+        opacity .12
+    &_header
+        text-align center
+        color white
+        font-size 35px
+        position relative
+        top -10px
+        padding-bottom 65px
+    &_scheme
+        display: flex
+        flex-flow row nowrap
+        justify-content center
+        align-items space-between
+        height 643px
+        margin-bottom 60px
+    &_schemeCard
+        background white
+        box-shadow 0 6px 26px 0 rgba(46, 83, 163, 0.4)
+        border-radius 3px
+        width 307px
+        display: flex
+        flex-direction row
+        justify-content center
+        align-items center
+        padding 30px 32px 25px
+        font-size 18px
+        line-height normal
+        font-weight 400
+        text-transform uppercase
+        text-align center
+        position relative
+        &:before
+            position absolute
+            display block
+            left 50%
+    &_schemePart
+        display flex
+        flex-flow column nowrap
+        align-items center
+        justify-content space-between
+    &_schemeCenter
+        border-radius 200px
+        box-shadow 0 0 0 35px rgba(255,255,255,.1)
+    &_schemePart-1, &_schemePart-3
+        border dashed 2px rgba(255,255,255,.9)
+        border-radius 21px
+        padding 42px 48px
+    &_schemePart-2
+        margin-left 42px
+        margin-right 42px
+    &_schemePart-1 &_schemeCard
+        color #f84f78
+        height 118px
+    &_schemePart-2 &_schemeCard
+        color #a240f2
+        min-height 160px
+    &_schemePart-3 &_schemeCard
+        color #2155c5
+        height 118px
+    &_schemePart-1 &_schemeCard:nth-of-type(1)
+        &:before
+            content url("../img/common/arrow-red.svg")
+            transform translate(-50%, 162%)
+            bottom 50%
+    &_schemePart-1 &_schemeCard:nth-of-type(2)
+        &:before
+            content url("../img/common/arrow-red-long.svg")
+            transform translate(195%, -30%)
+            right 50%
+            left unset
+            top 50%
+    &_schemePart-1 &_schemeCard:nth-of-type(3)
+        &:before
+            content url("../img/common/arrow-red.svg")
+            transform translate(-50%, -162%) rotate(180deg)
+            top 50%
+    &_schemePart-3 &_schemeCard:nth-of-type(1)
+        &:before
+            content url("../img/common/arrow-blue.svg")
+            transform translate(-50%, 162%)
+            bottom 50%
+    &_schemePart-3 &_schemeCard:nth-of-type(2)
+        &:before
+            content url("../img/common/arrow-blue-long.svg")
+            transform translate(-195%, -30%)
+            left 50%
+            right unset
+            top 50%
+    &_schemePart-3 &_schemeCard:nth-of-type(3)
+        &:before
+            content url("../img/common/arrow-blue.svg")
+            transform translate(-50%, -162%) rotate(180deg)
+            top 50%
+    &_schemePart-2 &_schemeCard:nth-of-type(1)
+        &:before
+            content url("../img/common/arrow-purple.svg")
+            transform translate(-50%, 192%)
+            bottom 50%
+    &_schemePart-2 &_schemeCard:nth-of-type(2)
+        &:before
+            content url("../img/common/arrow-purple.svg")
+            transform translate(-50%, -192%) rotate(180deg)
+            top 50%
+    &_text
+        color white
+        font-weight 300
+        line-height normal
+        text-align center
+        padding-bottom 100px
