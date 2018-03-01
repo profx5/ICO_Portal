@@ -35,6 +35,18 @@
         justify-content space-between
         align-items space-between
         padding-right 110px
+    &_currency
+        position relative
+        &:before, &:after
+            position absolute
+            top -35px
+            color white
+        &:before
+            content 'from'
+            left 28%
+        &:after
+            content 'to'
+            right 29%
     &_inputsWrapper-currency
         height 115px
         margin-bottom 35px
