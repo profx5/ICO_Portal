@@ -72,6 +72,10 @@ rabbitmqctl set_permissions -p ico_portal_vhost ico_portal ".*" ".*" ".*"
 ```
 
 ## Run app in development environment
+Run dev environment for landing
+```
+gulp dev
+```
 
 Run django server
 ```
@@ -81,11 +85,6 @@ python manage.py runserver
 Run npm server
 ```
 npm run start
-```
-
-Run dev environment for landing
-```
-gulp dev
 ```
 
 ## Run celery workers
