@@ -45,7 +45,6 @@ GRANT ALL PRIVILEGES ON ico_portal.* TO 'ico_portal_user'@'localhost';
 
 Prepare database
 ```
-python manage.py makemigrations
 python manage.py migrate
 ```
 or (recommended)
