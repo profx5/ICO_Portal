@@ -13,15 +13,15 @@ MINT_STATE_CHOICES = [
 class Mint(models.Model):
     id = models.AutoField(primary_key=True)
     currency = models.CharField(max_length=10, choices=CURRENCY_CHOICES)
-    txn_id = models.CharField(max_length=100)
+    txn_hash = models.CharField(max_length=100)
     account_to = models.CharField(max_length=100)
     account_from = models.CharField(max_length=100)
     value = models.PositiveIntegerField()
-    txn_date = models.DateTimeField()
+    txn_date = models.DateTimeField(blank=True, null=True)
     state = models.CharField(max_length=10, choices=MINT_STATE_CHOICES,
                              default='WAIT')
-    confirms = models.PositiveIntegerField(default=0)
-    confirm_date = models.DateTimeField(blank=True, null=True)
+    block_hash = models.CharField(max_length=100)
+    block_number = models.PositiveIntegerField()
 
     objects = models.Manager()
 

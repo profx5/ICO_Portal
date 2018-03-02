@@ -6,7 +6,7 @@ from user_office.models import Deposit, Mint
 class MintSerializer(ModelSerializer):
     class Meta:
         model = Mint
-        fields = ('txn_id',)
+        fields = ('txn_hash',)
 
 class DepositSerializer(ModelSerializer):
     mint = MintSerializer(many=False, read_only=True)

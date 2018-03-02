@@ -48,6 +48,17 @@ Prepare database
 python manage.py makemigrations
 python manage.py migrate
 ```
+or (recommended)
+[download](https://www.dropbox.com/sh/luvuxz8pqn6hpgb/AACjNzn2snBICDVPpj30JPAta?dl=0) database dump and deploy it
+os x
+```
+mysql -u ico_portal_user -pread_manual ico_portal < ico_portal_dump.sql
+```
+windows
+```
+mysql -u ico_portal_user -pread_manual ico_portal
+source ico_portal_dump.sql
+```
 
 (Optional) Configure rabbitmq
 ```
@@ -71,4 +82,16 @@ npm run start
 Run dev environment for landing
 ```
 gulp dev
+```
+
+## Run celery workers
+
+Run contract events watcher
+```
+./start_node_watcher.sh
+```
+
+Run event processing workers
+```
+./start_workers.sh
 ```

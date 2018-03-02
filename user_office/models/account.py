@@ -1,9 +1,9 @@
 from django.db import models
 from django.db.models import Manager
-from user_office.currencies import get_enabled_currencies, get_currency
+from blockchain.currencies import Currencies
 
 
-CURRENCY_CHOICES = [(c.code, c.name) for c in get_enabled_currencies()]
+CURRENCY_CHOICES = [(i.name, i.code) for i in Currencies.get_currencies()]
 
 
 class AccountManager(Manager):
