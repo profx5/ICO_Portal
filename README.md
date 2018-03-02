@@ -32,6 +32,11 @@ Install npm dependencies
 ```
 npm install
 ```
+Install gulp
+```
+npm install gulp-cli -g
+npm install gulp -D
+```
 
 Create user and database
 ```
