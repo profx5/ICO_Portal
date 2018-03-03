@@ -1,0 +1,70 @@
+.ContactSection
+    background-size cover
+    background-repeat no-repeat
+    background-position center
+    position relative
+    &:before
+        content ''
+        display block
+        background rgba(50, 116, 255, 0.86);
+        position absolute
+        top 0
+        left 0
+        size 100% 100%
+    &_headerPhantom
+        z-index 9
+        position relative
+        text-align center
+        text-transform uppercase
+        bottom -57px
+        color #fff
+        opacity .12
+    &_header
+        color white
+        font-weight 500
+        font-size 35px
+        z-index 10
+        position relative
+        text-align center
+        letter-spacing normal
+        margin-bottom 35px
+    &_form
+        padding-bottom 100px
+        display block
+    &_inputsWrapper-personalData
+        display flex
+        flex-flow row nowrap
+        justify-content space-between
+        margin-bottom 50px
+    &_input, &_textarea
+        font-size 18px
+        font-family "Circe"
+        font-weight 500 !important
+        line-height 1.5
+        padding-left 10px
+        padding-right 10px
+        &::-webkit-input-placeholder
+            color rgba(0,0,0,.3)
+    &_input
+        flex-basis 48%
+        height 43px
+        line-height 43px
+        border-radius 3px
+        padding 0 25px
+        padding-top 4px
+        background white
+        text(16px,400,'Circe', black, 16px)
+        letter-spacing .4px
+        border solid 1px #d9d9d9
+    &_textarea
+        size 100% 87px
+        border-radius 3px
+        background white
+        border 1px solid #d9d9d9
+        padding-top 8px
+        padding-bottom 8px
+        resize none
+    &_inputsWrapper-message
+        margin-bottom 40px
+    &_btnSubmit
+        margin-left auto
