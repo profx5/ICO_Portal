@@ -6,7 +6,7 @@ SECRET_KEY = 'e%1h03sc5xmbr#q^r2l7h78-^1vuwapt8%eiumxyr@^91v61v^'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -113,8 +113,36 @@ LOGGING = {
     }
 }
 
-CELERY_BROKER_URL = 'amqp://ico_portal:read_manual@localhost:5672/ico_portal_vhost'
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "frontend/landing/dist/static"),
 ]
+
+CURRENCIES = {
+    'ethereum_contract': {
+        'code': 'ETH',
+        'name': 'Ethereum',
+        'module': 'ethereum_contract',
+        'token_price': 1000,
+        'rpc_url': 'http://127.0.0.1:8545',
+        'contract_address': '0xF69C63e7a39b56b69E09b21496B46005bF950458',
+        'confirmations_required': 1,
+    }
+}
+
+CELERY_BROKER_URL = 'amqp://ico_portal:read_manual@localhost:5672/ico_portal_vhost'
+CELERY_TASK_SERIALIZER = 'pickle'
+CELERY_ACCEPT_CONTENT = ['pickle']
+CELERY_BEAT_SCHEDULE = {
+    'check-contract-event': {
+        'task': 'blockchain.ethereum_contract.tasks.check_events',
+        'schedule': 30.0,
+    }
+}
+CELERY_TASK_ROUTES = {
+    'blockchain.ethereum_contract.tasks.check_events': {
+        'queue': 'events_beat',
+    },
+    'blockchain.ethereum_contract.tasks.process_event': {
+        'queue': 'events'
+    }
+}

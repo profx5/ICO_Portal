@@ -1,6 +1,6 @@
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
-from user_office.currencies import get_enabled_currencies
+from blockchain.currencies import Currencies
 
 
 class GetAvailableCurrencies(GenericAPIView):
@@ -11,6 +11,6 @@ class GetAvailableCurrencies(GenericAPIView):
         return Response(
             [
                 {"code": c.code, "name": c.name}
-                for c in get_enabled_currencies()
+                for c in Currencies.get_currencies()
             ]
         )
