@@ -77,51 +77,38 @@ $(document).ready(function() {
       lat: 49.282617,
       lng: -123.092594,
       zoom: 14,
-      styles: [
-          {
-              "stylers": [
-                  {
-                      "hue": "#2c3e50"
-                  },
-                  {
-                      "saturation": 250
-                  }
-              ]
-          },
-          {
-              "featureType": "road",
-              "elementType": "geometry",
-              "stylers": [
-                  {
-                      "lightness": 50
-                  },
-                  {
-                      "visibility": "simplified"
-                  }
-              ]
-          },
-          {
-              "featureType": "road",
-              "elementType": "labels",
-              "stylers": [
-                  {
-                      "visibility": "off"
-                  }
-              ]
-          }
-      ]
+      styles: mapStyles
     })
 
-    map.addMarker({
-      position: {
-        lat: 49.283675,
-        lng: -123.112228
-      },
-      icon: {
-          url: "../static/img/common/svg/location.svg",
-          scaledSize: new google.maps.Size(28, 40),
-      },
-    })
+    map.addMarker(mainMarkerOpts)
+
+
+    // $('[data-fancybox="fancybox"]').click(() => {
+      
+      $(`[data-fancybox="fancybox"]`).fancybox({
+
+        idleTime: 0,
+        btnTpl : {
+          smallBtn: `<button data-fancybox-close class="MapPopup_btnClose"></button>`,
+        },
+        afterLoad: function() {
+
+          var popupMap = new GMaps({
+            div: '.MapPopup_map',
+            lat: 49.282617,
+            lng: -123.092594,
+            zoom: 14,
+            styles: mapStyles,
+          });
+
+          popupMap.addMarker(mainMarkerOpts);
+        },
+      })
+    // })
+
+
+
+    
 
 
 	// =include pages/*.js

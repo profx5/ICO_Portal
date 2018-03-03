@@ -123,14 +123,14 @@ gulp.task('scripts:all', function() {
 });
 
 gulp.task('vendor:js', function() {
-    return gulp.src(['frontend/landing/src/vendor/jquery/**/*', 'frontend/landing/src/vendor/**/!(jquery)*.js'])
+    return gulp.src(['frontend/landing/src/vendor/js/**/*.js'])
     .pipe(concat('vendor.js'))
     .pipe(uglify())
     .pipe(gulp.dest('frontend/landing/dist/static/js'))
 })
 
 gulp.task('vendor:css', function() {
-    return gulp.src('frontend/landing/src/vendor/**/*.css')
+    return gulp.src('frontend/landing/src/vendor/css/**/*.css')
     .pipe(concat('vendor.css'))
     .pipe(cssnano({
         zindex: false,
