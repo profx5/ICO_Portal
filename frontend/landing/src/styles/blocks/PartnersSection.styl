@@ -1,9 +1,60 @@
 .PartnersSection
     height 87px
     background #f7f7f7
+    position relative
+    z-index 20
     &_container
         height 100%
         display: flex
         flex-flow row nowrap
         justify-content space-between
         align-items center
+    &_partnerWrapper
+        position relative
+    &_header
+        font-size 25px
+        color pink
+        position relative
+        font-size 25px
+        &:after
+            content ''
+            display block
+            size 100% 1px
+            background rgba(151,151,151,.2)
+            margin 18px 0
+    &_text
+        color #000000
+        line-height 1.44
+        font-weight 400
+        margin-bottom 10px
+    &_link
+        color blue
+        font-weight 400
+        &:hover
+            color blue
+    &_partnerWrapper:hover &_partnerTip
+        transform translate3d(-50%, 107%, 0)
+        opacity 1
+        visibility visible
+    &_partnerTip
+        position absolute
+        width 371px
+        height auto
+        bottom 0
+        left 50%
+        transform translate3d(-50%, 117%, 0)
+        opacity 0
+        padding 32px 32px
+        box-shadow 1px 4px 20px 0 rgba(157, 155, 192, 0.24)
+        background white
+        transition all .3s ease
+        visibility hidden
+        &:before
+            content ''
+            display block
+            border 11px solid transparent
+            border-bottom-color white
+            position absolute
+            top -21px
+            left 50%
+            transform translateX(-50%)
