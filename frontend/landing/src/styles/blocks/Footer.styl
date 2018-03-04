@@ -3,11 +3,22 @@
     &_container
         padding-top 70px
         padding-bottom 45px
+        @media xs
+            padding-top 40px
+            padding-bottom 55px
     &_top
-        display: flex
-        flex-flow row nowrap
-        justify-content space-between
-        margin-bottom 23px
+        @media smPlus
+            display flex
+            flex-flow row nowrap
+            justify-content space-between
+            margin-bottom 23px
+        @media xs
+            order 2
+            position absolute
+            width 100%
+            left 50%
+            transform translateX(-50%)
+            top 68px
     &_menuItem
         color #383838
         display inline-block
@@ -15,31 +26,57 @@
         margin-right 20px
     &_link
         font-weight 400
+        @media xs
+            display block
+            text-align center
     &_divider
         background #959595
         opacity .2
         height 1px
         margin-bottom 23px
+        @media xs
+            display none
     &_info
         display: flex
         flex-flow row nowrap
         justify-content space-between
         padding-bottom 10px
+        @media xs
+            flex-wrap wrap
+            order 1
     &_addressText
         font-weight 400
         font-style normal
         &:before
             content url('../img/common/svg/location.svg')
             margin-right 7px
+            @media xs
+                display none
+        @media xs
+            text-align center
     &_socialWrapper
-        display: flex
+        display flex
         flex-flow row nowrap
         justify-content space-between
         width 120px
+    &_address
+        @media xs
+            order 3
+            border-top 1px solid rgba(149,149,149,.2)
+            padding-top 25px
+    &_links
+        @media xs
+            margin 0 auto
+            order 1
+            margin-bottom 50px
+            
     &_copyright
         display: flex
         flex-flow row nowrap
         justify-content space-between
+        @media xs
+            flex-wrap wrap
+            justify-content center
     &_rightText
         position relative
         padding-left 30px
@@ -54,8 +91,11 @@
             transform translateY(-50%)
     &_copyrightText
         font-weight 400
+        @media xs
+            order 2
     &_copyrightBlock
         font-weight 400
-    &_copyrightBlock
         display: flex
         flex-flow row nowrap
+        @media xs
+            order 1

@@ -5,11 +5,18 @@
     left 0
     top 0
     z-index 10
+    @media xs
+        height 73px
     &_container
         display flex
         justify-content space-between
         align-items center
         height 100%
+        @media xs
+            padding 0 20px
+    &_logo
+        @media xs
+            size 160px auto
     &_menu
         height 100%
         position absolute
@@ -40,3 +47,17 @@
         text-transform uppercase
         color white
         margin-left 15px
+    &_menuHamburger
+        display flex
+        justify-content center
+        align-items center
+    &_menuWrapper
+        display flex
+        flex-flow row nowrap
+        justify-content flex-end
+        align-items center
+    &_menuText
+        color white
+        margin-right 10px
+        font-weight 500
+        padding-top 4px

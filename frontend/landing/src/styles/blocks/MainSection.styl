@@ -7,14 +7,24 @@
     &:before
         content ''
         display block
-        background rgba(50, 116, 255, 0.66);
+        background rgba(50, 116, 255, 0.66)
         position absolute
         top 0
         left 0
         size 100% 100%
     &_container
-        padding-top 34vh
+        padding-top 0
+        display flex
+        justify-content center
+        align-items center
         height 100%
+        @media xs
+            padding-top 0
+            padding-left 18px
+            padding-right 18px
+            display flex
+            justify-content center
+            align-items center
     &_header
         font-size 45px
         line-height 58px
@@ -23,18 +33,32 @@
         color white
         text-align center
         margin-bottom 0
-        padding-bottom 15px
+        @media xs
+            font-size 22px
+            line-height 1.32
+            padding-bottom 20px
+        @media sm
+            padding-bottom 15px
+        @media md
+            padding 0 12vw 15px
     &_text
         color white
         text-align center
-        padding-bottom 25px
+        padding 0 0 35px
+        &Br
+            @media xs
+                display none
+        @media xs
+            font-size 14px
+            line-height 1.64
+            padding-bottom 20px
     &_btn
         margin-left auto
         margin-right auto
     &_scrollIcon
         position absolute
         left 50%
-        bottom 41px
+        bottom 15px
         transform translateX(-50%)
     &_infoWrapper
         position absolute
@@ -47,6 +71,14 @@
         flex-flow row nowrap
         justify-content space-between
         align-items center
+        @media xs
+            flex-wrap wrap
+            justify-content center
+            bottom 75px
+            height 65px
+        @media sm
+            padding 0 30px
+            bottom 20px
     &_websiteLink
         color white
         &:hover

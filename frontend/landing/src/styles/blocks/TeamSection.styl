@@ -6,6 +6,9 @@
         text-align center
         text-transform uppercase
         bottom -57px
+        @media xs
+            white-space nowrap
+            left -74px
     &_header
         color blue
         font-weight 500
@@ -15,6 +18,8 @@
         text-align center
         letter-spacing normal
         margin-bottom 45px
+        @media xs
+            font-size 22px
     &_switcherWrapper
         size 266px 42px
         display flex
@@ -46,25 +51,45 @@
         display flex
         align-items center
         top 208px
+        @media xs
+            top 2015
+        @media sm
+            top 185px
     &_btnPrev
         transform rotate(180deg)
         left 210px
+        @media xs
+            left 20px
+        @media sm
+            left 50px
     &_btnNext
         right 210px
+        @media xs
+            right 20px
+        @media sm
+            right 50px
     &_slideContent
-        width 250px
+        @media xs
+            padding 0 30px
+        @media md
+            width 250px
     &_sliderContainer
-        padding-left 13vw
         visibility hidden
         opacity 0
         transition all .3s ease
+        @media xs
+            margin-bottom 70px !important
+        @media md
+            padding-left 13vw
         &-advisiors
             position absolute
             width 100%
+            @media xs
+                top 236px
             @media md
                 top 290px
             @media sm
-                top 379px
+                top 267px
         &-active
             visibility visible
             opacity 1
@@ -107,12 +132,18 @@
     &_sliderWrapper
         margin-bottom 60px
     &_scrollbar
-        size 1170px 2px !important
+        height 2px
         background rgba(49,111,223,.15)
         display block
         left 50% !important
         right unset
         transform translateX(-50%)
+        @media xs
+            width 86% !important
+        @media sm
+            width 80vw !important
+        @media md
+            width 1170px !important
     &_scrollbarHandle
         background: #f84f78
         border-radius 10px
@@ -120,3 +151,7 @@
         top -5px !important
         position relative
         cursor pointer
+        @media xs
+            top -2.5px !important
+        @media sm
+            top -3.5px !important

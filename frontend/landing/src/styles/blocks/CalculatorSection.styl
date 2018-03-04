@@ -15,6 +15,8 @@
         height 100%
         padding-top 66px
         padding-bottom 96px
+        @media xs
+            padding 30px 18px 0
     &_header, &_text
         color white
         text-align center
@@ -22,47 +24,140 @@
         font-size 35px
         font-weight 500
         padding-bottom 13px
+        @media xs
+            font-size 22px
+            padding-bottom 7px
     &_text
         margin-bottom 70px
+        @media xs
+            font-size 14px
+            line-height 1.64
+            padding 0 20px
+    &_form
+        @media xs
+            position relative
     &_desc
         color white
         float left
         width 100px
         padding-top 13px
         margin-right 10px
+        @media xs
+            width 100%
+            text-align center
+            font-size 14px
+            &Br
+                display none
+    &_currency &_desc
+        @media xs
+            margin-bottom 40px
+    &_formula &_desc, &_address &_desc
+        margin-bottom 10px
+    &_inputsWrapper-currency
+        height 115px
+        margin-bottom 35px
     &_inputsWrapper
         display flex
         flex-flow row wrap
         justify-content space-between
         align-items space-between
         padding-right 110px
+        @media xs
+            padding 0 0
+            height auto
+            width 100%
     &_currency
+        position relative
+    &_address
+        @media xs
+            margin-bottom 70px
+    &_currency, &_formula, &_address
+        @media xs
+            display flex
+            flex-flow column nowrap
+            align-items center
+    &_inputField
+        flex-basis 49%
         position relative
         &:before, &:after
             position absolute
             top -35px
             color white
-        &:before
-            content 'from'
-            left 28%
-        &:after
-            content 'to'
-            right 29%
-    &_inputsWrapper-currency
-        height 115px
-        margin-bottom 35px
+            @media xs
+                font-size 14px
+                top -27px
+        @media xs
+            flex-basis 100%
+        &:nth-of-type(1)
+            @media xs
+                margin-bottom 15px
+            &:before
+                content 'from'
+                left 50%
+                transform translateX(-50%)
+        &:nth-of-type(2)
+            @media xs
+                margin-bottom 55px
+            &:after
+                content 'to'
+                right 28%
+                right 50%
+                transform translateX(50%)
+                @media xs
+                    display none
+        &:nth-of-type(3)
+            @media xs
+                margin-bottom 15px
+                &:after
+                    content 'to'
+                    right 28%
+                    right 50%
+                    transform translateX(50%)
+                
     &_inputsWrapper-currency &_input
-        flex-basis 49%
+        width 100%
         text-align center
     &_formula &_inputsWrapper-row
         margin-bottom 45px
+    &_formula &_inputsWrapper-row &_input
+        margin-bottom 15px
     &_address &_input
         font-weight 300
         color white
         background transparent
         border 1px solid white
+    &_formulaBtn, &_addressBtn
+        @media xs
+            width 100%
+        @media sm
+            margin-left auto
+    &_key
+        color white
+        padding 0 30px
+        flex-basis 70%
+        line-height 27px
+        border 1px solid white
+        border-radius 3px
+        @media xs
+            width 100%
+            height auto
+            word-wrap break-word
+            text-align center
+            line-height 26px
+            font-size 14px
+            padding 10px 30px
+            margin-bottom 50px
+        @media sm
+            flex-basis 100%
+            line-height 40px
+            margin-bottom 15px
     &_inputsWrapper-row &_input
         flex-basis 70%
+        @media xs
+            flex-basis 100%
+        @media sm
+            flex-basis 100%
+            margin-bottom 15px
     &_input
         height 43px
         line-height 43px
@@ -70,13 +165,28 @@
         padding 0 25px
         padding-top 4px
         background white
-        text(16px,400,'Circe', black, 16px)
+        text(16px,400,'Circe', black, unset)
         letter-spacing .4px
+        @media xs
+            font-size 14px
+            padding 3px 15px 0
+    
     &_tip
         display inline-block
         position relative
         color white
         margin-top 20px
+        @media xs
+            text-align center
+            font-size 14px
+            position absolute
+            bottom 63px
+            left 50%
+            transform translateX(-50%)
+        @media sm
+            margin-top 0
+            margin-left 110px
+            top -48px
         &:hover
             color white
         &:before

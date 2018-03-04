@@ -32,6 +32,8 @@ html
     font-size 62.5%
     line-height 62.5%
     min-height 100%
+    @media smMinus
+        overflow-x hidden
     
 body
     min-height 100%
@@ -41,11 +43,16 @@ body
     font-size 1.6rem
     line-height normal
     color black
+    @media smMinus
+        overflow-x hidden
     
 strong
     font-weight 600
 b
     font-weight 700
+    
+
+
     
 .container
     width 1070px
@@ -53,8 +60,9 @@ b
     margin-left auto
     margin-right auto
     position relative
-    @media sm
+    @media smMinus
         width 100%
+        padding 0 30px
 
 .HeaderPhantom
     font-family 'Gilroy'
@@ -63,3 +71,9 @@ b
     font-weight 800
     display block
     letter-spacing -.5px
+    @media xs
+        font-size 45px !important
+        bottom -36px !important
+    @media sm
+        font-size 52px
+        bottom -52px

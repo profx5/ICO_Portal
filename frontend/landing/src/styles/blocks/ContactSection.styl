@@ -19,6 +19,9 @@
         bottom -57px
         color #fff
         opacity .12
+        @media xs
+            left -18px
+            white-space nowrap
     &_header
         color white
         font-weight 500
@@ -28,6 +31,8 @@
         text-align center
         letter-spacing normal
         margin-bottom 35px
+        @media xs
+            font-size 22px
     &_form
         padding-bottom 100px
         display block
@@ -36,13 +41,16 @@
         flex-flow row nowrap
         justify-content space-between
         margin-bottom 50px
+        @media xs
+            flex-wrap wrap
+            margin-bottom 0
     &_input, &_textarea
         font-size 18px
         font-family "Circe"
         font-weight 400 !important
-        line-height 1
         padding-left 10px
         padding-right 10px
+        line-height unset !important
         &::-webkit-input-placeholder
             color rgba(0,0,0,.3)
     &_input
@@ -56,6 +64,9 @@
         text(16px,400,'Circe', black, 16px)
         letter-spacing .4px
         border solid 1px #d9d9d9
+        @media xs
+            flex-basis 100%
+            margin-bottom 20px
     &_textarea
         size 100% 87px
         border-radius 3px
@@ -68,3 +79,6 @@
         margin-bottom 40px
     &_btnSubmit
         margin-left auto
+        @media xs
+            margin-right auto
+            width 100%

@@ -1,8 +1,12 @@
 .ProgressSection
     position relative
     padding-top 88px
+    @media xs
+        padding-top 30px
     &_container
         padding-bottom 100px
+        @media xs
+            padding 0
     &_infoText
         font-weight 500
         line-height 1.44
@@ -10,21 +14,51 @@
         text-align center
         &:last-of-type
             margin-bottom 51px
+        @media xs
+            padding-left 30px
+            padding-right 30px
+            font-size 14px
+            line-height 23px
     &_wrapper
         height 360px
         border-radius 3px
         background white
         padding 0 109px
+        @media xs
+            padding 0 20px 150px
+            height auto
+        @media sm
+            padding 0 40px
     &_top
         display: flex
         flex-flow row nowrap
         justify-content space-between
         padding-top 47px
         margin-bottom 42px
+        @media xs
+            flex-wrap wrap
+            justify-content center
+            padding-top 25px
     &_countWrapper
         display: flex
         flex-flow row nowrap
         justify-content center
+    &_funds, &_discount, &_timer
+        @media xs
+            flex-basis 100%
+            margin-bottom 20px
+            padding-bottom 20px
+            border-bottom 1px solid rgba(49,111,223,.1)
+    @media xs
+        &_funds
+            order 2
+        &_discount
+            order 3
+        &_timer
+            order 1
+            padding-bottom 40px
+    &_fundsTitle, &_discountTitle, &_timerTitle
+        font-size 14px
     &_fundsTitle, &_fundsText, &_timerTitle, &_day, &_hours, &_minutes, &_seconds
         color blue
         font-weight 400
@@ -59,11 +93,18 @@
     &_fundsTitle, &_discountTitle, &_timerTitle
         padding-bottom 16px
         text-align center
+    &_fundsTitle, &_discountTitle
+        @media xs
+            padding-bottom 12px
     &_hr
         background #316fdf
         opacity .1
         margin-bottom 70px
+    &_progressWrapper
+        @media xs
+            width 143vw
     &_progressBarGeneral
+        width 100% !important
         height 5px
         background #eaeaea
         position relative
@@ -131,3 +172,17 @@
         &:before, &:after
             text-align right
             transform translateX(calc(-100% + 3px))
+            
+
+.scrollbar {
+  width: 640px;
+  height: 5px;
+  margin-top 100px
+}
+
+.scrollbar .handle {
+  width: 100px;
+  /* overriden if dynamicHandle: 1 */
+  height: 100%;
+  background: #888;
+}

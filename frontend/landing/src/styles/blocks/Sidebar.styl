@@ -1,0 +1,61 @@
+.Sidebar
+    position fixed
+    z-index 100
+    top 0
+    right 0
+    height 100%
+    width 74vw
+    background white
+    transform translate3d(100%,0,0)
+    transition transform .3s ease
+    @media xs
+        padding-top 20px
+    @media sm
+        padding-top 25px
+    &-active
+        transform translate3d(0,0,0)
+    &_controls
+        display flex
+        flex-flow row nowrap
+        justify-content space-between
+        align-items center
+        margin-bottom 50px
+        @media xs
+            padding 0 20px
+        @media sm
+            padding 0 30px
+    &_btn
+        min-width unset
+        width 150px
+    &_menuWrapper
+        display: flex
+        flex-flow row nowrap
+        justify-content flex-end
+        align-items center
+    &_btn
+        @media xs
+            font-size 13px
+            width 95px
+            height 30px
+            padding 3px 5px 0
+    &_menuText
+        color blue
+        margin-right 10px
+        font-weight 500
+        @media xs
+            padding-top 4px
+    &_menuHamburger
+        display: flex
+        justify-content center
+        align-items center
+    &_navItem
+        color blue
+        font-weight 500
+        text-align center
+        list-style-type none
+        height 50px
+        &:not(:last-of-type)
+            border-bottom 1px solid rgba(49,111,223,.1)
+    &_navLink
+        display block
+        line-height 50px

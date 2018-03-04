@@ -15,19 +15,29 @@
         text-align center
         letter-spacing normal
         margin-bottom 170px
+        @media xs
+            font-size 22px
+            margin-bottom 20px
+        @media sm
+            margin-bottom 110px
     &_headerPhantom
         z-index 9
         position relative
         text-align center
         bottom -57px
     &_content
-        display: flex
-        flex-flow row nowrap
-        justify-content center
-        align-items flex-start
+        @media smPlus
+            display: flex
+            flex-flow row nowrap
+            justify-content center
+            align-items flex-start
     &_contentText
         padding-right 90px
         padding-left 60px
+        @media xs
+            padding 0 0
+        @media sm
+            padding-right 30px
     &_text
         color #6b7c93
         font-weight 400
@@ -39,7 +49,27 @@
         size auto 750px
         position relative
         margin-top -230px
+        @media xs
+            display block
+            margin 0 auto 20px
+            size 58vw auto
+        @media sm
+            height 500px
+            margin-top -95px
+            margin-left calc(2vw + 40px)
     &_btn
-        display inline-block !important
+        @media xs
+            width 100%
+        @media sm
+            width 258px
+            display block
+        @media md
+            display inline-block !important
+        &:first-of-type
+            @media smMinus
+                margin-bottom 15px
         &:last-of-type
-            margin-left 20px
+            @media md
+                margin-left 20px
+            @media sm
+                margin-left 0
