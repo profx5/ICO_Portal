@@ -29,6 +29,6 @@
                 return;
             }
             $this.removeClass('Btn-animated Btn-hover Btn-noEvent');
-        }, duration + 2);
+        }, duration);
     });
 }
