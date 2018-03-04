@@ -1,20 +1,69 @@
+duration = .3s
+
 .Btn
     border-radius 100px
     height 43px
     color white
     text-transform uppercase
-    padding 0 35px
     position relative
     min-width 210px
     font-weight 300
     font-size 16px
     line-height 1
-    padding-top 4px
     display block
     cursor pointer
     font-family 'Circe', 'Trebuchet MS', 'Tahoma', 'Arial', 'sans-serif'
+    overflow hidden
+    z-index 20
+    &:before
+        content ''
+        display block
+        size 100% 100%
+        position absolute
+        top 0
+        left 0
+        transform translate3d(-100%,0,0)
+        pointer-events none
+        will-change transform
+    &:after
+        content attr(data-value)
+        position relative
+        pointer-events none
+    &-hover &_text
+        color blue
+    &-hover
+        &:before
+            transition transform .3s ease
+            transform translate3d(0,0,0)
+    &-hover &_iconWrapper:before
+        transition transform .2s ease .15s
+        transform translate3d(0,0,0)
+
+    &-animated:not(.Btn-hover):before
+        transform translate3d(100%,0,0)
+        transition transform .3s ease
+    &-animated:not(.Btn-hover) &_iconWrapper:before
+        transform translate3d(100%,0,0)
+        transition transform .2s ease .15s
+    &-hover &_icon:before
+        transform translate3d(100%,0,0)
+    &-hover &_icon:after
+        transform translate3d(0,0,0)
+        
+    &-noEvent
+        pointer-events none
+    &_text
+        size 100% 100%
+        display block
+        padding 1px 35px 0
+        line-height 43px
+        transition color duration ease
+        position relative
+        z-index 11
     &-pink
         background pink
+        &:before
+            background white
     &-transparent
         background white
     &-pink&-transparent
@@ -40,10 +89,43 @@
         justify-content center
         align-items center
         padding-left 3px
+        overflow hidden
         padding-top 2px
+        pointer-events none
+        transition background .15s ease .2s
         &:before
             content ''
-            size 9px 13px
             display block
-            background url('../img/common/svg/btn-arrow.svg')
-            
+            position absolute
+            size 100% 100%
+            top 0
+            left 0
+            background blue
+            transform translate3d(-100%,0,0)
+    &_icon
+        position absolute
+        top 0
+        left 0
+        size 100% 100%
+        &:before
+            content ''
+            size 100% 100%
+            display block
+            position absolute
+            top 0
+            left 0
+            background url('../img/common/svg/btn-arrow-pink.svg') no-repeat 55% 55%
+            pointer-events none
+            transform translate3d(0,0,0)
+            transition transform .2s ease .15s
+        &:after
+            content ''
+            size 100% 100%
+            display block
+            position absolute
+            top 0
+            left 0
+            background url('../img/common/svg/btn-arrow-white.svg') no-repeat 55% 55%
+            pointer-events none
+            transform translate3d(-100%,0,0)
+            transition transform .2s ease .15s
