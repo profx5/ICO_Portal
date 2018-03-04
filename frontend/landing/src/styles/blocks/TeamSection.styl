@@ -51,6 +51,7 @@
         display flex
         align-items center
         top 208px
+        visibility hidden
         @media xs
             top 2015
         @media sm
@@ -87,12 +88,17 @@
             @media xs
                 top 236px
             @media md
-                top 290px
+                top 289px
             @media sm
                 top 267px
-        &-active
-            visibility visible
-            opacity 1
+    &-advisiorsActive &_advisiorsBtn, &-teamActive &_teamBtn
+        visibility visible
+    &-teamActive &_sliderContainer-team
+        visibility visible
+        opacity 1
+    &-advisiorsActive &_sliderContainer-advisiors
+        visibility visible
+        opacity 1
     &_thumbnail
         size 185px 185px
         margin 0 auto
@@ -144,11 +150,11 @@
             width 80vw !important
         @media md
             width 1170px !important
-    &_scrollbarHandle
+    &_scrollbarHandle-team, &_scrollbarHandle-advisiors
         background: #f84f78
         border-radius 10px
         height 10px
-        top -5px !important
+        top -3px !important
         position relative
         cursor pointer
         @media xs

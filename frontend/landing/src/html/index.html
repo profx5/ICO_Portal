@@ -1,7 +1,7 @@
 <!-- MAIN SECTION START -->
 
 <section class="MainSection" style="background-image: url(static/img/common/main-section-bg.jpg);">
-    <div class="container MainSection_container">
+    <div class="container-fluid MainSection_container">
         <div class="MainSection_textWrapper">
             <h1 class="MainSection_header">We know how to improve<br class="MainSection_headerBr" /> your life today!</h1>
             <p class="MainSection_text">Longevity life data marketplace and ecosystem fueled by<br class="MainSection_textBr" /> the Longevity crypto token</p>
@@ -153,13 +153,16 @@
                 </div>
             </div>
             <hr class="ProgressSection_hr hidden-xs">
-            <div class="ProgressSection_progressWrapper">
-                <div class="ProgressSection_progressBarGeneral">
-                    <div class="ProgressSection_progressBarCurrent" data-collected-money="$1,2 M"></div>
-                    <div class="ProgressSection_progressPoint ProgressSection_progressPoint-1" data-money="0" data-state="Start"></div>
-                    <div class="ProgressSection_progressPoint ProgressSection_progressPoint-2" data-money="$2 M" data-state="Soft cap"></div>
-                    <div class="ProgressSection_progressPoint ProgressSection_progressPoint-3" data-money="$3 M" data-state="Hard cap"></div>
-                    <div class="ProgressSection_progressPoint ProgressSection_progressPoint-4" data-money="$4 M" data-state="Final"></div>
+            <div class="ProgressSection_progressWrapperScrollable">
+                
+                <div class="ProgressSection_progressWrapper">
+                    <div class="ProgressSection_progressBarGeneral">
+                        <div class="ProgressSection_progressBarCurrent" data-collected-money="$1,2 M"></div>
+                        <div class="ProgressSection_progressPoint ProgressSection_progressPoint-1" data-money="0" data-state="Start"></div>
+                        <div class="ProgressSection_progressPoint ProgressSection_progressPoint-2" data-money="$2 M" data-state="Soft cap"></div>
+                        <div class="ProgressSection_progressPoint ProgressSection_progressPoint-3" data-money="$3 M" data-state="Hard cap"></div>
+                        <div class="ProgressSection_progressPoint ProgressSection_progressPoint-4" data-money="$4 M" data-state="Final"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -235,8 +238,10 @@
             <div class="AboutSection_contentText">
                 <p class="AboutSection_text">Longevitytoken is a marketplace, which uses personal health data, transformed into a Longevity token.</p>
                 <p class="AboutSection_text">LT is used inside a marketplace as a monetary system, powered by Ethereum Blockchain technology to keep data secure and transparent.</p>
-                <button class="Btn Btn-pink AboutSection_btn">White paper</button>
-                <button class="Btn Btn-pink Btn-transparent AboutSection_btn">Sign up & buy tokens</button>
+                <div class="AboutSection_btnWrapper">
+                    <button class="Btn Btn-pink AboutSection_btn">White paper</button>
+                    <button class="Btn Btn-pink Btn-transparent AboutSection_btn">Sign up & buy tokens</button>
+                </div>
             </div>
         </div>
     </div>
@@ -310,6 +315,7 @@
         <div class="swiper-wrapper RoadmapSection_sliderWrapper">
             <div class="swiper-slide RoadmapSection_slide RoadmapSection_slide-reached">
                 <div class="RoadmapSection_slideContent">
+                    <span class="RoadmapSection_progress"></span>
                     <div class="RoadmapSection_slideInnerContent">
                         <h4 class="RoadmapSection_slideHeader">March 2018</h4>
                         <p class="RoadmapSection_slideText">Pre ICO - 2 week campiagn allows Eterly to achieve key objectives concurrently</p>
@@ -324,6 +330,7 @@
             </div>
             <div class="swiper-slide RoadmapSection_slide">
                 <div class="RoadmapSection_slideContent">
+                    <span class="RoadmapSection_progress"></span>
                     <div class="RoadmapSection_slideInnerContent">
                         <h4 class="RoadmapSection_slideHeader">May 2018</h4>
                         <p class="RoadmapSection_slideText">ICO - to raise total of $15m+ to fund further development of the project </p>
@@ -333,6 +340,7 @@
             </div>
             <div class="swiper-slide RoadmapSection_slide">
                 <div class="RoadmapSection_slideContent">
+                    <span class="RoadmapSection_progress"></span>
                     <div class="RoadmapSection_slideInnerContent">
                         <h4 class="RoadmapSection_slideHeader">July 2018</h4>
                         <p class="RoadmapSection_slideText">—</p>
@@ -340,8 +348,9 @@
                     </div>
                 </div>
             </div>
-            <div class="swiper-slide RoadmapSection_slide">
+            <div class="swiper-slide RoadmapSection_slide RoadmapSection_slide-last">
                 <div class="RoadmapSection_slideContent">
+                    <span class="RoadmapSection_progress"></span>
                     <div class="RoadmapSection_slideInnerContent">
                         <h4 class="RoadmapSection_slideHeader">August 2018</h4>
                         <p class="RoadmapSection_slideText">Series A raise at valuation of $50mm</p>
@@ -349,8 +358,8 @@
                     </div>
                 </div>
             </div>
-            <div class="swiper-slide RoadmapSection_slide hidden-xs"></div>
-            <div class="swiper-slide RoadmapSection_slide hidden-sm hidden-xs"></div>
+            <div class="swiper-slide hidden-xs"></div>
+            <div class="swiper-slide hidden-sm hidden-xs"></div>
         </div>
         <div class="RoadmapSection_pagination swiper-pagination hidden-md hidden-sm"></div>
     </div>
@@ -407,7 +416,7 @@
 
 <!-- TEAM SECTION START -->
 
-<section class="TeamSection">
+<section class="TeamSection TeamSection-teamActive">
     <span class="TeamSection_headerPhantom HeaderPhantom">Latest team & advisors</span>
     <h2 class="TeamSection_header">Team</h2>
     <div class="TeamSection_switcherWrapper">

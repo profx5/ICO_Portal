@@ -74,7 +74,7 @@ var processors = [
 gulp.task('styles', function() {
   return gulp.src('frontend/landing/src/styles/*.styl')
   .pipe(sourcemaps.init())
-    .pipe(plumber())
+  .pipe(plumber())
   .pipe(stylus())
   .pipe(postcss(processors))
     .pipe(cssnano({
@@ -110,6 +110,7 @@ gulp.task('scripts:single', function() {
 
 gulp.task('scripts:all', function() {
     return gulp.src('frontend/landing/src/js/**/*.js')
+        .pipe(plumber())
         .pipe(include()).on('error', console.error)
         .pipe(babel({
             presets: ['es2015']

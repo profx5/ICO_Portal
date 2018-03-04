@@ -25,7 +25,7 @@
         background white
         padding 0 109px
         @media xs
-            padding 0 20px 150px
+            padding 0 0 60px
             height auto
         @media sm
             padding 0 40px
@@ -39,6 +39,7 @@
             flex-wrap wrap
             justify-content center
             padding-top 25px
+            margin-bottom 0
     &_countWrapper
         display: flex
         flex-flow row nowrap
@@ -48,6 +49,7 @@
             flex-basis 100%
             margin-bottom 20px
             padding-bottom 20px
+            margin 0 20px 20px
             border-bottom 1px solid rgba(49,111,223,.1)
     @media xs
         &_funds
@@ -100,9 +102,17 @@
         background #316fdf
         opacity .1
         margin-bottom 70px
+    &_progressWrapperScrollable
+        width 90%
+        height 150px
+        padding-top 50px
+        @media xs
+            padding 50px 0 0 20px
+            width 100%
     &_progressWrapper
         @media xs
             width 143vw
+            padding-right 60px
     &_progressBarGeneral
         width 100% !important
         height 5px
@@ -180,9 +190,24 @@
   margin-top 100px
 }
 
-.scrollbar .handle {
-  width: 100px;
-  /* overriden if dynamicHandle: 1 */
-  height: 100%;
-  background: #888;
-}
+
+.nicescroll-rails
+    left 17px !important
+    height 7px !important
+    border-radius 5px
+    &:before
+        content ''
+        display block
+        size 90% 3px
+        position absolute
+        left 0
+        top 2px
+        background #eaeaea
+    .nicescroll-cursors:before
+        content: ''
+        display block
+        position absolute
+        left 50%
+        top 50%
+        size 50px 50px
+        transform translate(-50%, -50%)

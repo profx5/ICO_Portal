@@ -3,6 +3,11 @@ $(document).ready(function() {
 	// =include chunks/*.js
 	// =include classes/*.js
 
+  var dimensions = {
+    mobile: 768,
+    tablet: 1025
+  }
+
 
   $('.MainSection').height($(window).height());
   $(window).resize(() => {
@@ -23,18 +28,18 @@ $(document).ready(function() {
 
   $('.TeamSection_switcher').click(function() {
     $('.TeamSection_switcher').removeClass('TeamSection_switcher-active');
-    $('.TeamSection_sliderContainer').removeClass('TeamSection_sliderContainer-active');
-    // $('.TeamSection_sliderContainer').removeAttr('hidden');
+    $('.TeamSection').removeClass('TeamSection-advisiorsActive TeamSection-teamActive');
+
     $(this).addClass('TeamSection_switcher-active');
 
     if ($(this).hasClass('TeamSection_switcher-team')) {
 
-      $('.TeamSection_sliderContainer-team').addClass('TeamSection_sliderContainer-active');
-      // $('.TeamSection_sliderContainer-advisiors').attr('hidden', 'true')
+      $('.TeamSection').addClass('TeamSection-teamActive');
+
     } else if ($(this).hasClass('TeamSection_switcher-advisiors')) {
 
-      $('.TeamSection_sliderContainer-advisiors').addClass('TeamSection_sliderContainer-active');
-      // $('.TeamSection_sliderContainer-team').attr('hidden', 'true');
+      $('.TeamSection').addClass('TeamSection-advisiorsActive');
+
     }
   })
 	
@@ -68,14 +73,13 @@ $(document).ready(function() {
 
 
 
-    let teamSliderInst = new Swiper($('.TeamSection_sliderContainer'), {
+    let teamSliderInst = new Swiper($('.TeamSection_sliderContainer-team'), {
       slidesPerView: 5,
       spaceBetween: 250,
       navigation: {
-        prevEl: '.TeamSection_btnPrev',
-        nextEl: '.TeamSection_btnNext',
+        prevEl: '.TeamSection_teamBtn.TeamSection_btnPrev',
+        nextEl: '.TeamSection_teamBtn.TeamSection_btnNext',
       },
-      // centeredSlides: true,
       breakpoints: {
         1024: {
           slidesPerView: 3,
@@ -89,8 +93,8 @@ $(document).ready(function() {
       initialSlide: 0,
       slideActiveClass: "SectionsSlider_slide-active",
       scrollbar: {
-        el: '.TeamSection_scrollbar',
-        dragClass: 'TeamSection_scrollbarHandle',
+        el: '.TeamSection_scrollbar-team',
+        dragClass: 'TeamSection_scrollbarHandle-team',
         draggable: true,
         dragSize: 45
       }
@@ -98,12 +102,12 @@ $(document).ready(function() {
 
 
 
-    let advisiorsSliderInst = new Swiper($('.TeamSection_sliderContainer'), {
+    let advisiorsSliderInst = new Swiper($('.TeamSection_sliderContainer-advisiors'), {
       slidesPerView: 5,
       spaceBetween: 250,
       navigation: {
-        prevEl: '.TeamSection_btnPrev',
-        nextEl: '.TeamSection_btnNext',
+        prevEl: '.TeamSection_advisiorsBtn.TeamSection_btnPrev',
+        nextEl: '.TeamSection_advisiorsBtn.TeamSection_btnNext',
       },
       breakpoints: {
         1024: {
@@ -116,12 +120,11 @@ $(document).ready(function() {
           spaceBetween: 0
         }
       },
-      // centeredSlides: true,
       initialSlide: 0,
       slideActiveClass: "SectionsSlider_slide-active",
       scrollbar: {
-        el: '.TeamSection_scrollbar',
-        dragClass: 'TeamSection_scrollbarHandle',
+        el: '.TeamSection_scrollbar-advisiors',
+        dragClass: 'TeamSection_scrollbarHandle-advisiors',
         draggable: true,
         dragSize: 45
       }
@@ -159,7 +162,7 @@ $(document).ready(function() {
       },
     })
 
-    if ($(window).width() < 1025) {
+    if ($(window).width() < dimensions.tablet) {
       
       let partnersSliderInst = new Swiper(".PartnersSection_slider", {
         pagination: {
@@ -180,6 +183,28 @@ $(document).ready(function() {
         initialSlide: 0,
       })
     }
+
+
+
+    if ($(window).width() < dimensions.mobile) {
+
+      $('.ProgressSection_progressWrapperScrollable').niceScroll({
+        cursorwidth: '7px',
+        // cursorminheight: '7px',
+        cursorfixedheight: '35',
+        cursorcolor: '#f84f78',
+        cursoropacitymin: 1,
+        cursoropacitymax: 1,
+        railoffset: true,
+        railpadding: { top: 0, right: 37, left: 0, bottom: -10 },
+        emulatetouch: true,
+        grabcursorenabled: true,
+        preservenativescrolling: true, 
+        cursordragontouch: true,
+        horizrailenabled: true
+      })
+    }
+
 
 
 

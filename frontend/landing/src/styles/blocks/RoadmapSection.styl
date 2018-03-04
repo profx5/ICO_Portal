@@ -123,7 +123,7 @@
                 box-shadow 1px 4px 20px 0 rgba(157, 155, 192, 0.24)
         @media xs
             padding-left 0
-            padding-right 70px
+            padding-right 115px
     &_slideInnerContent:hover &_slideHeader
         @media md
             border-bottom-color #E9E9E9
@@ -138,7 +138,7 @@
         transition all .3s ease
         @media xs
             font-size 22px
-    &_slideContent
+    &_progress
         &:before
             content ''
             display block
@@ -146,10 +146,22 @@
             width 150vw
             background blue
             position absolute
-            top 155px
+            top 175px
             right 230px
             @media xs
                 right 315px
+                top 158px
+    &_slide-last &_progress
+        &:after
+            content ''
+            display block
+            height 4px
+            width 150vw
+            background blue
+            position absolute
+            top 175px
+            left 0
+    &_slideContent
         &:after
             content ''
             display block
@@ -157,17 +169,17 @@
             background blue
             border solid 2px white
             position absolute
-            top 50%
             left 50%
             transform translateX(-50%)
             border-radius 20px
-            top 146.5px
+            top 166.5px
             z-index 200
             @media xs
                 left 32%
+                top 148.5px
     &_slide-reached &_slideHeader
         color pink
-    &_slide-reached &_slideContent
+    &_slide-reached &_slideContent, &_slide-reached &_progress
         &:before
             background pink
         &:after

@@ -5,8 +5,11 @@
         padding-top 50px
         @media xs
             padding-top 0
+            padding-bottom 70px
         @media sm
-            padding 0 45px
+            padding 0 45px 60px
+        @media md
+            padding-bottom 100px
     &_headerPhantom
         z-index 9
         position relative
@@ -15,6 +18,8 @@
         bottom -57px
         @media xs
             bottom -50px
+            white-space nowrap
+            left -10px
     &_header
         color blue
         font-weight 500
@@ -55,7 +60,9 @@
             color #9fa3a7
             font-size 14px
             line-height 1.86
-    &_newsCard:hover &_newsHeader, &_newsCard:hover &_newsDate
+            z-index 10
+            transition color .2s ease
+    &_newsCard:hover &_newsHeader, &_newsCard:hover:after
         @media md
             color white
     &_newsCard:hover &_newsImg:after
@@ -108,7 +115,7 @@
         @media smMinus
             display none
     &_btnMore
-        margin 0 auto 100px
+        margin 0 auto
         @media xs
-            margin 0 0 70px
+            margin 0 0 0
             width 100%
