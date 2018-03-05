@@ -1,5 +1,5 @@
 {
-    let btn = $('.Btn'),
+    let btn = $('.Btn-animate'),
         duration = 300;
 
 

@@ -33,11 +33,16 @@
         &-active
             transform scale(1.4)
             background #316FDF
+    &.isOut &_partnerWrapper
+        transform scale(0)
+    &.isReached &_partnerWrapper
+        transform scale(1)
     &_partnerWrapper
         position relative
         display flex
         justify-content center
         align-items center
+        transition transform .3s ease
         @media md
             display inline-flex
             width auto
@@ -90,3 +95,22 @@
             transform translateX(-50%)
         @media smMinus
             display none
+            
+
+
+.PartnersSection.isReached .PartnersSection_partnerWrapper:nth-of-type(1)
+    transition-delay 0
+.PartnersSection.isReached .PartnersSection_partnerWrapper:nth-of-type(2)
+    transition-delay .2s
+.PartnersSection.isReached .PartnersSection_partnerWrapper:nth-of-type(3)
+    transition-delay .4s
+.PartnersSection.isReached .PartnersSection_partnerWrapper:nth-of-type(4)
+    transition-delay .6s
+.PartnersSection.isReached .PartnersSectionpartnerWrapper:nth-of-type(5)
+    transition-delay .8s
+.PartnersSection.isReached .PartnersSection_partnerWrapper:nth-of-type(6)
+    transition-delay 1s
+.PartnersSection.isReached .PartnersSection_partnerWrapper:nth-of-type(7)
+    transition-delay 1.2s
+.PartnersSection.isReached .PartnersSection_partnerWrapper:nth-of-type(8)
+    transition-delay 1.4s

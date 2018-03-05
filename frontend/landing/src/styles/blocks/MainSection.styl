@@ -1,9 +1,10 @@
 .MainSection
     height 100vh
-    background-repeat no-repeat
-    background-size cover
-    background-position 50% 50%
+    // background-repeat no-repeat
+    // background-size cover
+    // background-position 50% 50%
     position relative
+    overflow hidden
     &:before
         content ''
         display block
@@ -12,12 +13,45 @@
         top 0
         left 0
         size 100% 100%
+        z-index 5
+    &_dotWrapper
+        position absolute
+        size 1000px 1000px
+        top 50%
+        left 50%
+        transform translate3d(-50%,-50%,0)
+        pointer-events none
+        z-index 12
+        border-radius 1000px
+        overflow hidden
+        animation dots 25s linear infinite
+        transform-origin 0 0
+        will-change transform
+    &_dot
+        position absolute
+        background white
+        border-radius 6px
+    &_bg
+        background-repeat no-repeat
+        background-size cover
+        background-position 50% 50%
+        position relative
+        position absolute
+        size 105% 105%
+        top 50%
+        left 50%
+        transform translate3d(-50%,-50%,0)
+        animation mainBackground 14s ease infinite
+        transform-origin 0% 0%
+        will-change transform
     &_container
         padding-top 0
         display flex
         justify-content center
         align-items center
         height 100%
+        z-index 10
+        // transition transform .1s ease
         @media xs
             padding-top 0
             padding-left 18px
