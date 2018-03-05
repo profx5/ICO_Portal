@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/ongrid/ICO_Portal.svg?token=waZyqGFoEW87kExjCQoq&branch=master)](https://travis-ci.com/ongrid/ICO_Portal)
 # Installation for MacOS
 ## Requirements
 1. Python 3.6.4

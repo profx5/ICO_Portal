@@ -11,3 +11,8 @@ yarn.lock
 *.rar
 *.zip
 webpack-stats.dev.json
+pip-selfcheck.json
+lib
+bin
+.Python
+include
