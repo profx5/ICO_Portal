@@ -9,6 +9,8 @@ import AccountInfo from '../components/AccountInfo';
 
 //containers
 import DepositTable from './DepositTable'
+import BountiesBalance from './BountiesBalance'
+import PhasesStats from './PhasesStats'
 
 class Header extends React.Component {
     constructor(props) {
@@ -41,8 +43,9 @@ class Header extends React.Component {
             <header className="Header container col-md-10">
                 <div className="Header_row row h-100">
                     <Balance currentAmount={tokensAmount}/>
+                    <BountiesBalance />
                     <Bounty/>
-                    <Lang/>
+                    <PhasesStats />
                     <AccountInfo accountId={userId}/>
                 </div>
                 <DepositTable />
