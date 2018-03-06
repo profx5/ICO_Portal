@@ -111,23 +111,23 @@ swapon /swapfile
 echo "/swapfile   none    swap    sw    0   0" >> /etc/fstab
 ```
 
-Update linux packages and add sources for python3.6 and NodeJS
+Update linux packages and add sources for python3.6 and NodeJS (accept all default values)
 ```
-export DEBIAN_FRONTEND=noninteractive
 apt -y update
 apt -y install software-properties-common
 add-apt-repository -y ppa:deadsnakes/ppa
-# add NodeJS repo
 apt -y install curl
-curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 apt -y upgrade
-apt -y install screen vim nodejs mysql-server libmysqlclient-dev python3.6-dev rabbitmq-server python3-pip python3-dev python3.6 git 
+apt -y update
+apt -y install screen vim mysql-server libmysqlclient-dev python3.6-dev rabbitmq-server python3-pip python3-dev python3.6 git 
+# add NodeJS repo, install node and npm
+curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+apt -y install screen vim nodejs
 ```
 
 Create deploy keys for this repository
 ```
 echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDV7qnI8rBUhi7ul8k7q9Yd2qkM9a91xRaz6Jl167RHoLfH5pLLezO2pt3XYe7xQD7AcUd/0ysLEWw84/P96A8cv9ck/rNmz7IywEe/sb4kPAEfTbDHYyhTEQwuqrnjyT48gy5kL608JQzlStgsxUUzmz8SwRvYbqZCdDTW24kdIokvObGj9n7t5Q/+55DBKC8ZcSqrNzNTFnNqO1WNEXpj0c+5G6fF8qRZhs+hqzU5EpDPWP9d5R1kDtOeZOQiToujdN4qG+cVfnZTiSDWwse/M1XFEzsoSMTldJ75fSNF9/MF8ox0unaJAZ4Lb9O5JtyUzWQuwEceuyLNghF8uhph root@icoportal > ~/.ssh/id_ico_lk.pub
-
 read -d "" PRIVKEY <<"EOF"
 -----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEA1e6pyPKwVIYu7pfJO6vWHdqpDPWvdcUWs+iZdeu0R6C3x+aS
@@ -167,7 +167,6 @@ Host github.com
     IdentitiesOnly yes
 EOF
 echo "$SSHCONFIG" >> ~/.ssh/config
-
 ```
 
 install virtualenv
@@ -209,13 +208,14 @@ Run gulp dev then stop it
 ```
 gulp dev
 ```
-hit ctlrl-C to stop (ToDo gulp should not start as daemon, just build and exit) 
+hit ctlrl-C to stop (gulp should not start as daemon, just build and exit) 
 
-Run main Django dev server
+Run main Django dev server in 1st shell (in screen or terminal)
 ```
 python manage.py runserver 0.0.0.0:8000
 ```
-In another shell 
+
+Run NPM in 2nd shell (in screen or terminal)
 ```
 npm run start
 ```
@@ -250,13 +250,13 @@ docker exec -it geth_rinkeby geth --rinkeby --exec \
     personal.listAccounts' attach
 ```
 
-Start node watcher 
+Start node watcher in 3rd shell (in screen or terminal)
 ```
 export C_FORCE_ROOT=1
 ./start_node_watcher.sh
 ```
 
-Start workers 
+Start workers in 4th shell (in screen or terminal)
 ```
 export C_FORCE_ROOT=1
 ./start_workers.sh
