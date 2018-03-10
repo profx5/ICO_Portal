@@ -9,7 +9,7 @@
         @media sm
             padding 0 45px 60px
         @media md
-            padding-bottom 100px
+            padding-bottom 125px
     &_headerPhantom
         z-index 9
         position relative
@@ -117,6 +117,14 @@
             display none
     &_btnMore
         margin 0 auto
+        background-image linear-gradient(90deg, #f84f78 50%, #316fdf 50%)
+        .Btn_iconWrapper:before
+            background white !important
+        .Btn_icon
+            &:before
+                // background url('../img/common/svg/btn-arrow-white.svg') no-repeat 55% 55%
+            &:after
+                background url('../img/common/svg/btn-arrow-blue.svg') no-repeat 55% 55%
         @media xs
             margin 0 0 0
             width 100%

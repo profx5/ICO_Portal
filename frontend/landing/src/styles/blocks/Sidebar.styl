@@ -7,13 +7,30 @@
     width 74vw
     background white
     transform translate3d(100%,0,0)
-    transition transform .3s ease
+    transition all .4s ease
+    
+    &:before
+        content ''
+        display block
+        position absolute
+        left 0
+        top 0
+        transform translate3d(-100%,0,0)
+        size 400% 100%
+        background rgba(0,0,0,.5)
+        opacity 0
+        visibility hidden
+        transition all .4s ease
     @media xs
         padding-top 20px
     @media sm
         padding-top 25px
     &-active
         transform translate3d(0,0,0)
+        &:before
+            pointer-events none
+            visibility visible
+            opacity 1
     &_controls
         display flex
         flex-flow row nowrap
@@ -56,6 +73,11 @@
         height 50px
         &:not(:last-of-type)
             border-bottom 1px solid rgba(49,111,223,.1)
+        @media sm
+            font-size 20px
+            height 60px
     &_navLink
         display block
         line-height 50px
+        @media sm
+            line-height 60px

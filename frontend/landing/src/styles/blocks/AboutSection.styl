@@ -2,6 +2,7 @@
     position relative
     &_pattern
         background white url('../img/svg/common/pattern.svg') no-repeat center
+
     &_container
         height 100%
         padding-top 20px
@@ -14,7 +15,7 @@
         position relative
         text-align center
         letter-spacing normal
-        margin-bottom 170px
+        margin-bottom 80px
         @media xs
             font-size 22px
             margin-bottom 20px
@@ -27,18 +28,19 @@
         @media md
             bottom -57px
     &_content
-        @media smPlus
-            display: flex
+        @media md
+            display flex
             flex-flow row nowrap
             justify-content center
             align-items flex-start
     &_contentText
-        padding-right 90px
-        padding-left 60px
+        padding-right 12px
+        padding-left 0
         @media xs
             padding 0 0
         @media sm
             padding-right 30px
+            padding-left 30px
     &_text
         color #6b7c93
         font-weight 400
@@ -49,31 +51,33 @@
     &_img
         size auto 750px
         position relative
-        margin-top -230px
+        margin-top -132px
         @media xs
             display block
             margin 0 auto 20px
             size 58vw auto
         @media sm
             height 500px
-            margin-top -95px
-            margin-left calc(2vw + 40px)
+            margin -85px auto 30px
+            display block
+        @media md
+            right 50px
     &_btnWrapper
         @media md
             white-space nowrap
     &_btn
+        margin-bottom 40px
+        background-image linear-gradient(90deg, #f84f78 50%, white 50%) !important
         @media xs
             width 100%
         @media sm
             width 258px
             display block
+            margin-left auto
+            margin-right auto
         @media md
             display inline-block !important
+            margin-bottom 135px
         &:first-of-type
             @media smMinus
                 margin-bottom 15px
-        &:last-of-type
-            @media md
-                margin-left 20px
-            @media sm
-                margin-left 0

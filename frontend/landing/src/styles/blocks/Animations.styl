@@ -1,0 +1,50 @@
+
+
+.HeaderPhantom.isOut
+    transform translate3d(0,-50px,0)
+    opacity 0
+    transition opacity .5s ease, transform .5s ease
+.sectionHeader.isOut
+    transform translate3d(0,-50px,0)
+    opacity 0
+    transition opacity .5s ease, transform .5s ease
+.HeaderPhantom.isReached
+    transform translate3d(0,0,0) !important
+    opacity 1 !important
+    transition opacity .5s ease .2s, transform 1s ease .2s !important
+.sectionHeader.isReached
+    transform translate3d(0,0,0) !important
+    opacity 1 !important
+    transition opacity .7s ease, transform 1s ease !important
+    
+
+// .isOut, .isOutCenter
+//     transition all .2s ease
+//     opacity 0
+
+
+// .CalculatorSection
+//     &.isOut &_currency, &.isOut &_formula, &.isOut &_address
+//         opacity 0 !important
+//         transition all .3s ease
+//     &.isReached &_currency, &.isReached &_formula, &.isReached &_address
+
+//         // opacity 1 !important
+//         // animation-name fadeInUp !important
+//         // animation-duration 1s !important
+//         // animation-fill-mode both !important
+//         // transform-origin center bottom
+//         animation-duration 1s !important
+//         animation-fill-mode both !important
+//         opacity 1 !important
+//         animation-timing-function ease-in-out
+//         animation-name headShake !important
+
+[data-animation-hide]
+    opacity 0
+    transition opacity .2s ease
+    @media smMinus
+        opacity unset
+        
+[data-parallax-type]
+    will-change transform

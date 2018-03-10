@@ -8,17 +8,50 @@
         position absolute
         top 0
         left 0
-        .gm-bundled-control.gmnoprint
-            display none
     &_btnClose
         size 43px 43px
-        background pink url('../img/common/svg/cross.svg') no-repeat center
+        background pink
         background-size 16px 16px
         border-radius 43px
         position absolute
         right 0
         top -63px
         cursor pointer
-        display: flex
+        display flex
         justify-content center
         align-items center
+        transition all .25s ease
+        path
+            transition fill .25s ease
+        &:hover
+            background white
+            transform rotate(180deg)
+            & path
+                fill pink
+    &_desc
+        font-size 20px
+        line-height 1.2
+        color white
+        position absolute
+        top -44px
+        left 0
+        padding-left 25px
+        @media xs
+            padding-left 25px
+            padding-right 55px
+            font-size 14px
+        &:before
+            content ''
+            display inline-block
+            background url("../img/common/svg/location.svg") no-repeat center
+            background-size contain
+            position absolute
+            top 50%
+            left 0
+            transform translateY(-50%)
+            margin-right 7px
+            size 19px 19px
+            margin-right 7px
+            @media xs
+                top 26%
+                    

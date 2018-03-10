@@ -69,7 +69,6 @@
             margin 0 auto
             order 1
             margin-bottom 50px
-            
     &_copyright
         display: flex
         flex-flow row nowrap
@@ -99,3 +98,7 @@
         flex-flow row nowrap
         @media xs
             order 1
+    &_iconWrapper svg path
+        transition fill .2s ease
+    &_iconWrapper:hover svg path
+        fill blue

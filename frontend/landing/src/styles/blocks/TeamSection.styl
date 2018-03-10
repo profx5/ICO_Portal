@@ -1,5 +1,9 @@
 .TeamSection
     position relative
+    background white
+    z-index 10
+    // overflow-x hidden
+    // overflow-y visible
     &_headerPhantom
         z-index 9
         position relative
@@ -27,6 +31,8 @@
         flex-flow row nowrap
         margin 0 auto
         margin-bottom 60px
+        @media md
+            margin-bottom 35px
     &_switcher
         flex-basis 50%
         border 1px solid blue
@@ -57,6 +63,10 @@
             top 2015
         @media sm
             top 185px
+        path
+            transition fill 0.2s ease
+        &:hover path
+            fill pink
     &_btnPrev
         transform rotate(180deg)
         left 210px
@@ -70,34 +80,48 @@
             right 20px
         @media sm
             right 50px
+        &-active
+            transform scale(1) !important
     &_slideContent
+        position relative
         @media xs
             padding 0 30px
         @media md
             width 250px
+    &_slideContent:hover &_hoverInfo
+        opacity 1
+        visibility visible
+        transform translate3d(-50%, 0, 0)
     &_sliderContainer
         visibility hidden
         opacity 0
         transition all .3s ease
+        padding-bottom 110px
+        overflow visible
+        z-index 12
         @media xs
-            margin-bottom 70px !important
+            margin-bottom 0 !important
+            padding-bottom 50px
+        @media sm
+            padding-bottom 90px
         @media md
             padding-left 13vw
+            padding-top 25px
         &-advisiors
             position absolute
             width 100%
             @media xs
                 top 236px
             @media md
-                top 289px
+                top 265px
             @media sm
                 top 267px
     &-advisiorsActive &_advisiorsBtn, &-teamActive &_teamBtn
         visibility visible
-    &-teamActive &_sliderContainer-team
+    &-teamActive &_sliderContainer-team, &-teamActive &_scrollbar-team
         visibility visible
         opacity 1
-    &-advisiorsActive &_sliderContainer-advisiors
+    &-advisiorsActive &_sliderContainer-advisiors, &-advisiorsActive &_scrollbar-advisiors
         visibility visible
         opacity 1
     &_thumbnail
@@ -113,7 +137,7 @@
         color #316fdf
         text-align center
     &_status
-        line-height 1.75
+        line-height 1.35
         color #9b9b9b
         text-align center
         &:after
@@ -134,8 +158,6 @@
         flex-flow row nowrap
         justify-content space-between
         align-items center
-    &_sliderContainer
-        margin-bottom 100px
     &_sliderWrapper
         margin-bottom 60px
     &_scrollbar
@@ -151,14 +173,70 @@
             width 80vw !important
         @media md
             width 1170px !important
+            max-width 96vw
     &_scrollbarHandle-team, &_scrollbarHandle-advisiors
         background: #f84f78
         border-radius 10px
         height 10px
-        top -3px !important
+        top -4px !important
         position relative
         cursor pointer
-        @media xs
-            top -2.5px !important
-        @media sm
-            top -3.5px !important
+        @media smMinus
+            top -4.5px !important
+    &_hoverInfo
+        width 370px
+        height auto
+        box-shadow 1px 4px 20px 0 rgba(157, 155, 192, 0.24)
+        border-radius 3px
+        position absolute
+        top -21px
+        left 50%
+        z-index 20
+        background white
+        min-height 110%
+        padding 32px 30px 80px
+        opacity 0
+        visibility hidden
+        transform translate3d(-50%, 20px, 0)
+        transition opacity .5s ease, visibility .5s ease, transform .7s ease
+        @media smMinus
+            display none !important
+    &_hoverHeader
+        font-size 25px
+        line-height 0.92
+        font-weight 400
+        width 100%
+        color blue
+        letter-spacing 0.6
+        transform translate3d(0,10px,0)
+        border-bottom 1px solid transparent
+        transition all .3s ease
+        margin-bottom 18px
+        padding-bottom 18px
+    &_slide:hover &_hoverHeader
+        border-bottom-color #E9E9E9
+        transform translate3d(0,0,0)
+    &_hoverText
+        color #000000
+        font-weight 400
+        margin-top 18px
+        padding-bottom 50px
+    &_hoverSocialWrapper
+        size 85px auto
+        display flex
+        flex-flow row nowrap
+        justify-content space-between
+        align-items center
+        position absolute
+        bottom 30px
+    &_hoverSocialIcon svg path
+        transition fill .2s ease
+    &_hoverSocialIcon:hover svg path
+        fill blue
+    &_scrollbar
+        bottom 105px !important
+        z-index 15 !important
+        opacity 0
+        visibility hidden
+        @media smMinus
+            bottom 75px !important

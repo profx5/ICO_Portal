@@ -15,7 +15,7 @@
         @media md
             display: flex
             flex-flow row nowrap
-            justify-content space-between
+            justify-content center
     &_pagination
         position static
         margin-bottom 20px
@@ -28,15 +28,14 @@
         margin 0 10px
         background #9fa3a7
         border-radius 100%
-        transition all .3s ease
-        transform scale(1)
+        // transition all .3s ease
         &-active
             transform scale(1.4)
             background #316FDF
-    &.isOut &_partnerWrapper
-        transform scale(0)
-    &.isReached &_partnerWrapper
-        transform scale(1)
+    // &.isOut &_partnerWrapper
+    //     transform scale(0)
+    // &.isReached &_partnerWrapper
+    //     transform scale(1)
     &_partnerWrapper
         position relative
         display flex
@@ -46,6 +45,7 @@
         @media md
             display inline-flex
             width auto
+            margin 0 30px
     &_header
         font-size 25px
         color pink
@@ -68,21 +68,21 @@
         &:hover
             color blue
     &_partnerWrapper:hover &_partnerTip
-        transform translate3d(-50%, 108%, 0)
+        transform translate3d(-50%, calc(100% + 20px), 0)
         opacity 1
         visibility visible
     &_partnerTip
         position absolute
-        width 371px
+        width 450px
         height auto
         bottom 0
         left 50%
-        transform translate3d(-50%, 118%, 0)
+        transform translate3d(-50%, calc(100% + 60px), 0)
         opacity 0
         padding 32px 32px
         box-shadow 1px 4px 20px 0 rgba(157, 155, 192, 0.24)
         background white
-        transition all .3s ease
+        transition all .4s ease
         visibility hidden
         &:before
             content ''

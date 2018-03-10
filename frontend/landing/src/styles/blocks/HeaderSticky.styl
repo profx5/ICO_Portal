@@ -1,0 +1,75 @@
+.HeaderSticky
+    position fixed
+    width 100%
+    height 90px
+    left 0
+    top 0
+    z-index 98
+    background #316fdf
+    transform translate3d(0,-100%,0)
+    transition all .4s ease-out
+    border solid 1px rgba(255, 255, 255, 0.29);
+    &-active
+        transform translate3d(0,0,0)
+    @media xs
+        height 59px
+    &_container
+        display flex
+        justify-content space-between
+        align-items center
+        height 100%
+        @media xs
+            padding 0 20px
+            height 59px
+    &_logo
+        @media xs
+            size 160px auto
+    &_menu
+        height 100%
+        position absolute
+        top 50%
+        left 50%
+        transform translate(-50%, -50%)
+        display flex 
+        align-items center
+    &_menuList
+        height 100%
+    &_menuItem
+        height 100%
+        color white
+        list-style-type none
+        display inline-block
+        font-weight 500
+        transition color .2s ease
+        &:hover
+            color pink
+    &_menuLink
+        display flex
+        align-items center
+        height 100%
+        padding 0 13px
+    &_login
+        display: flex
+        align-items center
+    &_loginText
+        font-size 15px
+        font-weight 300
+        text-transform uppercase
+        color white
+        margin-left 15px
+    &_button .Btn
+        min-width 146px
+    &_menuHamburger
+        display flex
+        justify-content center
+        align-items center
+    &_menuWrapper
+        display flex
+        flex-flow row nowrap
+        justify-content flex-end
+        align-items center
+    &_menuText
+        color blue
+        margin-right 10px
+        font-weight 500
+        padding-top 4px

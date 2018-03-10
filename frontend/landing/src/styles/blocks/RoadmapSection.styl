@@ -25,6 +25,8 @@
     &_timerWrapper
         position relative
         margin-bottom 50px
+        @media md
+            margin-bottom 25px
     &_timerText
         color blue
         font-weight 400
@@ -38,9 +40,13 @@
             color blue
             font-weight 400
             text-align center
+            width 35px
+            margin 0 13px
+            position relative
             &:not(:first-of-type):before
                 content ':'
-                margin 0 7px
+                position absolute
+                left -17px
     &_day, &_hours, &_minutes, &_seconds
         position relative
         &:after
@@ -48,14 +54,9 @@
             font-size 13px
             color blue
             position absolute
-            bottom -12px
-    &_day:after
-        left 1px
-    &_hours, &_minutes, &_seconds
-        &:after
-            left 74%
-            transform translateX(-53%)
-            trasnform-origin 50% 50%
+            left 50%
+            bottom -14px
+            transform translateX(-50%)
     &_sliderContainer
         padding-left 160px
         padding-bottom 170px
@@ -64,6 +65,8 @@
             padding-bottom 40px
         @media sm
             padding-bottom 80px
+        @media md
+            padding-top 25px
     &_navBtn
         background-image none
         position absolute
@@ -74,6 +77,10 @@
             top 172px !important
         @media sm
             top 202px
+        path
+            transition fill 0.2s ease
+        &:hover path
+            fill pink
     &_btnPrev
         transform rotate(180deg)
         left 210px
@@ -115,11 +122,11 @@
         position relative
         z-index 250
         border-radius 3px
-        transition box-shadow .3s ease-out, background .3s ease-out, transform .5s ease
+        transition box-shadow .3s ease-out, background .3s ease-out, transform .7s ease
         &:hover
             @media md
                 background white
-                transform translateY(-15px)
+                transform translate3d(0,-15px,0)
                 box-shadow 1px 4px 20px 0 rgba(157, 155, 192, 0.24)
         @media xs
             padding-left 0
@@ -127,7 +134,7 @@
     &_slideInnerContent:hover &_slideHeader
         @media md
             border-bottom-color #E9E9E9
-            transform translateY(-10px)
+            transform translate3d(0,-10px,0)
     &_slideHeader
         font-size 25px
         font-weight 400

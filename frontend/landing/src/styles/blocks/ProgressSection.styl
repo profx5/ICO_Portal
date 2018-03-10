@@ -3,6 +3,12 @@
     padding-top 88px
     @media xs
         padding-top 30px
+    @media md
+        // z-index -1
+    &_pattern
+       @media md
+            top 63%
+            height 140%
     &_container
         padding-bottom 100px
         @media xs
@@ -25,7 +31,7 @@
         background white
         padding 0 109px
         @media xs
-            padding 0 0 60px
+            padding 0 0 85px
             height auto
         @media sm
             padding 0 40px
@@ -41,9 +47,12 @@
             padding-top 25px
             margin-bottom 0
     &_countWrapper
-        display: flex
+        display flex
         flex-flow row nowrap
         justify-content center
+        & > span
+            width 35px
+            margin 0 13px
     &_funds, &_discount, &_timer
         @media xs
             flex-basis 100%
@@ -76,10 +85,12 @@
     &_hours, &_minutes, &_seconds
         &:before
             content ':'
-            margin 0 7px
+            position absolute
+            left -17px
+            // margin 0 7px
         &:after
-            right 0
-            transform translateX(13%)
+            left 50%
+            transform translateX(-50%)
     &_day, &_hours, &_minutes, &_seconds
         position relative
         &:after
@@ -167,6 +178,8 @@
             content attr(data-state)
             bottom -60px
             font-weight 400
+            @media smMinus
+                width 84px
     &_progressPoint-1
         left 0
         &:before, &:after
@@ -174,8 +187,18 @@
             left -4px
             transform unset
     &_progressPoint-2
+        &:before
+            @media smMinus
+                text-align center
+                white-space pre-wrap !important
+                bottom -84px !important
         left 50%
     &_progressPoint-3
+        &:before
+            @media smMinus
+                text-align center
+                white-space pre-wrap !important
+                bottom -84px !important
         left 69%
     &_progressPoint-4
         right 0
@@ -195,6 +218,8 @@
     left 17px !important
     height 7px !important
     border-radius 5px
+    @media smPlus
+        display none !important
     &:before
         content ''
         display block

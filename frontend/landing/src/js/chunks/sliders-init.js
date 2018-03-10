@@ -1,24 +1,38 @@
-if ($(window).width() < dimensions.tablet) {
-  
-  let partnersSliderInst = new Swiper(".PartnersSection_slider", {
-    pagination: {
-      el: '.PartnersSection_pagination',
-      bulletClass: 'PartnersSection_bullet',
-      bulletActiveClass: 'PartnersSection_bullet-active'
-    },
-    breakpoints: {
-      1024: {
+let partnersSliderInst;
+
+function initPartnersSlider() {
+  if ($(window).width() <= dimensions.tablet) {
+
+    if (!partnersSliderInst) {
+
+      partnersSliderInst = new Swiper(".PartnersSection_slider", {
+        pagination: {
+          el: '.PartnersSection_pagination',
+          bulletClass: 'PartnersSection_bullet',
+          bulletActiveClass: 'PartnersSection_bullet-active'
+        },
         slidesPerView: 3,
-        slidesPerGroup: 3
-      },
-      767: {
-        slidesPerView: 2,
-        slidesPerGroup: 2
-      }
-    },
-    initialSlide: 0,
-  })
+        slidesPerGroup: 3,
+        breakpoints: {
+        767: {
+          slidesPerView: 2,
+          slidesPerGroup: 2
+        },
+        },
+        initialSlide: 0,
+      });
+    }
+  } else {
+    if (partnersSliderInst) {
+      partnersSliderInst.destroy();
+      partnersSliderInst = false;
+    }
+  }
 }
+
+initPartnersSlider()
+$(window).resize(initPartnersSlider);
+
 
 
 
@@ -60,8 +74,12 @@ let teamSliderInst = new Swiper($('.TeamSection_sliderContainer-team'), {
     nextEl: '.TeamSection_teamBtn.TeamSection_btnNext',
   },
   breakpoints: {
+    1522: {
+      spaceBetween: 280,
+      slidesPerView: 4
+    },
     1024: {
-      slidesPerView: 3,
+      slidesPerView: 2,
       spaceBetween: 0,
     },
     767: {
@@ -89,10 +107,13 @@ let advisiorsSliderInst = new Swiper($('.TeamSection_sliderContainer-advisiors')
     nextEl: '.TeamSection_advisiorsBtn.TeamSection_btnNext',
   },
   breakpoints: {
+    1522: {
+      spaceBetween: 280,
+      slidesPerView: 4
+    },
     1024: {
-      slidesPerView: 3,
+      slidesPerView: 2,
       spaceBetween: 0,
-
     },
     767: {
       slidesPerView: 1,

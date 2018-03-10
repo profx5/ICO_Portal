@@ -3,6 +3,7 @@
     background-size cover
     background-position 50% 50%
     position relative
+    overflow hidden
     &:before
         content ''
         display block
@@ -11,10 +12,21 @@
         top 0
         left 0
         size 100% 100%
+    &:after
+        content ''
+        display block
+        background rgba(46,162,255,.3)
+        position absolute
+        top 50%
+        left 50%
+        size 200% 68vw
+        transform translate(-54%, -50%) rotate(130deg)
     &_container
         height 100%
         padding-top 66px
         padding-bottom 96px
+        position relative
+        z-index 10
         @media xs
             padding 30px 18px 0
     &_header, &_text
@@ -23,7 +35,7 @@
     &_header
         font-size 35px
         font-weight 500
-        padding-bottom 13px
+        padding-bottom 0
         @media xs
             font-size 22px
             padding-bottom 7px
@@ -35,48 +47,57 @@
             padding 0 20px
             margin-bottom 30px
     &_form
+        padding-right 108px
         @media xs
             position relative
+            padding-right 0
     &_desc
         color white
         float left
         width 100px
-        padding-top 13px
+        padding-top 9px
         margin-right 10px
         @media xs
             width 100%
             text-align center
             font-size 14px
+            margin-bottom 9px
+            padding-top 11px
             &Br
                 display none
-    &_currency &_desc
+    &_currencyWrapper &_desc
         @media xs
             margin-bottom 40px
-    &_formula &_desc, &_address &_desc
+    &_formulaWrapper &_desc, &_addressWrapper &_desc
         margin-bottom 10px
-    &_inputsWrapper-currency
-        height 115px
-        margin-bottom 35px
     &_inputsWrapper
         display flex
         flex-flow row wrap
         justify-content space-between
         align-items space-between
-        padding-right 110px
+        // padding-right 110px
+        min-height 43px
         @media xs
             padding 0 0
             height auto
             width 100%
-    &_currency
+    &_currencyWrapper
         position relative
-    &_address
+    &_addressWrapper
         @media xs
             margin-bottom 70px
-    &_currency, &_formula, &_address
+    &_currencyWrapper, &_formulaWrapper, &_addressWrapper
         @media xs
             display flex
             flex-flow column nowrap
             align-items center
+    &_currencyWrapper &_inputField:first-of-type
+       &:before
+            content 'Amount'
+            left 50%
+            transform translateX(-50%)
+    &_input-currency
+        text-align center !important
     &_inputField
         flex-basis 49%
         position relative
@@ -91,21 +112,15 @@
             flex-basis 100%
         &:nth-of-type(1)
             @media xs
-                margin-bottom 15px
-            &:before
-                content 'from'
-                left 50%
-                transform translateX(-50%)
+                margin-bottom 38px
         &:nth-of-type(2)
             @media xs
-                margin-bottom 55px
-            &:after
-                content 'to'
+                margin-bottom 24px
+            &:before
+                content 'Current ETH price'
                 right 28%
                 right 50%
                 transform translateX(50%)
-                @media xs
-                    display none
         &:nth-of-type(3)
             @media xs
                 margin-bottom 15px
@@ -115,55 +130,41 @@
                     right 50%
                     transform translateX(50%)
                 
-    &_inputsWrapper-currency &_input
+    &_inputsWrapper-currencyWrapper &_input
         width 100%
         text-align center
-    &_formula &_inputsWrapper-row
-        margin-bottom 45px
-    &_formula &_inputsWrapper-row &_input
+    &_inputsWrapper
+        margin-bottom 38px
+        @media xs
+            margin-bottom 0
+    &_formulaWrapper &_inputsWrapper-row &_input
         margin-bottom 15px
-    &_address &_input
+    &_addressWrapper &_input
         font-weight 300
         color white
-        background transparent
         border 1px solid white
-    &_formulaBtn, &_addressBtn
+    &_formulaBtn
+        background-image linear-gradient(90deg, #f84f78 50%, white 50%)
         @media xs
             width 100%
         @media sm
             margin-left auto
-    &_key
-        color white
-        padding 0 30px
-        flex-basis 70%
-        line-height 41px
-        border 1px solid white
-        border-radius 3px
+    &_btnWrapper
         @media xs
             width 100%
-            height auto
-            word-wrap break-word
-            text-align center
-            line-height 26px
-            font-size 14px
-            padding 10px 30px 5px
-            margin-bottom 50px
         @media sm
-            flex-basis 100%
-            line-height 40px
-            margin-bottom 15px
-        @media smMinus
-            text-align center
-        @media md
-            padding-top 1px
-            height 41px
-    &_inputsWrapper-row &_input
+            margin-left auto
+    &_inputsWrapper-row &_inputField
         flex-basis 70%
         @media xs
             flex-basis 100%
         @media sm
             flex-basis 100%
             margin-bottom 15px
+    &_inputField &_input
+        width 100%
+    &_inputsWrapper-row &_input
+        width 100%
     &_input
         height 43px
         line-height 43px
@@ -173,26 +174,108 @@
         background white
         text(16px,400,'Circe', black, unset)
         letter-spacing .4px
+        text-align center
         @media xs
             font-size 14px
             padding 3px 15px 0
-    
+    &_fieldInner
+        word-break break-all
+        color white
+        padding 12px 30px 6px 30px
+        width 100%
+        border 1px solid white
+        border-radius 3px
+        display block
+        height auto
+        line-height 22px
+        min-height 41px
+        transition border-color .2s ease
+        &-copied
+            border-color #4CE47A
+        @media xs
+            font-size 14px
+            text-align center
+    &_fieldInner-filled
+        background white
+    &_field-disabled &_input, &_field-disabled &_fieldInner
+        color rgba(0,0,0,.4)
+        padding-right 40px
+        @media xs
+            padding-left 40px
+    &_inputField-disabled:after, &_field-disabled:after
+        content ''
+        display block
+        size 15px 15px
+        background url('../img/common/svg/check.svg') no-repeat center
+        background-size contain
+        position absolute
+        top 50%
+        transform translateY(calc(-50% + 2px))
+        right 17px
+    &_field
+        flex-basis 70%
+        position relative
+        font-weight 400
+        display: flex
+        flex-flow row nowrap
+        justify-content center
+        align-items center
+        min-height 43px
+        @media smMinus
+            flex-basis 100%
+        &-formula
+            @media xs
+                margin-bottom 38px
+            @media sm
+                margin-bottom 40px
+    &_field-key &_fieldInner
+        padding-right 40px
+        @media xs
+            text-align left
+            padding-right 42px
+            padding-left 23px
+    &_fieldIcon
+        position absolute
+        top 50%
+        transform translateY(-50%)
+        right 10px
+        display flex
+        align-items center
+        path
+            transition fill .2s ease
+        &-copied path
+            fill #4CE47A
+    &_formulaBtn
+        @media xs
+            margin-bottom 26px
+    &_field-row
+        display flex
+        flex-flow row wrap
+        justify-content space-between
+        align-items space-between
+        // padding-right 110px
+        min-height 43px
+        @media smMinus
+            width 100%
+    &_formula
+        width 100%
+        display block
     &_tip
         display inline-block
         position relative
         color white
-        margin-top 20px
         @media xs
             text-align center
             font-size 14px
             position absolute
-            bottom 63px
+            bottom -35px
             left 50%
             transform translateX(-50%)
-        @media sm
-            margin-top 0
+            margin-left 0
+            animation-name unset !important
+        @media smPlus
             margin-left 110px
-            top -48px
+            top -20px
         &:hover
             color white
         &:before

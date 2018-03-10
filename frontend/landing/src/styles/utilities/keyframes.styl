@@ -10,32 +10,80 @@
     }
 }
 
-@keyframes mainBackground {
+@keyframes isOut {
+    from {
+        opacity 1
+    }
+    to {
+        opacity 0
+    }
+}
+
+@keyframes isHidden {
+    from {
+        opacity 1
+    }
+    to {
+        opacity 0
+    }
+}
+
+.isHidden
+    animation isHidden .25s ease !important
+    @media smMinus
+        animation unset !important
+    
+
+
+@keyframes bgpin {
+  from {
+      background-position: 0 0;
+  }
+  to {
+      background-position: -100% 0;
+  }
+}
+@keyframes bgpout {
+  from {
+      background-position: -100% 0;
+  }
+  to {
+      background-position: -200% 0;
+  }
+}
+
+
+@keyframes scrollArrow {
+  from {
+    transform translate3d(0,0,0)
+  }
+  50% {
+    transform translate3d(0,-20px,0)
+  }
+  to {
+    transform translate3d(0,0,0)
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform rotate(0)
+  }
+  to {
+    transform rotate(360deg)
+  }
+}
+
+
+@keyframes video {
     0% {
-        transform scale(1) translate3d(-50%,-50%,0)
         filter blur(0)
     }
     50% {
-        transform scale(1.3) translate3d(-50%,-50%,0)
         filter blur(5px)
     }
     100% {
-        transform scale(1) translate3d(-50%,-50%,0)
         filter blur(0)
     }
 }
 
-@keyframes dots {
-    0% {
-        transform rotate(0deg) translate3d(-50%,-50%,0)
-        opacity .2
-    }
-    50% {
-        transform rotate(180deg) translate3d(-50%,-50%,0)
-        opacity 1
-    }
-    100% {
-        transform rotate(360deg) translate3d(-50%,-50%,0)
-        opacity .2
-    }
-}

@@ -1,0 +1,13 @@
+{
+    "USDcPerETHRate": 86315,
+    "USDcRaised": 123456000,
+    "totalHardCapUSDc": 400000000,
+    "currentPhase": {
+        "name": "preICO",
+        "discountPercent": 40,
+        "startTime": 1520467200,
+        "endTime": 1523145600,
+        "softCapUSDc": 200000000,
+        "hardCapUSDc": 300000000
+    }
+}
