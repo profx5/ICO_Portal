@@ -39,7 +39,7 @@ var mainMarkerOpts = {
         lng: -123.112228
     },
     icon: {
-        url: "static/img/common/svg/location-filled.svg",
+        url: "img/common/svg/location-filled.svg",
         scaledSize: new google.maps.Size(28, 40),
     },
 }

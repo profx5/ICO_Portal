@@ -24,6 +24,9 @@
         display inline-block
         font-weight 400
         margin-right 20px
+        transition color .25s ease
+        &:hover
+            color pink
     &_link
         font-weight 400
         @media xs
@@ -58,7 +61,7 @@
         display flex
         flex-flow row nowrap
         justify-content space-between
-        width 120px
+        width 145px
     &_address
         @media xs
             order 3
@@ -79,6 +82,7 @@
     &_rightText
         position relative
         padding-left 30px
+        white-space pre
         &:before
             content ''
             height 67%

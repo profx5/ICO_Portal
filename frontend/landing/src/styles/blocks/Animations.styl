@@ -40,6 +40,19 @@
 //         animation-timing-function ease-in-out
 //         animation-name headShake !important
 
+
+
+// [data-animation-type]
+//     opacity 0
+//     visibility hidden
+//     transition all .3s ease
+//     @media smMinus
+//         opacity 1 !important
+//         animation-name unset !important
+
+.isHidden
+    opacity 0
+
 [data-animation-hide]
     opacity 0
     transition opacity .2s ease
@@ -48,3 +61,6 @@
         
 [data-parallax-type]
     will-change transform
+    
+.animated
+    visibility visible

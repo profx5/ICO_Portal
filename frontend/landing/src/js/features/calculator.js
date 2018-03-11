@@ -32,12 +32,18 @@ function updateProgressbar(data) {
         hardCap = currentPhase.hardCapUSDc + '';
 
 
+
   $('.ProgressSection_fundsText').html(`$ ${splitDigits(Number(USDRaised))}`);
   $('.ProgressSection_discountText').html(`${discount}%`);
 
-  let raisedArray = USDRaised.split('')
-
-  $('.ProgressSection_progressBarCurrent').attr('data-collected-money', `${raisedArray[0]}.${raisedArray[1]} M`).css('width', '30.86%');
+  let raisedArray = USDRaised.split('');
+  let raisedResult;
+  if ((USDRaised + '').length === 9) {
+    raisedResult = `${raisedArray[0]}.${raisedArray[1]} M`;
+  } else if ((USDRaised + '').length === 10) {
+    raisedResult = `${raisedArray[0]}${raisedArray[1]}.${raisedArray[2]} M`;
+  }
+  $('.ProgressSection_progressBarCurrent').attr('data-collected-money', raisedResult).css('width', '30.86%');
 
   let softCapArray = softCap.split('');
   let hardCapArray = hardCap.split('');
@@ -106,7 +112,7 @@ function setTimer(data) {
 
 (function() {
 
-  axios.get('static/ico_info.json').then((response) => {
+  axios.get('ico_info.json').then((response) => {
 
     let data = response.data;
 

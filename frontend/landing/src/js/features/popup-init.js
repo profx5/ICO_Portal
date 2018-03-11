@@ -52,7 +52,7 @@
     available = false;
     e.preventDefault();
     
-    var popupInst = $.fancybox.open(`
+    let popupInst = $.fancybox.open(`
       <div class="CopyPopup">
           <div class="CopyPopup_icon animated bounceIn">
 
@@ -74,6 +74,25 @@
         popupInst.close();
     }, 2000)
 
+  });
+
+  $('.CalculatorSection_tip').click(function(e) {
+    let available = true;
+    if (!available) return;
+    available = false;
+    e.preventDefault();
+    
+    let popupInst = $.fancybox.open(`
+      <div class="InvestPopup">
+          <div class="InvestPopup_content">
+              <p class="InvestPopup_text">Info about how to invest in Longevity</p>
+          </div>
+      </div>
+    `);
+
+    setTimeout(() => {
+        popupInst.close();
+    }, 2000)
   });
 
 

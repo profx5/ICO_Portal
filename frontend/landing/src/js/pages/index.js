@@ -1,3 +1,0 @@
-if (isNeededPage('home-page')) {
-
-}
