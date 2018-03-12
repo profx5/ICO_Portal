@@ -28,6 +28,7 @@ class Mint(models.Model):
     class Meta:
         ordering = ['id']
         db_table = 'mint_log'
+        unique_together = ('currency', 'txn_hash')
 
     @property
     def confirmed(self):

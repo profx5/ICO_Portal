@@ -232,7 +232,7 @@ CREATE TABLE `deposits` (
   KEY `deposits_investor_id_d7cc7080_fk_investors_id` (`investor_id`),
   CONSTRAINT `deposits_investor_id_d7cc7080_fk` FOREIGN KEY (`investor_id`) REFERENCES `investors` (`id`),
   CONSTRAINT `deposits_mint_id_19248720_fk_mint_log_id` FOREIGN KEY (`mint_id`) REFERENCES `mint_log` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -318,7 +318,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -327,7 +327,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2018-02-27 15:45:19.767581'),(2,'auth','0001_initial','2018-02-27 15:45:20.255389'),(3,'admin','0001_initial','2018-02-27 15:45:20.387968'),(4,'admin','0002_logentry_remove_auto_add','2018-02-27 15:45:20.401627'),(5,'contenttypes','0002_remove_content_type_name','2018-02-27 15:45:20.502532'),(6,'auth','0002_alter_permission_name_max_length','2018-02-27 15:45:20.551892'),(7,'auth','0003_alter_user_email_max_length','2018-02-27 15:45:20.606034'),(8,'auth','0004_alter_user_username_opts','2018-02-27 15:45:20.624096'),(9,'auth','0005_alter_user_last_login_null','2018-02-27 15:45:20.666071'),(10,'auth','0006_require_contenttypes_0002','2018-02-27 15:45:20.668516'),(11,'auth','0007_alter_validators_add_error_messages','2018-02-27 15:45:20.687233'),(12,'auth','0008_alter_user_username_max_length','2018-02-27 15:45:20.778187'),(13,'auth','0009_alter_user_last_name_max_length','2018-02-27 15:45:20.825343'),(14,'landing','0001_initial','2018-02-27 15:45:20.858536'),(15,'sessions','0001_initial','2018-02-27 15:45:20.905860'),(16,'user_office','0001_initial','2018-02-27 15:45:21.207528'),(17,'user_office','0002_auto_20180301_2120','2018-03-01 21:20:12.003398'),(18,'user_office','0003_auto_20180301_2205','2018-03-01 22:05:46.798793'),(19,'user_office','0004_auto_20180312_1920','2018-03-12 19:20:26.109187'),(20,'user_office','0005_auto_20180312_1929','2018-03-12 19:29:18.332064');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2018-02-27 15:45:19.767581'),(2,'auth','0001_initial','2018-02-27 15:45:20.255389'),(3,'admin','0001_initial','2018-02-27 15:45:20.387968'),(4,'admin','0002_logentry_remove_auto_add','2018-02-27 15:45:20.401627'),(5,'contenttypes','0002_remove_content_type_name','2018-02-27 15:45:20.502532'),(6,'auth','0002_alter_permission_name_max_length','2018-02-27 15:45:20.551892'),(7,'auth','0003_alter_user_email_max_length','2018-02-27 15:45:20.606034'),(8,'auth','0004_alter_user_username_opts','2018-02-27 15:45:20.624096'),(9,'auth','0005_alter_user_last_login_null','2018-02-27 15:45:20.666071'),(10,'auth','0006_require_contenttypes_0002','2018-02-27 15:45:20.668516'),(11,'auth','0007_alter_validators_add_error_messages','2018-02-27 15:45:20.687233'),(12,'auth','0008_alter_user_username_max_length','2018-02-27 15:45:20.778187'),(13,'auth','0009_alter_user_last_name_max_length','2018-02-27 15:45:20.825343'),(14,'landing','0001_initial','2018-02-27 15:45:20.858536'),(15,'sessions','0001_initial','2018-02-27 15:45:20.905860'),(16,'user_office','0001_initial','2018-02-27 15:45:21.207528'),(17,'user_office','0002_auto_20180301_2120','2018-03-01 21:20:12.003398'),(18,'user_office','0003_auto_20180301_2205','2018-03-01 22:05:46.798793'),(19,'user_office','0004_auto_20180312_1920','2018-03-12 19:20:26.109187'),(20,'user_office','0005_auto_20180312_1929','2018-03-12 19:29:18.332064'),(21,'user_office','0006_auto_20180312_2105','2018-03-12 21:05:31.064030');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,7 +353,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('vedn4duprsb9f48yq1vyxilqjfsw9j0c','NDhmNDlhZmI0ODE2Y2QxNjFiNjQ0MTZkMzI2ZjE5MDRhMzBkNjk3Yzp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLlVzZXJPZmZpY2VBdXRoQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjhkNzQ3MDc5MDFjYTY0Yjk0MmYxYTRiZWI4ZDk1NDQyN2Y1NGYwOTIifQ==','2018-03-26 19:25:14.718606');
+INSERT INTO `django_session` VALUES ('jahsmbxncgz87fjj4d6a7artn62z3mea','ZTcwNmRjMDdjOWJlOTAyNTRlZDcwMjQ1NTgyODVlYTM5ZjcxOGE5MDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLlVzZXJPZmZpY2VBdXRoQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjlkN2MzNzJiYTNlYjgyMDMyOTQxYTU5ZDNhNWE3ZTIzYjc3MzUwY2EifQ==','2018-03-26 19:52:20.092818');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -383,7 +383,7 @@ CREATE TABLE `investors` (
 
 LOCK TABLES `investors` WRITE;
 /*!40000 ALTER TABLE `investors` DISABLE KEYS */;
-INSERT INTO `investors` VALUES ('pbkdf2_sha256$100000$fzJlA0JQ5Ccl$N5uSeqL5Ogz9aAY1pkpDTjp8PrQ14MdAP0iGAFY//LY=','2018-03-02 14:14:35.431034',1,'gordon','0x73015966604928A312F79F7E69291a656Cb88602',15882.08100000);
+INSERT INTO `investors` VALUES ('pbkdf2_sha256$100000$fzJlA0JQ5Ccl$N5uSeqL5Ogz9aAY1pkpDTjp8PrQ14MdAP0iGAFY//LY=','2018-03-12 19:52:20.056153',1,'gordon','0x73015966604928A312F79F7E69291a656Cb88602',15882.08100000);
 /*!40000 ALTER TABLE `investors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -433,8 +433,9 @@ CREATE TABLE `mint_log` (
   `state` varchar(10) COLLATE utf8_bin NOT NULL,
   `block_number` int(10) unsigned NOT NULL,
   `txn_hash` varchar(100) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mint_log_currency_txn_hash_8dcafacb_uniq` (`currency`,`txn_hash`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -483,4 +484,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-12 19:29:27
+-- Dump completed on 2018-03-12 21:26:36

@@ -1,4 +1,4 @@
-from django.db import transaction
+from django.db import transaction, IntegrityError
 from decimal import Decimal
 from datetime import datetime
 
@@ -52,7 +52,12 @@ class Processor:
 
             if not exists:
                 mint.confirm()
-                mint.save()
+                try:
+                    mint.save()
+                except IntegrityError as e:
+                    print(e)
+
+                    return False
 
                 deposit = self.create_deposit(mint)
                 deposit.save()
