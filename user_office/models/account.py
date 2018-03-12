@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models import Manager
 from blockchain.currencies import Currencies
 
+from .common import EthAddressField
+
 
 CURRENCY_CHOICES = [(i.name, i.code) for i in Currencies.get_currencies()]
 
@@ -21,7 +23,7 @@ class Account(models.Model):
     investor = models.ForeignKey('Investor', on_delete=models.CASCADE,
                                  related_name='pay_accounts')
     currency = models.CharField(max_length=10, choices=CURRENCY_CHOICES)
-    address = models.CharField(max_length=100)
+    address = EthAddressField()
 
     objects = AccountManager()
 

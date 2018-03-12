@@ -4,6 +4,7 @@ from django.db.models import Sum
 
 from .account import Account
 from .deposit import Deposit
+from .common import EthAddressField
 
 
 class NoAuthData(Exception):
@@ -40,9 +41,8 @@ class Investor(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=100,
                                 unique=True)
-    eth_account = models.CharField(verbose_name='etherium account address',
-                                   max_length=100,
-                                   unique=True)
+    eth_account = EthAddressField(verbose_name='etherium account address',
+                                  unique=True)
     tokens_amount = models.DecimalField(max_digits=32,
                                         decimal_places=8,
                                         default=0)
