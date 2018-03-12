@@ -16,3 +16,4 @@ lib
 bin
 .Python
 include
+celerybeat-schedule

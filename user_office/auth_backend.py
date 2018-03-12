@@ -17,6 +17,7 @@ class UserOfficeAuthBackend(ModelBackend):
     def get_user(self, user_id):
         try:
             user = Investor.objects.get(id=user_id)
-        except Ivestor.DoesNotExist:
+        except Investor.DoesNotExist:
             return None
+
         return user if self.user_can_authenticate(user) else None

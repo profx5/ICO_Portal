@@ -36,7 +36,8 @@ gulp.task('browser-sync', function() {
   browserSync.init({
     server: 'frontend/landing/dist',
     ghostMode: false,
-    open: false
+    open: false,
+    port: 3010
   });
 
 });

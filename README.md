@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/ongrid/ICO_Portal.svg?token=waZyqGFoEW87kExjCQoq&branch=master)](https://travis-ci.com/ongrid/ICO_Portal)
+ [![Build Status](https://travis-ci.com/ongrid/ICO_Portal.svg?token=waZyqGFoEW87kExjCQoq&branch=master)](https://travis-ci.com/ongrid/ICO_Portal)
 # Installation for MacOS
 ## Requirements
 1. Python 3.6.4
@@ -119,7 +119,7 @@ add-apt-repository -y ppa:deadsnakes/ppa
 apt -y install curl
 apt -y upgrade
 apt -y update
-apt -y install screen vim mysql-server libmysqlclient-dev python3.6-dev rabbitmq-server python3-pip python3-dev python3.6 git 
+apt -y install screen vim mysql-server libmysqlclient-dev python3.6-dev rabbitmq-server python3-pip python3-dev python3.6 git
 # add NodeJS repo, install node and npm
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 apt -y install screen vim nodejs
@@ -169,7 +169,7 @@ EOF
 echo "$SSHCONFIG" >> ~/.ssh/config
 ```
 
-install virtualenv
+Install virtualenv
 ```
 pip3 install -U pip virtualenv
 ```
@@ -197,46 +197,30 @@ echo "$SQL" | mysql -u root
 mysql -u ico_portal_user -pread_manual ico_portal < ico_portal_dump.sql
 ```
 
-add users to RabbitMQ
+Add users to RabbitMQ
 ```
 rabbitmqctl add_user ico_portal read_manual
 rabbitmqctl add_vhost ico_portal_vhost
 rabbitmqctl set_permissions -p ico_portal_vhost ico_portal ".*" ".*" ".*"
 ```
 
-Run gulp dev then stop it
-```
-gulp dev
-```
-hit ctlrl-C to stop (gulp should not start as daemon, just build and exit) 
-
-Run main Django dev server in 1st shell (in screen or terminal)
-```
-python manage.py runserver 0.0.0.0:8000
-```
-
-Run NPM in 2nd shell (in screen or terminal)
-```
-npm run start
-```
-
 Install docker CE
 ```
-apt -y install apt-transport-https ca-certificates 
+apt -y install apt-transport-https ca-certificates
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 apt -y update
 apt -y install docker-ce
 ```
 
-run Ethereum node
+Run Ethereum node
 ```
 docker rm -f geth_rinkeby
 docker run -d --name geth_rinkeby -p 8545:8545 -p 30303:30303 -p 30303:30303/udp ethereum/client-go --rpc --rpcaddr "0.0.0.0" \
     --rpccorsdomain "*" --port 30303 --rinkeby --fast --cache 4096
 ```
 
-import accounts
+Import accounts
 ```
 docker exec -it geth_rinkeby geth --rinkeby --exec \
    'personal.importRawKey("3460743f68c15f00138b8a901920aaefe34d08a193dfc62b7960ba0e257a059a","");\
@@ -250,14 +234,12 @@ docker exec -it geth_rinkeby geth --rinkeby --exec \
     personal.listAccounts' attach
 ```
 
-Start node watcher in 3rd shell (in screen or terminal)
+Run all services using `honcho`
 ```
-export C_FORCE_ROOT=1
-./start_node_watcher.sh
+honcho start
 ```
 
-Start workers in 4th shell (in screen or terminal)
+You can run specific process/processes
 ```
-export C_FORCE_ROOT=1
-./start_workers.sh
+honcho start web webpack
 ```
