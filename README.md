@@ -73,32 +73,14 @@ rabbitmqctl add_vhost ico_portal_vhost
 rabbitmqctl set_permissions -p ico_portal_vhost ico_portal ".*" ".*" ".*"
 ```
 
-## Run app in development environment
-Run dev environment for landing
+Run all services using `honcho`
 ```
-gulp dev
-```
-
-Run django server
-```
-python manage.py runserver
+honcho start
 ```
 
-Run npm server
+You can run specific service/services
 ```
-npm run start
-```
-
-## Run celery workers
-
-Run contract events watcher
-```
-./start_node_watcher.sh
-```
-
-Run event processing workers
-```
-./start_workers.sh
+honcho start web webpack
 ```
 
 # Install on Linux Ubuntu 16 LTS
@@ -239,7 +221,7 @@ Run all services using `honcho`
 honcho start
 ```
 
-You can run specific process/processes
+You can run specific service/services
 ```
 honcho start web webpack
 ```
