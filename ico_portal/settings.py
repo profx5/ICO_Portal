@@ -117,6 +117,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "frontend/landing/dist/static"),
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/tmp/ico_portal_media/'
+
 CURRENCIES = {
     'ethereum_contract': {
         'code': 'ETH',
@@ -146,3 +149,5 @@ CELERY_TASK_ROUTES = {
         'queue': 'events'
     }
 }
+
+KYC_ENABLED = True

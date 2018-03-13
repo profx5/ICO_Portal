@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from landing import views as landing_views
 from user_office import views as user_office_views
 from user_office.api_urls import api_urlpatterns
@@ -17,4 +19,4 @@ urlpatterns = [
     path('api/', include(api_urlpatterns)),
 
     path('docs/', include_docs_urls(title='User office API docs', public=False))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

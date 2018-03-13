@@ -1,3 +1,4 @@
+from .auth import KYCAndLoginPermission
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.serializers import ModelSerializer
 from rest_framework.response import Response
@@ -19,7 +20,9 @@ class GetICOPhaseStats(RetrieveAPIView):
     """
     Return current ico state
     """
+
     serializer_class = PhaseSerializer
+    permission_classes = (KYCAndLoginPermission,)
 
     def retrieve(self, request, *args, **kwargs):
         current_phase = Phase.objects.get_phase()

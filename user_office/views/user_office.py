@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from .mixins import LoginRequiredMixin
+from .common import LoginRequiredMixin
 
 class UserOfficeView(LoginRequiredMixin, TemplateView):
     template_name = "user_office.html"

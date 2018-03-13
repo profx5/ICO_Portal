@@ -1,3 +1,4 @@
+from .auth import KYCAndLoginPermission
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.serializers import ModelSerializer
 from rest_framework.response import Response
@@ -15,6 +16,7 @@ class GetAccount(RetrieveAPIView):
     Return user account address by cryptocurrency code ('currency_code' param)
     """
     serializer_class = AccountSerializer
+    permission_classes = (KYCAndLoginPermission,)
 
     def _get_currency_code(self):
         return self.request.query_params['currency_code'].upper()

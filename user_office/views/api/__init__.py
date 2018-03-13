@@ -3,6 +3,7 @@ from .get_ico_phase_stats import GetICOPhaseStats
 from .get_available_currencies import GetAvailableCurrencies
 from .get_account import GetAccount
 from .get_deposits import GetDeposits
+from .kyc import KYCViewSet
 
 get_me = GetMeView.as_view()
 get_ico_phase_stats = GetICOPhaseStats.as_view()

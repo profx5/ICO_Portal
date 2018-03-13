@@ -3,9 +3,13 @@ from user_office.models import Investor
 from django.contrib.auth import logout
 
 
+def is_user_authenticated(user):
+    return user.is_authenticated and isinstance(user, Investor)
+
+
 class LoginRequiredMixin:
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and isinstance(request.user, Investor):
+        if is_user_authenticated(request.user):
             return super().dispatch(request, *args, **kwargs)
         else:
             return redirect('/login')

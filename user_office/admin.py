@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
 
-from .models import Investor, Phase, Deposit, Mint
+from .models import Investor, Phase, Deposit, Mint, KYC
 
 
 class InvestorAdmin(admin.ModelAdmin):
@@ -19,3 +19,4 @@ admin.site.register(Investor, InvestorAdmin)
 admin.site.register(Phase)
 admin.site.register(Deposit)
 admin.site.register(Mint)
+admin.site.register(KYC)

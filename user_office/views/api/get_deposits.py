@@ -1,3 +1,4 @@
+from .auth import KYCAndLoginPermission
 from rest_framework.generics import ListAPIView
 from rest_framework.serializers import ModelSerializer
 from user_office.models import Deposit, Mint
@@ -20,7 +21,9 @@ class GetDeposits(ListAPIView):
     """
     Return list of deposits
     """
+
     serializer_class = DepositSerializer
+    permission_classes = (KYCAndLoginPermission,)
 
     def get_queryset(self):
         user = self.request.user

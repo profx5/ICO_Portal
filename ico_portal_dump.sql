@@ -110,7 +110,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `auth_permission` (
 
 LOCK TABLES `auth_permission` WRITE;
 /*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
-INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can add permission',2,'add_permission'),(5,'Can change permission',2,'change_permission'),(6,'Can delete permission',2,'delete_permission'),(7,'Can add group',3,'add_group'),(8,'Can change group',3,'change_group'),(9,'Can delete group',3,'delete_group'),(10,'Can add user',4,'add_user'),(11,'Can change user',4,'change_user'),(12,'Can delete user',4,'delete_user'),(13,'Can add content type',5,'add_contenttype'),(14,'Can change content type',5,'change_contenttype'),(15,'Can delete content type',5,'delete_contenttype'),(16,'Can add session',6,'add_session'),(17,'Can change session',6,'change_session'),(18,'Can delete session',6,'delete_session'),(19,'Can add milestone',7,'add_milestone'),(20,'Can change milestone',7,'change_milestone'),(21,'Can delete milestone',7,'delete_milestone'),(22,'Can add account',8,'add_account'),(23,'Can change account',8,'change_account'),(24,'Can delete account',8,'delete_account'),(25,'Can add deposit',9,'add_deposit'),(26,'Can change deposit',9,'change_deposit'),(27,'Can delete deposit',9,'delete_deposit'),(28,'Can add investor',10,'add_investor'),(29,'Can change investor',10,'change_investor'),(30,'Can delete investor',10,'delete_investor'),(31,'Can add mint',11,'add_mint'),(32,'Can change mint',11,'change_mint'),(33,'Can delete mint',11,'delete_mint'),(34,'Can add phase',12,'add_phase'),(35,'Can change phase',12,'change_phase'),(36,'Can delete phase',12,'delete_phase');
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can add permission',2,'add_permission'),(5,'Can change permission',2,'change_permission'),(6,'Can delete permission',2,'delete_permission'),(7,'Can add group',3,'add_group'),(8,'Can change group',3,'change_group'),(9,'Can delete group',3,'delete_group'),(10,'Can add user',4,'add_user'),(11,'Can change user',4,'change_user'),(12,'Can delete user',4,'delete_user'),(13,'Can add content type',5,'add_contenttype'),(14,'Can change content type',5,'change_contenttype'),(15,'Can delete content type',5,'delete_contenttype'),(16,'Can add session',6,'add_session'),(17,'Can change session',6,'change_session'),(18,'Can delete session',6,'delete_session'),(19,'Can add milestone',7,'add_milestone'),(20,'Can change milestone',7,'change_milestone'),(21,'Can delete milestone',7,'delete_milestone'),(22,'Can add account',8,'add_account'),(23,'Can change account',8,'change_account'),(24,'Can delete account',8,'delete_account'),(25,'Can add deposit',9,'add_deposit'),(26,'Can change deposit',9,'change_deposit'),(27,'Can delete deposit',9,'delete_deposit'),(28,'Can add investor',10,'add_investor'),(29,'Can change investor',10,'change_investor'),(30,'Can delete investor',10,'delete_investor'),(31,'Can add mint',11,'add_mint'),(32,'Can change mint',11,'change_mint'),(33,'Can delete mint',11,'delete_mint'),(34,'Can add phase',12,'add_phase'),(35,'Can change phase',12,'change_phase'),(36,'Can delete phase',12,'delete_phase'),(37,'Can add kyc',13,'add_kyc'),(38,'Can change kyc',13,'change_kyc'),(39,'Can delete kyc',13,'delete_kyc');
 /*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +153,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$100000$XMGY5IFZkKMI$dDTOtcb464oIczKiy4yL4Hd/cfP0FihkIMv8N/vtmAg=','2018-02-27 16:28:20.842743',1,'admin','','','',1,1,'2018-02-27 15:48:35.387168');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$100000$XMGY5IFZkKMI$dDTOtcb464oIczKiy4yL4Hd/cfP0FihkIMv8N/vtmAg=','2018-03-13 19:43:49.502302',1,'admin','','','',1,1,'2018-02-27 15:48:35.387168');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,7 +266,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +275,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2018-02-27 15:49:24.010251','1','Milestone object (1)',1,'[{\"added\": {}}]',7,1),(2,'2018-02-27 15:49:57.996076','2','Milestone object (2)',1,'[{\"added\": {}}]',7,1),(3,'2018-02-27 15:50:26.869981','3','Milestone object (3)',1,'[{\"added\": {}}]',7,1),(4,'2018-02-27 15:52:29.188581','1','First phase',1,'[{\"added\": {}}]',12,1),(5,'2018-02-27 15:53:44.867249','2','Second phase',1,'[{\"added\": {}}]',12,1),(6,'2018-02-27 15:54:10.396732','3','Third phase',1,'[{\"added\": {}}]',12,1);
+INSERT INTO `django_admin_log` VALUES (1,'2018-02-27 15:49:24.010251','1','Milestone object (1)',1,'[{\"added\": {}}]',7,1),(2,'2018-02-27 15:49:57.996076','2','Milestone object (2)',1,'[{\"added\": {}}]',7,1),(3,'2018-02-27 15:50:26.869981','3','Milestone object (3)',1,'[{\"added\": {}}]',7,1),(4,'2018-02-27 15:52:29.188581','1','First phase',1,'[{\"added\": {}}]',12,1),(5,'2018-02-27 15:53:44.867249','2','Second phase',1,'[{\"added\": {}}]',12,1),(6,'2018-02-27 15:54:10.396732','3','Third phase',1,'[{\"added\": {}}]',12,1),(7,'2018-03-13 18:58:14.695680','6','KYC object (6)',2,'[{\"changed\": {\"fields\": [\"state\"]}}]',13,1),(8,'2018-03-13 19:43:22.355769','8','KYC object (8)',2,'[{\"changed\": {\"fields\": [\"state\"]}}]',13,1),(9,'2018-03-13 19:45:49.470132','9','KYC object (9)',2,'[{\"changed\": {\"fields\": [\"state\"]}}]',13,1),(10,'2018-03-13 19:48:21.355093','10','KYC object (10)',2,'[{\"changed\": {\"fields\": [\"state\"]}}]',13,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,7 +292,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -301,7 +301,7 @@ CREATE TABLE `django_content_type` (
 
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(7,'landing','milestone'),(6,'sessions','session'),(8,'user_office','account'),(9,'user_office','deposit'),(10,'user_office','investor'),(11,'user_office','mint'),(12,'user_office','phase');
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(7,'landing','milestone'),(6,'sessions','session'),(8,'user_office','account'),(9,'user_office','deposit'),(10,'user_office','investor'),(13,'user_office','kyc'),(11,'user_office','mint'),(12,'user_office','phase');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -318,7 +318,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -327,7 +327,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2018-02-27 15:45:19.767581'),(2,'auth','0001_initial','2018-02-27 15:45:20.255389'),(3,'admin','0001_initial','2018-02-27 15:45:20.387968'),(4,'admin','0002_logentry_remove_auto_add','2018-02-27 15:45:20.401627'),(5,'contenttypes','0002_remove_content_type_name','2018-02-27 15:45:20.502532'),(6,'auth','0002_alter_permission_name_max_length','2018-02-27 15:45:20.551892'),(7,'auth','0003_alter_user_email_max_length','2018-02-27 15:45:20.606034'),(8,'auth','0004_alter_user_username_opts','2018-02-27 15:45:20.624096'),(9,'auth','0005_alter_user_last_login_null','2018-02-27 15:45:20.666071'),(10,'auth','0006_require_contenttypes_0002','2018-02-27 15:45:20.668516'),(11,'auth','0007_alter_validators_add_error_messages','2018-02-27 15:45:20.687233'),(12,'auth','0008_alter_user_username_max_length','2018-02-27 15:45:20.778187'),(13,'auth','0009_alter_user_last_name_max_length','2018-02-27 15:45:20.825343'),(14,'landing','0001_initial','2018-02-27 15:45:20.858536'),(15,'sessions','0001_initial','2018-02-27 15:45:20.905860'),(16,'user_office','0001_initial','2018-02-27 15:45:21.207528'),(17,'user_office','0002_auto_20180301_2120','2018-03-01 21:20:12.003398'),(18,'user_office','0003_auto_20180301_2205','2018-03-01 22:05:46.798793'),(19,'user_office','0004_auto_20180312_1920','2018-03-12 19:20:26.109187'),(20,'user_office','0005_auto_20180312_1929','2018-03-12 19:29:18.332064'),(21,'user_office','0006_auto_20180312_2105','2018-03-12 21:05:31.064030');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2018-02-27 15:45:19.767581'),(2,'auth','0001_initial','2018-02-27 15:45:20.255389'),(3,'admin','0001_initial','2018-02-27 15:45:20.387968'),(4,'admin','0002_logentry_remove_auto_add','2018-02-27 15:45:20.401627'),(5,'contenttypes','0002_remove_content_type_name','2018-02-27 15:45:20.502532'),(6,'auth','0002_alter_permission_name_max_length','2018-02-27 15:45:20.551892'),(7,'auth','0003_alter_user_email_max_length','2018-02-27 15:45:20.606034'),(8,'auth','0004_alter_user_username_opts','2018-02-27 15:45:20.624096'),(9,'auth','0005_alter_user_last_login_null','2018-02-27 15:45:20.666071'),(10,'auth','0006_require_contenttypes_0002','2018-02-27 15:45:20.668516'),(11,'auth','0007_alter_validators_add_error_messages','2018-02-27 15:45:20.687233'),(12,'auth','0008_alter_user_username_max_length','2018-02-27 15:45:20.778187'),(13,'auth','0009_alter_user_last_name_max_length','2018-02-27 15:45:20.825343'),(14,'landing','0001_initial','2018-02-27 15:45:20.858536'),(15,'sessions','0001_initial','2018-02-27 15:45:20.905860'),(16,'user_office','0001_initial','2018-02-27 15:45:21.207528'),(17,'user_office','0002_auto_20180301_2120','2018-03-01 21:20:12.003398'),(18,'user_office','0003_auto_20180301_2205','2018-03-01 22:05:46.798793'),(19,'user_office','0004_auto_20180312_1920','2018-03-12 19:20:26.109187'),(20,'user_office','0005_auto_20180312_1929','2018-03-12 19:29:18.332064'),(21,'user_office','0006_auto_20180312_2105','2018-03-12 21:05:31.064030'),(22,'user_office','0007_kyc','2018-03-13 14:44:35.978810');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,7 +353,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('jahsmbxncgz87fjj4d6a7artn62z3mea','ZTcwNmRjMDdjOWJlOTAyNTRlZDcwMjQ1NTgyODVlYTM5ZjcxOGE5MDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLlVzZXJPZmZpY2VBdXRoQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjlkN2MzNzJiYTNlYjgyMDMyOTQxYTU5ZDNhNWE3ZTIzYjc3MzUwY2EifQ==','2018-03-26 19:52:20.092818');
+INSERT INTO `django_session` VALUES ('0fvef1cs2zozt6xvf633nig77lx2icgm','NGUwMjNiZWY3Mjc1NjUwZGZhYjVmMjQyOTdmNGMzYjE5NjA0ZGVmZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5YjA3ZjhiYWRmYWJhMmE5MWYyYzUzZTA0NTQ5ZWE2NWRjMzU1ODkwIn0=','2018-03-27 19:43:49.504513'),('hptbrk33kidglmo6zpjo5vkg61qpi5zj','ZTcwNmRjMDdjOWJlOTAyNTRlZDcwMjQ1NTgyODVlYTM5ZjcxOGE5MDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLlVzZXJPZmZpY2VBdXRoQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjlkN2MzNzJiYTNlYjgyMDMyOTQxYTU5ZDNhNWE3ZTIzYjc3MzUwY2EifQ==','2018-03-27 19:47:00.827961');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -374,7 +374,7 @@ CREATE TABLE `investors` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `eth_account` (`eth_account`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,8 +383,40 @@ CREATE TABLE `investors` (
 
 LOCK TABLES `investors` WRITE;
 /*!40000 ALTER TABLE `investors` DISABLE KEYS */;
-INSERT INTO `investors` VALUES ('pbkdf2_sha256$100000$fzJlA0JQ5Ccl$N5uSeqL5Ogz9aAY1pkpDTjp8PrQ14MdAP0iGAFY//LY=','2018-03-12 19:52:20.056153',1,'gordon','0x73015966604928A312F79F7E69291a656Cb88602',15882.08100000);
+INSERT INTO `investors` VALUES ('pbkdf2_sha256$100000$fzJlA0JQ5Ccl$N5uSeqL5Ogz9aAY1pkpDTjp8PrQ14MdAP0iGAFY//LY=','2018-03-13 19:47:00.826427',1,'gordon','0x73015966604928A312F79F7E69291a656Cb88602',32295.91956000),('pbkdf2_sha256$100000$ktjUiRYazK7R$i8g8BWZOmcDckMfawIz1gJkh5ApPAxNSl7gIgf7V64w=','2018-03-13 19:45:12.305980',4,'user1','0xB0a3f48478d84a497f930d8455711d9981B66a70',0.00000000);
 /*!40000 ALTER TABLE `investors` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `kyc`
+--
+
+DROP TABLE IF EXISTS `kyc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `kyc` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state` varchar(10) COLLATE utf8_bin NOT NULL,
+  `firstname` varchar(30) COLLATE utf8_bin NOT NULL,
+  `midname` varchar(30) COLLATE utf8_bin DEFAULT NULL,
+  `surname` varchar(30) COLLATE utf8_bin NOT NULL,
+  `birthdate` date NOT NULL,
+  `document_no` varchar(50) COLLATE utf8_bin NOT NULL,
+  `photo` varchar(100) COLLATE utf8_bin NOT NULL,
+  `investor_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `investor_id` (`investor_id`),
+  CONSTRAINT `kyc_investor_id_1910e4d7_fk_investors_id` FOREIGN KEY (`investor_id`) REFERENCES `investors` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `kyc`
+--
+
+LOCK TABLES `kyc` WRITE;
+/*!40000 ALTER TABLE `kyc` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kyc` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -484,4 +516,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-12 21:26:36
+-- Dump completed on 2018-03-13 20:16:34

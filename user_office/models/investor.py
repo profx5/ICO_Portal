@@ -76,3 +76,7 @@ class Investor(AbstractBaseUser):
 
     def recalc_balance(self):
         self.tokens_amount = Deposit.objects.filter(investor=self).aggregate(amount=Sum('amount'))['amount']
+
+    @property
+    def passed_kys(self):
+        return hasattr(self, 'kyc') and self.kyc.approved
