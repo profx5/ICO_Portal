@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'django_object_actions',
     'webpack_loader',
     'rest_framework',
     'landing',
@@ -127,8 +128,9 @@ CURRENCIES = {
         'module': 'ethereum_contract',
         'token_price': 1000,
         'rpc_url': 'http://127.0.0.1:8545',
-        'contract_address': '0xF69C63e7a39b56b69E09b21496B46005bF950458',
-        'confirmations_required': 1,
+        'contract_address': '0xb9ebb98e3d48d4a800B612C8d52E646F88E46143',
+        'sender_address': '0x73015966604928A312F79F7E69291a656Cb88602',
+        'post_kyc_threshold': 5000000
     }
 }
 
@@ -145,9 +147,6 @@ CELERY_TASK_ROUTES = {
     'blockchain.ethereum_contract.tasks.check_events': {
         'queue': 'events_beat',
     },
-    'blockchain.ethereum_contract.tasks.process_event': {
-        'queue': 'events'
-    }
 }
 
 KYC_ENABLED = True

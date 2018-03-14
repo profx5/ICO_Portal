@@ -25,3 +25,18 @@ def check_events():
 
         event = Event(entry)
         process_event.delay(event)
+
+@shared_task
+def set_investment_threshold(address, threshold=None):
+    if threshold is None:
+        threshold = Settings.config('post_kyc_threshold')
+
+    print('Set investment threshold for account {0} to {1}'.format(address,
+                                                                   threshold))
+
+    contract = Settings.contract
+
+    contract.functions.setInvestmentThreshold(address, threshold).transact({
+        'from': Settings.config('sender_address'),
+         'gas': 100000
+    })

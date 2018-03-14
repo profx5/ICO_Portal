@@ -1,4 +1,6 @@
 from django.db import models
+from blockchain.ethereum_contract import tasks
+
 
 KYC_STATE_CHOICES = (('WAITING', 'Waiting for approval'),
                      ('DECLINED', 'Declined'),
@@ -28,6 +30,24 @@ class KYC(models.Model):
         ordering = ['id']
         db_table = 'kyc'
 
+        verbose_name = 'KYC'
+        verbose_name_plural = 'KYCs'
+
+    def __str__(self):
+        return 'KYC for user {0}'.format(self.investor.eth_account)
+
     @property
     def approved(self):
         return self.state == 'APPROVED'
+
+    @property
+    def waiting(self):
+        return self.state == 'WAITING'
+
+    def approve(self):
+        self.state = 'APPROVED'
+
+        tasks.set_investment_threshold.delay(self.investor.eth_account)
+
+    def decline(self):
+        self.state = 'DECLINED'
