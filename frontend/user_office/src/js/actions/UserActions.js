@@ -29,11 +29,11 @@ export default class UserActions {
             }).then( ({data}) => {
 
                 dispatch(UserActions.get_user_successfull(data))
-                
+
             }).catch(error => {
                 console.log("cant fetch user", {error})
             })
-            
+
         }
     }
 }

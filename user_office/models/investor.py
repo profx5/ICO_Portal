@@ -1,7 +1,9 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.db.models import Sum
+from django.conf import settings
 
+from blockchain.ethereum_contract.settings import Settings
 from .account import Account
 from .deposit import Deposit
 from .common import EthAddressField
@@ -80,3 +82,14 @@ class Investor(AbstractBaseUser):
     @property
     def passed_kys(self):
         return hasattr(self, 'kyc') and self.kyc.approved
+
+    @property
+    def kyc_required(self):
+        return settings.KYC_ENABLED and not self.passed_kys
+
+    @property
+    def investment_threshold(self):
+        if self.kyc_required:
+            return Settings.config('pre_kyc_threshold')
+        else:
+            return Settings.config('post_kyc_threshold')

@@ -4,6 +4,7 @@ from rest_framework.parsers import MultiPartParser
 from rest_framework.serializers import ModelSerializer
 from rest_framework.response import Response
 
+from .auth import KYCAndLoginPermission
 from user_office.models import KYC
 
 
@@ -11,14 +12,14 @@ class GetKYCSerializer(ModelSerializer):
     class Meta:
         model = KYC
         fields = ('state', 'firstname', 'midname', 'surname',
-                  'birthdate', 'document_no', 'photo')
+                  'birthdate', 'document_no', 'country', 'photo')
 
 
 class CreateKYCSerializer(ModelSerializer):
     class Meta:
         model = KYC
         fields = ('firstname', 'midname', 'surname', 'birthdate',
-                  'document_no', 'photo')
+                  'document_no', 'country', 'photo')
 
 
 class KYCViewSet(mixins.CreateModelMixin,
@@ -26,6 +27,8 @@ class KYCViewSet(mixins.CreateModelMixin,
                  mixins.RetrieveModelMixin,
                  GenericViewSet):
     parser_classes = (MultiPartParser,)
+
+    permission_classes = (KYCAndLoginPermission,)
 
     def get_serializer_class(self):
         if self.action in ('create', 'update'):

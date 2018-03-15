@@ -9,8 +9,9 @@ const AccountInfo = ({
         <a href="#" className="Header_link">
             <button className="btn btn-info">PROFILE</button>
         </a>
-        <a href="#" className="Header_link">
-            <button className="btn btn-danger">LOG OUT</button>
+        <a href="/logout/" className="Header_link">
+        <button className="btn btn-danger">
+        LOG OUT</button>
         </a>
     </div>
 )

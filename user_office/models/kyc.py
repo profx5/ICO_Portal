@@ -20,6 +20,8 @@ class KYC(models.Model):
     firstname = models.CharField(max_length=30)
     midname = models.CharField(max_length=30, blank=True, null=True)
     surname = models.CharField(max_length=30)
+
+    country = models.CharField(max_length=30)
     birthdate = models.DateField()
 
     document_no = models.CharField(max_length=50)

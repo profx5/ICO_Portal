@@ -9,6 +9,7 @@ class MintSerializer(ModelSerializer):
         model = Mint
         fields = ('txn_hash',)
 
+
 class DepositSerializer(ModelSerializer):
     mint = MintSerializer(many=False, read_only=True)
 

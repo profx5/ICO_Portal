@@ -13,7 +13,6 @@ import ICOPhasesStatsActions from '../actions/ICOPhasesStatsActions'
 import DepositsActions from '../actions/DepositsActions'
 
 class UserOffice extends Component {
-
     componentDidMount() {
         const {get_me, get_phases_stats, get_deposite} = this.props
 

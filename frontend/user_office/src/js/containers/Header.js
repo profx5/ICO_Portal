@@ -6,6 +6,7 @@ import Balance from '../components/Balance'
 import Bounty from '../components/Bounty';
 import Lang from '../components/Lang';
 import AccountInfo from '../components/AccountInfo';
+import KYCHeader from '../components/KYCHeader';
 
 //containers
 import DepositTable from './DepositTable'
@@ -41,6 +42,9 @@ class Header extends React.Component {
 
         return (
             <header className="Header container col-md-10">
+                <div className="row h-5">
+                    <KYCHeader />
+                </div>
                 <div className="Header_row row h-100">
                     <Balance currentAmount={tokensAmount}/>
                     <BountiesBalance />

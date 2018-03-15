@@ -2,7 +2,7 @@ class Api {
     constructor() {
         this.prefix = '/api'
     }
-    
+
     get_me() {
         return `${this.prefix}/getMe`
     }
@@ -17,6 +17,9 @@ class Api {
 
     get_deposits() {
         return `${this.prefix}/getDeposits`
+    }
+    kyc() {
+        return `${this.prefix}/kyc/`
     }
 }
 

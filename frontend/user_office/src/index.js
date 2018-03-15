@@ -15,6 +15,9 @@ const store = createStore(reducer, applyMiddleware(thunk))
 
 const ROOT_NODE = document.getElementById('root');
 
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+
 render(
     <Provider store={store}>
         <App />
