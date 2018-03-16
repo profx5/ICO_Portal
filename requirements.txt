@@ -20,6 +20,8 @@ eth-keyfile==0.5.1
 eth-keys==0.2.0b3
 eth-rlp==0.1.0a2
 eth-utils==1.0.0b2
+factory-boy==2.10.0
+Faker==0.8.12
 hexbytes==0.1.0b1
 honcho==1.0.1
 idna==2.6
@@ -41,11 +43,13 @@ ptyprocess==0.5.2
 pycryptodome==3.4.11
 Pygments==2.2.0
 pysha3==1.0.2
+python-dateutil==2.7.0
 pytz==2018.3
 requests==2.18.4
 rlp==0.6.0
 simplegeneric==0.8.1
 six==1.11.0
+text-unidecode==1.2
 toolz==0.9.0
 traitlets==4.3.2
 uritemplate==3.0.0

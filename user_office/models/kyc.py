@@ -46,10 +46,11 @@ class KYC(models.Model):
     def waiting(self):
         return self.state == 'WAITING'
 
-    def approve(self):
+    def approve(self, call_contract=True):
         self.state = 'APPROVED'
 
-        tasks.set_investment_threshold.delay(self.investor.eth_account)
+        if call_contract:
+            tasks.set_investment_threshold.delay(self.investor.eth_account)
 
     def decline(self):
         self.state = 'DECLINED'

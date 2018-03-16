@@ -80,12 +80,12 @@ class Investor(AbstractBaseUser):
         self.tokens_amount = Deposit.objects.filter(investor=self).aggregate(amount=Sum('amount'))['amount']
 
     @property
-    def passed_kys(self):
+    def passed_kyc(self):
         return hasattr(self, 'kyc') and self.kyc.approved
 
     @property
     def kyc_required(self):
-        return settings.KYC_ENABLED and not self.passed_kys
+        return settings.KYC_ENABLED and not self.passed_kyc
 
     @property
     def investment_threshold(self):

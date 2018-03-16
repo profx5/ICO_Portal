@@ -1,6 +1,6 @@
 from django.db import models
-from datetime import datetime
 
+from user_office.datetime import datetime
 from user_office.models.account import Account, CURRENCY_CHOICES
 
 
@@ -20,6 +20,7 @@ class Mint(models.Model):
     txn_date = models.DateTimeField(blank=True, null=True)
     state = models.CharField(max_length=10, choices=MINT_STATE_CHOICES,
                              default='WAIT')
+    confirmation_date = models.DateTimeField(null=True, blank=True)
     block_hash = models.CharField(max_length=100)
     block_number = models.PositiveIntegerField()
 
@@ -34,6 +35,9 @@ class Mint(models.Model):
     def confirmed(self):
         return self.state == 'CONFIRMED'
 
-    def confirm(self, date=datetime.now()):
+    def confirm(self, date=None):
+        if date is None:
+            date = datetime.utcnow()
+
         self.state = 'CONFIRMED'
-        self.confirme_data = date
+        self.confirmation_date = date

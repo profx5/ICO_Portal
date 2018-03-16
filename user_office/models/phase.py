@@ -1,11 +1,11 @@
-from datetime import datetime
-
 from django.db import models
 from django.db.models.query import QuerySet
 from django.db.models.manager import BaseManager
 from django.db.models import Q
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
+
+from user_office.datetime import datetime
 
 
 class PhaseDateIntersection(Exception):
@@ -21,8 +21,18 @@ class PhaseQuerySet(QuerySet):
         if overlaps:
             return [o.name for o in overlaps]
 
-    def get_phase(self, date=datetime.utcnow()):
-        return self.get(begin_date__lte=date, end_date__gte=date)
+    def get_phase(self, date=None):
+        if date is None:
+            date = datetime.utcnow()
+
+        phases = self.filter(begin_date__lte=date, end_date__gte=date)
+
+        if len(phases) == 1:
+            return phases[0]
+        elif len(phases) == 0:
+            return None
+        else:
+            raise PhaseDateIntersection()
 
 
 class Phase(models.Model):

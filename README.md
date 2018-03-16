@@ -225,3 +225,14 @@ You can run specific service/services
 ```
 honcho start web webpack
 ```
+
+# Testing
+Set environment
+```
+export DJANGO_SETTINGS_MODULE='ico_portal.settings.test'
+```
+
+Run tests
+```
+./manage.py test
+```

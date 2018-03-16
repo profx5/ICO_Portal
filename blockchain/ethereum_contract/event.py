@@ -1,5 +1,6 @@
-from datetime import datetime
 from decimal import Decimal
+
+from user_office.datetime import datetime
 
 class Event:
     def __init__(self, event):
