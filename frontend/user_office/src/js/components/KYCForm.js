@@ -21,6 +21,7 @@ class KYCForm extends React.Component {
             url: Api.kyc()
         }).then( ({data}) => {
             console.log({data})
+            this.props.hideForm()
         }).catch(error => {
             console.log("Cant create kyc")
         })

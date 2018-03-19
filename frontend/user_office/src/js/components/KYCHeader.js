@@ -12,12 +12,19 @@ class KYCHeader extends React.Component {
         };
 
         this.showForm = this.showForm.bind(this);
+        this.hideForm = this.hideForm.bind(this);
     }
 
     showForm() {
         this.setState({
             showForm: true,
         });
+    }
+
+    hideForm() {
+        this.setState({
+            showForm: false,
+        })
     }
 
     render() {
@@ -31,7 +38,7 @@ class KYCHeader extends React.Component {
                         Pass KYC
                     </button>
                 </div>
-                {this.state.showForm ? <KYCForm /> : null}
+                {this.state.showForm ? <KYCForm hideForm={this.hideForm} /> : null}
             </div>
         )
     }
