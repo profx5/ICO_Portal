@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.com/OnGridSystems/ICO_Portal.svg?token=YtkmGHXy5XUn2VXCRKwy&branch=master)](https://travis-ci.com/OnGridSystems/ICO_Portal)
-# Installation for MacOS
 ## Requirements
 1. Python 3.6.4
 ```
@@ -25,19 +24,21 @@ brew services start rabbitmq
 ```
 
 ## Installation
+# on MacOS (and Windows)
 Install python dependencies
 ```
 pip install -r requirements.txt
 ```
 
-Install npm dependencies
-```
-npm install
-```
 Install gulp
 ```
 npm install gulp-cli -g
 npm install gulp -D
+```
+
+Install npm dependencies
+```
+npm install
 ```
 
 Create user and database
@@ -50,17 +51,11 @@ CREATE USER ico_portal_user@localhost IDENTIFIED BY "read_manual";
 GRANT ALL PRIVILEGES ON ico_portal.* TO 'ico_portal_user'@'localhost';
 ```
 
-Prepare database
-```
-python manage.py migrate
-```
-or (recommended)
-[download](https://www.dropbox.com/sh/luvuxz8pqn6hpgb/AACjNzn2snBICDVPpj30JPAta?dl=0) database dump and deploy it
-os x
+Import dump
 ```
 mysql -u ico_portal_user -pread_manual ico_portal < ico_portal_dump.sql
 ```
-windows
+(for windows)
 ```
 mysql -u ico_portal_user -pread_manual ico_portal
 source ico_portal_dump.sql
@@ -71,16 +66,6 @@ source ico_portal_dump.sql
 rabbitmqctl add_user ico_portal read_manual
 rabbitmqctl add_vhost ico_portal_vhost
 rabbitmqctl set_permissions -p ico_portal_vhost ico_portal ".*" ".*" ".*"
-```
-
-Run all services using `honcho`
-```
-honcho start
-```
-
-You can run specific service/services
-```
-honcho start web webpack
 ```
 
 # Install on Linux Ubuntu 16 LTS
@@ -215,7 +200,7 @@ docker exec -it geth_rinkeby geth --rinkeby --exec \
     personal.unlockAccount("0xDEfE2673504264d3659bdA8Fdfb86aDCD29687F5","",0);\
     personal.listAccounts' attach
 ```
-
+## Running
 Run all services using `honcho`
 ```
 honcho start
@@ -225,6 +210,10 @@ You can run specific service/services
 ```
 honcho start web webpack
 ```
+
+To customize webpack bundle serving use this env variables:
+1. `NPM_HOST` and `NPM_PORT` set host and port for serving bundle.js file (default 0.0.0.0 and 3000)
+2. `BUNDLE_SERVING_PATH` set path from which django tries to load bundle.js file (default http://0.0.0.0:3000/)
 
 # Testing
 Set environment

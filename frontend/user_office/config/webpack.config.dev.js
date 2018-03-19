@@ -13,8 +13,10 @@ const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const BundleTracker = require('webpack-bundle-tracker');
 
-const publicPath = 'http://localhost:3000/';
-const publicUrl = 'http://localhost:3000/';
+
+const publicPath = process.env.BUNDLE_SERVING_PATH || 'http://0.0.0.0:3000/';
+const publicUrl = 'http://' + process.env.NPM_HOST || '0.0.0.0' + ':' + parseInt(process.env.NPM_PORT, 10) || 3000;
+
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
@@ -41,7 +43,7 @@ module.exports = {
     // the line below with these two lines if you prefer the stock client:
     // require.resolve('webpack-dev-server/client') + '?/',
     // require.resolve('webpack/hot/dev-server'),
-    require.resolve('webpack-dev-server/client') + '?http://localhost:3000',
+    require.resolve('webpack-dev-server/client') + '?' + publicUrl,
     require.resolve('webpack/hot/dev-server'),
     require.resolve('react-dev-utils/webpackHotDevClient'),
     // Finally, this is your app's code:

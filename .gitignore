@@ -17,3 +17,4 @@ bin
 .Python
 include
 celerybeat-schedule
+yarn-error.log
