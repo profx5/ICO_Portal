@@ -17,6 +17,6 @@ urlpatterns = [
     path('user_office/', user_office_views.user_office),
     path('admin/', admin.site.urls),
     path('api/', include(api_urlpatterns)),
-
+    path('oauth/', include('social_django.urls', namespace='social')),
     path('docs/', include_docs_urls(title='User office API docs', public=False))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

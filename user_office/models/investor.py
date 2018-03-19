@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.db.models import Sum
 from django.conf import settings
+from django.contrib.auth.models import BaseUserManager
 
 from blockchain.ethereum_contract.settings import Settings
 from .account import Account
@@ -13,7 +14,7 @@ class NoAuthData(Exception):
     pass
 
 
-class InvestorManager(models.Manager):
+class InvestorManager(BaseUserManager):
     def _find_by_username(self, username):
         try:
             return self.get_queryset().get(username=username)
@@ -38,6 +39,17 @@ class InvestorManager(models.Manager):
         else:
             return result
 
+    def create_user(self, *args, **kwargs):
+        username = kwargs['username']
+        password = self.make_random_password()
+
+        investor = self.model(username=username)
+        investor.set_password(password)
+
+        investor.save()
+
+        return investor
+
 
 class Investor(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
@@ -51,7 +63,7 @@ class Investor(AbstractBaseUser):
 
     objects = InvestorManager()
 
-    USERNAME_FIELD = 'eth_account'
+    USERNAME_FIELD = 'username'
 
     is_staff = False
 

@@ -16,11 +16,11 @@
 
         <button type="submit">Login</button>
         <p class="text-center"> or </p>
-        <a href="/signup/">
-SignUp
-        </a>
+        <a href="/signup/">SignUp</a>
 
         {% csrf_token %}
+        <br>
+        <a href="{% url "social:begin" "twitter" %}">Twitter</a>
     </div>
 </form>
 {% endblock %}

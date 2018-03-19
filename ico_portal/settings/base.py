@@ -1,6 +1,6 @@
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), '../../../'))
 
 SECRET_KEY = 'e%1h03sc5xmbr#q^r2l7h78-^1vuwapt8%eiumxyr@^91v61v^'
 
@@ -17,6 +17,8 @@ INSTALLED_APPS = [
     'django_object_actions',
     'webpack_loader',
     'rest_framework',
+    'social_django',
+
     'landing',
     'user_office',
 ]
@@ -29,6 +31,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'ico_portal.urls'
@@ -87,7 +90,9 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-AUTHENTICATION_BACKENDS = ['user_office.auth_backend.UserOfficeAuthBackend',
+AUTHENTICATION_BACKENDS = ['social_core.backends.twitter.TwitterOAuth',
+
+                           'user_office.auth_backend.UserOfficeAuthBackend',
                            'django.contrib.auth.backends.ModelBackend']
 
 WEBPACK_LOADER = {
@@ -134,3 +139,17 @@ CELERY_TASK_ROUTES = {
 }
 
 KYC_ENABLED = True
+
+SOCIAL_AUTH_TWITTER_KEY = 'uamiOlPYD88lkVMwfS00mTiLi'
+SOCIAL_AUTH_TWITTER_SECRET = 'hIewLBP2aKy1RIVsBsutP8MlkLgnjUIjuZiGtn6t77lt5XxoIZ'
+SOCIAL_AUTH_USER_MODEL = 'user_office.Investor'
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+)
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/user_office/'

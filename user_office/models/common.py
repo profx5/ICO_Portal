@@ -12,4 +12,4 @@ class EthAddressField(models.CharField):
         if value:
             return Web3.toChecksumAddress(value)
         else:
-            return super(UpperCaseCharField, self).pre_save(model_instance, add)
+            return super().pre_save(model_instance, add)
