@@ -14,16 +14,21 @@ class APITestCase(TestCase):
     setup_login = True
 
     def setUp(self):
-        self.investor = Investor.objects.create(username=self.username,
-                                                eth_account=self.eth_account,
-                                                tokens_amount=self.tokens_amount)
-        self.investor.set_password(self.password)
-        self.investor.save()
+        investor = Investor.objects.create(username=self.username,
+                                           eth_account=self.eth_account,
+                                           tokens_amount=self.tokens_amount)
+        investor.set_password(self.password)
+        investor.save()
+
+        self._investor_id = investor.id
 
         self.client = APIClient()
 
         if self.setup_login:
             self.client.login(username=self.username, passwd=self.password)
+
+    def get_investor(self):
+        return Investor.objects.get(id=self._investor_id)
 
     def tearDown(self):
         datetime.stubed_now = None

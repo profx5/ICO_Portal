@@ -27,8 +27,10 @@ class GetMeTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 201)
 
-        self.investor.kyc.approve(call_contract=False)
-        self.investor.kyc.save()
+        kyc = self.get_investor().kyc
+
+        kyc.approve(call_contract=False)
+        kyc.save()
 
         response = self.client.get('/api/getMe/')
 

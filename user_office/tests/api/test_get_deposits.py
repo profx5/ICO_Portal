@@ -28,12 +28,14 @@ class GetMeTestCase(APITestCase):
                                      block_number=1862325,
                                      txn_hash='0x7792b9bee82ef5e05c38858ba303d6199801c5dc362343752d847bca39fe38e4')]
 
-        deposits = [Deposit.objects.create(investor=self.investor,
+        investor = self.get_investor()
+
+        deposits = [Deposit.objects.create(investor=investor,
                                            amount=1166.6655,
                                            amount_wo_bonus=777.777,
                                            charged_at=datetime(2018, 1, 11),
                                            mint=mints[0]),
-                    Deposit.objects.create(investor=self.investor,
+                    Deposit.objects.create(investor=investor,
                                            amount=150.45,
                                            amount_wo_bonus=100.3,
                                            charged_at=datetime(2018, 2, 11),

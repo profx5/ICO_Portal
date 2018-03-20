@@ -20,7 +20,7 @@ class TestKYC(APITestCase):
                     'birthdate': '1990-01-01',
                     'document_no': '123123',
                     'country': 'Russia',
-                    'photo': 'http://testserver/media/kyc/{0}/photo.jpg'.format(self.investor.id)
+                    'photo': 'http://testserver/media/kyc/{0}/photo.jpg'.format(self._investor_id)
         }
 
         with open(fixture_path('photo.jpg'), 'rb') as f:
@@ -44,7 +44,7 @@ class TestKYC(APITestCase):
                     'birthdate': '1990-01-01',
                     'document_no': '123123',
                     'country': 'Russia',
-                    'photo': 'http://testserver/media/kyc/{0}/photo.jpg'.format(self.investor.id)
+                    'photo': 'http://testserver/media/kyc/{0}/photo.jpg'.format(self._investor_id)
         }
 
         with open(fixture_path('photo.jpg'), 'rb') as f:

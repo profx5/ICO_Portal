@@ -1,7 +1,6 @@
 from django.urls import path
 from rest_framework.routers import SimpleRouter, Route
 
-from .views.api import get_me
 from .views.api import *
 
 
@@ -29,7 +28,8 @@ api_urlpatterns = [
     path('getICOPhaseStats/', get_ico_phase_stats),
     path('getAvailableCurrencies/', get_available_currencies),
     path('getAccount/', get_account),
-    path('getDeposits/', get_deposits)
+    path('getDeposits/', get_deposits),
+    path('setEthAccount/', set_eth_account)
 ]
 
 api_urlpatterns += router.urls
