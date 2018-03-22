@@ -16,7 +16,6 @@ export function DepositeReducer(state=initialState, {type, payload, ...action}) 
                 isDepositLoading: true
             }
         }
-
         case GET_DEPOSITE_SUCCESS: {
             return {
                 ...state,
@@ -28,6 +27,4 @@ export function DepositeReducer(state=initialState, {type, payload, ...action}) 
             return {...state}
         }
     }
-
-    return {...state}
 }

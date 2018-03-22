@@ -9,19 +9,18 @@ import Footer from '../components/Footer'
 import Header from './Header'
 //actions
 import UserActions from '../actions/UserActions'
-import ICOPhasesStatsActions from '../actions/ICOPhasesStatsActions'
+import ICOPhaseStatsActions from '../actions/ICOPhaseStatsActions'
 import DepositsActions from '../actions/DepositsActions'
 
 class UserOffice extends Component {
     componentDidMount() {
-        const {get_me, get_phases_stats, get_deposite} = this.props
+        const {getMe, getPhaseStats, getDeposite} = this.props
 
         compose(
-            get_me(),
-            get_phases_stats(),
-            get_deposite()
+            getMe(),
+            getPhaseStats(),
+            getDeposite()
         )
-
     }
 
     render() {
@@ -33,7 +32,7 @@ class UserOffice extends Component {
                     <Content/>
                 </div>
                 <div className="row h-25">
-                    <Footer />
+                    <Footer/>
                 </div>
             </div>
         )
@@ -41,14 +40,14 @@ class UserOffice extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    get_me() {
-        dispatch(UserActions.get_user())
+    getMe() {
+        dispatch(UserActions.getUser())
     },
-    get_phases_stats() {
-        dispatch(ICOPhasesStatsActions.get_phases_stats())
+    getPhaseStats() {
+        dispatch(ICOPhaseStatsActions.getPhaseStats())
     },
-    get_deposite() {
-        dispatch(DepositsActions.get_deposite())
+    getDeposite() {
+        dispatch(DepositsActions.getDeposite())
     }
 })
 

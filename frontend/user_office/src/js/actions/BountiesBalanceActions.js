@@ -1,6 +1,5 @@
 import axios from 'axios'
 import Api from '../../api'
-
 //types
 import {
     GET_BOUNTIES_BALANCE_REQUEST,
@@ -8,26 +7,28 @@ import {
 } from '../types/BountiesBalanceTypes'
 
 export default class BountiesBalanceActions {
-    static get_bounties_request() {
+    static getBountiesRequest() {
         return {
             type: GET_BOUNTIES_BALANCE_REQUEST
         }
     }
-    static get_bounties_success(payload) {
+
+    static getBountiesSuccess(payload) {
         return {
             type: GET_BOUNTIES_BALANCE_SUCCESS,
             payload
         }
     }
-    static get_bounties() {
+
+    static getBounties() {
         return (dispatch) => {
-            dispatch(BountiesBalanceActions.get_bounties_request())
+            dispatch(BountiesBalanceActions.getBountiesRequest())
             axios({
                 method: 'GET',
-                url: Api.get_off_cain_bounties_balance()
+                url: Api.getOffChainBountiesBalance()
             }).then( ({data}) => {
                 console.log("BountiesBalanceActions", {data})
-                dispatch(BountiesBalanceActions.get_bounties_success(data))
+                dispatch(BountiesBalanceActions.getBountiesSuccess(data))
             }).catch(error => {
                 console.log("CANNOT FETCH bounties", {error})
             })

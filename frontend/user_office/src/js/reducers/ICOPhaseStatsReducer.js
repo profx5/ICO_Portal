@@ -1,7 +1,7 @@
 import {
-    GET_ICO_PHASES_STATS_REQUEST,
-    GET_ICO_PHASES_STATS_SUCCESS,
-} from '../types/ICOPhasesStatsTypes'
+    GET_ICO_PHASE_STATS_REQUEST,
+    GET_ICO_PHASE_STATS_SUCCESS,
+} from '../types/ICOPhaseStatsTypes'
 
 const initialState = {
     bonus_percents: null,
@@ -12,24 +12,19 @@ const initialState = {
     token_price: null,
 }
 
-export function ICOPhasesStatsReducer(state=initialState, {type, payload, ...action}) {
+export function ICOPhaseStatsReducer(state=initialState, {type, payload, ...action}) {
     switch ( type ) {
-
-        case GET_ICO_PHASES_STATS_REQUEST: {
+        case GET_ICO_PHASE_STATS_REQUEST: {
             return {...state}
         }
-
-        case GET_ICO_PHASES_STATS_SUCCESS: {
+        case GET_ICO_PHASE_STATS_SUCCESS: {
             return {
                 ...state,
                 ...payload
             }
         }
-        
         default: {
             return state
         }
     }
-
-    return state
 }

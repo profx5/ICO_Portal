@@ -1,21 +1,19 @@
 import React from 'react';
-import axios from 'axios';
 import {connect} from 'react-redux'
 
 import Balance from '../components/Balance'
 import Bounty from '../components/Bounty';
 import Lang from '../components/Lang';
-import AccountInfo from '../components/AccountInfo';
-import KYCHeader from '../components/KYCHeader';
-
 //containers
 import DepositTable from './DepositTable'
 import BountiesBalance from './BountiesBalance'
-import PhasesStats from './PhasesStats'
+import PhaseStats from './PhaseStats'
+import KYC from './KYC'
+import Account from './Account'
 
 class Header extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             currentAmount: '',
@@ -29,44 +27,46 @@ class Header extends React.Component {
             currency: '',
             balance: '',
             nextStage: ''
-        };
-
+        }
     }
 
     render () {
-
         const {
             tokensAmount,
             userId,
+            kycRequired
         } = this.props
 
         return (
             <header className="Header container col-md-10">
-                <div className="row h-5">
-                    <KYCHeader />
-                </div>
+                {kycRequired &&
+                 <div className="row h-5">
+                     <KYC />
+                 </div>
+                }
                 <div className="Header_row row h-100">
                     <Balance currentAmount={tokensAmount}/>
                     <BountiesBalance />
                     <Bounty/>
-                    <PhasesStats />
-                    <AccountInfo accountId={userId}/>
+                    <PhaseStats />
+                    <Account />
                 </div>
                 <DepositTable />
             </header>
-        );
+        )
     }
 }
 
-const mapStateToProps = ({user, ICOPhases}) => ({
+const mapStateToProps = ({user, ICOPhaseStats}) => ({
     tokensAmount: user.tokens_amount,
     userId: user.eth_account,
-    currentTokenPrice: ICOPhases.token_price,
-    currencyFrom: ICOPhases.currency_from,
-    currencyTo: ICOPhases.currency_to,
-    bonus_percents: ICOPhases.bonus_percents,
-    endDate: ICOPhases.end_date,
-    name: ICOPhases.name,
+    kycRequired: user.kyc_required,
+    currentTokenPrice: ICOPhaseStats.token_price,
+    currencyFrom: ICOPhaseStats.currency_from,
+    currencyTo: ICOPhaseStats.currency_to,
+    bonus_percents: ICOPhaseStats.bonus_percents,
+    endDate: ICOPhaseStats.end_date,
+    name: ICOPhaseStats.name,
 })
 
 export default connect(mapStateToProps)(Header)

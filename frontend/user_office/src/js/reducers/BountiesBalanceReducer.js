@@ -8,7 +8,7 @@ const initialState = {
     isBountiesBalanceLoading: false,
     currency: null,
     balance: null,
-    next_stage: null,
+    nextStage: null,
 }
 
 export function BountiesBalanceReducer(state=initialState, {type, payload, ...action}) {
@@ -30,5 +30,4 @@ export function BountiesBalanceReducer(state=initialState, {type, payload, ...ac
             return {...state}
         }
     }
-    return {...state}
 }

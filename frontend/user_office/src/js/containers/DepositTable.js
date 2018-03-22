@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 class DepositTable extends Component {
-
     static defultProps = {
         deposits: []
     }

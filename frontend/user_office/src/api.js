@@ -3,26 +3,31 @@ class Api {
         this.prefix = '/api'
     }
 
-    get_me() {
+    getMe() {
         return `${this.prefix}/getMe`
     }
 
-    get_ico_phasesStats() {
+    getICOPhaseStats() {
         return `${this.prefix}/getICOPhaseStats`
     }
 
-    get_off_cain_bounties_balance() {
-        return `${this.prefix}/getOffCainBountiesBalance`
+    getOffChainBountiesBalance() {
+        return `${this.prefix}/getOffChainBountiesBalance`
     }
 
-    get_deposits() {
+    getDeposits() {
         return `${this.prefix}/getDeposits`
     }
+
     kyc() {
         return `${this.prefix}/kyc/`
     }
+
+    setEthAccount() {
+        return `${this.prefix}/setEthAccount/`
+    }
 }
 
-const api = new Api;
+const api = new Api();
 
 export default api

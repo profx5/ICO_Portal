@@ -73,6 +73,6 @@ button {
   height: 80%;
 }
 
-.Header_link .btn-danger {
+.Header_link{
   margin-left: 10px;
 }

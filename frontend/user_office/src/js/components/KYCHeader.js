@@ -1,47 +1,28 @@
-import React from 'react';
+import React from 'react'
 
-import KYCForm from './KYCForm';
+export const KYCHeaderAlert = ({investmentThreshold, onClick}) => (
+    <div className="col-md-12">
+        <div className="alert alert-warning" role="alert">
+            <p>You did not pass KYC confirmation. Your invstment threshold is limited to {investmentThreshold}</p>
+            <button className="btn btn-success" onClick={onClick}>
+                Pass KYC
+            </button>
+        </div>
+    </div>
+)
 
+export const KYCHeaderWaiting = () => (
+    <div className="col-md-12">
+        <div className="alert alert-primary" role="alert">
+            <p>Your KYC is waiting for approval</p>
+        </div>
+    </div>
+)
 
-class KYCHeader extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            showForm: false
-        };
-
-        this.showForm = this.showForm.bind(this);
-        this.hideForm = this.hideForm.bind(this);
-    }
-
-    showForm() {
-        this.setState({
-            showForm: true,
-        });
-    }
-
-    hideForm() {
-        this.setState({
-            showForm: false,
-        })
-    }
-
-    render() {
-        const {investmentThreshold} = this.props;
-
-        return (
-            <div className="col-md-12">
-                <div className="alert alert-warning" role="alert">
-                    <p>You did not pass KYC confirmation. Your invstment threshold is limited to {investmentThreshold}</p>
-                    <button className="btn btn-success" onClick={this.showForm}>
-                        Pass KYC
-                    </button>
-                </div>
-                {this.state.showForm ? <KYCForm hideForm={this.hideForm} /> : null}
-            </div>
-        )
-    }
-}
-
-export default KYCHeader
+export const KYCHeaderDeclined = () => (
+    <div className="col-md-12">
+        <div className="alert alert-danger" role="alert">
+            <p>Your KYC was declined</p>
+        </div>
+    </div>
+)

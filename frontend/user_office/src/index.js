@@ -10,13 +10,14 @@ import thunk from 'redux-thunk'
 import './styles/index.css';
 import './vendor/bootstrap.css';
 import App from './App';
+
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+
 //store
 const store = createStore(reducer, applyMiddleware(thunk))
 
 const ROOT_NODE = document.getElementById('root');
-
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
 
 render(
     <Provider store={store}>
