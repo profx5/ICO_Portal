@@ -16,18 +16,13 @@ class UserOffice extends Component {
     componentDidMount() {
         const {getMe, getPhaseStats, getDeposite} = this.props
 
-        compose(
-            getMe(),
-            getPhaseStats(),
-            getDeposite()
-        )
+        compose(getMe(), getPhaseStats(), getDeposite())
     }
 
     render() {
-       return (
+        return (
             <div className="container-fluid">
                 <div className="row h-100">
-                    <Sidebar/>
                     <Header/>
                     <Content/>
                 </div>

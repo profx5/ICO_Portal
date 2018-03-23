@@ -12,16 +12,11 @@ import {
 
 export default class UserActions {
     static getUserRequest() {
-        return {
-            type: GET_USER_REQUEST
-        }
+        return {type: GET_USER_REQUEST}
     }
 
     static getUserSuccessfull(payload) {
-        return {
-            type: GET_USER_SUCCESSFULL,
-            payload
-        }
+        return {type: GET_USER_SUCCESSFULL, payload}
     }
 
     static getUser() {
@@ -51,15 +46,11 @@ export default class UserActions {
     }
 
     static setAccountRequest() {
-        return {
-            type: SET_ACCOUNT_REQUEST
-        }
+        return {type: SET_ACCOUNT_REQUEST}
     }
 
     static setAccountSuccessfull() {
-        return {
-            type: SET_ACCOUNT_SUCCESSFULL
-        }
+        return {type: SET_ACCOUNT_SUCCESSFULL}
     }
 
     static setAccount(accountValue) {

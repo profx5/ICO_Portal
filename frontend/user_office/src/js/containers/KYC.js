@@ -18,11 +18,6 @@ class KYC extends React.Component {
     componentDidMount() {
         this.props.getKYC()
     }
-
-    submitForm(data){
-        this.props.submitKYC(data)
-    }
-
     render() {
         const {
             investmentThreshold,
@@ -30,7 +25,8 @@ class KYC extends React.Component {
             hideForm,
             state,
             isFetched,
-            isFormVisible
+            isFormVisible,
+            submitKYC_and_retriveKYC
         } = this.props
 
         let header
@@ -47,7 +43,12 @@ class KYC extends React.Component {
                     header = (
                         <React.Fragment>
                             <KYCHeaderAlert investmentThreshold={investmentThreshold} onClick={showForm} />
-                            {isFormVisible && <KYCForm handleSubmit={this.submitForm.bind(this)} closeModal={hideForm}/>}
+                            {isFormVisible && 
+                                <KYCForm 
+                                    closeModal={hideForm}
+                                    submitKYC_and_retriveKYC={submitKYC_and_retriveKYC}
+                                />
+                            }
                         </React.Fragment>
                     )
             }
@@ -76,8 +77,8 @@ const mapDispatchToProps = (dispatch) => ({
     getKYC() {
         dispatch(KYCActions.getKYC())
     },
-    submitKYC(data) {
-        dispatch(KYCActions.submitKYC(data)).then(() => dispatch(KYCActions.getKYC()))
+    submitKYC_and_retriveKYC(data) {
+        dispatch(KYCActions.submitKYC_and_retriveKYC(data))
     }
 })
 

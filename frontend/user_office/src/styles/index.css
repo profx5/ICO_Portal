@@ -51,7 +51,6 @@ button {
   height: 130px;
 }
 .Header_row > div {
-  border: 1px solid #ccc;
   padding: 20px 0 0 20px;
 }
 .Header_head {
@@ -62,15 +61,10 @@ button {
   font-weight: 600;
 }
 .Sidebar {
-  background: rgba(0,0,0,0.8);
   height: 100%;
 }
 .Footer {
   height: 100%;
-  background: rgba(0,0,0,.7);
-}
-#root {
-  height: 80%;
 }
 
 .Header_link{
