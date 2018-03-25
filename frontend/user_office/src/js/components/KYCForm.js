@@ -1,12 +1,12 @@
 import React from 'react'
 
-const KYCForm = ({closeModal, handleSubmit}) => {
+const KYCForm = ({closeModal, submitKYC_and_retriveKYC}) => {
     const submitForm = (event) => {
         event.preventDefault()
 
         const data = new FormData(event.target)
 
-        handleSubmit(data)
+        submitKYC_and_retriveKYC(data)
     }
 
     return (

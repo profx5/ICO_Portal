@@ -8,13 +8,26 @@ import {
 } from '../types/KYCTypes'
 
 const initialState = {
-    state: null,
+    status: null,
     isSubmiting: false,
     showForm: false,
-    isFetched: false
+    isFetched: false,
+    kyc: {
+        birthdate: null,
+        country: null,
+        document_no: null,
+        firstname: null,
+        midname: null,
+        photo: null,
+        surname: null
+    }
 }
 
-export function KYCReducer(state = initialState, {type, payload, ...action}) {
+export function KYCReducer(state = initialState, {
+    type,
+    payload,
+    ...action
+}) {
     switch (type) {
         case GET_KYC_REQUEST:
             return {
@@ -23,8 +36,11 @@ export function KYCReducer(state = initialState, {type, payload, ...action}) {
         case GET_KYC_SUCCESSFULL:
             return {
                 ...state,
-                ...payload,
-                isFetched: true
+                isFetched: true,
+                status: payload.state,
+                kyc: {
+                    ...payload
+                }
             }
         case SUBMIT_KYC_REQUEST:
             return {
@@ -48,7 +64,6 @@ export function KYCReducer(state = initialState, {type, payload, ...action}) {
                 ...state,
                 showForm: false
             }
-
         default:
             return state
     }

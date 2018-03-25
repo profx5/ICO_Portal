@@ -24,16 +24,11 @@ export default class KYCActions {
     }
 
     static getKYCRequest() {
-        return {
-            type: GET_KYC_REQUEST
-        }
+        return {type: GET_KYC_REQUEST}
     }
 
     static getKYCSuccessfull(payload) {
-        return {
-            type: GET_KYC_SUCCESSFULL,
-            payload
-        }
+        return {type: GET_KYC_SUCCESSFULL, payload}
     }
 
     static getKYC() {
@@ -43,6 +38,7 @@ export default class KYCActions {
                 url: Api.kyc(),
                 method: 'GET'
             }).then(({data}) => {
+                console.log({data})
                 dispatch(KYCActions.getKYCSuccessfull(data))
             }).catch(error => {
                 console.log("cant fetch kyc", {error})
@@ -51,15 +47,11 @@ export default class KYCActions {
     }
 
     static submitKYCRequest() {
-        return {
-            type: SUBMIT_KYC_REQUEST
-        }
+        return {type: SUBMIT_KYC_REQUEST}
     }
 
     static submitKYCSuccessfull() {
-        return {
-            type: SUBMIT_KYC_SUCCESSFULL
-        }
+        return {type: SUBMIT_KYC_SUCCESSFULL}
     }
 
     static submitKYC(data) {
@@ -74,6 +66,19 @@ export default class KYCActions {
             }).catch(error => {
                 console.log("cant submit kyc", {error})
             })
+        }
+    }
+
+    static submitKYC_and_retriveKYC(data) {
+        return dispatch => {
+            return new Promise((resolve, reject) => {
+                !data
+                    ? reject()
+                    : resolve(data)
+            })
+            .then((kycObj) => dispatch( KYCActions.submitKYC(kycObj) ))
+            .then(() => dispatch( KYCActions.getKYC() ))
+            .catch(() => console.log("something go wrong at submitKYC_and_retriveKYC action"))
         }
     }
 }
