@@ -63,8 +63,6 @@ export default class KYCActions {
                 data: data
             }).then(() => {
                 dispatch(KYCActions.submitKYCSuccessfull())
-
-                return Promise.resolve()
             }).catch(error => {
                 console.log("cant submit kyc", {error})
             })
@@ -73,7 +71,6 @@ export default class KYCActions {
 
     static submitKYC_and_retriveKYC(data) {
         return dispatch => {
-
             return new Promise((resolve, reject) => {
                 !data
                     ? reject()

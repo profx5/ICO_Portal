@@ -29,7 +29,6 @@ class Header extends React.Component {
             balance: '',
             nextStage: ''
         }
-
     }
 
     render () {
@@ -40,10 +39,7 @@ class Header extends React.Component {
             kyc,
             KYCstatus
         } = this.props
-
         const isKycExist = Object.keys(kyc).length > 0;
-        
-
         return (
             <header className="Header container col-md-10">
                 {kycRequired &&

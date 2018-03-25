@@ -64,9 +64,7 @@ export function KYCReducer(state = initialState, {
                 ...state,
                 showForm: false
             }
-
         default:
             return state
     }
-
 }
