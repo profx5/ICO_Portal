@@ -3,28 +3,26 @@ import {
     GET_DEPOSITE_SUCCESS,
 } from '../types/DepositTypes'
 
-const initialState = {
+import {fromJS, List} from 'immutable'
+
+const initialState = fromJS({
     isDepositLoading: false,
     list: []
-}
+})
 
 export function DepositeReducer(state=initialState, {type, payload, ...action}) {
     switch(type) {
         case GET_DEPOSITE_REQUEST: {
-            return {
-                ...state,
-                isDepositLoading: true
-            }
+            return state.set('isDepositLoading', true)
         }
         case GET_DEPOSITE_SUCCESS: {
-            return {
-                ...state,
-                list: [...state.list, ...payload],
-                isDepositLoading: false
-            }
+            return state.merge({
+                list: state.get('list').concat(payload)
+            }).set('isDepositLoading', true)
+           
         }
         default: {
-            return {...state}
+            return state
         }
     }
 }

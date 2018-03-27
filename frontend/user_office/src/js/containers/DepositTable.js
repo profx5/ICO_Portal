@@ -39,9 +39,9 @@ class DepositTable extends Component {
 }
 
 const mapStateToProps = ({
-    deposits: {list}
+    deposits
 }) => ({
-    deposits: [...list]
+    deposits: deposits.get('list')
 })
 
 export default connect(mapStateToProps)(DepositTable)

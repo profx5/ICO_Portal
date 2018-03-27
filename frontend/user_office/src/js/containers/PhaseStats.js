@@ -38,12 +38,12 @@ const PhaseStats = ({
 )
 
 const mapStateToProps = ({ICOPhaseStats}) => ({
-    currentTokenPrice: ICOPhaseStats.token_price,
-    currencyFrom: ICOPhaseStats.currency_from,
-    currencyTo: ICOPhaseStats.currency_to,
-    bonus_percents: ICOPhaseStats.bonus_percents,
-    endDate: ICOPhaseStats.end_date,
-    name: ICOPhaseStats.name,
+    currentTokenPrice: ICOPhaseStats.get('token_price'),
+    currencyFrom: ICOPhaseStats.get('currency_from'),
+    currencyTo: ICOPhaseStats.get('currency_to'),
+    bonus_percents: ICOPhaseStats.get('bonus_percents'),
+    endDate: ICOPhaseStats.get('end_date'),
+    name: ICOPhaseStats.get('name'),
 })
 
 export default connect(mapStateToProps)(PhaseStats)

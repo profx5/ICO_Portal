@@ -18,8 +18,11 @@ const BountiesBalance = ({currency, balance, nextStage}) => (
     </div>
 )
 
-const mapStateToProps = ({
-    bountiesBalance: { currency, balance, nextStage }
-}) => ({ currency, balance, nextStage })
+
+const mapStateToProps = ({bountiesBalance}) => ({
+    currency: bountiesBalance.get('currency'),
+    balance: bountiesBalance.get('balance'),
+    nextStage: bountiesBalance.get('nextStage'),
+})
 
 export default connect(mapStateToProps)(BountiesBalance)

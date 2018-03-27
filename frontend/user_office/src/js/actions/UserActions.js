@@ -10,63 +10,69 @@ import {
     SET_ACCOUNT_SUCCESSFULL
 } from '../types/UserTypes'
 
-export default class UserActions {
-    static getUserRequest() {
-        return {type: GET_USER_REQUEST}
-    }
+import {call, take, put, takeEvery} from 'redux-saga/effects'
 
-    static getUserSuccessfull(payload) {
-        return {type: GET_USER_SUCCESSFULL, payload}
-    }
+export function getUserRequest() {
+    return {type: GET_USER_REQUEST}
+}
 
-    static getUser() {
-        return (dispatch) => {
-            dispatch(UserActions.getUserRequest())
-            axios({
-                url: Api.getMe(),
-                method: 'GET'
-            }).then(({data}) => {
-                dispatch(UserActions.getUserSuccessfull(data))
-            }).catch(error => {
-                console.log("cant fetch user", {error})
-            })
-        }
+function getUserSuccessfull(payload) {
+    return {
+        type: GET_USER_SUCCESSFULL, 
+        payload
     }
+}
 
-    static showSetAccountForm() {
-        return (dispatch) => {
-            dispatch({type: SHOW_SET_ACCOUNT_FORM})
-        }
-    }
+function* getUser() {
+    try {
+        const response = yield call(axios, {
+            url: Api.getMe(),
+            method: 'GET'
+        })
 
-    static hideSetAccountForm() {
-        return (dispatch) => {
-            dispatch({type: HIDE_SET_ACCOUNT_FORM})
-        }
+        yield put(getUserSuccessfull(response.data))
+    } catch(e) {
+        yield take("GET_USER_FAILED")
     }
+}
 
-    static setAccountRequest() {
-        return {type: SET_ACCOUNT_REQUEST}
-    }
+export function showSetAccountForm() {
+   return {type: SHOW_SET_ACCOUNT_FORM}
+}
 
-    static setAccountSuccessfull() {
-        return {type: SET_ACCOUNT_SUCCESSFULL}
-    }
+export function hideSetAccountForm() {
+    return {type: HIDE_SET_ACCOUNT_FORM}
+}
 
-    static setAccount(accountValue) {
-        return (dispatch) => {
-            dispatch(UserActions.getUserRequest())
-            return axios({
-                method: 'POST',
-                url: Api.setEthAccount(),
-                data: {
-                    'eth_account': accountValue
-                }
-            }).then(() => {
-                dispatch(UserActions.setAccountSuccessfull())
-            }).catch(error => {
-                console.log('cant set user account', {error})
-            })
-        }
+export function setAccountRequest(accountValue) {
+    return {
+        type: SET_ACCOUNT_REQUEST,
+        data: accountValue
     }
+}
+
+function setAccountSuccessfull() {
+    return {type: SET_ACCOUNT_SUCCESSFULL}
+}
+
+function* setAccount({data}) {
+    try {
+        yield call(axios, {
+            method: 'POST',
+            url: Api.setEthAccount(),
+            data: {
+                'eth_account': data
+            }
+        })
+
+        yield put(setAccountSuccessfull())
+
+    } catch(e) {
+        yield take("SET_ACCOUNT_FAILED")
+    }
+}
+
+export function* saga() {
+    yield takeEvery(GET_USER_REQUEST, getUser)
+    yield takeEvery(SET_ACCOUNT_REQUEST, setAccount)
 }

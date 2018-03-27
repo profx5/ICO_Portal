@@ -3,20 +3,19 @@ import {compose} from 'redux'
 import {connect} from 'react-redux'
 //components
 import Sidebar from '../components/Sidebar'
-import Content from '../components/Content'
 import Footer from '../components/Footer'
 //containers
 import Header from './Header'
 //actions
-import UserActions from '../actions/UserActions'
-import ICOPhaseStatsActions from '../actions/ICOPhaseStatsActions'
-import DepositsActions from '../actions/DepositsActions'
+import {getUserRequest} from '../actions/UserActions'
+import {getPhaseStatsRequest} from '../actions/ICOPhaseStatsActions'
+import {getDepositRequest} from '../actions/DepositsActions'
 
 class UserOffice extends Component {
     componentDidMount() {
         const {getMe, getPhaseStats, getDeposite} = this.props
 
-        compose(getMe(), getPhaseStats(), getDeposite())
+        compose(getMe, getPhaseStats, getDeposite)()
     }
 
     render() {
@@ -24,7 +23,6 @@ class UserOffice extends Component {
             <div className="container-fluid">
                 <div className="row h-100">
                     <Header/>
-                    <Content/>
                 </div>
                 <div className="row h-25">
                     <Footer/>
@@ -36,13 +34,13 @@ class UserOffice extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
     getMe() {
-        dispatch(UserActions.getUser())
+        dispatch(getUserRequest())
     },
     getPhaseStats() {
-        dispatch(ICOPhaseStatsActions.getPhaseStats())
+         dispatch( getPhaseStatsRequest() )
     },
     getDeposite() {
-        dispatch(DepositsActions.getDeposite())
+        dispatch(getDepositRequest())
     }
 })
 

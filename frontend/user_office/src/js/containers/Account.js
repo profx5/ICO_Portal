@@ -4,7 +4,11 @@ import {connect} from 'react-redux'
 import AccountInfo from '../components/AccountInfo'
 import {SetAccountButton, SetAccountForm} from '../components/SetAccount'
 //actions
-import UserActions from '../actions/UserActions.js'
+import {
+    setAccountRequest, 
+    hideSetAccountForm,
+    showSetAccountForm
+} from '../actions/UserActions.js'
 
 class Account extends React.Component{
     render() {
@@ -33,19 +37,19 @@ class Account extends React.Component{
 }
 
 const mapStateToProps = ({user}) => ({
-    ethAccount: user.eth_account,
-    showSetAccountForm: user.showSetAccountForm
+    ethAccount: user.get('eth_account'),
+    showSetAccountForm: user.get('showSetAccountForm')
 })
 
 const mapDispatchToProps = (dispatch) => ({
     showForm() {
-        dispatch(UserActions.showSetAccountForm())
+        dispatch(showSetAccountForm())
     },
     hideForm() {
-        dispatch(UserActions.hideSetAccountForm())
+        dispatch(hideSetAccountForm())
     },
     setAccount(data) {
-        dispatch(UserActions.setAccount(data)).then(() => dispatch(UserActions.getUser()))
+        dispatch(setAccountRequest(data))
     }
 })
 

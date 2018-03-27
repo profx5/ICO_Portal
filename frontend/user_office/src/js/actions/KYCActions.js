@@ -7,78 +7,81 @@ import {
     GET_KYC_REQUEST,
     GET_KYC_SUCCESSFULL,
     SUBMIT_KYC_REQUEST,
-    SUBMIT_KYC_SUCCESSFULL
+    SUBMIT_KYC_SUCCESSFULL,
+    SUBMIT_AND_GET_KYC_REQEUST
 } from '../types/KYCTypes'
 
-export default class KYCActions {
-    static showForm() {
-        return (dispatch) => {
-            dispatch({type: SHOW_KYC_FORM})
-        }
-    }
+import {call, put, takeEvery, take} from 'redux-saga/effects'
 
-    static hideForm() {
-        return (dispatch) => {
-            dispatch({type: HIDE_KYC_FORM})
-        }
-    }
+export function showForm() {
+    return {type: SHOW_KYC_FORM}
+}
 
-    static getKYCRequest() {
-        return {type: GET_KYC_REQUEST}
-    }
+export function hideForm() {
+    return {type: HIDE_KYC_FORM}
+}
 
-    static getKYCSuccessfull(payload) {
-        return {type: GET_KYC_SUCCESSFULL, payload}
-    }
+export function getKYCRequest() {
+    return {type: GET_KYC_REQUEST}
+}
 
-    static getKYC() {
-        return (dispatch) => {
-            dispatch(KYCActions.getKYCRequest())
-            axios({
-                url: Api.kyc(),
-                method: 'GET'
-            }).then(({data}) => {
-                console.log({data})
-                dispatch(KYCActions.getKYCSuccessfull(data))
-            }).catch(error => {
-                console.log("cant fetch kyc", {error})
-            })
-        }
-    }
+function getKYCSuccessfull(payload) {
+    return {type: GET_KYC_SUCCESSFULL, payload}
+}
 
-    static submitKYCRequest() {
-        return {type: SUBMIT_KYC_REQUEST}
-    }
+function* getKYC() {
+    try {
+        const response = yield call(axios, {
+            url: Api.kyc(),
+            method: 'GET'
+        })
 
-    static submitKYCSuccessfull() {
-        return {type: SUBMIT_KYC_SUCCESSFULL}
-    }
+        yield put(getKYCSuccessfull(response.data))
+    } catch(e) {
 
-    static submitKYC(data) {
-        return (dispatch) => {
-            dispatch(KYCActions.submitKYCRequest())
-            return axios({
-                url: Api.kyc(),
-                method: 'POST',
-                data: data
-            }).then(() => {
-                dispatch(KYCActions.submitKYCSuccessfull())
-            }).catch(error => {
-                console.log("cant submit kyc", {error})
-            })
-        }
     }
+}
 
-    static submitKYC_and_retriveKYC(data) {
-        return dispatch => {
-            return new Promise((resolve, reject) => {
-                !data
-                    ? reject()
-                    : resolve(data)
-            })
-            .then((kycObj) => dispatch( KYCActions.submitKYC(kycObj) ))
-            .then(() => dispatch( KYCActions.getKYC() ))
-            .catch(() => console.log("something go wrong at submitKYC_and_retriveKYC action"))
-        }
+export function submitKYCRequest(data) {
+    return {type: SUBMIT_KYC_REQUEST, data}
+}
+
+function submitKYCSuccessfull() {
+    return {type: SUBMIT_KYC_SUCCESSFULL}
+}
+
+function* submitKYC(action) {
+    try {
+        yield call(axios, {
+            url: Api.kyc(),
+            method: 'POST',
+            data: action.data
+        })
+        yield put(submitKYCSuccessfull())
+
+    } catch(e) {
+        yield put("SUBMIT_KYC_FAILED")
     }
+}
+
+export function submitKYC_and_retriveKYC_Request(data) {
+    return {
+        type: SUBMIT_AND_GET_KYC_REQEUST,
+        data
+    }
+}
+
+export function* submitKYC_and_retriveKYC(data) {
+    try {
+        yield call(submitKYC, data)
+        yield call(getKYC)
+    } catch(e) {
+        console.log("CANT SUBMIT AND FETCH KYC")
+    }
+}
+
+export function* saga() {
+    yield takeEvery(GET_KYC_REQUEST, getKYC)
+    yield takeEvery(SUBMIT_KYC_REQUEST, submitKYC)
+    yield takeEvery(SUBMIT_AND_GET_KYC_REQEUST, submitKYC_and_retriveKYC)
 }
