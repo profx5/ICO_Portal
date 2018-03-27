@@ -9,14 +9,18 @@ import Footer from '../components/Footer'
 import Header from './Header'
 //actions
 import UserActions from '../actions/UserActions'
-import ICOPhaseStatsActions from '../actions/ICOPhaseStatsActions'
+import ICOInfoActions from '../actions/ICOInfoActions'
 import DepositsActions from '../actions/DepositsActions'
 
 class UserOffice extends Component {
     componentDidMount() {
-        const {getMe, getPhaseStats, getDeposite} = this.props
+        const {getMe, getICOInfo, getDeposits} = this.props
 
-        compose(getMe(), getPhaseStats(), getDeposite())
+        compose(
+            getMe(),
+            getICOInfo(),
+            getDeposits()
+        )
     }
 
     render() {
@@ -29,6 +33,7 @@ class UserOffice extends Component {
                 <div className="row h-25">
                     <Footer/>
                 </div>
+
             </div>
         )
     }
@@ -38,11 +43,11 @@ const mapDispatchToProps = (dispatch) => ({
     getMe() {
         dispatch(UserActions.getUser())
     },
-    getPhaseStats() {
-        dispatch(ICOPhaseStatsActions.getPhaseStats())
+    getICOInfo() {
+        dispatch(ICOInfoActions.getICOInfo())
     },
-    getDeposite() {
-        dispatch(DepositsActions.getDeposite())
+    getDeposits() {
+        dispatch(DepositsActions.getDeposits())
     }
 })
 

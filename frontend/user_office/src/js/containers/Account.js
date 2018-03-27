@@ -13,7 +13,8 @@ class Account extends React.Component{
             showSetAccountForm,
             showForm,
             hideForm,
-            setAccount
+            setAccount,
+            metaMaskAccount
         } = this.props
 
         if (ethAccount){
@@ -23,9 +24,9 @@ class Account extends React.Component{
         } else {
             return (
                 <AccountInfo>
-                    <SetAccountButton onClick={showForm}/>
+                    <SetAccountButton onClick={showForm} />
                     {showSetAccountForm &&
-                     <SetAccountForm closeModal={hideForm} handleSubmit={setAccount} />}
+                     <SetAccountForm closeModal={hideForm} handleSubmit={setAccount} metaMaskAccount={metaMaskAccount} />}
                 </AccountInfo>
             )
         }
@@ -34,19 +35,21 @@ class Account extends React.Component{
 
 const mapStateToProps = ({user}) => ({
     ethAccount: user.eth_account,
-    showSetAccountForm: user.showSetAccountForm
+    showSetAccountForm: user.showSetAccountForm,
+    metaMaskAccount: user.metaMaskAccount
 })
 
 const mapDispatchToProps = (dispatch) => ({
     showForm() {
         dispatch(UserActions.showSetAccountForm())
+        dispatch(UserActions.extractMetaMaskAccount())
     },
     hideForm() {
         dispatch(UserActions.hideSetAccountForm())
     },
     setAccount(data) {
         dispatch(UserActions.setAccount(data)).then(() => dispatch(UserActions.getUser()))
-    }
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account)

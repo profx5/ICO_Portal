@@ -7,8 +7,8 @@ class Api {
         return `${this.prefix}/getMe`
     }
 
-    getICOPhaseStats() {
-        return `${this.prefix}/getICOPhaseStats`
+    getICOInfo() {
+        return `${this.prefix}/getICOInfo`
     }
 
     getOffChainBountiesBalance() {
@@ -25,6 +25,10 @@ class Api {
 
     setEthAccount() {
         return `${this.prefix}/setEthAccount/`
+    }
+
+    prepareDeposit() {
+        return `${this.prefix}/prepareDeposit/`
     }
 }
 

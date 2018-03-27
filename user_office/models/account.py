@@ -5,7 +5,7 @@ from blockchain.currencies import Currencies
 from .common import EthAddressField
 
 
-CURRENCY_CHOICES = [(i.name, i.code) for i in Currencies.get_currencies()]
+CURRENCY_CHOICES = [(i.code, i.name) for i in Currencies.get_currencies()]
 
 
 class AccountManager(Manager):

@@ -16,13 +16,13 @@ class Mint(models.Model):
     txn_hash = models.CharField(max_length=100)
     account_to = models.CharField(max_length=100)
     account_from = models.CharField(max_length=100)
-    value = models.PositiveIntegerField()
+    value = models.CharField(max_length=100)
     txn_date = models.DateTimeField(blank=True, null=True)
     state = models.CharField(max_length=10, choices=MINT_STATE_CHOICES,
                              default='WAIT')
     confirmation_date = models.DateTimeField(null=True, blank=True)
-    block_hash = models.CharField(max_length=100)
-    block_number = models.PositiveIntegerField()
+    block_hash = models.CharField(max_length=100, blank=True, null=True)
+    block_number = models.PositiveIntegerField(blank=True, null=True)
 
     objects = models.Manager()
 

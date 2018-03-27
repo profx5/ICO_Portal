@@ -1,5 +1,6 @@
 import Api from '../../api'
 import axios from 'axios'
+import {tryExtractAccount} from '../../web3'
 //types
 import {
     GET_USER_REQUEST,
@@ -7,7 +8,8 @@ import {
     SHOW_SET_ACCOUNT_FORM,
     HIDE_SET_ACCOUNT_FORM,
     SET_ACCOUNT_REQUEST,
-    SET_ACCOUNT_SUCCESSFULL
+    SET_ACCOUNT_SUCCESSFULL,
+    SET_METAMASK_ACCOUNT
 } from '../types/UserTypes'
 
 export default class UserActions {
@@ -67,6 +69,17 @@ export default class UserActions {
             }).catch(error => {
                 console.log('cant set user account', {error})
             })
+        }
+    }
+
+    static extractMetaMaskAccount() {
+        return (dispatch) => {
+            tryExtractAccount((account) => dispatch({
+                type: SET_METAMASK_ACCOUNT,
+                payload: {
+                    metaMaskAccount: account
+                }
+            }))
         }
     }
 }

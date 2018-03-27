@@ -2,34 +2,34 @@ import axios from 'axios'
 import Api from '../../api'
 //types
 import {
-    GET_DEPOSITE_REQUEST,
-    GET_DEPOSITE_SUCCESS,
-} from '../types/DepositTypes'
+    GET_DEPOSITS_REQUEST,
+    GET_DEPOSITS_SUCCESS,
+} from '../types/DepositsTypes'
 
 export default class DepositsActions {
-    static getDepositRequest() {
+    static getDepositsRequest() {
         return {
-            type: GET_DEPOSITE_REQUEST
+            type: GET_DEPOSITS_REQUEST
         }
     }
 
-    static getDepositSuccess(payload) {
+    static getDepositsSuccess(payload) {
         return {
-            type: GET_DEPOSITE_SUCCESS,
+            type: GET_DEPOSITS_SUCCESS,
             payload
         }
     }
 
-    static getDeposite() {
+    static getDeposits() {
         return (dispatch) => {
-            dispatch(DepositsActions.getDepositRequest())
+            dispatch(DepositsActions.getDepositsRequest())
             axios({
                 method: 'GET',
                 url: Api.getDeposits()
             }).then(({data}) => {
-                dispatch(DepositsActions.getDepositSuccess(data))
+                dispatch(DepositsActions.getDepositsSuccess(data))
             }).catch(error => {
-                console.log("Cant fetch  deposites")
+                console.log("Cant fetch  deposits")
             })
         }
     }

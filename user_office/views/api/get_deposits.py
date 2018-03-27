@@ -15,7 +15,7 @@ class DepositSerializer(ModelSerializer):
 
     class Meta:
         model = Deposit
-        fields = ('amount', 'amount_wo_bonus', 'charged_at', 'mint')
+        fields = ('amount', 'amount_wo_bonus', 'charged_at', 'state', 'mint')
 
 
 class GetDeposits(ListAPIView):

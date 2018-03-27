@@ -1,11 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import InvestActions from '../actions/InvestActions'
 //components
 import Balance from '../components/Balance'
 import Bounty from '../components/Bounty';
 import Lang from '../components/Lang';
-import KYCwidget from '../components/KYCwidget'
 //containers
+import Invest from './Invest'
+import KYCwidget from '../components/KYCwidget'
 import DepositTable from './DepositTable'
 import BountiesBalance from './BountiesBalance'
 import PhaseStats from './PhaseStats'
@@ -18,16 +20,7 @@ class Header extends React.Component {
 
         this.state = {
             currentAmount: '',
-            accountId: '',
-            currentTokenPrice: '',
-            currencyFrom: '',
-            currencyTo: '',
-            bonus_percents: '',
-            endDate: '',
-            name: '',
-            currency: '',
-            balance: '',
-            nextStage: ''
+            accountId: ''
         }
     }
 
@@ -36,6 +29,7 @@ class Header extends React.Component {
             tokensAmount,
             userId,
             kycRequired,
+            showInvestForm
             kyc,
             KYCstatus
         } = this.props
@@ -48,11 +42,12 @@ class Header extends React.Component {
                  </div>
                 }
                 <div className="Header_row row h-100">
-                    <Balance currentAmount={tokensAmount}/>
+                    <Balance currentAmount={tokensAmount} investClick={showInvestForm}/>
                     <BountiesBalance />
                     <Bounty/>
                     <PhaseStats />
                     <Account />
+                    <Invest />
                 </div>
                 <DepositTable />
                 {KYCstatus && <KYCwidget {...kyc} status={KYCstatus}/>}
@@ -61,18 +56,22 @@ class Header extends React.Component {
     }
 }
 
-const mapStateToProps = ({user, ICOPhaseStats, KYC: {kyc, status}}) => ({
+const mapStateToProps = ({user, Invest, KYC: {kyc, status}}) => ({
     tokensAmount: user.tokens_amount,
     userId: user.eth_account,
     kycRequired: user.kyc_required,
-    currentTokenPrice: ICOPhaseStats.token_price,
-    currencyFrom: ICOPhaseStats.currency_from,
-    currencyTo: ICOPhaseStats.currency_to,
-    bonus_percents: ICOPhaseStats.bonus_percents,
-    endDate: ICOPhaseStats.end_date,
-    name: ICOPhaseStats.name,
+    showInvestForm: Invest.showInvestForm,
     kyc,
     KYCstatus: status
 })
 
-export default connect(mapStateToProps)(Header)
+const mapDispatchToProps = (dispatch) => ({
+    showInvestForm() {
+        dispatch(InvestActions.showForm())
+    },
+    hideInvestForm() {
+        dispatch(InvestActions.hideForm())
+    },
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

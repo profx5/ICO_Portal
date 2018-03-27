@@ -114,12 +114,12 @@ CURRENCIES = {
         'code': 'ETH',
         'name': 'Ethereum',
         'module': 'ethereum_contract',
-        'token_price': 1000,
         'rpc_url': 'http://127.0.0.1:8545',
-        'contract_address': '0xb9ebb98e3d48d4a800B612C8d52E646F88E46143',
+        'contract_address': '0xD0EDB4aa92d03Efbdbf0978Cc17023BEa1574152',
         'sender_address': '0x73015966604928A312F79F7E69291a656Cb88602',
         'pre_kyc_threshold': 10000,
-        'post_kyc_threshold': 5000000
+        'post_kyc_threshold': 5000000,
+        'ico_info_path': os.path.join(BASE_DIR, 'ico_info.json')
     }
 }
 
