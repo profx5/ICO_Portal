@@ -29,7 +29,7 @@ class Header extends React.Component {
             tokensAmount,
             userId,
             kycRequired,
-            showInvestForm
+            showInvestForm,
             kyc,
             KYCstatus
         } = this.props
