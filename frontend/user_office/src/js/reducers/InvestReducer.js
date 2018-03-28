@@ -21,6 +21,5 @@ export function InvestReducer (state=initialState, {type, payload, ...action}) {
         default: {
             return state
         }
-
     }
 }

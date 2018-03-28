@@ -8,7 +8,7 @@ import Footer from '../components/Footer'
 import Header from './Header'
 //actions
 import {getUserRequest} from '../actions/UserActions'
-import {getPhaseStatsRequest} from '../actions/ICOPhaseStatsActions'
+import {getICOInfoRequest} from '../actions/ICOInfoActions'
 import {getDepositRequest} from '../actions/DepositsActions'
 
 class UserOffice extends Component {
@@ -35,13 +35,13 @@ class UserOffice extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
     getMe() {
-        dispatch(getUserRequest())
+        dispatch( getUserRequest() )
     },
     getPhaseStats() {
-         dispatch( getPhaseStatsRequest() )
+         dispatch( getICOInfoRequest() )
     },
     getDeposite() {
-        dispatch(getDepositRequest())
+        dispatch( getDepositRequest() )
     }
 })
 

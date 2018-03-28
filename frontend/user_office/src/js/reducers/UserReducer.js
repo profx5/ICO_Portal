@@ -53,6 +53,5 @@ export function UserReducer (state=initialState, {type, payload, ...action}) {
         default: {
             return state
         }
-
     }
 }

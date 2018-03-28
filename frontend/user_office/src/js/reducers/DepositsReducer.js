@@ -25,5 +25,4 @@ export function DepositsReducer(state=initialState, {type, payload, ...action}) 
             return state
         }
     }
-    return state
 }

@@ -4,6 +4,7 @@ import Api from '../../api'
 import {
     GET_DEPOSITS_REQUEST,
     GET_DEPOSITS_SUCCESS,
+    GET_DEPOSITE_FAILED
 } from '../types/DepositsTypes'
 import { takeEvery, call, put, take } from 'redux-saga/effects';
 
@@ -30,10 +31,9 @@ function* getDeposite() {
         yield put(getDepositSuccess(response.data))
 
     } catch(e) {
-        yield take('GET_DEPOSITE_FAILED')
+        yield take(GET_DEPOSITE_FAILED)
     }
 }
-
 
 export function* saga() {
     yield takeEvery(GET_DEPOSITS_REQUEST, getDeposite)
