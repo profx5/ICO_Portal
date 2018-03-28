@@ -2,20 +2,20 @@ import axios from 'axios'
 import Api from '../../api'
 //types
 import {
-    GET_DEPOSITE_REQUEST,
-    GET_DEPOSITE_SUCCESS,
-} from '../types/DepositTypes'
+    GET_DEPOSITS_REQUEST,
+    GET_DEPOSITS_SUCCESS,
+} from '../types/DepositsTypes'
 import { takeEvery, call, put, take } from 'redux-saga/effects';
 
 export function getDepositRequest() {
     return {
-        type: GET_DEPOSITE_REQUEST
+        type: GET_DEPOSITS_REQUEST
     }
 }
 
 function getDepositSuccess(payload) {
     return {
-        type: GET_DEPOSITE_SUCCESS,
+        type: GET_DEPOSITS_SUCCESS,
         payload
     }
 }
@@ -36,5 +36,5 @@ function* getDeposite() {
 
 
 export function* saga() {
-    yield takeEvery(GET_DEPOSITE_REQUEST, getDeposite)
+    yield takeEvery(GET_DEPOSITS_REQUEST, getDeposite)
 }

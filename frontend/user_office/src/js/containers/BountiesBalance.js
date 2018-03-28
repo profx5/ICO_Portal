@@ -18,7 +18,6 @@ const BountiesBalance = ({currency, balance, nextStage}) => (
     </div>
 )
 
-
 const mapStateToProps = ({bountiesBalance}) => ({
     currency: bountiesBalance.get('currency'),
     balance: bountiesBalance.get('balance'),

@@ -1,8 +1,6 @@
 from django.db import transaction, IntegrityError
-from decimal import Decimal
 
-from user_office.datetime import datetime
-from user_office.models import Investor, Mint, Deposit, Phase
+from user_office.models import Investor, Mint, Deposit
 
 
 class Processor:
@@ -12,46 +10,63 @@ class Processor:
     def set_investor(self, account):
         self.investor = Investor.objects.get(eth_account=account)
 
-    def find_or_create_mint(self, event):
-        mint = Mint.objects.filter(txn_hash=event.txn_hash, currency=self.settings.code)
+    def get_or_update_mint(self, event):
+        fields = {
+            'txn_hash': event.txn_hash,
+            'currency': self.settings.code,
+            'account_from': event.payer,
+            'account_to': event.contract_address,
+            'value': event.value,
+            'block_hash': event.block_hash,
+            'block_number': event.block_number,
+            'txn_date': event.accepted_at
+        }
+
+        mint = Mint.objects.filter(txn_hash=fields['txn_hash'],
+                                   currency=fields['currency'])
 
         if mint:
-            return True, mint[0]
+            mint = mint[0]
+
+            for k, v in fields.items():
+                setattr(mint, k, v)
+
+            return mint
         else:
-            return False, Mint(txn_hash=event.txn_hash,
-                               currency=self.settings.code,
-                               account_from=event.payer,
-                               account_to=event.contract_address,
-                               value=event.value,
-                               block_hash=event.block_hash,
-                               block_number=event.block_number,
-                               txn_date=event.accepted_at)
+            return Mint(**fields)
 
-    def calc_tokens_amount(self, mint):
-        phase_bonus_factor = (1 + Decimal(Phase.objects.get_phase(mint.txn_date).bonus_percents) / 100)
+    def get_or_update_deposit(self, mint):
+        amount, amount_wo_bonus = self.settings.calc_tokens_amount(mint.value)
 
-        tokens_amount = mint.value / self.settings.token_price
+        fields = {
+            'investor': self.investor,
+            'amount': amount,
+            'amount_wo_bonus': amount_wo_bonus,
+            'mint': mint
+        }
 
-        return (tokens_amount * phase_bonus_factor, tokens_amount)
+        deposit = Deposit.objects.filter(mint=mint)
 
-    def create_deposit(self, mint):
-        amount, amount_wo_bonus = self.calc_tokens_amount(mint)
+        if deposit:
+            deposit = deposit[0]
 
-        return Deposit(investor=self.investor,
-                       amount=amount,
-                       amount_wo_bonus=amount_wo_bonus,
-                       charged_at=datetime.now(),
-                       mint=mint)
+            for k, v in fields.items():
+                setattr(mint, k, v)
+
+            return deposit
+        else:
+            return Deposit(**fields)
 
     def __call__(self, event):
         payer_address = event.payer
         self.set_investor(payer_address)
 
         with transaction.atomic():
-            exists, mint = self.find_or_create_mint(event)
+            mint = self.get_or_update_mint(event)
 
-            if not exists:
+            if not mint.confirmed:
                 mint.confirm()
+
                 try:
                     mint.save()
                 except IntegrityError as e:
@@ -59,7 +74,8 @@ class Processor:
 
                     return False
 
-                deposit = self.create_deposit(mint)
+                deposit = self.get_or_update_deposit(mint)
+                deposit.confirm()
                 deposit.save()
 
                 self.investor.recalc_balance()

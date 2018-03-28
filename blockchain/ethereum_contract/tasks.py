@@ -6,7 +6,7 @@ from .event import Event
 
 @shared_task
 def process_event(event):
-    print('Got event with txn_hash=%s' % event.txn_hash)
+    print('Starting processing event with txn_hash=%s' % event.txn_hash)
     processor = Processor(Settings())
 
     processor(event)

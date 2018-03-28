@@ -1,17 +1,19 @@
 import {combineReducers} from 'redux'
 //reducers
 import {UserReducer} from './UserReducer'
-import {ICOPhaseStatsReducer} from './ICOPhaseStatsReducer'
-import {DepositeReducer} from './DepositeReducer'
+import {ICOInfoReducer} from './ICOInfoReducer'
+import {DepositsReducer} from './DepositsReducer'
 import {BountiesBalanceReducer} from './BountiesBalanceReducer'
 import {KYCReducer} from './KYCReducer'
+import {InvestReducer} from './InvestReducer.js'
 
 const reducer = combineReducers({
     user: UserReducer,
-    ICOPhaseStats: ICOPhaseStatsReducer,
-    deposits: DepositeReducer,
+    ICOInfo: ICOInfoReducer,
+    deposits: DepositsReducer,
     bountiesBalance: BountiesBalanceReducer,
-    KYC: KYCReducer
+    KYC: KYCReducer,
+    Invest: InvestReducer
 })
 
 export default reducer

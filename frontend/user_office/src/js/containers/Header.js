@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import InvestActions from '../actions/InvestActions'
 //components
 import Balance from '../components/Balance'
 import Lang from '../components/Lang';
-import KYCwidget from '../components/KYCwidget'
 //containers
+import Invest from './Invest'
+import KYCwidget from '../components/KYCwidget'
 import DepositTable from './DepositTable'
 import BountiesBalance from './BountiesBalance'
 import PhaseStats from './PhaseStats'
@@ -13,10 +15,10 @@ import Account from './Account'
 
 class Header extends React.Component {
     render () {
-
         const {
             tokensAmount,
             kycRequired,
+            showInvestForm,
             kyc,
             KYCstatus
         } = this.props
@@ -27,29 +29,39 @@ class Header extends React.Component {
             <header className="Header container col-md-10">
                 {kycRequired &&
                  <div className="row h-5">
-                    {/* {!KYCstatus && <KYC />} */}
                     <KYC />
                  </div>
                 }
                 <div className="Header_row row h-100">
-                    <Balance currentAmount={tokensAmount}/>
+                    <Balance currentAmount={tokensAmount} investClick={showInvestForm}/>
                     <BountiesBalance />
                     <PhaseStats />
                     <Account />
+                    <Invest />
                 </div>
                 <DepositTable />
-                {/* {KYCstatus && <KYCwidget kyc={kyc} status={KYCstatus}/>} */}
                 <KYCwidget kyc={kyc} status={KYCstatus}/>
             </header>
         )
     }
 }
 
-const mapStateToProps = ({user, ICOPhaseStats, KYC}) => ({
+const mapStateToProps = ({user, ICOPhaseStats, KYC, Invest}) => ({
     tokensAmount: user.get('tokens_amount'),
     kycRequired: user.get('kyc_required'),
     kyc: KYC.get('kyc'),
-    KYCstatus: KYC.get('status')
+    KYCstatus: KYC.get('status'),
+    userId: user.get('eth_account'),
+    showInvestForm: Invest.get('showInvestForm')
 })
 
-export default connect(mapStateToProps)(Header)
+const mapDispatchToProps = (dispatch) => ({
+    showInvestForm() {
+        dispatch(InvestActions.showForm())
+    },
+    hideInvestForm() {
+        dispatch(InvestActions.hideForm())
+    },
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

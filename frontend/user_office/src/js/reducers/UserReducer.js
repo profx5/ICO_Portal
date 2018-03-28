@@ -4,9 +4,9 @@ import {
     SHOW_SET_ACCOUNT_FORM,
     HIDE_SET_ACCOUNT_FORM,
     SET_ACCOUNT_REQUEST,
-    SET_ACCOUNT_SUCCESSFULL
+    SET_ACCOUNT_SUCCESSFULL,
+    SET_METAMASK_ACCOUNT
 } from '../types/UserTypes'
-
 
 import {Map} from 'immutable'
 
@@ -18,7 +18,8 @@ const initialState = Map({
     userIsLoading: false,
     investment_threshold: 0,
     showSetAccountForm: false,
-    setAccountSubmitting: false
+    setAccountSubmitting: false,
+    metaMaskAccount: ''
 })
 
 export function UserReducer (state=initialState, {type, payload, ...action}) {
@@ -42,6 +43,12 @@ export function UserReducer (state=initialState, {type, payload, ...action}) {
         }
         case SET_ACCOUNT_SUCCESSFULL: {
             return state.set('setAccountSubmitting', false)
+        }
+        case SET_METAMASK_ACCOUNT: {
+            return {
+                ...state,
+                ...payload
+            }
         }
         default: {
             return state

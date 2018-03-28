@@ -2,48 +2,35 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 const PhaseStats = ({
-    currentTokenPrice,
-    currencyFrom,
-    currencyTo,
-    bonus_percents,
-    endDate,
-    name,
-}) => (
-    <div>
-        <div>
-            <b>token price: </b>
-            {currentTokenPrice}
-        </div>
-        <div>
-            <b>currency from: </b>
-            {currencyFrom}
-        </div>
-        <div>
-            <b>currency to: </b>
-            {currencyTo}
-        </div>
-        <div>
-            <b>bonus percents: </b>
-            {bonus_percents}
-        </div>
-        <div>
-            <b>token price: </b>
-            {endDate}
-        </div>
-        <div>
-            <b>name: </b>
-            {name}
-        </div>
-    </div>
-)
+    phaseName,
+    discountPercent,
+    endTime
+}) => {
+    const endIn = new Date(endTime * 1000).toDateString()
 
-const mapStateToProps = ({ICOPhaseStats}) => ({
-    currentTokenPrice: ICOPhaseStats.get('token_price'),
-    currencyFrom: ICOPhaseStats.get('currency_from'),
-    currencyTo: ICOPhaseStats.get('currency_to'),
-    bonus_percents: ICOPhaseStats.get('bonus_percents'),
-    endDate: ICOPhaseStats.get('end_date'),
-    name: ICOPhaseStats.get('name'),
+    return (
+        <div>
+            <div><b>Current ico phase</b></div>
+            <div>
+                <b>Name: </b>
+                {phaseName}
+            </div>
+            <div>
+                <b>Discount: </b>
+                {discountPercent}%
+            </div>
+            <div>
+                <b>End date: </b>
+                {endIn}
+            </div>
+        </div>
+    )
+}
+
+const mapStateToProps = ({ICOInfo}) => ({
+    discountPercent: ICOInfo.get('currentPhase').get('discountPercent'),
+    endTime: ICOInfo.get('currentPhase').get('endTime'),
+    phaseName: ICOInfo.get('currentPhase').get('name'),
 })
 
 export default connect(mapStateToProps)(PhaseStats)

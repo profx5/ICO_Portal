@@ -15,7 +15,7 @@ const BundleTracker = require('webpack-bundle-tracker');
 
 
 const publicPath = process.env.BUNDLE_SERVING_PATH || 'http://0.0.0.0:3000/';
-const publicUrl = 'http://' + process.env.NPM_HOST || '0.0.0.0' + ':' + parseInt(process.env.NPM_PORT, 10) || 3000;
+const publicUrl = 'http://' + (process.env.NPM_HOST || '0.0.0.0') + ':' + (parseInt(process.env.NPM_PORT, 10) || 3000);
 
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);

@@ -1,12 +1,5 @@
 import React from 'react'
-
-function tryExtractMetamaskAccount() {
-    if (typeof window.web3 !== 'undefined') {
-        return [window.web3.eth.defaultAccount, true]
-    } else {
-        return ['', false]
-    }
-}
+/* import {tryExtractMetamaskAccount} from '../../web3'*/
 
 export const SetAccountButton = ({onClick}) => (
     <button className="Header_link btn btn-success" onClick={onClick}>Set ETH account</button>
@@ -16,26 +9,28 @@ export class SetAccountForm extends React.Component {
     constructor(props) {
         super(props)
 
-        const [metaMaskAccount, filled] = tryExtractMetamaskAccount()
-
         this.state = {
-            accountValue : metaMaskAccount,
-            filledWithMetamask: filled
+            accountValue: '',
+            filledWithMetaMask: false
         }
-
-        this.submitForm = this.submitForm.bind(this)
-        this.handleChange = this.handleChange.bind(this)
     }
 
-    submitForm(event) {
+    componentWillReceiveProps(nextProps){
+        if (nextProps.metaMaskAccount !== '') {
+            this.setState({accountValue: nextProps.metaMaskAccount,
+                           filledWithMetaMask: true})
+        }
+    }
+
+    submitForm = (event) => {
         event.preventDefault()
 
         this.props.handleSubmit(this.state.accountValue)
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({accountValue: event.target.value,
-                       filledWithMetamask: false});
+                       filledWithMetaMask: false});
     }
 
     render() {
@@ -54,10 +49,10 @@ export class SetAccountForm extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="account">Account</label>
                                     <input type="text" value={this.state.accountValue} className="form-control" id="account" onChange={this.handleChange} />
-                                    {this.state.filledWithMetamask &&
-                                     <small id="emailHelp" className="form-text text-muted">This value is filled with Metamask.</small>}
+                                    {this.state.filledWithMetaMask &&
+                                     <small id="emailHelp" className="form-text text-muted">This value was filled with Metamask.</small>}
                                 </div>
-                                <button type="submit" className="btn btn-primary">Submit KYC</button>
+                                <button type="submit" className="btn btn-primary">Set account</button>
                             </div>
                         </form>
                     </div>

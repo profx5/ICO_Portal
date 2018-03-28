@@ -1,4 +1,6 @@
+import json
 from web3 import Web3, HTTPProvider
+from decimal import Decimal
 
 
 CONTRACT_ABI = '''[
@@ -91,6 +93,7 @@ class Settings:
         cls._config = config
         cls.init_web3()
         cls.init_contract()
+        cls.load_ico_info()
 
     @classmethod
     def init_web3(cls):
@@ -112,3 +115,18 @@ class Settings:
             cls.init_events_filter()
 
         return cls.events_filter
+
+    @classmethod
+    def load_ico_info(cls):
+        with open(cls.config('ico_info_path'), 'r') as f:
+            cls.ico_info = json.loads(f.read())
+
+    @classmethod
+    def calc_tokens_amount(cls, value):
+        value = Decimal(value)
+
+        phase_bonus_factor = (1 + Decimal(cls.ico_info['currentPhase']['discountPercent']) / 100)
+        tokens_amount = (value / 10 ** 18) * (Decimal(cls.ico_info['USDcPerETHRate']) / 100)
+
+        return ((tokens_amount * phase_bonus_factor).quantize(Decimal('1.00000000')),
+                tokens_amount.quantize(Decimal('1.00000000')))

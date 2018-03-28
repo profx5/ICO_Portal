@@ -1,5 +1,6 @@
 import Api from '../../api'
 import axios from 'axios'
+import {tryExtractAccount} from '../../web3'
 //types
 import {
     GET_USER_REQUEST,
@@ -7,7 +8,8 @@ import {
     SHOW_SET_ACCOUNT_FORM,
     HIDE_SET_ACCOUNT_FORM,
     SET_ACCOUNT_REQUEST,
-    SET_ACCOUNT_SUCCESSFULL
+    SET_ACCOUNT_SUCCESSFULL,
+    SET_METAMASK_ACCOUNT
 } from '../types/UserTypes'
 
 import {call, take, put, takeEvery} from 'redux-saga/effects'
@@ -69,6 +71,19 @@ function* setAccount({data}) {
 
     } catch(e) {
         yield take("SET_ACCOUNT_FAILED")
+    }
+
+}
+export default class UserActions {
+    static extractMetaMaskAccount() {
+        return (dispatch) => {
+            tryExtractAccount((account) => dispatch({
+                type: SET_METAMASK_ACCOUNT,
+                payload: {
+                    metaMaskAccount: account
+                }
+            }))
+        }
     }
 }
 

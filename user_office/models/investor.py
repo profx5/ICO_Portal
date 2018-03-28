@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import Sum
 from django.conf import settings
 from django.contrib.auth.models import BaseUserManager
+from eth_utils.address import is_hex_address
 
 from blockchain.ethereum_contract.settings import Settings
 from .account import Account
@@ -89,7 +90,9 @@ class Investor(AbstractBaseUser):
             return account
 
     def recalc_balance(self):
-        self.tokens_amount = Deposit.objects.filter(investor=self).aggregate(amount=Sum('amount'))['amount']
+        self.tokens_amount = Deposit.objects.filter(investor=self,
+                                                    state='CONFIRMED')\
+                                            .aggregate(amount=Sum('amount'))['amount']
 
     @property
     def passed_kyc(self):
@@ -105,3 +108,7 @@ class Investor(AbstractBaseUser):
             return Settings.config('pre_kyc_threshold')
         else:
             return Settings.config('post_kyc_threshold')
+
+    @property
+    def eth_account_filled(self):
+        return len(self.eth_account) == 42 and is_hex_address(self.eth_account)

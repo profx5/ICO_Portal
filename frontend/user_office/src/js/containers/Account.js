@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import AccountInfo from '../components/AccountInfo'
 import {SetAccountButton, SetAccountForm} from '../components/SetAccount'
 //actions
-import {
+import UserActions, {
     setAccountRequest, 
     hideSetAccountForm,
     showSetAccountForm
@@ -17,7 +17,8 @@ class Account extends React.Component{
             showSetAccountForm,
             showForm,
             hideForm,
-            setAccount
+            setAccount,
+            metaMaskAccount
         } = this.props
 
         if (ethAccount){
@@ -27,9 +28,9 @@ class Account extends React.Component{
         } else {
             return (
                 <AccountInfo>
-                    <SetAccountButton onClick={showForm}/>
+                    <SetAccountButton onClick={showForm} />
                     {showSetAccountForm &&
-                     <SetAccountForm closeModal={hideForm} handleSubmit={setAccount} />}
+                     <SetAccountForm closeModal={hideForm} handleSubmit={setAccount} metaMaskAccount={metaMaskAccount} />}
                 </AccountInfo>
             )
         }
@@ -38,12 +39,14 @@ class Account extends React.Component{
 
 const mapStateToProps = ({user}) => ({
     ethAccount: user.get('eth_account'),
-    showSetAccountForm: user.get('showSetAccountForm')
+    showSetAccountForm: user.get('showSetAccountForm'),
+    metaMaskAccount: user.get('metaMaskAccount')
 })
 
 const mapDispatchToProps = (dispatch) => ({
     showForm() {
         dispatch(showSetAccountForm())
+        dispatch(UserActions.extractMetaMaskAccount())
     },
     hideForm() {
         dispatch(hideSetAccountForm())
