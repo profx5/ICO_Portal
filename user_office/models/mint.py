@@ -31,6 +31,10 @@ class Mint(models.Model):
         db_table = 'mint_log'
         unique_together = ('currency', 'txn_hash')
 
+    def __str__(self):
+        return f'Mint {self.txn_hash} by {self.currency}'
+
+
     @property
     def confirmed(self):
         return self.state == 'CONFIRMED'

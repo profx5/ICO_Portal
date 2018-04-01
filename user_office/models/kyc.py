@@ -1,4 +1,6 @@
+from functools import partial
 from django.db import models
+
 from blockchain.ethereum_contract import tasks
 
 
@@ -6,8 +8,9 @@ KYC_STATE_CHOICES = (('WAITING', 'Waiting for approval'),
                      ('DECLINED', 'Declined'),
                      ('APPROVED', 'Approved'))
 
-def kyc_photo_path(instance, filename):
-    return 'kyc/{0}/{1}'.format(instance.investor.id, filename)
+
+def kyc_photo_path(prefix, instance, filename):
+    return f'kyc/{instance.investor.id}/{prefix}/{filename}'
 
 
 class KYC(models.Model):
@@ -25,8 +28,11 @@ class KYC(models.Model):
     birthdate = models.DateField()
 
     document_no = models.CharField(max_length=50)
-    photo = models.ImageField(upload_to=kyc_photo_path)
+    photo = models.ImageField(upload_to=partial(kyc_photo_path, 'photo'))
+    selfie = models.ImageField(upload_to=partial(kyc_photo_path, 'selfie'))
 
+    decline_reason = models.TextField(blank=True, null=True)
+    approve_txn_hash = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         ordering = ['id']
@@ -36,7 +42,7 @@ class KYC(models.Model):
         verbose_name_plural = 'KYCs'
 
     def __str__(self):
-        return 'KYC for user {0}'.format(self.investor.eth_account)
+        return f'KYC for {self.firstname} {self.midname} {self.surname}'
 
     @property
     def approved(self):
@@ -50,7 +56,12 @@ class KYC(models.Model):
         self.state = 'APPROVED'
 
         if call_contract:
-            tasks.set_investment_threshold.delay(self.investor.eth_account)
+            result = tasks.set_investment_threshold.apply(args=(self.investor.eth_account,))
+
+            if result.successful():
+                self.approve_txn_hash = result.result
+            else:
+                pass
 
     def decline(self):
         self.state = 'DECLINED'
