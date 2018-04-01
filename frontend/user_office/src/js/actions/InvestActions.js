@@ -8,7 +8,8 @@ import {
     SEND_TRANSACTION_INIT,
     SEND_TRANSACTOIN_SUCCESSFULL
 } from '../types/InvestTypes'
-// import DepositsAction from './DepositsActions.js'
+
+import {getDepositRequest} from './DepositsActions'
 
 export default class InvestActions {
     static showForm() {
@@ -42,8 +43,8 @@ export default class InvestActions {
             method: 'POST',
             data: {value: value,
                    txn_hash: txnHash}
-        }).then(({data}) => {
-            // dispatch(DepositsAction.getDeposits())
+        }).then( ({data}) => {
+            dispatch(getDepositRequest())
         }).catch(error => {
             console.log("cant execute postInvest", {error})
         })
@@ -58,7 +59,5 @@ export default class InvestActions {
 
             sendTransaction(from, to, value, (txnHash) => InvestActions.postInvest(dispatch, txnHash, value))
         }
-
     }
-
 }
