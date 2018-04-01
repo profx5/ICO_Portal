@@ -4,35 +4,57 @@ import Api from '../../api'
 import {
     GET_BOUNTIES_BALANCE_REQUEST,
     GET_BOUNTIES_BALANCE_SUCCESS,
+    GET_BOUNTIES_BALANCE_FAILED,
+    TRANSFER_BOUNTIES_REQUEST,
+    TRANSFER_BOUNTIES_SUCCESS,
+    TRANSFER_BOUNTIES_FAILED,
 } from '../types/BountiesBalanceTypes'
 
 import {takeEvery, call, put, take} from 'redux-saga/effects'
 
+export class Bountie {
+    
+    static getBountiesRequest = () => ({type: GET_BOUNTIES_BALANCE_REQUEST})
 
-export function getBountiesRequest() {
-    return {type: GET_BOUNTIES_BALANCE_REQUEST}
-}
+    static getBountiesFailed = () => ({type: GET_BOUNTIES_BALANCE_FAILED})
 
-function getBountiesSuccess(payload) {
-    return {
-        type: GET_BOUNTIES_BALANCE_SUCCESS,
-        payload
+    static getBountiesSuccess = (payload) => ({type: GET_BOUNTIES_BALANCE_SUCCESS, payload})
+
+    static * getBounties() {
+        try {
+            const response = yield call(axios, {
+                method: 'GET',
+                url: Api.getBounties()
+            })
+    
+            yield put(Bountie.getBountiesSuccess(response.data))
+        } catch(e) {
+            yield put(Bountie.getBountiesFailed())
+        }
     }
-}
 
-function* getBounties() {
-    try {
-        const response = yield call(axios, {
-            method: 'GET',
-            url: Api.getOffChainBountiesBalance()
-        })
+    static postTransferRequest = () => ({type: TRANSFER_BOUNTIES_REQUEST})
 
-        yield put(getBountiesSuccess(response.data))
-    } catch(e) {
-        yield take("GET_BOUNTIES_BALANCE_FAILED")
+    static postTransferSuccess = (payload) => ({type: TRANSFER_BOUNTIES_SUCCESS, payload})
+
+    static postTransferFailed = () => ({type: TRANSFER_BOUNTIES_FAILED})
+
+    static * postTransferBounties(action) {
+        try {
+            const response = yield call(axios, {
+                method: 'POST',
+                url: Api.transferBounties()
+            })
+    
+            yield put(Bountie.postTransferSuccess(response.data))
+    
+        } catch (e) {
+            yield put(Bountie.postTransferFailed())
+        }   
     }
 }
 
 export function* saga() {
-    yield takeEvery(GET_BOUNTIES_BALANCE_REQUEST, getBounties)
+    yield takeEvery(GET_BOUNTIES_BALANCE_REQUEST, Bountie.getBounties)
+    yield takeEvery(TRANSFER_BOUNTIES_REQUEST, Bountie.postTransferBounties)
 }

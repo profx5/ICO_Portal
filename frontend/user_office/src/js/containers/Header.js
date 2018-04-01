@@ -12,6 +12,7 @@ import BountiesBalance from './BountiesBalance'
 import PhaseStats from './PhaseStats'
 import KYC from './KYC'
 import Account from './Account'
+import ReferalLink from './ReferalLink'
 
 class Header extends React.Component {
     render () {
@@ -33,7 +34,11 @@ class Header extends React.Component {
                  </div>
                 }
                 <div className="Header_row row h-100">
-                    <Balance currentAmount={tokensAmount} investClick={showInvestForm}/>
+                    <Balance 
+                        currentAmount={tokensAmount} 
+                        investClick={showInvestForm}
+                    />
+                    <ReferalLink />
                     <BountiesBalance />
                     <PhaseStats />
                     <Account />
@@ -41,6 +46,7 @@ class Header extends React.Component {
                 </div>
                 <DepositTable />
                 <KYCwidget kyc={kyc} status={KYCstatus}/>
+
             </header>
         )
     }

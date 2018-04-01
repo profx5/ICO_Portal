@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {showForm, hideForm, getKYCRequest, submitKYC_and_retriveKYC_Request} from '../actions/KYCActions'
+//actions
+import {KYCaction} from '../actions/KYCActions'
 //components
 import KYCForm from '../components/KYCForm'
 import KYCHeader from '../components/KYCHeader'
@@ -45,16 +46,16 @@ const mapStateToProps = ({KYC, user}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     showForm() {
-        dispatch(showForm())
+        dispatch(KYCaction.showForm())
     },
     hideForm() {
-        dispatch(hideForm())
+        dispatch(KYCaction.hideForm())
     },
     getKYC() {
-        dispatch(getKYCRequest())
+        dispatch(KYCaction.getKYCRequest())
     },
     submitKYC_and_retriveKYC(data) {
-        dispatch(submitKYC_and_retriveKYC_Request(data))
+        dispatch(KYCaction.submitKYC_and_retriveKYC_Request(data))
     }
 })
 

@@ -9,7 +9,7 @@ import {
     SEND_TRANSACTOIN_SUCCESSFULL
 } from '../types/InvestTypes'
 
-import {getDepositRequest} from './DepositsActions'
+import {DepositAction} from './DepositsActions'
 
 export default class InvestActions {
     static showForm() {
@@ -44,7 +44,7 @@ export default class InvestActions {
             data: {value: value,
                    txn_hash: txnHash}
         }).then( ({data}) => {
-            dispatch(getDepositRequest())
+            dispatch(DepositAction.getDepositRequest())
         }).catch(error => {
             console.log("cant execute postInvest", {error})
         })

@@ -5,34 +5,33 @@ import {put, call, take, takeEvery, all} from 'redux-saga/effects'
 import {
     GET_ICO_INFO_REQUEST,
     GET_ICO_INFO_SUCCESS,
+    GET_ICO_PHASE_STATS_FAILED
 } from '../types/ICOInfoTypes.js'
 
-function getPhaseStatsSuccess(payload) {
-    return {
-        type: GET_ICO_INFO_SUCCESS,
-        payload
-    }
-}
+export class ICOInfo {
 
-export function getICOInfoRequest() {
-    return {type: GET_ICO_INFO_REQUEST}
-}
+    static getPhaseStatsSuccess = (payload) => ({ type: GET_ICO_INFO_SUCCESS, payload })
 
-export function* getPhaseStatsSaga(action) {
-    try {
+    static getICOInfoRequest = () => ({type: GET_ICO_INFO_REQUEST})
 
-        const respons = yield call(axios,{
-            method: "GET",
-            url: Api.getICOInfo()
-        })
+    static getICOInfoFailed = () => ({type: GET_ICO_PHASE_STATS_FAILED})
 
-        yield put(getPhaseStatsSuccess(respons.data))
-
-    } catch(e) {
-        yield take("GET_ICO_PHASE_STATS_FAILED")
+    static * getPhaseStatsSaga(action){
+        try {
+    
+            const respons = yield call(axios,{
+                method: "GET",
+                url: Api.getICOInfo()
+            })
+    
+            yield put(ICOInfo.getPhaseStatsSuccess(respons.data))
+    
+        } catch(e) {
+            yield put(ICOInfo.getICOInfoFailed())
+        }
     }
 }
 
 export function* saga() {
-    yield takeEvery(GET_ICO_INFO_REQUEST, getPhaseStatsSaga)
+    yield takeEvery(GET_ICO_INFO_REQUEST, ICOInfo.getPhaseStatsSaga)
 }

@@ -8,33 +8,27 @@ import {
 } from '../types/DepositsTypes'
 import { takeEvery, call, put, take } from 'redux-saga/effects';
 
-export function getDepositRequest() {
-    return {
-        type: GET_DEPOSITS_REQUEST
-    }
-}
+export class DepositAction {
 
-function getDepositSuccess(payload) {
-    return {
-        type: GET_DEPOSITS_SUCCESS,
-        payload
-    }
-}
+    static getDepositRequest = () => ({ type: GET_DEPOSITS_REQUEST })
 
-function* getDeposite() {
-    try {
-        const response = yield call(axios, {
-            method: 'GET',
-            url: Api.getDeposits()
-        })
+    static getDepositSuccess = (payload) => ({ type: GET_DEPOSITS_SUCCESS, payload })
 
-        yield put(getDepositSuccess(response.data))
-
-    } catch(e) {
-        yield take(GET_DEPOSITE_FAILED)
+    static * getDeposite() {
+        try {
+            const response = yield call(axios, {
+                method: 'GET',
+                url: Api.getDeposits()
+            })
+    
+            yield put(DepositAction.getDepositSuccess(response.data))
+    
+        } catch(e) {
+            yield take(GET_DEPOSITE_FAILED)
+        }
     }
 }
 
 export function* saga() {
-    yield takeEvery(GET_DEPOSITS_REQUEST, getDeposite)
+    yield takeEvery(GET_DEPOSITS_REQUEST, DepositAction.getDeposite)
 }
