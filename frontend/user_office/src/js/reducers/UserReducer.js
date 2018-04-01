@@ -8,7 +8,9 @@ import {
     SET_METAMASK_ACCOUNT
 } from '../types/UserTypes'
 
-const initialState = {
+import {Map} from 'immutable'
+
+const initialState = Map({
     eth_account: null,
     tokens_amount: null,
     username: null,
@@ -18,46 +20,29 @@ const initialState = {
     showSetAccountForm: false,
     setAccountSubmitting: false,
     metaMaskAccount: ''
-}
+})
 
 export function UserReducer (state=initialState, {type, payload, ...action}) {
     switch(type) {
         case GET_USER_REQUEST: {
-            return {
-                ...state,
-                userIsLoading: true
-            }
+            return state.set("userIsLoading", true)
         }
         case GET_USER_SUCCESSFULL: {
-            return {
-                ...state,
-                ...payload,
-                userIsLoading: false
-            }
+            return state.merge({
+                ...payload
+            }).set('userIsLoading', false)
         }
         case SHOW_SET_ACCOUNT_FORM: {
-            return {
-                ...state,
-                showSetAccountForm: true
-            }
+            return state.set('showSetAccountForm', true)
         }
         case HIDE_SET_ACCOUNT_FORM: {
-            return {
-                ...state,
-                showSetAccountForm: false
-            }
+            return state.set('showSetAccountForm', false)
         }
         case SET_ACCOUNT_REQUEST: {
-            return {
-                ...state,
-                setAccountSubmitting: true
-            }
+            return state.set("setAccountSubmitting", true)
         }
         case SET_ACCOUNT_SUCCESSFULL: {
-            return {
-                ...state,
-                setAccountSubmitting: false
-            }
+            return state.set('setAccountSubmitting', false)
         }
         case SET_METAMASK_ACCOUNT: {
             return {
@@ -68,6 +53,5 @@ export function UserReducer (state=initialState, {type, payload, ...action}) {
         default: {
             return state
         }
-
     }
 }

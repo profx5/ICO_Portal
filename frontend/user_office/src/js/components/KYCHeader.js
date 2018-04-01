@@ -1,28 +1,53 @@
-import React from 'react'
+import React, {Component, Children} from 'react'
+//components
+import Button from './Button'
 
-export const KYCHeaderAlert = ({investmentThreshold, onClick}) => (
-    <div className="col-md-12">
-        <div className="alert alert-warning" role="alert">
-            <p>You did not pass KYC confirmation. Your invstment threshold is limited to {investmentThreshold}</p>
-            <button className="btn btn-success" onClick={onClick}>
-                Pass KYC
-            </button>
-        </div>
-    </div>
-)
+class KYCHeader extends Component {
 
-export const KYCHeaderWaiting = () => (
-    <div className="col-md-12">
+    static defaultProps = {
+        messages: {
+            waiting: "Your KYC is waiting for approval",
+            declined: "Your KYC was declined",
+            alert: 'You did not pass KYC confirmation. Your invstment threshold is limited to'
+        }
+    }
+
+    static Waiting = ({message}) => (
         <div className="alert alert-primary" role="alert">
-            <p>Your KYC is waiting for approval</p>
+            <p>{message}</p>
         </div>
-    </div>
-)
+    )
 
-export const KYCHeaderDeclined = () => (
-    <div className="col-md-12">
+    static Declined = ({message}) => (
         <div className="alert alert-danger" role="alert">
-            <p>Your KYC was declined</p>
+            <p>{message}</p>
         </div>
-    </div>
-)
+    )
+
+    static Alert = ({onClick, investmentThreshold, alert, message}) => (
+        <div className="alert alert-warning" role="alert">
+            <p>{message} {investmentThreshold}</p>
+            <Button text="Pass KYC" onClick={onClick} success={true}/>
+        </div>
+    )
+
+    _renderHeaders = (status, alertProps, {waiting, declined, alert}) => {
+        if(status === 'WAITING') { return <KYCHeader.Waiting message={waiting}/> }
+        else if(status === 'DECLINED') {return <KYCHeader.Declined message={declined}/>}
+        else if(status === 'APPROVED') {return }
+        return <KYCHeader.Alert {...alertProps} message={alert}/>
+    }
+
+    render() {
+        const {status, onClick, investmentThreshold, messages, children} = this.props
+        const alertProps = {onClick, investmentThreshold}
+        return (
+            <div className="col-md-12">
+                {this._renderHeaders(status, alertProps, messages)}
+                {Children.only(children)}
+            </div>
+        )
+    }
+}
+
+export default KYCHeader

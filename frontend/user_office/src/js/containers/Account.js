@@ -4,7 +4,11 @@ import {connect} from 'react-redux'
 import AccountInfo from '../components/AccountInfo'
 import {SetAccountButton, SetAccountForm} from '../components/SetAccount'
 //actions
-import UserActions from '../actions/UserActions.js'
+import UserActions, {
+    setAccountRequest, 
+    hideSetAccountForm,
+    showSetAccountForm
+} from '../actions/UserActions.js'
 
 class Account extends React.Component{
     render() {
@@ -34,22 +38,22 @@ class Account extends React.Component{
 }
 
 const mapStateToProps = ({user}) => ({
-    ethAccount: user.eth_account,
-    showSetAccountForm: user.showSetAccountForm,
-    metaMaskAccount: user.metaMaskAccount
+    ethAccount: user.get('eth_account'),
+    showSetAccountForm: user.get('showSetAccountForm'),
+    metaMaskAccount: user.get('metaMaskAccount')
 })
 
 const mapDispatchToProps = (dispatch) => ({
     showForm() {
-        dispatch(UserActions.showSetAccountForm())
+        dispatch(showSetAccountForm())
         dispatch(UserActions.extractMetaMaskAccount())
     },
     hideForm() {
-        dispatch(UserActions.hideSetAccountForm())
+        dispatch(hideSetAccountForm())
     },
     setAccount(data) {
-        dispatch(UserActions.setAccount(data)).then(() => dispatch(UserActions.getUser()))
-    },
+        dispatch(setAccountRequest(data))
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account)

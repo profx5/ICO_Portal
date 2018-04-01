@@ -1,20 +1,11 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import KYCActions from '../actions/KYCActions'
+import {showForm, hideForm, getKYCRequest, submitKYC_and_retriveKYC_Request} from '../actions/KYCActions'
 //components
-import {
-    KYCHeaderAlert,
-    KYCHeaderWaiting,
-    KYCHeaderDeclined
-} from '../components/KYCHeader'
 import KYCForm from '../components/KYCForm'
-//types
-import {
-    KYC_STATE_WAITING,
-    KYC_STATE_DECLINED
-} from '../types/KYCTypes'
+import KYCHeader from '../components/KYCHeader'
 
-class KYC extends React.Component {
+class KYC extends Component {
     componentDidMount() {
         this.props.getKYC()
     }
@@ -23,62 +14,47 @@ class KYC extends React.Component {
             investmentThreshold,
             showForm,
             hideForm,
-            state,
             isFetched,
             isFormVisible,
+            status,
             submitKYC_and_retriveKYC
         } = this.props
 
-        let header
-
-        if (isFetched) {
-            switch (state) {
-                case KYC_STATE_WAITING:
-                    header = (<KYCHeaderWaiting />)
-                    break
-                case KYC_STATE_DECLINED:
-                    header = (<KYCHeaderDeclined />)
-                    break
-                default:
-                    header = (
-                        <React.Fragment>
-                            <KYCHeaderAlert investmentThreshold={investmentThreshold} onClick={showForm} />
-                            {isFormVisible && 
-                                <KYCForm 
-                                    closeModal={hideForm}
-                                    submitKYC_and_retriveKYC={submitKYC_and_retriveKYC}
-                                />
-                            }
-                        </React.Fragment>
-                    )
-            }
-
-            return header
-        } else {
-            return null
-        }
+        return (
+            <KYCHeader 
+                investmentThreshold={investmentThreshold} 
+                onClick={showForm} 
+                status={status}
+            >
+                <KYCForm 
+                    closeModal={hideForm} 
+                    submitKYC_and_retriveKYC={submitKYC_and_retriveKYC}
+                    isFormVisible={isFormVisible}
+                />
+            </KYCHeader>
+        )
     }
 }
 
 const mapStateToProps = ({KYC, user}) => ({
-    isFormVisible: KYC.showForm,
-    state: KYC.state,
-    investmentThreshold: user.investment_threshold,
-    isFetched: KYC.isFetched
+    isFormVisible: KYC.get('showForm'),
+    status: KYC.get('status'),
+    investmentThreshold: user.get('investment_threshold'),
+    isFetched: KYC.get('isFetched')
 })
 
 const mapDispatchToProps = (dispatch) => ({
     showForm() {
-        dispatch(KYCActions.showForm())
+        dispatch(showForm())
     },
     hideForm() {
-        dispatch(KYCActions.hideForm())
+        dispatch(hideForm())
     },
     getKYC() {
-        dispatch(KYCActions.getKYC())
+        dispatch(getKYCRequest())
     },
     submitKYC_and_retriveKYC(data) {
-        dispatch(KYCActions.submitKYC_and_retriveKYC(data))
+        dispatch(submitKYC_and_retriveKYC_Request(data))
     }
 })
 

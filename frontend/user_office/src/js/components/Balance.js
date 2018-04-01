@@ -1,10 +1,13 @@
 import React from 'react';
+//components
+import Button from './Button'
+import Title from './Title'
 
 const Balance = ({currentAmount, investClick}) => (
     <div className="Header_balance col-md-3">
-        <h3 className="Header_head">On-Chain balance</h3>
+        <Title type='h3' text='On-Chain balance'/>
         <p className="Header_text Header_text-big">{currentAmount}</p>
-        <button className="btn btn-primary" onClick={investClick}>INVEST</button>
+        <Button primary={true} text='CONNECT WALLET' onClick={investClick}/>
     </div>
 )
 

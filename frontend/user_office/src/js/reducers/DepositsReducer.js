@@ -3,28 +3,26 @@ import {
     GET_DEPOSITS_SUCCESS,
 } from '../types/DepositsTypes'
 
-const initialState = {
+import {Map} from 'immutable'
+
+const initialState = Map({
     isDepositsLoading: false,
     list: []
-}
+})
 
 export function DepositsReducer(state=initialState, {type, payload, ...action}) {
     switch(type) {
         case GET_DEPOSITS_REQUEST: {
-            return {
-                ...state,
-                isDepositsLoading: true
-            }
+            return state.set('isDepositLoading', true)
         }
         case GET_DEPOSITS_SUCCESS: {
-            return {
-                ...state,
-                list: payload,
-                isDepositsLoading: false
-            }
+            return state.merge({
+                list: state.get('list').concat(payload)
+            }).set('isDepositLoading', true)
+           
         }
         default: {
-            return {...state}
+            return state
         }
     }
 }

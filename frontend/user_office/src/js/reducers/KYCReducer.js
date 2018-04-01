@@ -7,12 +7,14 @@ import {
     HIDE_KYC_FORM
 } from '../types/KYCTypes'
 
-const initialState = {
+import {Map} from 'immutable'
+
+const initialState = Map({
     status: null,
     isSubmiting: false,
     showForm: false,
     isFetched: false,
-    kyc: {
+    kyc: Map({
         birthdate: null,
         country: null,
         document_no: null,
@@ -20,8 +22,8 @@ const initialState = {
         midname: null,
         photo: null,
         surname: null
-    }
-}
+    })
+})
 
 export function KYCReducer(state = initialState, {
     type,
@@ -30,40 +32,28 @@ export function KYCReducer(state = initialState, {
 }) {
     switch (type) {
         case GET_KYC_REQUEST:
-            return {
-                ...state
-            }
-        case GET_KYC_SUCCESSFULL:
-            return {
-                ...state,
-                isFetched: true,
-                status: payload.state,
-                kyc: {
-                    ...payload
-                }
-            }
-        case SUBMIT_KYC_REQUEST:
-            return {
-                ...state,
-                isSubmiting: true
-            }
-        case SUBMIT_KYC_SUCCESSFULL:
-            return {
-                ...state,
-                isSubmiting: false,
-                showForm: false
-            }
-        case SHOW_KYC_FORM:
-            return {
-                ...state,
-                showForm: true
-            }
+            return state
 
+        case GET_KYC_SUCCESSFULL:
+        console.log({payload})
+            return state.merge({
+                status: payload.state,
+                kyc: state.get('kyc').merge(payload)
+            }).set('isFetched', true)
+
+        case SUBMIT_KYC_REQUEST:
+            return state.set('isSubmiting', true)
+
+        case SUBMIT_KYC_SUCCESSFULL:
+            return state
+                .set('isSubmiting', false)
+                .set('showForm', false)
+           
+        case SHOW_KYC_FORM:
+            return state.set('showForm', true)
         case HIDE_KYC_FORM:
-            return {
-                ...state,
-                showForm: false
-            }
+            return state.set('showForm', false)
+
         default:
             return state
     }

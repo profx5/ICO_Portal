@@ -1,5 +1,4 @@
 import {combineReducers} from 'redux'
-
 //reducers
 import {UserReducer} from './UserReducer'
 import {ICOInfoReducer} from './ICOInfoReducer'

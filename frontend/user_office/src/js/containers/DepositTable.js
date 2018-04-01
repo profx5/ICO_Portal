@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {List} from 'immutable'
 
 class DepositTable extends Component {
     static defultProps = {
-        deposits: []
+        deposits: List()
     }
 
     _renderTable = (deposits) => {
@@ -41,9 +42,9 @@ class DepositTable extends Component {
 }
 
 const mapStateToProps = ({
-    deposits: {list}
+    deposits
 }) => ({
-    deposits: [...list]
+    deposits: deposits.get('list')
 })
 
 export default connect(mapStateToProps)(DepositTable)

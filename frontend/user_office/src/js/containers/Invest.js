@@ -78,11 +78,11 @@ class Invest extends React.Component {
 }
 
 const mapStateToProps = ({user, ICOInfo, Invest}) => ({
-    showForm: Invest.showInvestForm,
-    contract: ICOInfo.crowdSaleAddress,
-    USDcPerETHRate: ICOInfo.USDcPerETHRate,
-    discountPercent: ICOInfo.currentPhase.discountPercent,
-    ethAccount: user.eth_account
+    showForm: Invest.get('showInvestForm'),
+    contract: ICOInfo.get('crowdSaleAddress'),
+    USDcPerETHRate: ICOInfo.get('USDcPerETHRate'),
+    discountPercent: ICOInfo.get('currentPhase').get('discountPercent'),
+    ethAccount: user.get('eth_account')
 })
 
 const mapDispatchToProps = (dispatch) => ({
