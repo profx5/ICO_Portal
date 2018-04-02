@@ -40,6 +40,9 @@ i {
 button {
   cursor: pointer;
 }
+html, body, #root {
+  height: 100%;
+}
 /*————————————————————————*/
 .container {
   height: 100%;
@@ -72,4 +75,38 @@ button {
 }
 tr.prepared {
   background: #ffe8e6
+}
+
+.relative {
+  position: relative;
+}
+
+.overlay-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0,0,0, .4);
+}
+
+.in-middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+.modal-wrapper {
+  position: relative;
+  box-shadow: 0 0 25px rgba(0,0,0, .4);
+}
+
+.confirm-modal {
+  width: 400px;
+  height: 200px;
+  background-color: #fff;
 }

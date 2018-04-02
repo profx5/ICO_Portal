@@ -1,27 +1,45 @@
 import React from 'react'
 import {connect} from 'react-redux'
+//actions
+import {ModalAction} from '../actions/ModalWindowAction'
+//components
+import Button from '../components/Button'
 
-const BountiesBalance = ({currency, balance, nextStage}) => (
+const BountiesBalance = ({
+    currentValue,
+    thresholdValue,
+    canTransfer,
+    openModal
+}) => (
     <div>
         <div>
-            <b>currency: </b>
-            {currency || 'null'}
+            <b>current: </b>
+            {currentValue || 'null'}
         </div>
         <div>
-            <b>balance: </b>
-            {balance || 'null'}
+            <b>threshold value: </b>
+            {thresholdValue || 'null'}
         </div>
         <div>
-            <b>next stage: </b>
-            {nextStage || 'null'}
+            <b>transfer allowed: </b>
+            {canTransfer || 'null'}
+        </div>
+        <div>
+            <Button text='Transfer' onClick={openModal}/>
         </div>
     </div>
 )
 
 const mapStateToProps = ({bountiesBalance}) => ({
-    currency: bountiesBalance.get('currency'),
-    balance: bountiesBalance.get('balance'),
-    nextStage: bountiesBalance.get('nextStage'),
+    currentValue: bountiesBalance.getIn(['bounties', 'currentValue']),
+    thresholdValue: bountiesBalance.getIn(['bounties', 'thresholdValue']),
+    canTransfer: bountiesBalance.getIn(['bounties', 'canTransfer']),
 })
 
-export default connect(mapStateToProps)(BountiesBalance)
+const mapDispatchToProps = (dispatch) => ({
+    openModal() {
+        dispatch( ModalAction.openModal() )
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(BountiesBalance)
