@@ -3,7 +3,7 @@ from django.conf import settings
 from datetime import datetime
 
 from django.core.files.uploadedfile import SimpleUploadedFile
-from .helpers.fixture import fixture_path
+from .helpers.kyc import create_kyc
 from .base import APITestCase
 
 
@@ -24,17 +24,7 @@ class TestKYC(APITestCase):
                     'selfie': f'http://testserver/media/kyc/{self._investor_id}/selfie/selfie.jpg'
         }
 
-        with open(fixture_path('photo.jpg'), 'rb') as photo, \
-             open(fixture_path('selfie.jpg'), 'rb') as selfie:
-            response = self.client.post('/api/kyc/', {
-                'firstname': 'John',
-                'surname': 'Doe',
-                'birthdate': '1990-01-01',
-                'document_no': 123123,
-                'country': 'Russia',
-                'photo': photo,
-                'selfie': selfie
-            }, format='multipart')
+        response = create_kyc(self.client)
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.data, expected)
@@ -51,17 +41,7 @@ class TestKYC(APITestCase):
                     'selfie': f'http://testserver/media/kyc/{self._investor_id}/selfie/selfie.jpg'
         }
 
-        with open(fixture_path('photo.jpg'), 'rb') as photo, \
-             open(fixture_path('selfie.jpg'), 'rb') as selfie:
-            response = self.client.post('/api/kyc/', {
-                'firstname': 'John',
-                'surname': 'Doe',
-                'birthdate': '1990-01-01',
-                'document_no': 123123,
-                'country': 'Russia',
-                'photo': photo,
-                'selfie': selfie
-            }, format='multipart')
+        response = create_kyc(self.client)
 
         response = self.client.get('/api/kyc/')
 

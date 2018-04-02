@@ -61,6 +61,7 @@ class KYC(models.Model):
             if result.successful():
                 self.approve_txn_hash = result.result
             else:
+                # TODO: Throw error
                 pass
 
     def decline(self):
