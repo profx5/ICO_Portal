@@ -20,17 +20,20 @@ class TestKYC(APITestCase):
                     'birthdate': '1990-01-01',
                     'document_no': '123123',
                     'country': 'Russia',
-                    'photo': 'http://testserver/media/kyc/{0}/photo.jpg'.format(self._investor_id)
+                    'photo': f'http://testserver/media/kyc/{self._investor_id}/photo/photo.jpg',
+                    'selfie': f'http://testserver/media/kyc/{self._investor_id}/selfie/selfie.jpg'
         }
 
-        with open(fixture_path('photo.jpg'), 'rb') as f:
+        with open(fixture_path('photo.jpg'), 'rb') as photo, \
+             open(fixture_path('selfie.jpg'), 'rb') as selfie:
             response = self.client.post('/api/kyc/', {
                 'firstname': 'John',
                 'surname': 'Doe',
                 'birthdate': '1990-01-01',
                 'document_no': 123123,
                 'country': 'Russia',
-                'photo': f
+                'photo': photo,
+                'selfie': selfie
             }, format='multipart')
 
         self.assertEqual(response.status_code, 201)
@@ -44,17 +47,20 @@ class TestKYC(APITestCase):
                     'birthdate': '1990-01-01',
                     'document_no': '123123',
                     'country': 'Russia',
-                    'photo': 'http://testserver/media/kyc/{0}/photo.jpg'.format(self._investor_id)
+                    'photo': f'http://testserver/media/kyc/{self._investor_id}/photo/photo.jpg',
+                    'selfie': f'http://testserver/media/kyc/{self._investor_id}/selfie/selfie.jpg'
         }
 
-        with open(fixture_path('photo.jpg'), 'rb') as f:
+        with open(fixture_path('photo.jpg'), 'rb') as photo, \
+             open(fixture_path('selfie.jpg'), 'rb') as selfie:
             response = self.client.post('/api/kyc/', {
                 'firstname': 'John',
                 'surname': 'Doe',
                 'birthdate': '1990-01-01',
                 'document_no': 123123,
                 'country': 'Russia',
-                'photo': f
+                'photo': photo,
+                'selfie': selfie
             }, format='multipart')
 
         response = self.client.get('/api/kyc/')

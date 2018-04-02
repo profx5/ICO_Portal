@@ -10,11 +10,11 @@ class DepositTable extends Component {
     _renderTable = (deposits) => {
         return deposits.map( (item, idx) => {
             return (
-                <tr key={idx} className={item.state === 'PREPARED' ? 'prepared' : ''}>
-                    <td>{item.amount}</td>
-                    <td>{item.amount_wo_bonus}</td>
-                    <td>{item.mint.txn_hash}</td>
-                    <td>{item.charged_at}</td>
+                <tr key={idx} className={item.get('state') === 'PREPARED' ? 'prepared' : ''}>
+                    <td>{item.get('amount')}</td>
+                    <td>{item.get('amount_wo_bonus')}</td>
+                    <td>{item.get('mint').get('txn_hash')}</td>
+                    <td>{item.get('charged_at')}</td>
                 </tr>
             )
         })
