@@ -32,13 +32,13 @@ class SetEthAccount(APIView):
         serializer = self.serializer(data=request.data)
 
         if serializer.is_valid():
-            if request.user.eth_account == '':
-                request.user.eth_account = serializer.validated_data['eth_account']
-                request.user.save()
-            else:
+            if request.user.eth_account:
                 return Response(data={'success': False,
                                       'error': 'eth account already filled'},
                                 status=422)
+            else:
+                request.user.eth_account = serializer.validated_data['eth_account']
+                request.user.save()
 
             return Response(data={'success': True})
         else:
