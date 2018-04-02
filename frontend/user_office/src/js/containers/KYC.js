@@ -55,6 +55,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(KYCaction.getKYCRequest())
     },
     submitKYC_and_retriveKYC(data) {
+        console.log("submitKYC_and_retriveKYC", {data})
         dispatch(KYCaction.submitKYC_and_retriveKYC_Request(data))
     }
 })

@@ -30,10 +30,10 @@ export class KYCaction {
                 url: Api.kyc(),
                 method: 'GET'
             })
-    
+            console.log({response})
             yield put(KYCaction.getKYCSuccessfull(response.data))
         } catch(e) {
-    
+            console.log("CANT GET KYC", {e})
         }
     }
 
@@ -57,7 +57,7 @@ export class KYCaction {
         }
     }
 
-    static * submitKYC_and_retriveKYC_Request(data) {
+    static submitKYC_and_retriveKYC_Request(data) {
         return {
             type: SUBMIT_AND_GET_KYC_REQEUST,   
             data

@@ -4,9 +4,9 @@ import InvestActions from '../actions/InvestActions'
 //components
 import Balance from '../components/Balance'
 import Lang from '../components/Lang';
+import KYCWidget from '../components/KYCwidget'
 //containers
 import Invest from './Invest'
-import KYCWidget from '../components/KYCWidget'
 import DepositTable from './DepositTable'
 import BountiesBalance from './BountiesBalance'
 import PhaseStats from './PhaseStats'

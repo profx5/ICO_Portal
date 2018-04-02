@@ -44,7 +44,7 @@ export default class InvestActions {
             data: {value: value,
                    txn_hash: txnHash}
         }).then( ({data}) => {
-            dispatch(DepositAction.getDepositRequest())
+            dispatch(DepositAction.getDepositsRequest())
         }).catch(error => {
             console.log("cant execute postInvest", {error})
         })

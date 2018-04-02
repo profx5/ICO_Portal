@@ -48,7 +48,7 @@ class UserOffice extends Component {
                             <Button 
                                 text='tranfer bonus in tokens' 
                                 success={true} 
-                                onClick={this.handleClickForTransferModalWindow}
+                                onClick={ compose(closeModal, this.handleClickForTransferModalWindow ) }
                             />
                             <Button 
                                 text='Cancel' 
@@ -72,7 +72,7 @@ const mapDispatchToProps = (dispatch) => ({
          dispatch( ICOInfo.getICOInfoRequest() )
     },
     getDeposite() {
-        dispatch( DepositAction.getDepositRequest() )
+        dispatch( DepositAction.getDepositsRequest() )
     },
     postTransferRequest() {
         dispatch( Bountie.postTransferRequest() )

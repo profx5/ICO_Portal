@@ -10,11 +10,11 @@ import { takeEvery, call, put, take } from 'redux-saga/effects';
 
 export class DepositAction {
 
-    static getDepositRequest = () => ({ type: GET_DEPOSITS_REQUEST })
+    static getDepositsRequest = () => ({ type: GET_DEPOSITS_REQUEST })
 
     static getDepositSuccess = (payload) => ({ type: GET_DEPOSITS_SUCCESS, payload })
 
-    static * getDeposite() {
+    static * getDeposits() {
         try {
             const response = yield call(axios, {
                 method: 'GET',
@@ -30,7 +30,7 @@ export class DepositAction {
 }
 
 export function* saga() {
-    yield takeEvery(GET_DEPOSITS_REQUEST, DepositAction.getDeposite)
+    yield takeEvery(GET_DEPOSITS_REQUEST, DepositAction.getDeposits)
 }
 
 
