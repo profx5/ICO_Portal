@@ -1,5 +1,5 @@
 from .base import APITestCase
-from .helpers.fixture import fixture_path
+from .helpers.kyc import create_kyc
 
 
 class GetMeTestCase(APITestCase):
@@ -15,15 +15,7 @@ class GetMeTestCase(APITestCase):
                           'investment_threshold': 10000})
 
     def test_passed_kyc_user(self):
-        with open(fixture_path('photo.jpg'), 'rb') as f:
-            response = self.client.post('/api/kyc/', {
-                'firstname': 'John',
-                'surname': 'Doe',
-                'birthdate': '1990-01-01',
-                'document_no': 123123,
-                'country': 'Russia',
-                'photo': f
-            }, format='multipart')
+        response = create_kyc(self.client)
 
         self.assertEqual(response.status_code, 201)
 

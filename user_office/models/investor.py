@@ -9,6 +9,7 @@ from blockchain.ethereum_contract.settings import Settings
 from .account import Account
 from .deposit import Deposit
 from .common import EthAddressField
+from user_office.datetime import datetime
 
 
 class NoAuthData(Exception):
@@ -56,38 +57,26 @@ class Investor(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=100,
                                 unique=True)
-    eth_account = EthAddressField(verbose_name='etherium account address',
+    eth_account = EthAddressField(verbose_name='ethereum account address',
+                                  null=True,
+                                  blank=True,
                                   unique=True)
     tokens_amount = models.DecimalField(max_digits=32,
                                         decimal_places=8,
                                         default=0)
+    date_joined = models.DateTimeField(default=datetime.utcnow)
 
     objects = InvestorManager()
 
     USERNAME_FIELD = 'username'
-
     is_staff = False
-
-    def has_module_perms(self, *arg, **kwargs):
-        return False
 
     class Meta:
         ordering = ['id']
         db_table = 'investors'
 
-    def get_account(self, currency_code):
-        existing = [a for a in self.pay_accounts.all()
-                    if a.currency == currency_code]
-
-        if existing:
-            return existing[0]
-
-        else:
-            account = Account.objects.create_by_code(currency_code, self)
-
-            account.save()
-
-            return account
+    def has_module_perms(self, *arg, **kwargs):
+        return False
 
     def recalc_balance(self):
         self.tokens_amount = Deposit.objects.filter(investor=self,

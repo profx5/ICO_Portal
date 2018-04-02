@@ -32,3 +32,5 @@ export class DepositAction {
 export function* saga() {
     yield takeEvery(GET_DEPOSITS_REQUEST, DepositAction.getDeposite)
 }
+
+

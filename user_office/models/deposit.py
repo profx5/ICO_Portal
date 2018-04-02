@@ -27,6 +27,8 @@ class Deposit(models.Model):
         ordering = ['id']
         db_table = 'deposits'
 
+    def __str__(self):
+        return f'Deposit {self.id}'
 
     @property
     def confirmed(self):

@@ -12,14 +12,14 @@ class GetKYCSerializer(ModelSerializer):
     class Meta:
         model = KYC
         fields = ('state', 'firstname', 'midname', 'surname',
-                  'birthdate', 'document_no', 'country', 'photo')
+                  'birthdate', 'document_no', 'country', 'photo', 'selfie')
 
 
 class CreateKYCSerializer(ModelSerializer):
     class Meta:
         model = KYC
         fields = ('firstname', 'midname', 'surname', 'birthdate',
-                  'document_no', 'country', 'photo')
+                  'document_no', 'country', 'photo', 'selfie')
 
 
 class KYCViewSet(mixins.CreateModelMixin,

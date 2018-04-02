@@ -55,6 +55,10 @@ const KYCForm = ({closeModal, submitKYC_and_retriveKYC, isFormVisible}) => {
                                     <input type="file" className="form-control-file" id="photo" name="photo" />
                                 </div>
                                 <div className="form-group">
+                                    <label htmlFor="selfie">Selfie</label>
+                                    <input type="file" className="form-control-file" id="selfie" name="selfie" />
+                                </div>
+                                <div className="form-group">
                                     <div className="form-check">
                                         <input className="form-check-input" type="checkbox" value="" id="agree" required />
                                         <label className="form-check-label" htmlFor="agree">

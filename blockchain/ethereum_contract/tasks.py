@@ -36,7 +36,7 @@ def set_investment_threshold(address, threshold=None):
 
     contract = Settings.contract
 
-    contract.functions.setInvestmentThreshold(address, threshold).transact({
+    return contract.functions.setInvestmentThreshold(address, threshold).transact({
         'from': Settings.config('sender_address'),
          'gas': 100000
-    })
+    }).hex()
