@@ -9,8 +9,7 @@ const indicator = (props) => {
 }
 
 export default ({kyc}) => {
-
-    return (    
+    return (
         <div className="card" style={{ width: '18rem' }}>
             <img className="card-img-top" src={kyc.get('photo')} alt={kyc.get('firstname')}/>
             <div className="card-body">

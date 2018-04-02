@@ -1,19 +1,34 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
+
 from user_office.models import Investor
+from user_office.forms import SignUpForm
 
 
 class SignUpView(View):
     template_name = "authentication/signup.html"
 
+    def _get_referrer(self, request):
+        if 'refid' in request.POST:
+            referrer = Investor.objects.filter(referral_id=request.POST['refid'])
+
+            if referrer:
+                return referrer[0]
+
     def get(self, request):
-        return render(request, self.template_name)
+        form = SignUpForm()
+
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request):
-        investor = Investor.objects.create(username=request.POST['username'],
-                                           eth_account=request.POST['eth_account'])
+        form = SignUpForm(request.POST)
 
-        investor.set_password(request.POST['password'])
+        investor = form.save(commit=False)
+
+        referrer = self._get_referrer(request)
+        if referrer:
+            investor.referrer = referrer
+
         investor.save()
 
         return redirect('/login')

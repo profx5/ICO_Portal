@@ -30,7 +30,8 @@ api_urlpatterns = [
     # path('getAccount/', get_account),
     path('getDeposits/', get_deposits),
     path('setEthAccount/', set_eth_account),
-    path('prepareDeposit/', prepare_deposit)
+    path('prepareDeposit/', prepare_deposit),
+    path('getReferralLink/', get_referral_link)
 ]
 
 api_urlpatterns += router.urls

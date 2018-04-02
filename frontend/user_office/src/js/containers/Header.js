@@ -6,7 +6,7 @@ import Balance from '../components/Balance'
 import Lang from '../components/Lang';
 //containers
 import Invest from './Invest'
-import KYCwidget from '../components/KYCwidget'
+import KYCWidget from '../components/KYCWidget'
 import DepositTable from './DepositTable'
 import BountiesBalance from './BountiesBalance'
 import PhaseStats from './PhaseStats'
@@ -24,18 +24,18 @@ class Header extends React.Component {
             KYCstatus
         } = this.props
 
-        const isKycExist = kyc.size > 0;
+        const isKYCExist = kyc.size > 0;
 
         return (
             <header className="Header container col-md-10">
                 {kycRequired &&
                  <div className="row h-5">
-                    <KYC />
+                     <KYC />
                  </div>
                 }
                 <div className="Header_row row h-100">
-                    <Balance 
-                        currentAmount={tokensAmount} 
+                    <Balance
+                        currentAmount={tokensAmount}
                         investClick={showInvestForm}
                     />
                     <ReferalLink />
@@ -45,8 +45,7 @@ class Header extends React.Component {
                     <Invest />
                 </div>
                 <DepositTable />
-                <KYCwidget kyc={kyc} status={KYCstatus}/>
-
+                {isKYCExist && <KYCWidget kyc={kyc} status={KYCstatus}/>}
             </header>
         )
     }

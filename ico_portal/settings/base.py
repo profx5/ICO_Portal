@@ -6,6 +6,8 @@ SECRET_KEY = 'e%1h03sc5xmbr#q^r2l7h78-^1vuwapt8%eiumxyr@^91v61v^'
 
 DEBUG = False
 
+HOST = 'http://localhost:8000'
+
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [

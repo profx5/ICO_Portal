@@ -11,10 +11,10 @@ from rest_framework.documentation import include_docs_urls
 
 urlpatterns = [
     path('', landing_views.main),
-    path('login/', user_office_views.login),
-    path('signup/', user_office_views.signup),
-    path('logout/', user_office_views.logout),
-    path('user_office/', user_office_views.user_office),
+    path('login/', user_office_views.login, name='login'),
+    path('signup/', user_office_views.signup, name='signup'),
+    path('logout/', user_office_views.logout, name='logout'),
+    path('user_office/', user_office_views.user_office, name='user_office'),
     path('admin/', admin.site.urls),
     path('api/', include(api_urlpatterns)),
     path('oauth/', include('social_django.urls', namespace='social')),

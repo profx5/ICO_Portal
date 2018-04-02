@@ -45,10 +45,7 @@ export function UserReducer (state=initialState, {type, payload, ...action}) {
             return state.set('setAccountSubmitting', false)
         }
         case SET_METAMASK_ACCOUNT: {
-            return {
-                ...state,
-                ...payload
-            }
+            return state.merge(payload)
         }
         default: {
             return state

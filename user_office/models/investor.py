@@ -4,6 +4,8 @@ from django.db.models import Sum
 from django.conf import settings
 from django.contrib.auth.models import BaseUserManager
 from eth_utils.address import is_hex_address
+from django.utils.crypto import get_random_string
+from functools import partial
 
 from blockchain.ethereum_contract.settings import Settings
 from .account import Account
@@ -65,6 +67,13 @@ class Investor(AbstractBaseUser):
                                         decimal_places=8,
                                         default=0)
     date_joined = models.DateTimeField(default=datetime.utcnow)
+    referral_id = models.CharField(max_length=16,
+                                   unique=True,
+                                   default=partial(get_random_string, 16))
+    referrer = models.ForeignKey('Investor',
+                                 blank=True,
+                                 null=True,
+                                 on_delete=models.SET_NULL)
 
     objects = InvestorManager()
 
@@ -80,7 +89,7 @@ class Investor(AbstractBaseUser):
 
     def recalc_balance(self):
         self.tokens_amount = Deposit.objects.filter(investor=self,
-                                                    state='CONFIRMED')\
+                                                    state='CONFIRMED') \
                                             .aggregate(amount=Sum('amount'))['amount']
 
     @property
