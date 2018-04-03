@@ -5,7 +5,7 @@ import {
     HIDE_SET_ACCOUNT_FORM,
     SET_ACCOUNT_REQUEST,
     SET_ACCOUNT_SUCCESSFULL,
-    SET_METAMASK_ACCOUNT
+    SET_METAMASK_ACCOUNT_SUCCESSFULL,
 } from '../types/UserTypes'
 
 import {Map} from 'immutable'
@@ -44,7 +44,7 @@ export function UserReducer (state=initialState, {type, payload, ...action}) {
         case SET_ACCOUNT_SUCCESSFULL: {
             return state.set('setAccountSubmitting', false)
         }
-        case SET_METAMASK_ACCOUNT: {
+        case SET_METAMASK_ACCOUNT_SUCCESSFULL: {
             return state.merge(payload)
         }
         default: {

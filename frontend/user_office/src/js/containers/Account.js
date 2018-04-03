@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import AccountInfo from '../components/AccountInfo'
 import {SetAccountButton, SetAccountForm} from '../components/SetAccount'
 //actions
-import UserActions, {User} from '../actions/UserActions.js'
+import {UserActions} from '../actions/UserActions.js'
 
 class Account extends React.Component{
     render() {
@@ -41,14 +41,14 @@ const mapStateToProps = ({user}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     showForm() {
-        dispatch(User.showSetAccountForm())
-        dispatch(UserActions.extractMetaMaskAccount())
+        dispatch(UserActions.showSetAccountForm())
+        dispatch(UserActions.setMetaMaskAccountRequest())
     },
     hideForm() {
-        dispatch(User.hideSetAccountForm())
+        dispatch(UserActions.hideSetAccountForm())
     },
     setAccount(data) {
-        dispatch(User.setAccountRequest(data))
+        dispatch(UserActions.setAccountRequest(data))
     }
 })
 

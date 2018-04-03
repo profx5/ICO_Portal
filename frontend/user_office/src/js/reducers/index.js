@@ -6,7 +6,7 @@ import {DepositsReducer} from './DepositsReducer'
 import {BountiesBalanceReducer} from './BountiesBalanceReducer'
 import {KYCReducer} from './KYCReducer'
 import {InvestReducer} from './InvestReducer.js'
-import {ReferalsReducer} from './ReferalsReducer.js'
+import {ReferralsReducer} from './ReferralsReducer.js'
 import {ModalWindowReducer} from './ModalWindowReducer.js'
 
 const reducer = combineReducers({
@@ -16,7 +16,7 @@ const reducer = combineReducers({
     bountiesBalance: BountiesBalanceReducer,
     KYC: KYCReducer,
     Invest: InvestReducer,
-    referals: ReferalsReducer,
+    referrals: ReferralsReducer,
     modals: ModalWindowReducer
 })
 

@@ -40,7 +40,7 @@ class SetEthAccount(APIView):
                 request.user.eth_account = serializer.validated_data['eth_account']
                 request.user.save()
 
-            return Response(data={'success': True})
+                return Response(data={'success': True})
         else:
             return Response(data={'success': False,
                                   'error': 'invalid parameters'},

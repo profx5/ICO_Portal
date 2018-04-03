@@ -9,10 +9,10 @@ const Button = ({
     ...props
 }) => {
     const classes = () => {
-        return danger && 'btn btn-danger' ||
-        info && 'btn btn-info' ||
-        primary && 'btn btn-primary' ||
-        success && 'btn btn-success'
+        return (danger && 'btn btn-danger') ||
+               (info && 'btn btn-info') ||
+               (primary && 'btn btn-primary') ||
+               (success && 'btn btn-success')
     }
 
     return (

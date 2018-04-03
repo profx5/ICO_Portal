@@ -1,18 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import InvestActions from '../actions/InvestActions'
-//components
+
 import Balance from '../components/Balance'
-import Lang from '../components/Lang';
-import KYCWidget from '../components/KYCwidget'
-//containers
+import KYCWidget from '../components/KYCWidget'
+
 import Invest from './Invest'
 import DepositTable from './DepositTable'
 import BountiesBalance from './BountiesBalance'
 import PhaseStats from './PhaseStats'
 import KYC from './KYC'
 import Account from './Account'
-import ReferalLink from './ReferalLink'
+import ReferralLink from './ReferralLink'
 
 class Header extends React.Component {
     render () {
@@ -21,10 +20,10 @@ class Header extends React.Component {
             kycRequired,
             showInvestForm,
             kyc,
-            KYCstatus
+            KYCStatus
         } = this.props
 
-        const isKYCExist = kyc.size > 0;
+        const showKYCWidget = KYCStatus === 'WAITING'
 
         return (
             <header className="Header container col-md-10">
@@ -38,14 +37,14 @@ class Header extends React.Component {
                         currentAmount={tokensAmount}
                         investClick={showInvestForm}
                     />
-                    <ReferalLink />
+                    <ReferralLink />
                     <BountiesBalance />
                     <PhaseStats />
                     <Account />
                     <Invest />
                 </div>
                 <DepositTable />
-                {isKYCExist && <KYCWidget kyc={kyc} status={KYCstatus}/>}
+                {showKYCWidget && <KYCWidget kyc={kyc} status={KYCStatus}/>}
             </header>
         )
     }
@@ -55,7 +54,7 @@ const mapStateToProps = ({user, ICOPhaseStats, KYC, Invest}) => ({
     tokensAmount: user.get('tokens_amount'),
     kycRequired: user.get('kyc_required'),
     kyc: KYC.get('kyc'),
-    KYCstatus: KYC.get('status'),
+    KYCStatus: KYC.get('status'),
     userId: user.get('eth_account'),
     showInvestForm: Invest.get('showInvestForm')
 })

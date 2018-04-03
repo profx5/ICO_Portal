@@ -4,8 +4,6 @@ var icoWeb3 = undefined
 
 window.addEventListener('load', function() {
     if (typeof window.web3 !== 'undefined') {
-        var provider = window.web3.currentProvider
-
         icoWeb3 = new Web3(window.web3.currentProvider);
         //for debug
         window.icoWeb3 = icoWeb3
@@ -28,10 +26,8 @@ export function canSendTransaction(userAccount) {
     }
 }
 
-export function tryExtractAccount(callback) {
-    if (typeof icoWeb3 !== 'undefined') {
-        icoWeb3.eth.getAccounts((error, result) => error ? null : callback(result[0]))
-    }
+export function extractAccount(callback) {
+    icoWeb3.eth.getAccounts(callback)
 }
 
 const gas = 30000
@@ -42,14 +38,7 @@ export function sendTransaction(from, to, value, callback) {
         to: to,
         value: value,
         gas: gas
-    }, (error, result) => {
-        console.log(2)
-        if (error) {
-        } else {
-            callback(result)
-        }
-    }
-    )
+    }, callback)
 }
 
 export function ethToWei(value) {

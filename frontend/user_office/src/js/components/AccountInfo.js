@@ -10,7 +10,7 @@ const AccountInfo = ({ ethAccount, children }) => {
         <div className="Header_accountInfo col-md-3">
             <Title text='Your account' type='h3' />
             {accountElement}
-            <a href='#' className="Header_link">
+            <a href='' className="Header_link">
                 <Button text='PROFILE' info={true} />
             </a>
 

@@ -51,8 +51,10 @@ class Invest extends React.Component {
 
     handleInvest = () => {
         const valueWei = ethToWei(this.state.ethValue)
+        const {ethAccount,
+               contract} = this.props
 
-        this.props.invest(valueWei)
+        this.props.invest(ethAccount, contract, valueWei)
     }
 
     render() {
@@ -86,8 +88,8 @@ const mapStateToProps = ({user, ICOInfo, Invest}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    invest(to, value) {
-        dispatch(InvestActions.invest(to))
+    invest(senderAccount, receiverAccount, value) {
+        dispatch(InvestActions.sendTransactionInit(senderAccount, receiverAccount, value))
     },
     hideForm() {
         dispatch(InvestActions.hideForm())

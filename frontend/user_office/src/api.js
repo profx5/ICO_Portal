@@ -31,16 +31,16 @@ class Api {
         return `${this.prefix}/prepareDeposit/`
     }
 
-    getReferalLink() {
-        return `${this.prefix}/getReferalLink`
+    getReferralLink() {
+        return `${this.prefix}/getReferralLink/`
     }
 
     getBounties() {
-        return `${this.prefix}/getBounties`
+        return `${this.prefix}/getBounties/`
     }
 
     transferBounties() {
-        return `${this.prefix}/transferBounties`
+        return `${this.prefix}/transferBounties/`
     }
 }
 

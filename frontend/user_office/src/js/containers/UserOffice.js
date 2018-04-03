@@ -1,19 +1,18 @@
 import React, {Component} from 'react'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
-//components
-import Sidebar from '../components/Sidebar'
+
 import Footer from '../components/Footer'
 import Button from '../components/Button'
 import Title from '../components/Title'
-//containers
+
 import Header from './Header'
 import Modal from './Modal'
-//actions
-import {User} from '../actions/UserActions'
-import {ICOInfo} from '../actions/ICOInfoActions'
-import {DepositAction} from '../actions/DepositsActions'
-import {Bountie} from '../actions/BountiesBalanceActions'
+
+import {UserActions} from '../actions/UserActions'
+import {ICOInfoActions} from '../actions/ICOInfoActions'
+import {DepositsActions} from '../actions/DepositsActions'
+import {BountiesActions} from '../actions/BountiesBalanceActions'
 
 class UserOffice extends Component {
     componentDidMount() {
@@ -28,7 +27,7 @@ class UserOffice extends Component {
 
     render() {
         const { transfaerAllowed, transferErrorMessage } = this.props
-        
+
         return (
             <div className="container-fluid relative">
                 <div className="row h-100">
@@ -37,22 +36,22 @@ class UserOffice extends Component {
                 <div className="row h-25">
                     <Footer/>
                 </div>
-                <Modal> 
+                <Modal>
                     { (closeModal) => (
                         <div className='confirm-modal in-middle'>
-                            <Title 
-                                text='Do you realy want to confirm that ?' 
-                                type='h3' 
+                            <Title
+                                text='Do you realy want to confirm that ?'
+                                type='h3'
                                 center={true}
-                            /> 
-                            <Button 
-                                text='tranfer bonus in tokens' 
-                                success={true} 
+                            />
+                            <Button
+                                text='tranfer bonus in tokens'
+                                success={true}
                                 onClick={ compose(closeModal, this.handleClickForTransferModalWindow ) }
                             />
-                            <Button 
-                                text='Cancel' 
-                                danger={true} 
+                            <Button
+                                text='Cancel'
+                                danger={true}
                                 onClick={closeModal}
                             />
                             <Title text={transfaerAllowed ? "transfer is Allowed" : transferErrorMessage} />
@@ -66,16 +65,16 @@ class UserOffice extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
     getMe() {
-        dispatch( User.getUserRequest() )
+        dispatch(UserActions.getUserRequest())
     },
     getPhaseStats() {
-         dispatch( ICOInfo.getICOInfoRequest() )
+         dispatch(ICOInfoActions.getICOInfoRequest())
     },
     getDeposite() {
-        dispatch( DepositAction.getDepositsRequest() )
+        dispatch(DepositsActions.getDepositsRequest())
     },
     postTransferRequest() {
-        dispatch( Bountie.postTransferRequest() )
+        dispatch(BountiesActions.postTransferRequest())
     }
 })
 

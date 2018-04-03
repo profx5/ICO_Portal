@@ -2,7 +2,7 @@ import React from 'react'
 
 const indicator = (props) => {
     return {
-        backgroundColor: props.get('state') === "WAITING" && '#007bff' || props.get('state') === 'APPROVED' && '#28a745',
+        backgroundColor: (props.get('state') === "WAITING" && '#007bff') || (props.get('state') === 'APPROVED' && '#28a745'),
         width: '20px',
         height: '20px'
     }

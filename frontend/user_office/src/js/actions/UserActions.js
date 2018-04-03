@@ -1,7 +1,7 @@
 import Api from '../../api'
 import axios from 'axios'
-import {tryExtractAccount} from '../../web3'
-//types
+import {extractAccount} from '../../web3'
+
 import {
     GET_USER_REQUEST,
     GET_USER_SUCCESSFULL,
@@ -9,15 +9,16 @@ import {
     HIDE_SET_ACCOUNT_FORM,
     SET_ACCOUNT_REQUEST,
     SET_ACCOUNT_SUCCESSFULL,
-    SET_METAMASK_ACCOUNT,
     GET_USER_FAILED,
-    SET_ACCOUNT_FAILED
+    SET_ACCOUNT_FAILED,
+    SET_METAMASK_ACCOUNT_REQUEST,
+    SET_METAMASK_ACCOUNT_SUCCESSFULL,
+    SET_METAMASK_ACCOUNT_FAILED
 } from '../types/UserTypes'
 
-import {call, take, put, takeEvery} from 'redux-saga/effects'
+import {call, put, takeEvery, cps} from 'redux-saga/effects'
 
-export class User {
-
+export class UserActions {
     static getUserRequest = () => ({type: GET_USER_REQUEST})
 
     static getUserSuccessfull = (payload) => ({type: GET_USER_SUCCESSFULL, payload})
@@ -30,10 +31,10 @@ export class User {
                 url: Api.getMe(),
                 method: 'GET'
             })
-    
-            yield put(User.getUserSuccessfull(response.data))
+
+            yield put(UserActions.getUserSuccessfull(response.data))
         } catch(e) {
-            yield put(User.getUserFailed())
+            yield put(UserActions.getUserFailed())
         }
     }
 
@@ -56,31 +57,41 @@ export class User {
                     'eth_account': data
                 }
             })
-    
-            yield put(User.setAccountSuccessfull())
-    
-        } catch(e) {
-            yield put(User.setAccountFailed())
-        }
-    
-    }
-}
 
-export default class UserActions {
-    static extractMetaMaskAccount() {
-        return (dispatch) => {
-            tryExtractAccount((account) => dispatch({
-                type: SET_METAMASK_ACCOUNT,
-                payload: {
-                    metaMaskAccount: account
-                }
-            }))
+            yield put(UserActions.setAccountSuccessfull())
+            yield put(UserActions.hideSetAccountForm())
+            yield put(UserActions.getUserRequest())
+        } catch(e) {
+            yield put(UserActions.setAccountFailed())
+        }
+    }
+
+    static setMetaMaskAccountRequest = () => ({type: SET_METAMASK_ACCOUNT_REQUEST})
+
+    static setMetaMaskAccountSuccessfull = (account) => ({
+        type: SET_METAMASK_ACCOUNT_SUCCESSFULL,
+        payload: {
+            metaMaskAccount: account
+        }
+    })
+
+    static setMetaMaskAccountFailed = (account) => ({type: SET_METAMASK_ACCOUNT_FAILED})
+
+    static * extractMetaMaskAccount() {
+        try {
+            const accounts = yield cps(extractAccount)
+
+            if (accounts.length !== 0) {
+                yield put(UserActions.setMetaMaskAccountSuccessfull(accounts[0]))
+            }
+        } catch(e) {
+            yield put(UserActions.setMetaMaskAccountFailed)
         }
     }
 }
 
 export function* saga() {
-    yield takeEvery(GET_USER_REQUEST, User.getUser)
-    yield takeEvery(SET_ACCOUNT_REQUEST, User.setAccount)
+    yield takeEvery(GET_USER_REQUEST, UserActions.getUser)
+    yield takeEvery(SET_ACCOUNT_REQUEST, UserActions.setAccount)
+    yield takeEvery(SET_METAMASK_ACCOUNT_REQUEST, UserActions.extractMetaMaskAccount)
 }
-

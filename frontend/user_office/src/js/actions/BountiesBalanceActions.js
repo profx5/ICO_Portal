@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Api from '../../api'
-//types
+
 import {
     GET_BOUNTIES_BALANCE_REQUEST,
     GET_BOUNTIES_BALANCE_SUCCESS,
@@ -10,10 +10,10 @@ import {
     TRANSFER_BOUNTIES_FAILED,
 } from '../types/BountiesBalanceTypes'
 
-import {takeEvery, call, put, take} from 'redux-saga/effects'
+import {takeEvery, call, put} from 'redux-saga/effects'
 
-export class Bountie {
-    
+
+export class BountiesActions {
     static getBountiesRequest = () => ({type: GET_BOUNTIES_BALANCE_REQUEST})
 
     static getBountiesFailed = () => ({type: GET_BOUNTIES_BALANCE_FAILED})
@@ -26,10 +26,10 @@ export class Bountie {
                 method: 'GET',
                 url: Api.getBounties()
             })
-    
-            yield put(Bountie.getBountiesSuccess(response.data))
+
+            yield put(BountiesActions.getBountiesSuccess(response.data))
         } catch(e) {
-            yield put(Bountie.getBountiesFailed())
+            yield put(BountiesActions.getBountiesFailed())
         }
     }
 
@@ -45,16 +45,16 @@ export class Bountie {
                 method: 'POST',
                 url: Api.transferBounties()
             })
-    
-            yield put(Bountie.postTransferSuccess(response.data))
-    
+
+            yield put(BountiesActions.postTransferSuccess(response.data))
+
         } catch (e) {
-            yield put(Bountie.postTransferFailed())
-        }   
+            yield put(BountiesActions.postTransferFailed())
+        }
     }
 }
 
 export function* saga() {
-    yield takeEvery(GET_BOUNTIES_BALANCE_REQUEST, Bountie.getBounties)
-    yield takeEvery(TRANSFER_BOUNTIES_REQUEST, Bountie.postTransferBounties)
+    yield takeEvery(GET_BOUNTIES_BALANCE_REQUEST, BountiesActions.getBounties)
+    yield takeEvery(TRANSFER_BOUNTIES_REQUEST, BountiesActions.postTransferBounties)
 }

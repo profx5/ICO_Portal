@@ -1,19 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {List} from 'immutable'
+
 
 class DepositTable extends Component {
-    static defultProps = {
-        deposits: List()
-    }
-
     _renderTable = (deposits) => {
         return deposits.map( (item, idx) => {
             return (
                 <tr key={idx} className={item.get('state') === 'PREPARED' ? 'prepared' : ''}>
                     <td>{item.get('amount')}</td>
                     <td>{item.get('amount_wo_bonus')}</td>
-                    <td>{item.get('mint').get('txn_hash')}</td>
+                    <td>{item.getIn(['mint', 'tnx_hash'])}</td>
                     <td>{item.get('charged_at')}</td>
                 </tr>
             )
@@ -41,9 +37,7 @@ class DepositTable extends Component {
     }
 }
 
-const mapStateToProps = ({
-    deposits
-}) => ({
+const mapStateToProps = ({deposits}) => ({
     deposits: deposits.get('list')
 })
 

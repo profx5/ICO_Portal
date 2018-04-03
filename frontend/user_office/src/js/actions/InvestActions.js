@@ -1,63 +1,49 @@
-import Api from '../../api'
-import axios from 'axios'
 import {sendTransaction} from '../../web3'
-//types
+
 import {
     SHOW_INVEST_FORM,
     HIDE_INVEST_FORM,
     SEND_TRANSACTION_INIT,
-    SEND_TRANSACTOIN_SUCCESSFULL
+    SEND_TRANSACTION_SUCCESSFULL,
+    SEND_TRANSACTION_FAILED
 } from '../types/InvestTypes'
 
-import {DepositAction} from './DepositsActions'
+import {DepositsActions} from './DepositsActions'
+
+import {cps, takeEvery, put} from 'redux-saga/effects'
 
 export default class InvestActions {
-    static showForm() {
-        return (dispatch) => {
-            dispatch({type: SHOW_INVEST_FORM})
+    static showForm = () => ({type: SHOW_INVEST_FORM})
+
+    static hideForm = () => ({type: HIDE_INVEST_FORM})
+
+    static sendTransactionInit = (senderAccount, receiverAccount, value) => ({
+        type: SEND_TRANSACTION_INIT,
+        payload: {
+            senderAccount, receiverAccount, value
+        }
+    })
+
+    static sendTransactionSuccessfull = () => ({type: SEND_TRANSACTION_SUCCESSFULL})
+
+    static sendTransactionFailed = () => ({type: SEND_TRANSACTION_FAILED})
+
+    static * invest(action) {
+        try {
+            const {senderAccount,
+                   receiverAccount,
+                   value} = action.payload
+
+            const txnHash = yield cps(sendTransaction, senderAccount, receiverAccount, value)
+
+            yield put(DepositsActions.createPreparedDepositRequest(value, txnHash))
+            yield put(InvestActions.hideForm())
+        } catch(e) {
+            console.log("CANT PERFROM INVEST ACTION")
         }
     }
+}
 
-    static hideForm() {
-        return (dispatch) => {
-            dispatch({type: HIDE_INVEST_FORM})
-        }
-    }
-
-    static sendTransactionInit() {
-        return (dispatch) => {
-            dispatch({type: SEND_TRANSACTION_INIT})
-        }
-    }
-
-    static sendTransactoinSuccessfull() {
-        return (dispatch) => {
-            dispatch({type: SEND_TRANSACTOIN_SUCCESSFULL})
-        }
-    }
-
-    static postInvest(dispatch, txnHash, value) {
-        InvestActions.hideForm()(dispatch)
-        axios({
-            url: Api.prepareDeposit(),
-            method: 'POST',
-            data: {value: value,
-                   txn_hash: txnHash}
-        }).then( ({data}) => {
-            dispatch(DepositAction.getDepositsRequest())
-        }).catch(error => {
-            console.log("cant execute postInvest", {error})
-        })
-    }
-
-    static invest(value) {
-        return (dispatch, getState) => {
-            dispatch(InvestActions.sendTransactionInit())
-
-            const from = getState().user.eth_account,
-                  to = getState().ICOInfo.crowdSaleAddress
-
-            sendTransaction(from, to, value, (txnHash) => InvestActions.postInvest(dispatch, txnHash, value))
-        }
-    }
+export function* saga() {
+    yield takeEvery(SEND_TRANSACTION_INIT, InvestActions.invest)
 }

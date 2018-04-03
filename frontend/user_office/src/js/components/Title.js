@@ -5,12 +5,11 @@ const Title = ({
     type,
     center
 }) => {
-    
     const styles = (center) => {
         return {
-            textAlign: center && 'center' || 'left'
+            textAlign: (center && 'center') || 'left'
         }
-    }   
+    }
 
     switch(type) {
         case 'h1': {
