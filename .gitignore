@@ -11,6 +11,7 @@ yarn.lock
 *.rar
 *.zip
 webpack-stats.dev.json
+webpack-stats.prod.json
 pip-selfcheck.json
 lib
 bin
@@ -18,3 +19,5 @@ bin
 include
 celerybeat-schedule
 yarn-error.log
+test_artifacts/*
+assets/bundles/*

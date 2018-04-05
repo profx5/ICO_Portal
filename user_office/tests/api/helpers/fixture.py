@@ -6,6 +6,7 @@ def fixture_path(name):
         '..',
         'fixtures',
         name)
+
     return path
 
 
