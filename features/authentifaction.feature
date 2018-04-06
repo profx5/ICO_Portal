@@ -17,5 +17,4 @@ Feature: Sign up, login and logout
     And  I should be logged in
 
     When I press "LOG OUT"
-    Then Title should be "Longevity"
-    And  I should be logged out
+    Then I should be logged out

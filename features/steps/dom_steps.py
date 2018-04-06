@@ -23,7 +23,7 @@ def step_impl(context, title):
 def step_impl(context, filename, field):
     input_field = get_input_field(context.browser, field)
 
-    input_field.send_keys(helpers.attached_file_path(filename))
+    input_field.send_keys(attached_file_path(filename))
 
 @when('I check checkbox "{label}"')
 def step_impl(context, label):
