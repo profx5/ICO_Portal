@@ -13,7 +13,7 @@ class TestAuthCheck(APITestCase):
                          {'detail': 'Authentication credentials were not provided.'})
 
     def test_logged_in_user(self):
-        self.client.login(username=self.username, passwd=self.password)
+        self.client.login(email=self.email, password=self.password)
         response = self.client.get('/api/getMe/')
 
         self.assertIn('_auth_user_id', self.client.session)

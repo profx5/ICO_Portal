@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
+from django.conf import settings
+from social_core.actions import do_complete
+from social_django.utils import load_strategy, load_backend
+from social_django.views import _do_login
 
 from user_office.models import Investor
 from user_office.forms import SignUpForm
@@ -18,17 +22,23 @@ class SignUpView(View):
     def get(self, request):
         form = SignUpForm()
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form,
+                                                    'sitekey': settings.REDAPTCHA_DATA_SITEKEY})
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         form = SignUpForm(request.POST)
 
-        investor = form.save(commit=False)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password2']
 
-        referrer = self._get_referrer(request)
-        if referrer:
-            investor.referrer = referrer
 
-        investor.save()
+            strategy = load_strategy(request)
+            backend = load_backend(strategy, 'email', None)
 
-        return redirect('/login')
+            return  do_complete(backend, _do_login,
+                                 request=request,
+                                 email=email,
+                                 password=password)
+        else:
+            raise Exception('Invalid signup data')

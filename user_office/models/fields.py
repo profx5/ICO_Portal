@@ -13,3 +13,10 @@ class EthAddressField(models.CharField):
             return Web3.toChecksumAddress(value)
         else:
             return super().pre_save(model_instance, add)
+
+
+class TokenField(models.DecimalField):
+    def __init__(self, *args, **kwargs):
+        kwargs['max_digits'] = 63
+        kwargs['decimal_places'] = 2
+        super().__init__(*args, **kwargs)

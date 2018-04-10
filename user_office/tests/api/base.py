@@ -6,7 +6,7 @@ from user_office.models import Investor
 
 
 class APITestCase(TestCase):
-    username = 'gordon'
+    email = 'gordon@example.com'
     password = 'q123'
     eth_account = '0x73015966604928A312F79F7E69291a656Cb88602'
     tokens_amount = 1231.22
@@ -14,9 +14,10 @@ class APITestCase(TestCase):
     setup_login = True
 
     def setUp(self):
-        investor = Investor.objects.create(username=self.username,
+        investor = Investor.objects.create(email=self.email,
                                            eth_account=self.eth_account,
-                                           tokens_amount=self.tokens_amount)
+                                           tokens_amount=self.tokens_amount,
+                                           is_active=True)
         investor.set_password(self.password)
         investor.save()
 
@@ -25,7 +26,7 @@ class APITestCase(TestCase):
         self.client = APIClient()
 
         if self.setup_login:
-            self.client.login(username=self.username, passwd=self.password)
+            self.client.login(email=self.email, password=self.password)
 
     def get_investor(self):
         return Investor.objects.get(id=self._investor_id)

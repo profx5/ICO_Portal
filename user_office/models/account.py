@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models import Manager
 from blockchain.currencies import Currencies
 
-from .common import EthAddressField
+from .fields import EthAddressField
 
 
 CURRENCY_CHOICES = [(i.code, i.name) for i in Currencies.get_currencies()]

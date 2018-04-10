@@ -3,24 +3,36 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<form action="/login/" method="POST">
-    <div class="container" id="main-container">
-        <label for="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" id="username">
-        <p class="text-center"> or </p>
-        <label for="eth_account"><b>Etherium account</b></label>
-        <input id="eth_account" type="text" placeholder="Enter etherium account" name="eth_account" id="'eht_account">
+<div class="container" id="main-container">
+    <form action="/login/" method="POST">
+        <label for="email"><b>Email</b></label>
+        <input type="email" placeholder="Enter email" name="email" id="email">
 
         <label for="password"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="password" id="password"'">
 
-        <button type="submit">Login</button>
-        <p class="text-center"> or </p>
-        <a href="/signup/">SignUp</a>
-
+        <button class="btn" type="submit">Login</button>
         {% csrf_token %}
         <br>
-        <a href="{% url "social:begin" "twitter" %}">Twitter</a>
+    </form>
+
+    <p class="text-center"> or </p>
+
+    <a href="/signup/"><button class="btn btn-primary">Sign up</button></a>
+    <!-- <a href="{% url "social:begin" "email" %}">Email</a> -->
+    <div class="social-signup">
+        <a href="{% url "social:begin" "twitter" %}">
+            <button class="btn twitter"><i class="fa fa-twitter"></i> Sign in with Twitter</button>
+        </a>
+        <a href="{% url "social:begin" "facebook" %}">
+            <button class="btn facebook"><i class="fa fa-facebook"></i> Sign in with Facebook</button>
+        </a>
+        <a href="{% url "social:begin" "google-oauth2" %}">
+            <button class="btn google"><i class="fa fa-google"></i> Sign in with Google</button>
+        </a>
+        <a href="{% url "social:begin" "linkedin-oauth2" %}">
+            <button class="btn linkedin"><i class="fa fa-linkedin"></i> Sign in with LinkedIn</button>
+        </a>
     </div>
-</form>
+</div>
 {% endblock %}

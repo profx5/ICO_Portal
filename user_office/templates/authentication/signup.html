@@ -3,10 +3,12 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <form action="/signup/" method="POST">
     <div class="container" id="main-container">
         {{ form }}
-
+        <div class="g-recaptcha" data-sitekey="{{ sitekey }}"></div>
         <button type="submit" class="btn-primary">Sign Up</button>
     </div>
     {% if request.GET.refid %}

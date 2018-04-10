@@ -11,7 +11,7 @@ class InvestorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Investor
-        fields = ('username', 'eth_account', 'tokens_amount',
+        fields = ('email', 'eth_account', 'tokens_amount',
                   'kyc_required', 'investment_threshold')
 
 

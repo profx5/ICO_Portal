@@ -8,9 +8,9 @@ class GetMeTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data,
-                         {'username': 'gordon',
+                         {'email': 'gordon@example.com',
                           'eth_account': '0x73015966604928A312F79F7E69291a656Cb88602',
-                          'tokens_amount': '1231.22000000',
+                          'tokens_amount': '1231.22',
                           'kyc_required': True,
                           'investment_threshold': 10000})
 
@@ -28,8 +28,8 @@ class GetMeTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data,
-                         {'username': 'gordon',
+                         {'email': 'gordon@example.com',
                           'eth_account': '0x73015966604928A312F79F7E69291a656Cb88602',
-                          'tokens_amount': '1231.22000000',
+                          'tokens_amount': '1231.22',
                           'kyc_required': False,
                           'investment_threshold': 5000000})

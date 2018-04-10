@@ -21,3 +21,4 @@ celerybeat-schedule
 yarn-error.log
 test_artifacts/*
 assets/bundles/*
+ico_portal/settings/local.py

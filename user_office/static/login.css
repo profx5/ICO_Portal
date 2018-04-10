@@ -8,7 +8,7 @@ form {
 }
 
 /* Full-width inputs */
-input[type=text], input[type=password] {
+input[type=password], input[type=email] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -64,4 +64,20 @@ span.psw {
 
 form > p {
     margin-bottom: 0px;
+}
+
+.twitter {
+    background-color: #55ACEE;
+}
+
+.facebook {
+    background-color: #3B5998;
+}
+
+.google {
+    background-color: #DD4B39;
+}
+
+.linkedin {
+    background-color: #007BB6
 }

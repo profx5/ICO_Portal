@@ -16,10 +16,10 @@ class InvestorChangeForm(UserChangeForm):
 class InvestorAdmin(PasswordFieldMixin, admin.ModelAdmin):
     form = InvestorChangeForm
 
-    list_display = ('username', 'eth_account', 'tokens_amount')
-    fields = (('username', 'eth_account'), 'tokens_amount',
+    list_display = ('email', 'eth_account', 'tokens_amount')
+    fields = (('email', 'eth_account'), 'tokens_amount',
               ('date_joined', 'last_login'), 'password')
-    readonly_fields = ('username', 'tokens_amount', 'date_joined', 'last_login')
-    search_fields = ('username', 'eth_account')
+    readonly_fields = ('email', 'tokens_amount', 'date_joined', 'last_login')
+    search_fields = ('email', 'eth_account')
 
     inlines = [KYCInstanceInline, DepositInstanceInline, SocialAuthInline]

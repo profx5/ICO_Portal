@@ -8,46 +8,18 @@ from django.utils.crypto import get_random_string
 from functools import partial
 
 from blockchain.ethereum_contract.settings import Settings
-from .account import Account
 from .deposit import Deposit
-from .common import EthAddressField
+from .fields import EthAddressField, TokenField
 from user_office.datetime import datetime
 
 
-class NoAuthData(Exception):
-    pass
-
-
 class InvestorManager(BaseUserManager):
-    def _find_by_username(self, username):
-        try:
-            return self.get_queryset().get(username=username)
-        except Investor.DoesNotExist:
-            return None
-
-    def _find_by_eth_account(self, eth_account):
-        try:
-            return self.get_queryset().get(eth_account=eth_account)
-        except Investor.DoesNotExist:
-            return None
-
-    def find_for_auth(self, username=None, eth_account=None):
-        if username is None and eth_account is None:
-            raise NoAuthData()
-
-        result = self._find_by_username(username) \
-                 or self._find_by_eth_account(eth_account)
-
-        if result is None:
-            raise Investor.DoesNotExist()
-        else:
-            return result
-
     def create_user(self, *args, **kwargs):
-        username = kwargs['username']
+        email = kwargs['email']
+
         password = self.make_random_password()
 
-        investor = self.model(username=username)
+        investor = self.model(email=email, is_active=True)
         investor.set_password(password)
 
         investor.save()
@@ -57,15 +29,12 @@ class InvestorManager(BaseUserManager):
 
 class Investor(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=100,
-                                unique=True)
+    email = models.EmailField(unique=True, null=True)
     eth_account = EthAddressField(verbose_name='ethereum account address',
                                   null=True,
                                   blank=True,
                                   unique=True)
-    tokens_amount = models.DecimalField(max_digits=32,
-                                        decimal_places=8,
-                                        default=0)
+    tokens_amount = TokenField(default=0)
     date_joined = models.DateTimeField(default=datetime.utcnow)
     referral_id = models.CharField(max_length=16,
                                    unique=True,
@@ -74,10 +43,11 @@ class Investor(AbstractBaseUser):
                                  blank=True,
                                  null=True,
                                  on_delete=models.SET_NULL)
+    is_active = models.BooleanField(default=False)
 
     objects = InvestorManager()
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'email'
     is_staff = False
 
     class Meta:

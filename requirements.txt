@@ -71,3 +71,4 @@ urllib3==1.22
 vine==1.1.4
 wcwidth==0.1.7
 web3==4.0.0b10
+pyjwkest==1.4.0

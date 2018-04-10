@@ -2,16 +2,16 @@ from django.contrib.auth.backends import ModelBackend
 from .models import Investor
 
 
-class UserOfficeAuthBackend(ModelBackend):
-    def authenticate(self, request, passwd, eth_account=None, username=None):
+class EmailBackend(ModelBackend):
+    def authenticate(self, request, email, password):
         try:
-            user = Investor.objects.find_for_auth(username, eth_account)
+            user = Investor.objects.get(email=email)
         except Investor.DoesNotExist:
             # Run the default password hasher once to reduce the timing
             # difference between an existing and a nonexistent user (#20760).
-            Investor().set_password(passwd)
+            Investor().set_password(password)
         else:
-            if user.check_password(passwd) and self.user_can_authenticate(user):
+            if user.check_password(password) and self.user_can_authenticate(user):
                 return user
 
     def get_user(self, user_id):
