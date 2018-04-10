@@ -1,17 +1,16 @@
 import {all} from 'redux-saga/effects'
 
-import {saga as ICOPhaseSaga} from './js/actions/ICOInfoActions'
-import {saga as BountiesBalanceSaga} from './js/actions/BountiesBalanceActions'
-import {saga as DepositsSaga} from './js/actions/DepositsActions'
-import {saga as UserSaga} from './js/actions/UserActions'
-import {saga as KYCSaga} from './js/actions/KYCActions'
-import {saga as ReferralsSaga} from './js/actions/ReferralsActions'
-import {saga as InvestSaga} from './js/actions/InvestActions'
-
+import {saga as BountiesBalanceSaga} from './js/sagas/BountiesBalanceSagas'
+import {saga as DepositsSaga} from './js/sagas/DepositsSagas'
+import {saga as ICOInfoSaga} from './js/sagas/ICOInfoSagas'
+import {saga as InvestSaga} from './js/sagas/InvestSagas'
+import {saga as KYCSaga} from './js/sagas/KYCSagas'
+import {saga as ReferralsSaga} from './js/sagas/ReferralsSagas'
+import {saga as UserSaga} from './js/sagas/UserSagas'
 
 export default function* rootSaga() {
     yield all([
-        ICOPhaseSaga(),
+        ICOInfoSaga(),
         BountiesBalanceSaga(),
         DepositsSaga(),
         UserSaga(),
