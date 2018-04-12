@@ -152,7 +152,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$100000$EidpIpUAkuyl$BCL0w0pcV5Vb2msfpfmwR748uaNft8+d3hbRKNyGL/s=','2018-04-12 18:21:21.310470',1,'admin','','','',1,1,'2018-04-12 18:18:30.431747');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$100000$EidpIpUAkuyl$BCL0w0pcV5Vb2msfpfmwR748uaNft8+d3hbRKNyGL/s=','2018-04-12 19:32:17.902277',1,'admin','','','',1,1,'2018-04-12 18:18:30.431747');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -318,7 +318,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -327,7 +327,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2018-04-12 18:16:06.325813'),(2,'auth','0001_initial','2018-04-12 18:16:06.870791'),(3,'admin','0001_initial','2018-04-12 18:16:06.962442'),(4,'admin','0002_logentry_remove_auto_add','2018-04-12 18:16:06.972033'),(5,'contenttypes','0002_remove_content_type_name','2018-04-12 18:16:07.075445'),(6,'auth','0002_alter_permission_name_max_length','2018-04-12 18:16:07.105159'),(7,'auth','0003_alter_user_email_max_length','2018-04-12 18:16:07.142127'),(8,'auth','0004_alter_user_username_opts','2018-04-12 18:16:07.153719'),(9,'auth','0005_alter_user_last_login_null','2018-04-12 18:16:07.186441'),(10,'auth','0006_require_contenttypes_0002','2018-04-12 18:16:07.188368'),(11,'auth','0007_alter_validators_add_error_messages','2018-04-12 18:16:07.198493'),(12,'auth','0008_alter_user_username_max_length','2018-04-12 18:16:07.270790'),(13,'auth','0009_alter_user_last_name_max_length','2018-04-12 18:16:07.303579'),(14,'sessions','0001_initial','2018-04-12 18:16:07.344124'),(15,'user_office','0001_initial','2018-04-12 18:16:07.791086'),(16,'default','0001_initial','2018-04-12 18:16:07.996797'),(17,'social_auth','0001_initial','2018-04-12 18:16:08.001179'),(18,'default','0002_add_related_name','2018-04-12 18:16:08.063124'),(19,'social_auth','0002_add_related_name','2018-04-12 18:16:08.067041'),(20,'default','0003_alter_email_max_length','2018-04-12 18:16:08.123953'),(21,'social_auth','0003_alter_email_max_length','2018-04-12 18:16:08.127797'),(22,'default','0004_auto_20160423_0400','2018-04-12 18:16:08.134769'),(23,'social_auth','0004_auto_20160423_0400','2018-04-12 18:16:08.136752'),(24,'social_auth','0005_auto_20160727_2333','2018-04-12 18:16:08.156827'),(25,'social_django','0006_partial','2018-04-12 18:16:08.199387'),(26,'social_django','0007_code_timestamp','2018-04-12 18:16:08.255079'),(27,'social_django','0008_partial_timestamp','2018-04-12 18:16:08.322682'),(28,'user_office','0002_auto_20180410_1811','2018-04-12 18:16:08.355515'),(29,'social_django','0001_initial','2018-04-12 18:16:08.362025'),(30,'social_django','0004_auto_20160423_0400','2018-04-12 18:16:08.364089'),(31,'social_django','0005_auto_20160727_2333','2018-04-12 18:16:08.366055'),(32,'social_django','0003_alter_email_max_length','2018-04-12 18:16:08.367816'),(33,'social_django','0002_add_related_name','2018-04-12 18:16:08.380296');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2018-04-12 18:16:06.325813'),(2,'auth','0001_initial','2018-04-12 18:16:06.870791'),(3,'admin','0001_initial','2018-04-12 18:16:06.962442'),(4,'admin','0002_logentry_remove_auto_add','2018-04-12 18:16:06.972033'),(5,'contenttypes','0002_remove_content_type_name','2018-04-12 18:16:07.075445'),(6,'auth','0002_alter_permission_name_max_length','2018-04-12 18:16:07.105159'),(7,'auth','0003_alter_user_email_max_length','2018-04-12 18:16:07.142127'),(8,'auth','0004_alter_user_username_opts','2018-04-12 18:16:07.153719'),(9,'auth','0005_alter_user_last_login_null','2018-04-12 18:16:07.186441'),(10,'auth','0006_require_contenttypes_0002','2018-04-12 18:16:07.188368'),(11,'auth','0007_alter_validators_add_error_messages','2018-04-12 18:16:07.198493'),(12,'auth','0008_alter_user_username_max_length','2018-04-12 18:16:07.270790'),(13,'auth','0009_alter_user_last_name_max_length','2018-04-12 18:16:07.303579'),(14,'sessions','0001_initial','2018-04-12 18:16:07.344124'),(15,'user_office','0001_initial','2018-04-12 18:16:07.791086'),(16,'default','0001_initial','2018-04-12 18:16:07.996797'),(17,'social_auth','0001_initial','2018-04-12 18:16:08.001179'),(18,'default','0002_add_related_name','2018-04-12 18:16:08.063124'),(19,'social_auth','0002_add_related_name','2018-04-12 18:16:08.067041'),(20,'default','0003_alter_email_max_length','2018-04-12 18:16:08.123953'),(21,'social_auth','0003_alter_email_max_length','2018-04-12 18:16:08.127797'),(22,'default','0004_auto_20160423_0400','2018-04-12 18:16:08.134769'),(23,'social_auth','0004_auto_20160423_0400','2018-04-12 18:16:08.136752'),(24,'social_auth','0005_auto_20160727_2333','2018-04-12 18:16:08.156827'),(25,'social_django','0006_partial','2018-04-12 18:16:08.199387'),(26,'social_django','0007_code_timestamp','2018-04-12 18:16:08.255079'),(27,'social_django','0008_partial_timestamp','2018-04-12 18:16:08.322682'),(28,'user_office','0002_auto_20180410_1811','2018-04-12 18:16:08.355515'),(29,'social_django','0001_initial','2018-04-12 18:16:08.362025'),(30,'social_django','0004_auto_20160423_0400','2018-04-12 18:16:08.364089'),(31,'social_django','0005_auto_20160727_2333','2018-04-12 18:16:08.366055'),(32,'social_django','0003_alter_email_max_length','2018-04-12 18:16:08.367816'),(33,'social_django','0002_add_related_name','2018-04-12 18:16:08.380296'),(34,'user_office','0003_kyc_document_type','2018-04-12 19:01:52.143739');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,7 +353,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('b0xo6nt5ihxfs09ycof1dts51i0bdh72','YWMwMzE5MmE0Y2Y3OWEyNTQwZmE3ZWZmZjI4OWYxMGJmYTQyNWU4Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWU3YmZjOTUyZjQ5OTAyMGZiMmYyOTE3OTBlYTFmMjM2NTQ4YzI2In0=','2018-04-26 18:18:32.467299'),('b2h9h2ps6hnqombpn0mywzykipjzj4dt','YWMwMzE5MmE0Y2Y3OWEyNTQwZmE3ZWZmZjI4OWYxMGJmYTQyNWU4Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWU3YmZjOTUyZjQ5OTAyMGZiMmYyOTE3OTBlYTFmMjM2NTQ4YzI2In0=','2018-04-26 18:21:21.312599'),('b6uul5h5lngbs3cnwpoe1adb9ba73i4l','YzllZDlkYTJkZTE2MWQ2OWYzYWM1MjhhNzA0Njk4OGJhM2Q0YzMyYjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkVtYWlsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjM3ODBmNDIxNjUyNjUxZjFjZjM0NTBmYWVhYjlmZjNmYWI2OTYwZmUifQ==','2018-04-26 18:20:52.321392');
+INSERT INTO `django_session` VALUES ('b0xo6nt5ihxfs09ycof1dts51i0bdh72','YWMwMzE5MmE0Y2Y3OWEyNTQwZmE3ZWZmZjI4OWYxMGJmYTQyNWU4Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWU3YmZjOTUyZjQ5OTAyMGZiMmYyOTE3OTBlYTFmMjM2NTQ4YzI2In0=','2018-04-26 18:18:32.467299'),('b2h9h2ps6hnqombpn0mywzykipjzj4dt','YWMwMzE5MmE0Y2Y3OWEyNTQwZmE3ZWZmZjI4OWYxMGJmYTQyNWU4Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWU3YmZjOTUyZjQ5OTAyMGZiMmYyOTE3OTBlYTFmMjM2NTQ4YzI2In0=','2018-04-26 18:21:21.312599'),('b6uul5h5lngbs3cnwpoe1adb9ba73i4l','YzllZDlkYTJkZTE2MWQ2OWYzYWM1MjhhNzA0Njk4OGJhM2Q0YzMyYjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkVtYWlsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjM3ODBmNDIxNjUyNjUxZjFjZjM0NTBmYWVhYjlmZjNmYWI2OTYwZmUifQ==','2018-04-26 18:20:52.321392'),('hvphivz7ao1z3ggxjt46yccwuta67949','YWMwMzE5MmE0Y2Y3OWEyNTQwZmE3ZWZmZjI4OWYxMGJmYTQyNWU4Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWU3YmZjOTUyZjQ5OTAyMGZiMmYyOTE3OTBlYTFmMjM2NTQ4YzI2In0=','2018-04-26 19:32:17.904442');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,10 +415,11 @@ CREATE TABLE `kyc` (
   `decline_reason` longtext COLLATE utf8_bin,
   `approve_txn_hash` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `investor_id` int(11) NOT NULL,
+  `document_type` varchar(10) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `investor_id` (`investor_id`),
   CONSTRAINT `kyc_investor_id_1910e4d7_fk_investors_id` FOREIGN KEY (`investor_id`) REFERENCES `investors` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -427,7 +428,7 @@ CREATE TABLE `kyc` (
 
 LOCK TABLES `kyc` WRITE;
 /*!40000 ALTER TABLE `kyc` DISABLE KEYS */;
-INSERT INTO `kyc` VALUES (1,'APPROVED','Roman','Nesytov','Nesytov','Russia','1995-12-29','12313','kyc/1/photo/3168822.png','kyc/1/selfie/3168822.png',NULL,NULL,1),(2,'APPROVED','Roman','Nesytov','Nesytov','Russia','1995-12-29','12313','kyc/2/photo/3168822_XDDhuQl.png','kyc/2/selfie/3168822_S5wwYnS.png',NULL,NULL,2);
+INSERT INTO `kyc` VALUES (3,'APPROVED','Roman','','Nesytov','Russia','1995-12-29','123123','kyc/2/photo/2018-03-16_14.02.58.jpg','kyc/2/selfie/2018-03-16_14.02.58.jpg',NULL,NULL,2,'Passport');
 /*!40000 ALTER TABLE `kyc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -645,4 +646,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-12 18:26:40
+-- Dump completed on 2018-04-12 19:56:30
