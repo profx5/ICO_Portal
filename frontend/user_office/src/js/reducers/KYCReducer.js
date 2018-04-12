@@ -18,6 +18,7 @@ const initialState = Map({
         birthdate: null,
         country: null,
         document_no: null,
+        document_type: null,
         firstname: null,
         midname: null,
         photo: null,
@@ -48,7 +49,7 @@ export function KYCReducer(state = initialState, {
             return state
                 .set('isSubmiting', false)
                 .set('showForm', false)
-           
+
         case SHOW_KYC_FORM:
             return state.set('showForm', true)
         case HIDE_KYC_FORM:

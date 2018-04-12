@@ -6,7 +6,7 @@ use_step_matcher('re')
 
 @then('I should see "(?P<value>[^\"]*)" in field "(?P<field>[^\"]*)"')
 def step_impl(context, value, field):
-    input_field = get_input_field(context.browser, field)
+    input_field = get_field(context.browser, field)
 
     context.test.assertEqual(input_field.get_attribute('value'), value)
 

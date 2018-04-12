@@ -18,6 +18,7 @@ export default ({kyc}) => {
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">midname: {kyc.get('midname')}</li>
                 <li className="list-group-item">document_no: {kyc.get('document_no')}</li>
+                <li className="list-group-item">document type: {kyc.get('document_type')}</li>
                 <li className="list-group-item">country: {kyc.get('country')}</li>
                 <li className="list-group-item">birdth day: {kyc.get('birthdate')}</li>
             </ul>

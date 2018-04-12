@@ -12,6 +12,7 @@ Feature: KYC passing
     And  I set "01/01/1990" in field "Birth date"
     And  I set "Russia" in field "Country"
     And  I set "922311" in field "Document no"
+    And  I select "Passport" in field "Document type"
     And  I choose file "photo.jpg" in field "photo"
     And  I choose file "selfie.jpg" in field "selfie"
     And  I check checkbox "Agree to terms and conditions"

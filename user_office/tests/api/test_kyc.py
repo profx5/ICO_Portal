@@ -19,6 +19,7 @@ class TestKYC(APITestCase):
                     'surname': 'Doe',
                     'birthdate': '1990-01-01',
                     'document_no': '123123',
+                    'document_type': 'Passport',
                     'country': 'Russia',
                     'photo': f'http://testserver/media/kyc/{self._investor_id}/photo/photo.jpg',
                     'selfie': f'http://testserver/media/kyc/{self._investor_id}/selfie/selfie.jpg'
@@ -36,6 +37,7 @@ class TestKYC(APITestCase):
                     'surname': 'Doe',
                     'birthdate': '1990-01-01',
                     'document_no': '123123',
+                    'document_type': 'Passport',
                     'country': 'Russia',
                     'photo': f'http://testserver/media/kyc/{self._investor_id}/photo/photo.jpg',
                     'selfie': f'http://testserver/media/kyc/{self._investor_id}/selfie/selfie.jpg'

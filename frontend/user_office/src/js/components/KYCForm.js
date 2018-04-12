@@ -45,7 +45,18 @@ const KYCForm = ({closeModal, submitKYC_and_retriveKYC, isFormVisible}) => {
                                         <label htmlFor="country">Country</label>
                                         <input type="text" className="form-control" id="country" name="country" placeholder="Country" required />
                                     </div>
-                                    <div className="col-md-3 mb-3">
+                                </div>
+                                <div className="form-row">
+                                    <div className="col-md-5 mb-5">
+                                        <label htmlFor="documentType">Document type</label>
+                                        <select className="form-control" id="documentType" name="document_type" required>
+                                            <option value="ID">ID</option>
+                                            <option value="Passport">Passport</option>
+                                            <option value="DriverLicence">Driver Licence</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div className="col-md-5 mb-5">
                                         <label htmlFor="documentNo">Document no</label>
                                         <input type="text" className="form-control" id="documentNo" name="document_no" placeholder="Document" required />
                                     </div>

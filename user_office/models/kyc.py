@@ -8,6 +8,11 @@ KYC_STATE_CHOICES = (('WAITING', 'Waiting for approval'),
                      ('DECLINED', 'Declined'),
                      ('APPROVED', 'Approved'))
 
+KYC_DOC_TYPE_CHOICES = (('ID', 'ID'),
+                        ('Passport', 'Passport'),
+                        ('DriveLicence', 'Driver Licence'),
+                        ('Other', 'Other'))
+
 
 def kyc_photo_path(prefix, instance, filename):
     return f'kyc/{instance.investor.id}/{prefix}/{filename}'
@@ -28,6 +33,7 @@ class KYC(models.Model):
     birthdate = models.DateField()
 
     document_no = models.CharField(max_length=50)
+    document_type = models.CharField(max_length=10, choices=KYC_DOC_TYPE_CHOICES)
     photo = models.ImageField(upload_to=partial(kyc_photo_path, 'photo'))
     selfie = models.ImageField(upload_to=partial(kyc_photo_path, 'selfie'))
 

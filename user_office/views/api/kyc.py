@@ -11,15 +11,15 @@ from user_office.models import KYC
 class GetKYCSerializer(ModelSerializer):
     class Meta:
         model = KYC
-        fields = ('state', 'firstname', 'midname', 'surname',
-                  'birthdate', 'document_no', 'country', 'photo', 'selfie')
+        fields = ('state', 'firstname', 'midname', 'surname', 'birthdate',
+                  'document_no', 'document_type', 'country', 'photo', 'selfie')
 
 
 class CreateKYCSerializer(ModelSerializer):
     class Meta:
         model = KYC
         fields = ('firstname', 'midname', 'surname', 'birthdate',
-                  'document_no', 'country', 'photo', 'selfie')
+                  'document_type', 'document_no', 'country', 'photo', 'selfie')
 
 
 class KYCViewSet(mixins.CreateModelMixin,

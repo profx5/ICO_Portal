@@ -8,6 +8,7 @@ def create_kyc(client):
                 'surname': 'Doe',
                 'birthdate': '1990-01-01',
                 'document_no': 123123,
+                'document_type': 'Passport',
                 'country': 'Russia',
                 'photo': photo,
                 'selfie': selfie
