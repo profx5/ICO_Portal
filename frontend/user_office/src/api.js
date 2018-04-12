@@ -4,19 +4,19 @@ class Api {
     }
 
     getMe() {
-        return `${this.prefix}/getMe`
+        return `${this.prefix}/getMe/`
     }
 
     getICOInfo() {
-        return `${this.prefix}/getICOInfo`
+        return `${this.prefix}/getICOInfo/`
     }
 
     getOffChainBountiesBalance() {
-        return `${this.prefix}/getOffChainBountiesBalance`
+        return `${this.prefix}/getOffChainBountiesBalance/`
     }
 
     getDeposits() {
-        return `${this.prefix}/getDeposits`
+        return `${this.prefix}/getDeposits/`
     }
 
     kyc() {

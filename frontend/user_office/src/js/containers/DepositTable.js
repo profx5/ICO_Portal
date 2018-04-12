@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {DepositsActions} from '../actions/DepositsActions'
 
 
 class DepositTable extends Component {
@@ -17,6 +18,13 @@ class DepositTable extends Component {
     }
 
     render() {
+        const {
+            currentPage,
+            pages,
+            nextPage,
+            prevPage
+        } = this.props
+
         return (
             <div>
                 <table className="table">
@@ -32,13 +40,27 @@ class DepositTable extends Component {
                         {this._renderTable(this.props.deposits)}
                     </tbody>
                 </table>
+                <p>Page {currentPage} of {pages}</p>
+                {currentPage < pages && <a href="#" onClick={nextPage}>Next</a>}
+                {currentPage >= pages && <a href="#" onClick={prevPage}>Prev</a>}
             </div>
         )
     }
 }
 
 const mapStateToProps = ({deposits}) => ({
-    deposits: deposits.get('list')
+    deposits: deposits.get('results'),
+    pages: deposits.get('pages'),
+    currentPage: deposits.get('current_page')
 })
 
-export default connect(mapStateToProps)(DepositTable)
+const mapDispatchToProps = (dispatch) => ({
+    nextPage() {
+        dispatch(DepositsActions.depositsNextPage())
+    },
+    prevPage() {
+        dispatch(DepositsActions.depositsPrevPage())
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DepositTable)

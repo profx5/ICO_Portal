@@ -47,23 +47,28 @@ class GetDepositsTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(json.dumps(response.data, indent=4),
-'''[
-    {
-        "amount": "1166.66550000",
-        "amount_wo_bonus": "777.77700000",
-        "charged_at": "2018-01-11T00:00:00",
-        "state": "CONFIRMED",
-        "mint": {
-            "txn_hash": "0x3c45134db6764ceaaf4879f71be6586d59831949be460b8f6d6e479a8acd0e9a"
+'''{
+    "count": 2,
+    "pages": 1,
+    "current_page": 1,
+    "results": [
+        {
+            "amount": "1166.66550000",
+            "amount_wo_bonus": "777.77700000",
+            "charged_at": "2018-01-11T00:00:00",
+            "state": "CONFIRMED",
+            "mint": {
+                "txn_hash": "0x3c45134db6764ceaaf4879f71be6586d59831949be460b8f6d6e479a8acd0e9a"
+            }
+        },
+        {
+            "amount": "150.45000000",
+            "amount_wo_bonus": "100.30000000",
+            "charged_at": "2018-02-11T00:00:00",
+            "state": "CONFIRMED",
+            "mint": {
+                "txn_hash": "0x7792b9bee82ef5e05c38858ba303d6199801c5dc362343752d847bca39fe38e4"
+            }
         }
-    },
-    {
-        "amount": "150.45000000",
-        "amount_wo_bonus": "100.30000000",
-        "charged_at": "2018-02-11T00:00:00",
-        "state": "CONFIRMED",
-        "mint": {
-            "txn_hash": "0x7792b9bee82ef5e05c38858ba303d6199801c5dc362343752d847bca39fe38e4"
-        }
-    }
-]''')
+    ]
+}''')

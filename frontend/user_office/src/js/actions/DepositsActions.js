@@ -4,7 +4,9 @@ import {
     GET_DEPOSITE_FAILED,
     CREATE_PREPARED_DEPOSIT_REQUEST,
     CREATE_PREPARED_DEPOSIT_SUCCESS,
-    CREATE_PREPARED_DEPOSIT_FAILED
+    CREATE_PREPARED_DEPOSIT_FAILED,
+    DEPOSITS_NEXT_PAGE,
+    DEPOSITS_PREV_PAGE
 } from '../types/DepositsTypes'
 
 export class DepositsActions {
@@ -23,4 +25,7 @@ export class DepositsActions {
 
     static createPreparedDepositFailed = () => ({type: CREATE_PREPARED_DEPOSIT_FAILED})
 
+    static depositsNextPage = () => ({type: DEPOSITS_NEXT_PAGE})
+
+    static depositsPrevPage = () => ({type: DEPOSITS_PREV_PAGE})
 }
