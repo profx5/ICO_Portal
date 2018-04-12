@@ -1,7 +1,8 @@
 @invest
 Feature: Invest form
   Scenario: Open invest form and check calculator
-    Given logged in as gordon/q123
+    Given investor gordon@example.com/q123
+    And   logged in as gordon@example.com/q123
 
     When I press "INVEST"
     Then I should see "Invest form"

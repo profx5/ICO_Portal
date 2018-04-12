@@ -4,17 +4,19 @@ from behave import *
 
 use_step_matcher('parse')
 
-@given('logged in as {username}/{password}')
-def step_impl(context, username, password):
-    context.browser.delete_all_cookies()
+@given('investor {email}/{password}')
+def step_impl(context, email, password):
+    create_user(email, password)
 
-    create_user(username, password)
+@given('logged in as {email}/{password}')
+def step_impl(context, email, password):
+    context.browser.delete_all_cookies()
 
     context.browser.get(context.get_url('/login/'))
 
     form = context.browser.find_element_by_tag_name('form')
 
-    form.find_element_by_id('username').send_keys(username)
+    form.find_element_by_id('email').send_keys(email)
     form.find_element_by_id('password').send_keys(password)
 
     form.submit()

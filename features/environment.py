@@ -11,14 +11,14 @@ def setup_debug_on_error(userdata):
     BEHAVE_DEBUG_ON_ERROR = userdata.getbool("BEHAVE_DEBUG_ON_ERROR")
 
 def get_chrome_options(userdata):
-    is_headless = userdata.getbool("SELENIUM_CHROME_HEADLESS")
+    chrome_options = Options()
 
-    if is_headless:
-        chrome_options = Options()
+    chrome_options.add_argument('--disable-web-security')
 
+    if userdata.getbool("SELENIUM_CHROME_HEADLESS"):
         chrome_options.set_headless()
 
-        return chrome_options
+    return chrome_options
 
 def before_all(context):
     setup_debug_on_error(context.config.userdata)

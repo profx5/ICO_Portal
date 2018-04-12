@@ -31,3 +31,13 @@ def step_impl(context, label):
 
     if not input_field.is_selected():
         input_field.click()
+
+@when('I check recaptcha')
+def step_impl(context):
+    script = "document.getElementsByClassName('g-recaptcha')[0]" \
+             ".getElementsByTagName('iframe')[0].contentWindow.document" \
+             ".getElementsByClassName('recaptcha-checkbox-checkmark')[0].click()"
+
+    context.browser.execute_script(script)
+
+    context.test.assertTrue(wait_recapthca(context.browser, 5))

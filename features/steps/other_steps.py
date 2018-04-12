@@ -24,6 +24,6 @@ def step_impl(context):
 def step_impl(context):
     context.test.assertFalse(is_logged_in(context.browser))
 
-@when('Admin approve KYC for user "{username}"')
-def step_impl(context, username):
-    approve_kyc(username)
+@when('Admin approve KYC for user "{email}"')
+def step_impl(context, email):
+    approve_kyc(email)

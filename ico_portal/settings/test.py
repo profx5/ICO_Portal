@@ -13,3 +13,6 @@ WEBPACK_LOADER = {
             'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.prod.json'),
         }
 }
+
+REDAPTCHA_DATA_SITEKEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+RECAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'

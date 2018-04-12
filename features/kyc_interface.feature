@@ -1,7 +1,8 @@
 @kyc
 Feature: KYC passing
   Scenario: KYC passing
-    Given logged in as gordon/q123
+    Given investor gordon@example.com/q123
+    And   logged in as gordon@example.com/q123
 
     When I press "Pass KYC"
     Then I should see "KYC from"
@@ -17,6 +18,6 @@ Feature: KYC passing
     And  I press "Submit KYC"
     Then I should see "Your KYC is waiting for approval"
 
-    When Admin approve KYC for user "gordon"
+    When Admin approve KYC for user "gordon@example.com"
     And  I refresh page
     Then I should not see "Your KYC is waiting for approval"

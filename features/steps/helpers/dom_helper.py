@@ -41,3 +41,9 @@ def get_input_field(driver, field_spec):
         input_field = get_element(driver, f'//input[@id="{input_id}"]')
 
     return input_field
+
+def is_recapthca_sent(driver):
+    return driver.execute_script('return grecaptcha.getResponse().length > 0')
+
+def wait_recapthca(driver, wait_sec):
+    return WebDriverWait(driver, wait_sec).until(is_recapthca_sent)
