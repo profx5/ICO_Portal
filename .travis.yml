@@ -31,6 +31,6 @@ env:
 script:
   - whereis google-chrome-stable
   - whereis chromedriver
-  - npm run build
+  - CI=false npm run build
   - "./manage.py test"
   - "./manage.py behave -D SELENIUM_CHROME_HEADLESS"
