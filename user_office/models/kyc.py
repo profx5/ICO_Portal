@@ -1,8 +1,6 @@
 from functools import partial
 from django.db import models
 
-from blockchain.ethereum_contract import tasks
-
 
 KYC_STATE_CHOICES = (('WAITING', 'Waiting for approval'),
                      ('DECLINED', 'Declined'),
@@ -57,18 +55,6 @@ class KYC(models.Model):
     @property
     def waiting(self):
         return self.state == 'WAITING'
-
-    def approve(self, call_contract=True):
-        self.state = 'APPROVED'
-
-        if call_contract:
-            result = tasks.set_investment_threshold.apply(args=(self.investor.eth_account,))
-
-            if result.successful():
-                self.approve_txn_hash = result.result
-            else:
-                # TODO: Throw error
-                pass
 
     def decline(self):
         self.state = 'DECLINED'

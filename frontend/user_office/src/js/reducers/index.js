@@ -8,6 +8,7 @@ import {KYCReducer} from './KYCReducer'
 import {InvestReducer} from './InvestReducer.js'
 import {ReferralsReducer} from './ReferralsReducer.js'
 import {ModalWindowReducer} from './ModalWindowReducer.js'
+import {PhaseReducer} from './PhaseReducer.js'
 
 const reducer = combineReducers({
     user: UserReducer,
@@ -17,7 +18,8 @@ const reducer = combineReducers({
     KYC: KYCReducer,
     Invest: InvestReducer,
     referrals: ReferralsReducer,
-    modals: ModalWindowReducer
+    modals: ModalWindowReducer,
+    Phase: PhaseReducer
 })
 
 export default reducer

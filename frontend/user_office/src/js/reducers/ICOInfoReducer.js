@@ -6,19 +6,9 @@ import {
 import {Map} from 'immutable'
 
 const initialState = Map({
-    USDcPerETHRate: 0,
-    USDcRaised: 0,
-    totalHardCapUSDc: 0,
-    crowdSaleAddress: "",
-    tokenAddress: "",
-    currentPhase: Map({
-        name: "",
-        discountPercent: 0,
-        startTime: 0,
-        endTime: 0,
-        softCapUSDc: 0,
-        hardCapUSDc: 0
-    })
+    token_address: "",
+    total_supply: 0,
+    usd_c_per_eth: 0
 })
 
 export function ICOInfoReducer(state=initialState, {type, payload, ...action}) {

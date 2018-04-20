@@ -13,12 +13,13 @@ import {UserActions} from '../actions/UserActions'
 import {ICOInfoActions} from '../actions/ICOInfoActions'
 import {DepositsActions} from '../actions/DepositsActions'
 import {BountiesActions} from '../actions/BountiesBalanceActions'
+import {PhaseActions} from '../actions/PhaseActions'
 
 class UserOffice extends Component {
     componentDidMount() {
-        const {getMe, getPhaseStats, getDeposite} = this.props
+        const {getMe, getPhaseStats, getDeposite, getPhase} = this.props
 
-        compose(getMe, getPhaseStats, getDeposite)()
+        compose(getMe, getPhaseStats, getDeposite, getPhase)()
     }
 
     handleClickForTransferModalWindow = (e) => {
@@ -75,6 +76,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     postTransferRequest() {
         dispatch(BountiesActions.postTransferRequest())
+    },
+    getPhase() {
+        dispatch(PhaseActions.getPhaseRequest())
     }
 })
 

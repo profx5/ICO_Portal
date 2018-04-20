@@ -10,7 +10,7 @@ class DepositTable extends Component {
                 <tr key={idx} className={item.get('state') === 'PREPARED' ? 'prepared' : ''}>
                     <td>{item.get('amount')}</td>
                     <td>{item.get('amount_wo_bonus')}</td>
-                    <td>{item.getIn(['mint', 'tnx_hash'])}</td>
+                    <td>{item.getIn(['mint', 'txn_hash'])}</td>
                     <td>{item.get('charged_at')}</td>
                 </tr>
             )

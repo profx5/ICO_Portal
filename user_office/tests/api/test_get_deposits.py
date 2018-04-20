@@ -5,7 +5,7 @@ from .base import APITestCase
 from user_office.models import Deposit, Mint
 
 
-class GetDepositsTestCase(APITestCase):
+class TestGetDeposits(APITestCase):
     def test_successful_request(self):
         mints = [Mint.objects.create(currency='ETH',
                                      block_hash='0xa72c855a41006709e340d15640c2b18dc6be332fcaa35f09da1d26ccbb042b49',

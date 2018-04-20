@@ -1,5 +1,5 @@
 import os
-from .social_auth import *
+from .include import *
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), '../../../'))
 
@@ -62,7 +62,10 @@ DATABASES = {
         'NAME': 'ico_portal',
         'USER': 'ico_portal_user',
         'PASSWORD': 'read_manual',
-        'HOST': 'localhost'
+        'HOST': 'localhost',
+        'OPTIONS': {
+            'isolation_level': 'read committed'
+        }
     }
 }
 
@@ -70,9 +73,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    # },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
@@ -107,34 +110,3 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/tmp/ico_portal_media/'
-
-CURRENCIES = {
-    'ethereum_contract': {
-        'code': 'ETH',
-        'name': 'Ethereum',
-        'module': 'ethereum_contract',
-        'rpc_url': 'http://127.0.0.1:8545',
-        'contract_address': '0xD0EDB4aa92d03Efbdbf0978Cc17023BEa1574152',
-        'sender_address': '0x73015966604928A312F79F7E69291a656Cb88602',
-        'pre_kyc_threshold': 10000,
-        'post_kyc_threshold': 5000000,
-        'ico_info_path': os.path.join(BASE_DIR, 'ico_info.json')
-    }
-}
-
-CELERY_BROKER_URL = 'amqp://ico_portal:read_manual@localhost:5672/ico_portal_vhost'
-CELERY_TASK_SERIALIZER = 'pickle'
-CELERY_ACCEPT_CONTENT = ['pickle']
-CELERY_BEAT_SCHEDULE = {
-    'check-contract-event': {
-        'task': 'blockchain.ethereum_contract.tasks.check_events',
-        'schedule': 30.0,
-    }
-}
-CELERY_TASK_ROUTES = {
-    'blockchain.ethereum_contract.tasks.check_events': {
-        'queue': 'events_beat',
-    },
-}
-
-KYC_ENABLED = True

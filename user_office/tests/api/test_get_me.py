@@ -2,7 +2,7 @@ from .base import APITestCase
 from .helpers.kyc import create_kyc
 
 
-class GetMeTestCase(APITestCase):
+class TestGetMe(APITestCase):
     def test_successful_request(self):
         response = self.client.get('/api/getMe/')
 
@@ -21,7 +21,7 @@ class GetMeTestCase(APITestCase):
 
         kyc = self.get_investor().kyc
 
-        kyc.approve(call_contract=False)
+        kyc.state = 'APPROVED'
         kyc.save()
 
         response = self.client.get('/api/getMe/')

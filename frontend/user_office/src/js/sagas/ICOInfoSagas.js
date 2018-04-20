@@ -2,21 +2,19 @@ import axios from 'axios'
 import Api from '../../api'
 import {
     GET_ICO_INFO_REQUEST,
-} from '../types/ICOInfoTypes.js'
+} from '../types/ICOInfoTypes'
 import {put, call, takeEvery} from 'redux-saga/effects'
 import {ICOInfoActions} from '../actions/ICOInfoActions'
 
 export class ICOInfoSagas {
     static * getPhaseStatsSaga(action){
         try {
-
-            const respons = yield call(axios,{
+            const response = yield call(axios,{
                 method: "GET",
                 url: Api.getICOInfo()
             })
 
-            yield put(ICOInfoActions.getPhaseStatsSuccess(respons.data))
-
+            yield put(ICOInfoActions.getICOInfoSuccess(response.data))
         } catch(e) {
             yield put(ICOInfoActions.getICOInfoFailed())
         }

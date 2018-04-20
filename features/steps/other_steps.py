@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from helpers import *
 from behave import *
 
@@ -27,3 +29,11 @@ def step_impl(context):
 @when('Admin approve KYC for user "{email}"')
 def step_impl(context, email):
     approve_kyc(email)
+
+@given('ico info with usd eth rate "{rate}"')
+def step_impl(context, rate):
+    create_ico_info(Decimal(rate))
+
+@given('phase with name "{name}" and bonus "{bonus}%"')
+def step_impl(context, name, bonus):
+    create_phase(name, bonus)

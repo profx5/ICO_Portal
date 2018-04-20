@@ -1,7 +1,7 @@
 from .base import APITestCase
 
 
-class GetReferralLinkTestCase(APITestCase):
+class TestGetReferralLink(APITestCase):
     def test_successful_request(self):
         response = self.client.get('/api/getReferralLink/')
 

@@ -1,6 +1,6 @@
 from django.db import models
 
-from user_office.datetime import datetime
+from ico_portal.utils.datetime import datetime
 from user_office.models.account import Account, CURRENCY_CHOICES
 
 

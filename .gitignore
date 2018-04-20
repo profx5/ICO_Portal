@@ -16,7 +16,6 @@ pip-selfcheck.json
 lib
 bin
 .Python
-include
 celerybeat-schedule
 yarn-error.log
 test_artifacts/*

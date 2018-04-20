@@ -4,8 +4,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework.schemas import AutoSchema
+from oslash import Right
+
 from user_office.models import Deposit, Mint
-from blockchain.ethereum_contract import settings
+from user_office.services import PrepareDeposit as PrepareDepositService
 
 
 class MintSerializer(serializers.ModelSerializer):
@@ -51,30 +53,12 @@ class PrepareDeposit(APIView):
         if not request.user.eth_account_filled:
             return Response(423, {'error': 'fill eth account'})
 
-        value = request.data['value']
-        txn_hash = request.data['txn_hash']
+        result = PrepareDepositService()(investor=request.user,
+                                         value=request.data['value'],
+                                         txn_hash=request.data['txn_hash'])
 
-        amount, amount_wo_bonus = settings.Settings.calc_tokens_amount(value)
-
-        data = {'investor': self.request.user.id,
-                'amount': amount,
-                'amount_wo_bonus': amount_wo_bonus,
-                'state': 'PREPARED',
-                'mint': {
-                    'currency': 'ETH',
-                    'txn_hash': txn_hash,
-                    'account_to': settings.Settings.ico_info['crowdSaleAddress'],
-                    'account_from': request.user.eth_account,
-                    'value': value,
-                    'state': 'WAIT'
-                }}
-
-        serialized = self.serializer(data=data)
-
-        if serialized.is_valid():
-            serialized.save()
-
+        if isinstance(result, Right):
             return Response(data={'success': True}, status=201)
         else:
-            return Response(data={'success': False, 'error': serialized.errors},
+            return Response(data={'success': False, 'error': result.value},
                             status=422)

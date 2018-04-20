@@ -27,10 +27,10 @@ const PhaseStats = ({
     )
 }
 
-const mapStateToProps = ({ICOInfo}) => ({
-    discountPercent: ICOInfo.get('currentPhase').get('discountPercent'),
-    endTime: ICOInfo.get('currentPhase').get('endTime'),
-    phaseName: ICOInfo.get('currentPhase').get('name'),
+const mapStateToProps = ({Phase}) => ({
+    discountPercent: 1,//ICOInfo.getIn['currentPhase', 'discountPercent'],
+    endTime: 1,//ICOInfo.get('currentPhase').get('endTime'),
+    phaseName: 2, //ICOInfo.get('currentPhase').get('name'),
 })
 
 export default connect(mapStateToProps)(PhaseStats)

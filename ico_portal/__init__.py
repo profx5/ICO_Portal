@@ -1,6 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
 from .celery import app as celery_app
-from .currencies import currencies
+from .blockchain import currencies
 
 __all__ = ['celery_app', 'currencies']

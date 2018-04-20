@@ -1,16 +1,13 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
-from django.db.models import Sum
 from django.conf import settings
 from django.contrib.auth.models import BaseUserManager
 from eth_utils.address import is_hex_address
 from django.utils.crypto import get_random_string
 from functools import partial
 
-from blockchain.ethereum_contract.settings import Settings
-from .deposit import Deposit
 from .fields import EthAddressField, TokenField
-from user_office.datetime import datetime
+from ico_portal.utils.datetime import datetime
 
 
 class InvestorManager(BaseUserManager):
@@ -57,11 +54,6 @@ class Investor(AbstractBaseUser):
     def has_module_perms(self, *arg, **kwargs):
         return False
 
-    def recalc_balance(self):
-        self.tokens_amount = Deposit.objects.filter(investor=self,
-                                                    state='CONFIRMED') \
-                                            .aggregate(amount=Sum('amount'))['amount']
-
     @property
     def passed_kyc(self):
         return hasattr(self, 'kyc') and self.kyc.approved
@@ -73,9 +65,9 @@ class Investor(AbstractBaseUser):
     @property
     def investment_threshold(self):
         if self.kyc_required:
-            return Settings.config('pre_kyc_threshold')
+            return settings.THRESHOLDS['pre_kyc']
         else:
-            return Settings.config('post_kyc_threshold')
+            return settings.THRESHOLDS['post_kyc']
 
     @property
     def eth_account_filled(self):

@@ -1,7 +1,7 @@
 from .base import APITestCase
 
 
-class SetEthAccountTestCase(APITestCase):
+class TestSetEthAccount(APITestCase):
     eth_account = ''
     new_eth_account = '0x73015966604928A312F79F7E69291a656Cb88602'
 

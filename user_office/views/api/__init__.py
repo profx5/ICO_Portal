@@ -7,6 +7,7 @@ from .kyc import KYCViewSet
 from .set_eth_account import SetEthAccount
 from .prepare_deposit import PrepareDeposit
 from .get_referral_link import GetReferralLinkView
+from .get_phase import GetPhase
 
 get_me = GetMeView.as_view()
 get_ico_info = GetICOInfo.as_view()
@@ -16,3 +17,4 @@ get_deposits = GetDeposits.as_view()
 set_eth_account = SetEthAccount.as_view()
 prepare_deposit= PrepareDeposit.as_view()
 get_referral_link = GetReferralLinkView.as_view()
+get_phase = GetPhase.as_view()

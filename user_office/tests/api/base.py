@@ -1,7 +1,7 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
 
-from user_office.datetime import datetime
+from ico_portal.utils.datetime import datetime
 from user_office.models import Investor
 
 
