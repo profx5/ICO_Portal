@@ -1,5 +1,4 @@
 import React from 'react';
-//components
 import Button from './Button'
 import Title from './Title'
 

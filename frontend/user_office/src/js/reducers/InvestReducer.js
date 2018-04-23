@@ -2,7 +2,6 @@ import {
     SHOW_INVEST_FORM,
     HIDE_INVEST_FORM,
 } from '../types/InvestTypes'
-
 import {Map} from 'immutable'
 
 const initialState = Map({

@@ -1,10 +1,10 @@
 import React from 'react';
-//components
 import Button from './Button'
 import Title from './Title'
 
 const AccountInfo = ({ ethAccount, children }) => {
-    const accountElement = ethAccount ? (<p className="Header_text Header_accountId">{ethAccount}</p>) : children
+    const accountElement = ethAccount ?
+        (<p className="Header_text Header_accountId">{ethAccount}</p>) : children
 
     return (
         <div className="Header_accountInfo col-md-3">

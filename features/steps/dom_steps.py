@@ -45,3 +45,10 @@ def step_impl(context):
     context.browser.execute_script(script)
 
     context.test.assertTrue(wait_recapthca(context.browser, 5))
+
+@then('I should see address "{address}"')
+def step_impl(context, address):
+    address_element = get_element(context.browser,
+                                "//p[contains(@class, 'Header_accountId')]",
+                                wait_sec=3)
+    context.test.assertEqual(address_element.text, address)

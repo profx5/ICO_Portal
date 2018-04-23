@@ -1,13 +1,11 @@
 import {
     GET_USER_REQUEST,
     GET_USER_SUCCESSFULL,
-    SHOW_SET_ACCOUNT_FORM,
-    HIDE_SET_ACCOUNT_FORM,
     SET_ACCOUNT_REQUEST,
     SET_ACCOUNT_SUCCESSFULL,
+    SET_GENERETED_ETHEREUM_ACCOUNT,
     SET_METAMASK_ACCOUNT_SUCCESSFULL,
 } from '../types/UserTypes'
-
 import {Map} from 'immutable'
 
 const initialState = Map({
@@ -17,9 +15,11 @@ const initialState = Map({
     kyc_required: false,
     userIsLoading: false,
     investment_threshold: 0,
-    showSetAccountForm: false,
     setAccountSubmitting: false,
-    metaMaskAccount: ''
+    metamaskAccount: null,
+    security: Map({
+        privateKey: null
+    })
 })
 
 export function UserReducer (state=initialState, {type, payload, ...action}) {
@@ -32,12 +32,6 @@ export function UserReducer (state=initialState, {type, payload, ...action}) {
                 ...payload
             }).set('userIsLoading', false)
         }
-        case SHOW_SET_ACCOUNT_FORM: {
-            return state.set('showSetAccountForm', true)
-        }
-        case HIDE_SET_ACCOUNT_FORM: {
-            return state.set('showSetAccountForm', false)
-        }
         case SET_ACCOUNT_REQUEST: {
             return state.set("setAccountSubmitting", true)
         }
@@ -45,8 +39,16 @@ export function UserReducer (state=initialState, {type, payload, ...action}) {
             return state.set('setAccountSubmitting', false)
         }
         case SET_METAMASK_ACCOUNT_SUCCESSFULL: {
-            return state.merge(payload)
+            return state.set('metamaskAccount', payload)
         }
+        case SET_GENERETED_ETHEREUM_ACCOUNT : {
+            const {address, privateKey} = action
+
+            return state
+                .set('eth_account', address)
+                .setIn(['security', 'privateKey'], privateKey)
+        }
+
         default: {
             return state
         }

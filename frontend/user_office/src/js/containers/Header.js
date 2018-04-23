@@ -1,11 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import InvestActions from '../actions/InvestActions'
-
 import Balance from '../components/Balance'
-import KYCWidget from '../components/KYCWidget'
-
+import Title from '../components/Title'
 import Invest from './Invest'
+import KYCWidget from '../components/KYCWidget'
 import DepositTable from './DepositTable'
 import BountiesBalance from './BountiesBalance'
 import PhaseStats from './PhaseStats'
@@ -20,10 +19,11 @@ class Header extends React.Component {
             kycRequired,
             showInvestForm,
             kyc,
-            KYCStatus
+            KYCStatus,
+            privateKey
         } = this.props
 
-        const showKYCWidget = KYCStatus === 'WAITING'
+        const showKYCwidget = KYCStatus === 'WAITING'
 
         return (
             <header className="Header container col-md-10">
@@ -43,8 +43,9 @@ class Header extends React.Component {
                     <Account />
                     <Invest />
                 </div>
+                {privateKey && <Title text={`Private key — ${privateKey}`} type='h2'/>}
                 <DepositTable />
-                {showKYCWidget && <KYCWidget kyc={kyc} status={KYCStatus}/>}
+                {showKYCwidget && <KYCWidget kyc={kyc} status={KYCStatus}/>}
             </header>
         )
     }
@@ -56,7 +57,8 @@ const mapStateToProps = ({user, ICOPhaseStats, KYC, Invest}) => ({
     kyc: KYC.get('kyc'),
     KYCStatus: KYC.get('status'),
     userId: user.get('eth_account'),
-    showInvestForm: Invest.get('showInvestForm')
+    showInvestForm: Invest.get('showInvestForm'),
+    privateKey: user.getIn(['security', 'privateKey'])
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -2,7 +2,6 @@ import {
     GET_ICO_INFO_REQUEST,
     GET_ICO_INFO_SUCCESS,
 } from '../types/ICOInfoTypes'
-
 import {Map} from 'immutable'
 
 const initialState = Map({

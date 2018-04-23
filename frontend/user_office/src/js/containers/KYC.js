@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-
 import {KYCActions} from '../actions/KYCActions'
-
 import KYCForm from '../components/KYCForm'
 import KYCHeader from '../components/KYCHeader'
 

@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {DepositsActions} from '../actions/DepositsActions'
 
-
 class DepositTable extends Component {
     _renderTable = (deposits) => {
         return deposits.map( (item, idx) => {

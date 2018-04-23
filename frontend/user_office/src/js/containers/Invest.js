@@ -1,9 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {canSendTransaction, ethToWei} from '../../web3'
-//components
 import InvestForm from '../components/InvestForm'
-//actions
 import InvestActions from '../actions/InvestActions'
 
 class Invest extends React.Component {

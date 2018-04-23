@@ -2,7 +2,6 @@ import React, {Component, Children} from 'react'
 import {createPortal} from 'react-dom'
 import {connect} from 'react-redux'
 import {func} from 'prop-types'
-//actions
 import {ModalAction} from '../actions/ModalWindowAction'
 
 const body = document.querySelector('body')

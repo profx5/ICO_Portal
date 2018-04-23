@@ -1,5 +1,4 @@
 import {combineReducers} from 'redux'
-//reducers
 import {UserReducer} from './UserReducer'
 import {ICOInfoReducer} from './ICOInfoReducer'
 import {DepositsReducer} from './DepositsReducer'
@@ -9,6 +8,7 @@ import {InvestReducer} from './InvestReducer.js'
 import {ReferralsReducer} from './ReferralsReducer.js'
 import {ModalWindowReducer} from './ModalWindowReducer.js'
 import {PhaseReducer} from './PhaseReducer.js'
+import {MetaMaskReducer} from './MetaMaskReducer'
 
 const reducer = combineReducers({
     user: UserReducer,
@@ -19,7 +19,8 @@ const reducer = combineReducers({
     Invest: InvestReducer,
     referrals: ReferralsReducer,
     modals: ModalWindowReducer,
-    Phase: PhaseReducer
+    metamask: MetaMaskReducer,
+    Phase: PhaseReducer,
 })
 
 export default reducer

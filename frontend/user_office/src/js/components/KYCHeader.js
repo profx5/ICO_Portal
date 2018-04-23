@@ -1,5 +1,4 @@
 import React, {Component, Children} from 'react'
-//components
 import Button from './Button'
 
 class KYCHeader extends Component {

@@ -20,5 +20,9 @@ Feature: Sign up, login and logout
     Then Title should be "User office"
     And  I should be logged in
 
+    When I set "0xb79D16cE900cCb086C4D1b2c0aE44bDD1be5eE9f" in field "ethereum_address"
+    And  I press "Add own Ethereum account"
+    Then I should see address "0xb79D16cE900cCb086C4D1b2c0aE44bDD1be5eE9f"
+
     When I press "LOG OUT"
     Then I should be logged out

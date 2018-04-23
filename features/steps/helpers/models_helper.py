@@ -3,11 +3,13 @@ from datetime import datetime, timedelta
 from user_office.models import Investor, ICO_Info, Phase
 from user_office.services import ApproveKYC
 
-def create_user(email, password):
+def create_investor(email, password):
     investor = Investor(email=email, is_active=True)
     investor.set_password(password)
 
     investor.save()
+
+    return investor
 
 def approve_kyc(email):
     kyc = Investor.objects.get(email=email).kyc

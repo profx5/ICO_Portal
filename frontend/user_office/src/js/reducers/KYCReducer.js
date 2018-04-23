@@ -6,7 +6,6 @@ import {
     SHOW_KYC_FORM,
     HIDE_KYC_FORM
 } from '../types/KYCTypes'
-
 import {Map} from 'immutable'
 
 const initialState = Map({

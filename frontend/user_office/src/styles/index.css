@@ -87,6 +87,7 @@ tr.prepared {
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 10000;
 
   width: 100%;
   height: 100%;
@@ -99,10 +100,30 @@ tr.prepared {
   justify-content: center;
   align-items: center;
   flex-flow: column nowrap;
+  padding: 10px;
 }
 .modal-wrapper {
   position: relative;
   box-shadow: 0 0 25px rgba(0,0,0, .4);
+}
+
+.modal-for-banner {
+  width: 400px;
+  height: 300px;
+  background-color: #fff;
+  box-shadow: 0 0 80px rgba(0,0,0, .2);
+}
+
+.link {
+  font-size: 24px;
+  text-align: center;
+  display: block;
+  text-decoration: underline;
+  font-style: italic;
+  border: 1px solid rgba(0,0,0, .1);
+  margin: 20px 0;
+  padding: 5px 15px;
+  border-radius: 4px;
 }
 
 .confirm-modal {

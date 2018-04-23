@@ -1,8 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-//actions
 import {ModalAction} from '../actions/ModalWindowAction'
-//components
 import Button from '../components/Button'
 
 const BountiesBalance = ({

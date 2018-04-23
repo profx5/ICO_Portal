@@ -1,14 +1,11 @@
 import React, {Component} from 'react'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
-
 import Footer from '../components/Footer'
 import Button from '../components/Button'
 import Title from '../components/Title'
-
 import Header from './Header'
 import Modal from './Modal'
-
 import {UserActions} from '../actions/UserActions'
 import {ICOInfoActions} from '../actions/ICOInfoActions'
 import {DepositsActions} from '../actions/DepositsActions'
@@ -59,6 +56,7 @@ class UserOffice extends Component {
                         </div>
                     )}
                 </Modal>
+                {this.props.children}
             </div>
         )
     }
