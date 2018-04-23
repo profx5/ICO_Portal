@@ -8,13 +8,17 @@ from user_office.models import ICO_Info
 
 class ICO_InfoSerializer(ModelSerializer):
     token_address = SerializerMethodField()
+    token_decimals = SerializerMethodField()
 
     def get_token_address(self, _):
         return settings.TOKEN_CONTRACT['address']
 
+    def get_token_decimals(self, _):
+        return settings.TOKEN_DECIMALS
+
     class Meta:
         model = ICO_Info
-        fields = ('usd_c_per_eth', 'total_supply', 'token_address')
+        fields = ('total_supply', 'token_address', 'token_decimals')
 
 
 class GetICOInfo(RetrieveAPIView):

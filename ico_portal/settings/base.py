@@ -24,6 +24,7 @@ INSTALLED_APPS = [
 
     'landing',
     'user_office',
+    'blockchain'
 ]
 
 MIDDLEWARE = [

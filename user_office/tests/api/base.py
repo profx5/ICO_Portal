@@ -9,7 +9,7 @@ class APITestCase(TestCase):
     email = 'gordon@example.com'
     password = 'q123'
     eth_account = '0x73015966604928A312F79F7E69291a656Cb88602'
-    tokens_amount = 1231.22
+    tokens_amount = 1231
 
     setup_login = True
 

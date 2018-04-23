@@ -19,7 +19,7 @@ class EthAddressField(models.CharField):
 class TokenField(models.DecimalField):
     def __init__(self, *args, **kwargs):
         kwargs['max_digits'] = 65
-        kwargs['decimal_places'] = settings.TOKEN_DECIMALS
+        kwargs['decimal_places'] = 0
 
         super().__init__(*args, **kwargs)
 

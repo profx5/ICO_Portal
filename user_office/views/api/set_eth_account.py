@@ -1,10 +1,11 @@
 import coreapi
-from .auth import KYCAndLoginPermission
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework.schemas import AutoSchema
 from web3 import Web3
+
+from .auth import KYCAndLoginPermission
 
 
 class SetEthSerializer(serializers.Serializer):

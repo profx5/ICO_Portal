@@ -14,7 +14,7 @@ class ExchangeRate(models.Model):
     objects = models.Manager()
 
     class Meta:
-        ordering = ['creation_date',]
+        ordering = ['creation_date']
         db_table = 'exchange_rates'
 
     def __str__(self):

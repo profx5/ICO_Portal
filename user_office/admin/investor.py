@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserChangeForm
 
 from user_office.models import Investor, KYC
 from .mixins import PasswordFieldMixin
-from .inlines import DepositInstanceInline, KYCInstanceInline, SocialAuthInline
+from .inlines import TokensMoveInstanceInline, KYCInstanceInline, SocialAuthInline
 
 
 class InvestorChangeForm(UserChangeForm):
@@ -22,4 +22,4 @@ class InvestorAdmin(PasswordFieldMixin, admin.ModelAdmin):
     readonly_fields = ('email', 'tokens_amount', 'date_joined', 'last_login')
     search_fields = ('email', 'eth_account')
 
-    inlines = [KYCInstanceInline, DepositInstanceInline, SocialAuthInline]
+    inlines = [KYCInstanceInline, TokensMoveInstanceInline, SocialAuthInline]

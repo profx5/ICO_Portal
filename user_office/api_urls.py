@@ -4,6 +4,20 @@ from rest_framework.routers import SimpleRouter, Route
 from .views.api import *
 
 
+api_urlpatterns = [
+    path('getMe/', get_me),
+    path('getICOInfo/', get_ico_info),
+    path('getAvailableCurrencies/', get_available_currencies),
+    path('getAccount/', get_account),
+    path('getTokensMoves/', get_tokens_moves),
+    path('setEthAccount/', set_eth_account),
+    path('prepareTokensMove/', prepare_tokens_move),
+    path('getReferralLink/', get_referral_link),
+    path('getPhase/', get_phase),
+    path('getRates/', get_rates)
+]
+
+
 class SingleObjectRouter(SimpleRouter):
     routes = [
         Route(
@@ -18,22 +32,7 @@ class SingleObjectRouter(SimpleRouter):
         ),
     ]
 
-
 router = SingleObjectRouter()
 router.register(r'kyc', KYCViewSet, base_name='kyc')
-
-
-api_urlpatterns = [
-    path('getMe/', get_me),
-    path('getICOInfo/', get_ico_info),
-    # path('getAvailableCurrencies/', get_available_currencies),
-    # path('getAccount/', get_account),
-    path('getDeposits/', get_deposits),
-    path('setEthAccount/', set_eth_account),
-    path('prepareDeposit/', prepare_deposit),
-    path('getReferralLink/', get_referral_link),
-    path('getPhase/', get_phase),
-    path('getRates/', get_rates)
-]
 
 api_urlpatterns += router.urls
