@@ -1,5 +1,9 @@
 .Footer
     background #FAFAFA
+    position relative
+    z-index 20
+    &-instr
+        background #F7F8FA
     &_container
         padding-top 70px
         padding-bottom 45px
@@ -43,26 +47,29 @@
         display: flex
         flex-flow row nowrap
         justify-content space-between
-        padding-bottom 10px
+        padding-bottom 25px
         @media xs
             flex-wrap wrap
             order 1
     &_addressText
         font-weight 400
         font-style normal
-        &:before
-            content url('../img/common/svg/location.svg')
-            margin-right 7px
-            @media xs
-                display none
+        font-size 12px
+        // &:before
+        //     content url('../img/common/svg/location.svg')
+        //     margin-right 7px
+        //     @media xs
+        //         display none
         @media xs
             text-align center
     &_socialWrapper
         display flex
         flex-flow row nowrap
         justify-content space-between
-        width 145px
+        width 275px
     &_address
+        @media smPlus
+            flex-basis 68%
         @media xs
             order 3
             border-top 1px solid rgba(149,149,149,.2)

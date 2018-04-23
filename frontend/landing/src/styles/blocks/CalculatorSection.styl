@@ -68,19 +68,24 @@
     &_currencyWrapper &_desc
         @media xs
             margin-bottom 40px
-    &_formulaWrapper &_desc, &_addressWrapper &_desc
-        margin-bottom 10px
+    &_formulaWrapper &_desc
+        margin-bottom 39px
+    &_addressWrapper &_desc
+        margin-bottom 15px
     &_inputsWrapper
         display flex
         flex-flow row wrap
         justify-content space-between
         align-items space-between
-        // padding-right 110px
         min-height 43px
         @media xs
             padding 0 0
             height auto
             width 100%
+        &-address
+            justify-content flex-end
+            @media sm
+                margin-bottom 0 !important
     &_currencyWrapper
         position relative
     &_addressWrapper
@@ -91,16 +96,10 @@
             display flex
             flex-flow column nowrap
             align-items center
-    &_currencyWrapper &_inputField:first-of-type
-       &:before
-            content 'Amount'
-            left 50%
-            transform translateX(-50%)
-    &_input-currency
-        text-align center !important
-    &_inputField
-        flex-basis 49%
-        position relative
+            
+
+
+    &_field-formula &_inputField, &_inputField
         &:before, &:after
             position absolute
             top -35px
@@ -108,6 +107,39 @@
             @media xs
                 font-size 14px
                 top -27px
+                
+
+    &_currencyWrapper &_inputField:first-of-type, &_currencyWrapper &_inputField:last-of-type, &_inputField-formula, &_inputField-price
+        &:before
+            left 50%
+            transform translateX(-50%)
+            white-space nowrap
+            font-weight 300
+
+    &_currencyWrapper &_inputField:first-of-type
+       &:before
+            content 'Amount (ETH)'
+    &_currencyWrapper &_inputField:last-of-type
+        &:before
+            content 'Current ETH price'
+            
+    &_inputField-formula
+       &:before
+            content 'Amount (LTY)'
+    &_inputField-price
+        &:before
+            content 'Price of purchase'
+            
+    &_inputField-formula
+        @media smMinus
+            margin-bottom 55px
+
+    &_input-currency
+        text-align center !important
+        
+    &_inputField
+        flex-basis 49%
+        position relative
         @media xs
             flex-basis 100%
         &:nth-of-type(1)
@@ -115,12 +147,7 @@
                 margin-bottom 38px
         &:nth-of-type(2)
             @media xs
-                margin-bottom 24px
-            &:before
-                content 'Current ETH price'
-                right 28%
-                right 50%
-                transform translateX(50%)
+                margin-bottom 15px
         &:nth-of-type(3)
             @media xs
                 margin-bottom 15px
@@ -129,12 +156,23 @@
                     right 28%
                     right 50%
                     transform translateX(50%)
-                
+
+    &_field-disabled:after
+        content ''
+        display block
+        size 15px 15px
+        background url('../img/common/svg/check.svg') no-repeat center
+        background-size contain
+        position absolute
+        top 50%
+        transform translateY(calc(-50% + 2px))
+        right 17px
+        transition opacity .25s ease
     &_inputsWrapper-currencyWrapper &_input
         width 100%
         text-align center
     &_inputsWrapper
-        margin-bottom 38px
+        margin-bottom 55px
         @media xs
             margin-bottom 0
     &_formulaWrapper &_inputsWrapper-row &_input
@@ -155,7 +193,7 @@
         @media sm
             margin-left auto
     &_inputsWrapper-row &_inputField
-        flex-basis 70%
+        flex-basis 100%
         @media xs
             flex-basis 100%
         @media sm
@@ -175,6 +213,7 @@
         text(16px,400,'Circe', black, unset)
         letter-spacing .4px
         text-align center
+        transition color .25s ease
         @media xs
             font-size 14px
             padding 3px 15px 0
@@ -202,16 +241,6 @@
         padding-right 40px
         @media xs
             padding-left 40px
-    &_inputField-disabled:after, &_field-disabled:after
-        content ''
-        display block
-        size 15px 15px
-        background url('../img/common/svg/check.svg') no-repeat center
-        background-size contain
-        position absolute
-        top 50%
-        transform translateY(calc(-50% + 2px))
-        right 17px
     &_field
         flex-basis 70%
         position relative
@@ -224,10 +253,28 @@
         @media smMinus
             flex-basis 100%
         &-formula
-            @media xs
-                margin-bottom 38px
-            @media sm
-                margin-bottom 40px
+            flex-basis 100%
+            justify-content space-between
+            align-items flex-start
+            @media smMinus
+                flex-flow row wrap
+    &_field-formula &_inputField
+        @media smMinus
+            flex-basis 100%
+    &_field-formula &_fieldInner
+        color rgba(0,0,0,.4)
+    &_price
+        &-result
+            color #48C08D
+        &-resultNoDiscount
+            text-align center
+            display block
+    &_fieldInner-address
+        @media xs
+            margin-bottom 20px
+    &_field-key
+        @media sm
+            margin-bottom 35px
     &_field-key &_fieldInner
         padding-right 40px
         @media xs
@@ -246,18 +293,21 @@
         &-copied path
             fill #4CE47A
     &_formulaBtn
+        min-width 240px
         @media xs
             margin-bottom 26px
+    &_btnWrapper-buy
+        margin-left auto
     &_field-row
         display flex
         flex-flow row wrap
         justify-content space-between
         align-items space-between
-        // padding-right 110px
         min-height 43px
         @media smMinus
             width 100%
     &_formula
+        
         width 100%
         display block
     &_tip
@@ -268,14 +318,17 @@
             text-align center
             font-size 14px
             position absolute
-            bottom -35px
+            bottom -10px
             left 50%
             transform translateX(-50%)
             margin-left 0
             animation-name unset !important
+        @media sm
+            top -113px
         @media smPlus
             margin-left 110px
-            top -20px
+        @media md
+            top -42px
         &:hover
             color white
         &:before

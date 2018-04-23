@@ -42,19 +42,17 @@
         @media sm
             padding 0 30px
     &_btn
-        min-width unset
-        width 150px
+        min-width 170px
+        @media xs
+            font-size 13px
+            min-width 95px
+            height 30px
+            padding 0 15px 0
     &_menuWrapper
         display: flex
         flex-flow row nowrap
         justify-content flex-end
         align-items center
-    &_btn
-        @media xs
-            font-size 13px
-            width 95px
-            height 30px
-            padding 3px 5px 0
     &_menuText
         color blue
         margin-right 10px

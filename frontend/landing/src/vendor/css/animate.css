@@ -20,6 +20,49 @@
   animation-iteration-count: infinite;
 }
 
+@keyframes pulseFadeIn {
+  from {
+    -webkit-transform: scale(.85);
+    transform: scale(.85);
+    opacity: 0;
+  }
+
+  50% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseFadeIn {
+  from {
+    -webkit-transform: scale(.85);
+    transform: scale(.85);
+    opacity: 0;
+  }
+
+  50% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.pulseFadeIn {
+  -webkit-animation-name: pulseFadeIn !important;
+  animation-name: pulseFadeIn !important;
+}
+
 @-webkit-keyframes bounce {
   from,
   20%,
@@ -1658,6 +1701,41 @@
   -webkit-animation-name: fadeInUpCustom;
   animation-name: fadeInUpCustom;
 }
+
+
+@-webkit-keyframes fadeInUpCustomLong {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 160%, 0);
+    transform: translate3d(0, 160%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInUpCustomLong {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 160%, 0);
+    transform: translate3d(0, 160%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInUpCustomLong {
+  -webkit-animation-name: fadeInUpCustomLong;
+  animation-name: fadeInUpCustomLong;
+}
+
 
 @-webkit-keyframes fadeInUpBig {
   from {

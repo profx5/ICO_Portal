@@ -1,0 +1,155 @@
+.InstrSection
+    size 100% auto
+    background transparent
+    border-radius 3px
+    position relative
+    margin-bottom 90px
+    z-index 15
+    @media md
+        margin-top -78vh !important
+    &-blured
+        filter blur(4px)
+    &_pattern.Pattern
+        top 85vh
+        height calc(100% - 570px)
+        left 0
+        transform unset
+        background-repeat repeat
+        background-size contain
+        @media smMinus
+            display none
+    &_content
+        width 1007px
+        box-shadow 1px 4px 20px 0 rgba(157, 155, 192, 0.24)
+        margin 0 auto
+        padding 60px 78px
+        position relative
+        background white
+        @media xs
+            padding 30px 20px
+        @media smMinus
+            width 100%
+    &_header
+        font-size 25px
+        font-weight 500
+        line-height 25px
+        color #000000
+        margin-bottom 22px
+        padding-top 0
+        margin-top 0
+        position relative
+        &-hasPseudo:before
+            content ''
+            display block
+            position absolute
+            left 0
+            top 0
+            size 100% 400px
+            background #F9FBFE
+            border-top 2px solid #FA3232
+    &_breadcrumbs
+        position absolute
+        left 0
+        top -40px
+        @media xs
+            left 50%
+            transform translateX(-50%)
+        @media sm
+            padding-left 32px
+    &_breadcrumbsLink
+        font-size 16px
+        color white
+        position relative
+        &:hover
+            color white
+        &:first-of-type:before
+            content ''
+            display block
+            position absolute
+            size 44px 1px
+            background rgba(255,255,255,.8)
+            left 0
+            bottom 2px
+        &:last-of-type
+            opacity .6
+            pointer-events none
+    &_text, &_listItem
+        color #000000
+        letter-spacing 0.4px
+        font-weight 400
+        padding-top 0
+        margin-top 0
+        word-wrap break-word
+    &_text
+        margin-bottom 20px
+    ul&_list
+        list-style-type none
+    ul&_list &_listItem
+        padding-left 20px
+        position relative
+        &:before
+            content ''
+            display block
+            position absolute
+            size 11px 2px
+            background #000000
+            top 10px
+            left 0
+    &_list
+        list-style-position inside
+        margin-bottom 50px
+    &_img
+        max-width calc(100% + 12px)
+        position relative
+        left -12px
+        margin-bottom 20px
+        display block
+        margin 0 auto 30px
+        object-fit cover
+    &_img + &_text
+        margin-bottom 50px
+    &_divider
+        size 100% 1px
+        opacity .1
+        background #316fdf
+        margin 50px 0
+    &_link
+        color #93ccee
+        text-decoration underline
+    &_security
+        background #F9FBFE
+        border-top 4px solid #FA3232
+        padding 48px 60px 8px
+        margin-bottom 50px
+        @media smPlus
+            position relative
+            left -37px
+            width calc(100% + 75px)
+        @media xs
+            padding 48px 25px 8px
+    &_btn
+        display: flex
+        flex-flow row nowrap
+        justify-content space-between
+        align-items center
+        position relative
+        width 200px
+        margin 0 auto
+        color blue
+        top 49px
+        transition color .25s ease
+        font-weight 400
+        &:hover
+            color pink
+            & path
+                fill pink
+        svg
+            transform rotate(180deg) scale(.7)
+            path
+                transition fill .25s ease
+    .align-center
+        text-align center
+    .color-pink
+        color pink
+    .color-red
+        color #fa3232
