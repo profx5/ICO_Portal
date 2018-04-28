@@ -1,10 +1,7 @@
 import {sendTransaction} from '../../web3'
-import {
-    SEND_TRANSACTION_INIT,
-} from '../types/InvestTypes'
 import {cps, takeEvery, put} from 'redux-saga/effects'
-import InvestActions from '../actions/InvestActions'
-import {DepositsActions} from '../actions/DepositsActions'
+import * as InvestActions from '../actions/InvestActions'
+import * as DepositsActions from '../actions/DepositsActions'
 
 export class InvestSagas {
     static * invest(action) {
@@ -24,5 +21,5 @@ export class InvestSagas {
 }
 
 export function* saga() {
-    yield takeEvery(SEND_TRANSACTION_INIT, InvestSagas.invest)
+    yield takeEvery(InvestActions.sendTransactionInit, InvestSagas.invest)
 }

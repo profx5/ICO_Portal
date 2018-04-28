@@ -1,24 +1,27 @@
 import React, {Component} from 'react'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
+import styled from 'styled-components';
 
 import Footer from '../components/Footer'
 import Button from '../components/Button'
 import Title from '../components/Title'
 
 import Header from './Header'
+import StatusSidebar from './StatusSidebar'
+import Content from './Content'
 import Modal from './Modal'
 
-import {UserActions} from '../actions/UserActions'
-import {ICOInfoActions} from '../actions/ICOInfoActions'
-import {DepositsActions} from '../actions/DepositsActions'
-import {BountiesActions} from '../actions/BountiesBalanceActions'
+import * as UserActions from '../actions/UserActions'
+import * as ICOInfoActions from '../actions/ICOInfoActions'
+import * as DepositsActions from '../actions/DepositsActions'
+import * as BountiesActions from '../actions/BountiesBalanceActions'
 
 class UserOffice extends Component {
     componentDidMount() {
-        const {getMe, getPhaseStats, getDeposite} = this.props
+        const {getMe, getPhaseStats, getDeposite} = this.props;
 
-        compose(getMe, getPhaseStats, getDeposite)()
+        compose(getMe, getPhaseStats, getDeposite)();
     }
 
     handleClickForTransferModalWindow = (e) => {
@@ -29,11 +32,13 @@ class UserOffice extends Component {
         const { transfaerAllowed, transferErrorMessage } = this.props
 
         return (
-            <div className="container-fluid relative">
-                <div className="row h-100">
+            <Wrapper>
+                <HeaderWrapper>
                     <Header/>
-                </div>
-                <div className="row h-25">
+                </HeaderWrapper>
+                <Content />
+                <StatusSidebar/>
+                <div>
                     <Footer/>
                 </div>
                 <Modal>
@@ -58,7 +63,7 @@ class UserOffice extends Component {
                         </div>
                     )}
                 </Modal>
-            </div>
+            </Wrapper>
         )
     }
 }
@@ -83,4 +88,16 @@ const mapStateToProps = ({bountiesBalance}) => ({
     transferErrorMessage: bountiesBalance.getIn(['transfer', 'error'])
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserOffice)
+export default connect(mapStateToProps, mapDispatchToProps)(UserOffice);
+
+const Wrapper = styled.div`
+    background: #F3F3F3;
+    flex: 1;
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+`;
+
+const HeaderWrapper = styled.div`
+    flex-basis: 100%;
+`;

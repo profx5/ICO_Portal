@@ -20,11 +20,13 @@
     function showStickyHeader() {
         if ($(window).scrollTop() > $('.MainSection').offset().top + $('.MainSection').height()) {
             $('.HeaderSticky').addClass('HeaderSticky-active');
+            $('.SocialSidebar').addClass('SocialSidebar-active');
         } else {
             $('.HeaderSticky').removeClass('HeaderSticky-active');
+            $('.SocialSidebar').removeClass('SocialSidebar-active');
         }
     }
 
-    $(window).scroll(throttle(showStickyHeader, 40));
+    $(window).scroll(_.throttle(showStickyHeader, 40));
 
 }

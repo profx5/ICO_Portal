@@ -1,13 +1,8 @@
-import {
-    GET_KYC_REQUEST,
-    GET_KYC_SUCCESSFULL,
-    SUBMIT_KYC_REQUEST,
-    SUBMIT_KYC_SUCCESSFULL,
-    SHOW_KYC_FORM,
-    HIDE_KYC_FORM
-} from '../types/KYCTypes'
-
+import { createReducer } from 'redux-act';
+import * as actions from './../actions/KYCActions';
 import {Map} from 'immutable'
+
+
 
 const initialState = Map({
     status: null,
@@ -26,36 +21,24 @@ const initialState = Map({
     })
 })
 
-export function KYCReducer(state = initialState, {
-    type,
-    payload,
-    ...action
-}) {
-    switch (type) {
-        case GET_KYC_REQUEST:
-            return state
 
-        case GET_KYC_SUCCESSFULL:
-        console.log({payload})
-            return state.merge({
-                status: payload.state,
-                kyc: state.get('kyc').merge(payload)
-            }).set('isFetched', true)
 
-        case SUBMIT_KYC_REQUEST:
-            return state.set('isSubmiting', true)
+export const KYCReducer = createReducer({
+    [actions.getKYCRequest]: (state, payload) => state,
+    [actions.getKYCSuccessfull]: (state, payload) => {
+        return state.merge({
+            status: payload.state,
+            kyc: state.get('kyc').merge(payload)
+        }).set('isFetched', true)
+    },
 
-        case SUBMIT_KYC_SUCCESSFULL:
-            return state
-                .set('isSubmiting', false)
-                .set('showForm', false)
+    [actions.submitKYCRequest]: (state, payload) => state.set('isSubmiting', true),
+    [actions.submitKYCSuccessfull]: (state, payload) => {
+        return state
+            .set('isSubmiting', false)
+            .set('showForm', false)
+    },
 
-        case SHOW_KYC_FORM:
-            return state.set('showForm', true)
-        case HIDE_KYC_FORM:
-            return state.set('showForm', false)
-
-        default:
-            return state
-    }
-}
+    [actions.showForm]: (state, payload) => state.set('showForm', true),
+    [actions.hideForm]: (state, payload) => state.set('showForm', false)
+}, initialState);

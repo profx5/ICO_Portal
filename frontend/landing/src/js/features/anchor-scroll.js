@@ -6,10 +6,10 @@
     $('body, html').animate({
       'scrollTop': $(`.${el}`).offset().top - $('.HeaderSticky').height() + 3
     }, 1500);
-    if ($(this).hasClass('Sidebar_navLink')) {
+    // if ($(this).hasClass('Sidebar_navLink')) {
       $('html').removeClass('noscroll');
       $('.Sidebar').removeClass('Sidebar-active');
-    }
+    // }
   });
 
   $('.MainSection_scrollIcon').click(() => {

@@ -1,10 +1,7 @@
 import axios from 'axios'
 import api from '../../api'
-import {
-    GET_REFERRAL_LINK_REQUEST,
-} from '../types/ReferralsTypes'
 import {takeLatest, put, call} from 'redux-saga/effects'
-import {ReferralsActions} from '../actions/ReferralsActions'
+import * as actions from '../actions/ReferralsActions'
 
 export class ReferralsSagas {
     static * getReferralLink(action) {
@@ -14,13 +11,13 @@ export class ReferralsSagas {
                 method: 'GET'
             })
 
-            yield put(ReferralsActions.getReferralLinkSuccess(response.data.link))
+            yield put(actions.getReferralLinkSuccess(response.data.link))
         } catch(e) {
-            yield put(ReferralsActions.getReferralLinkFailed())
+            yield put(actions.getReferralLinkFailed())
         }
     }
 }
 
 export function* saga() {
-    yield takeLatest(GET_REFERRAL_LINK_REQUEST, ReferralsSagas.getReferralLink)
+    yield takeLatest(actions.getReferralLinkRequest, ReferralsSagas.getReferralLink)
 }

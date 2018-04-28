@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import AccountInfo from '../components/AccountInfo'
 import {SetAccountButton, SetAccountForm} from '../components/SetAccount'
 //actions
-import {UserActions} from '../actions/UserActions.js'
+import * as UserActions from '../actions/UserActions.js'
 
 class Account extends React.Component{
     render() {
@@ -19,7 +19,7 @@ class Account extends React.Component{
 
         if (ethAccount){
             return (
-                <AccountInfo ethAccount={ethAccount} />
+                <AccountInfo />
             )
         } else {
             return (

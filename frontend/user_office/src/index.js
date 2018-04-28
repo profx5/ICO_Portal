@@ -8,7 +8,6 @@ import reducer from './js/reducers'
 import Immutable from 'immutable'
 
 import './styles/index.css';
-import './vendor/bootstrap.css';
 import App from './App';
 
 import createSagaMiddleware from 'redux-saga'

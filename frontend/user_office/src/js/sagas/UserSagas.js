@@ -1,13 +1,8 @@
 import Api from '../../api'
 import axios from 'axios'
 import {extractAccount} from '../../web3'
-import {
-    GET_USER_REQUEST,
-    SET_ACCOUNT_REQUEST,
-    SET_METAMASK_ACCOUNT_REQUEST,
-} from '../types/UserTypes'
 import {call, put, takeEvery, cps} from 'redux-saga/effects'
-import {UserActions} from '../actions/UserActions'
+import * as actions from '../actions/UserActions'
 
 export class UserSagas {
     static * setAccount({data}) {
@@ -20,11 +15,11 @@ export class UserSagas {
                 }
             })
 
-            yield put(UserActions.setAccountSuccessfull())
-            yield put(UserActions.hideSetAccountForm())
-            yield put(UserActions.getUserRequest())
+            yield put(actions.setAccountSuccessfull())
+            yield put(actions.hideSetAccountForm())
+            yield put(actions.getUserRequest())
         } catch(e) {
-            yield put(UserActions.setAccountFailed())
+            yield put(actions.setAccountFailed())
         }
     }
 
@@ -35,9 +30,10 @@ export class UserSagas {
                 method: 'GET'
             })
 
-            yield put(UserActions.getUserSuccessfull(response.data))
+            yield put(actions.getUserSuccessfull(response.data))
+
         } catch(e) {
-            yield put(UserActions.getUserFailed())
+            yield put(actions.getUserFailed())
         }
     }
 
@@ -46,16 +42,16 @@ export class UserSagas {
             const accounts = yield cps(extractAccount)
 
             if (accounts.length !== 0) {
-                yield put(UserActions.setMetaMaskAccountSuccessfull(accounts[0]))
+                yield put(actions.setMetaMaskAccountSuccessfull(accounts[0]))
             }
         } catch(e) {
-            yield put(UserActions.setMetaMaskAccountFailed)
+            yield put(actions.setMetaMaskAccountFailed)
         }
     }
 }
 
 export function* saga() {
-    yield takeEvery(GET_USER_REQUEST, UserSagas.getUser)
-    yield takeEvery(SET_ACCOUNT_REQUEST, UserSagas.setAccount)
-    yield takeEvery(SET_METAMASK_ACCOUNT_REQUEST, UserSagas.extractMetaMaskAccount)
+    yield takeEvery(actions.getUserRequest, UserSagas.getUser)
+    yield takeEvery(actions.setAccountRequest, UserSagas.setAccount)
+    yield takeEvery(actions.setMetaMaskAccountRequest, UserSagas.extractMetaMaskAccount)
 }

@@ -4,7 +4,7 @@ import {canSendTransaction, ethToWei} from '../../web3'
 //components
 import InvestForm from '../components/InvestForm'
 //actions
-import InvestActions from '../actions/InvestActions'
+import * as InvestActions from '../actions/InvestActions'
 
 class Invest extends React.Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class Invest extends React.Component {
     }
 
     getRate = () =>  Number(this.props.USDcPerETHRate) / 100
-    getBonus = () => Number(this.props.discountPercent)
+    getBonus = () => Number(this.props.bonusPercents)
 
     calcTokensAmount = (value) => {
         const parsedValue = Math.floor(Number(value.replace(',', '.')) * 100) / 100
@@ -79,11 +79,11 @@ class Invest extends React.Component {
     }
 }
 
-const mapStateToProps = ({user, ICOInfo, Invest}) => ({
+const mapStateToProps = ({user, ICOInfo, Phase, Invest}) => ({
     showForm: Invest.get('showInvestForm'),
-    contract: ICOInfo.get('crowdSaleAddress'),
-    USDcPerETHRate: ICOInfo.get('USDcPerETHRate'),
-    discountPercent: ICOInfo.get('currentPhase').get('discountPercent'),
+    contract: ICOInfo.get('token_address'),
+    USDcPerETHRate: ICOInfo.get('usd_c_per_eth'),
+    bonusPercents: Phase.get('bonus_percents'),
     ethAccount: user.get('eth_account')
 })
 

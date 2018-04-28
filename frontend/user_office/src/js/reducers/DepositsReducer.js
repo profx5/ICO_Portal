@@ -1,11 +1,8 @@
-import {
-    GET_DEPOSITS_REQUEST,
-    GET_DEPOSITS_SUCCESS,
-    DEPOSITS_NEXT_PAGE,
-    DEPOSITS_PREV_PAGE
-} from '../types/DepositsTypes'
+import { createReducer } from 'redux-act';
+import * as actions from './../actions/DepositsActions';
+import {Map, List} from 'immutable';
 
-import {Map, List} from 'immutable'
+
 
 const initialState = Map({
     isDepositsLoading: false,
@@ -13,24 +10,13 @@ const initialState = Map({
     pages: 0,
     current_page: 1,
     results: List()
-})
+});
 
-export function DepositsReducer(state=initialState, {type, payload, ...action}) {
-    switch(type) {
-        case GET_DEPOSITS_REQUEST: {
-            return state.set('isDepositsLoading', true)
-        }
-        case GET_DEPOSITS_SUCCESS: {
-            return state.mergeDeep(payload).set('isDepositsLoading', false)
-        }
-        case DEPOSITS_NEXT_PAGE: {
-            return state.update('current_page', page => page + 1)
-        }
-        case DEPOSITS_PREV_PAGE: {
-            return state.update('current_page', page => page - 1)
-        }
-        default: {
-            return state
-        }
-    }
-}
+
+
+export const DepositsReducer = createReducer({
+    [actions.getDepositsRequest]: (state = initialState, payload) => state.set('isDepositsLoading', true),
+    [actions.getDepositsSuccess]: (state = initialState, payload) => state.mergeDeep(payload).set('isDepositsLoading', false),
+    [actions.depositsNextPage]: (state = initialState, payload) => state.update('current_page', page => page + 1),
+    [actions.depositsPrevPage]: (state = initialState, payload) => state.update('current_page', page => page - 1)
+}, initialState);

@@ -1,0 +1,102 @@
+.TermsPopup
+    background white
+    z-index 20
+    position fixed
+    left 50%
+    top 50%
+    transform translate(-50%, -50%)
+    box-shadow 0 6px 26px 0 rgba(46, 83, 163, 0.4)
+    border-radius 3px
+    transition all .4s ease
+    &-hidden
+        visibility hidden
+        opacity 0
+    @media smMinus
+        width 90vw
+    @media xs
+        transform translateX(-50%)
+        top 60px
+        height 88%
+    &_content
+        padding 55px 65px
+        height 100%
+        @media xs
+            padding 35px 30px 18px
+            overflow scroll
+    &_link
+        position absolute
+        left 0
+        top -50px
+        color white
+        display flex
+        align-items center
+        &:hover
+            color white
+        svg
+            transform rotate(180deg) scale(.7)
+            margin-right 20px
+        @media xs
+            top -37px
+    &_header
+        color #2d6dfb
+        font-size 25px
+        font-weight 500
+        padding-bottom 45px
+        @media xs
+            font-size 22px
+            line-height 27px
+            padding-bottom 25px
+    &_text
+        color #000000
+        font-weight 400
+        margin-bottom 50px
+        @media xs
+            font-size 14px
+    &_inputs
+        display flex
+        flex-flow row nowrap
+        justify-content space-between
+        align-items center
+        @media smMinus
+            flex-wrap wrap
+    &_checkboxWrapper
+        display flex
+        flex-flow row nowrap
+        justify-content space-between
+        align-items center
+        @media smMinus
+            margin-bottom 20px
+            flex-basis 100%
+            justify-content unset
+    &_checkbox:checked + &_checkboxLabel
+        background url('../img/common/svg/check.svg') no-repeat center, transparent
+        background-size 12px 12px
+    &_checkboxLabel
+        size 20px 20px
+        min-width 20px
+        min-height 20px
+        background transparent
+        border 1px solid blue
+        cursor pointer
+    &_checkboxDesc
+        color #000000
+        margin-right 140px
+        padding-left 20px
+        font-weight 400
+        @media md
+            white-space nowrap
+        @media smMinus
+            margin-right 0
+        @media xs
+            font-size 11px
+    &_btnWrapper
+        margin-left auto
+        @media xs
+            margin-right auto
+    &_btn
+        background-image linear-gradient(90deg, #f84f78 50%, #316fdf 50%)
+        .Btn_iconWrapper:before
+            background white !important
+        .Btn_icon
+            &:after
+                background url('../img/common/svg/btn-arrow-blue.svg') no-repeat 55% 55%

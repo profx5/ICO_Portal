@@ -1,24 +1,36 @@
 import React from 'react';
+import styled from 'styled-components';
+import userPhoto from './../../img/user.svg';
 //components
-import Button from './Button'
-import Title from './Title'
 
-const AccountInfo = ({ ethAccount, children }) => {
-    const accountElement = ethAccount ? (<p className="Header_text Header_accountId">{ethAccount}</p>) : children
-
+const AccountInfo = ({email }) => {
     return (
-        <div className="Header_accountInfo col-md-3">
-            <Title text='Your account' type='h3' />
-            {accountElement}
-            <a href='' className="Header_link">
-                <Button text='PROFILE' info={true} />
-            </a>
-
-            <a href='/logout/' className="Header_link">
-                <Button text='LOG OUT' danger={true} />
-            </a>
-        </div>
+        <InfoWrapper>
+            <UserImg src={userPhoto} />
+            <EmailText>{email}</EmailText>
+        </InfoWrapper>
     )
 }
 
-export default AccountInfo
+export default AccountInfo;
+
+
+const InfoWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+`
+
+const ConfirmLink = styled.a`
+    color: #d44b4b;
+    font-weight: 400;
+    text-decoration: underline;
+`
+const UserImg = styled.img`
+    margin-left: 25px;
+`
+
+const EmailText = styled.span`
+    color: #222121;
+    margin-left: 25px;
+`

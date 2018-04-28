@@ -1,11 +1,6 @@
-import {
-    OPEN_MODAL_FOR_TRANSFER,
-    CLOSE_MODAL_FOR_TRANSFER,
-} from '../types/ModalWindowTypes'
+import { createAction } from 'redux-act';
 
-export class ModalAction {
-    static closeModal = () => ({type: CLOSE_MODAL_FOR_TRANSFER})
 
-    static openModal = () => ({type: OPEN_MODAL_FOR_TRANSFER})
-}
 
+export const openModal = createAction('CLOSE_MODAL_FOR_TRANSFER');
+export const closeModal = createAction('OPEN_MODAL_FOR_TRANSFER');

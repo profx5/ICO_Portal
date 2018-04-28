@@ -1,15 +1,17 @@
-import {combineReducers} from 'redux'
+import {combineReducers} from 'redux';
 //reducers
-import {UserReducer} from './UserReducer'
-import {ICOInfoReducer} from './ICOInfoReducer'
-import {DepositsReducer} from './DepositsReducer'
-import {BountiesBalanceReducer} from './BountiesBalanceReducer'
-import {KYCReducer} from './KYCReducer'
-import {InvestReducer} from './InvestReducer.js'
-import {ReferralsReducer} from './ReferralsReducer.js'
-import {ModalWindowReducer} from './ModalWindowReducer.js'
+import {UserReducer} from './UserReducer';
+import {ICOInfoReducer} from './ICOInfoReducer';
+import {DepositsReducer} from './DepositsReducer';
+import {BountiesBalanceReducer} from './BountiesBalanceReducer';
+import {KYCReducer} from './KYCReducer';
+import {InvestReducer} from './InvestReducer.js';
+import {ReferralsReducer} from './ReferralsReducer.js';
+import {ModalWindowReducer} from './ModalWindowReducer.js';
+import {PhaseReducer} from './PhaseReducer.js';
+import {CurrencyReducer} from './CurrencyReducer.js';
 
-const reducer = combineReducers({
+const reducers = combineReducers({
     user: UserReducer,
     ICOInfo: ICOInfoReducer,
     deposits: DepositsReducer,
@@ -17,7 +19,9 @@ const reducer = combineReducers({
     KYC: KYCReducer,
     Invest: InvestReducer,
     referrals: ReferralsReducer,
-    modals: ModalWindowReducer
+    modals: ModalWindowReducer,
+    Phase: PhaseReducer,
+    Currencies: CurrencyReducer
 })
 
-export default reducer
+export default reducers;

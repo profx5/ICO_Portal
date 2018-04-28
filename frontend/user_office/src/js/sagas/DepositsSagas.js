@@ -1,13 +1,7 @@
 import axios from 'axios'
 import Api from '../../api'
-import {
-    GET_DEPOSITS_REQUEST,
-    CREATE_PREPARED_DEPOSIT_REQUEST,
-    DEPOSITS_NEXT_PAGE,
-    DEPOSITS_PREV_PAGE
-} from '../types/DepositsTypes'
 import { takeEvery, call, put, select} from 'redux-saga/effects';
-import {DepositsActions} from '../actions/DepositsActions'
+import * as actions from './../actions/DepositsActions';
 
 export class DepositsSagas {
     static * getDeposits() {
@@ -22,9 +16,9 @@ export class DepositsSagas {
                 }
             })
 
-            yield put(DepositsActions.getDepositsSuccess(response.data))
+            yield put(actions.getDepositsSuccess(response.data))
         } catch(e) {
-            yield put(DepositsActions.getDepositsFailed())
+            yield put(actions.getDepositsFailed())
         }
     }
 
@@ -39,17 +33,17 @@ export class DepositsSagas {
                        txn_hash: txnHash}
             })
 
-            yield put(DepositsActions.createPreparedDepositSuccess())
-            yield put(DepositsActions.getDepositsRequest())
+            yield put(actions.createPreparedDepositSuccess())
+            yield put(actions.getDepositsRequest())
         } catch(e) {
-            yield put(DepositsActions.createPreparedDepositFailed())
+            yield put(actions.createPreparedDepositFailed())
         }
     }
 }
 
 export function* saga() {
-    yield takeEvery(GET_DEPOSITS_REQUEST, DepositsSagas.getDeposits)
-    yield takeEvery(CREATE_PREPARED_DEPOSIT_REQUEST, DepositsSagas.createPreparedDeposit)
-    yield takeEvery(DEPOSITS_NEXT_PAGE, DepositsSagas.getDeposits)
-    yield takeEvery(DEPOSITS_PREV_PAGE, DepositsSagas.getDeposits)
+    yield takeEvery(actions.getDepositsRequest, DepositsSagas.getDeposits)
+    yield takeEvery(actions.createPreparedDepositRequest, DepositsSagas.createPreparedDeposit)
+    yield takeEvery(actions.depositsNextPage, DepositsSagas.getDeposits)
+    yield takeEvery(actions.depositsPrevPage, DepositsSagas.getDeposits)
 }

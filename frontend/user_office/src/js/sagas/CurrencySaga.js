@@ -1,0 +1,23 @@
+import axios from 'axios'
+import Api from '../../api'
+import * as actions from './../actions/CurrencyActions'
+import {takeEvery, call, put} from 'redux-saga/effects'
+
+class CurrencySagas {
+    static * getCurrencies() {
+        try {
+            const response = yield call(axios, {
+                method: 'GET',
+                url: Api.getCurrencies()
+            })
+
+            yield put(actions.getCurrenciesSuccess(response.data))
+        } catch(e) {
+            yield put(actions.getCurrenciesFailed())
+        }
+    }
+}
+
+export function* saga() {
+    yield takeEvery(actions.getCurrenciesRequest, CurrencySagas.getCurrencies)
+}

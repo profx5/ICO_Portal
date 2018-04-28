@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 //actions
-import {ModalAction} from '../actions/ModalWindowAction'
+import * as ModalAction from '../actions/ModalWindowAction'
 //components
 import Button from '../components/Button'
 

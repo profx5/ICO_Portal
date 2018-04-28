@@ -1,54 +1,39 @@
-import {
-    GET_USER_REQUEST,
-    GET_USER_SUCCESSFULL,
-    SHOW_SET_ACCOUNT_FORM,
-    HIDE_SET_ACCOUNT_FORM,
-    SET_ACCOUNT_REQUEST,
-    SET_ACCOUNT_SUCCESSFULL,
-    SET_METAMASK_ACCOUNT_SUCCESSFULL,
-} from '../types/UserTypes'
+import { createReducer } from 'redux-act';
+import * as actions from './../actions/UserActions';
+import {Map} from 'immutable';
 
-import {Map} from 'immutable'
+
 
 const initialState = Map({
     eth_account: null,
-    tokens_amount: null,
+    tokens_amount: 0.00,
     username: null,
+    email: 'gordon@ongrid.pro',
     kyc_required: false,
     userIsLoading: false,
     investment_threshold: 0,
-    showSetAccountForm: false,
     setAccountSubmitting: false,
-    metaMaskAccount: ''
+    metamaskAccount: null,
+    security: Map({
+        privateKey: null
+    })
 })
 
-export function UserReducer (state=initialState, {type, payload, ...action}) {
-    switch(type) {
-        case GET_USER_REQUEST: {
-            return state.set("userIsLoading", true)
-        }
-        case GET_USER_SUCCESSFULL: {
-            return state.merge({
-                ...payload
-            }).set('userIsLoading', false)
-        }
-        case SHOW_SET_ACCOUNT_FORM: {
-            return state.set('showSetAccountForm', true)
-        }
-        case HIDE_SET_ACCOUNT_FORM: {
-            return state.set('showSetAccountForm', false)
-        }
-        case SET_ACCOUNT_REQUEST: {
-            return state.set("setAccountSubmitting", true)
-        }
-        case SET_ACCOUNT_SUCCESSFULL: {
-            return state.set('setAccountSubmitting', false)
-        }
-        case SET_METAMASK_ACCOUNT_SUCCESSFULL: {
-            return state.merge(payload)
-        }
-        default: {
-            return state
-        }
-    }
-}
+
+
+export const UserReducer = createReducer({
+    [actions.getUserRequest]: (state, payload) => state.set("userIsLoading", true),
+    [actions.getUserSuccessfull]: (state, payload) => {
+        return state.merge({
+            ...payload
+        }).set('userIsLoading', false)
+    },
+
+    [actions.showSetAccountForm]: (state, payload) => state.set('showSetAccountForm', true),
+    [actions.hideSetAccountForm]: (state, payload) => state.set('showSetAccountForm', false),
+
+    [actions.setAccountRequest]: (state, payload) => state.set("setAccountSubmitting", true),
+    [actions.setAccountSuccessfull]: (state, payload) => state.set('setAccountSubmitting', false),
+
+    [actions.setMetaMaskAccountSuccessfull]: (state, payload) => state.set('metamaskAccount', payload)
+}, initialState);

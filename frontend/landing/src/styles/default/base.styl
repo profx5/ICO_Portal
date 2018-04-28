@@ -86,3 +86,41 @@ section
     @media sm
         font-size 52px
         bottom -52px
+
+html
+    &:before
+        content ''
+        display block
+        size 100% 100%
+        position fixed
+        left 0
+        top 0
+        background blue
+        opacity 0
+        visibility hidden
+        z-index 18
+        transition all .4s ease
+  
+html.content-blured
+    overflow hidden
+    &:before
+        visibility visible
+        opacity .5
+    body
+        background blue
+        overflow hidden
+    .Header, .MainSection, .InstrSection, .Footer
+        filter blur(4px)
+    .HeaderSticky
+        opacity 0
+
+.Header, .MainSection, .InstrSection, .Footer
+    transition filter .4s ease
+    
+.compensate-for-scrollbar
+    margin-right 0 !important
+    
+
+.Popup-hidden
+    display none
+    pointer-events none

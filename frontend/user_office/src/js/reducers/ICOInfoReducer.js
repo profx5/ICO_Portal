@@ -1,36 +1,18 @@
-import {
-    GET_ICO_INFO_REQUEST,
-    GET_ICO_INFO_SUCCESS,
-} from '../types/ICOInfoTypes'
+import { createReducer } from 'redux-act';
+import * as actions from './../actions/ICOInfoActions';
+import {Map} from 'immutable';
 
-import {Map} from 'immutable'
+
 
 const initialState = Map({
-    USDcPerETHRate: 0,
-    USDcRaised: 0,
-    totalHardCapUSDc: 0,
-    crowdSaleAddress: "",
-    tokenAddress: "",
-    currentPhase: Map({
-        name: "",
-        discountPercent: 0,
-        startTime: 0,
-        endTime: 0,
-        softCapUSDc: 0,
-        hardCapUSDc: 0
-    })
-})
+    token_address: "",
+    total_supply: 0,
+    usd_c_per_eth: 0
+});
 
-export function ICOInfoReducer(state=initialState, {type, payload, ...action}) {
-    switch ( type ) {
-        case GET_ICO_INFO_REQUEST: {
-            return state
-        }
-        case GET_ICO_INFO_SUCCESS: {
-            return state.merge(payload)
-        }
-        default: {
-            return state
-        }
-    }
-}
+
+
+export const ICOInfoReducer = createReducer({
+    [actions.getICOInfoRequest]: (state = initialState, payload) => state,
+    [actions.getICOInfoSuccess]: (state = initialState, payload) => state.merge(payload)
+}, initialState);

@@ -27,7 +27,7 @@ class KYCHeader extends Component {
     static Alert = ({onClick, investmentThreshold, alert, message}) => (
         <div className="alert alert-warning" role="alert">
             <p>{message} {investmentThreshold}</p>
-            <Button text="Pass KYC" onClick={onClick} success={true}/>
+            <Button text="Pass KYC" onClick={onClick}/>
         </div>
     )
 

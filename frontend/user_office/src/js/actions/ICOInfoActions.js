@@ -1,13 +1,6 @@
-import {
-    GET_ICO_INFO_REQUEST,
-    GET_ICO_INFO_SUCCESS,
-    GET_ICO_PHASE_STATS_FAILED
-} from '../types/ICOInfoTypes.js'
+import { createAction } from 'redux-act';
 
-export class ICOInfoActions {
-    static getPhaseStatsSuccess = (payload) => ({ type: GET_ICO_INFO_SUCCESS, payload })
 
-    static getICOInfoRequest = () => ({type: GET_ICO_INFO_REQUEST})
-
-    static getICOInfoFailed = () => ({type: GET_ICO_PHASE_STATS_FAILED})
-}
+export const getICOInfoRequest = createAction('GET_ICO_INFO_REQUEST');
+export const getICOInfoSuccess = createAction('GET_ICO_INFO_SUCCESS');
+export const getICOInfoFailed = createAction('GET_ICO_PHASE_STATS_FAILED');

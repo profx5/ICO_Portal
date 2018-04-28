@@ -18,34 +18,13 @@ duration = .3s
     transition all .3s ease
     cursor pointer
     overflow hidden
-    padding-top 4px
+    padding 4px 24px 0
     background-size 200% 100%
     background-position 0 0
     animation bgpout .3s
     &:hover
         animation bgpin .3s
         animation-fill-mode forwards
-    // &:before
-    //     border-radius 100px
-    //     content ''
-    //     display block
-    //     position absolute
-    //     left 0
-    //     bottom 0
-    //     right 0
-    //     top 0
-    //     transform scaleX(0)
-    //     pointer-events none
-    //     will-change transform
-    //     transform-origin bottom right
-    //     transition transform 0.25s ease-out
-    //     z-index -1
-    // &:hover
-    //     overflow visible
-    //     color blue
-    //     &:before
-    //         transform-origin bottom left
-    //         transform scaleX(1)
     &-transBlue, &-transPink, &-transWhite
         transition color .25s ease, border-color .25s ease
         border 1px solid transparent

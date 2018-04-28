@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import {ReferralsActions} from '../actions/ReferralsActions'
+import * as ReferralsActions from '../actions/ReferralsActions'
 
 import Button from '../components/Button'
 

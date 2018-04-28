@@ -42,6 +42,10 @@ class Api {
     transferBounties() {
         return `${this.prefix}/transferBounties/`
     }
+
+    getCurrencies() {
+        return `${this.prefix}/getCurrencies/`
+    }
 }
 
 const api = new Api();

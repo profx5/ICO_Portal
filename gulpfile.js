@@ -36,8 +36,7 @@ gulp.task('browser-sync', function() {
   browserSync.init({
     server: 'frontend/landing/dist',
     ghostMode: false,
-    open: false,
-    port: 3010
+    open: false
   });
 
 });
@@ -51,14 +50,13 @@ gulp.task('reload', function(done) {
 
 //HTML
 gulp.task('html', function() {
-      return gulp.src(['frontend/landing/src/html/template/template.html'])
+      return gulp.src(['frontend/landing/src/html/*.html'])
         .pipe(include()).on('error', console.error)
-        .pipe(rename('index.html'))
         .on('error', function(err) {
             notify({ title: 'template task error!' }).write(err.message);
             this.emit('end');
         })
-        .pipe(gulp.dest("frontend/landing/dist/"));
+        .pipe(gulp.dest("frontend/landing/dist"));
 });
 //HTML
 
@@ -75,7 +73,7 @@ var processors = [
 gulp.task('styles', function() {
   return gulp.src('frontend/landing/src/styles/*.styl')
   .pipe(sourcemaps.init())
-    .pipe(plumber())
+  .pipe(plumber())
   .pipe(stylus())
   .pipe(postcss(processors))
     .pipe(cssnano({
@@ -88,15 +86,30 @@ gulp.task('styles', function() {
         notify({ title: 'CSS task error!' }).write(err.message);
         this.emit('end');
     })
-    .pipe(gulp.dest('frontend/landing/dist/static/styles'))
+    .pipe(gulp.dest('frontend/landing/dist/styles'))
 })
 //CSS
 
 
 //JAVASCRIPT
+gulp.task('scripts:single', function() {
+    return gulp.src('frontend/landing/src/js/pages/*.js')
+        .pipe(plumber())
+        .pipe(include()).on('error', console.error)
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(uglify())
+        .on('error', function(err) {
+            notify({ title: 'scripts:single task error!' }).write(err.message);
+            this.emit('end');
+        })
+        .pipe(gulp.dest("frontend/landing/dist/js"));
+});
 
 gulp.task('scripts:all', function() {
-    return gulp.src('frontend/landing/src/js/**/*.js')
+    return gulp.src('frontend/landing/src/js/*.js')
+        .pipe(plumber())
         .pipe(include()).on('error', console.error)
         .pipe(babel({
             presets: ['es2015']
@@ -106,14 +119,14 @@ gulp.task('scripts:all', function() {
             notify({ title: 'scripts:all task error!' }).write(err.message);
             this.emit('end');
         })
-        .pipe(gulp.dest("frontend/landing/dist/static/js"));
+        .pipe(gulp.dest("frontend/landing/dist/js"));
 });
 
 gulp.task('vendor:js', function() {
     return gulp.src(['frontend/landing/src/vendor/js/**/*.js'])
     .pipe(concat('vendor.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('frontend/landing/dist/static/js'))
+    .pipe(gulp.dest('frontend/landing/dist/js'))
 })
 
 gulp.task('vendor:css', function() {
@@ -124,7 +137,7 @@ gulp.task('vendor:css', function() {
         autoprefixer: false,
         discardComments: { removeAll: true }
     }))
-    .pipe(gulp.dest('frontend/landing/dist/static/styles'))
+    .pipe(gulp.dest('frontend/landing/dist/styles'))
 })
 //JAVASCRIPT
 
@@ -137,28 +150,23 @@ gulp.task('images', function() {
             svgoPlugins: [{removeViewBox: false}],
             use: [pngquant()]
         })))
-        .pipe(gulp.dest('frontend/landing/dist/static'))
+        .pipe(gulp.dest('frontend/landing/dist'))
 })
 
 
 gulp.task('assets', function() {
     return gulp.src(['frontend/landing/src/assets/**', '!frontend/landing/src/assets/img/*'], {since: gulp.lastRun('assets')})
-        .pipe(gulp.dest('frontend/landing/dist/static'))
+        .pipe(gulp.dest('frontend/landing/dist'))
 })
 
-// gulp.task('svgSprite', function () {
-//     return gulp.src('frontend/landing/src/img/sprite')
-//         .pipe(svgSprite())
-//         .pipe(gulp.dest("frontend/landing/dist/img/sprite/done"));
-// });
 
 
 gulp.task('clean:dist', function() {
-  return del('frontend/landing/dist');
+  return del('dist');
 });
 
 gulp.task('clean:public', function() {
-    return del('frontend/landing/public');
+    return del('public');
 });
 
 
@@ -180,34 +188,5 @@ gulp.task('watch', gulp.series('clean:dist', gulp.parallel('html', 'styles', 'sc
 }));
 
 gulp.task('dev', gulp.parallel('watch', 'browser-sync'));
+gulp.task('build', gulp.series('clean:dist', gulp.parallel('html', 'styles', 'scripts:all', 'vendor:css', 'vendor:js', 'assets')))
 //DEV //DEV //DEV
-
-
-// BUILD  // BUILD  // BUILD  // BUILD
-
-
-// gulp.task('reduce:js', function() {
-//     return gulp.src('frontend/landing/dist/js/**/*')
-//             .pipe(uglify())
-//             .pipe(gulp.dest('frontend/landing/public/js'))
-// })
-
-// gulp.task('reduce:css', function() {
-//     return gulp.src('frontend/landing/dist/styles/**/*')
-//             .pipe(cssnano({
-//                 zindex: false,
-//                 autoprefixer: false,
-//                 discardComments: { removeAll: true }
-//             }))
-//             .pipe(gulp.dest('frontend/landing/public/styles'))
-// })
-
-// gulp.task('build', gulp.series('clean:public', gulp.parallel('reduce:css', 'reduce:js'), function() {
-//     return gulp.src([
-//         'frontend/landing/dist/!(styles|js)/**/*',
-//         'frontend/landing/dist/*'
-//         ])
-//             .pipe(gulp.dest('public'))
-// }))
-
-// BUILD  // BUILD  // BUILD  // BUILD

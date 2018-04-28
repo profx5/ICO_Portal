@@ -1,23 +1,36 @@
 
-function makeFormula(tokensAmount = 1, bonusAmount = '0%') {
+function makeFormula(tokensAmount = 1, discountAmount = '0%', rateAmount) {
 
   let $el = $('.CalculatorSection_formula'),
       tokens = Number(tokensAmount),
-      bonus = bonusAmount;
+      discount = discountAmount,
+      ethRate = rateAmount,
+      discountedEthRate = ((100 - discount) / 100) * 0.01,
+      result = parseInt(tokens * ethRate / discountedEthRate);
+
+  let price = result * discountedEthRate,
+      priceStr = '';
 
 
-  let bonusAsNumber = (tokens * bonus) / 100;
-  let result = tokens + bonusAsNumber;
 
-  if (tokens % 1 !== 0) tokens = tokens.toFixed(2);
-  if (result % 1 !== 0) result = result.toFixed(2);
+  if (tokens <= 0) {
+    priceStr = `<span class="CalculatorSection_price-resultNoDiscount">$0</span>`;
+    console.log(tokens);
+  } else if (discount !== 0) {
+    priceStr += `<strike>$${Math.round(result * 0.01)}</strike> <span class="CalculatorSection_price-result">$${Math.round(result * discountedEthRate)}</span> with ${discount}% discount!`;
+  } else if (discount === 0) {
+    priceStr = `<span class="CalculatorSection_price-resultNoDiscount">${Math.round(result * 0.01)}</span>`;
+  }
 
 
-  let formula = `${tokens} LTY tokens + ${bonus}% = ${result} LTY`;
 
-  return $el.html(formula);
+  let formula = `${parseInt(tokens, 10)} ETH * $${ethRate} / $${discountedEthRate} = ${result}`;
+
+  return {
+    formula: formula,
+    price: priceStr
+  };
 }
-
 
 
 function updateProgressbar(data) {
@@ -25,53 +38,60 @@ function updateProgressbar(data) {
         USDToGather = data.totalHardCapUSDc;
 
   const currentPhase = data.currentPhase;
+  currentPhase.startTime = new Date().getTime()
         
   const stateName = currentPhase.name,
-        discount = currentPhase.discountPercent,
-        softCap = currentPhase.softCapUSDc + '',
-        hardCap = currentPhase.hardCapUSDc + '';
+        discount = currentPhase.discountPercent;
 
 
 
-  $('.ProgressSection_fundsText').html(`$ ${splitDigits(Number(USDRaised))}`);
-  $('.ProgressSection_discountText').html(`${discount}%`);
+  // $('.ProgressSection_fundsText').html(`$ ${splitDigits(parseInt((Number(USDRaised / 100))))}`);
+  $('.CalculatorSection_text-discount').html(`${discount}%`);
 
-  let raisedArray = USDRaised.split('');
-  let raisedResult;
-  if ((USDRaised + '').length === 9) {
-    raisedResult = `${raisedArray[0]}.${raisedArray[1]} M`;
-  } else if ((USDRaised + '').length === 10) {
-    raisedResult = `${raisedArray[0]}${raisedArray[1]}.${raisedArray[2]} M`;
-  }
-  $('.ProgressSection_progressBarCurrent').attr('data-collected-money', raisedResult).css('width', '30.86%');
 
-  let softCapArray = softCap.split('');
-  let hardCapArray = hardCap.split('');
-  $('.ProgressSection_progressPoint-2').attr("data-state", `${stateName} Soft Cap`).attr("data-money", `$${softCapArray[0]} M`);
-  $('.ProgressSection_progressPoint-3').attr("data-state", `${stateName} Hard Cap`).attr("data-money", `$${hardCapArray[0]} M`);
+  let progressbarWidth = ((USDRaised * 100) / Number(USDToGather)).toFixed(2);
+
+  $('.ProgressSection_progressBarCurrent').attr('data-collected-money', `$${formatMoney(USDRaised, 1)}`).css('width', `${progressbarWidth}%`);
+
 
 }
 
-function setTimer(data) {
-
+function setTimer(data) { 
   let currentPhase = data.currentPhase;
-  let UTCStartTime = new Date(currentPhase.startTime);
-  let UTCEndTime = new Date(currentPhase.endTime);
+
+  let startTime = moment(new Date(currentPhase.startTime)).toArray(); // Thursday, 8 March 2018 г., 00:00:00
+  let endTime = moment(new Date(currentPhase.endTime * 1000)).toArray(); // Sunday, 8 April 2018 г., 00:00:00
+
+
+  let timeDifference = endTime.map((el, index) => {
+    return el - startTime[index];
+  });
+
+  timeDifference.shift();
+  timeDifference.pop();
+
 
   let time = {
-    days: UTCEndTime.getUTCDay() - UTCStartTime.getUTCDay() <= 0 ? 0 : UTCEndTime.getUTCDay() - UTCStartTime.getUTCDay(),
-    hours: UTCEndTime.getUTCHours() - UTCStartTime.getUTCHours() <= 0 ? 0 : UTCEndTime.getUTCHours() - UTCStartTime.getUTCHours(),
-    minutes: UTCEndTime.getUTCMinutes() - UTCStartTime.getUTCMinutes() <= 0 ? 0 : UTCEndTime.getUTCMinutes() - UTCStartTime.getUTCMinutes(),
-    seconds: UTCEndTime.getUTCSeconds() - UTCStartTime.getUTCSeconds() <= 0 ? 0 : UTCEndTime.getUTCSeconds() - UTCStartTime.getUTCSeconds(),
+    days: (timeDifference[0] * 30) + timeDifference[1],
+    hours: timeDifference[2],
+    minutes: timeDifference[3],
+    seconds: timeDifference[4],
   };
 
+  while (time.seconds > 60) {
+    time.seconds -= 60;
+    time.minutes += 60;
+  }
 
-  $('.ProgressSection_seconds, .RoadmapSection_seconds').html(time.seconds);
-  $('.ProgressSection_minutes, .RoadmapSection_minutes').html(time.minutes);
-  $('.ProgressSection_hours, .RoadmapSection_hours').html(time.hours);
-  $('.ProgressSection_day, .RoadmapSection_day').html(time.days);
+  while (time.minutes > 60) {
+    time.minutes -= 60;
+    time.hours += 24;
+  }
 
-
+  while (time.hours > 24) {
+    time.hours -= 24;
+    time.days += 1;
+  }
 
   var interval = setInterval(function() {
 
@@ -90,11 +110,17 @@ function setTimer(data) {
         if (time.days !== 0)  time.days -= 1;
         time.hours = 23;
 
-        $('.ProgressSection_hours, .RoadmapSection_hours').html(time.hours);
       }
    
-      if (time.seconds === 0 && time.minutes === 0 && time.hours === 0 && time.days === 0) {
+      if (time.seconds <= 0 && time.minutes <= 0 && time.hours <= 0 && time.days <= 0) {
         clearInterval(interval);
+      } else if (time.days <= 0) {
+        clearInterval(interval);
+         $('.ProgressSection_seconds, .RoadmapSection_seconds').html('00');
+         $('.ProgressSection_minutes, .RoadmapSection_minutes').html('00');
+         $('.ProgressSection_hours, .RoadmapSection_hours').html('00');
+         $('.ProgressSection_day, .RoadmapSection_day').html('00');
+         return;
       }
    
 
@@ -117,7 +143,8 @@ function setTimer(data) {
     let data = response.data;
 
     let rate = Number(data.USDcPerETHRate) / 100,
-        bonus = Number(data.currentPhase.discountPercent);
+        discount = Number(data.currentPhase.discountPercent),
+        crowdSaleAddress = data.crowdSaleAddress;
 
     updateProgressbar(data);
     setTimer(data);
@@ -126,31 +153,56 @@ function setTimer(data) {
     let $currencyInput = $('.CalculatorSection_input-currency');
     $rateInput.val(`$ ${rate}`);
 
-    $currencyInput.inputmask({
-        'alias': 'decimal',
-        radixPoint: ',',
-        showMaskOnHover: false,
-        'suffix': ' ETH',
-        "min": '1',
-        'allowMinus': false,
-        clearMaskOnLostFocus: false,
-        oncomplete: function(key, result){
+    $currencyInput.val('1');
 
 
+    $('.CalculatorSection_fieldInner-address').html(crowdSaleAddress + '');
 
-            let currencyNewVal = Math.floor(Number($currencyInput.inputmask('unmaskedvalue').replace(',', '.')) * 100) / 100;
+    $currencyInput.on('input', function(event) {
+      let val = $(this).val() || ' ',
+          lastChar = val[val.length - 1],
+          newVal;
 
 
-            let tokens = currencyNewVal * rate;
-            makeFormula(tokens, bonus);
-        },
-        oncleared: () => {
-            // $currencyInput.val('1')
+      if (lastChar.match(/[0-9.,]/g) === null) {
+        event.preventDefault();
+        $(this).val(val.substr(0,val.length - 1));
+      }
+
+      if ($(this).val().indexOf(',') != -1) {
+        newVal = val.replace(',' , '.');
+        $(this).val(newVal);
+
+        if (newVal.match(/\./g) !== null && newVal.match(/\./g).length >= 2) {
+          $(this).val(newVal.substr(0,newVal.length - 1));
         }
+
+      }
+
+      if (val.match(/\./g) !== null && val.match(/\./g).length >= 2) {
+        $(this).val(val.substr(0,val.length - 1));
+      }
+      
+      let currencyNewVal = Math.floor(Number($currencyInput.val()) * 100) / 100; 
+
+      let tokens = currencyNewVal;
+      $('.CalculatorSection_formula').html(makeFormula(tokens, discount, rate).formula);
+      $('.CalculatorSection_price').html(makeFormula(tokens, discount, rate).price);
+
+
+      if (val.match(/\d+/g)[0] < 1000) {
+        $('.CalculatorSection_form').addClass('CalculatorSection_form-invalid');
+      } else {
+        $('.CalculatorSection_form').removeClass('CalculatorSection_form-invalid');
+      }
+
     });
 
-    let currencyCurrentVal = Number($currencyInput.inputmask('unmaskedvalue'));
-    makeFormula(currencyCurrentVal, bonus);
+    let currencyCurrentVal = Number($currencyInput.val());
+
+    $('.CalculatorSection_formula').html(makeFormula(currencyCurrentVal, discount, rate).formula);
+    $('.CalculatorSection_price').html(makeFormula(currencyCurrentVal, discount, rate).price);
+
   });
 
 })();

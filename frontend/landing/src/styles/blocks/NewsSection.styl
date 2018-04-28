@@ -29,9 +29,26 @@
         position relative
         text-align center
         letter-spacing normal
-        margin-bottom 95px
+        margin-bottom 180px
+        @media smMinus
+            margin-bottom 65px
         @media xs
             font-size 22px
+            margin-bottom 80px
+    &_logo
+        position absolute
+        top -30px
+        left 0
+        size 102px auto
+        z-index 10
+        @media xs
+            top -30px
+            width 78px
+        path
+            fill blue
+            transition fill .25s ease
+    &_forbes + &_newsHeader
+        color blue
     &_newsWrapper
         display: flex
         flex-flow row wrap
@@ -63,6 +80,11 @@
             line-height 1.86
             z-index 10
             transition color .2s ease
+    &_newsCard-brand
+        @media smMinus
+            margin-top 30px
+    &_newsCard-brand &_newsHeader
+        padding-top 40px
     &_newsCard:hover &_newsHeader, &_newsCard:hover:after
         @media md
             color white
@@ -70,8 +92,12 @@
         animation-play-state running
     &_newsCard:hover &_newsImg
         opacity 1
+    &_newsCard:hover &_logo path
+        @media md
+            fill white
     &_newsHeader
         font-size 35px
+        line-height 50px
         color #212121
         font-weight 400
         z-index 10

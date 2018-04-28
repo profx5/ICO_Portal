@@ -4,6 +4,26 @@
     z-index 10
     // overflow-x hidden
     // overflow-y visible
+    @media smMinus
+        margin-bottom 45px
+    @media md
+        margin-bottom 145px
+    &_pattern
+        background white url('../img/common/svg/pattern.svg') repeat center
+    &_header
+        color blue
+        font-weight 500
+        font-size 35px
+        z-index 10
+        position relative
+        text-align center
+        letter-spacing normal
+        margin-bottom 80px
+        @media xs
+            font-size 22px
+            margin-bottom 20px
+        @media sm
+            margin-bottom 110px
     &_headerPhantom
         z-index 9
         position relative
@@ -14,229 +34,85 @@
             left -74px
         @media md
             bottom -57px
-    &_header
-        color blue
-        font-weight 500
-        font-size 35px
-        z-index 10
-        position relative
+    &_teamWrapper
+        display flex
+        flex-flow row wrap
+        @media sm
+            justify-content space-between
+    &_teammate
+        flex-basis 22.8%
+        height auto
+        background white
+        box-shadow 1px 4px 20px 0 rgba(157, 155, 192, 0.24)
+        margin-bottom 30px
+        border-radius 3px
+        overflow hidden
+        display inline-flex
+        flex-direction column
+        &:not(:nth-child(4n))
+            margin-right 27px
+            @media smMinus
+                margin-right 0
+        @media xs
+            flex-basis 100%
+        @media sm
+            flex-basis 47.7%
+    &_photo
+        background-size cover
+        background-position center center
+        size 100% 264px
+        display flex
+        flex-flow row nowrap
+        justify-content flex-end
+        align-items flex-end
+        padding-right 10px
+        padding-bottom 3px
+        border 1px solid #EBEEF8
+        border-top-left-radius 3px
+        border-top-right-radius 3px
+    &_linkWrapper
+        size 30px 30px
+        border-radius 3px
+        background blue
+        display inline-flex
+        justify-content center
+        align-items center
+        background-repeat no-repeat
+        background-size 16px 16px
+        background-position center
+    &_info
         text-align center
+        padding 0 18px
+        position relative
+        flex 1
+    &_name
+        color #316fdf
+        font-weight 500
+        font-size 22px
+        z-index 10
+        text-align center
+        position relative
         letter-spacing normal
-        margin-bottom 45px
+        padding-top 20px
+        margin-bottom 11px
         @media xs
             font-size 22px
-    &_switcherWrapper
-        size 266px 42px
-        display flex
-        flex-flow row nowrap
-        margin 0 auto
-        margin-bottom 60px
-        @media md
-            margin-bottom 35px
-    &_switcher
-        flex-basis 50%
-        border 1px solid blue
-        background transparent
-        transition all .3s ease
-        text-align center
-        line-height 42px
-        font-weight 400
+    &_title
+        line-height 1.5
+        color #a2a2a2
+        margin-bottom 85px
+    &_moreInfo
         color blue
-        cursor pointer
-        &-active
-            background blue
-            color white
-        &-team
-            border-top-left-radius 40px
-            border-bottom-left-radius 40px
-        &-advisiors
-            border-top-right-radius 40px
-            border-bottom-right-radius 40px
-    &_navBtn
-        background-image none
-        position absolute
-        display flex
-        align-items center
-        top 208px
-        visibility hidden
-        @media xs
-            top 2015
-        @media sm
-            top 185px
-        path
-            transition fill 0.2s ease
-        &:hover path
-            fill pink
-    &_btnPrev
-        transform rotate(180deg)
-        left 210px
-        @media xs
-            left 20px
-        @media sm
-            left 50px
-    &_btnNext
-        right 210px
-        @media xs
-            right 20px
-        @media sm
-            right 50px
-        &-active
-            transform scale(1) !important
-    &_slideContent
         position relative
-        @media xs
-            padding 0 30px
-        @media md
-            width 250px
-    &_slideContent:hover &_hoverInfo
-        opacity 1
-        visibility visible
-        transform translate3d(-50%, 0, 0)
-    &_sliderContainer
-        visibility hidden
-        opacity 0
-        transition all .3s ease
-        padding-bottom 110px
-        overflow visible
-        z-index 20
-        @media xs
-            margin-bottom 0 !important
-            padding-bottom 50px
-        @media sm
-            padding-bottom 90px
-        @media md
-            padding-left 13vw
-            padding-top 25px
-        &-advisiors
-            position absolute
-            width 100%
-            @media xs
-                top 236px
-            @media md
-                top 265px
-            @media sm
-                top 267px
-    &-advisiorsActive &_advisiorsBtn, &-teamActive &_teamBtn
-        visibility visible
-    &-teamActive &_sliderContainer-team, &-teamActive &_scrollbar-team
-        visibility visible
-        opacity 1
-    &-advisiorsActive &_sliderContainer-advisiors, &-advisiorsActive &_scrollbar-advisiors
-        visibility visible
-        opacity 1
-    &_thumbnail
-        size 185px 185px
-        margin 0 auto
-        border-radius 180px
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        margin-bottom 10px
-    &_name
-        font-size 25px
-        color #316fdf
-        text-align center
-    &_status
-        line-height 1.35
-        color #9b9b9b
-        text-align center
-        &:after
+        position absolute
+        left 50%
+        transform translateX(-50%)
+        bottom 30px
+        &:before
             content ''
             display block
-            background #eaeaea
-            size 40px 2px
-            margin 10px auto 10px
-    &_text
-        color #9b9b9b
-        line-height 1.56
-        text-align center
-        padding-bottom 15px
-    &_socialWrapper
-        width 85px
-        margin 0 auto
-        display: flex
-        flex-flow row nowrap
-        justify-content space-between
-        align-items center
-    &_sliderWrapper
-        margin-bottom 60px
-    &_scrollbar
-        height 2px
-        background rgba(49,111,223,.15)
-        display block
-        left 50% !important
-        right unset
-        transform translateX(-50%)
-        @media xs
-            width 86% !important
-        @media sm
-            width 80vw !important
-        @media md
-            width 1170px !important
-            max-width 96vw
-    &_scrollbarHandle-team, &_scrollbarHandle-advisiors
-        background: #f84f78
-        border-radius 10px
-        height 10px
-        top -4px !important
-        position relative
-        cursor pointer
-        @media smMinus
-            top -4.5px !important
-    &_hoverInfo
-        width 370px
-        height auto
-        box-shadow 1px 4px 20px 0 rgba(157, 155, 192, 0.24)
-        border-radius 3px
-        position absolute
-        top -21px
-        left 50%
-        z-index 20
-        background white
-        min-height 110%
-        padding 32px 30px 80px
-        opacity 0
-        visibility hidden
-        transform translate3d(-50%, 20px, 0)
-        transition opacity .5s ease, visibility .5s ease, transform .7s ease
-        @media smMinus
-            display none !important
-    &_hoverHeader
-        font-size 25px
-        line-height 0.92
-        font-weight 400
-        width 100%
-        color blue
-        letter-spacing 0.6
-        transform translate3d(0,10px,0)
-        border-bottom 1px solid transparent
-        transition all .3s ease
-        margin-bottom 18px
-        padding-bottom 18px
-    &_slide:hover &_hoverHeader
-        border-bottom-color #E9E9E9
-        transform translate3d(0,0,0)
-    &_hoverText
-        color #000000
-        font-weight 400
-        margin-top 18px
-        padding-bottom 50px
-    &_hoverSocialWrapper
-        size 85px auto
-        display flex
-        flex-flow row nowrap
-        justify-content space-between
-        align-items center
-        position absolute
-        bottom 30px
-    &_hoverSocialIcon svg path
-        transition fill .2s ease
-    &_hoverSocialIcon:hover svg path
-        fill blue
-    &_scrollbar
-        bottom 105px !important
-        z-index 0 !important
-        opacity 0
-        visibility hidden
-        @media smMinus
-            bottom 75px !important
+            position absolute unset 0 1px
+            height 1px
+            background blue
+        &:hover
+            color blue
