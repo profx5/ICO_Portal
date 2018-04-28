@@ -6,7 +6,7 @@ from user_office.models import Deposit, Mint
 
 
 class TestGetDeposits(APITestCase):
-    def test_successful_request(self):
+    def test_get_deposits(self):
         mints = [Mint.objects.create(currency='ETH',
                                      block_hash='0xa72c855a41006709e340d15640c2b18dc6be332fcaa35f09da1d26ccbb042b49',
                                      account_to='0xF69C63e7a39b56b69E09b21496B46005bF950458',
@@ -71,4 +71,15 @@ class TestGetDeposits(APITestCase):
             }
         }
     ]
+}''')
+
+    def test_get_empty_deposits(self):
+        response = self.client.get('/api/getDeposits/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.dumps(response.data, indent=4),
+'''{
+    "count": 0,
+    "pages": 1,
+    "current_page": 1,
+    "results": []
 }''')
