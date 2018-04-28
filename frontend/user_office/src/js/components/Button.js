@@ -18,7 +18,7 @@ const Btn = styled.button`
     border-radius: 2px;
     color: #ffffff;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 300;
     text-align: center;
     position: relative;
     z-index: 1;

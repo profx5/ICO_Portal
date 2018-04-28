@@ -1,12 +1,14 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import styled from 'styled-components';
+
+import CurrencyCalculator from './CurrencyCalculator';
 
 import CurrencyCard from './../components/CurrencyCard';
 import Button from './../components/Button';
 import FetchButton from './../components/FetchButton';
 
-import * as CurrencyActions from '../actions/CurrencyActions.js'
+import * as CurrencyActions from '../actions/CurrencyActions.js';
 
 
 
@@ -55,6 +57,7 @@ class Currency extends React.Component {
                     {this.generateCurrencyCards(this.props.currencies)}
                 </Content>
                 <FetchButton amount={23}/>
+                <CurrencyCalculator/>
             </Wrapper>
         )
     }
