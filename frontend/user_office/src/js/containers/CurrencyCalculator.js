@@ -1,16 +1,23 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import styled from 'styled-components';
 
 import Button from './../components/Button';
 
-import * as CurrencyActions from '../actions/CurrencyActions.js'
+import Invest from './Invest';
+
+import * as CurrencyActions from './../actions/CurrencyActions';
+import * as InvestActions from './../actions/InvestActions';
 
 
 
 class CurrencyCalculator extends React.Component {
 
     render() {
+        const {
+            showInvestForm
+        } = this.props;
+
         return (
             <Wrapper>
                 <div>
@@ -18,10 +25,10 @@ class CurrencyCalculator extends React.Component {
                         <Input type="text" placeholder="1"/>
                     </InputWrapper>
                     <InputWrapper data-header="TKN" data-currency="TNK">
-                        <Input type="text" readonly value="120.00"/>
+                        <Input type="text"/>
                     </InputWrapper>
                     <ButtonWrapper>
-                        <Button text="INVEST"/>
+                        <Button clickHandler={showInvestForm} text="INVEST"/>
                     </ButtonWrapper>
                 </div>
                 <Tip>
@@ -39,7 +46,12 @@ const mapStateToProps = ({}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+    showInvestForm() {
+        dispatch(InvestActions.showForm())
+    },
+    hideInvestForm() {
+        dispatch(InvestActions.hideForm())
+    },
 })
 
 

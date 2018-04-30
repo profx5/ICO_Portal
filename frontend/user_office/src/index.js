@@ -7,7 +7,8 @@ import {Provider} from 'react-redux'
 import reducer from './js/reducers'
 import Immutable from 'immutable'
 
-import './styles/index.css';
+import './global-styles';
+
 import App from './App';
 
 import createSagaMiddleware from 'redux-saga'

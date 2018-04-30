@@ -2,9 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {canSendTransaction, ethToWei} from '../../web3'
 //components
-import InvestForm from '../components/InvestForm'
+import InvestForm from './../components/InvestForm'
 //actions
-import * as InvestActions from '../actions/InvestActions'
+import * as InvestActions from './../actions/InvestActions'
 
 class Invest extends React.Component {
     constructor(props) {

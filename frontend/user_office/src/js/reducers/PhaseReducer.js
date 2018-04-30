@@ -9,7 +9,7 @@ const initialState = Map({
     begin_date: null,
     end_date: null,
     bonus_percents: 0
-})
+});
 
 
 

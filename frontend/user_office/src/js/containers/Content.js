@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Invest from './Invest';
 import ICOProgress from './ICOProgress';
 import Currency from './Currency';
 import Transactions from './Transactions';
@@ -10,6 +11,7 @@ import DepositTable from './DepositTable';
 const Content = (props) => {
     return (
         <Wrapper>
+            <Invest/>
             <Head>Dashboard</Head>
             <ICOProgress/>
             <Currency/>

@@ -10,6 +10,7 @@ import {ReferralsReducer} from './ReferralsReducer.js';
 import {ModalWindowReducer} from './ModalWindowReducer.js';
 import {PhaseReducer} from './PhaseReducer.js';
 import {CurrencyReducer} from './CurrencyReducer.js';
+import {TimerReducer} from './TimerReducer.js';
 
 const reducers = combineReducers({
     user: UserReducer,
@@ -21,7 +22,8 @@ const reducers = combineReducers({
     referrals: ReferralsReducer,
     modals: ModalWindowReducer,
     Phase: PhaseReducer,
-    Currencies: CurrencyReducer
+    Currencies: CurrencyReducer,
+    Timer: TimerReducer
 })
 
 export default reducers;

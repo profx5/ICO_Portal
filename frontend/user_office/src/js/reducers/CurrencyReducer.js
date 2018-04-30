@@ -12,34 +12,34 @@ const initialState = Map({
             rate: '585.3880'
         },
         {
-            name: 'ETH',
+            name: 'BTC',
             logo: '/img.png',
-            rate: '585.3880'
+            rate: '8471.2900'
         },
         {
-            name: 'ETH',
+            name: 'LTC',
             logo: '/img.png',
-            rate: '585.3880'
+            rate: '149.1980'
         },
         {
-            name: 'ETH',
+            name: 'BCH',
             logo: '/img.png',
-            rate: '585.3880'
+            rate: '1067.8200'
         },
         {
-            name: 'ETH',
+            name: 'BTG',
             logo: '/img.png',
-            rate: '585.3880'
+            rate: '63.7921'
         },
         {
-            name: 'ETH',
+            name: 'DASH',
             logo: '/img.png',
-            rate: '585.3880'
+            rate: '438.3370'
         },
         {
-            name: 'ETH',
+            name: 'ETC',
             logo: '/img.png',
-            rate: '585.3880'
+            rate: '18.8307'
         },
     ]
 });

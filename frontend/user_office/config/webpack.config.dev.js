@@ -137,14 +137,6 @@ module.exports = {
               name: 'img/[name].[ext]',
             },
           },
-          {
-            test: [/\.ttf$/, /\.woff$/, /\.woff2$/,],
-            loader: require.resolve('url-loader'),
-            options: {
-              limit: 10000,
-              name: 'static/fonts/[name].[ext]',
-            },
-          },
           // Process JS with Babel.
           {
             test: /\.(js|jsx|mjs)$/,
@@ -156,6 +148,13 @@ module.exports = {
               ],
               cacheDirectory: true,
             },
+          },
+          {
+            test: /\.(eot|svg|otf|ttf|woff|woff2)$/,
+            loader: require.resolve('file-loader'),
+            options: {
+              name: '[path][name].[ext]',
+            }
           },
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.

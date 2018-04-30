@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Button = ({text}) => {
-    return (<Btn>{text}</Btn>)
+const Button = ({text, clickHandler}) => {
+    return (<Btn onClick={clickHandler}>{text}</Btn>)
 }
 
 

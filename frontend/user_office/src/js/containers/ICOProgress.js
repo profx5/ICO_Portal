@@ -1,5 +1,11 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import styled from 'styled-components';
+
+import Utils from './../utils/index';
+
+import * as ICOInfoActions from './../actions/ICOInfoActions';
+import * as TimerActions from './../actions/TimerActions';
 
 import clockImg from './../../img/icon_progress.svg';
 import Button from './../components/Button';
@@ -8,22 +14,43 @@ import Button from './../components/Button';
 
 class ICOProgress extends React.Component {
 
+    componentWillMount () {
+        this.props.getICOInfo();
+        this.props.updateTimerTime('55');
+    }
+
+    getPhasePercents = (current, goal) => current / goal * 100
+
+
     render() {
+
+        const {
+            USDcRaised,
+            phaseName,
+            discountPercent,
+            startTime,
+            endTime,
+            hardCapUSDc,
+            timerTime
+        } = this.props;
+
+        let raisedAmountString = USDcRaised + '';
+
         return (
             <Wrapper>
                 <Header>
                     <Head>ICO Progress</Head>
                     <WrapperHeaderInfo>
-                        <Text>Current phase: <Span>preICO</Span></Text>
-                        <Text>Current bonus: <Span>40%</Span></Text>
-                        <Text>Funds raised: <Span colored>123 566 USD</Span></Text>
+                        <Text>Current phase: <Span>{phaseName}</Span></Text>
+                        <Text>Current bonus: <Span>{discountPercent}%</Span></Text>
+                        <Text>Funds raised: <Span colored>{Utils.splitDigits(raisedAmountString)} USD</Span></Text>
                     </WrapperHeaderInfo>
                 </Header>
                 <Content>
                     <ContentPart>
-                        <ContentProgressCell noBorderBottom progress="80%" color="#ffffff" background="rgba(79,221,190,.4)">25M USD / 35M USD</ContentProgressCell>
-                        <ContentCell noBorderBottom>Pre ICO</ContentCell>
-                        <ContentCell noBorderBottom>Current bonus: 40%</ContentCell>
+                        {<ContentProgressCell noBorderBottom progress={this.getPhasePercents(USDcRaised, hardCapUSDc) + '%'} color="#ffffff" background="rgba(79,221,190,.4)">{Utils.formatMoney(USDcRaised)} USD / {Utils.formatMoney(hardCapUSDc)} USD</ContentProgressCell>}
+                        <ContentCell noBorderBottom>{phaseName}</ContentCell>
+                        <ContentCell noBorderBottom>Current bonus: {discountPercent}%</ContentCell>
                         <ContentCell>Remaining: 
                             <Span colored>11 days 01h 15m 12s</Span>
                         </ContentCell>
@@ -47,7 +74,29 @@ class ICOProgress extends React.Component {
 };
 
 
-export default ICOProgress;
+const mapStateToProps = ({ICOInfo, Timer}) => ({
+
+    timerTime: Timer.get('timerTime'),
+    USDcRaised: ICOInfo.get('USDcRaised'),
+    phaseName: ICOInfo.getIn(['currentPhase', 'name']),
+    discountPercent: ICOInfo.getIn(['currentPhase', 'discountPercent']),
+    startTime: ICOInfo.getIn(['currentPhase', 'startTime']),
+    endTime: ICOInfo.getIn(['currentPhase', 'endTime']),
+    hardCapUSDc: ICOInfo.getIn(['currentPhase', 'hardCapUSDc'])
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    getICOInfo() {
+        dispatch(ICOInfoActions.getICOInfoRequest())
+    },
+    updateTimerTime() {
+        dispatch(TimerActions.updateTimerTime())
+    }
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ICOProgress)
+
 
 const Wrapper = styled.div`
     flex: 1;
