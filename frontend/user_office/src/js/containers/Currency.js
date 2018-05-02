@@ -16,32 +16,28 @@ class Currency extends React.Component {
 
     constructor() {
         super();
-
-        this.cards = [];
     }
 
     componentDidMount() {
         this.props.getCurrencies();
+        this.props.setInvestCurrency('ETH');
     }
 
-    cardClickHandler = event => {
-
-        // this.cards.forEach(item => {
-        //     item.classList.remove('active');
-        // });
-        // event.currentTarget.classList.add('active');
+    cardClickHandler (name) {
+        this.props.setInvestCurrency(name);
     }
 
     generateCurrencyCards = (data) => {
 
         return data.map((item, index) => {
+
             return <CurrencyCard 
-                className={index === 0 ? 'active' : ''}
+                className={this.props.investCurrency === item.name ? 'active' : ''}
                 name={item.name} 
-                icon={item.logo} 
+                icon={'icon-' + item.name} 
                 rate={item.rate} 
                 key={index} 
-                ref={card => {this.cards[index] = card}} 
+                clickHandler={this.cardClickHandler.bind(this, item.name)} 
             />
         })
     }
@@ -56,7 +52,7 @@ class Currency extends React.Component {
                 <Content>
                     {this.generateCurrencyCards(this.props.currencies)}
                 </Content>
-                <FetchButton amount={23}/>
+                {(!(currencies.length - 7) <= 0) && <FetchButton amount={currencies.length - 7}/>}
                 <CurrencyCalculator/>
             </Wrapper>
         )
@@ -66,12 +62,16 @@ class Currency extends React.Component {
 
 
 const mapStateToProps = ({Currencies}) => ({
-    currencies: Currencies.get('currencies')
+    currencies: Currencies.get('currencies'),
+    investCurrency: Currencies.get('investCurrency')
 })
 
 const mapDispatchToProps = (dispatch) => ({
     getCurrencies() {
         dispatch(CurrencyActions.getCurrenciesRequest())
+    },
+    setInvestCurrency(payload) {
+        dispatch(CurrencyActions.setInvestCurrency(payload))
     }
 })
 

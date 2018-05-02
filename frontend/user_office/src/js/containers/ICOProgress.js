@@ -34,8 +34,8 @@ class ICOProgress extends React.Component {
             timerTime
         } = this.props;
 
-        let raisedAmountString = USDcRaised + '';
-
+        const raisedAmountString = USDcRaised + '';
+        let phaseRaisedPercents = this.getPhasePercents(USDcRaised, hardCapUSDc);
         return (
             <Wrapper>
                 <Header>
@@ -48,11 +48,14 @@ class ICOProgress extends React.Component {
                 </Header>
                 <Content>
                     <ContentPart>
-                        {<ContentProgressCell noBorderBottom progress={this.getPhasePercents(USDcRaised, hardCapUSDc) + '%'} color="#ffffff" background="rgba(79,221,190,.4)">{Utils.formatMoney(USDcRaised)} USD / {Utils.formatMoney(hardCapUSDc)} USD</ContentProgressCell>}
-                        <ContentCell noBorderBottom>{phaseName}</ContentCell>
+                        {<ContentProgressCell noBorderBottom progress={phaseRaisedPercents === 0 ? '2%' : phaseRaisedPercents + '%'}>
+                            {Utils.formatMoney(USDcRaised)} USD / {Utils.formatMoney(hardCapUSDc)} USD
+                        </ContentProgressCell>}
+
+                        <ContentCell bold noBorderBottom>{phaseName}</ContentCell>
                         <ContentCell noBorderBottom>Current bonus: {discountPercent}%</ContentCell>
-                        <ContentCell>Remaining: 
-                            <Span colored>11 days 01h 15m 12s</Span>
+                        <ContentCell>Remaining:
+                            <Span colored> 11 days 01h 15m 12s</Span>
                         </ContentCell>
                     </ContentPart>
                     <ContentPart>
@@ -181,6 +184,8 @@ const ContentCell = styled.div`
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    font-weight: ${props => props.bold ? '600' : '500'}
+
     color: ${props => props.color || '#233539'}
 
     height: ${props => props.statusCell ? '90px' : '45px'};
@@ -196,6 +201,8 @@ const ContentCell = styled.div`
 const ContentProgressCell = ContentCell.extend`
     position: relative;
     z-index: 1;
+    color: #ffffff;
+    background: rgba(79,221,190,.55);
     &:before {
         content: '';
         background: linear-gradient(to right, #87f0e0, #4fddbe);

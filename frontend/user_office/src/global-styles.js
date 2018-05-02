@@ -1,4 +1,25 @@
 import { injectGlobal } from 'styled-components';
+import gilroyLightWoff from './fonts/Gilroy-Light.woff';
+import gilroyLightWoff2 from './fonts/Gilroy-Light.woff2';
+import gilroyLightTtf from './fonts/Gilroy-Light.ttf';
+
+import gilroyRegularWoff from './fonts/Gilroy-Regular.woff';
+import gilroyRegularWoff2 from './fonts/Gilroy-Regular.woff2';
+import gilroyRegularTtf from './fonts/Gilroy-Regular.ttf';
+
+import gilroyMediumWoff from './fonts/Gilroy-Medium.woff';
+import gilroyMediumWoff2 from './fonts/Gilroy-Medium.woff2';
+import gilroyMediumTtf from './fonts/Gilroy-Medium.ttf';
+
+import gilroyBoldWoff from './fonts/Gilroy-Bold.woff';
+import gilroyBoldWoff2 from './fonts/Gilroy-Bold.woff2';
+import gilroyBoldTtf from './fonts/Gilroy-Bold.ttf';
+
+
+import icomoonEot from './fonts/icomoon.eot';
+import icomoonWoff from './fonts/icomoon.woff';
+import icomoonTtf from './fonts/icomoon.ttf';
+import icomoonSvg from './fonts/icomoon.svg';
 
 injectGlobal`
 
@@ -256,8 +277,8 @@ injectGlobal`
   body {
 
     min-height: 100%;
-    font-family: 'Circe', 'Trebuchet MS', 'Tahoma', 'Arial', 'sans-serif' !important;
-    font-weight: 400;
+    font-family: 'gilroy', 'Trebuchet MS', 'Tahoma', 'Arial', 'sans-serif' !important;
+    font-weight: 500;
     letter-spacing: .4px;
     font-size: 1.6rem;
     line-height: normal;
@@ -276,34 +297,71 @@ injectGlobal`
   }
 
 
+
   @font-face {
-      font-family: 'Circe';
-      src: url('Circe-Light.woff2') format('woff2'),
-          url('Circe-Light.woff') format('woff'),
-          url('Circe-Light.ttf') format('truetype');
+      font-family: 'gilroy';
+      src: url(${gilroyLightWoff}) format('woff2'),
+          url(${gilroyLightWoff2}) format('woff'),
+          url(${gilroyLightTtf}) format('truetype');
       font-weight: 300;
       font-style: normal;
       font-display: swap;
   }
 
   @font-face {
-      font-family: 'Circe';
-      src: url('Circe-Regular.woff2') format('woff2'),
-          url('Circe-Regular.woff') format('woff'),
-          url('Circe-Regular.ttf') format('truetype');
+      font-family: 'gilroy';
+      src: url(${gilroyRegularWoff2}) format('woff2'),
+          url(${gilroyRegularWoff}) format('woff'),
+          url(${gilroyRegularTtf}) format('truetype');
       font-weight: 400;
       font-style: normal;
       font-display: swap;
   }
 
   @font-face {
-      font-family: 'Circe';
-      src: url('Circe-Bold.woff2') format('woff2'),
-          url('Circe-Bold.woff') format('woff'),
-          url('Circe-Bold.ttf') format('truetype');
+      font-family: 'gilroy';
+      src: url(${gilroyMediumWoff2}) format('woff2'),
+          url(${gilroyMediumWoff}) format('woff'),
+          url(${gilroyMediumTtf}) format('truetype');
       font-weight: 500;
       font-style: normal;
       font-display: swap;
+  }
+
+  @font-face {
+      font-family: 'gilroy';
+      src: url(${gilroyBoldWoff2}) format('woff2'),
+          url(${gilroyBoldWoff}) format('woff'),
+          url(${gilroyBoldTtf}) format('truetype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+  }
+
+  @font-face {
+      font-family: 'icomoon';
+      src:  url(${icomoonEot}?18elz6);
+      src:  url(${icomoonEot}?18elz6#iefix) format('embedded-opentype'),
+        url(${icomoonWoff}?18elz6) format('woff'),
+        url(${icomoonTtf}?18elz6) format('truetype'),
+        url(${icomoonSvg}?18elz6#icomoon) format('svg');
+        font-weight: normal;
+        font-style: normal;
+  }
+
+
+  [class^="icon-"], [class*=" icon-"] {
+
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
 `;

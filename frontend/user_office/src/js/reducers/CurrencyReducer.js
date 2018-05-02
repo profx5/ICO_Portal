@@ -27,7 +27,7 @@ const initialState = Map({
             rate: '1067.8200'
         },
         {
-            name: 'BTG',
+            name: 'BRK',
             logo: '/img.png',
             rate: '63.7921'
         },
@@ -41,7 +41,8 @@ const initialState = Map({
             logo: '/img.png',
             rate: '18.8307'
         },
-    ]
+    ],
+    investCurrency: ''
 });
 
 
@@ -51,6 +52,12 @@ export const CurrencyReducer = createReducer({
     [actions.getCurrenciesSuccess]: (state, payload) => {
         return state.merge({
             currencies: payload
+        });
+    },
+    [actions.setInvestCurrency]: (state, payload) => {
+
+        return state.merge({
+            investCurrency: payload
         });
     }
 }, initialState);

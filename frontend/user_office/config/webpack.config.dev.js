@@ -151,9 +151,9 @@ module.exports = {
           },
           {
             test: /\.(eot|svg|otf|ttf|woff|woff2)$/,
-            loader: require.resolve('file-loader'),
+            loader: 'file-loader',
             options: {
-              name: '[path][name].[ext]',
+              name: 'fonts/[name].[ext]',
             }
           },
           // "postcss" loader applies autoprefixer to our CSS.

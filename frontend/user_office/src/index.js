@@ -8,6 +8,7 @@ import reducer from './js/reducers'
 import Immutable from 'immutable'
 
 import './global-styles';
+import './index.css';
 
 import App from './App';
 

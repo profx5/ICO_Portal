@@ -35,7 +35,7 @@ const Wrapper = styled.div`
 const Head = styled.h2`
     font-size: 38px;
     line-height: 1;
-    font-weight: 400;
+    font-weight: 500;
     color: #233539;
     letter-spacing: -1.1px;
     margin-top: 34px;
