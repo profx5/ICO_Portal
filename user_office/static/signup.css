@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+}
+
+[data-password-indicator='default']{ 
+
+}
+
+[data-password-indicator='weak']{ 
+    border: 2px solid tomato !important;
+    outline: none;
+}
+[data-password-indicator='medium']{ 
+    outline: none;
+    border: 2px solid yellow !important;
+}
+[data-password-indicator='strong']{ 
+    outline: none;
+    border: 2px solid green !important;
+}
+
+.auth-button:disabled {
+    box-shadow: inset 0 0 10px #000;
+    cursor: not-allowed;
+}
