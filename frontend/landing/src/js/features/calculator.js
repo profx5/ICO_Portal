@@ -15,7 +15,7 @@ function makeFormula(tokensAmount = 1, discountAmount = '0%', rateAmount) {
 
   if (tokens <= 0) {
     priceStr = `<span class="CalculatorSection_price-resultNoDiscount">$0</span>`;
-    console.log(tokens);
+
   } else if (discount !== 0) {
     priceStr += `<strike>$${Math.round(result * 0.01)}</strike> <span class="CalculatorSection_price-result">$${Math.round(result * discountedEthRate)}</span> with ${discount}% discount!`;
   } else if (discount === 0) {

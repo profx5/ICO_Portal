@@ -86,10 +86,11 @@ const TableBodyRow = styled.tr`
 
 const TableHead = styled.th`
     color: #0a0a0a;
+    font-size: 15px;
     text-align: left;
     font-weight: 600;
     padding-left: 24px;
-    padding-bottom: 25px;
+    padding-bottom: 18px;
     &:last-of-type {
         width: 260px;
     }

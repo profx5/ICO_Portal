@@ -8,41 +8,35 @@ const initialState = Map({
     currencies: [
         {
             name: 'ETH',
-            logo: '/img.png',
-            rate: '585.3880'
+            rate: 585.38
         },
         {
             name: 'BTC',
-            logo: '/img.png',
-            rate: '8471.2900'
+            rate: 8471.29
         },
         {
             name: 'LTC',
-            logo: '/img.png',
-            rate: '149.1980'
+            rate: 149.19
         },
         {
             name: 'BCH',
-            logo: '/img.png',
-            rate: '1067.8200'
+            rate: 1067.82
         },
         {
             name: 'BRK',
-            logo: '/img.png',
-            rate: '63.7921'
+            rate: 63.79
         },
         {
             name: 'DASH',
-            logo: '/img.png',
-            rate: '438.3370'
+            rate: 438.33
         },
         {
             name: 'ETC',
-            logo: '/img.png',
-            rate: '18.8307'
+            rate: 18.83
         },
     ],
-    investCurrency: ''
+    investCurrency: '',
+    investCurrencyRate: ''
 });
 
 
@@ -55,9 +49,13 @@ export const CurrencyReducer = createReducer({
         });
     },
     [actions.setInvestCurrency]: (state, payload) => {
-
         return state.merge({
             investCurrency: payload
+        });
+    },
+    [actions.setInvestCurrencyRate]: (state, payload) => {
+        return state.merge({
+            investCurrencyRate: payload
         });
     }
 }, initialState);

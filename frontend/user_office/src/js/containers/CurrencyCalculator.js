@@ -2,7 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
+import Utils from './../utils';
+
 import Button from './../components/Button';
+import InvestInput from './../components/InvestInput';
 
 import Invest from './Invest';
 
@@ -13,36 +16,54 @@ import * as InvestActions from './../actions/InvestActions';
 
 class CurrencyCalculator extends React.Component {
 
+    updateTotalTokens = () => {
+        const {investAmount, investCurrencyRate, discountPercent, setTokensAmount} = this.props;
+
+        let totalTokens = investAmount * investCurrencyRate;
+        let bonusAmount = totalTokens / 100 * discountPercent;
+        totalTokens = (totalTokens + bonusAmount).toFixed(2);
+
+        setTokensAmount(totalTokens);
+    }
+
+    componentDidUpdate() {this.updateTotalTokens()}
+
+    investOnChangeHandler = event => {
+        Utils.formatInvestNumber(event, this.props.setInvestAmount);
+        this.updateTotalTokens();
+    }
+
+
     render() {
         const {
-            showInvestForm
+            showInvestForm,
+            investCurrency,
+            investCurrencyRate,
+            investAmount,
+            tokensAmount
         } = this.props;
 
         return (
             <Wrapper>
                 <div>
-                    <InputWrapper data-header="Amount" data-currency="ETH">
-                        <Input type="text" placeholder="1"/>
-                    </InputWrapper>
-                    <InputWrapper data-header="TKN" data-currency="TNK">
-                        <Input type="text"/>
-                    </InputWrapper>
+                    <InvestInput value={this.props.investAmount} type="text" onChangeHandler={this.investOnChangeHandler} header="Amount" currency={investCurrency}/>
+                    <InvestInput value={this.props.tokensAmount} type="text" header="TKN" currency="TNK"/>
                     <ButtonWrapper>
                         <Button clickHandler={showInvestForm} text="INVEST"/>
                     </ButtonWrapper>
                 </div>
-                <Tip>
-                    1 ETH = 1250.000 TNK
-                </Tip>
+                <Tip>{"1 " + investCurrency + ' = ' + investCurrencyRate + ' TNK'}</Tip>
             </Wrapper>
         )
     }
 };
 
-
-
-const mapStateToProps = ({}) => ({
-
+const mapStateToProps = ({Currencies, Invest, ICOInfo}) => ({
+    investCurrency: Currencies.get('investCurrency'),
+    investCurrencyRate: Currencies.get('investCurrencyRate'),
+    investAmount: Invest.get('investAmount'),
+    tokensAmount: Invest.get('tokensAmount'),
+    discountPercent: ICOInfo.getIn(['currentPhase', 'discountPercent'])
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -52,6 +73,12 @@ const mapDispatchToProps = (dispatch) => ({
     hideInvestForm() {
         dispatch(InvestActions.hideForm())
     },
+    setInvestAmount(payload) {
+        dispatch(InvestActions.setInvestAmount(payload))
+    },
+    setTokensAmount(payload) {
+        dispatch(InvestActions.setTokensAmount(payload))
+    }
 })
 
 

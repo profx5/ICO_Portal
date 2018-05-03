@@ -68,7 +68,38 @@ const Utils = {
             str[1] = str[1].replace(/(\d{3})/g, '$1 ');
         }
         return str.join('.');
+    },
+    formatInvestNumber: (event, callback) => {
+        let val = event.target.value,
+            lastChar = val[val.length - 1],
+            newVal;
+
+        if (!val) {
+            callback('');
+            return;
+        } 
+
+        if (lastChar.match(/[0-9.,]/g) === null) {
+
+            let newVal = val.substr(0,val.length - 1);
+            callback(newVal);
+        } else callback(val);
+
+        if (val.indexOf(',') != -1) {
+            newVal = val.replace(',' , '.');
+            callback(newVal);
+
+            if (newVal.match(/\./g) !== null && newVal.match(/\./g).length >= 2) {
+              callback(newVal.substr(0,newVal.length - 1));
+            }
+        }
+
+        if (val.match(/\./g) !== null && val.match(/\./g).length >= 2) {
+            callback(val.substr(0,val.length - 1));
+        }
+
+        if (val.length === 1 && val.match(/[.,]/g) != null) callback('');
     }
-}
+};
 
 export default Utils

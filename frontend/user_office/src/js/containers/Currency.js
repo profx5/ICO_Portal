@@ -19,33 +19,42 @@ class Currency extends React.Component {
     }
 
     componentDidMount() {
+        const firstCurrencyData = this.props.currencies[0];
+
         this.props.getCurrencies();
-        this.props.setInvestCurrency('ETH');
+        this.props.setInvestCurrency(firstCurrencyData.name);
+        this.props.setInvestCurrencyRate(firstCurrencyData.rate);
     }
 
-    cardClickHandler (name) {
+    cardClickHandler (name, rate) {
         this.props.setInvestCurrency(name);
+        this.props.setInvestCurrencyRate(rate);
     }
 
     generateCurrencyCards = (data) => {
 
         return data.map((item, index) => {
+            let name = item.name,
+                rate = item.rate;
 
             return <CurrencyCard 
-                className={this.props.investCurrency === item.name ? 'active' : ''}
-                name={item.name} 
-                icon={'icon-' + item.name} 
-                rate={item.rate} 
+                className={this.props.investCurrency === name ? 'active' : ''}
+                name={name} 
+                icon={'icon-' + name} 
+                rate={rate} 
                 key={index} 
-                clickHandler={this.cardClickHandler.bind(this, item.name)} 
+                clickHandler={this.cardClickHandler.bind(this, name, rate)}
             />
         })
     }
 
     render() {
         const {
-            currencies
+            currencies,
+            investCurrency,
+            investCurrencyRate
         } = this.props;
+
         return (
             <Wrapper>
                 <Head>Currency</Head>
@@ -63,7 +72,8 @@ class Currency extends React.Component {
 
 const mapStateToProps = ({Currencies}) => ({
     currencies: Currencies.get('currencies'),
-    investCurrency: Currencies.get('investCurrency')
+    investCurrency: Currencies.get('investCurrency'),
+    investCurrencyRate: Currencies.get('investCurrencyRate')
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -72,6 +82,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     setInvestCurrency(payload) {
         dispatch(CurrencyActions.setInvestCurrency(payload))
+    },
+    setInvestCurrencyRate(payload) {
+        dispatch(CurrencyActions.setInvestCurrencyRate(payload))
     }
 })
 

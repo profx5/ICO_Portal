@@ -16,29 +16,7 @@ import createSagaMiddleware from 'redux-saga'
 import rootSaga from './saga'
 import {createLogger} from 'redux-logger'
 
-const sagaMiddleware = createSagaMiddleware()
-
-const logger = createLogger({
-    stateTransformer: (state) => {
-        let newState = {};
-
-        for (var i of Object.keys(state)) {
-            if (Immutable.Iterable.isIterable(state[i])) {
-                newState[i] = state[i].toJS();
-            } else {
-                newState[i] = state[i];
-            }
-        };
-
-        return newState;
-    }
-});
-
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
-
-const store = createStore(reducer, applyMiddleware(sagaMiddleware, logger))
-sagaMiddleware.run(rootSaga)
+import store from './js/store/index';
 
 const ROOT_NODE = document.getElementById('root');
 
