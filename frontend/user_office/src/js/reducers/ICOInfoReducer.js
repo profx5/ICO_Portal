@@ -17,12 +17,14 @@ const initialState = Map({
         endTime: 1523145600,
         softCapUSDc: 200000000,
         hardCapUSDc: 300000000
-    }
+    },
+    humanizedEndTime: ''
 });
 
 
 
 export const ICOInfoReducer = createReducer({
     [actions.getICOInfoRequest]: (state, payload) => state,
-    [actions.getICOInfoSuccess]: (state, payload) => state.merge(payload)
+    [actions.getICOInfoSuccess]: (state, payload) => state.merge(payload),
+    [actions.humanizeEndTime]: (state, payload) => state.merge({humanizedEndTime: payload})
 }, initialState);
