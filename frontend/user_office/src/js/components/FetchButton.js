@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const FetchButton = ({amount}) => {
-    return (<Button>View more {amount} currencies</Button>)
+const FetchButton = ({amount, spread, onClickHandler}) => {
+    return (<Button onClick={onClickHandler}>{spread === false ? 'View more' : 'Hide'} {amount} currencies</Button>)
 }
 
 
@@ -19,4 +19,6 @@ const Button = styled.button`
     border: solid 1px rgba(228, 232, 234, 0.25);
     background: white;
     box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform .25s ease;
 `;

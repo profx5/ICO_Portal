@@ -25,6 +25,7 @@ const Card = styled.div`
     min-height: 157px;
     width: 12.5%;
     padding: 12px 16px;
+    margin-bottom: 18px;
     display: inline-flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -37,7 +38,7 @@ const Card = styled.div`
     &:hover {
         [class^="icon-"] {
             color: rgba(80,154,245,1) !important;
-            transform: scale3d(1.1,1.1,1.1);
+            transform: scale3d(1.05,1.05,1.05);
         }
         .currency-rate {
             color: #3476fc;
@@ -48,10 +49,10 @@ const Card = styled.div`
     }
     &.active {
         box-shadow: 0 2px 25px 0 rgba(63, 123, 244, 0.33);
-        transform: scale3d(1.1,1.1,1.1);
+        transform: scale3d(1.05,1.05,1.05);
         [class^="icon-"] {
             color: rgba(80,154,245,1) !important;
-            transform: scale3d(1.1,1.1,1.1);
+            transform: scale3d(1.05,1.05,1.05);
         }
         .currency-rate {
             color: #3476fc;

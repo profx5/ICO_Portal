@@ -34,9 +34,35 @@ const initialState = Map({
             name: 'ETC',
             rate: 18.83
         },
+        {
+            name: 'XLM',
+            rate: 585.38
+        },
+        {
+            name: 'IOT',
+            rate: 8471.29
+        },
+        {
+            name: 'GNT',
+            rate: 149.19
+        },
+        {
+            name: 'ETP',
+            rate: 1067.82
+        },
+        {
+            name: 'ADA',
+            rate: 63.79
+        },
+        {
+            name: 'XMR',
+            rate: 438.33
+        },
+
     ],
     investCurrency: '',
-    investCurrencyRate: ''
+    investCurrencyRate: '',
+    spreadedCurrencyCards: false
 });
 
 
@@ -57,5 +83,11 @@ export const CurrencyReducer = createReducer({
         return state.merge({
             investCurrencyRate: payload
         });
-    }
+    },
+    [actions.spreadVisibleCards]: (state, payload) => {
+        return state.merge({
+            spreadedCurrencyCards: payload
+        });
+    },
+
 }, initialState);

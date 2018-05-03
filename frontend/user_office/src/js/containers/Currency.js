@@ -37,6 +37,8 @@ class Currency extends React.Component {
             let name = item.name,
                 rate = item.rate;
 
+            if (index >= 7 && this.props.spreadedCurrencyCards === false) return;
+
             return <CurrencyCard 
                 className={this.props.investCurrency === name ? 'active' : ''}
                 name={name} 
@@ -48,11 +50,23 @@ class Currency extends React.Component {
         })
     }
 
+    buttonClickHandler = () => {
+        let {spreadedCurrencyCards, spreadVisibleCards, currencies, setInvestCurrency} = this.props;
+        
+        if (spreadedCurrencyCards === true) {
+            spreadVisibleCards(false);
+            setInvestCurrency(currencies[0].name)
+        } else {
+            spreadVisibleCards(true);
+        }
+    }
+
     render() {
         const {
             currencies,
             investCurrency,
-            investCurrencyRate
+            investCurrencyRate,
+            spreadedCurrencyCards
         } = this.props;
 
         return (
@@ -61,7 +75,7 @@ class Currency extends React.Component {
                 <Content>
                     {this.generateCurrencyCards(this.props.currencies)}
                 </Content>
-                {(!(currencies.length - 7) <= 0) && <FetchButton amount={currencies.length - 7}/>}
+                {(!(currencies.length - 7) <= 0) && <FetchButton onClickHandler={this.buttonClickHandler} spread={spreadedCurrencyCards} amount={currencies.length - 7}/>}
                 <CurrencyCalculator/>
             </Wrapper>
         )
@@ -73,7 +87,8 @@ class Currency extends React.Component {
 const mapStateToProps = ({Currencies}) => ({
     currencies: Currencies.get('currencies'),
     investCurrency: Currencies.get('investCurrency'),
-    investCurrencyRate: Currencies.get('investCurrencyRate')
+    investCurrencyRate: Currencies.get('investCurrencyRate'),
+    spreadedCurrencyCards: Currencies.get('spreadedCurrencyCards')
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -85,6 +100,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     setInvestCurrencyRate(payload) {
         dispatch(CurrencyActions.setInvestCurrencyRate(payload))
+    },
+    spreadVisibleCards(payload) {
+        dispatch(CurrencyActions.spreadVisibleCards(payload))
     }
 })
 

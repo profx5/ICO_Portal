@@ -36,7 +36,6 @@ class CurrencyCalculator extends React.Component {
 
     render() {
         const {
-            showInvestForm,
             investCurrency,
             investCurrencyRate,
             investAmount,
@@ -49,7 +48,7 @@ class CurrencyCalculator extends React.Component {
                     <InvestInput value={this.props.investAmount} type="text" onChangeHandler={this.investOnChangeHandler} header="Amount" currency={investCurrency}/>
                     <InvestInput value={this.props.tokensAmount} type="text" header="TKN" currency="TNK"/>
                     <ButtonWrapper>
-                        <Button clickHandler={showInvestForm} text="INVEST"/>
+                        <Button text="INVEST"/>
                     </ButtonWrapper>
                 </div>
                 <Tip>{"1 " + investCurrency + ' = ' + investCurrencyRate + ' TNK'}</Tip>
@@ -67,12 +66,6 @@ const mapStateToProps = ({Currencies, Invest, ICOInfo}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    showInvestForm() {
-        dispatch(InvestActions.showForm())
-    },
-    hideInvestForm() {
-        dispatch(InvestActions.hideForm())
-    },
     setInvestAmount(payload) {
         dispatch(InvestActions.setInvestAmount(payload))
     },
