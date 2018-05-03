@@ -4,7 +4,7 @@ from .investor import *
 from .kyc import *
 from .mint import *
 from .deposit import *
-
+from .exchange_rates import *
 
 admin.site.unregister(Group)
 
