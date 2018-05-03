@@ -32,7 +32,8 @@ api_urlpatterns = [
     path('setEthAccount/', set_eth_account),
     path('prepareDeposit/', prepare_deposit),
     path('getReferralLink/', get_referral_link),
-    path('getPhase/', get_phase)
+    path('getPhase/', get_phase),
+    path('getRates/', get_rates)
 ]
 
 api_urlpatterns += router.urls
