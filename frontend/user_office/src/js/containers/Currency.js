@@ -51,11 +51,12 @@ class Currency extends React.Component {
     }
 
     buttonClickHandler = () => {
-        let {spreadedCurrencyCards, spreadVisibleCards, currencies, setInvestCurrency} = this.props;
+        let {spreadedCurrencyCards, spreadVisibleCards, currencies, setInvestCurrency, setInvestCurrencyRate} = this.props;
         
         if (spreadedCurrencyCards === true) {
             spreadVisibleCards(false);
             setInvestCurrency(currencies[0].name)
+            setInvestCurrencyRate(currencies[0].rate)
         } else {
             spreadVisibleCards(true);
         }
