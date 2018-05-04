@@ -11,6 +11,7 @@ import {ModalWindowReducer} from './ModalWindowReducer.js';
 import {PhaseReducer} from './PhaseReducer.js';
 import {CurrencyReducer} from './CurrencyReducer.js';
 import {TimerReducer} from './TimerReducer.js';
+import {UIStateReducer} from './UIStateReducer.js';
 
 const reducers = combineReducers({
     user: UserReducer,
@@ -23,7 +24,8 @@ const reducers = combineReducers({
     modals: ModalWindowReducer,
     Phase: PhaseReducer,
     Currencies: CurrencyReducer,
-    Timer: TimerReducer
+    Timer: TimerReducer,
+    UI: UIStateReducer
 })
 
 export default reducers;

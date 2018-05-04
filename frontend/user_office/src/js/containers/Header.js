@@ -1,21 +1,30 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import styled from 'styled-components';
-import * as InvestActions from '../actions/InvestActions'
+import * as InvestActions from '../actions/InvestActions';
+import * as UIStateActions from '../actions/UIStateActions';
 
-import Balance from '../components/Balance'
-import AccountInfo from '../components/AccountInfo'
-import KYCWidget from '../components/KYCWidget'
+import Balance from '../components/Balance';
+import AccountInfo from '../components/AccountInfo';
+import KYCWidget from '../components/KYCWidget';
 
-import Invest from './Invest'
-import DepositTable from './DepositTable'
-import BountiesBalance from './BountiesBalance'
-import PhaseStats from './PhaseStats'
-import KYC from './KYC'
-import Account from './Account'
-import ReferralLink from './ReferralLink'
+import Invest from './Invest';
+import DepositTable from './DepositTable';
+import BountiesBalance from './BountiesBalance';
+import PhaseStats from './PhaseStats';
+import KYC from './KYC';
+import Account from './Account';
+import ReferralLink from './ReferralLink';
 
 class Header extends React.Component {
+
+    dropdownClickHandler = () => {
+        const {accountDropdownShown, showAccountDropdown, hideAccountDropdown} = this.props;
+        if (!accountDropdownShown) {
+            showAccountDropdown();
+        } else hideAccountDropdown();
+    }
+
     render () {
         const {
             email,
@@ -24,7 +33,8 @@ class Header extends React.Component {
             showInvestForm,
             kyc,
             KYCStatus,
-            accountApproved
+            accountApproved,
+            accountDropdownShown
         } = this.props;
 
         const showKYCWidget = KYCStatus === 'WAITING'
@@ -43,22 +53,16 @@ class Header extends React.Component {
                     />
                     <AccountInfo
                         email={email}
+                        isDropdownOpen={accountDropdownShown}
+                        dropdownClickHandler={this.dropdownClickHandler}
                     />
-  {/*                  <Account />*/}
-{/*                    <Account />
-                    <ReferralLink />
-                    <BountiesBalance />
-                    <PhaseStats />
-                    <Invest />*/}
                 </HeaderUserBlock>
-{/*                <DepositTable />
-                {showKYCWidget && <KYCWidget kyc={kyc} status={KYCStatus}/>}*/}
             </HeaderBlock>
         )
     }
 }
 
-const mapStateToProps = ({user, ICOPhaseStats, KYC, Invest}) => ({
+const mapStateToProps = ({user, ICOPhaseStats, KYC, Invest, UI}) => ({
     email: user.get('email'),
     tokensAmount: user.get('tokens_amount'),
     kycRequired: user.get('kyc_required'),
@@ -66,15 +70,16 @@ const mapStateToProps = ({user, ICOPhaseStats, KYC, Invest}) => ({
     KYCStatus: KYC.get('status'),
     userId: user.get('eth_account'),
     showInvestForm: Invest.get('showInvestForm'),
-    accountApproved: user.get('setAccountSubmitting')
+    accountApproved: user.get('setAccountSubmitting'),
+    accountDropdownShown: UI.get('accountDropdownShown')
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    showInvestForm() {
-        dispatch(InvestActions.showForm())
+    showAccountDropdown() {
+        dispatch(UIStateActions.showAccountDropdown())
     },
-    hideInvestForm() {
-        dispatch(InvestActions.hideForm())
+    hideAccountDropdown() {
+        dispatch(UIStateActions.hideAccountDropdown())
     },
 })
 
@@ -91,6 +96,8 @@ const HeaderBlock = styled.header`
     flex-flow: row nowrap;
     align-items: center;
     border-bottom: 1px solid #e7e9ea;
+    position: relative;
+    z-index: 2;
 `;
 
 const HeaderUserBlock = styled.div`

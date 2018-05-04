@@ -254,6 +254,10 @@ injectGlobal`
     margin: 0 0;
   }
 
+  ul {
+    list-style-type: none;
+  }
+
   * {
 
     box-sizing: border-box;
