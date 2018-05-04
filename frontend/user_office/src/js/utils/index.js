@@ -71,7 +71,7 @@ const Utils = {
         }
         return str.join('.');
     },
-    formatInvestNumber: (event, callback) => {
+    formatInputNumber: (event, callback) => {
         let val = event.target.value,
             lastChar = val[val.length - 1],
             newVal;

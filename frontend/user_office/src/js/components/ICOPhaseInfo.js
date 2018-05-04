@@ -7,7 +7,7 @@ const ICOPhaseInfo = ({phaseName, discount, endDate}) => (
     <div>
         <Title>Current ico phase</Title>
         <Text>Name: {phaseName}</Text>
-        <Text>Discount: {discount}</Text>
+        <Text>Discount: {discount}%</Text>
         <Text>End date: {endDate}</Text>
     </div>
 )

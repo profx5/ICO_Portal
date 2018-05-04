@@ -21,17 +21,32 @@ class CurrencyCalculator extends React.Component {
 
         let totalTokens = investAmount * investCurrencyRate;
         let bonusAmount = totalTokens / 100 * discountPercent;
-        totalTokens = (totalTokens + bonusAmount).toFixed(2);
+        totalTokens = parseInt(totalTokens + bonusAmount, 10);
 
         setTokensAmount(totalTokens);
     }
 
+    // updateInvestAmount = () => {
+    //     const {tokensAmount, investAmount, investCurrencyRate, discountPercent, setTokensAmount, setInvestAmount} = this.props;
+
+    //     let totalInvest = investCurrencyRate / tokensAmount;
+    //     let bonusAmount = totalInvest / 100 * discountPercent;
+    //     totalInvest = (totalInvest + bonusAmount).toFixed(2);
+
+    //     setInvestAmount(totalInvest);
+    // }
+
     componentDidUpdate() {this.updateTotalTokens()}
 
     investOnChangeHandler = event => {
-        Utils.formatInvestNumber(event, this.props.setInvestAmount);
+        Utils.formatInputNumber(event, this.props.setInvestAmount);
         this.updateTotalTokens();
     }
+
+    // tokensOnChangeHandler = event => {
+    //     Utils.formatInputNumber(event, this.props.setTokensAmount);
+    //     this.updateInvestAmount();
+    // };
 
 
     render() {
