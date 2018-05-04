@@ -3,7 +3,6 @@ import {compose} from 'redux'
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 
-import Footer from '../components/Footer'
 import Button from '../components/Button'
 import Title from '../components/Title'
 
@@ -38,31 +37,6 @@ class UserOffice extends Component {
                 </HeaderWrapper>
                 <Content />
                 <StatusSidebar/>
-                <div>
-                    <Footer/>
-                </div>
-                <Modal>
-                    { (closeModal) => (
-                        <div className='confirm-modal in-middle'>
-                            <Title
-                                text='Do you realy want to confirm that ?'
-                                type='h3'
-                                center={true}
-                            />
-                            <Button
-                                text='tranfer bonus in tokens'
-                                success={true}
-                                onClick={ compose(closeModal, this.handleClickForTransferModalWindow ) }
-                            />
-                            <Button
-                                text='Cancel'
-                                danger={true}
-                                onClick={closeModal}
-                            />
-                            <Title text={transfaerAllowed ? "transfer is Allowed" : transferErrorMessage} />
-                        </div>
-                    )}
-                </Modal>
             </Wrapper>
         )
     }
@@ -91,6 +65,7 @@ const mapStateToProps = ({bountiesBalance}) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(UserOffice);
 
 const Wrapper = styled.div`
+    width: calc(100% - 105px);
     background: #F3F3F3;
     flex: 1;
     display: inline-flex;
@@ -100,4 +75,11 @@ const Wrapper = styled.div`
 
 const HeaderWrapper = styled.div`
     flex-basis: 100%;
+`;
+
+const MainContentWrapper = styled.div`
+    flex-basis: 100%;
+
+    display: flex;
+    flex-flow: row nowrap;
 `;

@@ -91,6 +91,7 @@ const TableHead = styled.th`
     font-weight: 600;
     padding-left: 24px;
     padding-bottom: 18px;
+    white-space: nowrap;
     &:last-of-type {
         width: 260px;
     }
@@ -99,4 +100,5 @@ const TableHead = styled.th`
 const TableCell = styled.td`
     color: #0a0a0a;
     padding-left: 24px;
+    word-break: break-all;
 `;
