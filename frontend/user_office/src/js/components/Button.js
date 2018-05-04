@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Button = ({text, clickHandler}) => {
-    return (<Btn onClick={clickHandler}>{text}</Btn>)
+const Button = ({text, className, clickHandler}) => {
+    return (<Btn className={className} onClick={clickHandler}>{text}</Btn>)
 }
 
 
@@ -12,7 +12,7 @@ export default Button;
 
 const Btn = styled.button`
     border: solid 1px #4da1ffb3;
-    background: transparent;
+    background: 'transparent';
     height: 45px;
     width: 100%;
     border-radius: 2px;
@@ -25,7 +25,7 @@ const Btn = styled.button`
     cursor: pointer;
     &:before, &:after {
         content: '';
-        display: block;
+        display: ${props => props.background ? 'none' : 'block'};
         position: absolute;
         top: 0;
         right: 0;
@@ -43,5 +43,15 @@ const Btn = styled.button`
     }
     &:hover:before {
         opacity: 0;
+    }
+    &.btn-white {
+        background: white;
+        color: #484643;
+        font-weight: 600;
+        border: none;
+        &:before, &:after {
+            content: unset;
+            display: none;
+        }
     }
 `;

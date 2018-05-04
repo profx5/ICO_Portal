@@ -13,7 +13,7 @@ const AccountInfo = ({email, isDropdownOpen, dropdownClickHandler}) => {
             <EmailInfo>
                 <EmailTextWrapper onClick={dropdownClickHandler}>
                     <EmailText>{email}</EmailText>
-                    <ArrowImg src={arrowImg} />
+                    <ArrowImg up={isDropdownOpen} src={arrowImg} />
                 </EmailTextWrapper>
                 {isDropdownOpen && 
                     <Dropdown>
@@ -21,7 +21,7 @@ const AccountInfo = ({email, isDropdownOpen, dropdownClickHandler}) => {
                             <ListItem>Account settings</ListItem>
                             <ListItem>Verification</ListItem>
                         </ul>
-                        <LogoutLink href="">
+                        <LogoutLink>
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20">
                               <g fill="#858B91" fill-rule="nonzero" stroke="#979797" stroke-width=".5">
                                 <path d="M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z"/>
@@ -70,9 +70,10 @@ const EmailText = styled.p`
 `;
 
 const ArrowImg = styled.img`
-    transform: rotate(-180deg);
-    translate: all .25s ease;
     margin-left: 20px;
+    position: relative;
+    top: 1px;
+    transform: ${props => props.up ? 'rotate(0)' : 'rotate(-180deg)'}
 `;
 
 const EmailTextWrapper = styled.div`
