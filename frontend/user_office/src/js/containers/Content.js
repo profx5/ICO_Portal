@@ -30,7 +30,6 @@ const Wrapper = styled.div`
     height: 100%;
     margin-left: 60px;
     padding-bottom: 73px;
-    overflow: hidden;
 `;
 
 const Head = styled.h2`

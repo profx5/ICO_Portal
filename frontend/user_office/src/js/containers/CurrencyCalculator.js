@@ -39,7 +39,8 @@ class CurrencyCalculator extends React.Component {
             investCurrency,
             investCurrencyRate,
             investAmount,
-            tokensAmount
+            tokensAmount,
+            discountPercent
         } = this.props;
 
         return (
@@ -51,7 +52,10 @@ class CurrencyCalculator extends React.Component {
                         <Button text="INVEST"/>
                     </ButtonWrapper>
                 </div>
-                <Tip>{"1 " + investCurrency + ' = ' + investCurrencyRate + ' TNK'}</Tip>
+                <Tip>
+                    {"1 " + investCurrency + ' = ' + investCurrencyRate + ' TNK'}
+                    <HoverTip>{(investAmount === '' ? 0 : investAmount) + ' ' + investCurrency + ' +' + discountPercent + '%' + ' = ' + tokensAmount + ' TNK'}</HoverTip>
+                </Tip>
             </Wrapper>
         )
     }
@@ -125,6 +129,7 @@ const Tip = styled.span`
     display: inline-block;
     position: relative;
     margin-top: 35px;
+    cursor: help;
     &:before {
         content: '';
         display: block;
@@ -134,5 +139,42 @@ const Tip = styled.span`
         left: 0;
         bottom: -1px;
         background #377afc;
+    }
+    &:hover div {
+        transform: translate(-50%, calc(-100% - 30px));
+        opacity: 1;
+        visibility: visible;
+    }
+`;
+
+const HoverTip = styled.div`
+    height: 60px;
+    color: #222121;
+    position: absolute;
+    left: 50%;
+    bottm: 0;
+    transform: translate(-50%, calc(-100% - 15px));
+    border: 1px solid rgba(243,243,243,.8);
+
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 9px 0 rgba(0,0,0,0.03);
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    transition: all .25s ease;
+    opacity: 0;
+    visibility: hidden;
+    &:before {
+        content: '';
+        display: block;
+        border 7px solid transparent;
+        border-top: 7px solid white;
+        position: absolute;
+        bottom: -14px;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 0 1px 0 rgba(243,243,243,.8) inset;
     }
 `;

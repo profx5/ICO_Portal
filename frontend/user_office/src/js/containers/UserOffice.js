@@ -76,10 +76,3 @@ const Wrapper = styled.div`
 const HeaderWrapper = styled.div`
     flex-basis: 100%;
 `;
-
-const MainContentWrapper = styled.div`
-    flex-basis: 100%;
-
-    display: flex;
-    flex-flow: row nowrap;
-`;

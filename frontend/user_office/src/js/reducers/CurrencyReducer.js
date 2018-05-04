@@ -35,11 +35,11 @@ const initialState = Map({
             rate: 18.83
         },
         {
-            name: 'XLM',
+            name: 'NVC',
             rate: 585.38
         },
         {
-            name: 'IOT',
+            name: 'IOC',
             rate: 8471.29
         },
         {
@@ -47,15 +47,15 @@ const initialState = Map({
             rate: 149.19
         },
         {
-            name: 'ETP',
+            name: 'NLG',
             rate: 1067.82
         },
         {
-            name: 'ADA',
+            name: 'ZEIT',
             rate: 63.79
         },
         {
-            name: 'XMR',
+            name: 'XVG',
             rate: 438.33
         },
 

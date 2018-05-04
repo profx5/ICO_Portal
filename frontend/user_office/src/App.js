@@ -11,7 +11,8 @@ const App = () => {
             <Warnings/>
             <ContentWrapper
                 left={<NavSidebar/>}
-                rest={<UserOffice/>}/>
+                rest={<UserOffice/>}
+            />
         </div>
     )
 }
