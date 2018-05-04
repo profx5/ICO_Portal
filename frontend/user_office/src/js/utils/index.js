@@ -105,6 +105,87 @@ const Utils = {
     humanizeUTCTime: (UTC, dateFormat) => {
         let newDate = moment(new Date(UTC * 1000));
         return moment(newDate).format(dateFormat);
+    },
+    setTimer: (startUTCTime, endUTCTime, callback) => {
+      let newTime;
+      let startTime = moment(new Date(startUTCTime)).toArray(); // Thursday, 8 March 2018 г., 00:00:00
+      let endTime = moment(new Date(endUTCTime * 1000)).toArray(); // Sunday, 8 April 2018 г., 00:00:00
+
+
+      let timeDifference = endTime.map((el, index) => {
+        return el - startTime[index];
+      });
+
+      timeDifference.shift();
+      timeDifference.pop();
+
+
+      let time = {
+        days: (timeDifference[0] * 30) + timeDifference[1],
+        hours: timeDifference[2],
+        minutes: timeDifference[3],
+        seconds: timeDifference[4],
+      };
+
+      while (time.seconds > 60) {
+        time.seconds -= 60;
+        time.minutes += 60;
+      }
+
+      while (time.minutes > 60) {
+        time.minutes -= 60;
+        time.hours += 24;
+      }
+
+      while (time.hours > 24) {
+        time.hours -= 24;
+        time.days += 1;
+      }
+
+      var interval = setInterval(function() {
+
+          time.seconds -= 1;
+          if (time.seconds <= 0) {
+            time.minutes -= 1;
+            time.seconds = 59;
+          }
+        
+          if (time.minutes <= 0) {
+            if (time.hours !== 0)  time.hours -= 1;
+            time.minutes = 59;
+          }
+       
+          if (time.hours <= 0 && time.days !== 0) {
+            if (time.days !== 0)  time.days -= 1;
+            time.hours = 23;
+
+          }
+       
+          if (time.seconds <= 0 && time.minutes <= 0 && time.hours <= 0 && time.days <= 0) {
+            clearInterval(interval);
+          } else if (time.days <= 0) {
+            clearInterval(interval);
+
+            console.error('Timer has been reached it\' end!');
+            newTime = {
+              seconds: '00',
+              minutes: '00',
+              hours: '00',
+              days: '00'
+            };
+            callback(`${newTime.days} days ${newTime.hours}h ${newTime.minutes}m ${newTime.seconds}s`);
+          }
+       
+      newTime = {
+        seconds: time.seconds < 10 ? `0${time.seconds}` : time.seconds + '',
+        minutes: time.minutes < 10 ? `0${time.minutes}` : time.minutes + '',
+        hours: time.hours < 10 ? `0${time.hours}` : time.hours + '',
+        days: time.days < 10 ? `0${time.days}` : time.days + ''
+      };
+      callback(`${newTime.days} days ${newTime.hours}h ${newTime.minutes}m ${newTime.seconds}s`);
+
+      },1000);
+
     }
 };
 

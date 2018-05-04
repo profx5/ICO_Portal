@@ -16,22 +16,24 @@ class ICOProgress extends React.Component {
 
     componentWillMount () {
         this.props.getICOInfo();
-        this.props.updateTimerTime('55');
     }
 
-    getPhasePercents = (current, goal) => current / goal * 100
+    componentDidUpdate() {
+        const {startTime, endTime, countdownTime, updateCountdown} = this.props;
+        if (countdownTime === '') Utils.setTimer(startTime, endTime, updateCountdown);
+    }
+
+    getPhasePercents = (current, goal) => current / goal * 100;
 
 
     render() {
-
         const {
             USDcRaised,
             phaseName,
             discountPercent,
-            startTime,
-            endTime,
             hardCapUSDc,
-            timerTime
+            countdownTime,
+            updateCountdown
         } = this.props;
 
         const raisedAmountString = USDcRaised + '';
@@ -55,7 +57,7 @@ class ICOProgress extends React.Component {
                         <ContentCell bold noBorderBottom>{phaseName}</ContentCell>
                         <ContentCell noBorderBottom>Current bonus: {discountPercent}%</ContentCell>
                         <ContentCell>Remaining:
-                            <Span colored> 11 days 01h 15m 12s</Span>
+                            <Span colored>&nbsp;{countdownTime}</Span>
                         </ContentCell>
                     </ContentPart>
                     <ContentPart>
@@ -85,18 +87,18 @@ const mapStateToProps = ({ICOInfo, Timer}) => ({
     discountPercent: ICOInfo.getIn(['currentPhase', 'discountPercent']),
     startTime: ICOInfo.getIn(['currentPhase', 'startTime']),
     endTime: ICOInfo.getIn(['currentPhase', 'endTime']),
-    hardCapUSDc: ICOInfo.getIn(['currentPhase', 'hardCapUSDc'])
+    hardCapUSDc: ICOInfo.getIn(['currentPhase', 'hardCapUSDc']),
+    countdownTime: ICOInfo.get('countdownTime')
 })
 
 const mapDispatchToProps = (dispatch) => ({
     getICOInfo() {
         dispatch(ICOInfoActions.getICOInfoRequest())
     },
-    updateTimerTime() {
-        dispatch(TimerActions.updateTimerTime())
+    updateCountdown(payload) {
+        dispatch(ICOInfoActions.updateCountdown(payload))
     }
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ICOProgress)
 
