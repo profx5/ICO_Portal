@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import styled from 'styled-components';
 
 import canSendTransaction from '../../web3';
@@ -12,12 +13,16 @@ class Warnings extends React.Component {
 
 
     render() {
+        const {kycRequired} = this.props;
+
         return (
             <div>
                 <Wrapper background="#F6DD9C">
                     <Img src={foxIcon}/>
                     <Text color="#484643">In order to commit a transition, you must <Link href="https://metamask.io/" target="blank">download metamask</Link></Text>
                 </Wrapper>
+                {kycRequired &&
+
                 <Wrapper background="#F46C6E">
                     <Img src={checkIcon}/>
                     <Text color="#ffffff">You did not pass KYS confirmation. Your invstment threshold is limited 10000</Text>
@@ -25,13 +30,19 @@ class Warnings extends React.Component {
                         <Button className="btn-white" color="#484643" background="#ffffff" text='Pass KYC'/>
                     </ButtonWrapper>
                 </Wrapper>
+                }
             </div>
         );
     }
 }
 
 
-export default Warnings;
+const mapStateToProps = ({user}) => ({
+    kycRequired: user.get('kyc_required')
+})
+
+export default connect(mapStateToProps)(Warnings)
+
 
 const Wrapper = styled.div`
     width: 100%;
