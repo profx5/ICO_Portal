@@ -15,11 +15,8 @@ import Button from './../components/Button';
 class ICOSidebarInfo extends React.Component {
 
     componentDidUpdate() {
-        
         const {endTime, humanizeEndTime} = this.props;
-        let endDate = moment(new Date(endTime * 1000)),
-            humanizedEndTime = moment(endDate).format("ddd MMM DD YYYY");
-        humanizeEndTime(humanizedEndTime);
+        humanizeEndTime(Utils.humanizeUTCTime(endTime, 'ddd MMM DD YYYY'));
     }
 
     render() {

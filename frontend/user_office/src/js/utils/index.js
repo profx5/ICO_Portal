@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const Utils = {
     path: function getPath(obj, ...props) {
         const value = obj[props[0]];
@@ -99,7 +101,11 @@ const Utils = {
         }
 
         if (val.length === 1 && val.match(/[.,]/g) != null) callback('');
+    },
+    humanizeUTCTime: (UTC, dateFormat) => {
+        let newDate = moment(new Date(UTC * 1000));
+        return moment(newDate).format(dateFormat);
     }
 };
 
-export default Utils
+export default Utils;
