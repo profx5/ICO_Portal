@@ -1,4 +1,4 @@
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.23;
 
 
 /**
@@ -103,8 +103,12 @@ contract KYCCrowdsale {
         bool passedKYC;
     }
 
+    uint256 public phaseBonus;
+
+    uint256 public USDcPerETH;
+
     // deposits kept for minting after KYC
-    // equal to amount of tokens to mint after KYC 
+    // equal to amount of tokens to mint after KYC
     mapping (address => Investor) public investors;
 
     address public wallet;
@@ -119,11 +123,14 @@ contract KYCCrowdsale {
 
     event TokensPurchased(address indexed investor, uint256 weiAmount, uint256 tokens);
 
-    function KYCCrowdsale(address _wallet, MintableToken _token) public {
+    function KYCCrowdsale(address _wallet, MintableToken _token, uint256 _phaseBonus, uint256 _USDcPerETH) public {
         require(_wallet != address(0));
         require(_token != MintableToken(0));
         token = _token;
         wallet = _wallet;
+
+        phaseBonus = _phaseBonus;
+        USDcPerETH = _USDcPerETH;
     }
 
     function() external payable {
@@ -136,8 +143,8 @@ contract KYCCrowdsale {
         }
     }
 
-    function calculateTokens(uint256 _weiAmount) public pure returns (uint256) {
-        return _weiAmount.div(10 ** 16);
+    function calculateTokens(uint256 _weiAmount) view public returns (uint256) {
+        return (_weiAmount * USDcPerETH * (100 + phaseBonus)).div(10 ** 20);
     }
 
     // called by LK
@@ -151,7 +158,7 @@ contract KYCCrowdsale {
     }
 
     // keep deposit records in local balances without actial minting
-    // until KYC passed 
+    // until KYC passed
     function holdFunds(uint256 _tokens) internal returns (bool) {
         require(_tokens > 0);
         investors[msg.sender].weiDeposited = investors[msg.sender].weiDeposited.add(msg.value);
