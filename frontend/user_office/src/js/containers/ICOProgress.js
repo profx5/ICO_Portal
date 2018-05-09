@@ -106,7 +106,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(ICOProgress)
 const Wrapper = styled.div`
     flex: 1;
     height: auto;
-    margin-top: 22px;
+    margin-top: 42px;
     padding: 42px 30px 34px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);

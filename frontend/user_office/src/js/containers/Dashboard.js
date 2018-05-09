@@ -8,7 +8,7 @@ import Transactions from './Transactions';
 import DepositTable from './DepositTable';
 
 
-const Content = (props) => {
+const Dashboard = (props) => {
     return (
         <Wrapper>
             <Invest/>
@@ -22,8 +22,7 @@ const Content = (props) => {
     )
 };
 
-
-export default Content;
+export default Dashboard;
 
 const Wrapper = styled.div`
     flex: 1;
