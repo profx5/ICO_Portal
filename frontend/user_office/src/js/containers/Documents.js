@@ -8,7 +8,7 @@ import Photo from './../components/Photo';
 import FileUpload from './../components/FileUpload';
 import PhotoUpload from './../components/PhotoUpload';
 import DocsOptions from './../components/DocsOptions';
-import InputText from './../components/InputText';
+import FieldText from './../components/FieldText';
 
 
 
@@ -17,7 +17,7 @@ class Documents extends React.Component {
     render() {
 
         return (
-            <Wrapper className="Verification_documents">
+            <Wrapper className="Verification__documents">
                 <Title>Document</Title>
                 <ContentWrapper>
                     <ContentPart>
@@ -26,13 +26,13 @@ class Documents extends React.Component {
                     </ContentPart>
                     <ContentPart>
                         <InputWrapper>
-                            <InputText labelText="Series and number"/>
+                            <FieldText labelText="Series and number" options={{numericOnly: true}}/>
                         </InputWrapper>
                         <InputWrapper>
-                            <InputText labelText="Country"/>
+                            <FieldText labelText="Country"/>
                         </InputWrapper>
                         <InputWrapper>
-                            <InputText labelText="Date"/>
+                            <FieldText labelText="Date" options={{date: true, datePattern: ['Y', 'm', 'd']}}/>
                         </InputWrapper>
                     </ContentPart>
                 </ContentWrapper>
@@ -78,7 +78,7 @@ const Title = styled.h3`
     font-weight: 600;
     color: #323c47;
     letter-spacing: 0.1px;
-    margin-bottom: 90px;
+    margin-bottom: 45px;
 `;
 
 const ContentWrapper = styled.div`

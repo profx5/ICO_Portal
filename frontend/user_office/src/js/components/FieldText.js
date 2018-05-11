@@ -1,17 +1,20 @@
 import React from 'react'
 import styled from 'styled-components';
+import Cleave from 'cleave.js/react';
 
-const InputText = ({labelText}) => {
+const FieldText = ({labelText, placeholder, options}) => {
+
     return (
         <Wrapper>
             <StyledLabel>{labelText}</StyledLabel>
-            <StyledInput type="text"/>
+            <StyledInput placeholder={placeholder} className="Field" type="text" options={options}/>
         </Wrapper>
     );
 }
 
 
-export default InputText;
+
+export default FieldText;
 
 const Wrapper = styled.div`
     position: relative;
@@ -24,7 +27,7 @@ const StyledLabel = styled.label`
     margin-bottom: 13px;
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled(Cleave)`
     color: #233539;
     font-weight: 600;
     padding: 0 20px;

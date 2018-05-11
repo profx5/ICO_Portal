@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Utils from './../utils/index';
 
-import InputText from './../components/InputText';
+import FieldText from './../components/FieldText';
 
 
 
@@ -13,17 +13,17 @@ class Address extends React.Component {
     render() {
 
         return (
-            <Wrapper className="Verification_address">
+            <Wrapper className="Verification__address">
                 <Title>Address</Title>
                 <InputSet>
                     <InputWrapper>
-                        <InputText labelText="City"/>
+                        <FieldText labelText="City"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <InputText labelText="Registration address"/>
+                        <FieldText labelText="Registration address"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <InputText labelText="Postcode"/>
+                        <FieldText labelText="Postcode" options={{numericOnly: true}}/>
                     </InputWrapper>
             </InputSet>
             </Wrapper>
@@ -58,7 +58,7 @@ const Title = styled.h3`
     font-weight: 600;
     color: #323c47;
     letter-spacing: 0.1px;
-    margin-bottom: 50px;
+    margin-bottom: 45px;
 `;
 
 const DescHead = styled.h4`

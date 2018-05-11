@@ -57,7 +57,7 @@ class VerificationInfo extends React.Component {
 
     render() {
         const {status} = this.props;
-        const verificationStages = ['Verification_personalData','Verification_address','Verification_documents'];
+        const verificationStages = ['Verification__personalData','Verification__address','Verification__documents'];
 
         return (
             <Wrapper className="VerificationInfo">

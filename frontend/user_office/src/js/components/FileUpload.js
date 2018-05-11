@@ -26,6 +26,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     position: relative;
+    cursor: pointer;
     &:before, &:after {
         content: '';
         position: absolute;

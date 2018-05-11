@@ -26,7 +26,7 @@ export default Dashboard;
 
 const Wrapper = styled.div`
     flex: 1;
-    height: 100%;
+    height: calc(100% - 100px);
     margin-left: 60px;
     padding-bottom: 73px;
 `;

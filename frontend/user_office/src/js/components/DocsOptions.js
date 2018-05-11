@@ -20,6 +20,7 @@ const List = styled.ul`
     padding: 6px;
     background: #F4F9FF;
     max-width: 263px;
+    margin-right: 35px;
 `;
 
 const ListItem = styled.li`

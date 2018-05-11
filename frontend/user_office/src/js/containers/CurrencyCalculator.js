@@ -7,9 +7,7 @@ import Utils from './../utils';
 import Button from './../components/Button';
 import InvestInput from './../components/InvestInput';
 
-import Invest from './Invest';
 
-import * as CurrencyActions from './../actions/CurrencyActions';
 import * as InvestActions from './../actions/InvestActions';
 
 
@@ -98,30 +96,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(CurrencyCalculator)
 
 const Wrapper = styled.div`
     margin-top: 107px;
-`;
-
-const InputWrapper = styled.div`
-    display: inline-block;
-    width: 226px;
-    height: 45px;
-    border: 1px solid #d6dfe6;
-    position: relative;
-    margin-right: 22px;
-    &:before {
-        content: attr(data-header);
-        color: #0a0a0a;
-        position: absolute;
-        left: 0
-        top: -35px;
-    }
-    &:after {
-        content: attr(data-currency);
-        color: #0a0a0a;
-        position: absolute;
-        right: 18px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
 `;
 
 const Input = styled.input`

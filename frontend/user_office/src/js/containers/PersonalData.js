@@ -7,7 +7,8 @@ import Utils from './../utils/index';
 import Photo from './../components/Photo';
 import FileUpload from './../components/FileUpload';
 import PhotoUpload from './../components/PhotoUpload';
-import InputText from './../components/InputText';
+import FieldText from './../components/FieldText';
+import FieldRadio from './../components/FieldRadio';
 import Button from './../components/Button';
 
 
@@ -17,7 +18,7 @@ class PersonalData extends React.Component {
     render() {
 
         return (
-            <Wrapper className="Verification_personalData">
+            <Wrapper className="Verification__personalData">
                 <Title>Personal Data</Title>
                 <PhotoFileUpload>
                     <PhotoWrapper>
@@ -32,19 +33,19 @@ class PersonalData extends React.Component {
                 </PhotoFileUpload>
                 <InputSet>
                     <InputWrapper>
-                        <InputText labelText="First Name"/>
+                        <FieldText labelText="First Name"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <InputText labelText="Last Name"/>
+                        <FieldText labelText="Last Name"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <InputText labelText="Middle Name"/>
+                        <FieldText labelText="Middle Name"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <InputText labelText="Gender"/>
+                        <FieldRadio labelText="Gender" options={['Male', 'Female']}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <InputText labelText="Date of birth"/>
+                        <FieldText labelText="Date of birth" options={{date: true, datePattern: ['Y', 'm', 'd']}}/>
                     </InputWrapper>
             </InputSet>
             </Wrapper>
@@ -78,7 +79,7 @@ const Title = styled.h3`
     font-weight: 600;
     color: #323c47;
     letter-spacing: 0.1px;
-    margin-bottom: 40px;
+    margin-bottom: 45px;
 `;
 
 const DescHead = styled.h4`
@@ -103,7 +104,7 @@ const PhotoWrapper = styled.div`
     flex-flow: row wrap;
     align-items: center;
     position: relative;
-    padding-top: 90px;
+    padding-top: 60px;
 `;
 
 const UploadWrapper = styled.div`
@@ -113,7 +114,7 @@ const UploadWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     position: relative;
-    padding-top: 90px;
+    padding-top: 60px;
 `;
 
 

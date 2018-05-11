@@ -29,7 +29,7 @@ export default Verification;
 
 const Wrapper = styled.div`
     flex: 1;
-    height: 100%;
+    height: calc(100% - 100px);
     margin-left: 60px;
     padding-bottom: 73px;
     display: flex;
@@ -42,8 +42,9 @@ const Head = styled.h2`
     font-weight: 500;
     color: #233539;
     letter-spacing: -1.1px;
-    margin-top: 34px;
+    margin-top: 45px;
     flex-basis: 100%;
+    margin-bottom: 45px;
 `;
 
 const MainWrapper = styled.div`
