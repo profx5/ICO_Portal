@@ -20,5 +20,4 @@ const Wrapper = styled.div`
     flex-flow: row nowrap;
     align-items: stretch;
     min-height: 100%;
-    overflow: hidden;
 `;

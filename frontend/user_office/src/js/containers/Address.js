@@ -13,7 +13,7 @@ class Address extends React.Component {
     render() {
 
         return (
-            <Wrapper>
+            <Wrapper className="Verification_address">
                 <Title>Address</Title>
                 <InputSet>
                     <InputWrapper>

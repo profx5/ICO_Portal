@@ -17,7 +17,7 @@ class Documents extends React.Component {
     render() {
 
         return (
-            <Wrapper>
+            <Wrapper className="Verification_documents">
                 <Title>Document</Title>
                 <ContentWrapper>
                     <ContentPart>

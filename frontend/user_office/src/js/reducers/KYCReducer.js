@@ -5,7 +5,7 @@ import {Map} from 'immutable'
 
 
 const initialState = Map({
-    status: null,
+    state: null,
     isSubmiting: false,
     showForm: false,
     isFetched: false,
@@ -27,7 +27,7 @@ export const KYCReducer = createReducer({
     [actions.getKYCRequest]: (state, payload) => state,
     [actions.getKYCSuccessfull]: (state, payload) => {
         return state.merge({
-            status: payload.state,
+            state: payload.state,
             kyc: state.get('kyc').merge(payload)
         }).set('isFetched', true)
     },

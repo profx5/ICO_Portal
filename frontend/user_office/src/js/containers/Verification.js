@@ -4,16 +4,22 @@ import styled from 'styled-components';
 import PersonalData from './PersonalData';
 import Address from './Address';
 import Documents from './Documents';
+import VerificationInfo from './VerificationInfo';
 
 
 
 const Verification = (props) => {
     return (
-        <Wrapper>
+        <Wrapper className="Verification">
             <Head>Verification</Head>
-            <PersonalData/>
-            <Address/>
-            <Documents/>
+            <MainWrapper>
+                <PersonalData/>
+                <Address/>
+                <Documents/>
+            </MainWrapper>
+            <InfoWrapper>
+                <VerificationInfo/>
+            </InfoWrapper>
         </Wrapper>
     )
 };
@@ -26,6 +32,8 @@ const Wrapper = styled.div`
     height: 100%;
     margin-left: 60px;
     padding-bottom: 73px;
+    display: flex;
+    flex-flow: row wrap;
 `;
 
 const Head = styled.h2`
@@ -35,5 +43,13 @@ const Head = styled.h2`
     color: #233539;
     letter-spacing: -1.1px;
     margin-top: 34px;
+    flex-basis: 100%;
 `;
 
+const MainWrapper = styled.div`
+    flex: 1;
+`;
+
+const InfoWrapper = styled.div`
+    
+`;

@@ -92,7 +92,7 @@ const Dropdown = styled.div`
     left: 50%;
     top: -14px;
     padding: 75px 15px 0;
-    transform: translateX(-50%);
+    transform: translate3d(-50%,0,0);
     border-radius: 6px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);

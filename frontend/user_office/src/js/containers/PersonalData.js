@@ -17,7 +17,7 @@ class PersonalData extends React.Component {
     render() {
 
         return (
-            <Wrapper>
+            <Wrapper className="Verification_personalData">
                 <Title>Personal Data</Title>
                 <PhotoFileUpload>
                     <PhotoWrapper>
@@ -67,7 +67,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(PersonalData)
 const Wrapper = styled.div`
     flex: 1;
     height: auto;
-    margin-top: 42px;
     padding: 42px 30px 42px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
