@@ -41,11 +41,6 @@ class Header extends React.Component {
 
         return (
             <HeaderBlock>
-                {kycRequired &&
-                 <div>
-                     <KYC />
-                 </div>
-                }
                 <HeaderUserBlock>
                     <Balance
                         currentAmount={tokensAmount}

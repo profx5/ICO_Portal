@@ -4,14 +4,14 @@ import styled from 'styled-components';
 
 import * as KYCActions from './../actions/KYCActions';
 
-import PersonalData from './PersonalData';
-import Address from './Address';
-import Documents from './Documents';
+import PersonalInfo from './PersonalInfo';
+import Password from './Password';
+import Sessions from './Sessions';
 import VerificationInfo from './VerificationInfo';
 
 
 
-class Verification extends React.Component {
+class VerificationSecond extends React.Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault()
@@ -25,15 +25,15 @@ class Verification extends React.Component {
     render () {
 
         return (
-            <Wrapper enctype="multipart/form-data" onSubmit={this.onSubmitHandler} className="Verification">
+            <Wrapper onSubmit={this.onSubmitHandler} className="Verification">
                 <Head>Verification</Head>
                 <MainWrapper>
-                    <PersonalData/>
-                    <Address/>
-                    <Documents/>
+                    <PersonalInfo/>
+                    <Password/>
+                    <Sessions/>
                 </MainWrapper>
                 <InfoWrapper>
-                    <VerificationInfo verificationStages={['Verification__personalData','Verification__address','Verification__documents']} stage={['Personal Data', 'Registration address', 'Document']}/>
+                    <VerificationInfo verificationStages={['Verification__personalData','Verification__password','Verification__sessions']} stages={['Personal Data', 'Password', 'My Sessions']}/>
                 </InfoWrapper>
             </Wrapper>
         )
@@ -51,7 +51,7 @@ const mapDispatchToProps = (dispatch) => ({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Verification);
+export default connect(mapStateToProps, mapDispatchToProps)(VerificationSecond);
 
 
 const Wrapper = styled.form`
@@ -61,6 +61,7 @@ const Wrapper = styled.form`
     padding-bottom: 73px;
     display: flex;
     flex-flow: row wrap;
+    justify-content: flex-start;
 `;
 
 const Head = styled.h2`
@@ -76,6 +77,7 @@ const Head = styled.h2`
 
 const MainWrapper = styled.div`
     flex: 1;
+    max-width: 620px;
 `;
 
 const InfoWrapper = styled.div`

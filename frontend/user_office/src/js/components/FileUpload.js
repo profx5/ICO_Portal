@@ -1,14 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const FileUpload = () => {
+const FileUpload = ({onClickHandler, onUploadHandler, name}) => {
     return (
-        <Wrapper>
+        <Wrapper onClick={onClickHandler}>
             <svg xmlns="http://www.w3.org/2000/svg" width="33" height="38">
               <path d="M10.2417 21.9426c-.2844-.303-.744-.303-1.0284 0s-.2844.7928 0 1.0958l7.2576 7.7338c.1353.1464.32.2278.5135.2278.005 0 .0101-.0031.0152-.0031s.0095.0031.0153.0031c.2422 0 .4458-.134.5782-.3278l7.1936-7.6655c.2844-.303.2844-.7929 0-1.0959-.2843-.303-.744-.303-1.0284 0l-6.0161 6.4108V.775c0-.4286-.3251-.775-.7273-.775-.4022 0-.7273.3464-.7273.775v27.6117l-6.046-6.4441z"/>
               <path d="M21.75 13c-.4148 0-.75.2599-.75.5814s.3352.5814.75.5814h9.75v22.6744h-30V14.1628h9.75c.4147 0 .75-.2599.75-.5814S11.6647 13 11.25 13H0v25h33V13H21.75z"/>
             </svg>
             <DescText>File</DescText>
+            <input name={name} onChange={onUploadHandler} type="file" hidden/>
         </Wrapper>
     );
 }

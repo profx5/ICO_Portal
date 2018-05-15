@@ -56,14 +56,13 @@ class VerificationInfo extends React.Component {
     }
 
     render() {
-        const {status} = this.props;
-        const verificationStages = ['Verification__personalData','Verification__address','Verification__documents'];
+        const {status, verificationStages, stages} = this.props;
 
         return (
             <Wrapper className="VerificationInfo">
-                <VerificationStages stageClickHandler={this.stageClickHandler} boundSections={verificationStages} stages={['Personal Data', 'Registration address', 'Document']}/>
+                <VerificationStages stageClickHandler={this.stageClickHandler} boundSections={verificationStages} stages={stages}/>
                 <ButtonWrapper>
-                    <Button text="Send data"/>
+                    <Button type="submit" text="Send data"/>
                 </ButtonWrapper>
                 <VerificationState kycState={status}/>
             </Wrapper>

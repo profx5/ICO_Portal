@@ -2,12 +2,12 @@ import React from 'react'
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
-const FieldText = ({labelText, placeholder, options}) => {
+const FieldText = ({labelText, placeholder, options, name}) => {
 
     return (
         <Wrapper>
             <StyledLabel>{labelText}</StyledLabel>
-            <StyledInput placeholder={placeholder} className="Field" type="text" options={options}/>
+            <StyledInput placeholder={placeholder} className="Field" type="text" name={name} options={options}/>
         </Wrapper>
     );
 }

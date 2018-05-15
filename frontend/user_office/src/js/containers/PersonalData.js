@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
+import $ from 'jquery';
+
+import * as KYCActions from './../actions/KYCActions';
 
 import Utils from './../utils/index';
 
@@ -15,6 +18,16 @@ import Button from './../components/Button';
 
 class PersonalData extends React.Component {
 
+    uploadOnClickHandler = (event) => {
+        $(event.currentTarget).find('input[type="file"]').click();
+    }
+
+    onUploadHandler = (event) => {
+        let file = event.currentTarget.files[0];
+        if (!file) return;
+        this.props.updateKycData()
+    }
+
     render() {
 
         return (
@@ -28,24 +41,24 @@ class PersonalData extends React.Component {
                     <UploadWrapper>
                         <DescHead>Choose uploading way</DescHead>
                         <PhotoUpload/>
-                        <FileUpload/>
+                        <FileUpload name="selfie" onUploadHandler={this.onUploadHandler} onClickHandler={this.uploadOnClickHandler}/>
                     </UploadWrapper>
                 </PhotoFileUpload>
                 <InputSet>
                     <InputWrapper>
-                        <FieldText labelText="First Name"/>
+                        <FieldText labelText="First Name" name="firstname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FieldText labelText="Last Name"/>
+                        <FieldText labelText="Last Name" name="surname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FieldText labelText="Middle Name"/>
+                        <FieldText labelText="Middle Name" name="midname"/>
                     </InputWrapper>
                     <InputWrapper>
                         <FieldRadio labelText="Gender" options={['Male', 'Female']}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FieldText labelText="Date of birth" options={{date: true, datePattern: ['Y', 'm', 'd']}}/>
+                        <FieldText labelText="Date of birth" options={{date: true, datePattern: ['Y', 'm', 'd']}} name="birthdate"/>
                     </InputWrapper>
             </InputSet>
             </Wrapper>
@@ -59,7 +72,9 @@ const mapStateToProps = ({ICOInfo, Timer}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+    updateKycData() {
+        dispatch(KYCActions.submitKYCRequest())
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PersonalData)

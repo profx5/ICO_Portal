@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
+import $ from 'jquery';
 
 import Utils from './../utils/index';
 
@@ -14,6 +15,14 @@ import FieldText from './../components/FieldText';
 
 class Documents extends React.Component {
 
+    uploadOnClickHandler = (event) => {
+        $(event.currentTarget).find('input[type="file"]').click();
+    }
+
+    onUploadHandler = (event) => {
+
+    }
+
     render() {
 
         return (
@@ -26,10 +35,10 @@ class Documents extends React.Component {
                     </ContentPart>
                     <ContentPart>
                         <InputWrapper>
-                            <FieldText labelText="Series and number" options={{numericOnly: true}}/>
+                            <FieldText labelText="Series and number" name="document_no" options={{numericOnly: true}}/>
                         </InputWrapper>
                         <InputWrapper>
-                            <FieldText labelText="Country"/>
+                            <FieldText labelText="Country" name="country"/>
                         </InputWrapper>
                         <InputWrapper>
                             <FieldText labelText="Date" options={{date: true, datePattern: ['Y', 'm', 'd']}}/>
@@ -43,7 +52,7 @@ class Documents extends React.Component {
                     <UploadWrapper>
                         <DescHead>Choose uploading way</DescHead>
                         <PhotoUpload/>
-                        <FileUpload/>
+                        <FileUpload name="photo" onUploadHandler={this.onUploadHandler} onClickHandler={this.uploadOnClickHandler}/>
                     </UploadWrapper>
                 </PhotoFileUpload>
             </Wrapper>
