@@ -1,8 +1,9 @@
 @kyc
 Feature: KYC passing
   Scenario: KYC passing
-    Given investor gordon@example.com/q123
-    And   logged in as gordon@example.com/q123
+    Given investor gordon@example.com/q123q123q123
+    And   investor has eth account "0xb79D16cE900cCb086C4D1b2c0aE44bDD1be5eE9f"
+    And   logged in as gordon@example.com/q123q123q123
 
     When I press "Pass KYC"
     Then I should see "KYC from"

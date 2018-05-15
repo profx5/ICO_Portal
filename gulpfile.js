@@ -104,7 +104,7 @@ gulp.task('scripts:single', function() {
             notify({ title: 'scripts:single task error!' }).write(err.message);
             this.emit('end');
         })
-        .pipe(gulp.dest("frontend/landing/dist/js"));
+        .pipe(gulp.dest("frontend/landing/dist/static/js"));
 });
 
 gulp.task('scripts:all', function() {
@@ -163,10 +163,6 @@ gulp.task('assets', function() {
 
 gulp.task('clean:dist', function() {
   return del('dist');
-});
-
-gulp.task('clean:public', function() {
-    return del('public');
 });
 
 

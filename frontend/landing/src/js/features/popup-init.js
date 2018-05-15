@@ -1,5 +1,3 @@
-
-
 {
 
   // $('.CalculatorSection_fieldIcon').click(function(e) {
@@ -8,7 +6,7 @@
   //   new ClipboardJS(".copyBtn");
   //   available = false;
   //   e.preventDefault();
-    
+
   //   let popupInst = new Popup(`
   //     <div class="CopyPopup">
   //         <div class="CopyPopup_icon animated bounceIn">
@@ -36,7 +34,7 @@
 
 
     if (self.closest('.TeamSection_teammate').find('.TeamSection_linkWrapper-github').attr('href') ) {
-      github = `<a target="blank" href="${self.closest('.TeamSection_teammate').find('.TeamSection_linkWrapper-github').attr('href')}" style="background-image: url('img/common/svg/github-white.svg')" class="TeammatePopup_linkWrapper"></a>`
+      github = `<a target="blank" href="${self.closest('.TeamSection_teammate').find('.TeamSection_linkWrapper-github').attr('href')}" style="background-image: url('static/img/common/svg/github-white.svg')" class="TeammatePopup_linkWrapper"></a>`
     } else {
       github = '';
     }
@@ -45,7 +43,7 @@
       `<div class="TeammatePopup">
           <div class="TeammatePopup_socialLinks">
             ${github}
-            <a target="blank" href="${self.closest('.TeamSection_teammate').find('.TeamSection_linkWrapper-linkedin').attr('href')}" style="background-image: url('img/common/svg/linkedin-white.svg')" class="TeammatePopup_linkWrapper"></a>
+            <a target="blank" href="${self.closest('.TeamSection_teammate').find('.TeamSection_linkWrapper-linkedin').attr('href')}" style="background-image: url('static/img/common/svg/linkedin-white.svg')" class="TeammatePopup_linkWrapper"></a>
           </div>
           <p class="TeammatePopup_header">${self.siblings('.TeamSection_name').html()}</p>
           <span class="TeammatePopup_title">${self.siblings('.TeamSection_title').html()}</span>

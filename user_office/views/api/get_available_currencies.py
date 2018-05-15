@@ -1,7 +1,9 @@
 from .auth import KYCAndLoginPermission
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
+
 from blockchain.currencies import Currencies
+from user_office.models import ExchangeRate
 
 
 class GetAvailableCurrencies(GenericAPIView):
@@ -11,10 +13,15 @@ class GetAvailableCurrencies(GenericAPIView):
 
     permission_classes = (KYCAndLoginPermission,)
 
+    def get_exchange_rate(self, currency):
+        return ExchangeRate.objects.filter(currency=currency).first()
+
     def get(self, request, *args, **kwargs):
         return Response(
             [
-                {"code": c.code, "name": c.name}
+                {"code": c.code,
+                 "name": c.name,
+                 "rate": self.get_exchange_rate(c.code).rate}
                 for c in Currencies.get_currencies()
             ]
         )

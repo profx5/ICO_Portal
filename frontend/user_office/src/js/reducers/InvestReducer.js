@@ -26,5 +26,3 @@ export const InvestReducer = createReducer({
         });
     }
 }, initialState);
-
-

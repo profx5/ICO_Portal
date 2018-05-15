@@ -1,5 +1,5 @@
 from django.contrib import admin
-from user_office.models import Mint, Deposit, KYC
+from user_office.models import TokensMove, Transfer, KYC, Payment
 from social_django.models import UserSocialAuth
 
 class KYCInstanceInline(admin.TabularInline):
@@ -14,34 +14,30 @@ class KYCInstanceInline(admin.TabularInline):
     readonly_fields = fields
 
 
-class MintInstanceInline(admin.TabularInline):
-    model = Mint
+class TransferInstanceInline(admin.TabularInline):
+    model = Transfer
     can_delete = False
     show_change_link = True
 
-    fields = ('txn_hash', 'currency', ('account_to', 'account_from'),
-              'value', 'txn_date', 'state')
-    readonly_fields = ('txn_hash', 'currency', 'account_to', 'account_from',
-                       'value', 'txn_date', 'state')
+    fields = ('txn_hash', ('account_to', 'account_from'), 'amount', ('block_hash', 'block_number'),
+              ('created_at', 'actualized_at'), 'state')
+    readonly_fields = ('txn_hash', 'account_to', 'account_from', 'amount', 'block_hash', 'block_number',
+                       'created_at', 'actualized_at', 'state')
 
     def has_add_permission(self, request):
         return False
 
 
-class DepositInstanceInline(admin.TabularInline):
-    model = Deposit
+class TokensMoveInstanceInline(admin.TabularInline):
+    model = TokensMove
     can_delete = False
     show_change_link = True
 
-    fields = ('state', 'txn_hash', 'amount', 'amount_wo_bonus', 'created_at',
-              'charged_at')
+    fields = ('state', 'txn_hash', 'amount', 'created_at', 'actualized_at')
     readonly_fields = fields
 
     def txn_hash(self, obj):
-        if obj.mint:
-            return obj.mint.txn_hash
-        else:
-            return ''
+        return obj.transfer.txn_hash
 
     def has_add_permission(self, request):
         return False
@@ -57,6 +53,18 @@ class SocialAuthInline(admin.TabularInline):
     extra = 0
 
     readonly_fields = ('user', 'provider', 'uid', 'extra_data')
+
+    def has_add_permission(self, request):
+        return False
+
+
+class PaymentInstanceInline(admin.TabularInline):
+    model = Payment
+    can_delete = False
+    show_change_link = True
+
+    fields = ('currency', 'payer_account', 'received_at', 'txn_id')
+    readonly_fields = fields
 
     def has_add_permission(self, request):
         return False

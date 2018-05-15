@@ -9,7 +9,7 @@
     <div class="container" id="main-container">
         {{ form }}
         <div class="g-recaptcha" data-sitekey="{{ sitekey }}"></div>
-        <button type="submit" class="btn-primary">Sign Up</button>
+        <button type="submit" class="btn-primary auth-button">Sign Up</button>
     </div>
     {% if request.GET.refid %}
         <input type="hidden" name="refid" value="{{ request.GET.refid }}">

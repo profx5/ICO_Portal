@@ -5,13 +5,13 @@ import {call, put, takeEvery, cps} from 'redux-saga/effects'
 import * as actions from '../actions/UserActions'
 
 export class UserSagas {
-    static * setAccount({data}) {
+    static * setAccount({address}) {
         try {
             yield call(axios, {
                 method: 'POST',
                 url: Api.setEthAccount(),
                 data: {
-                    'eth_account': data
+                    'eth_account': address
                 }
             })
 
@@ -37,10 +37,9 @@ export class UserSagas {
         }
     }
 
-    static * extractMetaMaskAccount() {
+    static * extractMetaMaskAccount(action) {
         try {
             const accounts = yield cps(extractAccount)
-
             if (accounts.length !== 0) {
                 yield put(actions.setMetaMaskAccountSuccessfull(accounts[0]))
             }
@@ -48,7 +47,25 @@ export class UserSagas {
             yield put(actions.setMetaMaskAccountFailed)
         }
     }
+
+    static * detectMetaMaskAccount() {
+        if(utils.path(window, 'web3')) {
+            yield UserSagas.extractMetaMaskAccount({})
+            const metamaskAcc = yield select( (state) => state.user.get('metamaskAccount') )
+
+            if(typeof metamaskAcc === 'string' && metamaskAcc.length > 0) {
+                yield put( MetaMaskActions.showModalWithOptionsForEthAccount() )
+                return
+            }
+            yield put( MetaMaskActions.metamaskIsBlocked() )
+            return
+        }
+
+        yield put( MetaMaskActions.showModalWithOptionsForEthAccount() )
+        return
+    }
 }
+
 
 export function* saga() {
     yield takeEvery(actions.getUserRequest, UserSagas.getUser)

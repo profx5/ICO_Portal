@@ -2,12 +2,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic.base import TemplateView
+from rest_framework.documentation import include_docs_urls
+
 from landing import views as landing_views
 from user_office import views as user_office_views
 from user_office.api_urls import api_urlpatterns
-from django.views.generic.base import TemplateView
-
-from rest_framework.documentation import include_docs_urls
 
 
 urlpatterns = [
@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(api_urlpatterns)),
     path('', include('social_django.urls', namespace='social')),
-    path('docs/', include_docs_urls(title='User office API docs', public=False))
+    path('docs/', include_docs_urls(title='User office API docs', public=False)),
+    path('', include('blockchain.urls', namespace='blockchain'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -17,4 +17,15 @@ const App = () => {
     )
 }
 
-export default App;
+const mapStateToProps = ({user}) => {
+    const isEthereumAccountExist = user.get('eth_account') !== null;
+
+    return {
+        isAllowed: isEthereumAccountExist
+    }
+}
+
+export default compose(
+    connect(mapStateToProps),
+    WithGuard(Banner)
+)(App)

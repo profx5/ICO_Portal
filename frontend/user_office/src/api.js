@@ -11,6 +11,10 @@ class Api {
         return `${this.prefix}/getICOInfo/`
     }
 
+    getPhase() {
+        return `${this.prefix}/getPhase/`
+    }
+
     getOffChainBountiesBalance() {
         return `${this.prefix}/getOffChainBountiesBalance/`
     }

@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 
-from user_office.datetime import datetime
+from ico_portal.utils.datetime import datetime
 
 
 class PhaseDateIntersection(Exception):

@@ -42,5 +42,3 @@ export const BountiesBalanceReducer = createReducer({
             .merge({...payload})
     }
 }, initialState)
-
-

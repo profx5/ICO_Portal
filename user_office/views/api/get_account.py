@@ -1,25 +1,35 @@
-from .auth import KYCAndLoginPermission
-from rest_framework.generics import RetrieveAPIView
-from rest_framework.serializers import ModelSerializer
+import coreapi
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from user_office.models import Account
+from rest_framework.schemas import AutoSchema
+from oslash import Right
 
+from blockchain.currencies.coinpayments.services import GetAccount as GetAccountService
+from blockchain.currencies import Currencies
+from .auth import KYCAndLoginPermission
 
-class AccountSerializer(ModelSerializer):
-    class Meta:
-        model = Account
-        fields = ('currency', 'address')
-
-
-class GetAccount(RetrieveAPIView):
+class GetAccount(APIView):
     """
-    Return user account address by cryptocurrency code ('currency_code' param)
+    Return user account address by currency code (doesn't work with ETH)
     """
-    serializer_class = AccountSerializer
+
+    schema = AutoSchema(
+        manual_fields=[
+            coreapi.Field(name='curency_code', location='query', required=True),
+        ]
+    )
+
     permission_classes = (KYCAndLoginPermission,)
 
-    def _get_currency_code(self):
-        return self.request.query_params['currency_code'].upper()
+    def get(self, request, *args, **kwargs):
+        currency_code = request.query_params['currency'].upper()
 
-    def get_object(self):
-        return self.request.user.get_account(self._get_currency_code())
+        currency = Currencies.get_currency(currency_code)
+
+        result = GetAccountService()(request.user, currency)
+
+        if isinstance(result, Right):
+            return Response(data={'success': True, 'address': result.value.address})
+        else:
+            return Response(data={'success': False, 'error': result.value},
+                            status=422)

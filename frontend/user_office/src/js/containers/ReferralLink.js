@@ -5,7 +5,6 @@ import * as ReferralsActions from '../actions/ReferralsActions'
 
 import Button from '../components/Button'
 
-
 class ReferralLink extends Component {
     copyLink = () => {
         const copyText = document.getElementById("referralLink");

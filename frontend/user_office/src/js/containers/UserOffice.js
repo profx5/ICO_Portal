@@ -57,6 +57,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     postTransferRequest() {
         dispatch(BountiesActions.postTransferRequest())
+    },
+    getPhase() {
+        dispatch(PhaseActions.getPhaseRequest())
     }
 })
 

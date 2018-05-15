@@ -6,7 +6,12 @@ use_step_matcher('parse')
 
 @given('investor {email}/{password}')
 def step_impl(context, email, password):
-    create_user(email, password)
+    context.investor = create_investor(email, password)
+
+@given('investor has eth account "{address}"')
+def step_impl(context, address):
+    context.investor.eth_account = address
+    context.investor.save()
 
 @given('logged in as {email}/{password}')
 def step_impl(context, email, password):

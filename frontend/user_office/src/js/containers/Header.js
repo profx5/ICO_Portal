@@ -37,7 +37,7 @@ class Header extends React.Component {
             accountDropdownShown
         } = this.props;
 
-        const showKYCWidget = KYCStatus === 'WAITING'
+        const showKYCwidget = KYCStatus === 'WAITING'
 
         return (
             <HeaderBlock>

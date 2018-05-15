@@ -1,6 +1,5 @@
 from shutil import rmtree
 from django.conf import settings
-from datetime import datetime
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from .helpers.kyc import create_kyc
