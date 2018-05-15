@@ -73,4 +73,4 @@ wcwidth==0.1.7
 web3==4.1.0
 pyjwkest==1.4.0
 oslash==0.5.1
-coinpayments-py=0.1.0
+coinpayments-py==0.1.0
