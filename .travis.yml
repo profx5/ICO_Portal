@@ -13,24 +13,24 @@ services:
 
 before_install:
   - mysql -e 'CREATE DATABASE ico_portal CHARACTER SET utf8 COLLATE utf8_bin;'
-  - nvm install 9.5.0
+  # - nvm install 9.5.0
 
 install:
   - pip install -r requirements.txt
-  - npm install
-  # chromedriver
-  - wget -N http://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip -P ~/
-  - unzip ~/chromedriver_linux64.zip -d ~/
-  - rm ~/chromedriver_linux64.zip
-  - sudo mv -f ~/chromedriver /usr/local/share/
-  - sudo chmod +x /usr/local/share/chromedriver
-  - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+  # - npm install
+  # # chromedriver
+  # - wget -N http://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip -P ~/
+  # - unzip ~/chromedriver_linux64.zip -d ~/
+  # - rm ~/chromedriver_linux64.zip
+  # - sudo mv -f ~/chromedriver /usr/local/share/
+  # - sudo chmod +x /usr/local/share/chromedriver
+  # - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 env:
   - DJANGO_SETTINGS_MODULE='ico_portal.settings.travis'
 
 script:
-  - whereis google-chrome-stable
-  - whereis chromedriver
-  - CI=false npm run build
+  # - whereis google-chrome-stable
+  # - whereis chromedriver
+  # - CI=false npm run build
   - "./manage.py test"
-  - "./manage.py behave -D SELENIUM_CHROME_HEADLESS"
+  # - "./manage.py behave -D SELENIUM_CHROME_HEADLESS"
