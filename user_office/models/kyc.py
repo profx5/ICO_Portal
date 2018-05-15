@@ -31,7 +31,7 @@ class KYC(models.Model):
     birthdate = models.DateField()
 
     document_no = models.CharField(max_length=50)
-    document_type = models.CharField(max_length=10, choices=KYC_DOC_TYPE_CHOICES)
+    document_type = models.CharField(max_length=50, choices=KYC_DOC_TYPE_CHOICES)
     photo = models.ImageField(upload_to=partial(kyc_photo_path, 'photo'))
     selfie = models.ImageField(upload_to=partial(kyc_photo_path, 'selfie'))
 
