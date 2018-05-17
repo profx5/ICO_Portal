@@ -58,7 +58,7 @@ class PersonalData extends React.Component {
                         <FieldRadio labelText="Gender" options={['Male', 'Female']}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FieldText labelText="Date of birth" options={{date: true, datePattern: ['Y', 'm', 'd']}} name="birthdate"/>
+                        <FieldText labelText="Date of birth" options={{date: true, datePattern: ['d', 'm', 'Y']}} name="birthdate"/>
                     </InputWrapper>
             </InputSet>
             </Wrapper>

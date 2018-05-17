@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
 //containers
-import ContentWrapper from './js/containers/ContentWrapper'
-import Warnings from './js/containers/Warnings'
-import UserOffice from './js/containers/UserOffice'
-import NavSidebar from './js/containers/NavSidebar'
+import ContentWrapper from './js/containers/ContentWrapper';
+import Warnings from './js/containers/Warnings';
+import UserOffice from './js/containers/UserOffice';
+import NavSidebar from './js/containers/NavSidebar';
+
+import WithGuard from './js/HOC/WithGuard';
+import Banner from './js/containers/Banner';
 
 const App = () => {
     return (

@@ -24,7 +24,7 @@ class Modal extends Component {
     componentWillUnmount() {
         body.removeChild(this.nodeElement)
     }
-
+    
     render() {
         const {children, closeModal, isModalOpened} = this.props
         const childrenWidthProps = children.call(null, closeModal)

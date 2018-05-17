@@ -25,6 +25,7 @@ const logger = createLogger({
     }
 });
 
+
 const store = createStore(reducer, applyMiddleware(sagaMiddleware, logger))
 sagaMiddleware.run(rootSaga)
 

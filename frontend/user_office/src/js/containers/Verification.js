@@ -16,7 +16,8 @@ class Verification extends React.Component {
     onSubmitHandler = (event) => {
         event.preventDefault()
 
-        const data = new FormData(event.target)
+
+        const data = new FormData(event.target);
 
         this.props.submitForm(data)
     }
@@ -25,7 +26,7 @@ class Verification extends React.Component {
     render () {
 
         return (
-            <Wrapper enctype="multipart/form-data" onSubmit={this.onSubmitHandler} className="Verification">
+            <Wrapper onSubmit={this.onSubmitHandler} id="form" className="Verification">
                 <Head>Verification</Head>
                 <MainWrapper>
                     <PersonalData/>
@@ -33,7 +34,7 @@ class Verification extends React.Component {
                     <Documents/>
                 </MainWrapper>
                 <InfoWrapper>
-                    <VerificationInfo verificationStages={['Verification__personalData','Verification__address','Verification__documents']} stage={['Personal Data', 'Registration address', 'Document']}/>
+                    <VerificationInfo verificationStages={['Verification__personalData','Verification__address','Verification__documents']} stages={['Personal Data', 'Registration address', 'Document']}/>
                 </InfoWrapper>
             </Wrapper>
         )
@@ -47,7 +48,7 @@ const mapStateToProps = ({}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     submitForm(payload) {
-        dispatch(KYCActions.submitKYCRequest(payload))
+        dispatch(KYCActions.submitKYC_and_retriveKYC_Request(payload))
     }
 })
 

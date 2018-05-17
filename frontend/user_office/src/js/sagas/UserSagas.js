@@ -1,8 +1,9 @@
 import Api from '../../api'
 import axios from 'axios'
 import {extractAccount} from '../../web3'
-import {call, put, takeEvery, cps} from 'redux-saga/effects'
+import {call, put, takeEvery, cps, select} from 'redux-saga/effects'
 import * as actions from '../actions/UserActions'
+import utils from '../_utils'
 
 export class UserSagas {
     static * setAccount({address}) {
@@ -54,14 +55,14 @@ export class UserSagas {
             const metamaskAcc = yield select( (state) => state.user.get('metamaskAccount') )
 
             if(typeof metamaskAcc === 'string' && metamaskAcc.length > 0) {
-                yield put( MetaMaskActions.showModalWithOptionsForEthAccount() )
+                yield put( actions.showModalWithOptionsForEthAccount() )
                 return
             }
-            yield put( MetaMaskActions.metamaskIsBlocked() )
+            yield put( actions.metamaskIsBlocked() )
             return
         }
 
-        yield put( MetaMaskActions.showModalWithOptionsForEthAccount() )
+        yield put( actions.showModalWithOptionsForEthAccount() )
         return
     }
 }

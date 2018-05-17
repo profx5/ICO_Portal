@@ -16,3 +16,4 @@ export const setAccountFailed = createAction('SET_ACCOUNT_FAILED');
 export const setMetaMaskAccountRequest = createAction('SET_METAMASK_ACCOUNT_REQUEST');
 export const setMetaMaskAccountSuccessfull = createAction('SET_METAMASK_ACCOUNT_SUCCESSFULL');
 export const setMetaMaskAccountFailed = createAction('SET_METAMASK_ACCOUNT_FAILED');
+

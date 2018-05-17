@@ -46,17 +46,3 @@ export function ethToWei(value) {
 
     return icoWeb3.utils.toWei(stringValue, 'ether')
 }
-
-export function isAddressValid(ethereumAddress) {
-    const web3 = new Web3(Web3.givenProvider);
-    const isValid = web3.utils.isAddress(ethereumAddress)
-
-    return isValid
-}
-
-export function generateEthereumAccount() {
-    const web3 = new Web3(Web3.givenProvider);
-    const account = web3.eth.accounts.create()
-
-    return account
-}

@@ -37,8 +37,8 @@ class UserOffice extends Component {
                     <Header/>
                 </HeaderWrapper>
                 {/*<Dashboard />*/}
-                {/*<Verification />*/}
-                <VerificationSecond/>
+                <Verification />
+                {/*<VerificationSecond/>*/}
                 <StatusSidebar/>
             </Wrapper>
         )
@@ -57,9 +57,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
     postTransferRequest() {
         dispatch(BountiesActions.postTransferRequest())
-    },
-    getPhase() {
-        dispatch(PhaseActions.getPhaseRequest())
     }
 })
 

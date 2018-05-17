@@ -15,7 +15,7 @@ const AccountInfo = ({email, isDropdownOpen, dropdownClickHandler}) => {
                     <EmailText>{email}</EmailText>
                     <ArrowImg up={isDropdownOpen} src={arrowImg} />
                 </EmailTextWrapper>
-                {isDropdownOpen &&
+                {isDropdownOpen && 
                     <Dropdown>
                         <ul>
                             <ListItem>Account settings</ListItem>

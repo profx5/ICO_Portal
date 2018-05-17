@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import * as DepositsActions from '../actions/DepositsActions'
 
+
 class DepositTable extends Component {
     _renderTable = (deposits) => {
         return deposits.map( (item, index) => {
