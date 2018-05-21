@@ -8,6 +8,12 @@ from .process_tokens_moves import ProcessIncomingTokensMove, \
 
 
 class ProcessTransfer:
+    def check_transfer(self, args):
+        if args['event'].removed:
+            return Left('Transfer event has removed=True')
+        else:
+            return Right(args)
+
     def create_or_update_transfer(self, args):
         event = args['event']
 
@@ -70,6 +76,7 @@ class ProcessTransfer:
     def __call__(self, event):
         with transaction.atomic():
             result = Right({'event': event}) | \
+                     self.check_transfer | \
                      self.create_or_update_transfer | \
                      self.process_incoming_tokens_move | \
                      self.process_outgoing_tokens_move | \

@@ -39,7 +39,7 @@ class RecalcBalance:
 
             return Right(args)
         except DatabaseError as e:
-            return Left('Error while saving investor {e}')
+            return Left(f'Error while saving investor {e}')
 
     def __call__(self, investor):
         return Right({'investor': investor}) | \

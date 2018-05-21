@@ -44,6 +44,7 @@ class TransferEvent:
         self.block_hash = entry['blockHash'].hex()
         self.block_number = entry['blockNumber']
         self.accepted_at = datetime.utcnow()
+        self.removed = entry.get('removed')
 
     def __str__(self):
         return f'Transfer event at {self.txn_hash}'

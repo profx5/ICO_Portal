@@ -10,7 +10,7 @@ class InvestorNotFound(Left):
 
 
 def _find_investor(eth_account):
-    investor = Investor.objects.filter(eth_account=eth_account).first()
+    investor = Investor.objects.select_for_update().filter(eth_account=eth_account).first()
 
     if investor:
         return Just(investor)
