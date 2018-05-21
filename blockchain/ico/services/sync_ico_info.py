@@ -7,9 +7,12 @@ from user_office.models import ICO_Info
 
 class SyncICOInfo:
     def get_total_supply(self, args):
-        total_supply = TokenContract().get_total_supply()
+        try:
+            total_supply = TokenContract().get_total_supply()
 
-        return Right(dict(args, total_supply=total_supply))
+            return Right(dict(args, total_supply=total_supply))
+        except ConnectionError as e:
+            return Left(f'Got connection error while trying get total supply')
 
     def build_object(self, args):
         ico_info = ICO_Info(total_supply=args['total_supply'])

@@ -135,5 +135,5 @@ class ICO_InfoFacotry(factory.DjangoModelFactory):
     class Meta:
         model = 'user_office.ICO_Info'
 
-    creation_date = UTCNow
+    created_at = UTCNow
     total_supply = fuzzy.FuzzyInteger(low=0)

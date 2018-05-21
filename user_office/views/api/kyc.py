@@ -1,7 +1,7 @@
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 from rest_framework.parsers import MultiPartParser
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, FileField
 from rest_framework.response import Response
 
 from .auth import KYCAndLoginPermission
@@ -27,7 +27,6 @@ class KYCViewSet(mixins.CreateModelMixin,
                  mixins.RetrieveModelMixin,
                  GenericViewSet):
     parser_classes = (MultiPartParser,)
-
     permission_classes = (KYCAndLoginPermission,)
 
     def get_serializer_class(self):
