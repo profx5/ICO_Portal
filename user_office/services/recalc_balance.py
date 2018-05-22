@@ -8,9 +8,9 @@ from user_office.models import TokensMove
 class RecalcBalance:
     def calculate_incoming_amount(self, args):
         result = TokensMove.objects.filter(investor=args['investor'],
-                                        state='ACTUAL',
-                                        direction='IN') \
-                                .aggregate(amount=Sum('amount'))
+                                           state='ACTUAL',
+                                           direction='IN') \
+                                   .aggregate(amount=Sum('amount'))
 
         if result['amount']:
             return Right(dict(args, incoming_amount=result['amount']))
@@ -19,9 +19,9 @@ class RecalcBalance:
 
     def calculate_outgoing_amount(self, args):
         result = TokensMove.objects.filter(investor=args['investor'],
-                                        state='ACTUAL',
-                                        direction='OUT') \
-                                .aggregate(amount=Sum('amount'))
+                                           state='ACTUAL',
+                                           direction='OUT') \
+                                   .aggregate(amount=Sum('amount'))
 
         if result['amount']:
             return Right(dict(args, outgoing_amount=result['amount']))

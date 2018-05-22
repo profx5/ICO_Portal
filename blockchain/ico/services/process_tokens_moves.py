@@ -1,31 +1,23 @@
-from oslash import Left, Right, Nothing, Just
+from oslash import Left, Right
+from django.db import DatabaseError
 
 from user_office.models import Investor, TokensMove
 from user_office.services import RecalcBalance
 
 
-class InvestorNotFound(Left):
-    def bind(self, func):
-        return InvestorNotFound(self._get_value())
+def create_or_update_tokens_move(args):
+    investor_id =  args['investor_id']
+    transfer = args['transfer']
+    direction = args['direction']
 
-
-def _find_investor(eth_account):
-    investor = Investor.objects.select_for_update().filter(eth_account=eth_account).first()
-
-    if investor:
-        return Just(investor)
-    else:
-        return Nothing()
-
-def _create_or_update_tokens_move(transfer, investor, direction):
     fields = {
-        'investor': investor,
+        'investor_id': investor_id,
         'amount': transfer.amount,
         'transfer': transfer,
         'direction': direction
     }
 
-    tokens_move = TokensMove.objects.filter(investor=investor,
+    tokens_move = TokensMove.objects.filter(investor_id=investor_id,
                                             transfer=transfer,
                                             direction=direction)
 
@@ -42,49 +34,38 @@ def _create_or_update_tokens_move(transfer, investor, direction):
 
     tokens_move.actualize()
 
-    tokens_move.save()
+    try:
+        tokens_move.save()
 
-    return Right(tokens_move)
+        return Right(dict(args, tokens_move=tokens_move))
+    except DatabaseError as e:
+        return Left(f'Error while saving TokensMove, {e}')
 
 def recalc_tokens_balance(args):
-    investor = args['investor']
+    investor = Investor.objects.select_for_update()\
+                               .filter(eth_account=args['investor_id']).first()
 
-    service = RecalcBalance()
+    if investor:
+        service = RecalcBalance()
 
-    return service(investor) | (lambda _: Right(args))
+        return service(investor) | (lambda _: Right(args))
+    else:
+        return Right(args)
 
 
 class ProcessIncomingTokensMove:
-    def find_investor(self, args):
-        return _find_investor(args['transfer'].account_to) | \
-            (lambda investor: Right(dict(args, investor=investor)))
-
-    def create_or_update_tokens_move(self, args):
-        return _create_or_update_tokens_move(args['transfer'], args['investor'], 'IN') | \
-            (lambda tokens_move: Right(dict(args, tokens_move=tokens_move)))
-
-    def try_process_payment(self, args):
-        return Right(args)
-
     def __call__(self, transfer):
-        return Right({'transfer': transfer}) | \
-            self.find_investor | \
-            self.create_or_update_tokens_move | \
-            self.try_process_payment | \
-            recalc_tokens_balance
+        return Right({'transfer': transfer,
+                      'investor_id': transfer.account_to,
+                      'direction': 'IN'}) | \
+                      create_or_update_tokens_move | \
+                      recalc_tokens_balance
 
 
 class ProcessOutgoingTokensMove:
-    def find_investor(self, args):
-        return _find_investor(args['transfer'].account_from) | \
-            (lambda investor: Right(dict(args, investor=investor)))
-
-    def create_or_update_tokens_move(self, args):
-        return _create_or_update_tokens_move(args['transfer'], args['investor'], 'OUT') | \
-            (lambda tokens_move: Right(dict(args, tokens_move=tokens_move)))
-
     def __call__(self, transfer):
-        return Right({'transfer': transfer}) | \
-            self.find_investor | \
-            self.create_or_update_tokens_move | \
-            recalc_tokens_balance
+        return Right({'transfer': transfer,
+                      'investor_id': transfer.account_from,
+                      'direction': 'OUT'}) | \
+                      create_or_update_tokens_move | \
+                      recalc_tokens_balance
