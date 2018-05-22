@@ -93,10 +93,10 @@ const Utils = {
     },
     splitDigits: num => {
         var str = num.toString().split('.');
-        if (str[0].length >= 5) {
+        if (str[0].length >= 4) {
             str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
         }
-        if (str[1] && str[1].length >= 5) {
+        if (str[1] && str[1].length >= 4) {
             str[1] = str[1].replace(/(\d{3})/g, '$1 ');
         }
         return str.join('.');
@@ -133,13 +133,13 @@ const Utils = {
         if (val.length === 1 && val.match(/[.,]/g) != null) callback('');
     },
     humanizeUTCTime: (UTC, dateFormat) => {
-        let newDate = moment(new Date(UTC * 1000));
+        let newDate = moment(new Date(UTC));
         return moment(newDate).format(dateFormat);
     },
     setTimer: (startUTCTime, endUTCTime, callback) => {
       let newTime;
-      let startTime = moment(new Date(startUTCTime)).toArray(); // Thursday, 8 March 2018 г., 00:00:00
-      let endTime = moment(new Date(endUTCTime * 1000)).toArray(); // Sunday, 8 April 2018 г., 00:00:00
+      let startTime = moment(new Date(startUTCTime)).toArray(); 
+      let endTime = moment(new Date(endUTCTime)).toArray();
 
 
       let timeDifference = endTime.map((el, index) => {

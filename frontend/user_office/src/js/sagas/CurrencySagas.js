@@ -8,7 +8,7 @@ class CurrencySagas {
         try {
             const response = yield call(axios, {
                 method: 'GET',
-                url: Api.getCurrencies()
+                url: Api.getAvailableCurrencies()
             })
 
             yield put(actions.getCurrenciesSuccess(response.data))

@@ -2,8 +2,9 @@ import Api from '../../api'
 import axios from 'axios'
 import {extractAccount} from '../../web3'
 import {call, put, takeEvery, cps, select} from 'redux-saga/effects'
-import * as actions from '../actions/UserActions'
-import utils from '../_utils'
+import * as UserActions from '../actions/UserActions'
+import * as MetamaskActions from '../actions/MetamaskActions'
+import Utils from '../utils/index'
 
 export class UserSagas {
     static * setAccount({address}) {
@@ -16,11 +17,11 @@ export class UserSagas {
                 }
             })
 
-            yield put(actions.setAccountSuccessfull())
-            yield put(actions.hideSetAccountForm())
-            yield put(actions.getUserRequest())
+            yield put(UserActions.setAccountSuccessfull())
+            yield put(UserActions.hideSetAccountForm())
+            yield put(UserActions.getUserRequest())
         } catch(e) {
-            yield put(actions.setAccountFailed())
+            yield put(UserActions.setAccountFailed())
         }
     }
 
@@ -31,10 +32,10 @@ export class UserSagas {
                 method: 'GET'
             })
 
-            yield put(actions.getUserSuccessfull(response.data))
+            yield put(UserActions.getUserSuccessfull(response.data))
 
         } catch(e) {
-            yield put(actions.getUserFailed())
+            yield put(UserActions.getUserFailed())
         }
     }
 
@@ -42,34 +43,34 @@ export class UserSagas {
         try {
             const accounts = yield cps(extractAccount)
             if (accounts.length !== 0) {
-                yield put(actions.setMetaMaskAccountSuccessfull(accounts[0]))
+                yield put(UserActions.setMetaMaskAccountSuccessfull(accounts[0]))
             }
         } catch(e) {
-            yield put(actions.setMetaMaskAccountFailed)
+            yield put(UserActions.setMetaMaskAccountFailed)
         }
     }
 
     static * detectMetaMaskAccount() {
-        if(utils.path(window, 'web3')) {
+        if(Utils.path(window, 'web3')) {
             yield UserSagas.extractMetaMaskAccount({})
             const metamaskAcc = yield select( (state) => state.user.get('metamaskAccount') )
 
             if(typeof metamaskAcc === 'string' && metamaskAcc.length > 0) {
-                yield put( actions.showModalWithOptionsForEthAccount() )
+                yield put( MetamaskActions.showModalWithOptionsForEthAccount() )
                 return
             }
-            yield put( actions.metamaskIsBlocked() )
+            yield put( MetamaskActions.metamaskIsBlocked() )
             return
         }
 
-        yield put( actions.showModalWithOptionsForEthAccount() )
+        yield put( MetamaskActions.showModalWithOptionsForEthAccount() )
         return
     }
 }
 
 
 export function* saga() {
-    yield takeEvery(actions.getUserRequest, UserSagas.getUser)
-    yield takeEvery(actions.setAccountRequest, UserSagas.setAccount)
-    yield takeEvery(actions.setMetaMaskAccountRequest, UserSagas.extractMetaMaskAccount)
+    yield takeEvery(UserActions.getUserRequest, UserSagas.getUser)
+    yield takeEvery(UserActions.setAccountRequest, UserSagas.setAccount)
+    yield takeEvery(UserActions.setMetaMaskAccountRequest, UserSagas.extractMetaMaskAccount)
 }

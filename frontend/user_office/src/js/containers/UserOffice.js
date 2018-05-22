@@ -36,8 +36,8 @@ class UserOffice extends Component {
                 <HeaderWrapper>
                     <Header/>
                 </HeaderWrapper>
-                {/*<Dashboard />*/}
-                <Verification />
+                <Dashboard />
+                {/*<Verification />*/}
                 {/*<VerificationSecond/>*/}
                 <StatusSidebar/>
             </Wrapper>

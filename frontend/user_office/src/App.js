@@ -7,8 +7,8 @@ import Warnings from './js/containers/Warnings';
 import UserOffice from './js/containers/UserOffice';
 import NavSidebar from './js/containers/NavSidebar';
 
-import WithGuard from './js/HOC/WithGuard';
-import Banner from './js/containers/Banner';
+// import WithGuard from './js/HOC/WithGuard';
+// import Banner from './js/containers/Banner';
 
 const App = () => {
     return (
@@ -32,5 +32,5 @@ const mapStateToProps = ({user}) => {
 
 export default compose(
     connect(mapStateToProps),
-    WithGuard(Banner)
+    // WithGuard(Banner)
 )(App)

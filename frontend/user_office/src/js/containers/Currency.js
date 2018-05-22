@@ -14,38 +14,29 @@ import * as CurrencyActions from '../actions/CurrencyActions.js';
 
 class Currency extends React.Component {
 
-    constructor() {
-        super();
-    }
-
     componentDidMount() {
-        const firstCurrencyData = this.props.currencies[0];
-
         this.props.getCurrencies();
-        this.props.setInvestCurrency(firstCurrencyData.name);
-        this.props.setInvestCurrencyRate(firstCurrencyData.rate);
     }
 
-    cardClickHandler (name, rate) {
-        this.props.setInvestCurrency(name);
+    cardClickHandler (code, rate) {
+        this.props.setInvestCurrency(code);
         this.props.setInvestCurrencyRate(rate);
     }
 
     generateCurrencyCards = (data) => {
 
         return data.map((item, index) => {
-            let name = item.name,
-                rate = item.rate;
+            let {code, name, rate} = item;
+            console.log(code)
 
             if (index >= 7 && this.props.spreadedCurrencyCards === false) return;
-
             return <CurrencyCard 
-                className={this.props.investCurrency === name ? 'active' : ''}
-                name={name} 
-                icon={'icon-' + name} 
-                rate={rate} 
+                className={this.props.investCurrency === code ? 'active' : ''}
+                name={code} 
+                icon={'icon-' + code} 
+                rate={rate.toFixed(2)} 
                 key={index} 
-                clickHandler={this.cardClickHandler.bind(this, name, rate)}
+                clickHandler={this.cardClickHandler.bind(this, code, rate)}
             />
         })
     }
@@ -55,7 +46,7 @@ class Currency extends React.Component {
         
         if (spreadedCurrencyCards === true) {
             spreadVisibleCards(false);
-            setInvestCurrency(currencies[0].name)
+            setInvestCurrency(currencies[0].code)
             setInvestCurrencyRate(currencies[0].rate)
         } else {
             spreadVisibleCards(true);
@@ -76,7 +67,7 @@ class Currency extends React.Component {
                 <Content>
                     {this.generateCurrencyCards(this.props.currencies)}
                 </Content>
-                {(!(currencies.length - 7) <= 0) && <FetchButton onClickHandler={this.buttonClickHandler} spread={spreadedCurrencyCards} amount={currencies.length - 7}/>}
+                {(currencies.length >= 7) && <FetchButton onClickHandler={this.buttonClickHandler} spread={spreadedCurrencyCards} amount={currencies.length - 7}/>}
                 <CurrencyCalculator/>
             </Wrapper>
         )

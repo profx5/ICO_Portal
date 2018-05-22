@@ -12,6 +12,7 @@ import {PhaseReducer} from './PhaseReducer.js';
 import {CurrencyReducer} from './CurrencyReducer.js';
 import {TimerReducer} from './TimerReducer.js';
 import {UIStateReducer} from './UIStateReducer.js';
+import {MetamaskReducer} from './MetamaskReducer.js';
 
 const reducers = combineReducers({
     user: UserReducer,
@@ -25,7 +26,8 @@ const reducers = combineReducers({
     Phase: PhaseReducer,
     Currencies: CurrencyReducer,
     Timer: TimerReducer,
-    UI: UIStateReducer
+    UI: UIStateReducer,
+    Metamask: MetamaskReducer,
 })
 
 export default reducers;

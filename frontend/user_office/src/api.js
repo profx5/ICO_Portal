@@ -11,6 +11,10 @@ class Api {
         return `${this.prefix}/getICOInfo/`
     }
 
+    getPhase() {
+        return `${this.prefix}/getPhase/`
+    }
+
     getOffChainBountiesBalance() {
         return `${this.prefix}/getOffChainBountiesBalance/`
     }
@@ -43,8 +47,8 @@ class Api {
         return `${this.prefix}/transferBounties/`
     }
 
-    getCurrencies() {
-        return `${this.prefix}/getCurrencies/`
+    getAvailableCurrencies() {
+        return `${this.prefix}/getAvailableCurrencies/`
     }
 }
 

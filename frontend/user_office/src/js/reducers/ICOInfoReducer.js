@@ -5,19 +5,10 @@ import {Map} from 'immutable';
 
 
 const initialState = Map({
-    USDcPerETHRate: 0,
-    USDcRaised: 0,
-    totalHardCapUSDc: 400000000,
-    crowdSaleAddress: "",
-    tokenAddress: "",
-    currentPhase: {
-        name: "preICO",
-        discountPercent: 40,
-        startTime: 1520467200,
-        endTime: 1523145600,
-        softCapUSDc: 200000000,
-        hardCapUSDc: 300000000
-    },
+    total_supply: "0",
+    goal_supply: "5411630",
+    token_address: "0x",
+    token_decimals: 2,
     humanizedEndTime: '',
     countdownTime: ''
 });

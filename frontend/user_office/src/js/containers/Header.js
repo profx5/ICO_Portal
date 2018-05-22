@@ -31,19 +31,25 @@ class Header extends React.Component {
             tokensAmount,
             kycRequired,
             showInvestForm,
+            decimals,
             kyc,
             KYCStatus,
             accountApproved,
             accountDropdownShown
         } = this.props;
 
-        const showKYCWidget = KYCStatus === 'WAITING'
+        const showKYCWidget = KYCStatus === 'WAITING';
+        let floatTokensAmount = '1';
+        for (let i = 0; i < decimals; i++) {
+            floatTokensAmount += '0';
+        }
+        floatTokensAmount = parseInt(floatTokensAmount);
 
         return (
             <HeaderBlock>
                 <HeaderUserBlock>
                     <Balance
-                        currentAmount={tokensAmount}
+                        currentAmount={tokensAmount / floatTokensAmount}
                         investClick={showInvestForm}
                     />
                     <AccountInfo
@@ -57,11 +63,12 @@ class Header extends React.Component {
     }
 }
 
-const mapStateToProps = ({user, ICOPhaseStats, KYC, Invest, UI}) => ({
+const mapStateToProps = ({user, ICOInfo, KYC, Invest, UI}) => ({
     email: user.get('email'),
     tokensAmount: user.get('tokens_amount'),
     kycRequired: user.get('kyc_required'),
     kyc: KYC.get('kyc'),
+    decimals: ICOInfo.get('token_decimals'),
     KYCStatus: KYC.get('status'),
     userId: user.get('eth_account'),
     showInvestForm: Invest.get('showInvestForm'),
@@ -101,4 +108,4 @@ const HeaderUserBlock = styled.div`
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-`
+`;

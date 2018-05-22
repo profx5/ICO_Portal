@@ -5,19 +5,12 @@ import {Map} from 'immutable';
 
 
 const initialState = Map({
-    eth_account: null,
-    tokens_amount: 0.00,
-    username: null,
-    email: 'gordon@ongrid.pro',
-    kyc_required: false,
-    userIsLoading: false,
-    investment_threshold: 0,
-    setAccountSubmitting: false,
-    metamaskAccount: null,
-    security: Map({
-        privateKey: null
-    })
-})
+    "email": "gordon@ongrid.pro",
+    "eth_account": null,
+    "tokens_amount": 0.00,
+    "kyc_required": false,
+    "investment_threshold": 0
+});
 
 
 

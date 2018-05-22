@@ -15,24 +15,25 @@ import * as InvestActions from './../actions/InvestActions';
 class CurrencyCalculator extends React.Component {
 
     updateTotalTokens = () => {
-        const {investAmount, investCurrencyRate, discountPercent, setTokensAmount} = this.props;
+        const {investAmount, investCurrencyRate, bonusPercent, setTokensAmount} = this.props;
 
         let totalTokens = investAmount * investCurrencyRate;
-        let bonusAmount = totalTokens / 100 * discountPercent;
+        let bonusAmount = totalTokens / 100 * bonusPercent;
         totalTokens = parseInt(totalTokens + bonusAmount, 10);
 
         setTokensAmount(totalTokens);
     }
 
-    // updateInvestAmount = () => {
-    //     const {tokensAmount, investAmount, investCurrencyRate, discountPercent, setTokensAmount, setInvestAmount} = this.props;
+    updateInvestAmount = () => {
+        const {tokensAmount, investAmount, investCurrencyRate, bonusPercent, setTokensAmount, setInvestAmount} = this.props;
 
-    //     let totalInvest = investCurrencyRate / tokensAmount;
-    //     let bonusAmount = totalInvest / 100 * discountPercent;
-    //     totalInvest = (totalInvest + bonusAmount).toFixed(2);
+        let totalInvest = investCurrencyRate / tokensAmount;
+        let bonusAmount = totalInvest / 100 * bonusPercent;
+        totalInvest = (totalInvest + bonusAmount).toFixed(2);
+        console.log(totalInvest)
 
-    //     setInvestAmount(totalInvest);
-    // }
+        // setInvestAmount(totalInvest);
+    }
 
     componentDidUpdate() {this.updateTotalTokens()}
 
@@ -41,11 +42,6 @@ class CurrencyCalculator extends React.Component {
         this.updateTotalTokens();
     }
 
-    // tokensOnChangeHandler = event => {
-    //     Utils.formatInputNumber(event, this.props.setTokensAmount);
-    //     this.updateInvestAmount();
-    // };
-
 
     render() {
         const {
@@ -53,7 +49,7 @@ class CurrencyCalculator extends React.Component {
             investCurrencyRate,
             investAmount,
             tokensAmount,
-            discountPercent
+            bonusPercent
         } = this.props;
 
         return (
@@ -67,19 +63,19 @@ class CurrencyCalculator extends React.Component {
                 </div>
                 <Tip>
                     {"1 " + investCurrency + ' = ' + investCurrencyRate + ' TNK'}
-                    <HoverTip>{(investAmount === '' ? 0 : investAmount) + ' ' + investCurrency + ' +' + discountPercent + '%' + ' = ' + tokensAmount + ' TNK'}</HoverTip>
+                    <HoverTip>{(investAmount === '' ? 0 : investAmount) + ' ' + investCurrency + ' +' + bonusPercent + '%' + ' = ' + tokensAmount + ' TNK'}</HoverTip>
                 </Tip>
             </Wrapper>
         )
     }
 };
 
-const mapStateToProps = ({Currencies, Invest, ICOInfo}) => ({
+const mapStateToProps = ({Currencies, Invest, ICOInfo, Phase}) => ({
     investCurrency: Currencies.get('investCurrency'),
     investCurrencyRate: Currencies.get('investCurrencyRate'),
     investAmount: Invest.get('investAmount'),
     tokensAmount: Invest.get('tokensAmount'),
-    discountPercent: ICOInfo.getIn(['currentPhase', 'discountPercent'])
+    bonusPercent: Phase.get('bonus_percents'),
 })
 
 const mapDispatchToProps = (dispatch) => ({

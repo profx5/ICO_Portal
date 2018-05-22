@@ -15,27 +15,28 @@ import Button from './../components/Button';
 class ICOSidebarInfo extends React.Component {
 
     componentDidUpdate() {
-        const {startTime, endTime, humanizeEndTime, updateTimer} = this.props;
+        const {endTime, humanizeEndTime} = this.props;
+        let endDate = new Date(endTime);
         humanizeEndTime(Utils.humanizeUTCTime(endTime, 'ddd MMM DD YYYY'));
     }
 
     render() {
-        const {phaseName, discountPercent, humanizedEndTime} = this.props;
+        const {phaseName, bonusPercents, humanizedEndTime} = this.props;
         return (
             <div>
-                <ICOPhaseInfo phaseName={phaseName} discount={discountPercent} endDate={humanizedEndTime}/>
+                <ICOPhaseInfo phaseName={phaseName} discount={bonusPercents} endDate={humanizedEndTime}/>
                 <Button text='Buy TKN'/>
             </div>
         );
     }
 }
 
-const mapStateToProps = ({ICOInfo}) => ({
+const mapStateToProps = ({ICOInfo, Phase}) => ({
 
-    phaseName: ICOInfo.getIn(['currentPhase', 'name']),
-    discountPercent: ICOInfo.getIn(['currentPhase', 'discountPercent']),
-    startTime: ICOInfo.getIn(['currentPhase', 'startTime']),
-    endTime: ICOInfo.getIn(['currentPhase', 'endTime']),
+    phaseName: Phase.get('name'),
+    bonusPercents: Phase.get('bonus_percents'),
+
+    endTime: Phase.get('end_date'),
     humanizedEndTime: ICOInfo.get('humanizedEndTime'),
     countdownTime: ICOInfo.get('countdownTime')
 })

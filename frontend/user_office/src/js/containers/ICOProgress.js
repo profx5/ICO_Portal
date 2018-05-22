@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Utils from './../utils/index';
 
 import * as ICOInfoActions from './../actions/ICOInfoActions';
+import * as PhaseActions from './../actions/PhaseActions';
 import * as TimerActions from './../actions/TimerActions';
 
 import clockImg from './../../img/icon_progress.svg';
@@ -14,8 +15,9 @@ import Button from './../components/Button';
 
 class ICOProgress extends React.Component {
 
-    componentWillMount () {
-        this.props.getICOInfo();
+    componentWillMount = () => {
+        // this.props.getICOInfo();
+        this.props.getPhaseInfo();
     }
 
     componentDidUpdate() {
@@ -25,37 +27,38 @@ class ICOProgress extends React.Component {
 
     getPhasePercents = (current, goal) => current / goal * 100;
 
-
     render() {
         const {
             USDcRaised,
+            gainedMoney,
+            moneyToGain,
             phaseName,
-            discountPercent,
+            bonusPercents,
             hardCapUSDc,
             countdownTime,
             updateCountdown
         } = this.props;
 
-        const raisedAmountString = USDcRaised + '';
-        let phaseRaisedPercents = this.getPhasePercents(USDcRaised, hardCapUSDc);
+        const raisedAmountString = Math.round(parseInt(gainedMoney)/100) + '';
+        let phaseRaisedPercents = this.getPhasePercents(gainedMoney, moneyToGain);
         return (
             <Wrapper>
                 <Header>
                     <Head>ICO Progress</Head>
                     <WrapperHeaderInfo>
                         <Text>Current phase: <Span>{phaseName}</Span></Text>
-                        <Text>Current bonus: <Span>{discountPercent}%</Span></Text>
+                        <Text>Current bonus: <Span>{bonusPercents}%</Span></Text>
                         <Text>Funds raised: <Span colored>{Utils.splitDigits(raisedAmountString)} USD</Span></Text>
                     </WrapperHeaderInfo>
                 </Header>
                 <Content>
                     <ContentPart>
                         {<ContentProgressCell noBorderBottom progress={phaseRaisedPercents === 0 ? '2%' : phaseRaisedPercents + '%'}>
-                            {Utils.formatMoney(USDcRaised)} USD / {Utils.formatMoney(hardCapUSDc)} USD
+                            {Utils.formatMoney(gainedMoney)} USD / {Utils.formatMoney(moneyToGain)} USD
                         </ContentProgressCell>}
 
                         <ContentCell bold noBorderBottom>{phaseName}</ContentCell>
-                        <ContentCell noBorderBottom>Current bonus: {discountPercent}%</ContentCell>
+                        <ContentCell noBorderBottom>Current bonus: {bonusPercents}%</ContentCell>
                         <ContentCell>Remaining:
                             <Span colored>&nbsp;{countdownTime}</Span>
                         </ContentCell>
@@ -79,21 +82,24 @@ class ICOProgress extends React.Component {
 };
 
 
-const mapStateToProps = ({ICOInfo, Timer}) => ({
+const mapStateToProps = ({Phase, ICOInfo, Timer}) => ({
 
     timerTime: Timer.get('timerTime'),
-    USDcRaised: ICOInfo.get('USDcRaised'),
-    phaseName: ICOInfo.getIn(['currentPhase', 'name']),
-    discountPercent: ICOInfo.getIn(['currentPhase', 'discountPercent']),
-    startTime: ICOInfo.getIn(['currentPhase', 'startTime']),
-    endTime: ICOInfo.getIn(['currentPhase', 'endTime']),
-    hardCapUSDc: ICOInfo.getIn(['currentPhase', 'hardCapUSDc']),
+    phaseName: Phase.get('name'),
+    gainedMoney: ICOInfo.get('total_supply'),
+    moneyToGain: ICOInfo.get('goal_supply'),
+    startTime: Phase.get('begin_date'),
+    endTime: Phase.get('end_date'),
+    bonusPercents: Phase.get('bonus_percents'),
     countdownTime: ICOInfo.get('countdownTime')
 })
 
 const mapDispatchToProps = (dispatch) => ({
     getICOInfo() {
         dispatch(ICOInfoActions.getICOInfoRequest())
+    },
+    getPhaseInfo() {
+        dispatch(PhaseActions.getPhaseRequest())
     },
     updateCountdown(payload) {
         dispatch(ICOInfoActions.updateCountdown(payload))
