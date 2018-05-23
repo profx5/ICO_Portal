@@ -37,7 +37,7 @@ class TokensMove(models.Model):
 
     class Meta:
         ordering = ['id']
-        db_table = 'toknes_moves'
+        db_table = 'tokens_moves'
 
     def __str__(self):
         return f'TokensMove {self.id}'
