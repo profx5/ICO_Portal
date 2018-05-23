@@ -465,7 +465,7 @@ CREATE TABLE `kyc` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `investor_id` (`investor_id`),
   CONSTRAINT `kyc_investor_id_1910e4d7_fk_investors_id` FOREIGN KEY (`investor_id`) REFERENCES `investors` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -474,6 +474,7 @@ CREATE TABLE `kyc` (
 
 LOCK TABLES `kyc` WRITE;
 /*!40000 ALTER TABLE `kyc` DISABLE KEYS */;
+INSERT INTO `kyc` VALUES (1,'APPROVED','OuLRbKgliq','uYYjRfgYdL','KeYoCJLuzY','jKhALnNdnV','2003-12-17','0','Passport','kyc/1/photo/example.jpg','kyc/1/selfie/example.jpg',NULL,'0x9603f815f3f49b064634625c3afa19e1e11a84ae43897424c134cd7a77fbe999425c',1);
 /*!40000 ALTER TABLE `kyc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -754,4 +755,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-22 20:05:29
+-- Dump completed on 2018-05-23 14:30:01
