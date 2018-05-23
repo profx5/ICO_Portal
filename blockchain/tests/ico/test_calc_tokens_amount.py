@@ -14,7 +14,7 @@ class TestCalcTokensAmount(BlockChainTestCase):
 
     def test_successful_calc(self):
         ExchangeRateFactory(currency='ETH', rate=Decimal('720.31422'))
-        CurrentPhaseFactory(bonus_percents=40)
+        PhaseFactory(bonus_percents=40)
 
         result = CalcTokensAmount()('1.23', 'ETH')
 
