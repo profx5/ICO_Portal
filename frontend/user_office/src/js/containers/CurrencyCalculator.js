@@ -63,7 +63,7 @@ class CurrencyCalculator extends React.Component {
                 </div>
                 <Tip>
                     {"1 " + investCurrency + ' = ' + investCurrencyRate + ' TNK'}
-                    <HoverTip>{(investAmount === '' ? 0 : investAmount) + ' ' + investCurrency + ' +' + bonusPercent + '%' + ' = ' + tokensAmount + ' TNK'}</HoverTip>
+                    <HoverTip>{(investAmount === '' ? 0 : investAmount) + ' ' + investCurrency + ' + ' + bonusPercent + '%' + ' = ' + tokensAmount + ' TNK'}</HoverTip>
                 </Tip>
             </Wrapper>
         )

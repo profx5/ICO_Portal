@@ -20,7 +20,7 @@ class Api {
     }
 
     getDeposits() {
-        return `${this.prefix}/getDeposits/`
+        return `${this.prefix}/getTokensMoves/`
     }
 
     kyc() {

@@ -1,20 +1,25 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import styled from 'styled-components';
+import moment from 'moment';
 
 import * as DepositsActions from '../actions/DepositsActions'
 
 
 class DepositTable extends Component {
+
+    componentWillMount = () => {
+        this.props.getDeposits();
+    }
+
     _renderTable = (deposits) => {
         return deposits.map( (item, index) => {
             if (index === 3) return;
             return (
-                <TableBodyRow key={index} className={item.get('state') === 'PREPARED' ? 'prepared' : ''}>
+                <TableBodyRow key={index} className={item.getIn(['transfer', 'state']) === 'ACTUAL' ? 'prepared' : ''}>
                     <TableCell>{item.get('amount')}</TableCell>
-                    <TableCell>{item.get('amount_wo_bonus')}</TableCell>
-                    <TableCell>{item.getIn(['mint', 'txn_hash'])}</TableCell>
-                    <TableCell>{item.get('charged_at')}</TableCell>
+                    <TableCell>{item.getIn(['transfer', 'txn_hash'])}</TableCell>
+                    <TableCell>{moment(item.get('created_at')).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
                 </TableBodyRow>
             )
         })
@@ -34,7 +39,6 @@ class DepositTable extends Component {
                     <thead>
                         <tr>
                             <TableHead>Amount</TableHead>
-                            <TableHead>Bonus</TableHead>
                             <TableHead>Tx hash</TableHead>
                             <TableHead>Tx time</TableHead>
                         </tr>
@@ -55,11 +59,8 @@ const mapStateToProps = ({deposits}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    nextPage() {
-        dispatch(DepositsActions.depositsNextPage())
-    },
-    prevPage() {
-        dispatch(DepositsActions.depositsPrevPage())
+    getDeposits() {
+        dispatch(DepositsActions.getDepositsRequest())
     }
 })
 
@@ -78,7 +79,7 @@ const Table = styled.table`
 
 const TableBodyRow = styled.tr`
     height: 45px;
-    background: #e3dfdf;
+    background: rgba(227,223,223,.3);
     &.prepared td {
         background: rgba(184,241,229,.6);
     }
