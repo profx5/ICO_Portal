@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import * as InvestActions from '../actions/InvestActions';
 import * as UIStateActions from '../actions/UIStateActions';
 
 import Balance from '../components/Balance';

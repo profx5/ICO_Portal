@@ -18,11 +18,6 @@ import * as DepositsActions from '../actions/DepositsActions';
 import * as BountiesActions from '../actions/BountiesBalanceActions';
 
 class UserOffice extends Component {
-    componentDidMount() {
-        const {getMe, getPhaseStats, getDeposite} = this.props;
-
-        compose(getMe, getPhaseStats, getDeposite)();
-    }
 
     handleClickForTransferModalWindow = (e) => {
         this.props.postTransferRequest()
@@ -46,15 +41,6 @@ class UserOffice extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getMe() {
-        dispatch(UserActions.getUserRequest())
-    },
-    getPhaseStats() {
-         dispatch(ICOInfoActions.getICOInfoRequest())
-    },
-    getDeposite() {
-        dispatch(DepositsActions.getDepositsRequest())
-    },
     postTransferRequest() {
         dispatch(BountiesActions.postTransferRequest())
     }

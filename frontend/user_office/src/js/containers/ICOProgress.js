@@ -15,11 +15,6 @@ import Button from './../components/Button';
 
 class ICOProgress extends React.Component {
 
-    componentWillMount = () => {
-        // this.props.getICOInfo();
-        this.props.getPhaseInfo();
-    }
-
     componentDidUpdate() {
         const {startTime, endTime, countdownTime, updateCountdown} = this.props;
         if (countdownTime === '') Utils.setTimer(startTime, endTime, updateCountdown);
@@ -95,12 +90,6 @@ const mapStateToProps = ({Phase, ICOInfo, Timer}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    getICOInfo() {
-        dispatch(ICOInfoActions.getICOInfoRequest())
-    },
-    getPhaseInfo() {
-        dispatch(PhaseActions.getPhaseRequest())
-    },
     updateCountdown(payload) {
         dispatch(ICOInfoActions.updateCountdown(payload))
     }

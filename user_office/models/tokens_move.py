@@ -18,7 +18,9 @@ TOKENS_MOVE_DIRECTIONS = [
 class TokensMove(models.Model):
     id = models.AutoField(primary_key=True)
     investor = models.ForeignKey('Investor', related_name='deposits',
-                                 on_delete=models.CASCADE)
+                                 on_delete=models.DO_NOTHING,
+                                 to_field='eth_account', db_constraint=False,
+                                 db_column='investor_account')
     amount = TokenField()
 
     created_at = models.DateTimeField(default=datetime.utcnow)

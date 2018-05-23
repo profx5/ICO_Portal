@@ -7,11 +7,7 @@ import * as DepositsActions from '../actions/DepositsActions'
 
 
 class DepositTable extends Component {
-
-    componentWillMount = () => {
-        this.props.getDeposits();
-    }
-
+    
     _renderTable = (deposits) => {
         return deposits.map( (item, index) => {
             if (index === 3) return;
@@ -59,16 +55,10 @@ const mapStateToProps = ({deposits}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    getDeposits() {
-        dispatch(DepositsActions.getDepositsRequest())
-    }
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DepositTable)
-
-
-
-
 
 
 const Table = styled.table`
@@ -101,5 +91,7 @@ const TableHead = styled.th`
 const TableCell = styled.td`
     color: #0a0a0a;
     padding-left: 24px;
-    word-break: break-all;
+    &:nth-of-type(2) {
+        word-break: break-all;
+    }
 `;

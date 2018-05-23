@@ -3,8 +3,8 @@ from celery.utils.log import get_task_logger
 from oslash import Right
 from django.conf import settings
 
-from .services import SyncICOInfo, SyncExchangeRates, ProcessTransfer
-from .contracts.token import TokenContract, TransferEvent
+from .services import SyncICOInfo, SyncExchangeRates, ProcessTransfer, \
+    GetEvents
 
 logger = get_task_logger(__name__)
 
@@ -15,10 +15,9 @@ def sync_ico_info():
     result = service()
 
     if isinstance(result, Right):
-        logger.info('ICO info successfully synced, ico_id = %s' %
-                    result.value['ico_info'].id)
+        logger.info(f"ICO info successfully synced, ico_info_id={result.value['ico_info'].id}")
     else:
-        logger.error('Erorr while syncing ico info, %s' % result.value)
+        logger.error(f'Erorr while syncing ico info, {result.value}')
 
 @shared_task
 def sync_exchange_rates():
@@ -28,38 +27,29 @@ def sync_exchange_rates():
 
     for currency, r in result.items():
         if isinstance(r, Right):
-            logger.info('Exchange rate for %s successfully synced, rate_id = %s' % (
-                currency,
-                r.value['obj'].id))
+            logger.info(f"Exchange rate for {currency} successfully synced, rate_id={r.value['obj'].id}")
         else:
-            logger.error('Erorr while syncing exchange rate for %s, %s' % (
-                currency,
-                r.value))
+            logger.error(f'Erorr while syncing exchange rate for {currency}, {r.value}')
 
 @shared_task
-def process_event(entry):
+def process_event(event):
     processor = ProcessTransfer()
 
-    result = processor(entry)
+    result = processor(event)
 
     if isinstance(result, Right):
-        logger.info('Transfer from txn %s was successfully processed (to_id=%s).' % (
-            result.value['event'].txn_hash,
-            result.value['transfer'].id))
+        logger.info(f"Transfer with txn_hash {event.txn_hash} successfully processed (transfer_id={result.value['transfer'].id}).")
     else:
-        logger.error('Got error while processing transfer from txn %s, %s' % (
-            entry['transactionHash'].hex(),
-            result.value))
+        logger.error(f'Got error while processing transfer with txn_hash {event.txn_hash}, {result.value}')
 
 @shared_task
 def check_events():
-    events_filter = TokenContract().get_events_filter()
+    new_events = GetEvents()()
 
-    new_entries = events_filter.get_new_entries()
+    if isinstance(new_events, Right):
+        for event in new_events.value:
+            logger.info(f'Got event with transactionHash={event.txn_hash}')
 
-    for entry in new_entries:
-        logger.info('Got entry with transactionHash=%s ' %
-                    entry['transactionHash'].hex())
-
-        event = TransferEvent(entry)
-        process_event.delay(event)
+            process_event.delay(event)
+    else:
+        logger.info(f'Got error while checking events {new_events.value}')

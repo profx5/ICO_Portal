@@ -86,7 +86,7 @@ gulp.task('styles', function() {
         notify({ title: 'CSS task error!' }).write(err.message);
         this.emit('end');
     })
-    .pipe(gulp.dest('frontend/landing/dist/styles'))
+    .pipe(gulp.dest('frontend/landing/dist/static/styles'))
 })
 //CSS
 
@@ -119,14 +119,14 @@ gulp.task('scripts:all', function() {
             notify({ title: 'scripts:all task error!' }).write(err.message);
             this.emit('end');
         })
-        .pipe(gulp.dest("frontend/landing/dist/js"));
+        .pipe(gulp.dest("frontend/landing/dist/static/js"));
 });
 
 gulp.task('vendor:js', function() {
     return gulp.src(['frontend/landing/src/vendor/js/**/*.js'])
     .pipe(concat('vendor.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('frontend/landing/dist/js'))
+    .pipe(gulp.dest('frontend/landing/dist/static/js'))
 })
 
 gulp.task('vendor:css', function() {
@@ -137,7 +137,7 @@ gulp.task('vendor:css', function() {
         autoprefixer: false,
         discardComments: { removeAll: true }
     }))
-    .pipe(gulp.dest('frontend/landing/dist/styles'))
+    .pipe(gulp.dest('frontend/landing/dist/static/styles'))
 })
 //JAVASCRIPT
 
@@ -150,20 +150,21 @@ gulp.task('images', function() {
             svgoPlugins: [{removeViewBox: false}],
             use: [pngquant()]
         })))
-        .pipe(gulp.dest('frontend/landing/dist'))
+        .pipe(gulp.dest('frontend/landing/dist/static'))
 })
 
 
 gulp.task('assets', function() {
     return gulp.src(['frontend/landing/src/assets/**', '!frontend/landing/src/assets/img/*'], {since: gulp.lastRun('assets')})
-        .pipe(gulp.dest('frontend/landing/dist'))
+        .pipe(gulp.dest('frontend/landing/dist/static'))
 })
 
 
 
 gulp.task('clean:dist', function() {
-  return del('dist');
+  return del('frontend/landing/dist');
 });
+
 
 
 gulp.task('clear', function (callback) {
