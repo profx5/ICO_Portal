@@ -16,8 +16,8 @@ class FuzzyHash(fuzzy.FuzzyText):
 
 
 UTCNow = factory.LazyFunction(datetime.utcnow)
-
 CurrencyFuzzy = fuzzy.FuzzyChoice(['ETH', 'LTC', 'BTC'])
+AmountFuzzy = fuzzy.FuzzyDecimal(low=0, high=10000000, precision=0)
 
 
 class InvestorFactory(factory.DjangoModelFactory):
@@ -53,7 +53,7 @@ class TokensMoveFactory(factory.DjangoModelFactory):
     created_at = UTCNow
     actualized_at = UTCNow
 
-    amount = fuzzy.FuzzyDecimal(low=0, high=10000)
+    amount = AmountFuzzy
 
     transfer = factory.SubFactory(TransferFactory)
     investor = factory.SubFactory(InvestorFactory)
