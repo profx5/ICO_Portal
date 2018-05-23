@@ -13,9 +13,9 @@ import * as PhaseActions from './../actions/PhaseActions';
 class ContentWrapper extends React.Component {
 
     componentWillMount() {
-        const {getMe, getICOInfo, getKyc, getPhaseInfo, getDeposits} = this.props;
+        const {getMe, getICOInfo, getKyc, getPhasesInfo, getDeposits} = this.props;
 
-        compose(getMe, getKyc, getICOInfo, getPhaseInfo, getDeposits)();
+        compose(getMe, getKyc, getICOInfo, getPhasesInfo, getDeposits)();
     }
 
     render() {
@@ -43,8 +43,8 @@ const mapDispatchToProps = (dispatch) => ({
     getKyc() {
         dispatch(KYCActions.getKYCRequest())
     },
-    getPhaseInfo() {
-        dispatch(PhaseActions.getPhaseRequest())
+    getPhasesInfo() {
+        dispatch(PhaseActions.getPhasesRequest())
     },
     getDeposits() {
         dispatch(DepositsActions.getDepositsRequest())

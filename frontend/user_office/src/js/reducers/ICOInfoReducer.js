@@ -6,7 +6,6 @@ import {Map} from 'immutable';
 
 const initialState = Map({
     total_supply: "0",
-    goal_supply: "5411630",
     token_address: "0x",
     token_decimals: 2,
     humanizedEndTime: '',

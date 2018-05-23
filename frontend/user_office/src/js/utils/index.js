@@ -84,8 +84,21 @@ const Utils = {
         case 13:
           result = num[0] + num[1] + 'B';
           break;
-        case 13:
+        case 14:
           result = num[0] + num[1] + num[2] + 'B';
+          break;
+
+        case 15:
+          result = `${num[0]} TR`;
+          break;
+        case 16:
+          result = `${num[0]}.${num[1]} TR`;
+          break;
+        case 17:
+          result = `${num[0]}.${num[1]}${num[2]} TR`;
+          break;
+        case 18:
+          result = `${num[0]}.${num[1]}${num[2]}${num[3]} TR`;
           break;
       }
 
@@ -196,7 +209,7 @@ const Utils = {
           } else if (time.days <= 0) {
             clearInterval(interval);
 
-            console.error('Timer has been reached it\' end!');
+            console.error('Timer has been reached it\'s end!');
             newTime = {
               seconds: '00',
               minutes: '00',
@@ -204,6 +217,7 @@ const Utils = {
               days: '00'
             };
             callback(`${newTime.days} days ${newTime.hours}h ${newTime.minutes}m ${newTime.seconds}s`);
+            return;
           }
        
       newTime = {

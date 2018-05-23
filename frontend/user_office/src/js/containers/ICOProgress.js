@@ -26,7 +26,7 @@ class ICOProgress extends React.Component {
         const {
             USDcRaised,
             gainedMoney,
-            moneyToGain,
+            hardCup,
             phaseName,
             bonusPercents,
             hardCapUSDc,
@@ -35,7 +35,9 @@ class ICOProgress extends React.Component {
         } = this.props;
 
         const raisedAmountString = Math.round(parseInt(gainedMoney)/100) + '';
-        let phaseRaisedPercents = this.getPhasePercents(gainedMoney, moneyToGain);
+        let hardCupNumber = parseInt(hardCup, 10);
+        let phaseRaisedPercents = this.getPhasePercents(gainedMoney, hardCupNumber);
+
         return (
             <Wrapper>
                 <Header>
@@ -49,7 +51,7 @@ class ICOProgress extends React.Component {
                 <Content>
                     <ContentPart>
                         {<ContentProgressCell noBorderBottom progress={phaseRaisedPercents === 0 ? '2%' : phaseRaisedPercents + '%'}>
-                            {Utils.formatMoney(gainedMoney)} USD / {Utils.formatMoney(moneyToGain)} USD
+                            {Utils.formatMoney(gainedMoney)} USD / {Utils.formatMoney(hardCupNumber)} USD
                         </ContentProgressCell>}
 
                         <ContentCell bold noBorderBottom>{phaseName}</ContentCell>
@@ -82,7 +84,7 @@ const mapStateToProps = ({Phase, ICOInfo, Timer}) => ({
     timerTime: Timer.get('timerTime'),
     phaseName: Phase.get('name'),
     gainedMoney: ICOInfo.get('total_supply'),
-    moneyToGain: ICOInfo.get('goal_supply'),
+    hardCup: Phase.get('hard_cap'),
     startTime: Phase.get('begin_date'),
     endTime: Phase.get('end_date'),
     bonusPercents: Phase.get('bonus_percents'),

@@ -8,7 +8,7 @@ import {KYCReducer} from './KYCReducer';
 import {InvestReducer} from './InvestReducer.js';
 import {ReferralsReducer} from './ReferralsReducer.js';
 import {ModalWindowReducer} from './ModalWindowReducer.js';
-import {PhaseReducer} from './PhaseReducer.js';
+import {PhasesReducer} from './PhasesReducer.js';
 import {CurrencyReducer} from './CurrencyReducer.js';
 import {TimerReducer} from './TimerReducer.js';
 import {UIStateReducer} from './UIStateReducer.js';
@@ -23,7 +23,7 @@ const reducers = combineReducers({
     Invest: InvestReducer,
     referrals: ReferralsReducer,
     modals: ModalWindowReducer,
-    Phase: PhaseReducer,
+    Phase: PhasesReducer,
     Currencies: CurrencyReducer,
     Timer: TimerReducer,
     UI: UIStateReducer,
