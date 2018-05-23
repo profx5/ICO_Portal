@@ -14,7 +14,7 @@ class GetAvailableCurrencies(GenericAPIView):
     permission_classes = (KYCAndLoginPermission,)
 
     def get_exchange_rate(self, currency):
-        return ExchangeRate.objects.filter(currency=currency).first()
+        return ExchangeRate.objects.get_rate_by_currency(currency)
 
     def get(self, request, *args, **kwargs):
         return Response(

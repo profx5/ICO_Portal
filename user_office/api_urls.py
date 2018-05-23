@@ -13,8 +13,7 @@ api_urlpatterns = [
     path('setEthAccount/', set_eth_account),
     path('prepareTokensMove/', prepare_tokens_move),
     path('getReferralLink/', get_referral_link),
-    path('getPhase/', get_phase),
-    path('getRates/', get_rates)
+    path('getPhase/', get_phase)
 ]
 
 

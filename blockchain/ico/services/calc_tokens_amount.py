@@ -18,7 +18,7 @@ class CalcTokensAmount:
             return Left('Current phase not found')
 
     def find_exchange_rate(self, args):
-        rate = ExchangeRate.objects.filter(currency=args['currency'].upper()).last()
+        rate = ExchangeRate.objects.get_rate_by_currency(args['currency'])
 
         if rate:
             return Right(dict(args, rate=rate))

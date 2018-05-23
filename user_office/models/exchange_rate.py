@@ -1,7 +1,14 @@
 from django.db import models
+from django.db.models.query import QuerySet
+from django.db.models.manager import BaseManager
 
 from ico_portal.utils.datetime import datetime
 from .fields import CurrencyField
+
+
+class ExchangeRateQuerySet(QuerySet):
+    def get_rate_by_currency(self, currency):
+        return self.filter(currency=currency.upper()).last()
 
 
 class ExchangeRate(models.Model):
@@ -11,7 +18,7 @@ class ExchangeRate(models.Model):
     rate = models.DecimalField(max_digits=32, decimal_places=5)
     timestamp = models.PositiveIntegerField()
 
-    objects = models.Manager()
+    objects = BaseManager.from_queryset(ExchangeRateQuerySet)()
 
     class Meta:
         ordering = ['creation_date']
