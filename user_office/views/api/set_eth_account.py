@@ -1,21 +1,14 @@
 import coreapi
+from oslash import Right
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import serializers
 from rest_framework.schemas import AutoSchema
-from web3 import Web3
 
 from .auth import KYCAndLoginPermission
+from user_office.services import set_eth_account
 
 
-class SetEthSerializer(serializers.Serializer):
-    eth_account = serializers.CharField(max_length=42)
-
-    def validate_eth_account(self, value):
-        return Web3.toChecksumAddress(value)
-
-
-class SetEthAccount(APIView):
+class SetETHAccount(APIView):
     """
     Set Ethereum account for user
     """
@@ -26,23 +19,19 @@ class SetEthAccount(APIView):
         ]
     )
 
-    serializer = SetEthSerializer
     permission_classes = (KYCAndLoginPermission,)
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer(data=request.data)
+        service = set_eth_account.SetETHAccount()
 
-        if serializer.is_valid():
-            if request.user.eth_account:
-                return Response(data={'success': False,
-                                      'error': 'eth account already filled'},
-                                status=422)
-            else:
-                request.user.eth_account = serializer.validated_data['eth_account']
-                request.user.save()
+        result = service(request.user, request.data['eth_account'])
 
-                return Response(data={'success': True})
+        if isinstance(result, Right):
+            return Response(data={'success': True})
         else:
+            status = 422 if isinstance(result, set_eth_account.InvalidAddress) \
+                     else 500
+
             return Response(data={'success': False,
-                                  'error': 'invalid parameters'},
-                            status=422)
+                                  'error': result.value},
+                            status=status)

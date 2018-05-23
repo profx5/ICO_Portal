@@ -6,6 +6,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 
 from ico_portal.utils.datetime import datetime
+from .fields import TokenField
 
 
 class PhaseDateIntersection(Exception):
@@ -42,8 +43,13 @@ class Phase(models.Model):
     end_date = models.DateTimeField()
     bonus_percents = models.IntegerField(
         validators=[MinValueValidator(1),MaxValueValidator(100)])
+    hard_cap = TokenField()
 
     objects = BaseManager.from_queryset(PhaseQuerySet)()
+
+    class Meta:
+        ordering = ['begin_date']
+        db_table = 'phases'
 
     def clean(self):
         if self.begin_date >= self.end_date:
@@ -63,6 +69,6 @@ class Phase(models.Model):
     def __str__(self):
         return self.name
 
-    class Meta:
-        ordering = ['begin_date']
-        db_table = 'phases'
+    @property
+    def current(self):
+        return self.begin_date <= datetime.utcnow() < self.end_date

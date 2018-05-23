@@ -41,7 +41,7 @@ class TestProcessIPN(BlockChainTestCase):
         self.stub_datetime_utcnow(self.utcnow)
 
         self.investor = InvestorFactory(eth_account=self.investor_eth_address)
-        self.phase = CurrentPhaseFactory(bonus_percents=40)
+        self.phase = PhaseFactory(bonus_percents=40)
         self.exchange_rate = ExchangeRateFactory(currency='LTC', rate=Decimal('142.43610'))
         self.account = AccountFactory(investor=self.investor,
                                       currency='LTC',

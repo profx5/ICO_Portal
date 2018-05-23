@@ -16,8 +16,8 @@ class FuzzyHash(fuzzy.FuzzyText):
 
 
 UTCNow = factory.LazyFunction(datetime.utcnow)
-
 CurrencyFuzzy = fuzzy.FuzzyChoice(['ETH', 'LTC', 'BTC'])
+AmountFuzzy = fuzzy.FuzzyDecimal(low=0, high=10000000, precision=0)
 
 
 class InvestorFactory(factory.DjangoModelFactory):
@@ -53,7 +53,7 @@ class TokensMoveFactory(factory.DjangoModelFactory):
     created_at = UTCNow
     actualized_at = UTCNow
 
-    amount = fuzzy.FuzzyDecimal(low=0, high=10000)
+    amount = AmountFuzzy
 
     transfer = factory.SubFactory(TransferFactory)
     investor = factory.SubFactory(InvestorFactory)
@@ -63,7 +63,7 @@ class TokensMoveFactory(factory.DjangoModelFactory):
     direction = 'IN'
 
 
-class CurrentPhaseFactory(factory.DjangoModelFactory):
+class PhaseFactory(factory.DjangoModelFactory):
     class Meta:
         model = 'user_office.Phase'
 
@@ -71,6 +71,7 @@ class CurrentPhaseFactory(factory.DjangoModelFactory):
     begin_date = factory.LazyFunction(lambda: datetime.utcnow() - timedelta(days=10))
     end_date = factory.LazyFunction(lambda: datetime.utcnow() + timedelta(days=10))
     bonus_percents = fuzzy.FuzzyInteger(low=0, high=100)
+    hard_cap = fuzzy.FuzzyInteger(low=0)
 
 
 class ExchangeRateFactory(factory.DjangoModelFactory):

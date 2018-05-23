@@ -2,7 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 
 from .base import APITestCase
-from user_office.factories import CurrentPhaseFactory, ExchangeRateFactory
+from user_office.factories import PhaseFactory, ExchangeRateFactory
 from user_office.models import Transfer, TokensMove
 
 
@@ -13,7 +13,7 @@ class TestPrepareDeposit(APITestCase):
         utcnow = datetime(2018, 5, 14, 11, 11, 11)
         self.stub_datetime_utcnow(utcnow)
 
-        CurrentPhaseFactory(bonus_percents=30)
+        PhaseFactory(bonus_percents=30)
         ExchangeRateFactory(currency='ETH', rate='750.77123')
 
 
