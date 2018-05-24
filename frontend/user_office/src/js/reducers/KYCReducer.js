@@ -5,20 +5,16 @@ import {Map} from 'immutable'
 
 
 const initialState = Map({
-    state: null,
-    isSubmiting: false,
-    showForm: false,
-    isFetched: false,
-    kyc: Map({
-        birthdate: null,
-        country: null,
-        document_no: null,
-        document_type: null,
-        firstname: null,
-        midname: null,
-        photo: null,
-        surname: null
-    })
+    state: "DECLINED",
+    firstname: "",
+    midname: "",
+    surname: "",
+    birthdate: "",
+    document_no: "",
+    document_type: "",
+    country: "",
+    photo: null,
+    selfie: null
 })
 
 
@@ -26,10 +22,7 @@ const initialState = Map({
 export const KYCReducer = createReducer({
     [actions.getKYCRequest]: (state, payload) => state,
     [actions.getKYCSuccessfull]: (state, payload) => {
-        return state.merge({
-            state: payload.state,
-            kyc: state.get('kyc').merge(payload)
-        }).set('isFetched', true)
+        return state.merge(payload).set('isFetched', true)
     },
 
     [actions.submitKYCRequest]: (state, payload) => state.set('isSubmiting', true),

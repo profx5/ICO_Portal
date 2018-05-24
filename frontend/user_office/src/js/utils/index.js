@@ -45,60 +45,41 @@ const Utils = {
           result;
 
       switch (num.length) {
-        case 1:
-          result = '0';
+        case 1: result = '0';
           break;
-        case 2:
-          result = '0';
+        case 2: result = '0';
           break;
-        case 3:
-          result = num[0];
+        case 3: result = num[0];
           break;
-        case 4:
-          result = num[0] + num[1];
+        case 4: result = num[0] + num[1];
           break;
-        case 5:
-          result = num[0] + num[1] + num[2];
+        case 5: result = num[0] + num[1] + num[2];
           break;
-        case 6:
-          result = num[0] + 'K';
+        case 6: result = num[0] + 'K';
           break;
-        case 7:
-          result = num[0] + num[1] + 'K';
+        case 7: result = num[0] + num[1] + 'K';
           break;
-        case 8:
-          result = num[0] + num[1] + num[2] + 'K';
+        case 8: result = num[0] + num[1] + num[2] + 'K';
           break;
-        case 9:
-          result = num[0] + 'M';
+        case 9: result = num[0] + 'M';
           break;
-        case 10:
-          result = num[0] + num[1] + 'M';
+        case 10: result = num[0] + num[1] + 'M';
           break;
-        case 11:
-          result = num[0] + num[1] + num[2] + 'M';
+        case 11: result = num[0] + num[1] + num[2] + 'M';
           break;
-        case 12:
-          result = num[0] + 'B';
+        case 12: result = num[0] + 'B';
           break;
-        case 13:
-          result = num[0] + num[1] + 'B';
+        case 13: result = num[0] + num[1] + 'B';
           break;
-        case 14:
-          result = num[0] + num[1] + num[2] + 'B';
+        case 14: result = num[0] + num[1] + num[2] + 'B';
           break;
-
-        case 15:
-          result = `${num[0]}T`;
+        case 15: result = `${num[0]}T`;
           break;
-        case 16:
-          result = `${num[0]}.${num[1]}T`;
+        case 16: result = `${num[0]}.${num[1]}T`;
           break;
-        case 17:
-          result = `${num[0]}.${num[1]}${num[2]}T`;
+        case 17: result = `${num[0]}.${num[1]}${num[2]}T`;
           break;
-        case 18:
-          result = `${num[0]}.${num[1]}${num[2]}${num[3]}T`;
+        case 18: result = `${num[0]}.${num[1]}${num[2]}${num[3]}T`;
           break;
       }
 

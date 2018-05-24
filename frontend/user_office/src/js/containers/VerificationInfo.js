@@ -47,10 +47,6 @@ class VerificationInfo extends React.Component {
         })
     }
 
-    componentWillMount() {
-        this.props.getKYCInfo();
-    }
-
     componentDidMount() {
         $(window).on('scroll', Utils.throttle(this.stageTracker,30));
     }
@@ -76,9 +72,7 @@ const mapStateToProps = ({KYC}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    getKYCInfo() {
-        dispatch(KYCActions.getKYCRequest())
-    }
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(VerificationInfo)

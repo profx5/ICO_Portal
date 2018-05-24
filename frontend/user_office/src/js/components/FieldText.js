@@ -2,12 +2,19 @@ import React from 'react'
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
-const FieldText = ({labelText, placeholder, options, name}) => {
+const FieldText = ({labelText, placeholder, options, name, value, disabled}) => {
 
     return (
         <Wrapper>
-            <StyledLabel>{labelText}</StyledLabel>
-            <StyledInput placeholder={placeholder} className="Field" type="text" name={name} options={options}/>
+            <StyledLabel>{labelText}</StyledLabel> 
+            <StyledInput 
+                value={value} 
+                placeholder={placeholder} 
+                className="Field" 
+                type="text" 
+                name={name} 
+                readOnly={disabled === true ? 'true' : 'false'} 
+                options={options}/>
         </Wrapper>
     );
 }
@@ -36,4 +43,7 @@ const StyledInput = styled(Cleave)`
     width: 100%;
     background: #ffffff;
     border: 1px solid #EAEFF2;
+    &:read-only {
+        color: rgba(35,53,57,.3);
+    }
 `;

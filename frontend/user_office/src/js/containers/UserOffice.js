@@ -10,7 +10,7 @@ import Header from './Header';
 import StatusSidebar from './StatusSidebar';
 import Dashboard from './Dashboard';
 import Verification from './Verification';
-import VerificationSecond from './VerificationSecond';
+import Settings from './Settings';
 
 import * as UserActions from '../actions/UserActions';
 import * as ICOInfoActions from '../actions/ICOInfoActions';
@@ -31,9 +31,9 @@ class UserOffice extends Component {
                 <HeaderWrapper>
                     <Header/>
                 </HeaderWrapper>
-                <Dashboard />
+                {/*<Dashboard />*/}
                 {/*<Verification />*/}
-                {/*<VerificationSecond/>*/}
+                <Settings/>
                 <StatusSidebar/>
             </Wrapper>
         )

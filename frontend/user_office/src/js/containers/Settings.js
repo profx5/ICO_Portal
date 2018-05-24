@@ -10,15 +10,14 @@ import Sessions from './Sessions';
 import VerificationInfo from './VerificationInfo';
 
 
-
-class VerificationSecond extends React.Component {
+class Settings extends React.Component {
 
     onSubmitHandler = (event) => {
-        event.preventDefault()
+        event.preventDefault();
 
-        const data = new FormData(event.target)
+        const data = new FormData(event.target);
 
-        this.props.submitForm(data)
+        this.props.submitForm(data);
     }
 
 
@@ -42,7 +41,7 @@ class VerificationSecond extends React.Component {
 
 
 const mapStateToProps = ({}) => ({
-
+    
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -51,7 +50,7 @@ const mapDispatchToProps = (dispatch) => ({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(VerificationSecond);
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);
 
 
 const Wrapper = styled.form`
