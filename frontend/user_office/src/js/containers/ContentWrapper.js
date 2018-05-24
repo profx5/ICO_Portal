@@ -8,14 +8,15 @@ import * as ICOInfoActions from '../actions/ICOInfoActions';
 import * as DepositsActions from '../actions/DepositsActions';
 import * as KYCActions from '../actions/KYCActions';
 import * as PhaseActions from './../actions/PhaseActions';
+import * as CurrencyActions from './../actions/CurrencyActions';
 
 
 class ContentWrapper extends React.Component {
 
     componentWillMount() {
-        const {getMe, getICOInfo, getKyc, getPhasesInfo, getDeposits} = this.props;
+        const {getMe, getICOInfo, getKyc, getPhasesInfo, getDeposits, getCurrencies} = this.props;
 
-        compose(getMe, getKyc, getICOInfo, getPhasesInfo, getDeposits)();
+        compose(getMe, getKyc, getICOInfo, getPhasesInfo, getDeposits, getCurrencies)();
     }
 
     render() {
@@ -48,7 +49,10 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getDeposits() {
         dispatch(DepositsActions.getDepositsRequest())
-    }
+    },
+    getCurrencies() {
+        dispatch(CurrencyActions.getCurrenciesRequest())
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentWrapper);

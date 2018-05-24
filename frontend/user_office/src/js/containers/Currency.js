@@ -14,10 +14,6 @@ import * as CurrencyActions from '../actions/CurrencyActions.js';
 
 class Currency extends React.Component {
 
-    componentDidMount() {
-        this.props.getCurrencies();
-    }
-
     cardClickHandler (code, rate) {
         this.props.setInvestCurrency(code);
         this.props.setInvestCurrencyRate(rate);
@@ -84,9 +80,6 @@ const mapStateToProps = ({Currencies}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    getCurrencies() {
-        dispatch(CurrencyActions.getCurrenciesRequest())
-    },
     setInvestCurrency(payload) {
         dispatch(CurrencyActions.setInvestCurrency(payload))
     },

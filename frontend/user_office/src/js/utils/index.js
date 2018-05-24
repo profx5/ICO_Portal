@@ -89,16 +89,16 @@ const Utils = {
           break;
 
         case 15:
-          result = `${num[0]} TR`;
+          result = `${num[0]}T`;
           break;
         case 16:
-          result = `${num[0]}.${num[1]} TR`;
+          result = `${num[0]}.${num[1]}T`;
           break;
         case 17:
-          result = `${num[0]}.${num[1]}${num[2]} TR`;
+          result = `${num[0]}.${num[1]}${num[2]}T`;
           break;
         case 18:
-          result = `${num[0]}.${num[1]}${num[2]}${num[3]} TR`;
+          result = `${num[0]}.${num[1]}${num[2]}${num[3]}T`;
           break;
       }
 
