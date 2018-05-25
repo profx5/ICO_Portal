@@ -52,4 +52,4 @@ def check_events():
 
             process_event.delay(event)
     else:
-        logger.info(f'Got error while checking events {new_events.value}')
+        logger.error(f'Got error while checking events {new_events.value}')

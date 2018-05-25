@@ -31,16 +31,34 @@ CURRENCIES = {
     },
     'litecoin': {
         'module': 'coinpayments',
-        'code': 'LTC',
+        'code': 'LTCT',
         'name': 'Litecoin',
         'merchant': '69d94a11a25bc1245847e2c5175cd254',
         'ipn_secret': 'q123q123q123',
-        'public_key': 'a2308cc5846557e67b377623dbd2ce939a5fd997ab8302e2295ae65ba1d757e7',
-        'private_key': '508055A03f88Cd1217f6B724878Ff238d43E961d89E5cCb5be7182F3713613c6'
+        'public_key': '3eaf230a98bd62a69305f1d06ca50f69095be5d23bef32c06b328eb0f134129f',
+        'private_key': '87cbfc69BAB5fbdC910e9080b363d63352fc4fAdcDad46280b80767537849e24'
+    },
+    'bitcoin': {
+        'module': 'coinpayments',
+        'code': 'BTC',
+        'name': 'Bitcoin',
+        'merchant': '69d94a11a25bc1245847e2c5175cd254',
+        'ipn_secret': 'q123q123q123',
+        'public_key': '3eaf230a98bd62a69305f1d06ca50f69095be5d23bef32c06b328eb0f134129f',
+        'private_key': '87cbfc69BAB5fbdC910e9080b363d63352fc4fAdcDad46280b80767537849e24'
+    },
+    'dash': {
+        'module': 'coinpayments',
+        'code': 'DASH',
+        'name': 'Dash',
+        'merchant': '69d94a11a25bc1245847e2c5175cd254',
+        'ipn_secret': 'q123q123q123',
+        'public_key': '3eaf230a98bd62a69305f1d06ca50f69095be5d23bef32c06b328eb0f134129f',
+        'private_key': '87cbfc69BAB5fbdC910e9080b363d63352fc4fAdcDad46280b80767537849e24'
     }
 }
 
-EXCHANGE_RATES = ['ETH', 'LTC']
+EXCHANGE_RATES = ['ETH', 'LTC', 'BTC', 'DASH']
 
 # Celery
 CELERY_BROKER_URL = 'amqp://ico_portal:read_manual@localhost:5672/ico_portal_vhost'

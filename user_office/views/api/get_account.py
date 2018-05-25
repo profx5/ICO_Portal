@@ -15,7 +15,7 @@ class GetAccount(APIView):
 
     schema = AutoSchema(
         manual_fields=[
-            coreapi.Field(name='curency_code', location='query', required=True),
+            coreapi.Field(name='currency', location='query', required=True),
         ]
     )
 

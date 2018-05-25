@@ -81,9 +81,11 @@ class GetEvents:
 
             if last_block is None or last_block < max_block:
                 try:
-                    args['events_processing'].last_processed_block = max_block
-                    args['last_update_at'] = datetime.utcnow()
-                    args['events_processing'].save()
+                    events_processing = args['events_processing']
+
+                    events_processing.last_processed_block = max_block
+                    events_processing.last_update_at = datetime.utcnow()
+                    events_processing.save()
                 except DatabaseError as e:
                     return Left(f'Error while saving EventsProcessing {e}')
 

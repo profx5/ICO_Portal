@@ -1,12 +1,12 @@
 from .auth import KYCAndLoginPermission
-from rest_framework.generics import GenericAPIView
+from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from blockchain.currencies import Currencies
 from user_office.models import ExchangeRate
 
 
-class GetAvailableCurrencies(GenericAPIView):
+class GetAvailableCurrencies(APIView):
     """
     Return list of available cryptocurrencies
     """
