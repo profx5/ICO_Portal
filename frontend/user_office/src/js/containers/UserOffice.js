@@ -23,6 +23,17 @@ class UserOffice extends Component {
         this.props.postTransferRequest()
     }
 
+    verificationOnSubmitHandler = (values) => {
+        // console.log(value);
+        return new Promise((resolve, reject) => {
+            resolve(values);
+        })
+        .then(data => {
+            alert(JSON.stringify(values));
+        })
+
+    }
+
     render() {
         const { transfaerAllowed, transferErrorMessage } = this.props
 
@@ -32,8 +43,8 @@ class UserOffice extends Component {
                     <Header/>
                 </HeaderWrapper>
                 {/*<Dashboard />*/}
-                {/*<Verification />*/}
-                <Settings/>
+                <Verification onSubmitHandler={this.verificationOnSubmitHandler} />
+                {/*<Settings/>*/}
                 <StatusSidebar/>
             </Wrapper>
         )

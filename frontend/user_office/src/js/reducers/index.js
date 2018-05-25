@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+import { reducer as formReducer } from 'redux-form';
 //reducers
 import {UserReducer} from './UserReducer';
 import {ICOInfoReducer} from './ICOInfoReducer';
@@ -28,6 +29,7 @@ const reducers = combineReducers({
     Timer: TimerReducer,
     UI: UIStateReducer,
     Metamask: MetamaskReducer,
+    form: formReducer
 })
 
 export default reducers;

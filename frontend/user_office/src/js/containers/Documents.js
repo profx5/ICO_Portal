@@ -9,7 +9,7 @@ import Photo from './../components/Photo';
 import FileUpload from './../components/FileUpload';
 import PhotoUpload from './../components/PhotoUpload';
 import DocsOptions from './../components/DocsOptions';
-import FieldText from './../components/FieldText';
+import ReduxFormField from './../components/ReduxFormField';
 
 
 
@@ -35,13 +35,13 @@ class Documents extends React.Component {
                     </ContentPart>
                     <ContentPart>
                         <InputWrapper>
-                            <FieldText labelText="Series and number" name="document_no" options={{numericOnly: true}}/>
+                            <ReduxFormField labelText="Series and number" name="document_no" options={{numericOnly: true}}/>
                         </InputWrapper>
                         <InputWrapper>
-                            <FieldText labelText="Country" name="country"/>
+                            <ReduxFormField labelText="Country" name="country"/>
                         </InputWrapper>
                         <InputWrapper>
-                            <FieldText labelText="Date" options={{date: true, datePattern: ['Y', 'm', 'd']}}/>
+                            <ReduxFormField labelText="Date" name="document_date" options={{date: true, datePattern: ['Y', 'm', 'd']}}/>
                         </InputWrapper>
                     </ContentPart>
                 </ContentWrapper>

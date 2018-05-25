@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Utils from './../utils/index';
 
-import FieldText from './../components/FieldText';
+import ReduxFormField from './../components/ReduxFormField';
 
 
 
@@ -17,13 +17,13 @@ class Address extends React.Component {
                 <Title>Address</Title>
                 <InputSet>
                     <InputWrapper>
-                        <FieldText labelText="City"/>
+                        <ReduxFormField labelText="City" name="city"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FieldText labelText="Registration address"/>
+                        <ReduxFormField labelText="Registration address" name="registration address"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FieldText labelText="Postcode" options={{numericOnly: true}}/>
+                        <ReduxFormField labelText="Postcode" name="postcode" options={{numericOnly: true}}/>
                     </InputWrapper>
             </InputSet>
             </Wrapper>

@@ -11,7 +11,8 @@ import Photo from './../components/Photo';
 import FileUpload from './../components/FileUpload';
 import PhotoUpload from './../components/PhotoUpload';
 import FieldText from './../components/FieldText';
-import FieldRadio from './../components/FieldRadio';
+import ReduxFormField from './../components/ReduxFormField';
+import ReduxFormRadio from './../components/ReduxFormRadio';
 import Button from './../components/Button';
 
 
@@ -46,19 +47,19 @@ class PersonalData extends React.Component {
                 </PhotoFileUpload>
                 <InputSet>
                     <InputWrapper>
-                        <FieldText labelText="First Name" name="firstname"/>
+                        <ReduxFormField labelText="First Name" name="firstname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FieldText labelText="Last Name" name="surname"/>
+                        <ReduxFormField labelText="Last Name" name="surname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FieldText labelText="Middle Name" name="midname"/>
+                        <ReduxFormField labelText="Middle Name" name="midname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FieldRadio labelText="Gender" options={['Male', 'Female']}/>
+                        <ReduxFormRadio labelText="Gender" options={['Male', 'Female']}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FieldText labelText="Date of birth" options={{date: true, datePattern: ['d', 'm', 'Y']}} name="birthdate"/>
+                        <ReduxFormField labelText="Date of birth" options={{date: true, datePattern: ['d', 'm', 'Y']}} name="birthdate"/>
                     </InputWrapper>
             </InputSet>
             </Wrapper>
