@@ -13,7 +13,7 @@ const Dashboard = (props) => {
         <Wrapper>
             <Invest/>
             <Head>Dashboard</Head>
-            <ICOProgress/>
+            {/*<ICOProgress/>*/}
             <Currency/>
             <Transactions>
                 <DepositTable/>

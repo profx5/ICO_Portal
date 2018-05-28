@@ -13,6 +13,7 @@ import Verification from './Verification';
 import Settings from './Settings';
 
 import * as UserActions from '../actions/UserActions';
+import * as KYCActions from '../actions/KYCActions';
 import * as ICOInfoActions from '../actions/ICOInfoActions';
 import * as DepositsActions from '../actions/DepositsActions';
 import * as BountiesActions from '../actions/BountiesBalanceActions';
@@ -29,7 +30,10 @@ class UserOffice extends Component {
             resolve(values);
         })
         .then(data => {
-            alert(JSON.stringify(values));
+
+            this.props.submitVerificationForm(new FormData(data));
+            alert('bro')
+            // alert(JSON.stringify(values));
         })
 
     }
@@ -42,8 +46,8 @@ class UserOffice extends Component {
                 <HeaderWrapper>
                     <Header/>
                 </HeaderWrapper>
-                {/*<Dashboard />*/}
-                <Verification onSubmitHandler={this.verificationOnSubmitHandler} />
+                <Dashboard />
+                {/*<Verification onSubmitHandler={this.verificationOnSubmitHandler} />*/}
                 {/*<Settings/>*/}
                 <StatusSidebar/>
             </Wrapper>
@@ -51,15 +55,18 @@ class UserOffice extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    postTransferRequest() {
-        dispatch(BountiesActions.postTransferRequest())
-    }
-})
-
 const mapStateToProps = ({bountiesBalance}) => ({
     transfaerAllowed: bountiesBalance.getIn(['transfer', 'success']),
     transferErrorMessage: bountiesBalance.getIn(['transfer', 'error'])
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    postTransferRequest() {
+        dispatch(BountiesActions.postTransferRequest())
+    },
+    submitVerificationForm(payload) {
+        dispatch(KYCActions.submitKYCRequest(payload))
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserOffice);

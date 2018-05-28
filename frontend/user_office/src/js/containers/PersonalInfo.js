@@ -41,7 +41,7 @@ class PersonalInfo extends React.Component {
                         id="EthAccount" 
                         children={<IconCopy className="CopyBtn" data-clipboard-target="#EthAccount" onClick={this.copyOnClickHandler}/>} 
                         value={ethAccount} 
-                        labelText="Etherium wallet address"
+                        labelText="Etherium wallet address" 
                         disabled 
                     />
                     </InputWrapper>

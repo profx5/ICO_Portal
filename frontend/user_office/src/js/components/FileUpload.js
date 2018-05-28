@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import {Field} from 'redux-form';
 
-const FileUpload = ({onClickHandler, onUploadHandler, name}) => {
+const FileUpload = ({onClickHandler, name}) => {
     return (
         <Wrapper onClick={onClickHandler}>
             <svg xmlns="http://www.w3.org/2000/svg" width="33" height="38">
@@ -10,7 +10,7 @@ const FileUpload = ({onClickHandler, onUploadHandler, name}) => {
               <path d="M21.75 13c-.4148 0-.75.2599-.75.5814s.3352.5814.75.5814h9.75v22.6744h-30V14.1628h9.75c.4147 0 .75-.2599.75-.5814S11.6647 13 11.25 13H0v25h33V13H21.75z"/>
             </svg>
             <DescText>File</DescText>
-            <Field component="input" name={name} onChange={onUploadHandler} type="file" hidden/>
+            <Field component="input" name={name} type="file" hidden/>
         </Wrapper>
     );
 }

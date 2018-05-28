@@ -13,6 +13,7 @@ import PhotoUpload from './../components/PhotoUpload';
 import FieldText from './../components/FieldText';
 import ReduxFormField from './../components/ReduxFormField';
 import ReduxFormRadio from './../components/ReduxFormRadio';
+import {Field} from 'redux-form';
 import Button from './../components/Button';
 
 
@@ -23,11 +24,11 @@ class PersonalData extends React.Component {
         $(event.currentTarget).find('input[type="file"]').click();
     }
 
-    onUploadHandler = (event) => {
-        let file = event.currentTarget.files[0];
-        if (!file) return;
-        this.props.updateKycData()
-    }
+    // onUploadHandler = (event) => {
+    //     let file = event.currentTarget.files[0];
+    //     if (!file) return;
+    //     this.props.updateKycData()
+    // }
 
     render() {
 
@@ -42,10 +43,11 @@ class PersonalData extends React.Component {
                     <UploadWrapper>
                         <DescHead>Choose uploading way</DescHead>
                         <PhotoUpload/>
-                        <FileUpload name="selfie" onUploadHandler={this.onUploadHandler} onClickHandler={this.uploadOnClickHandler}/>
+                        <FileUpload name="selfie" onClickHandler={this.uploadOnClickHandler}/>
                     </UploadWrapper>
                 </PhotoFileUpload>
                 <InputSet>
+                    <Field type="file" name="fgfdgfdgdfle" component="input"/>
                     <InputWrapper>
                         <ReduxFormField labelText="First Name" name="firstname"/>
                     </InputWrapper>

@@ -52,7 +52,7 @@ class Documents extends React.Component {
                     <UploadWrapper>
                         <DescHead>Choose uploading way</DescHead>
                         <PhotoUpload/>
-                        <FileUpload name="photo" onUploadHandler={this.onUploadHandler} onClickHandler={this.uploadOnClickHandler}/>
+                        <FileUpload name="photo" onClickHandler={this.uploadOnClickHandler}/>
                     </UploadWrapper>
                 </PhotoFileUpload>
             </Wrapper>
