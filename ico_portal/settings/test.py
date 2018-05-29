@@ -38,3 +38,4 @@ CURRENCIES = {
 }
 
 EXCHANGE_RATES = ['ETH', 'LTC']
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'

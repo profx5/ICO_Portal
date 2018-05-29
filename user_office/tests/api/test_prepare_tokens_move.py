@@ -1,7 +1,7 @@
 from datetime import datetime
 from decimal import Decimal
 
-from .base import APITestCase
+from ..base import APITestCase
 from user_office.factories import PhaseFactory, ExchangeRateFactory
 from user_office.models import Transfer, TokensMove
 

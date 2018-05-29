@@ -8,6 +8,8 @@ from .set_eth_account import SetETHAccount
 from .prepare_tokens_move import PrepareTokensMove
 from .get_referral_link import GetReferralLinkView
 from .get_phases import GetPhases
+from .change_password import ChangePassword
+from .change_email import ChangeEmail
 
 get_me = GetMeView.as_view()
 get_ico_info = GetICOInfo.as_view()
@@ -18,3 +20,5 @@ set_eth_account = SetETHAccount.as_view()
 prepare_tokens_move = PrepareTokensMove.as_view()
 get_referral_link = GetReferralLinkView.as_view()
 get_phases = GetPhases.as_view()
+change_password = ChangePassword.as_view()
+change_email = ChangeEmail.as_view()

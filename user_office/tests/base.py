@@ -14,7 +14,8 @@ class APITestCase(TestCase):
     setup_login = True
 
     def setUp(self):
-        investor = Investor.objects.create(email=self.email,
+        investor = Investor.objects.create(id=1,
+                                           email=self.email,
                                            eth_account=self.eth_account,
                                            tokens_amount=self.tokens_amount,
                                            is_active=True)

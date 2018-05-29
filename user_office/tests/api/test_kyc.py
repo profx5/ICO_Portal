@@ -3,7 +3,7 @@ from django.conf import settings
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from .helpers.kyc import create_kyc
-from .base import APITestCase
+from ..base import APITestCase
 
 
 class TestKYC(APITestCase):

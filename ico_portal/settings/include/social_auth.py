@@ -21,7 +21,7 @@ AUTHENTICATION_BACKENDS = ['user_office.auth_backend.EmailBackend',
                            'social_core.backends.google.GoogleOAuth2',
                            'social_core.backends.linkedin.LinkedinOAuth2',
 
-                           'django.contrib.auth.backends.ModelBackend']
+                           'user_office.auth_backend.AdminUserBackend']
 
 # Twitter
 SOCIAL_AUTH_TWITTER_KEY = 'uamiOlPYD88lkVMwfS00mTiLi'

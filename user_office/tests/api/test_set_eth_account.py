@@ -1,4 +1,4 @@
-from .base import APITestCase
+from ..base import APITestCase
 from user_office.factories import TokensMoveFactory
 
 

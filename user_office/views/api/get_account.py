@@ -8,6 +8,7 @@ from blockchain.currencies.coinpayments.services import GetAccount as GetAccount
 from blockchain.currencies import Currencies
 from .auth import KYCAndLoginPermission
 
+
 class GetAccount(APIView):
     """
     Return user account address by currency code (doesn't work with ETH)
