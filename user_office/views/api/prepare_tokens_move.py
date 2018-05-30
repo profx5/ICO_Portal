@@ -37,11 +37,12 @@ class PrepareTokensMove(APIView):
     Created prepared tokens move and transfer objects
     """
 
+    currency = 'ETH'
+
     schema = AutoSchema(
         manual_fields=[
             coreapi.Field(name='value', location='form', required=True),
             coreapi.Field(name='txn_hash', location='form', required=True),
-            coreapi.Field(name='currency', location='form', required=True)
         ]
     )
 
@@ -54,7 +55,7 @@ class PrepareTokensMove(APIView):
         result = CalcAndPrepareTM()(investor=request.user,
                                     value=request.data['value'],
                                     txn_hash=request.data['txn_hash'],
-                                    currency=request.data['currency'])
+                                    currency=self.currency)
 
         if isinstance(result, Right):
             return Response(data={'success': True}, status=201)

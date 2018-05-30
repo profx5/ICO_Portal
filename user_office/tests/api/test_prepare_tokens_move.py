@@ -17,10 +17,10 @@ class TestPrepareDeposit(APITestCase):
         ExchangeRateFactory(currency='ETH', rate='750.77123')
 
 
-        response = self.client.post('/api/prepareTokensMove/',
-                                    {'value': '1.23',
-                                     'txn_hash': self.txn_hash,
-                                     'currency': 'ETH'})
+        response = self.client.post('/api/prepareTokensMove/', {
+            'value': '1.23',
+            'txn_hash': self.txn_hash
+        })
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.data, {'success': True})
