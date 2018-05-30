@@ -14,7 +14,7 @@ class TestSetEthAccount(APITestCase):
 
         self.assertEqual(response.status_code, 422)
         self.assertEqual(response.data, {'success': False, 'error':
-                                         f'Invalid account address {account}'})
+                                         'Account should be hexadecimal'})
 
         self.assertEqual(self.get_investor().eth_account, '')
 
@@ -26,7 +26,7 @@ class TestSetEthAccount(APITestCase):
 
         self.assertEqual(response.status_code, 422)
         self.assertEqual(response.data, {'success': False, 'error':
-                                         f'Invalid account address {account}'})
+                                         'Invalid account address'})
 
         self.assertEqual(self.get_investor().eth_account, '')
 
@@ -67,3 +67,12 @@ class TestSetEthAccount(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, {'success': True})
         self.assertEqual(self.get_investor().tokens_amount, tokens_move.amount)
+
+    def test_invalid_checksum(self):
+        account = '0x73015966604928A312f79f7E69291a656Cb88602'
+        response = self.client.post('/api/setEthAccount/',
+                                    {'eth_account': account})
+
+        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.data, {'success': False,
+                                         'error': 'Invalid eip-55 checksum'})

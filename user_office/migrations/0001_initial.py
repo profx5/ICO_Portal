@@ -63,7 +63,7 @@ class Migration(migrations.Migration):
                 ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
                 ('id', models.AutoField(primary_key=True, serialize=False)),
                 ('email', models.EmailField(max_length=254, null=True, unique=True)),
-                ('eth_account', user_office.models.fields.EthAddressField(blank=True, max_length=42, null=True, unique=True, verbose_name='ethereum account address')),
+                ('eth_account', user_office.models.fields.ETHAddressField(blank=True, max_length=42, null=True, unique=True, verbose_name='ethereum account address')),
                 ('tokens_amount', user_office.models.fields.TokenField(decimal_places=2, default=0, max_digits=65)),
                 ('date_joined', models.DateTimeField(default=ico_portal.utils.datetime.datetime.utcnow)),
                 ('referral_id', models.CharField(default=functools.partial(django.utils.crypto.get_random_string, *(16,), **{}), max_length=16, unique=True)),

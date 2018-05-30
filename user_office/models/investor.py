@@ -6,7 +6,7 @@ from eth_utils.address import is_hex_address
 from django.utils.crypto import get_random_string
 from functools import partial
 
-from .fields import EthAddressField, TokenField
+from .fields import ETHAddressField, TokenField
 from ico_portal.utils.datetime import datetime
 
 
@@ -27,7 +27,7 @@ class InvestorManager(BaseUserManager):
 class Investor(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     email = models.EmailField(unique=True, null=True)
-    eth_account = EthAddressField(verbose_name='ethereum account address',
+    eth_account = ETHAddressField(verbose_name='ethereum account address',
                                   null=True,
                                   blank=True,
                                   unique=True)

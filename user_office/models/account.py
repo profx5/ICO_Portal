@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import Manager
 
-from .fields import EthAddressField, CurrencyField
+from .fields import CurrencyField
 
 
 class Account(models.Model):
