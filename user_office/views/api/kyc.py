@@ -6,20 +6,24 @@ from rest_framework.response import Response
 
 from .auth import KYCAndLoginPermission
 from user_office.models import KYC
+from ico_portal.utils import tuple_exclude
 
+
+KYC_FIELDS = ('state', 'user_photo', 'firstname', 'midname', 'surname', 'gender',
+              'birthdate', 'country', 'city', 'registration_address', 'postcode',
+              'document_type', 'document_no', 'document_country', 'document_date',
+              'document_photo', 'decline_reason')
 
 class GetKYCSerializer(ModelSerializer):
     class Meta:
         model = KYC
-        fields = ('state', 'firstname', 'midname', 'surname', 'birthdate',
-                  'document_no', 'document_type', 'country', 'photo', 'selfie')
+        fields = KYC_FIELDS
 
 
 class CreateKYCSerializer(ModelSerializer):
     class Meta:
         model = KYC
-        fields = ('firstname', 'midname', 'surname', 'birthdate',
-                  'document_type', 'document_no', 'country', 'photo', 'selfie')
+        fields = tuple_exclude(KYC_FIELDS, ('state', 'decline_reason'))
 
 
 class KYCViewSet(mixins.CreateModelMixin,
