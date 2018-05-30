@@ -3,6 +3,10 @@ class Api {
         this.prefix = '/api'
     }
 
+    getAccount() {
+        return `${this.prefix}/getAccount/`
+    }
+
     getMe() {
         return `${this.prefix}/getMe/`
     }
@@ -23,16 +27,16 @@ class Api {
         return `${this.prefix}/getTokensMoves/`
     }
 
+    prepareDeposits() {
+        return `${this.prefix}/prepareTokensMove/`
+    }
+
     kyc() {
         return `${this.prefix}/kyc/`
     }
 
     setEthAccount() {
         return `${this.prefix}/setEthAccount/`
-    }
-
-    prepareDeposit() {
-        return `${this.prefix}/prepareDeposit/`
     }
 
     getReferralLink() {

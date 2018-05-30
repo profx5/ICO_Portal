@@ -4,7 +4,7 @@ import { takeEvery, call, put, select} from 'redux-saga/effects';
 import * as actions from './../actions/DepositsActions';
 
 export class DepositsSagas {
-    static * getDeposits() {
+    static * getTokensMoves() {
         try {
             const page = yield select(state => state.deposits.get('current_page'))
 
@@ -21,13 +21,16 @@ export class DepositsSagas {
 
     static * createPreparedDeposit(action) {
         try {
-            const {value, txnHash} = action.payload
+            const {value, txn_hash, currency} = action.payload;
 
             yield call(axios, {
-                url: Api.prepareDeposit(),
+                url: Api.prepareDeposits(),
                 method: 'POST',
-                data: {value: value,
-                       txn_hash: txnHash}
+                data: {
+                    value: value,
+                    txn_hash: txn_hash,
+                    currency: currency
+                }
             })
 
             yield put(actions.createPreparedDepositSuccess())
@@ -39,8 +42,8 @@ export class DepositsSagas {
 }
 
 export function* saga() {
-    yield takeEvery(actions.getDepositsRequest, DepositsSagas.getDeposits)
+    yield takeEvery(actions.getDepositsRequest, DepositsSagas.getTokensMoves)
     yield takeEvery(actions.createPreparedDepositRequest, DepositsSagas.createPreparedDeposit)
-    yield takeEvery(actions.depositsNextPage, DepositsSagas.getDeposits)
-    yield takeEvery(actions.depositsPrevPage, DepositsSagas.getDeposits)
+    yield takeEvery(actions.depositsNextPage, DepositsSagas.getTokensMoves)
+    yield takeEvery(actions.depositsPrevPage, DepositsSagas.getTokensMoves)
 }

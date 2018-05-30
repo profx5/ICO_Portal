@@ -55,13 +55,13 @@ class PersonalInfo extends React.Component {
 const mapStateToProps = ({user}) => ({
     email: user.get('email'),
     ethAccount: user.get('eth_account')
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
     updateKycData() {
         dispatch(KYCActions.submitKYCRequest())
     }
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PersonalInfo)
 

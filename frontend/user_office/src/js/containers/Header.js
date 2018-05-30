@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import * as UIStateActions from '../actions/UIStateActions';
+import * as UIActions from '../actions/UIActions';
 
 import Balance from '../components/Balance';
 import AccountInfo from '../components/AccountInfo';
@@ -77,10 +77,10 @@ const mapStateToProps = ({user, ICOInfo, KYC, Invest, UI}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     showAccountDropdown() {
-        dispatch(UIStateActions.showAccountDropdown())
+        dispatch(UIActions.showAccountDropdown())
     },
     hideAccountDropdown() {
-        dispatch(UIStateActions.hideAccountDropdown())
+        dispatch(UIActions.hideAccountDropdown())
     },
 })
 

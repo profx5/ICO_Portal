@@ -3,15 +3,24 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
+import {canSendTransaction, ethToWei, isMetamaskAvailable} from '../../web3';
+
 import * as UserActions from '../actions/UserActions';
 import * as ICOInfoActions from '../actions/ICOInfoActions';
 import * as DepositsActions from '../actions/DepositsActions';
 import * as KYCActions from '../actions/KYCActions';
 import * as PhaseActions from './../actions/PhaseActions';
 import * as CurrencyActions from './../actions/CurrencyActions';
+import * as MetamaskActions from './../actions/MetamaskActions';
+
 
 
 class ContentWrapper extends React.Component {
+
+    componentDidMount() {
+        let isMetamaskInstalled = isMetamaskAvailable();
+        this.props.updateMetamaskStatus(isMetamaskInstalled);
+    }
 
     componentWillMount() {
         const {getMe, getICOInfo, getKyc, getPhasesInfo, getDeposits, getCurrencies} = this.props;
@@ -53,6 +62,9 @@ const mapDispatchToProps = (dispatch) => ({
     getCurrencies() {
         dispatch(CurrencyActions.getCurrenciesRequest())
     },
+    updateMetamaskStatus(payload) {
+        dispatch(MetamaskActions.updateMetamaskStatus(payload))
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentWrapper);

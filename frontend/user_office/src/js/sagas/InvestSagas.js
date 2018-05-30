@@ -9,7 +9,7 @@ export class InvestSagas {
             const {senderAccount,
                    receiverAccount,
                    value} = action.payload
-
+                   
             const txnHash = yield cps(sendTransaction, senderAccount, receiverAccount, value)
 
             yield put(DepositsActions.createPreparedDepositRequest(value, txnHash))

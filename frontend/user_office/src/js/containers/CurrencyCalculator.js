@@ -6,6 +6,7 @@ import Utils from './../utils';
 
 import Button from './../components/Button';
 import InvestInput from './../components/InvestInput';
+import * as UIActions from './../actions/UIActions';
 
 
 import * as InvestActions from './../actions/InvestActions';
@@ -30,12 +31,11 @@ class CurrencyCalculator extends React.Component {
         let totalInvest = investCurrencyRate / tokensAmount;
         let bonusAmount = totalInvest / 100 * bonusPercent;
         totalInvest = (totalInvest + bonusAmount).toFixed(2);
-        console.log(totalInvest)
-
-        // setInvestAmount(totalInvest);
     }
 
-    componentDidUpdate() {this.updateTotalTokens()}
+    componentDidUpdate() {
+        this.updateTotalTokens()
+    }
 
     investOnChangeHandler = event => {
         Utils.formatInputNumber(event, this.props.setInvestAmount);
@@ -49,7 +49,8 @@ class CurrencyCalculator extends React.Component {
             investCurrencyRate,
             investAmount,
             tokensAmount,
-            bonusPercent
+            bonusPercent,
+            showInvestOptions
         } = this.props;
 
         return (
@@ -58,7 +59,7 @@ class CurrencyCalculator extends React.Component {
                     <InvestInput value={this.props.investAmount} type="text" onChangeHandler={this.investOnChangeHandler} header="Amount" currency={investCurrency}/>
                     <InvestInput value={this.props.tokensAmount} type="text" header="TKN" currency="TNK"/>
                     <ButtonWrapper>
-                        <Button text="INVEST"/>
+                        <Button clickHandler={showInvestOptions} text="INVEST"/>
                     </ButtonWrapper>
                 </div>
                 <Tip>
@@ -84,8 +85,12 @@ const mapDispatchToProps = (dispatch) => ({
     },
     setTokensAmount(payload) {
         dispatch(InvestActions.setTokensAmount(payload))
-    }
+    },
+    showInvestOptions() {
+        dispatch(UIActions.showInvestOptions());
+    },
 })
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyCalculator)

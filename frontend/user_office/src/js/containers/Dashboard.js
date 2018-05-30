@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Invest from './Invest';
+import InvestOptions from './InvestOptions';
 import ICOProgress from './ICOProgress';
 import Currency from './Currency';
 import Transactions from './Transactions';
@@ -11,7 +11,7 @@ import DepositTable from './DepositTable';
 const Dashboard = (props) => {
     return (
         <Wrapper>
-            <Invest/>
+            <InvestOptions/>
             <Head>Dashboard</Head>
             {/*<ICOProgress/>*/}
             <Currency/>
