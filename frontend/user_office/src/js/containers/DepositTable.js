@@ -50,7 +50,6 @@ class DepositTable extends Component {
 
 const mapStateToProps = ({deposits}) => ({
     deposits: deposits.get('results'),
-    pages: deposits.get('pages'),
     currentPage: deposits.get('current_page')
 })
 

@@ -10,5 +10,7 @@ export const createPreparedDepositRequest = createAction('CREATE_PREPARED_DEPOSI
 export const createPreparedDepositSuccess = createAction('CREATE_PREPARED_DEPOSIT_SUCCESS');
 export const createPreparedDepositFailed = createAction('CREATE_PREPARED_DEPOSIT_FAILED');
 
-export const depositsNextPage = createAction('DEPOSITS_NEXT_PAGE');
-export const depositsPrevPage = createAction('DEPOSITS_PREV_PAGE');
+
+export const requestIncrementCurrentPage = createAction('REQUEST_INCREMENT_CURRENT_PAGE');
+export const executeIncrementCurrentPage = createAction('EXECUTE_INCREMENT_CURRENT_PAGE');
+

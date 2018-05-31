@@ -10,7 +10,10 @@ export class DepositsSagas {
 
             const response = yield call(axios, {
                 method: 'GET',
-                url: Api.getDeposits()
+                url: Api.getDeposits(),
+                params: {
+                    page: page
+                }
             })
 
             yield put(actions.getDepositsSuccess(response.data))
@@ -39,11 +42,20 @@ export class DepositsSagas {
             yield put(actions.createPreparedDepositFailed())
         }
     }
+
+    static * incrementCurrentPage() {
+        try {
+
+            yield put(actions.executeIncrementCurrentPage());
+            yield put(actions.getDepositsRequest());
+        } catch(e) {
+            console.error(e);
+        }
+    }
 }
 
 export function* saga() {
-    yield takeEvery(actions.getDepositsRequest, DepositsSagas.getTokensMoves)
-    yield takeEvery(actions.createPreparedDepositRequest, DepositsSagas.createPreparedDeposit)
-    yield takeEvery(actions.depositsNextPage, DepositsSagas.getTokensMoves)
-    yield takeEvery(actions.depositsPrevPage, DepositsSagas.getTokensMoves)
+    yield takeEvery(actions.getDepositsRequest, DepositsSagas.getTokensMoves);
+    yield takeEvery(actions.createPreparedDepositRequest, DepositsSagas.createPreparedDeposit);
+    yield takeEvery(actions.requestIncrementCurrentPage, DepositsSagas.incrementCurrentPage);
 }

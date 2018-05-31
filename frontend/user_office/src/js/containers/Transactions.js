@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 
+import * as DepositsActions from './../actions/DepositsActions';
+
 import Button from './../components/Button';
 
 
@@ -10,6 +12,8 @@ class Transactions extends React.Component {
 
     render() {
 
+        const {currentPage, incrementPage} = this.props;
+
         return (
             <Wrapper>
                 <Head>Transactions</Head>
@@ -17,7 +21,7 @@ class Transactions extends React.Component {
                     {this.props.children}
                 </Content>
                 <Controls>
-                    <FetchLink>All more</FetchLink>
+                    { currentPage === 1 === true && <FetchLink onClick={incrementPage}>All more</FetchLink> }
                     <ButtonWrapper>
                         <Button text="Buy TKN" />
                     </ButtonWrapper>
@@ -29,12 +33,14 @@ class Transactions extends React.Component {
 
 
 
-const mapStateToProps = ({}) => ({
-
+const mapStateToProps = ({deposits}) => ({
+    currentPage: deposits.get('current_page')
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+    incrementPage() {
+        dispatch(DepositsActions.requestIncrementCurrentPage())
+    }
 })
 
 
