@@ -8,12 +8,19 @@ export class InvestSagas {
         try {
             const {senderAccount,
                    receiverAccount,
-                   value} = action.payload
+                   value, currency} = action.payload
+
+            console.log(action.payload)
+            console.log(action.payload)
+            console.log(action.payload)
+            console.log(action.payload)
+            console.log(action.payload)
+            console.log(action.payload)
+            console.log(action.payload)
                    
             const txnHash = yield cps(sendTransaction, senderAccount, receiverAccount, value)
 
-            yield put(DepositsActions.createPreparedDepositRequest(value, txnHash))
-            yield put(InvestActions.hideForm())
+            yield put(DepositsActions.createPreparedDepositRequest(value, txnHash, currency))
         } catch(e) {
             console.log("CANT PERFROM INVEST ACTION")
         }

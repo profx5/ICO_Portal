@@ -10,6 +10,7 @@ import InvestForm from './../components/InvestForm';
 //actions
 import * as UIActions from './../actions/UIActions';
 import * as DepositsActions from './../actions/DepositsActions';
+import * as InvestActions from './../actions/InvestActions';
 
 
 class InvestOptions extends React.Component {
@@ -19,19 +20,12 @@ class InvestOptions extends React.Component {
 
         icoWeb3.eth.getAccounts().then(response => {
 
-            let ethAccount = response[0];
-            let contract = this.props.tokenAddress;
-            let valueWei = ethToWei(this.props.investAmount);
+            const valueWei = ethToWei(this.props.investAmount);
+            const {ethAccount, contract, investCurrency, invest} = this.props;
+            const metamaskEthAccount = response[0];
 
-            let callback = this.props.prepareDeposits({
-                value: this.props.investAmount,
-                txn_hash: ethAccount,
-                currency: this.props.investCurrency
-            });
-
-            sendTransaction(ethAccount, contract, valueWei, callback);
+            invest(metamaskEthAccount, contract, valueWei, investCurrency);
         })
-
     } 
 
     render() {
@@ -57,11 +51,13 @@ class InvestOptions extends React.Component {
     }
 }
 
-const mapStateToProps = ({UI, Metamask, ICOInfo, Invest, Currencies}) => ({
+const mapStateToProps = ({UI, Metamask, ICOInfo, Invest, Currencies, user}) => ({
     investOptionsShown: UI.get('showInvestOptions'),
-    tokenAddress: ICOInfo.get('token_address'),
+    contract: ICOInfo.get('token_address'),
     investAmount: Invest.get('investAmount'),
     investCurrency: Currencies.get('investCurrency'),
+    // ethAccount: user.get('eth_account'),
+    ethAccount: '0xB0a3f48478d84a497f930d8455711d9981B66a70',
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -71,12 +67,9 @@ const mapDispatchToProps = (dispatch) => ({
     hideInvestOptions() {
         dispatch(UIActions.hideInvestOptions());
     },
-    getDeposits() {
-        dispatch(DepositsActions.getDepositsRequest())
+    invest(senderAccount, receiverAccount, value, currency) {
+        dispatch(InvestActions.sendTransactionInit(senderAccount, receiverAccount, value, currency))
     },
-    prepareDeposits(payload) {
-        dispatch(DepositsActions.createPreparedDepositRequest(payload))
-    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InvestOptions);
@@ -110,3 +103,73 @@ const BtnClose = styled.span`
     right: 15px;
     cursor: pointer;
 `;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// class InvestOptions extends React.Component {
+
+
+//     metamaskPaymentHandler = () => {
+
+//         let {tokenAddress, investAmount, prepareDeposits, investCurrency, ethAccount} = this.props;
+
+//         icoWeb3.eth.getAccounts().then(response => {
+
+//             let contract = tokenAddress;
+//             let valueWei = ethToWei(investAmount);
+
+//             let depositData = {
+//                 value: investAmount,
+//                 txn_hash: ethAccount,
+//                 currency: investCurrency
+//             };
+
+//             sendTransaction(ethAccount, contract, valueWei, () => {
+//                 alert(response[0])
+//                 // prepareDeposits(depositData)
+//             });
+//         })
+
+//     } 
+
+//     render() {
+//         const {investOptionsShown, hideInvestOptions} = this.props;
+//         const isMetamaskInstalled = isMetamaskAvailable();
+//         return (
+//             <React.Fragment>
+//                 { investOptionsShown && 
+//                     <PopupWrapper>
+//                         <Popup>
+//                             <BtnClose onClick={hideInvestOptions}>Close</BtnClose>
+//                             {isMetamaskInstalled && 
+//                                 <div>
+//                                     <p onClick={this.metamaskPaymentHandler}>Do it via metamask!</p>
+//                                     <p>Do it without metamask!</p>
+//                                 </div>
+//                             }
+//                         </Popup>
+//                     </PopupWrapper>
+//                 }
+//             </React.Fragment>
+//         );
+//     }
+// }
+
+// const mapStateToProps = ({UI, Metamask, ICOInfo, Invest, Currencies, user}) => ({
+//     investOptionsShown: UI.get('showInvestOptions'),
+//     tokenAddress: ICOInfo.get('token_address'),
+//     investAmount: Invest.get('investAmount'),
+//     investCurrency: Currencies.get('investCurrency'),
+//     ethAccount: user.get('eth_account'),
+// });

@@ -21,14 +21,14 @@ export class DepositsSagas {
 
     static * createPreparedDeposit(action) {
         try {
-            const {value, txn_hash, currency} = action.payload;
+            const {value, txnHash, currency} = action.payload;
 
             yield call(axios, {
                 url: Api.prepareDeposits(),
                 method: 'POST',
                 data: {
                     value: value,
-                    txn_hash: txn_hash,
+                    txn_hash: txnHash,
                     currency: currency
                 }
             })
