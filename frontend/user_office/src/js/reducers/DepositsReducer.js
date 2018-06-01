@@ -6,6 +6,7 @@ import {Map, List} from 'immutable';
 
 const initialState = Map({
     current_page: 1,
+    pages: 1,
     results: List()
 });
 
@@ -16,6 +17,18 @@ export const DepositsReducer = createReducer({
     [actions.getDepositsSuccess]: (state = initialState, payload) => state.mergeDeep(payload),
     [actions.executeIncrementCurrentPage]: (state = initialState, payload) => {
         let current_page = state.get('current_page');
-        return state.set('current_page', 2);
+        let pages = state.get('pages');
+        if (current_page < pages) {
+            current_page += 1;
+            return state.set('current_page', current_page);
+        } else return state;
+    },
+    [actions.executeDecrementCurrentPage]: (state = initialState, payload) => {
+        let current_page = state.get('current_page');
+        let pages = state.get('pages');
+        if (current_page > 1) {
+            current_page -= 1;
+            return state.set('current_page', current_page);
+        } else return state;
     }
 }, initialState);

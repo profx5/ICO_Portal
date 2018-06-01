@@ -12,7 +12,7 @@ class Transactions extends React.Component {
 
     render() {
 
-        const {currentPage, incrementPage} = this.props;
+        const {pages, currentPage, incrementPage, decrementPage} = this.props;
 
         return (
             <Wrapper>
@@ -21,7 +21,10 @@ class Transactions extends React.Component {
                     {this.props.children}
                 </Content>
                 <Controls>
-                    { currentPage === 1 === true && <FetchLink onClick={incrementPage}>All more</FetchLink> }
+                    <FetchLinksWrapper>
+                        <FetchLink disabled={currentPage <= 1} onClick={decrementPage}>Prev</FetchLink>
+                        <FetchLink disabled={currentPage === pages} onClick={incrementPage}>Next</FetchLink>
+                    </FetchLinksWrapper>
                     <ButtonWrapper>
                         <Button text="Buy TKN" />
                     </ButtonWrapper>
@@ -34,12 +37,16 @@ class Transactions extends React.Component {
 
 
 const mapStateToProps = ({deposits}) => ({
-    currentPage: deposits.get('current_page')
+    currentPage: deposits.get('current_page'),
+    pages: deposits.get('pages')
 })
 
 const mapDispatchToProps = (dispatch) => ({
     incrementPage() {
         dispatch(DepositsActions.requestIncrementCurrentPage())
+    },
+    decrementPage() {
+        dispatch(DepositsActions.requestDecrementCurrentPage())
     }
 })
 
@@ -73,26 +80,23 @@ const Controls = styled.div`
     position: relative;
 `;
 
-const FetchLink = styled.a`
-    display: inline-block;
-    text-transform: uppercase;
-    color: #3172fd;
+const FetchLinksWrapper = styled.div`
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    display flex;
+    justify-content: space-between;
+    width: 100px;
+`;
+
+const FetchLink = styled.a`
+    display: inline-block;
+    text-transform: uppercase;
+    color: ${props => props.disabled ? '#ccc' : '#3172fd'};
+    pointer-events: ${props => props.disabled ? 'none' : 'all'};
     &:hover {
         color: #3172fd;
-    }
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: #3172fd;
     }
 `;
 

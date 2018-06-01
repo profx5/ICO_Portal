@@ -52,10 +52,21 @@ export class DepositsSagas {
             console.error(e);
         }
     }
+
+    static * decrementCurrentPage() {
+        try {
+
+            yield put(actions.executeDecrementCurrentPage());
+            yield put(actions.getDepositsRequest());
+        } catch(e) {
+            console.error(e);
+        }
+    }
 }
 
 export function* saga() {
     yield takeEvery(actions.getDepositsRequest, DepositsSagas.getTokensMoves);
     yield takeEvery(actions.createPreparedDepositRequest, DepositsSagas.createPreparedDeposit);
     yield takeEvery(actions.requestIncrementCurrentPage, DepositsSagas.incrementCurrentPage);
+    yield takeEvery(actions.requestDecrementCurrentPage, DepositsSagas.decrementCurrentPage);
 }
