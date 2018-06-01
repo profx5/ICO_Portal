@@ -1,9 +1,10 @@
 from oslash import Right, Left
-from web3 import Web3
+from eth_utils.address import add_0x_prefix, is_hex_address, to_checksum_address
 from django.db import DatabaseError
 
 from user_office.models import TokensMove
 from .recalc_balance import RecalcBalance
+from ico_portal.utils import is_mixed_case
 
 
 class InvalidAddress(Left):
@@ -19,17 +20,26 @@ class SetETHAccount:
             return Right(args)
 
     def validate_account(self, args):
-        invalid_address = InvalidAddress(f"Invalid account address {args['account']}")
-
         try:
-            account = Web3.toChecksumAddress(args['account'])
+            account = add_0x_prefix(args['account'])
+
+            if not is_hex_address(account):
+                return InvalidAddress('Account should be hexadecimal')
 
             if account == '0x0000000000000000000000000000000000000000':
-                return invalid_address
+                return InvalidAddress('Invalid account address')
+
+            if is_mixed_case(account):
+                if account == to_checksum_address(account):
+                    return Right(dict(args, account=account))
+                else:
+                    return InvalidAddress('Invalid eip-55 checksum')
             else:
+                account = to_checksum_address(account)
+
                 return Right(dict(args, account=account))
         except ValueError as e:
-            return invalid_address
+            return InvalidAddress('')
 
     def set_account(self, args):
         try:

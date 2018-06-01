@@ -2,6 +2,7 @@ from django.contrib import admin
 from user_office.models import TokensMove, Transfer, KYC, Payment
 from social_django.models import UserSocialAuth
 
+
 class KYCInstanceInline(admin.TabularInline):
     model = KYC
     verbose_name = 'KYC'
@@ -10,7 +11,10 @@ class KYCInstanceInline(admin.TabularInline):
     show_change_link = True
     extra = 0
 
-    fields = ('state', 'firstname', 'midname', 'surname', 'photo', 'selfie')
+    fields = ('state', 'user_photo', 'firstname', 'midname', 'surname', 'gender',
+              'birthdate', 'country', 'city', 'registration_address', 'postcode',
+              'document_type', 'document_no', 'document_country', 'document_date',
+              'document_photo', 'decline_reason')
     readonly_fields = fields
 
 

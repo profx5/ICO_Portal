@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 
 from user_office.factories import TokensMoveFactory, PaymentFactory
-from .base import APITestCase
+from ..base import APITestCase
 
 
 class TestGetTokensMoves(APITestCase):

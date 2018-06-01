@@ -3,7 +3,6 @@ from factory import fuzzy
 from datetime import timedelta, date
 
 from ico_portal.utils.datetime import datetime
-from user_office.models.kyc import KYC_DOC_TYPE_CHOICES
 
 
 class FuzzyHash(fuzzy.FuzzyText):
@@ -117,17 +116,24 @@ class KYCFactory(factory.DjangoModelFactory):
 
     state = 'APPROVED'
 
+    user_photo = factory.django.ImageField(color='blue')
     firstname = fuzzy.FuzzyText(length=10)
     midname = fuzzy.FuzzyText(length=10)
     surname = fuzzy.FuzzyText(length=10)
 
-    country = fuzzy.FuzzyText(length=10)
+    gender = 'M'
     birthdate = fuzzy.FuzzyDate(start_date=date(1970, 1, 1))
 
+    country = fuzzy.FuzzyText(length=10)
+    city = fuzzy.FuzzyText(length=10)
+    registration_address = fuzzy.FuzzyText(length=10)
+    postcode = fuzzy.FuzzyInteger(low=1, high=100000)
+
+    document_type = fuzzy.FuzzyText(length=10)
     document_no = fuzzy.FuzzyInteger(low=0)
-    document_type = fuzzy.FuzzyChoice(c[0] for c in KYC_DOC_TYPE_CHOICES)
-    photo = factory.django.ImageField(color='blue')
-    selfie = factory.django.ImageField(color='green')
+    document_country = fuzzy.FuzzyText(length=10)
+    document_date = fuzzy.FuzzyDate(start_date=date(1970, 1, 1))
+    document_photo = factory.django.ImageField(color='green')
 
     approve_txn_hash = FuzzyHash(length=70)
 

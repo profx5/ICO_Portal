@@ -6,10 +6,9 @@ KYC_STATE_CHOICES = (('WAITING', 'Waiting for approval'),
                      ('DECLINED', 'Declined'),
                      ('APPROVED', 'Approved'))
 
-KYC_DOC_TYPE_CHOICES = (('ID', 'ID'),
-                        ('Passport', 'Passport'),
-                        ('DriveLicence', 'Driver Licence'),
-                        ('Other', 'Other'))
+GENDER_CHOICES = (('M', 'Male'),
+                  ('F', 'Female'),
+                  ('O', 'Other'))
 
 
 def kyc_photo_path(prefix, instance, filename):
@@ -23,17 +22,25 @@ class KYC(models.Model):
     state = models.CharField(max_length=10, choices=KYC_STATE_CHOICES,
                              default='WAITING')
 
+    user_photo = models.ImageField(upload_to=partial(kyc_photo_path, 'selfie'))
     firstname = models.CharField(max_length=30)
     midname = models.CharField(max_length=30, blank=True, null=True)
     surname = models.CharField(max_length=30)
 
-    country = models.CharField(max_length=30)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     birthdate = models.DateField()
 
+    country = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
+    registration_address = models.CharField(max_length=500)
+    postcode = models.CharField(max_length=10)
+
+    document_type = models.CharField(max_length=50)
     document_no = models.CharField(max_length=50)
-    document_type = models.CharField(max_length=50, choices=KYC_DOC_TYPE_CHOICES)
-    photo = models.ImageField(upload_to=partial(kyc_photo_path, 'photo'))
-    selfie = models.ImageField(upload_to=partial(kyc_photo_path, 'selfie'))
+    document_country = models.CharField(max_length=50)
+    document_date = models.DateField()
+    document_photo = models.ImageField(upload_to=partial(kyc_photo_path, 'photo'))
+
 
     decline_reason = models.TextField(blank=True, null=True)
     approve_txn_hash = models.CharField(max_length=100, blank=True, null=True)
@@ -55,6 +62,3 @@ class KYC(models.Model):
     @property
     def waiting(self):
         return self.state == 'WAITING'
-
-    def decline(self):
-        self.state = 'DECLINED'

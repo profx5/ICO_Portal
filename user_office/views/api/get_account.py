@@ -8,6 +8,7 @@ from blockchain.currencies.coinpayments.services import GetAccount as GetAccount
 from blockchain.currencies import Currencies
 from .auth import KYCAndLoginPermission
 
+
 class GetAccount(APIView):
     """
     Return user account address by currency code (doesn't work with ETH)
@@ -15,7 +16,7 @@ class GetAccount(APIView):
 
     schema = AutoSchema(
         manual_fields=[
-            coreapi.Field(name='curency_code', location='query', required=True),
+            coreapi.Field(name='currency', location='query', required=True),
         ]
     )
 
