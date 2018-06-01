@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import QRCode from 'qrcode';
 
 import {extractAccount, sendTransaction, isMetamaskAvailable, icoWeb3, ethToWei} from '../../web3';
 
@@ -16,8 +17,7 @@ import * as InvestActions from './../actions/InvestActions';
 
 class InvestOptions extends React.Component {
 
-
-    metamaskPaymentHandler = () => {
+    withMetamaskPaymentHandler = () => {
 
         icoWeb3.eth.getAccounts().then(response => {
 
@@ -25,11 +25,11 @@ class InvestOptions extends React.Component {
             const {ethAccount, crowdsaleAddress, contract, investCurrency, invest} = this.props;
             const metamaskEthAccount = response[0];
 
-            invest(metamaskEthAccount, crowdsaleAddress, value, investCurrency);
+            invest(metamaskEthAccount, crowdsaleAddress, value);
         })
     }
 
-    noMetamaskPaymentHandler = () => {
+    withoutMetamaskPaymentHandler = () => {
         this.props.disableMetamaskOption();
     }
 
@@ -38,14 +38,22 @@ class InvestOptions extends React.Component {
         this.props.enableMetamaskOption();
     }
 
+    generateQRCode = (text) => {
+        QRCode.toDataURL(text).then(url => {
+            this.props.setQRCode(url);
+        });
+    }
+
     render() {
         const {
             investOptionsShown,
             investCurrency, 
             crowdsaleAddress,
-            isMetamaskEnabled} = this.props;
+            isMetamaskEnabled,
+            QRCode} = this.props;
 
         const isMetamaskInstalled = isMetamaskAvailable();
+        this.generateQRCode(crowdsaleAddress);
 
         return (
             <React.Fragment>
@@ -55,12 +63,12 @@ class InvestOptions extends React.Component {
                             <BtnClose onClick={this.hideInvestPopup}>Close</BtnClose>
                             {investCurrency === 'ETH' && isMetamaskInstalled && isMetamaskEnabled && 
                                 <div>
-                                    <TextOption onClick={this.metamaskPaymentHandler}>Do it via metamask!</TextOption>
-                                    <TextOption onClick={this.noMetamaskPaymentHandler}>Do it without metamask!</TextOption>
+                                    <TextOption onClick={this.withMetamaskPaymentHandler}>Do it via metamask!</TextOption>
+                                    <TextOption onClick={this.withoutMetamaskPaymentHandler}>Do it without metamask!</TextOption>
                                 </div>
                             }
-                            {investCurrency === 'ETH' && !isMetamaskEnabled && <PaymentDetails address={crowdsaleAddress}/>}
-                            {investCurrency !== 'ETH' && <PaymentDetails address={crowdsaleAddress}/>}
+                            {investCurrency === 'ETH' && !isMetamaskEnabled && <PaymentDetails QRCode={QRCode} address={crowdsaleAddress}/>}
+                            {investCurrency !== 'ETH' && <PaymentDetails QRCode={QRCode} address={crowdsaleAddress}/>}
 
                         </Popup>
                     </PopupWrapper>
@@ -78,7 +86,8 @@ const mapStateToProps = ({UI, Metamask, ICOInfo, Invest, Currencies, user}) => (
     investCurrency: Currencies.get('investCurrency'),
     ethAccount: user.get('eth_account'),
     crowdsaleAddress: ICOInfo.get('crowdsale_address'),
-    isMetamaskEnabled: Invest.get('isMetamaskEnabled')
+    isMetamaskEnabled: Invest.get('isMetamaskEnabled'),
+    QRCode: Invest.get('qrcode')
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -88,14 +97,17 @@ const mapDispatchToProps = (dispatch) => ({
     hideInvestOptions() {
         dispatch(UIActions.hideInvestOptions());
     },
-    invest(senderAccount, receiverAccount, value, currency) {
-        dispatch(InvestActions.sendTransactionInit(senderAccount, receiverAccount, value, currency))
+    invest(senderAccount, receiverAccount, value) {
+        dispatch(InvestActions.sendTransactionInit(senderAccount, receiverAccount, value))
     },
     enableMetamaskOption() {
         dispatch(InvestActions.enableMetamaskOption())
     },
     disableMetamaskOption() {
         dispatch(InvestActions.disableMetamaskOption())
+    },
+    setQRCode(payload) {
+        dispatch(InvestActions.setQRCode(payload))
     }
 });
 

@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const PaymentDetails = ({address, QRCode}) => {
 
-const PaymentDetails = ({address}) => {
+
     return (
         <Wrapper>
             <PaymentHead>Crowdsale address</PaymentHead>
             <CrowdsaleAddress>{address}</CrowdsaleAddress>
+            <br/><br/>
+            <PaymentHead>QR code</PaymentHead>
+            <img src={QRCode} />
         </Wrapper>
     );
 };

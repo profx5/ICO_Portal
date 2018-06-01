@@ -7,7 +7,8 @@ import {Map} from 'immutable';
 const initialState = Map({
     investAmount: 1,
     tokensAmount: 0,
-    isMetamaskEnabled: true
+    isMetamaskEnabled: true,
+    qrcode: ''
 })
 
 
@@ -24,7 +25,8 @@ export const InvestReducer = createReducer({
         });
     },
     [actions.enableMetamaskOption]: (state, payload) => state.set('isMetamaskEnabled', true),
-    [actions.disableMetamaskOption]: (state, payload) => state.set('isMetamaskEnabled', false)
+    [actions.disableMetamaskOption]: (state, payload) => state.set('isMetamaskEnabled', false),
+    [actions.setQRCode]: (state, payload) => state.set('qrcode', payload)
 }, initialState);
 
 

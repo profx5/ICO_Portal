@@ -10,12 +10,12 @@ export class InvestSagas {
         try {
             const {senderAccount,
                    receiverAccount,
-                   value, currency} = action.payload;
+                   value} = action.payload;
             const valueWei = ethToWei(value);
 
             const txnHash = yield cps(sendTransaction, senderAccount, receiverAccount, valueWei);
 
-            yield put(DepositsActions.createPreparedDepositRequest(value, txnHash, currency));
+            yield put(DepositsActions.createPreparedDepositRequest(value, txnHash));
         } catch(e) {
             console.log("CANT PERFROM INVEST ACTION");
         }
