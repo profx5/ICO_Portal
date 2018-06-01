@@ -10,3 +10,6 @@ export const setTokensAmount = createAction('GET_TOKENS_AMOUNT');
 
 export const sendTransactionSuccessfull = createAction('SEND_TRANSACTION_SUCCESSFULL');
 export const sendTransactionFailed = createAction('SEND_TRANSACTION_FAILED');
+
+export const enableMetamaskOption = createAction('ENABLE_METAMASK_OPTION');
+export const disableMetamaskOption = createAction('DISABLE_METAMASK_OPTION');

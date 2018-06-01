@@ -7,6 +7,7 @@ import {Map} from 'immutable';
 const initialState = Map({
     total_supply: "0",
     token_address: "0x",
+    crowdsale_address: '0x',
     token_decimals: 2,
     humanizedEndTime: '',
     countdownTime: ''

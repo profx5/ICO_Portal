@@ -7,6 +7,7 @@ import {Map} from 'immutable';
 const initialState = Map({
     investAmount: 1,
     tokensAmount: 0,
+    isMetamaskEnabled: true
 })
 
 
@@ -21,7 +22,9 @@ export const InvestReducer = createReducer({
         return state.merge({
             tokensAmount: payload
         });
-    }
+    },
+    [actions.enableMetamaskOption]: (state, payload) => state.set('isMetamaskEnabled', true),
+    [actions.disableMetamaskOption]: (state, payload) => state.set('isMetamaskEnabled', false)
 }, initialState);
 
 

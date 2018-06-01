@@ -21,10 +21,12 @@ class Transactions extends React.Component {
                     {this.props.children}
                 </Content>
                 <Controls>
-                    <FetchLinksWrapper>
-                        <FetchLink disabled={currentPage <= 1} onClick={decrementPage}>Prev</FetchLink>
-                        <FetchLink disabled={currentPage === pages} onClick={incrementPage}>Next</FetchLink>
-                    </FetchLinksWrapper>
+                    {pages !== 1 &&
+                        <FetchLinksWrapper>
+                            <FetchLink disabled={currentPage <= 1} onClick={decrementPage}>Prev</FetchLink>
+                            <FetchLink disabled={currentPage === pages} onClick={incrementPage}>Next</FetchLink>
+                        </FetchLinksWrapper>
+                    }
                     <ButtonWrapper>
                         <Button text="Buy TKN" />
                     </ButtonWrapper>
