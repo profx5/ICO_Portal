@@ -10,16 +10,14 @@ TOKEN_DECIMALS = 2
 
 WEB3_RPC_URL = 'http://127.0.0.1:8545'
 
-DEFAULT_ACCOUNT = {'address': '0x73015966604928A312F79F7E69291a656Cb88602',
-                   'private_key': 'e362e876f03abf385273ff2f5f2d9b75903d34130942ef891c378815d5ae0b71'}
+ETH_ACCOUNT = {'address': '0x73015966604928A312F79F7E69291a656Cb88602',
+               'private_key': 'e362e876f03abf385273ff2f5f2d9b75903d34130942ef891c378815d5ae0b71'}
 
 CROWDSALE_CONTRACT = {
     'address': '0x703941C626999Ede2F1630ea95AFCcB6b96a3857',
-    'account': DEFAULT_ACCOUNT
 }
 TOKEN_CONTRACT = {
     'address': '0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',
-    'account': DEFAULT_ACCOUNT
 }
 
 CURRENCIES = {
@@ -60,6 +58,9 @@ CURRENCIES = {
 
 EXCHANGE_RATES = ['ETH', 'LTC', 'BTC', 'DASH']
 
+TXN_TRACKER_RESEND_SECONDS = 600 # 10 minutes
+RESEND_GAS_PRICE_FACTOR = 1.1
+
 # Celery
 CELERY_BROKER_URL = 'amqp://ico_portal:read_manual@localhost:5672/ico_portal_vhost'
 CELERY_TASK_SERIALIZER = 'pickle'
@@ -76,7 +77,16 @@ CELERY_BEAT_SCHEDULE = {
     'sync_exchange_rates': {
         'task': 'blockchain.ico.tasks.sync_exchange_rates',
         'schedule': 300.0
+    },
+    'send_transactions': {
+        'task': 'blockchain.ico.tasks.send_transactions',
+        'schedule': 45.0
+    },
+    'track_transactions': {
+        'task': 'blockchain.ico.tasks.track_transactions',
+        'schedule': 60
     }
+
 }
 CELERY_TASK_ROUTES = {
     'blockchain.ico.tasks.check_events': {
@@ -86,6 +96,12 @@ CELERY_TASK_ROUTES = {
         'queue': 'events_beat',
     },
     'blockchain.ico.tasks.sync_exchange_rates': {
+        'queue': 'events_beat',
+    },
+    'blockchain.ico.tasks.send_transactions': {
+        'queue': 'events_beat',
+    },
+    'blockchain.ico.tasks.TrackTransactions': {
         'queue': 'events_beat',
     },
 }

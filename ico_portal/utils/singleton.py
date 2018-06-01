@@ -1,5 +1,6 @@
 class SingletonType(type):
-    """Metaclass for Singleton pattern implementation
+    """
+    Metaclass for Singleton pattern implementation
     """
 
     __instance = None

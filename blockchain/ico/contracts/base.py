@@ -1,4 +1,5 @@
 from django.conf import settings
+from blockchain.web3 import get_web3
 
 
 class BaseContract:
@@ -8,12 +9,17 @@ class BaseContract:
             return f.read()
 
     @classmethod
-    def init(cls, web3, contract_address, account):
-        cls.web3 = web3
-        cls.contract = web3.eth.contract(abi=cls.get_abi(),
-                                         address=contract_address)
-        cls.private_key = account['private_key']
-        cls.sender_address = account['address']
+    def init(cls, contract_address):
+        cls.contract_address = contract_address
+
+    @property
+    def web3(self):
+        return get_web3()
+
+    @property
+    def contract(self):
+        return self.web3.eth.contract(abi=self.get_abi(),
+                                      address=self.contract_address)
 
 
 class ContractTransact:

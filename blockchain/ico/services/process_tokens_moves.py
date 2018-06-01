@@ -2,7 +2,7 @@ from oslash import Left, Right
 from django.db import DatabaseError
 
 from user_office.models import Investor, TokensMove
-from user_office.services import RecalcBalance
+from user_office import services
 
 
 def create_or_update_tokens_move(args):
@@ -46,7 +46,7 @@ def recalc_tokens_balance(args):
                                .filter(eth_account=args['investor_id']).first()
 
     if investor:
-        service = RecalcBalance()
+        service = services.RecalcBalance()
 
         return service(investor) | (lambda _: Right(args))
     else:
@@ -56,7 +56,7 @@ def recalc_tokens_balance(args):
 class ProcessIncomingTokensMove:
     def __call__(self, transfer):
         return Right({'transfer': transfer,
-                      'investor_id': transfer.account_to,
+                      'investor_id': transfer.to_account,
                       'direction': 'IN'}) | \
                       create_or_update_tokens_move | \
                       recalc_tokens_balance
@@ -65,7 +65,7 @@ class ProcessIncomingTokensMove:
 class ProcessOutgoingTokensMove:
     def __call__(self, transfer):
         return Right({'transfer': transfer,
-                      'investor_id': transfer.account_from,
+                      'investor_id': transfer.from_account,
                       'direction': 'OUT'}) | \
                       create_or_update_tokens_move | \
                       recalc_tokens_balance

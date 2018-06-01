@@ -13,8 +13,8 @@ class TestGetAvailableCurrencies(APITestCase):
 
         response = self.client.get('/api/getAvailableCurrencies/')
 
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.data, [
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, [
             {'code': 'ETH', 'name': 'Ethereum', 'rate': Decimal('720.11223')},
             {'code': 'LTC', 'name': 'Litecoin', 'rate': Decimal('151.43324')}
         ])

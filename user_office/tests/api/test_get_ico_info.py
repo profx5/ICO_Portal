@@ -8,8 +8,8 @@ class TestGetICOInfo(APITestCase):
 
         response = self.client.get('/api/getICOInfo/')
 
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.data,
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data,
                           {'token_decimals': 2,
                            'total_supply': '100000000',
                            'token_address': '0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',

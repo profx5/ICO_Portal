@@ -1,6 +1,5 @@
 from oslash import Left, Right
 from django.db import DatabaseError
-from blockchain.ico.contracts import TokenContract
 
 from user_office.models import ICO_Info
 

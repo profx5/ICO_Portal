@@ -1,6 +1,7 @@
 import factory
 from factory import fuzzy
 from datetime import timedelta, date
+from uuid import uuid4
 
 from ico_portal.utils.datetime import datetime
 
@@ -17,6 +18,7 @@ class FuzzyHash(fuzzy.FuzzyText):
 UTCNow = factory.LazyFunction(datetime.utcnow)
 CurrencyFuzzy = fuzzy.FuzzyChoice(['ETH', 'LTC', 'BTC'])
 AmountFuzzy = fuzzy.FuzzyDecimal(low=0, high=10000000, precision=0)
+UUID = factory.LazyFunction(uuid4)
 
 
 class InvestorFactory(factory.DjangoModelFactory):
@@ -33,8 +35,8 @@ class TransferFactory(factory.DjangoModelFactory):
         model = 'user_office.Transfer'
 
     txn_hash = FuzzyHash(length=70)
-    account_to = FuzzyHash(length=42)
-    account_from = FuzzyHash(length=42)
+    to_account = FuzzyHash(length=42)
+    from_account = FuzzyHash(length=42)
 
     block_hash = FuzzyHash(length=66)
     block_number = fuzzy.FuzzyInteger(low=0)
@@ -135,7 +137,7 @@ class KYCFactory(factory.DjangoModelFactory):
     document_date = fuzzy.FuzzyDate(start_date=date(1970, 1, 1))
     document_photo = factory.django.ImageField(color='green')
 
-    approve_txn_hash = FuzzyHash(length=70)
+    approve_txn_id = UUID
 
 
 class ICO_InfoFacotry(factory.DjangoModelFactory):
@@ -144,3 +146,18 @@ class ICO_InfoFacotry(factory.DjangoModelFactory):
 
     created_at = UTCNow
     total_supply = fuzzy.FuzzyInteger(low=0)
+
+
+class TransactionFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = 'user_office.Transaction'
+
+    data = fuzzy.FuzzyText(length=10)
+
+    gas = fuzzy.FuzzyInteger(low=21000)
+    txn_hash = FuzzyHash(length=42)
+
+    state = 'SENT'
+
+    created_at = UTCNow
+    txn_id = UUID

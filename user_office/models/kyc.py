@@ -43,7 +43,7 @@ class KYC(models.Model):
 
 
     decline_reason = models.TextField(blank=True, null=True)
-    approve_txn_hash = models.CharField(max_length=100, blank=True, null=True)
+    approve_txn_id = models.UUIDField(blank=True, null=True)
 
     class Meta:
         ordering = ['id']

@@ -16,7 +16,7 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
     def get_exclude(self, request, obj=None):
         if obj:
             if obj.state in ('WAITING', 'DECLINED'):
-                return ('approve_txn_hash',)
+                return ('approve_txn_id',)
             else:
                 return ('decline_reason',)
 
@@ -25,12 +25,13 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
 
         if obj:
             if obj.state == 'APPROVED':
-                fields.append('approve_txn_hash')
+                fields.append('approve_txn_id')
 
         return fields
 
     def approve_kyc(self, request, kyc):
         service = ApproveKYC(call_contract=True)
+
         result = service(kyc)
 
         if isinstance(result, Left):

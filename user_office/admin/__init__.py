@@ -6,6 +6,7 @@ from .exchange_rates import *
 from .transfer import *
 from .tokens_move import *
 from .payment import *
+from .transaction import *
 
 admin.site.unregister(Group)
 

@@ -2,13 +2,12 @@ from django.conf import settings
 from web3.utils.filters import LogFilter
 from web3.utils.events import get_event_data
 
-from ico_portal.utils.singleton import SingletonType
 from ico_portal.utils.datetime import datetime
-from .base import BaseContract, ContractTransact
+from .base import BaseContract
 
 
 
-class TokenContract(BaseContract, metaclass=SingletonType):
+class TokenContract(BaseContract):
     abi_file_path = '{BASE_DIR}/contracts/MintableToken.json'
 
     def get_total_supply(self):
@@ -17,12 +16,11 @@ class TokenContract(BaseContract, metaclass=SingletonType):
     def mint(self, to, amount):
         amount = int(amount)
 
-        gas = 40000
+        gas = 70000
 
-        return ContractTransact(self, self.contract.functions.mint(to, amount).buildTransaction({
-            'gas': gas,
-            'from': self.sender_address
-        }))
+        return self.contract.functions.mint(to, amount).buildTransaction({
+            'gas': gas
+        })
 
     def get_filter(self, from_block):
         return self.contract.events.Transfer.createFilter(fromBlock=from_block)
@@ -36,8 +34,8 @@ class TransferEvent:
     purchase_account = '0x0000000000000000000000000000000000000000'
 
     def __init__(self, entry):
-        self.account_from = entry['args']['from']
-        self.account_to = entry['args']['to']
+        self.from_account = entry['args']['from']
+        self.to_account = entry['args']['to']
         self.amount = entry['args']['value']
         self.txn_hash = entry['transactionHash'].hex()
         self.contract_address = entry['address']
@@ -53,7 +51,7 @@ class TransferEvent:
 
     @property
     def is_purchase(self):
-        return self.account_from == self.purchase_account
+        return self.from_account == self.purchase_account
 
 
 class TransfersFilter(LogFilter):
