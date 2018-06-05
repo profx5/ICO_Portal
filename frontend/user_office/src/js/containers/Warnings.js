@@ -53,7 +53,7 @@ class Warnings extends React.Component {
 const mapStateToProps = ({user, KYC, UI}) => ({
     kycRequired: user.get('kyc_required'),
     KYCStatus: KYC.get('state'),
-    isEthereumAccountExist: user.get('eth_account') === null,
+    isEthereumAccountExist: user.get('eth_account') !== null,
     showSetAccountPopup: UI.get('showSetAccountPopup')
 })
 
