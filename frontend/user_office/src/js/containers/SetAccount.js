@@ -19,21 +19,21 @@ class SetAccount extends Component {
 
     render() {
         const {hidePopup} = this.props;
-
+        let metamaskEthAccount = window.web3.eth.defaultAccount;
         return(
             <React.Fragment>
-                    <PopupWrapper>
-                        <Popup>
-                            <BtnClose onClick={hidePopup}>Close</BtnClose>
-                            <StyledHead>Add your ETH account</StyledHead>
-                            <form>
-                                <TextField type="text" innerRef={input => this.input = input}/>
-                                <FieldWrapper>
-                                    <Button clickHandler={this.onSubmitHandler} type="submit" text="Send"/>
-                                </FieldWrapper>
-                            </form>
-                        </Popup>
-                    </PopupWrapper>
+                <PopupWrapper>
+                    <Popup>
+                        <BtnClose onClick={hidePopup}>Close</BtnClose>
+                        <StyledHead>Add your ETH account</StyledHead>
+                        <form>
+                            <TextField type="text" value={metamaskEthAccount} innerRef={input => this.input = input}/>
+                            <FieldWrapper>
+                                <Button clickHandler={this.onSubmitHandler} type="submit" text="Send"/>
+                            </FieldWrapper>
+                        </form>
+                    </Popup>
+                </PopupWrapper>
             </React.Fragment>
         )
     }
