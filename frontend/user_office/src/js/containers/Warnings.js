@@ -8,12 +8,14 @@ import Button from './../components/Button';
 import foxIcon from './../../img/metamask.png';
 import checkIcon from './../../img/check.svg';
 
+import * as UIActions from './../actions/UIActions';
+
 
 class Warnings extends React.Component {
 
-
     render() {
-        const {kycRequired} = this.props;
+        const {kycRequired, KYCStatus, isEthereumAccountExist, showSetAccountPopup} = this.props;
+        const showKYCwidget = KYCStatus === 'DECLINED'
 
         return (
             <div>
@@ -21,8 +23,8 @@ class Warnings extends React.Component {
                     <Img src={foxIcon}/>
                     <Text color="#484643">In order to commit a transition, you must <Link href="https://metamask.io/" target="blank">download metamask</Link></Text>
                 </Wrapper>
-                {kycRequired &&
 
+                {showKYCwidget &&
                 <Wrapper background="#F46C6E">
                     <Img src={checkIcon}/>
                     <Text color="#ffffff">You did not pass KYS confirmation. Your invstment threshold is limited 10000</Text>
@@ -31,17 +33,37 @@ class Warnings extends React.Component {
                     </ButtonWrapper>
                 </Wrapper>
                 }
+
+                {!isEthereumAccountExist &&
+                <Wrapper background="#F46C6E">
+                    <Img src={checkIcon}/>
+                    <Text color="#ffffff">You did not provide ETH account!</Text>
+                    <ButtonWrapper>
+                        <Button clickHandler={showSetAccountPopup} className="btn-white" color="#484643" background="#ffffff" text='Set now!'/>
+                    </ButtonWrapper>
+                </Wrapper>
+                }
+
             </div>
         );
     }
 }
 
 
-const mapStateToProps = ({user}) => ({
-    kycRequired: user.get('kyc_required')
+const mapStateToProps = ({user, KYC, UI}) => ({
+    kycRequired: user.get('kyc_required'),
+    KYCStatus: KYC.get('state'),
+    isEthereumAccountExist: user.get('eth_account') === null,
+    showSetAccountPopup: UI.get('showSetAccountPopup')
 })
 
-export default connect(mapStateToProps)(Warnings)
+const mapDispatchToProps = (dispatch) => ({
+    showSetAccountPopup() {
+        dispatch(UIActions.showSetAccountPopup())
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Warnings)
 
 
 const Wrapper = styled.div`

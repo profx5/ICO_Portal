@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {Field, reduxForm} from 'redux-form';
+import {Field, reduxForm, getFormValues} from 'redux-form';
 
 import * as KYCActions from './../actions/KYCActions';
 
@@ -14,21 +14,23 @@ import VerificationInfo from './VerificationInfo';
 
 class Verification extends React.Component {
 
-    onSubmitHandler = values => {
-        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+    // onSubmitHandler = values => {
+    //     this.props.submitForm(values);
+    // }
 
-        return sleep(500).then(() => {
-            alert(JSON.stringify(values))
-        })
-
+    onSubmitHandler = event => {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        this.props.submitForm(data);
     }
 
     render () {
 
-        const {onSubmitHandler, handleSubmit} = this.props;
+        const {handleSubmit} = this.props;
 
         return (
-            <Wrapper onSubmit={handleSubmit(onSubmitHandler)} id="form" className="Verification">
+
+            <Wrapper onSubmit={this.onSubmitHandler} id="form" className="Verification">
                 <Head>Verification</Head>
                 <MainWrapper>
                     <PersonalData/>
@@ -48,12 +50,13 @@ const mapStateToProps = ({}) => ({})
 
 const mapDispatchToProps = (dispatch) => ({
     submitForm(payload) {
-        dispatch(KYCActions.submitKYC_and_retriveKYC_Request(payload))
+        dispatch(KYCActions.submitKYCRequest(payload))
     }
 })
 
 Verification = reduxForm({
-    form: 'verification'
+    form: 'verification',
+    multipartForm: true
 })(Verification);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Verification);

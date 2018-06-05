@@ -42,12 +42,11 @@ class PersonalData extends React.Component {
                     </PhotoWrapper>
                     <UploadWrapper>
                         <DescHead>Choose uploading way</DescHead>
-                        <PhotoUpload/>
+                        <PhotoUpload name='selfie'/>
                         <FileUpload name="selfie" onClickHandler={this.uploadOnClickHandler}/>
                     </UploadWrapper>
                 </PhotoFileUpload>
                 <InputSet>
-                    <Field type="file" name="fgfdgfdgdfle" component="input"/>
                     <InputWrapper>
                         <ReduxFormField labelText="First Name" name="firstname"/>
                     </InputWrapper>
@@ -58,7 +57,7 @@ class PersonalData extends React.Component {
                         <ReduxFormField labelText="Middle Name" name="midname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <ReduxFormRadio labelText="Gender" options={['Male', 'Female']}/>
+                        <ReduxFormRadio labelText="Gender" name="gender" options={['Male', 'Female']}/>
                     </InputWrapper>
                     <InputWrapper>
                         <ReduxFormField labelText="Date of birth" options={{date: true, datePattern: ['d', 'm', 'Y']}} name="birthdate"/>

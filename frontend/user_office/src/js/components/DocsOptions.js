@@ -1,14 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
+import {Field} from 'redux-form';
 
 const DocsOptions = ({tabsArray}) => {
     return (
         <List>
-            <InputRadio type="radio" id="document_type_1" name="document_type" value={tabsArray[0]} hidden checked/>
+            <InputRadio type="radio" id="document_type_1" name="document_type" component="input" value={tabsArray[0]} hidden checked defaultChecked/>
             <StyledLabel htmlFor="document_type_1">{tabsArray[0]}</StyledLabel>
-            <InputRadio type="radio" id="document_type_2" name="document_type" value={tabsArray[1]} hidden/>
+            <InputRadio type="radio" id="document_type_2" name="document_type" component="input" value={tabsArray[1]} hidden/>
             <StyledLabel htmlFor="document_type_2">{tabsArray[1]}</StyledLabel>
-            <InputRadio type="radio" id="document_type_3" name="document_type" value={tabsArray[2]} hidden/>
+            <InputRadio type="radio" id="document_type_3" name="document_type" component="input" value={tabsArray[2]} hidden/>
             <StyledLabel htmlFor="document_type_3">{tabsArray[2]}</StyledLabel>
         </List>
     )
@@ -26,7 +27,7 @@ const List = styled.div`
     margin-right: 35px;
 `;
 
-const InputRadio = styled.input`
+const InputRadio = styled(Field)`
     &:checked {
         background: white;
     }

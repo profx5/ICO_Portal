@@ -20,7 +20,7 @@ class Address extends React.Component {
                         <ReduxFormField labelText="City" name="city"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <ReduxFormField labelText="Registration address" name="registration address"/>
+                        <ReduxFormField labelText="Registration address" name="registration_address"/>
                     </InputWrapper>
                     <InputWrapper>
                         <ReduxFormField labelText="Postcode" name="postcode" options={{numericOnly: true}}/>

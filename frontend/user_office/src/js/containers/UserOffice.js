@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import Button from '../components/Button';
 import Title from '../components/Title';
 
+import SetAccount from '../containers/SetAccount';
+
 import Header from './Header';
 import StatusSidebar from './StatusSidebar';
 import Dashboard from './Dashboard';
@@ -24,22 +26,8 @@ class UserOffice extends Component {
         this.props.postTransferRequest()
     }
 
-    verificationOnSubmitHandler = (values) => {
-        // console.log(value);
-        return new Promise((resolve, reject) => {
-            resolve(values);
-        })
-        .then(data => {
-
-            this.props.submitVerificationForm(new FormData(data));
-            alert('bro')
-            // alert(JSON.stringify(values));
-        })
-
-    }
-
     render() {
-        const { transfaerAllowed, transferErrorMessage } = this.props
+        const { transfaerAllowed, transferErrorMessage, showSetAccountPopup } = this.props
 
         return (
             <Wrapper>
@@ -47,25 +35,24 @@ class UserOffice extends Component {
                     <Header/>
                 </HeaderWrapper>
                 <Dashboard />
-                {/*<Verification onSubmitHandler={this.verificationOnSubmitHandler} />*/}
+                {/*<Verification/>*/}
                 {/*<Settings/>*/}
                 <StatusSidebar/>
+                {showSetAccountPopup && <SetAccount/>}
             </Wrapper>
         )
     }
 }
 
-const mapStateToProps = ({bountiesBalance}) => ({
+const mapStateToProps = ({bountiesBalance, UI}) => ({
     transfaerAllowed: bountiesBalance.getIn(['transfer', 'success']),
-    transferErrorMessage: bountiesBalance.getIn(['transfer', 'error'])
+    transferErrorMessage: bountiesBalance.getIn(['transfer', 'error']),
+    showSetAccountPopup: UI.get('showSetAccountPopup')
 })
 
 const mapDispatchToProps = (dispatch) => ({
     postTransferRequest() {
         dispatch(BountiesActions.postTransferRequest())
-    },
-    submitVerificationForm(payload) {
-        dispatch(KYCActions.submitKYCRequest(payload))
     }
 })
 

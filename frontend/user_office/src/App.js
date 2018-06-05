@@ -22,15 +22,12 @@ const App = () => {
     )
 }
 
-const mapStateToProps = ({user}) => {
-    const isEthereumAccountExist = user.get('eth_account') !== null;
+const mapStateToProps = ({user}) => ({
+    
+})
 
-    return {
-        isAllowed: isEthereumAccountExist
-    }
-}
+const mapDispatchToProps = (dispatch) => ({
 
-export default compose(
-    connect(mapStateToProps),
-    // WithGuard(Banner)
-)(App)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
