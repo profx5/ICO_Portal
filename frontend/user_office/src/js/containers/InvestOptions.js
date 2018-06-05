@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import QRCode from 'qrcode';
 
-import {extractAccount, sendTransaction, isMetamaskAvailable, icoWeb3, ethToWei} from '../../web3';
+import {extractAccount, canSendTransaction, sendTransaction, isMetamaskAvailable, icoWeb3, ethToWei} from './../../web3';
 
 //components
 import InvestForm from './../components/InvestForm';
@@ -16,6 +16,18 @@ import * as InvestActions from './../actions/InvestActions';
 
 
 class InvestOptions extends React.Component {
+
+    canSendTransaction = (userAccount) => {
+        if (typeof window.web3 === 'undefined') {
+            return [false, 'Install MetaMask'];
+        } else if (!window.web3.eth.defaultAccount) {
+            return [false, 'Unlock MetaMask'];
+        } else if (!userAccount) {
+            return [false, 'Define Ethereum account'];
+        } else {
+            return [true, ''];
+        }
+    }
 
     withMetamaskPaymentHandler = () => {
 
@@ -50,9 +62,13 @@ class InvestOptions extends React.Component {
             investCurrency, 
             crowdsaleAddress,
             isMetamaskEnabled,
+            extractAccount,
+            canSendTransaction,
+            ethAccount,
             QRCode} = this.props;
 
         const isMetamaskInstalled = isMetamaskAvailable();
+        const [isUnlocked, reason] = this.canSendTransaction(ethAccount);
         this.generateQRCode(crowdsaleAddress);
 
         return (
@@ -63,8 +79,13 @@ class InvestOptions extends React.Component {
                             <BtnClose onClick={this.hideInvestPopup}>Close</BtnClose>
                             {investCurrency === 'ETH' && isMetamaskInstalled && isMetamaskEnabled && 
                                 <div>
-                                    <TextOption onClick={this.withMetamaskPaymentHandler}>Do it via metamask!</TextOption>
-                                    <TextOption onClick={this.withoutMetamaskPaymentHandler}>Do it without metamask!</TextOption>
+                                    {isUnlocked && 
+                                        <TextOption clickable onClick={this.withMetamaskPaymentHandler}>Do it via metamask!</TextOption>
+                                    }
+                                    {!isUnlocked &&
+                                        <TextOption><strike>Do it via metamask!</strike> {reason}</TextOption>
+                                    }
+                                    <TextOption clickable onClick={this.withoutMetamaskPaymentHandler}>Do it without metamask!</TextOption>
                                 </div>
                             }
                             {investCurrency === 'ETH' && !isMetamaskEnabled && <PaymentDetails QRCode={QRCode} address={crowdsaleAddress}/>}
@@ -145,9 +166,10 @@ const BtnClose = styled.span`
 `;
 
 const TextOption = styled.p`
-    cursor: pointer;
-    text-decoration: underline;
     margin-bottom: 30px;
+
+    text-decoration: ${props => props.clickable ? 'underline' : 'unset'};
+    cursor: ${props => props.clickable ? 'pointer' : 'unset'};
 `;
 
 const PaymentAddress = styled.p`
