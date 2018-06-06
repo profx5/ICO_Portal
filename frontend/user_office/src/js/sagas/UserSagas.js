@@ -74,3 +74,4 @@ export function* saga() {
     yield takeEvery(UserActions.setAccountRequest, UserSagas.setAccount)
     yield takeEvery(UserActions.setMetaMaskAccountRequest, UserSagas.extractMetaMaskAccount)
 }
+

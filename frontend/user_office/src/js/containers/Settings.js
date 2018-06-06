@@ -6,7 +6,6 @@ import * as KYCActions from './../actions/KYCActions';
 
 import PersonalInfo from './PersonalInfo';
 import Password from './Password';
-import Sessions from './Sessions';
 import VerificationInfo from './VerificationInfo';
 
 
@@ -29,10 +28,9 @@ class Settings extends React.Component {
                 <MainWrapper>
                     <PersonalInfo/>
                     <Password/>
-                    <Sessions/>
                 </MainWrapper>
                 <InfoWrapper>
-                    <VerificationInfo verificationStages={['Verification__personalData','Verification__password','Verification__sessions']} stages={['Personal Data', 'Password', 'My Sessions']}/>
+                    <VerificationInfo verificationStages={['Verification__personalData','Verification__password']} stages={['Personal Data', 'Password']}/>
                 </InfoWrapper>
             </Wrapper>
         )

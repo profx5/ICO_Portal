@@ -11,6 +11,8 @@ import PaymentDetails from './../components/PaymentDetails';
 //actions
 import * as UIActions from './../actions/UIActions';
 import * as InvestActions from './../actions/InvestActions';
+import * as UserActions from './../actions/UserActions';
+import * as ICOInfoActions from './../actions/ICOInfoActions';
 
 
 class InvestOptions extends React.Component {
@@ -59,13 +61,14 @@ class InvestOptions extends React.Component {
             investOptionsShown,
             investCurrency, 
             crowdsaleAddress,
+            altCrowdsaleAddress,
             isMetamaskEnabled,
             ethAccount,
             QRCode} = this.props;
 
         const isMetamaskInstalled = isMetamaskAvailable();
         const [isUnlocked, reason] = this.canSendTransaction(ethAccount);
-        this.generateQRCode(crowdsaleAddress);
+        this.generateQRCode(altCrowdsaleAddress);
 
         return (
             <React.Fragment>
@@ -84,8 +87,8 @@ class InvestOptions extends React.Component {
                                     <TextOption clickable onClick={this.withoutMetamaskPaymentHandler}>Do it without metamask!</TextOption>
                                 </div>
                             }
-                            {investCurrency === 'ETH' && !isMetamaskEnabled && <PaymentDetails QRCode={QRCode} address={crowdsaleAddress}/>}
-                            {investCurrency !== 'ETH' && <PaymentDetails QRCode={QRCode} address={crowdsaleAddress}/>}
+                            {investCurrency === 'ETH' && !isMetamaskEnabled && <PaymentDetails QRCode={QRCode} address={altCrowdsaleAddress}/>}
+                            {investCurrency !== 'ETH' && <PaymentDetails QRCode={QRCode} address={altCrowdsaleAddress}/>}
 
                         </Popup>
                     </PopupWrapper>
@@ -96,14 +99,15 @@ class InvestOptions extends React.Component {
 }
 
 
-const mapStateToProps = ({UI, Metamask, ICOInfo, Invest, Currencies, user}) => ({
+const mapStateToProps = ({UI, ICOInfo, Invest, Currencies, user}) => ({
     investOptionsShown: UI.get('showInvestOptions'),
     investAmount: Invest.get('investAmount'),
     investCurrency: Currencies.get('investCurrency'),
     ethAccount: user.get('eth_account'),
     crowdsaleAddress: ICOInfo.get('crowdsale_address'),
     isMetamaskEnabled: Invest.get('isMetamaskEnabled'),
-    QRCode: Invest.get('qrcode')
+    QRCode: Invest.get('qrcode'),
+    altCrowdsaleAddress: ICOInfo.get('alt_crowdsale_address')
 });
 
 const mapDispatchToProps = (dispatch) => ({

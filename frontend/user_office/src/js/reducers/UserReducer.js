@@ -7,9 +7,11 @@ import {Map} from 'immutable';
 const initialState = Map({
     "email": "gordon@ongrid.pro",
     "eth_account": null,
+
     "tokens_amount": 0.00,
     "kyc_required": false,
-    "investment_threshold": 0
+    "investment_threshold": 0,
+
 });
 
 
@@ -28,5 +30,6 @@ export const UserReducer = createReducer({
     [actions.setAccountRequest]: (state, payload) => state.set("setAccountSubmitting", true),
     [actions.setAccountSuccessfull]: (state, payload) => state.set('setAccountSubmitting', false),
 
-    [actions.setMetaMaskAccountSuccessfull]: (state, payload) => state.set('metamaskAccount', payload)
+    [actions.setMetaMaskAccountSuccessfull]: (state, payload) => state.set('metamaskAccount', payload),
+
 }, initialState);

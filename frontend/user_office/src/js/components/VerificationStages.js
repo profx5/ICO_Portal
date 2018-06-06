@@ -6,7 +6,7 @@ const VerificationStages = ({stages, boundSections, stageClickHandler}) => {
         <List>
             <ListItem onClick={stageClickHandler} data-bind-to={boundSections[0]} className="active">{stages[0]}</ListItem>
             <ListItem onClick={stageClickHandler} data-bind-to={boundSections[1]}>{stages[1]}</ListItem>
-            <ListItem onClick={stageClickHandler} data-bind-to={boundSections[2]}>{stages[2]}</ListItem>
+            {stages[2] && <ListItem onClick={stageClickHandler} data-bind-to={boundSections[2]}>{stages[2]}</ListItem>}
         </List>
     )
 }

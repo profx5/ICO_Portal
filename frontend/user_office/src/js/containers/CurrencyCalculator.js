@@ -10,6 +10,7 @@ import * as UIActions from './../actions/UIActions';
 
 
 import * as InvestActions from './../actions/InvestActions';
+import * as ICOInfoActions from './../actions/ICOInfoActions';
 
 
 
@@ -42,6 +43,12 @@ class CurrencyCalculator extends React.Component {
         this.updateTotalTokens();
     }
 
+    investClickHandler = () => {
+        const {investCurrency, showInvestOptions, getAltCryptoAccount} = this.props;
+        showInvestOptions();
+        getAltCryptoAccount(investCurrency);
+    }
+
 
     render() {
         const {
@@ -59,7 +66,7 @@ class CurrencyCalculator extends React.Component {
                     <InvestInput value={this.props.investAmount} type="text" onChangeHandler={this.investOnChangeHandler} header="Amount" currency={investCurrency}/>
                     <InvestInput value={this.props.tokensAmount} type="text" header="TKN" currency="TNK"/>
                     <ButtonWrapper>
-                        <Button clickHandler={showInvestOptions} text="INVEST"/>
+                        <Button clickHandler={this.investClickHandler} text="INVEST"/>
                     </ButtonWrapper>
                 </div>
                 <Tip>
@@ -89,6 +96,9 @@ const mapDispatchToProps = (dispatch) => ({
     showInvestOptions() {
         dispatch(UIActions.showInvestOptions());
     },
+    getAltCryptoAccount(payload) {
+        dispatch(ICOInfoActions.getCryptoAccountRequest(payload))
+    }
 })
 
 
