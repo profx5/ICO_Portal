@@ -9,6 +9,7 @@ import PhotoUpload from './../components/PhotoUpload';
 import DocsOptions from './../components/DocsOptions';
 import ReduxFormField from './../components/ReduxFormField';
 
+import samplePhoto from './../../img/user.svg';
 
 
 class Documents extends React.Component {
@@ -17,11 +18,9 @@ class Documents extends React.Component {
         $(event.currentTarget).find('input[type="file"]').click();
     }
 
-    onUploadHandler = (event) => {
-
-    }
-
     render() {
+
+        const {documentPhoto} = this.props;
 
         return (
             <Wrapper className="Verification__documents">
@@ -45,7 +44,7 @@ class Documents extends React.Component {
                 </ContentWrapper>
                 <PhotoFileUpload>
                     <PhotoWrapper>
-                        <Photo/>
+                        <Photo path={documentPhoto || samplePhoto}/>
                     </PhotoWrapper>
                     <UploadWrapper>
                         <DescHead>Choose uploading way</DescHead>
@@ -59,8 +58,8 @@ class Documents extends React.Component {
 };
 
 
-const mapStateToProps = ({ICOInfo, Timer}) => ({
-
+const mapStateToProps = ({KYC}) => ({
+    documentPhoto: KYC.get('document_photo')
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,12 +1,10 @@
 import React from 'react'
 import styled from 'styled-components';
 
-import userPhoto from './../../img/user.svg';
-
-const Photo = () => {
+const Photo = ({path}) => {
     return (
         <Wrapper>
-            <PhotoWrapper imgUrl={userPhoto}/>
+            <PhotoWrapper src={path}/>
             <div>
                 <SpanState>Загружено</SpanState>
                 <SpanRemove>Удалить</SpanRemove>
@@ -29,7 +27,7 @@ const Wrapper = styled.div`
 const PhotoWrapper = styled.div`
     width: 68px;
     flex-basis: 100%;
-    background-image: url(${props => props.imgUrl || userPhoto});
+    background-image: url(${props => props.src});
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

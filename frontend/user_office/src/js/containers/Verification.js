@@ -14,10 +14,6 @@ import VerificationInfo from './VerificationInfo';
 
 class Verification extends React.Component {
 
-    // onSubmitHandler = values => {
-    //     this.props.submitForm(values);
-    // }
-
     onSubmitHandler = event => {
         event.preventDefault();
         const data = new FormData(event.target);
@@ -46,7 +42,7 @@ class Verification extends React.Component {
 };
 
 
-const mapStateToProps = ({}) => ({})
+const mapStateToProps = ({KYC}) => ({})
 
 const mapDispatchToProps = (dispatch) => ({
     submitForm(payload) {

@@ -11,6 +11,7 @@ import PhotoUpload from './../components/PhotoUpload';
 import ReduxFormField from './../components/ReduxFormField';
 import ReduxFormRadio from './../components/ReduxFormRadio';
 
+import samplePhoto from './../../img/user.svg';
 
 
 class PersonalData extends React.Component {
@@ -27,13 +28,15 @@ class PersonalData extends React.Component {
 
     render() {
 
+        const {userPhoto} = this.props;
+
         return (
             <Wrapper className="Verification__personalData">
                 <Title>Personal Data</Title>
                 <PhotoFileUpload>
                     <PhotoWrapper>
                         <DescHead>Your photo</DescHead>
-                        <Photo/>
+                        <Photo path={userPhoto || samplePhoto}/>
                     </PhotoWrapper>
                     <UploadWrapper>
                         <DescHead>Choose uploading way</DescHead>
@@ -64,8 +67,9 @@ class PersonalData extends React.Component {
 };
 
 
-const mapStateToProps = ({ICOInfo, Timer}) => ({
-
+const mapStateToProps = ({ICOInfo, Timer, KYC}) => ({
+    userPhoto: KYC.get('user_photo'),
+    documentPhoto: KYC.get('document_photo')
 })
 
 const mapDispatchToProps = (dispatch) => ({

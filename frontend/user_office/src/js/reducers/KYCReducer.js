@@ -6,15 +6,22 @@ import {Map} from 'immutable'
 
 const initialState = Map({
     state: "DECLINED",
+    user_photo: "",
     firstname: "",
     midname: "",
     surname: "",
+    gender: "",
     birthdate: "",
-    document_no: "",
-    document_type: "",
     country: "",
-    photo: null,
-    selfie: null
+    city: "",
+    registration_address: "",
+    postcode: "",
+    document_type: "",
+    document_no: "",
+    document_country: "",
+    document_date: "",
+    document_photo: "",
+    decline_reason: null
 })
 
 
