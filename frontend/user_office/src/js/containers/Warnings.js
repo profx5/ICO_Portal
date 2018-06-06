@@ -32,7 +32,7 @@ class Warnings extends React.Component {
                     <Img src={checkIcon}/>
                     <Text color="#ffffff">You did not pass KYS confirmation. Your invstment threshold is limited 10000</Text>
                         <ButtonWrapper>
-                            <Link to="/verification">
+                            <Link to="/user_office/verification">
                                 <Button className="btn-white" color="#484643" background="#ffffff" text='Pass KYC'/>
                             </Link>
                         </ButtonWrapper>

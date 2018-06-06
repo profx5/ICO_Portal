@@ -33,8 +33,8 @@ class UserOffice extends Component {
                 </HeaderWrapper>
                 <Switch>
                     <Route exact path="/user_office" component={Dashboard} />
-                    <Route path="/verification" component={Verification} />
-                    <Route path="/settings" component={Settings} />
+                    <Route path="/user_office/verification" component={Verification} />
+                    <Route path="/user_office/settings" component={Settings} />
                 </Switch>
                 <StatusSidebar/>
                 {showSetAccountPopup && <SetAccount/>}
