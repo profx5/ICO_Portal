@@ -73,7 +73,7 @@ const Head = styled.h2`
     font-weight: 500;
     color: #233539;
     letter-spacing: -1.1px;
-    margin-top: 45px;
+    margin-top: 34px;
     flex-basis: 100%;
     margin-bottom: 45px;
 `;
