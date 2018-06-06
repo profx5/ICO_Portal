@@ -30,7 +30,7 @@ class Verification extends React.Component {
 
         return (
 
-            <Wrapper onSubmit={handleSubmit(this.onSubmitHandler)} id="form" className="Verification">
+            <Wrapper onSubmit={this.onSubmitHandler} id="form" className="Verification">
                 <Head>Verification</Head>
                 <MainWrapper>
                     <PersonalData/>
