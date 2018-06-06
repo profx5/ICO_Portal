@@ -26,7 +26,7 @@ class CurrencyCalculator extends React.Component {
     }
 
     updateInvestAmount = () => {
-        const {tokensAmount, investAmount, investCurrencyRate, bonusPercent, setTokensAmount, setInvestAmount} = this.props;
+        const {tokensAmount, investCurrencyRate, bonusPercent} = this.props;
 
         let totalInvest = investCurrencyRate / tokensAmount;
         let bonusAmount = totalInvest / 100 * bonusPercent;
@@ -97,15 +97,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(CurrencyCalculator)
 
 const Wrapper = styled.div`
     margin-top: 107px;
-`;
-
-const Input = styled.input`
-    display: block;
-    font-weight: 600;
-    height: 100%;
-    width: 100%;
-    padding-left: 18px;
-    padding-right: 55px;
 `;
 
 const ButtonWrapper = styled.div`

@@ -8,8 +8,8 @@ import reducer from './../reducers'
 
 
 const sagaMiddleware = createSagaMiddleware()
-
 const logger = createLogger({
+
     stateTransformer: (state) => {
         let newState = {};
 
@@ -26,7 +26,10 @@ const logger = createLogger({
 });
 
 
-const store = createStore(reducer, applyMiddleware(sagaMiddleware, logger))
+export const store = createStore(
+    reducer, 
+    applyMiddleware(sagaMiddleware, logger))
+
 sagaMiddleware.run(rootSaga)
 
 export default store;

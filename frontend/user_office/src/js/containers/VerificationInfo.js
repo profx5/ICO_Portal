@@ -5,8 +5,6 @@ import $ from 'jquery';
 
 import Utils from './../utils/index';
 
-import * as KYCActions from './../actions/KYCActions';
-
 import Button from './../components/Button';
 import VerificationStages from './../components/VerificationStages';
 import VerificationState from './../components/VerificationState';

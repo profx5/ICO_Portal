@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Button from './Button'
-
 const ICOPhaseInfo = ({phaseName, discount, endDate}) => (
     <div>
         <Title>Current ico phase</Title>

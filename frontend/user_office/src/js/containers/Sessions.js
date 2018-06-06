@@ -1,29 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import $ from 'jquery';
-import PerfectScrollbar from 'perfect-scrollbar';
-
-import * as KYCActions from './../actions/KYCActions';
-
-import Utils from './../utils/index';
 
 import SessionsTable from './SessionsTable';
-import FieldText from './../components/FieldText';
-import Button from './../components/Button';
 
 
 
 class Sessions extends React.Component {
-
-    componentDidMount() {
-        
-        const ps = new PerfectScrollbar('#Verification__sessions', {
-          wheelSpeed: 2,
-          wheelPropagation: true,
-          minScrollbarLength: 20
-        });
-    }
 
     render() {
 
@@ -37,12 +20,8 @@ class Sessions extends React.Component {
 };
 
 
-const mapStateToProps = () => ({
-
-})
-
-const mapDispatchToProps = (dispatch) => ({
-})
+const mapStateToProps = () => ({})
+const mapDispatchToProps = (dispatch) => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sessions)
 
@@ -63,33 +42,4 @@ const Title = styled.h3`
     color: #323c47;
     letter-spacing: 0.1px;
     margin-bottom: 45px;
-`;
-
-const DescHead = styled.h4`
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: #0a0a0a;
-    font-weight: 500;
-    flex-basis: 100%;
-`;
-
-const InputSet = styled.div`
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    position: relative;
-`;
-
-const InputWrapper = styled.div`
-    height: 45px;
-    flex-basis: ${props => props.fullWidth ? '100%' : '48%'};
-    
-    &:not(:last-child) {
-        margin-bottom: 70px;
-    }
-    &:last-child {
-        margin-bottom: 40px;
-    }
 `;

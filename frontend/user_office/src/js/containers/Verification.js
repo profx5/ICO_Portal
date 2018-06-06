@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {Field, reduxForm, getFormValues} from 'redux-form';
+import {reduxForm} from 'redux-form';
 
 import * as KYCActions from './../actions/KYCActions';
 
@@ -30,7 +30,7 @@ class Verification extends React.Component {
 
         return (
 
-            <Wrapper onSubmit={this.onSubmitHandler} id="form" className="Verification">
+            <Wrapper onSubmit={handleSubmit(this.onSubmitHandler)} id="form" className="Verification">
                 <Head>Verification</Head>
                 <MainWrapper>
                     <PersonalData/>

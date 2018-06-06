@@ -10,7 +10,7 @@ const PaymentDetails = ({address, QRCode}) => {
             <CrowdsaleAddress>{address}</CrowdsaleAddress>
             <br/><br/>
             <PaymentHead>QR code</PaymentHead>
-            <img src={QRCode} />
+            <img src={QRCode} alt="QR code"/>
         </Wrapper>
     );
 };

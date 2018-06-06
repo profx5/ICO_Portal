@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import Cleave from 'cleave.js/react';
 
 const FieldTextSpan = ({labelText, value, children, id}) => {
 

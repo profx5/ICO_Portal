@@ -1,7 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import moment from 'moment';
-import styled from 'styled-components';
 
 import Utils from './../utils/index';
 
@@ -16,7 +14,7 @@ class ICOSidebarInfo extends React.Component {
 
     componentDidUpdate() {
         const {endTime, humanizeEndTime} = this.props;
-        let endDate = new Date(endTime);
+
         humanizeEndTime(Utils.humanizeUTCTime(endTime, 'ddd MMM DD YYYY'));
     }
 

@@ -5,15 +5,6 @@ import * as UIActions from '../actions/UIActions';
 
 import Balance from '../components/Balance';
 import AccountInfo from '../components/AccountInfo';
-import KYCWidget from '../components/KYCWidget';
-
-import Invest from './Invest';
-import DepositTable from './DepositTable';
-import BountiesBalance from './BountiesBalance';
-import PhaseStats from './PhaseStats';
-import KYC from './KYC';
-import Account from './Account';
-import ReferralLink from './ReferralLink';
 
 class Header extends React.Component {
 
@@ -28,16 +19,11 @@ class Header extends React.Component {
         const {
             email,
             tokensAmount,
-            kycRequired,
             showInvestForm,
             decimals,
-            kyc,
-            KYCStatus,
-            accountApproved,
             accountDropdownShown
         } = this.props;
 
-        const showKYCWidget = KYCStatus === 'WAITING';
         let floatTokensAmount = '1';
         for (let i = 0; i < decimals; i++) {
             floatTokensAmount += '0';
@@ -65,13 +51,10 @@ class Header extends React.Component {
 const mapStateToProps = ({user, ICOInfo, KYC, Invest, UI}) => ({
     email: user.get('email'),
     tokensAmount: user.get('tokens_amount'),
-    kycRequired: user.get('kyc_required'),
-    kyc: KYC.get('kyc'),
     decimals: ICOInfo.get('token_decimals'),
     KYCStatus: KYC.get('status'),
     userId: user.get('eth_account'),
     showInvestForm: Invest.get('showInvestForm'),
-    accountApproved: user.get('setAccountSubmitting'),
     accountDropdownShown: UI.get('accountDropdownShown')
 })
 

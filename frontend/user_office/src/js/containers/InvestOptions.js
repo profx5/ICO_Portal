@@ -3,15 +3,13 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import QRCode from 'qrcode';
 
-import {extractAccount, canSendTransaction, sendTransaction, isMetamaskAvailable, icoWeb3, ethToWei} from './../../web3';
+import {isMetamaskAvailable, icoWeb3} from './../../web3';
 
 //components
-import InvestForm from './../components/InvestForm';
 import PaymentDetails from './../components/PaymentDetails';
 
 //actions
 import * as UIActions from './../actions/UIActions';
-import * as DepositsActions from './../actions/DepositsActions';
 import * as InvestActions from './../actions/InvestActions';
 
 
@@ -34,7 +32,7 @@ class InvestOptions extends React.Component {
         icoWeb3.eth.getAccounts().then(response => {
 
             const value = this.props.investAmount;
-            const {ethAccount, crowdsaleAddress, contract, investCurrency, invest} = this.props;
+            const {crowdsaleAddress, invest} = this.props;
             const metamaskEthAccount = response[0];
 
             invest(metamaskEthAccount, crowdsaleAddress, value);
@@ -62,8 +60,6 @@ class InvestOptions extends React.Component {
             investCurrency, 
             crowdsaleAddress,
             isMetamaskEnabled,
-            extractAccount,
-            canSendTransaction,
             ethAccount,
             QRCode} = this.props;
 
@@ -102,7 +98,6 @@ class InvestOptions extends React.Component {
 
 const mapStateToProps = ({UI, Metamask, ICOInfo, Invest, Currencies, user}) => ({
     investOptionsShown: UI.get('showInvestOptions'),
-    contract: ICOInfo.get('token_address'),
     investAmount: Invest.get('investAmount'),
     investCurrency: Currencies.get('investCurrency'),
     ethAccount: user.get('eth_account'),
@@ -170,8 +165,4 @@ const TextOption = styled.p`
 
     text-decoration: ${props => props.clickable ? 'underline' : 'unset'};
     cursor: ${props => props.clickable ? 'pointer' : 'unset'};
-`;
-
-const PaymentAddress = styled.p`
-    word-break: break-word;
 `;

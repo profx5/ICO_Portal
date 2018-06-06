@@ -64,14 +64,3 @@ const StyledLabel = styled.label`
     display: block;
     margin-bottom: 13px;
 `;
-
-const StyledInput = styled(Cleave)`
-    color: #233539;
-    font-weight: 600;
-    padding: 0 20px;
-    display: block;
-    height: 100%;
-    width: 100%;
-    background: #ffffff;
-    border: 1px solid #EAEFF2;
-`;

@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import CurrencyCalculator from './CurrencyCalculator';
 
 import CurrencyCard from './../components/CurrencyCard';
-import Button from './../components/Button';
 import FetchButton from './../components/FetchButton';
 
 import * as CurrencyActions from '../actions/CurrencyActions.js';
@@ -22,7 +21,7 @@ class Currency extends React.Component {
     generateCurrencyCards = (data) => {
 
         return data.map((item, index) => {
-            let {code, name, rate} = item;
+            let {code, rate} = item;
             console.log(code)
 
             if (index >= 7 && this.props.spreadedCurrencyCards === false) return;
@@ -52,8 +51,6 @@ class Currency extends React.Component {
     render() {
         const {
             currencies,
-            investCurrency,
-            investCurrencyRate,
             spreadedCurrencyCards
         } = this.props;
 
@@ -69,7 +66,6 @@ class Currency extends React.Component {
         )
     }
 };
-
 
 
 const mapStateToProps = ({Currencies}) => ({
@@ -115,10 +111,4 @@ const Head = styled.h3`
 
 const Content = styled.div`
     margin-bottom: 24px;
-`;
-
-const ButtonWrapper = styled.div`
-    width: 165px;
-    margin-left: auto;
-    margin-top: 30px;
 `;

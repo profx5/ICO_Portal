@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import Utils from './../utils/index';
 
 import * as ICOInfoActions from './../actions/ICOInfoActions';
-import * as PhaseActions from './../actions/PhaseActions';
-import * as TimerActions from './../actions/TimerActions';
 
 import clockImg from './../../img/icon_progress.svg';
 import Button from './../components/Button';
@@ -24,14 +22,11 @@ class ICOProgress extends React.Component {
 
     render() {
         const {
-            USDcRaised,
             gainedMoney,
             hardCup,
             phaseName,
             bonusPercents,
-            hardCapUSDc,
             countdownTime,
-            updateCountdown
         } = this.props;
 
         const raisedAmountString = Math.round(parseInt(gainedMoney)/100) + '';

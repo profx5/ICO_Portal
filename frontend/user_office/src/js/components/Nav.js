@@ -13,7 +13,7 @@ class Nav extends React.Component {
 
             <Wrapper>
                 <IconLink bordered logo marginBottom="76px">
-                    <img src={logo} />
+                    <img src={logo} alt="Logo"/>
                 </IconLink>
                 <span></span>
                 <IconLink active>

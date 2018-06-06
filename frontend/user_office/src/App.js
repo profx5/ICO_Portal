@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {compose} from 'redux';
 //containers
 import ContentWrapper from './js/containers/ContentWrapper';
 import Warnings from './js/containers/Warnings';

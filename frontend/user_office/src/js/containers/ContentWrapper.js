@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
-import {canSendTransaction, ethToWei, isMetamaskAvailable} from '../../web3';
+import {isMetamaskAvailable} from '../../web3';
 
 import * as UserActions from '../actions/UserActions';
 import * as ICOInfoActions from '../actions/ICOInfoActions';

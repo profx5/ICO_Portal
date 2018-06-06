@@ -5,16 +5,11 @@ import $ from 'jquery';
 
 import * as KYCActions from './../actions/KYCActions';
 
-import Utils from './../utils/index';
-
 import Photo from './../components/Photo';
 import FileUpload from './../components/FileUpload';
 import PhotoUpload from './../components/PhotoUpload';
-import FieldText from './../components/FieldText';
 import ReduxFormField from './../components/ReduxFormField';
 import ReduxFormRadio from './../components/ReduxFormRadio';
-import {Field} from 'redux-form';
-import Button from './../components/Button';
 
 
 

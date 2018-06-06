@@ -3,8 +3,6 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 import moment from 'moment';
 
-import * as DepositsActions from '../actions/DepositsActions'
-
 
 class DepositTable extends Component {
     
@@ -22,12 +20,6 @@ class DepositTable extends Component {
     }
 
     render() {
-        const {
-            currentPage,
-            pages,
-            nextPage,
-            prevPage
-        } = this.props
 
         return (
             <div>

@@ -2,8 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 
-import Utils from './../utils/index';
-
 import ReduxFormField from './../components/ReduxFormField';
 
 
@@ -32,13 +30,9 @@ class Address extends React.Component {
 };
 
 
-const mapStateToProps = ({ICOInfo, Timer}) => ({
+const mapStateToProps = ({ICOInfo, Timer}) => ({})
 
-})
-
-const mapDispatchToProps = (dispatch) => ({
-
-})
+const mapDispatchToProps = (dispatch) => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Address)
 
@@ -60,32 +54,6 @@ const Title = styled.h3`
     letter-spacing: 0.1px;
     margin-bottom: 45px;
 `;
-
-const DescHead = styled.h4`
-    color: #0a0a0a;
-    font-weight: 500;
-    flex-basis: 100%;
-    margin-bottom: 40px;
-`;
-
-
-const PhotoFileUpload = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    margin-bottom: 150px;
-`;
-
-const PhotoWrapper = styled.div`
-    flex-basis: 50%;
-`;
-
-const UploadWrapper = styled.div`
-    width: 285px;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-`;
-
 
 const InputSet = styled.div`
     display: flex;

@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 
-import canSendTransaction from '../../web3';
 
 import Button from './../components/Button';
 import foxIcon from './../../img/metamask.png';
@@ -14,8 +13,8 @@ import * as UIActions from './../actions/UIActions';
 class Warnings extends React.Component {
 
     render() {
-        const {kycRequired, KYCStatus, isEthereumAccountExist, showSetAccountPopup} = this.props;
-        const showKYCwidget = KYCStatus === 'DECLINED'
+        const {KYCStatus, isEthereumAccountExist, showSetAccountPopup} = this.props;
+        const showKYCwidget = KYCStatus === 'DECLINED';
 
         return (
             <div>

@@ -1,42 +1,40 @@
 import React, {Component} from 'react';
-import {compose} from 'redux';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
-import Button from '../components/Button';
-import Title from '../components/Title';
-
 import SetAccount from '../containers/SetAccount';
+import Verification from '../containers/Verification';
+import Settings from '../containers/Settings';
 
 import Header from './Header';
 import StatusSidebar from './StatusSidebar';
 import Dashboard from './Dashboard';
-import Verification from './Verification';
-import Settings from './Settings';
 
-import * as UserActions from '../actions/UserActions';
-import * as KYCActions from '../actions/KYCActions';
-import * as ICOInfoActions from '../actions/ICOInfoActions';
-import * as DepositsActions from '../actions/DepositsActions';
 import * as BountiesActions from '../actions/BountiesBalanceActions';
+
+import { Switch, Route } from 'react-router-dom'
+
+
 
 class UserOffice extends Component {
 
     handleClickForTransferModalWindow = (e) => {
-        this.props.postTransferRequest()
+        this.props.postTransferRequest();
     }
 
     render() {
-        const { transfaerAllowed, transferErrorMessage, showSetAccountPopup } = this.props
+        const { showSetAccountPopup } = this.props;
 
         return (
             <Wrapper>
                 <HeaderWrapper>
                     <Header/>
                 </HeaderWrapper>
-                <Dashboard />
-                {/*<Verification/>*/}
-                {/*<Settings/>*/}
+                <Switch>
+                    <Route path="/user_office" component={Dashboard} />
+                    <Route path="/verification" component={Verification} />
+                    <Route path="/settings" component={Settings} />
+                </Switch>
                 <StatusSidebar/>
                 {showSetAccountPopup && <SetAccount/>}
             </Wrapper>

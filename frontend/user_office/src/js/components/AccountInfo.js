@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import userPhoto from './../../img/user.svg';
 import arrowImg from './../../img/arrow-down.svg';
-import logoutIcon from './../../img/logout.svg';
 
+import { Link } from 'react-router-dom';
 
 const AccountInfo = ({email, isDropdownOpen, dropdownClickHandler}) => {
     return (
@@ -18,8 +18,13 @@ const AccountInfo = ({email, isDropdownOpen, dropdownClickHandler}) => {
                 {isDropdownOpen && 
                     <Dropdown>
                         <ul>
-                            <ListItem>Account settings</ListItem>
-                            <ListItem>Verification</ListItem>
+                            <ListItem>
+                                <Link to="/settings">Account settings</Link>
+                            </ListItem>
+                            <ListItem>
+                                <Link to="/verification">Verification</Link>
+                            </ListItem>
+
                         </ul>
                         <LogoutLink>
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20">
@@ -46,11 +51,6 @@ const InfoWrapper = styled.div`
     justify-content: flex-end;
 `;
 
-const ConfirmLink = styled.a`
-    color: #d44b4b;
-    font-weight: 400;
-    text-decoration: underline;
-`;
 const UserImg = styled.img`
     margin-left: 25px;
     position: relative;

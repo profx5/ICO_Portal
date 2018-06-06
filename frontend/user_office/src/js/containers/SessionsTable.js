@@ -1,18 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
-import $ from 'jquery';
-
-import * as KYCActions from './../actions/KYCActions';
-
-import Utils from './../utils/index';
-
-import Photo from './../components/Photo';
-import FileUpload from './../components/FileUpload';
-import PhotoUpload from './../components/PhotoUpload';
-import FieldText from './../components/FieldText';
-import FieldRadio from './../components/FieldRadio';
-import Button from './../components/Button';
 
 
 class SessionsTable extends React.Component {

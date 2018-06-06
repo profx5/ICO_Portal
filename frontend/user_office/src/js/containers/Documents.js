@@ -3,8 +3,6 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
 
-import Utils from './../utils/index';
-
 import Photo from './../components/Photo';
 import FileUpload from './../components/FileUpload';
 import PhotoUpload from './../components/PhotoUpload';
