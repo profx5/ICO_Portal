@@ -31,7 +31,7 @@ class UserOffice extends Component {
                     <Header/>
                 </HeaderWrapper>
                 <Switch>
-                    <Route path="/user_office" component={Dashboard} />
+                    <Route exact path="/user_office" component={Dashboard} />
                     <Route path="/verification" component={Verification} />
                     <Route path="/settings" component={Settings} />
                 </Switch>
