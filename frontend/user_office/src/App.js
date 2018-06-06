@@ -6,8 +6,8 @@ import Warnings from './js/containers/Warnings';
 import UserOffice from './js/containers/UserOffice';
 import NavSidebar from './js/containers/NavSidebar';
 
-// import WithGuard from './js/HOC/WithGuard';
-// import Banner from './js/containers/Banner';
+import { withRouter } from 'react-router';
+
 
 const App = () => {
     return (
@@ -29,4 +29,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

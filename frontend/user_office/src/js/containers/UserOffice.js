@@ -12,7 +12,8 @@ import Dashboard from './Dashboard';
 
 import * as BountiesActions from '../actions/BountiesBalanceActions';
 
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 
 
@@ -54,7 +55,7 @@ const mapDispatchToProps = (dispatch) => ({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserOffice);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserOffice));
 
 const Wrapper = styled.div`
     width: calc(100% - 105px);

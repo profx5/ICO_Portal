@@ -24,7 +24,6 @@ const AccountInfo = ({email, isDropdownOpen, dropdownClickHandler}) => {
                             <ListItem>
                                 <Link to="/verification">Verification</Link>
                             </ListItem>
-
                         </ul>
                         <LogoutLink>
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20">
