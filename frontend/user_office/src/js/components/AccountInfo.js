@@ -18,10 +18,10 @@ const AccountInfo = ({email, isDropdownOpen, dropdownClickHandler}) => {
                 {isDropdownOpen && 
                     <Dropdown>
                         <ul>
-                            <ListItem>
+                            <ListItem onClick={dropdownClickHandler}>
                                 <Link to="/settings">Account settings</Link>
                             </ListItem>
-                            <ListItem>
+                            <ListItem onClick={dropdownClickHandler}>
                                 <Link to="/verification">Verification</Link>
                             </ListItem>
                         </ul>
