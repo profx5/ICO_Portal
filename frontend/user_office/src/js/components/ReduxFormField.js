@@ -1,20 +1,29 @@
 import React from 'react'
 import styled from 'styled-components';
 import {Field} from 'redux-form';
+import Cleave from 'cleave.js/react';
+
+
+
+
 
 const ReduxFormField = ({labelText, placeholder, options, name, value, disabled}) => {
 
+    let CleaveInput = (field) => (
+        <Cleave />
+    )
+
     return (
         <Wrapper>
-            <StyledLabel htmlFor={name}>{labelText}</StyledLabel> 
+            <StyledLabel htmlFor={name}>{labelText}</StyledLabel>
             <StyledInput 
-                value={value} 
-                placeholder={placeholder} 
+                options={options} 
                 className="Field" 
+                component={CleaveInput} 
+                placeholder={placeholder} 
+                value={value} 
                 type="text" 
-                name={name} 
-                component="input"
-            />
+                name={name}/>
         </Wrapper>
     );
 }
@@ -34,7 +43,7 @@ const StyledLabel = styled.label`
     margin-bottom: 13px;
 `;
 
-const StyledInput = styled(Field)`
+const StyledInput = styled(Cleave)`
     color: #233539;
     font-weight: 600;
     padding: 0 20px;

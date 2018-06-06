@@ -36,10 +36,10 @@ class Documents extends React.Component {
                             <ReduxFormField labelText="Series and number" name="document_no" options={{numericOnly: true}}/>
                         </InputWrapper>
                         <InputWrapper>
-                            <ReduxFormField labelText="Country" name="country"/>
+                            <ReduxFormField labelText="Document country" name="document_country"/>
                         </InputWrapper>
                         <InputWrapper>
-                            <ReduxFormField labelText="Date" name="document_date" options={{date: true, datePattern: ['Y', 'm', 'd']}}/>
+                            <ReduxFormField labelText="Date" name="document_date" options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}/>
                         </InputWrapper>
                     </ContentPart>
                 </ContentWrapper>
@@ -49,8 +49,8 @@ class Documents extends React.Component {
                     </PhotoWrapper>
                     <UploadWrapper>
                         <DescHead>Choose uploading way</DescHead>
-                        <PhotoUpload name="photo"/>
-                        <FileUpload name="photo" onClickHandler={this.uploadOnClickHandler}/>
+                        <PhotoUpload name="document_photo"/>
+                        <FileUpload name="document_photo" onClickHandler={this.uploadOnClickHandler}/>
                     </UploadWrapper>
                 </PhotoFileUpload>
             </Wrapper>

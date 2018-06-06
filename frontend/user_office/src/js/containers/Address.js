@@ -18,6 +18,9 @@ class Address extends React.Component {
                         <ReduxFormField labelText="City" name="city"/>
                     </InputWrapper>
                     <InputWrapper>
+                        <ReduxFormField labelText="Country" name="country"/>
+                    </InputWrapper>
+                    <InputWrapper>
                         <ReduxFormField labelText="Registration address" name="registration_address"/>
                     </InputWrapper>
                     <InputWrapper>

@@ -9,9 +9,10 @@ export class KYCSagas {
             yield call(axios, {
                 url: Api.kyc(),
                 method: 'POST',
-                data: action.data
+                data: action.payload
             })
-            yield put(actions.submitKYCSuccessfull())
+            yield put(actions.submitKYCSuccessfull());
+            yield call(KYCSagas.getKYC);
 
         } catch(e) {
             yield put(actions.submitKYCFailed())
@@ -33,7 +34,6 @@ export class KYCSagas {
                 url: Api.kyc(),
                 method: 'GET'
             })
-            console.log({response})
             yield put(actions.getKYCSuccessfull(response.data))
         } catch(e) {
             console.log("CANT GET KYC", {e})
