@@ -19,23 +19,15 @@ export class ICOInfoSagas {
 
     static * getCryptoAccount(action) {
         try {
-            const response = yield(axios, {
+            const response = yield call(axios, {
                 url: Api.getAccount(),
-                method: 'GET',
-                data: action.payload
+                method: "GET",
+                params: {
+                    "currency": action.payload
+                }
             });
 
-            console.log(555)
-            console.log(555)
-            console.log(555)
-            console.log(555)
-            console.log(555)
-            console.log(555)
-            console.log(555)
-            console.log(555)
-            console.log(555)
-
-            yield put(actions.getCryptoAccountSuccessful(response.data));
+            yield put(actions.getCryptoAccountSuccessful(response.data.address));
 
         } catch(e) {
 

@@ -68,7 +68,7 @@ class InvestOptions extends React.Component {
 
         const isMetamaskInstalled = isMetamaskAvailable();
         const [isUnlocked, reason] = this.canSendTransaction(ethAccount);
-        this.generateQRCode(altCrowdsaleAddress);
+        this.generateQRCode(altCrowdsaleAddress || '0');
 
         return (
             <React.Fragment>
@@ -87,7 +87,7 @@ class InvestOptions extends React.Component {
                                     <TextOption clickable onClick={this.withoutMetamaskPaymentHandler}>Do it without metamask!</TextOption>
                                 </div>
                             }
-                            {investCurrency === 'ETH' && !isMetamaskEnabled && <PaymentDetails QRCode={QRCode} address={altCrowdsaleAddress}/>}
+                            {investCurrency === 'ETH' && !isMetamaskEnabled && <PaymentDetails QRCode={QRCode} address={crowdsaleAddress}/>}
                             {investCurrency !== 'ETH' && <PaymentDetails QRCode={QRCode} address={altCrowdsaleAddress}/>}
 
                         </Popup>
