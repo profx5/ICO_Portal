@@ -9,6 +9,8 @@ import checkIcon from './../../img/check.svg';
 
 import * as UIActions from './../actions/UIActions';
 
+import { Link } from 'react-router-dom';
+
 
 class Warnings extends React.Component {
 
@@ -18,18 +20,22 @@ class Warnings extends React.Component {
 
         return (
             <div>
+                {typeof window.web3 === 'undefined' &&
                 <Wrapper background="#F6DD9C">
                     <Img src={foxIcon}/>
-                    <Text color="#484643">In order to commit a transition, you must <Link href="https://metamask.io/" target="blank">download metamask</Link></Text>
+                    <Text color="#484643">In order to commit a transition, you must <TextLink href="https://metamask.io/" target="blank">download metamask</TextLink></Text>
                 </Wrapper>
+                }
 
                 {showKYCwidget &&
                 <Wrapper background="#F46C6E">
                     <Img src={checkIcon}/>
                     <Text color="#ffffff">You did not pass KYS confirmation. Your invstment threshold is limited 10000</Text>
-                    <ButtonWrapper>
-                        <Button className="btn-white" color="#484643" background="#ffffff" text='Pass KYC'/>
-                    </ButtonWrapper>
+                        <ButtonWrapper>
+                            <Link to="/verification">
+                                <Button className="btn-white" color="#484643" background="#ffffff" text='Pass KYC'/>
+                            </Link>
+                        </ButtonWrapper>
                 </Wrapper>
                 }
 
@@ -85,7 +91,7 @@ const Text = styled.p`
     color: ${props => props.color || '#484643'};
 `;
 
-const Link = styled.a`
+const TextLink = styled.a`
     text-decoration: underline;
 `;
 
