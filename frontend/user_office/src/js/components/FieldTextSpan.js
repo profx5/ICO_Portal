@@ -31,7 +31,8 @@ const StyledDesc = styled.span`
 
 const StyledField = styled.span`
     font-weight: 600;
-    padding: 0 20px;
+    padding-left: 20px;
+    padding-right: 48px;
     display: flex;
     align-items: center;
     height: 100%;
@@ -39,6 +40,7 @@ const StyledField = styled.span`
     background: #ffffff;
     border: 1px solid #EAEFF2;
     position: relative;
+    word-break: break-all;
     span {
         color: ${props => props.disabled ? '#233539' : 'rgba(35,53,57,.3)'};
     }

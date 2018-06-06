@@ -101,6 +101,10 @@ const DescHead = styled.h4`
     color: #0a0a0a;
     font-weight: 500;
     flex-basis: 100%;
+    @media (max-width: 1300px) {
+        text-align: center
+        width: 100%;
+    }
 `;
 
 
@@ -127,6 +131,9 @@ const UploadWrapper = styled.div`
     align-items: center;
     position: relative;
     padding-top: 60px;
+    @media (max-width: 1300px) {
+        justify-content: center;
+    }
 `;
 
 

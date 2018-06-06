@@ -24,7 +24,7 @@ class Settings extends React.Component {
 
         return (
             <Wrapper onSubmit={this.onSubmitHandler} className="Verification">
-                <Head>Verification</Head>
+                <Head>Settings</Head>
                 <MainWrapper>
                     <PersonalInfo/>
                     <Password/>

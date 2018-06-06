@@ -84,6 +84,7 @@ const Head = styled.h2`
 
 const MainWrapper = styled.div`
     flex: 1;
+    max-width: 620px;
 `;
 
 const InfoWrapper = styled.div`
