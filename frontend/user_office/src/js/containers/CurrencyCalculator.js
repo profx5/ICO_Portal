@@ -46,7 +46,7 @@ class CurrencyCalculator extends React.Component {
     investClickHandler = () => {
         const {investCurrency, showInvestOptions, getAltCryptoAccount} = this.props;
         showInvestOptions();
-        getAltCryptoAccount(investCurrency);
+        if (investCurrency !== 'ETH') getAltCryptoAccount(investCurrency);
     }
 
 

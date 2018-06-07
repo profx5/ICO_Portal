@@ -20,12 +20,6 @@ class PersonalData extends React.Component {
         $(event.currentTarget).find('input[type="file"]').click();
     }
 
-    // onUploadHandler = (event) => {
-    //     let file = event.currentTarget.files[0];
-    //     if (!file) return;
-    //     this.props.updateKycData()
-    // }
-
     render() {
 
         const {userPhoto} = this.props;

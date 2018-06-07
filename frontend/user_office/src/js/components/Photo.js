@@ -32,6 +32,7 @@ const PhotoWrapper = styled.div`
     background-size: cover;
     background-position: center;
     margin-right: 15px;
+    border-radius: 100%;
 `;
 
 const SpanState = styled.div`
