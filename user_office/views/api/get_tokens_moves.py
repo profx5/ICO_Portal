@@ -53,4 +53,4 @@ class GetTokensMoves(ListAPIView):
     def get_queryset(self):
         user = self.request.user
 
-        return TokensMove.objects.filter(investor=user)
+        return TokensMove.objects.filter(investor=user).order_by('-created_at')
