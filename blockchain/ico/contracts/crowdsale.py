@@ -1,8 +1,7 @@
 from oslash import Right, Left, Just, Nothing
 
 from ico_portal.utils.datetime import datetime
-from ico_portal.utils.singleton import SingletonType
-from .base import BaseContract, ContractTransact
+from .base import BaseContract
 
 
 class TokensPurchasedEvent:
@@ -22,16 +21,15 @@ class TokensPurchasedEvent:
     __repr__ = __str__
 
 
-class CrowdsaleContract(BaseContract, metaclass=SingletonType):
+class CrowdsaleContract(BaseContract):
     abi_file_path = '{BASE_DIR}/contracts/KYCCrowdsale.json'
 
     def pass_kyc(self, address):
         gas = 50000
 
-        return ContractTransact(self, self.contract.functions.passKYC(address).buildTransaction({
-            'gas': gas,
-            'from': self.sender_address
-        }))
+        return self.contract.functions.passKYC(address).buildTransaction({
+            'gas': gas
+        })
 
     def get_event_from_txn_hash(self, txn_hash):
         receipt = self.web3.eth.getTransactionReceipt(txn_hash)

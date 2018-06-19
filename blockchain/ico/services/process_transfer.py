@@ -2,32 +2,46 @@ from oslash import Left, Right, Nothing
 from django.db import transaction, DatabaseError
 
 from blockchain.currencies.ethereum.services import process_purchase
-from user_office.models import Transfer
+from user_office.models import Transfer, Transaction
 from .process_tokens_moves import ProcessIncomingTokensMove, \
     ProcessOutgoingTokensMove
 
 
 class ProcessTransfer:
-    def check_transfer(self, args):
+    def check_event(self, args):
         if args['event'].removed:
             return Left('Transfer event has removed=True')
         else:
             return Right(args)
 
-    def create_or_update_transfer(self, args):
+    def find_transaction(self, args):
+        txn_hash = args['event'].txn_hash
+        transaction = Transaction.objects.filter(txn_hash=txn_hash)
+
+        if transaction.exists():
+            return Right(dict(args, transaction=transaction.first()))
+        else:
+            return Right(dict(args, transaction=None))
+
+    def get_transfer(self, args):
         event = args['event']
 
         fields = {
             'txn_hash': event.txn_hash,
-            'account_from': event.account_from,
-            'account_to': event.account_to,
+            'from_account': event.from_account,
+            'to_account': event.to_account,
             'amount': event.amount,
             'block_hash': event.block_hash,
             'block_number': event.block_number,
             'created_at': event.accepted_at,
         }
 
-        transfer = Transfer.objects.filter(txn_hash=fields['txn_hash']).first()
+        transaction = args['transaction']
+
+        if transaction:
+            transfer = Transfer.objects.filter(mint_txn_id=transaction.txn_id).first()
+        else:
+            transfer = Transfer.objects.filter(txn_hash=fields['txn_hash']).first()
 
         if transfer:
             if transfer.actual:
@@ -76,8 +90,9 @@ class ProcessTransfer:
     def __call__(self, event):
         with transaction.atomic():
             result = Right({'event': event}) | \
-                     self.check_transfer | \
-                     self.create_or_update_transfer | \
+                     self.check_event | \
+                     self.find_transaction | \
+                     self.get_transfer | \
                      self.process_incoming_tokens_move | \
                      self.process_outgoing_tokens_move | \
                      self.maybe_process_purchase

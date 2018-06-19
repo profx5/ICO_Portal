@@ -4,7 +4,7 @@ from django.db import transaction, DatabaseError
 from coinpayments.api import CoinPaymentsAPI
 
 from blockchain.ico.contracts import TokenContract
-from blockchain.ico.services import PrepareTokensMove, CalcTokensAmount
+from blockchain.ico.services import PrepareTokensMove, CalcTokensAmount, Mint
 from user_office.models import Account, Payment
 
 
@@ -72,25 +72,17 @@ class ProcessIPN:
                                        amount=result[0],
                                        amount_wo_bonus=result[1])))
 
-    def build_mint_txn(self, args):
-        contract = TokenContract()
+    def create_transaction(self, args):
+        return Mint()(to=args['investor'].eth_account,
+                      amount=args['amount']) | \
+                      (lambda txn_id: Right(dict(args, mint_txn_id=txn_id)))
 
-        transaction = contract.mint(to=args['investor'].eth_account,
-                                    amount=args['amount'])
-
-        transaction.sign()
-
-        return Right(dict(args, transaction=transaction))
-
-    def prepare_tokens_move(self, args):
-        service = PrepareTokensMove()
-
-        result = service(investor=args['investor'],
-                         txn_hash=args['transaction'].txn_hash,
-                         currency=self.settings.code,
-                         amount=args['amount'])
-
-        return result | (lambda result: Right(dict(args, tokens_move=result['tokens_move'])))
+    def create_tokens_move(self, args):
+        return PrepareTokensMove()(investor=args['investor'],
+                                   mint_txn_id=args['mint_txn_id'],
+                                   currency=self.settings.code,
+                                   amount=args['amount']) | \
+                                   (lambda result: Right(dict(args, tokens_move=result['tokens_move'])))
 
     def create_payment(self, args):
         payment = Payment(currency=self.settings.code,
@@ -108,11 +100,6 @@ class ProcessIPN:
         except DatabaseError as e:
             return Left(f'Error while saving Payment {e}')
 
-    def send_transaction(self, args):
-        args['transaction'].send()
-
-        return Right(args)
-
     def __call__(self, request):
         with transaction.atomic():
             result = Right({'request': request}) | \
@@ -120,10 +107,9 @@ class ProcessIPN:
                      self.find_payment_by_ipn_id | \
                      self.find_investor | \
                      self.calc_tokens_amount | \
-                     self.build_mint_txn | \
-                     self.prepare_tokens_move | \
-                     self.create_payment | \
-                     self.send_transaction
+                     self.create_transaction | \
+                     self.create_tokens_move | \
+                     self.create_payment
 
             if isinstance(result, Left):
                 transaction.set_rollback(True)

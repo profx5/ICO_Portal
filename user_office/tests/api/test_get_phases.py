@@ -21,8 +21,8 @@ class TestGetPhases(APITestCase):
 
         response = self.client.get('/api/getPhases/')
 
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.json(), [
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), [
             {
                 'name': 'Phase One',
                 'begin_date': '2018-04-01T00:00:00',

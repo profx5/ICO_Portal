@@ -22,3 +22,4 @@ yarn-error.log
 test_artifacts/*
 assets/bundles/*
 ico_portal/settings/local.py
+ico_eth_chain/

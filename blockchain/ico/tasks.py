@@ -4,7 +4,7 @@ from oslash import Right
 from django.conf import settings
 
 from .services import SyncICOInfo, SyncExchangeRates, ProcessTransfer, \
-    GetEvents
+    GetEvents, SendPreparedTxns, TrackTransactions
 
 logger = get_task_logger(__name__)
 
@@ -53,3 +53,24 @@ def check_events():
             process_event.delay(event)
     else:
         logger.error(f'Got error while checking events {new_events.value}')
+
+@shared_task
+def send_transactions():
+    result = SendPreparedTxns()()
+
+    for r in result:
+        if isinstance(r, Right):
+            logger.info(r.value['result'])
+        else:
+            logger.error(r.value)
+
+
+@shared_task
+def track_transactions():
+    result = TrackTransactions()()
+
+    for r in result:
+        if isinstance(r, Right):
+            logger.info(r.value['result'])
+        else:
+            logger.error(r.value)

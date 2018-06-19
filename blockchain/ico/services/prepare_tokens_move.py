@@ -1,12 +1,13 @@
 from oslash import Left, Right
 from django.db import DatabaseError
 
-from user_office.models import Transfer, TokensMove
+from user_office.models import Transfer, TokensMove, Transaction
 
 
 class PrepareTokensMove:
     def create_transfer(self, args):
         transfer = Transfer(txn_hash=args['txn_hash'],
+                            mint_txn_id=args['mint_txn_id'],
                             state='PREPARED')
 
         try:
@@ -30,9 +31,10 @@ class PrepareTokensMove:
         except DatabaseError as e:
             return Left(f'Error while saving prepared TokensMove {e}')
 
-    def __call__(self, investor, txn_hash, currency, amount):
+    def __call__(self, investor, currency, amount, txn_hash=None, mint_txn_id=None):
         return Right({'investor': investor,
                       'txn_hash': txn_hash,
+                      'mint_txn_id': mint_txn_id,
                       'currency': currency,
                       'amount': amount}) | \
                       self.create_transfer | \

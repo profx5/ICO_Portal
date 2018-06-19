@@ -14,10 +14,12 @@ TRANSFER_STATE_CHOICES = [
 class Transfer(models.Model):
     id = models.AutoField(primary_key=True)
 
-    txn_hash = models.CharField(max_length=100, unique=True)
+    txn_hash = models.CharField(max_length=100, unique=True,
+                                blank=True, null=True)
+    mint_txn_id = models.UUIDField(null=True, blank=True)
 
-    account_to = models.CharField(max_length=100, null=True, blank=True)
-    account_from = models.CharField(max_length=100, null=True, blank=True)
+    to_account = models.CharField(max_length=100, null=True, blank=True)
+    from_account = models.CharField(max_length=100, null=True, blank=True)
 
     amount = models.DecimalField(max_digits=65, decimal_places=0,
                                  null=True, blank=True)

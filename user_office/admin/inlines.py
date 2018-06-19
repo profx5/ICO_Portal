@@ -23,9 +23,9 @@ class TransferInstanceInline(admin.TabularInline):
     can_delete = False
     show_change_link = True
 
-    fields = ('txn_hash', ('account_to', 'account_from'), 'amount', ('block_hash', 'block_number'),
+    fields = ('txn_hash', ('to_account', 'from_account'), 'amount', ('block_hash', 'block_number'),
               ('created_at', 'actualized_at'), 'state')
-    readonly_fields = ('txn_hash', 'account_to', 'account_from', 'amount', 'block_hash', 'block_number',
+    readonly_fields = ('txn_hash', 'to_account', 'from_account', 'amount', 'block_hash', 'block_number',
                        'created_at', 'actualized_at', 'state')
 
     def has_add_permission(self, request):

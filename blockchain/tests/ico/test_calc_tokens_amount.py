@@ -8,10 +8,6 @@ from blockchain.ico.services import CalcTokensAmount
 
 
 class TestCalcTokensAmount(BlockChainTestCase):
-    def setUp(self):
-        self.utcnow = datetime.utcnow()
-        self.stub_datetime_utcnow(self.utcnow)
-
     def test_successful_calc(self):
         ExchangeRateFactory(currency='ETH', rate=Decimal('720.31422'))
         PhaseFactory(bonus_percents=40)

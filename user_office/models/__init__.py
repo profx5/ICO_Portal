@@ -8,3 +8,4 @@ from .ico_info import ICO_Info
 from .exchange_rate import ExchangeRate
 from .payment import Payment
 from .events_processing import EventsProcessing
+from .transaction import Transaction

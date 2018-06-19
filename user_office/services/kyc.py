@@ -1,8 +1,9 @@
 from oslash import Right, Left
 from functools import partial
-from django.db import DatabaseError
+from django.db import DatabaseError, transaction
 
 from blockchain.ico.contracts import CrowdsaleContract
+from blockchain.ico import services
 
 
 def save_kyc(args):
@@ -20,40 +21,43 @@ class ApproveKYC:
 
     def check_state(self, args):
         if args['kyc'].state != 'APPROVED':
-            return Right(argsx)
+            return Right(args)
         else:
             return Left('KYC already approved')
 
     def set_state(self, args):
         args['kyc'].state = 'APPROVED'
 
-        return Right(kyc)
+        return Right(args)
 
-    def send_pass_kyc(self, args):
-        if self.call_contract:
-            contract = CrowdsaleContract()
+    def get_txn_data(self, args):
+        txn_data = CrowdsaleContract().pass_kyc(args['kyc'].investor.eth_account)
 
-            transaction = contract.pass_kyc(args['kyc'].investor.eth_account)
+        return Right(dict(args, txn_data=txn_data))
 
-            txn_hash = transaction.send()
+    def create_transaction(self, args):
+        return services.CreateTransaction()(args['txn_data']) | \
+            (lambda transaction: Right(dict(args, txn=transaction)))
 
-            return Right(dict(args, txn_hash=txn_hash))
-        else:
-            return Right(args)
-
-    def set_approve_txn_hash(self, args):
-        if args['txn_hash']:
-            args['kyc'].approve_txn_hash = txn_hash
+    def set_approve_txn_id(self, args):
+        args['kyc'].approve_txn_id = args['txn'].txn_id
 
         return Right(args)
 
     def __call__(self, kyc):
-        return Right({'kyc': kyc}) | \
-            self.check_state | \
-            self.set_state | \
-            self.send_pass_kyc | \
-            self.set_approve_txn_hash | \
-            save_kyc
+        with transaction.atomic():
+            result = Right({'kyc': kyc}) | \
+                     self.check_state | \
+                     self.set_state | \
+                     self.get_txn_data | \
+                     self.create_transaction | \
+                     self.set_approve_txn_id | \
+                     save_kyc
+
+            if isinstance(result, Left):
+                transaction.set_rollback(True)
+
+            return result
 
 
 class DeclineKYC:

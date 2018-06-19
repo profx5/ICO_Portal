@@ -10,7 +10,8 @@ from blockchain.currencies.coinpayments.services.process_ipn import ProcessIPN, 
 from blockchain.currencies.coinpayments.services.get_account import GetAccount
 from blockchain.currencies import Currencies
 from user_office.factories import *
-from user_office.models import Payment, TokensMove, Transfer, Account
+from user_office.models import Payment, TokensMove, Transfer, Account, Transaction
+from uuid import UUID
 
 
 class TestProcessIPN(BlockChainTestCase):
@@ -60,12 +61,30 @@ class TestProcessIPN(BlockChainTestCase):
 
         self.assertTrue(isinstance(result, Right))
 
+        transactions = Transaction.objects.all()
+        self.assertEqual(transactions.count(), 1)
+
+        transaction = transactions.first()
+        self.assertEqual(transaction.data,
+                         '0x40c10f19000000000000000000000000b0a3f48478d84a497f930d8455711d9981b66a7000000000000000000000000000000000000000000000000000000000000007ca')
+        self.assertIsNone(transaction.nonce)
+        self.assertEqual(transaction.value, Decimal('0'))
+        self.assertIsNone(transaction.from_account)
+        self.assertEqual(transaction.to_account, '0x2feB9363a9bb1E16Ab90F6d4007264774e959F34')
+        self.assertEqual(transaction.gas, 70000)
+        self.assertIsNone(transaction.gas_price)
+        self.assertIsNone(transaction.txn_hash)
+        self.assertEqual(transaction.state, 'PREPARED')
+        self.assertIsNone(transaction.fail_reason)
+        self.assertEqual(transaction.created_at, self.utcnow)
+        self.assertIsInstance(transaction.txn_id, UUID)
+
         transfers = Transfer.objects.all()
         self.assertEqual(transfers.count(), 1)
 
         transfer = transfers.first()
-        self.assertRegex(transfer.txn_hash, '^0x([A-Fa-f0-9]{64})$')
         self.assertEqual(transfer.state, 'PREPARED')
+        self.assertEqual(transfer.mint_txn_id, transaction.txn_id)
 
         tokens_moves = TokensMove.objects.all()
         self.assertEqual(tokens_moves.count(), 1)
