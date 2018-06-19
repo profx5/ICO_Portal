@@ -2,6 +2,7 @@ from oslash import Left, Right
 from django.db import DatabaseError
 
 from user_office.models import ICO_Info
+from blockchain.ico.contracts import TokenContract
 
 
 class SyncICOInfo:
