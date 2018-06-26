@@ -25,6 +25,11 @@ brew services start rabbitmq
 
 ## Installation
 # on MacOS (and Windows)
+Prepare submodules
+```
+git submodule update --init
+```
+
 Install python dependencies
 ```
 pip install -r requirements.txt
@@ -151,6 +156,11 @@ pip install -r requirements.txt
 npm install
 npm install gulp-cli -g
 npm install gulp -D
+```
+
+Prepare submodules
+```
+git submodule update --init
 ```
 
 Create MySQL schema and import dump
