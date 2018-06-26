@@ -17,10 +17,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'django_object_actions',
     'webpack_loader',
     'rest_framework',
     'social_django',
+
+    'bootstrapform',
+    'helpdesk',
 
     'landing',
     'user_office',

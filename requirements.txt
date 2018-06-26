@@ -24,11 +24,12 @@ defusedxml==0.5.0
 Django==2.0.6
 django-admin-sortable==2.1.4
 django-admin-sortable2==0.6.19
+django-bootstrap-form==3.4
 django-js-asset==1.0.0
 django-mptt==0.9.0
 django-object-actions==1.0.0
 django-webpack-loader==0.5.0
-djangorestframework==3.7.7
+djangorestframework==3.8.2
 eth-abi==1.1.1
 eth-account==0.2.2
 eth-bloom==1.0.0

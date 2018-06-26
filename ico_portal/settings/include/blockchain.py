@@ -101,7 +101,7 @@ CELERY_TASK_ROUTES = {
     'blockchain.ico.tasks.send_transactions': {
         'queue': 'events_beat',
     },
-    'blockchain.ico.tasks.TrackTransactions': {
+    'blockchain.ico.tasks.track_transactions': {
         'queue': 'events_beat',
     },
 }

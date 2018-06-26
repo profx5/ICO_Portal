@@ -79,7 +79,7 @@ class SendPreparedTxns(_Base):
             return Left(F'Error while saving Transaction, {e}')
 
     def return_result(self, args):
-        txn_object = args['txn_objects']
+        txn_object = args['txn_object']
 
         return Right({'txn_object': txn_object,
                       'result': f'Sent new transaction with txn_hash={txn_object.txn_hash}'})
@@ -92,7 +92,8 @@ class SendPreparedTxns(_Base):
                      self.build_txn_data | \
                      self.sign_transaction | \
                      self.save_txn_object | \
-                     self.send_transaction
+                     self.send_transaction | \
+                     self.return_result
 
             if isinstance(result, Left):
                 transaction.set_rollback(True)

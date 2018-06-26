@@ -10,6 +10,7 @@ from .get_referral_link import GetReferralLinkView
 from .get_phases import GetPhases
 from .change_password import ChangePassword
 from .change_email import ChangeEmail
+from .ticket import TicketViewSet
 
 get_me = GetMeView.as_view()
 get_ico_info = GetICOInfo.as_view()

@@ -1,5 +1,5 @@
 from django.urls import path
-from rest_framework.routers import SimpleRouter, Route
+from rest_framework.routers import SimpleRouter, Route, DefaultRouter
 
 from .views.api import *
 
@@ -29,11 +29,21 @@ class SingleObjectRouter(SimpleRouter):
                 'put': 'update'
             },
             name='{basename}-detail',
-            initkwargs={'suffix': 'Instance'}
+            initkwargs={'suffix': 'Instance'},
+            detail=True
         ),
     ]
 
-router = SingleObjectRouter()
+# kyc_router = SingleObjectRouter()
+# kyc_router.register(r'kyc', KYCViewSet, base_name='kyc')
+# api_urlpatterns += kyc_router.urls
+
+# ticket_router = DefaultRouter()
+# ticket_router.register(r'tickets', TicketViewSet, base_name='tickets')
+# api_urlpatterns += ticket_router.urls
+
+router = DefaultRouter()
+router.register(r'tickets', TicketViewSet, base_name='tickets')
 router.register(r'kyc', KYCViewSet, base_name='kyc')
 
 api_urlpatterns += router.urls
