@@ -45,6 +45,9 @@ class KYC(models.Model):
     decline_reason = models.TextField(blank=True, null=True)
     approve_txn_id = models.UUIDField(blank=True, null=True)
 
+    ticket = models.ForeignKey('helpdesk.Ticket', on_delete=models.SET_NULL,
+                               null=True, blank=True, related_name='kyc')
+
     class Meta:
         ordering = ['id']
         db_table = 'kyc'

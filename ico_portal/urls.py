@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('social_django.urls', namespace='social')),
     path('docs/', include_docs_urls(title='User office API docs', public=False)),
     path('', include('blockchain.urls', namespace='blockchain')),
+    path('support/', include('helpdesk.urls')),
 
     path(r'password_reset/', auth_views.password_reset, name='password_reset'),
     path(r'password_reset/done/', auth_views.password_reset_done, name='password_reset_done'),

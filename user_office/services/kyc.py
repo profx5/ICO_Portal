@@ -1,9 +1,10 @@
 from oslash import Right, Left
-from functools import partial
 from django.db import DatabaseError, transaction
+from django.urls import reverse
 
 from blockchain.ico.contracts import CrowdsaleContract
 from blockchain.ico import services
+from ico_portal.utils.datetime import datetime
 
 
 def save_kyc(args):
