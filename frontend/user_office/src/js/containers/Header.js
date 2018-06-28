@@ -28,7 +28,7 @@ class Header extends React.Component {
         for (let i = 0; i < decimals; i++) {
             floatTokensAmount += '0';
         }
-        floatTokensAmount = parseInt(floatTokensAmount);
+        floatTokensAmount = parseInt(floatTokensAmount, 10);
 
         return (
             <HeaderBlock>

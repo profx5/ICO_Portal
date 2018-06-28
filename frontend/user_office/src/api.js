@@ -54,6 +54,14 @@ class Api {
     getAvailableCurrencies() {
         return `${this.prefix}/getAvailableCurrencies/`
     }
+
+    changePassword() {
+        return `${this.prefix}/changePassword/`
+    }
+
+    changeEmail() {
+        return `${this.prefix}/changeEmail/`
+    }
 }
 
 const api = new Api();

@@ -2,29 +2,35 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 
-import FieldText from './../components/FieldText';
-
+import Button from './../components/Button';
+import FieldPassword from './../components/FieldPassword';
+import * as UserActions from './../actions/UserActions';
 
 
 class Password extends React.Component {
+    changePasswordHandler = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        this.props.changePassword(data);
+    }
 
     render() {
-
         return (
-            <Wrapper className="Verification__password">
+            <Wrapper className="Verification__password" onSubmit={this.changePasswordHandler}>
                 <Title>Password</Title>
                 <InputSet>
                     <InputWrapper>
-                        <FieldText labelText="Old password" name="firstname"/>
+                        <FieldPassword labelText="Old password" name="old_password"/>
                     </InputWrapper>
                     <InputWrapper></InputWrapper>
                     <InputWrapper>
-                        <FieldText labelText="New password" name="firstname"/>
+                        <FieldPassword labelText="New password" name="new_password1"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FieldText labelText="Confirm password" name="firstname"/>
+                        <FieldPassword labelText="Confirm password" name="new_password2"/>
                     </InputWrapper>
                 </InputSet>
+                <Button text="Change password" submit={true}/>
             </Wrapper>
         )
     }
@@ -36,12 +42,15 @@ const mapStateToProps = () => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+    changePassword(data) {
+        dispatch(UserActions.changePasswordRequest(data))
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Password)
 
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
     flex: 1;
     height: auto;
     padding: 42px 30px 42px;
@@ -70,11 +79,11 @@ const InputSet = styled.div`
 const InputWrapper = styled.div`
     height: 45px;
     flex-basis: ${props => props.fullWidth ? '100%' : '48%'};
-    
+
     &:not(:last-child) {
-        margin-bottom: 70px;
+    margin-bottom: 70px;
     }
     &:last-child {
-        margin-bottom: 40px;
+    margin-bottom: 40px;
     }
 `;

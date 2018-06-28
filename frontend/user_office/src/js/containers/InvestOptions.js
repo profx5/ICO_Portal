@@ -11,8 +11,6 @@ import PaymentDetails from './../components/PaymentDetails';
 //actions
 import * as UIActions from './../actions/UIActions';
 import * as InvestActions from './../actions/InvestActions';
-import * as UserActions from './../actions/UserActions';
-import * as ICOInfoActions from './../actions/ICOInfoActions';
 
 
 class InvestOptions extends React.Component {
@@ -59,7 +57,7 @@ class InvestOptions extends React.Component {
     render() {
         const {
             investOptionsShown,
-            investCurrency, 
+            investCurrency,
             crowdsaleAddress,
             altCrowdsaleAddress,
             isMetamaskEnabled,
@@ -72,13 +70,13 @@ class InvestOptions extends React.Component {
 
         return (
             <React.Fragment>
-                { investOptionsShown && 
+                { investOptionsShown &&
                     <PopupWrapper>
                         <Popup>
                             <BtnClose onClick={this.hideInvestPopup}>Close</BtnClose>
-                            {investCurrency === 'ETH' && isMetamaskInstalled && isMetamaskEnabled && 
+                            {investCurrency === 'ETH' && isMetamaskInstalled && isMetamaskEnabled &&
                                 <div>
-                                    {isUnlocked && 
+                                    {isUnlocked &&
                                         <TextOption clickable onClick={this.withMetamaskPaymentHandler}>Do it via metamask!</TextOption>
                                     }
                                     {!isUnlocked &&

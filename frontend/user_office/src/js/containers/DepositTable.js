@@ -5,17 +5,17 @@ import moment from 'moment';
 
 
 class DepositTable extends Component {
-    
+
     _renderTable = (deposits) => {
         return deposits.map( (item, index) => {
-            if (index === 3) return;
-            return (
-                <TableBodyRow key={index} className={item.getIn(['transfer', 'state']) === 'ACTUAL' ? 'prepared' : ''}>
-                    <TableCell>{item.get('amount')}</TableCell>
-                    <TableCell>{item.getIn(['transfer', 'txn_hash'])}</TableCell>
-                    <TableCell>{moment(item.get('created_at')).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
-                </TableBodyRow>
-            )
+            if (index !== 3) {
+                return (
+                    <TableBodyRow key={index} className={item.getIn(['transfer', 'state']) === 'ACTUAL' ? 'prepared' : ''}>
+                        <TableCell>{item.get('amount')}</TableCell>
+                        <TableCell>{item.getIn(['transfer', 'txn_hash'])}</TableCell>
+                        <TableCell>{moment(item.get('created_at')).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
+                    </TableBodyRow>
+                )}
         })
     }
 

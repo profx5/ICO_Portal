@@ -56,22 +56,21 @@ class CurrencyCalculator extends React.Component {
             investCurrencyRate,
             investAmount,
             tokensAmount,
-            bonusPercent,
-            showInvestOptions
+            bonusPercent
         } = this.props;
 
         return (
             <Wrapper>
                 <div>
                     <InvestInput value={this.props.investAmount} type="text" onChangeHandler={this.investOnChangeHandler} header="Amount" currency={investCurrency}/>
-                    <InvestInput value={this.props.tokensAmount} type="text" header="TKN" currency="TNK"/>
+                    <InvestInput value={this.props.tokensAmount} type="text" header="TKN" currency="TKN"/>
                     <ButtonWrapper>
                         <Button clickHandler={this.investClickHandler} text="INVEST"/>
                     </ButtonWrapper>
                 </div>
                 <Tip>
-                    {"1 " + investCurrency + ' = ' + investCurrencyRate + ' TNK'}
-                    <HoverTip>{(investAmount === '' ? 0 : investAmount) + ' ' + investCurrency + ' + ' + bonusPercent + '%' + ' = ' + tokensAmount + ' TNK'}</HoverTip>
+                    {"1 " + investCurrency + ' = ' + investCurrencyRate + ' TKN'}
+                    <HoverTip>{(investAmount === '' ? 0 : investAmount) + ' ' + investCurrency + ' + ' + bonusPercent + '%' + ' = ' + tokensAmount + ' TKN'}</HoverTip>
                 </Tip>
             </Wrapper>
         )

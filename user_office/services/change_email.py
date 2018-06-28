@@ -60,7 +60,7 @@ class SendChangeEmailConfirm:
 
         link = urljoin(settings.HOST, f'change_email/{uid}/{token}/')
 
-        content = loader.render_to_string('mail/validation.html', {
+        content = loader.render_to_string('mail/change_email.html', {
             'link': link,
             'email': new_email
         })

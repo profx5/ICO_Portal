@@ -103,7 +103,7 @@ const Utils = {
         if (!val) {
             callback('');
             return;
-        } 
+        }
 
         if (lastChar.match(/[0-9.,]/g) === null) {
 
@@ -111,7 +111,7 @@ const Utils = {
             callback(newVal);
         } else callback(val);
 
-        if (val.indexOf(',') != -1) {
+        if (val.indexOf(',') !== -1) {
             newVal = val.replace(',' , '.');
             callback(newVal);
 
@@ -132,7 +132,7 @@ const Utils = {
     },
     setTimer: (startUTCTime, endUTCTime, callback) => {
       let newTime;
-      let startTime = moment(new Date(startUTCTime)).toArray(); 
+      let startTime = moment(new Date(startUTCTime)).toArray();
       let endTime = moment(new Date(endUTCTime)).toArray();
 
 
@@ -173,18 +173,18 @@ const Utils = {
             time.minutes -= 1;
             time.seconds = 59;
           }
-        
+
           if (time.minutes <= 0) {
             if (time.hours !== 0)  time.hours -= 1;
             time.minutes = 59;
           }
-       
+
           if (time.hours <= 0 && time.days !== 0) {
             if (time.days !== 0)  time.days -= 1;
             time.hours = 23;
 
           }
-       
+
           if (time.seconds <= 0 && time.minutes <= 0 && time.hours <= 0 && time.days <= 0) {
             clearInterval(interval);
           } else if (time.days <= 0) {
@@ -200,7 +200,7 @@ const Utils = {
             callback(`${newTime.days} days ${newTime.hours}h ${newTime.minutes}m ${newTime.seconds}s`);
             return;
           }
-       
+
       newTime = {
         seconds: time.seconds < 10 ? `0${time.seconds}` : time.seconds + '',
         minutes: time.minutes < 10 ? `0${time.minutes}` : time.minutes + '',

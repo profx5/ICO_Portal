@@ -32,7 +32,7 @@ class TestChangeEmail(_Base):
         self.assertEqual(sent_mails[0].to[0], self.email)
         self.assertEqual(sent_mails[0].subject, 'Change email')
         self.assertEqual(sent_mails[0].body,
-                         'To continue registration follow this link ' \
+                         f'To change your email to {self.new_email} follow this link ' \
                          'http://localhost:8000/change_email/MTtub2Ryb2dAb25ncmlkLnBybw/4wh-d320ec9b6fcf3233767d/')
 
     def test_invalid_email(self):

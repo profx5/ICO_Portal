@@ -11,27 +11,27 @@ import VerificationInfo from './VerificationInfo';
 
 class Settings extends React.Component {
 
-    onSubmitHandler = (event) => {
-        event.preventDefault();
+    /* onSubmitHandler = (event) => {
+     *     event.preventDefault();
 
-        const data = new FormData(event.target);
+     *     const data = new FormData(event.target);
 
-        this.props.submitForm(data);
-    }
+     *     this.props.submitForm(data);
+     * }*/
 
 
     render () {
 
         return (
-            <Wrapper onSubmit={this.onSubmitHandler} className="Verification">
+            <Wrapper className="Verification">
                 <Head>Settings</Head>
                 <MainWrapper>
                     <PersonalInfo/>
                     <Password/>
                 </MainWrapper>
-                <InfoWrapper>
+                {/* <InfoWrapper>
                     <VerificationInfo verificationStages={['Verification__personalData','Verification__password']} stages={['Personal Data', 'Password']}/>
-                </InfoWrapper>
+                    </InfoWrapper> */}
             </Wrapper>
         )
     }
@@ -39,19 +39,19 @@ class Settings extends React.Component {
 
 
 const mapStateToProps = ({}) => ({
-    
+
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    submitForm(payload) {
-        dispatch(KYCActions.submitKYCRequest(payload))
-    }
+    /* submitForm(payload) {
+     *     dispatch(KYCActions.submitKYCRequest(payload))
+     * }*/
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
 
 
-const Wrapper = styled.form`
+const Wrapper = styled.div`
     flex: 1;
     height: calc(100% - 100px);
     margin-left: 60px;
@@ -78,5 +78,5 @@ const MainWrapper = styled.div`
 `;
 
 const InfoWrapper = styled.div`
-    
+
 `;

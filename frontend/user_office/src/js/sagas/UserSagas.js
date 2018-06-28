@@ -66,6 +66,34 @@ export class UserSagas {
         yield put( MetamaskActions.showModalWithOptionsForEthAccount() )
         return
     }
+
+    static * changePassowrd(action) {
+        const response = yield call(axios, {
+            url: Api.changePassword(),
+            method: 'POST',
+            data: action.payload
+        })
+
+        if (response.data.success) {
+            yield put(UserActions.changePasswordSuccessfull())
+        } else {
+            yield put(UserActions.changePasswordFailed())
+        }
+    }
+
+    static * changeEmail(action) {
+        const response = yield call(axios, {
+            url: Api.changeEmail(),
+            method: 'POST',
+            data: action.payload
+        })
+
+        if (response.data.success) {
+            yield put(UserActions.changeEmailSuccessfull())
+        } else {
+            yield put(UserActions.changeEmailFailed())
+        }
+    }
 }
 
 
@@ -73,5 +101,6 @@ export function* saga() {
     yield takeEvery(UserActions.getUserRequest, UserSagas.getUser)
     yield takeEvery(UserActions.setAccountRequest, UserSagas.setAccount)
     yield takeEvery(UserActions.setMetaMaskAccountRequest, UserSagas.extractMetaMaskAccount)
+    yield takeEvery(UserActions.changePasswordRequest, UserSagas.changePassowrd)
+    yield takeEvery(UserActions.changeEmailRequest, UserSagas.changeEmail)
 }
-

@@ -1,8 +1,17 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Button = ({text, className, clickHandler, type}) => {
-    return (<Btn className={className} {...(type ? type="submit" : '')} onClick={clickHandler}>{text}</Btn>)
+const Button = ({text, className, clickHandler, submit}) => {
+    const opts = {
+        className: className,
+        onClick: clickHandler
+    }
+
+    if (submit) {
+        opts['type'] = 'submit'
+    }
+
+    return (<Btn {...opts}>{text}</Btn>)
 }
 
 

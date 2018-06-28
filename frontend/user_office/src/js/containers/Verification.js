@@ -21,9 +21,6 @@ class Verification extends React.Component {
     }
 
     render () {
-
-        const {handleSubmit} = this.props;
-
         return (
 
             <Wrapper onSubmit={this.onSubmitHandler} id="form" className="Verification">
@@ -84,5 +81,5 @@ const MainWrapper = styled.div`
 `;
 
 const InfoWrapper = styled.div`
-    
+
 `;

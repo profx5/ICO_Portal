@@ -29,7 +29,7 @@ class ICOProgress extends React.Component {
             countdownTime,
         } = this.props;
 
-        const raisedAmountString = Math.round(parseInt(gainedMoney)/100) + '';
+        const raisedAmountString = Math.round(parseInt(gainedMoney, 10)/100) + '';
         let hardCupNumber = parseInt(hardCup, 10);
         let phaseRaisedPercents = this.getPhasePercents(gainedMoney, hardCupNumber);
 
@@ -169,7 +169,7 @@ const ContentPart = styled.div`
             }
             &:not(:first-of-type) {
                 flex-basis: 33.33%;
-            } 
+            }
         }
     }
 `;

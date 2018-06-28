@@ -4,17 +4,24 @@ import styled from 'styled-components';
 import ClipboardJS from 'clipboard';
 
 import * as KYCActions from './../actions/KYCActions';
+import * as UserActions from './../actions/UserActions';
 
 import FieldText from './../components/FieldText';
 import FieldTextSpan from './../components/FieldTextSpan';
+import Button from './../components/Button';
 
 import copyIcon from './../../img/icon_copy.svg';
 
 
 class PersonalInfo extends React.Component {
-
     componentDidMount() {
         new ClipboardJS('.CopyBtn');
+    }
+
+    changeEmail = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        this.props.changeEmailRequest(data);
     }
 
     render() {
@@ -24,18 +31,26 @@ class PersonalInfo extends React.Component {
         return (
             <Wrapper className="Verification__personalData">
                 <Title>Personal Data</Title>
+                <form onSubmit={this.changeEmail}>
+                    <InputSet>
+                        <InputWrapper>
+                            <FieldText disabled value={email} labelText="Email"/>
+                        </InputWrapper>
+                        <InputWrapper>
+                            <FieldText labelText="New Email" name='email'/>
+                        </InputWrapper>
+                        <Button text="Change Email" submit={true} />
+                    </InputSet>
+                </form>
                 <InputSet>
-                    <InputWrapper>
-                        <FieldText disabled value={email} labelText="Email"/>
-                    </InputWrapper>
                     <InputWrapper fullWidth>
-                        <FieldTextSpan 
-                        id="EthAccount" 
-                        children={<IconCopy className="CopyBtn" data-clipboard-target="#EthAccount" onClick={this.copyOnClickHandler}/>} 
-                        value={ethAccount} 
-                        labelText="Etherium wallet address" 
-                        disabled 
-                    />
+                        <FieldTextSpan
+                            id="EthAccount"
+                            children={<IconCopy className="CopyBtn" data-clipboard-target="#EthAccount" onClick={this.copyOnClickHandler}/>}
+                            value={ethAccount}
+                            labelText="Ethereum wallet address"
+                            disabled
+                        />
                     </InputWrapper>
                 </InputSet>
             </Wrapper>
@@ -52,6 +67,9 @@ const mapStateToProps = ({user}) => ({
 const mapDispatchToProps = (dispatch) => ({
     updateKycData() {
         dispatch(KYCActions.submitKYCRequest())
+    },
+    changeEmailRequest(data) {
+        dispatch(UserActions.changeEmailRequest(data))
     }
 });
 
@@ -82,6 +100,7 @@ const InputSet = styled.div`
     justify-content: space-between;
     align-items: flex-start;
     position: relative;
+    margin-bottom: 10px
 `;
 
 const InputWrapper = styled.div`
@@ -89,10 +108,10 @@ const InputWrapper = styled.div`
     flex-basis: ${props => props.fullWidth ? '100%' : '48%'};
 
     &:not(:last-child) {
-        margin-bottom: 70px;
+    margin-bottom: 70px;
     }
     &:last-child {
-        margin-bottom: 40px;
+    margin-bottom: 40px;
     }
 `;
 
