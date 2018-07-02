@@ -1,47 +1,40 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {DepositsActions} from '../actions/DepositsActions'
+import styled from 'styled-components';
+import moment from 'moment';
+
 
 class DepositTable extends Component {
+
     _renderTable = (deposits) => {
-        return deposits.map( (item, idx) => {
-            return (
-                <tr key={idx} className={item.get('state') === 'PREPARED' ? 'prepared' : ''}>
-                    <td>{item.get('amount')}</td>
-                    <td>{item.get('amount_wo_bonus')}</td>
-                    <td>{item.getIn(['mint', 'txn_hash'])}</td>
-                    <td>{item.get('charged_at')}</td>
-                </tr>
-            )
+        return deposits.map( (item, index) => {
+            if (index !== 3) {
+                return (
+                    <TableBodyRow key={index} className={item.getIn(['transfer', 'state']) === 'ACTUAL' ? 'prepared' : ''}>
+                        <TableCell>{item.get('amount')}</TableCell>
+                        <TableCell>{item.getIn(['transfer', 'txn_hash'])}</TableCell>
+                        <TableCell>{moment(item.get('created_at')).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
+                    </TableBodyRow>
+                )}
         })
     }
 
     render() {
-        const {
-            currentPage,
-            pages,
-            nextPage,
-            prevPage
-        } = this.props
 
         return (
             <div>
-                <table className="table">
+                <Table className="table">
                     <thead>
                         <tr>
-                            <th scope="col">amount</th>
-                            <th scope="col">amount_wo_bonus</th>
-                            <th scope="col">txn_hash</th>
-                            <th scope="col">charged_at</th>
+                            <TableHead>Amount</TableHead>
+                            <TableHead>Tx hash</TableHead>
+                            <TableHead>Tx time</TableHead>
                         </tr>
                     </thead>
                     <tbody>
                         {this._renderTable(this.props.deposits)}
                     </tbody>
-                </table>
-                <p>Page {currentPage} of {pages}</p>
-                {currentPage < pages && <a href="#" onClick={nextPage}>Next</a>}
-                {currentPage >= pages && <a href="#" onClick={prevPage}>Prev</a>}
+                </Table>
             </div>
         )
     }
@@ -49,17 +42,47 @@ class DepositTable extends Component {
 
 const mapStateToProps = ({deposits}) => ({
     deposits: deposits.get('results'),
-    pages: deposits.get('pages'),
     currentPage: deposits.get('current_page')
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    nextPage() {
-        dispatch(DepositsActions.depositsNextPage())
-    },
-    prevPage() {
-        dispatch(DepositsActions.depositsPrevPage())
-    }
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DepositTable)
+
+
+const Table = styled.table`
+    border-collapse: separate;
+    width: 100%;
+    border-spacing: 0 5px;
+`;
+
+const TableBodyRow = styled.tr`
+    height: 45px;
+    background: rgba(227,223,223,.3);
+    &.prepared td {
+        background: rgba(184,241,229,.6);
+    }
+`;
+
+const TableHead = styled.th`
+    color: #0a0a0a;
+    font-size: 15px;
+    text-align: left;
+    font-weight: 600;
+    padding-left: 24px;
+    padding-bottom: 18px;
+    white-space: nowrap;
+    &:last-of-type {
+        width: 260px;
+    }
+`;
+
+const TableCell = styled.td`
+    color: #0a0a0a;
+    padding-left: 24px;
+    &:nth-of-type(2) {
+        word-break: break-all;
+    }
+`;

@@ -1,4 +1,5 @@
 import React, {Component, Children} from 'react'
+//components
 import Button from './Button'
 
 class KYCHeader extends Component {
@@ -26,7 +27,7 @@ class KYCHeader extends Component {
     static Alert = ({onClick, investmentThreshold, alert, message}) => (
         <div className="alert alert-warning" role="alert">
             <p>{message} {investmentThreshold}</p>
-            <Button text="Pass KYC" onClick={onClick} success={true}/>
+            <Button text="Pass KYC" onClick={onClick}/>
         </div>
     )
 

@@ -1,5 +1,3 @@
-
-
 {
 
   // $('.CalculatorSection_fieldIcon').click(function(e) {
@@ -8,7 +6,7 @@
   //   new ClipboardJS(".copyBtn");
   //   available = false;
   //   e.preventDefault();
-    
+
   //   let popupInst = new Popup(`
   //     <div class="CopyPopup">
   //         <div class="CopyPopup_icon animated bounceIn">

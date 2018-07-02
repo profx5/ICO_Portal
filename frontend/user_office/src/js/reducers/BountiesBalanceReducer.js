@@ -1,13 +1,8 @@
-import {
-    GET_BOUNTIES_BALANCE_REQUEST,
-    GET_BOUNTIES_BALANCE_SUCCESS,
-    GET_BOUNTIES_BALANCE_FAILED,
-    TRANSFER_BOUNTIES_REQUEST,
-    TRANSFER_BOUNTIES_SUCCESS,
-    TRANSFER_BOUNTIES_FAILED,
-} from '../types/BountiesBalanceTypes'
-
+import { createReducer } from 'redux-act';
+import * as actions from './../actions/BountiesBalanceActions';
 import {Map} from 'immutable'
+
+
 
 const initialState = Map({
     isBountiesBalanceLoading: false,
@@ -24,42 +19,28 @@ const initialState = Map({
         error: null,
     }),
     transferIsLoading: false
-})
+});
 
-export function BountiesBalanceReducer(state=initialState, {type, payload, ...action}) {
-    switch(type) {
-        case GET_BOUNTIES_BALANCE_REQUEST: {
-            return state.set('isBountiesBalanceLoading', true)
-        }
 
-        case GET_BOUNTIES_BALANCE_FAILED: {
-            return state.set('isBountiesBalanceLoading', false)
-        }
-        
-        case GET_BOUNTIES_BALANCE_SUCCESS: {
-            return state
-                .get('bounties')
-                .merge({...payload})
-                .set('isBountiesBalanceLoading', false)
-        }
-        
-        case TRANSFER_BOUNTIES_REQUEST: {
-            return state.set('transferIsLoading', true)
-        }
 
-        case TRANSFER_BOUNTIES_FAILED: {
-            return state.set('transferIsLoading', false)
-        }
-            
-        case TRANSFER_BOUNTIES_SUCCESS: {
-            return state
-                .set('transferIsLoading', false)
-                .get('transfer')
-                .merge({...payload})
-        }
+export const BountiesBalanceReducer = createReducer({
+    [actions.getBountiesRequest]: (state = initialState, payload) => state.set('isBountiesBalanceLoading', true),
+    [actions.getBountiesFailed]: (state = initialState, payload) => state.set('isBountiesBalanceLoading', false),
+    [actions.getBountiesSuccess]: (state = initialState, payload) => {
+        return state
+            .get('bounties')
+            .merge({...payload})
+            .set('isBountiesBalanceLoading', false)
+    },
 
-        default: {
-            return state
-        }
+    [actions.postTransferRequest]: (state = initialState, payload) => state.set('transferIsLoading', true),
+    [actions.postTransferFailed]: (state = initialState, payload) => state.set('transferIsLoading', false),
+    [actions.postTransferSuccess]: (state = initialState, payload) => {
+        return state
+            .set('transferIsLoading', false)
+            .get('transfer')
+            .merge({...payload})
     }
-}
+}, initialState)
+
+

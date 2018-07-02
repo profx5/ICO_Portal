@@ -1,24 +1,32 @@
-import {
-    SHOW_INVEST_FORM,
-    HIDE_INVEST_FORM,
-} from '../types/InvestTypes'
-import {Map} from 'immutable'
+import { createReducer } from 'redux-act';
+import * as actions from './../actions/InvestActions';
+import {Map} from 'immutable';
+
+
 
 const initialState = Map({
-    showInvestForm: false
+    investAmount: 1,
+    tokensAmount: 0,
+    isMetamaskEnabled: true,
+    qrcode: ''
 })
 
-export function InvestReducer (state=initialState, {type, payload, ...action}) {
-    switch(type) {
-        case SHOW_INVEST_FORM: {
-            return state.set("showInvestForm", true)
-        }
-        case HIDE_INVEST_FORM: {
-            return state.set("showInvestForm", false)
-           
-        }
-        default: {
-            return state
-        }
-    }
-}
+
+
+export const InvestReducer = createReducer({
+    [actions.setInvestAmount]: (state, payload) => {
+        return state.merge({
+            investAmount: payload
+        });
+    },
+    [actions.setTokensAmount]: (state, payload) => {
+        return state.merge({
+            tokensAmount: payload
+        });
+    },
+    [actions.enableMetamaskOption]: (state, payload) => state.set('isMetamaskEnabled', true),
+    [actions.disableMetamaskOption]: (state, payload) => state.set('isMetamaskEnabled', false),
+    [actions.setQRCode]: (state, payload) => state.set('qrcode', payload)
+}, initialState);
+
+

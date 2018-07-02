@@ -1,88 +1,71 @@
-import React, {Component} from 'react'
-import {compose} from 'redux'
-import {connect} from 'react-redux'
-import Footer from '../components/Footer'
-import Button from '../components/Button'
-import Title from '../components/Title'
-import Header from './Header'
-import Modal from './Modal'
-import {UserActions} from '../actions/UserActions'
-import {ICOInfoActions} from '../actions/ICOInfoActions'
-import {DepositsActions} from '../actions/DepositsActions'
-import {BountiesActions} from '../actions/BountiesBalanceActions'
-import {PhaseActions} from '../actions/PhaseActions'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import styled from 'styled-components';
+
+import SetAccount from '../containers/SetAccount';
+import Verification from '../containers/Verification';
+import Settings from '../containers/Settings';
+
+import Header from './Header';
+import StatusSidebar from './StatusSidebar';
+import Dashboard from './Dashboard';
+
+import * as BountiesActions from '../actions/BountiesBalanceActions';
+
+import { Switch, Route } from 'react-router-dom';
+import { withRouter } from 'react-router';
+
+
 
 class UserOffice extends Component {
-    componentDidMount() {
-        const {getMe, getPhaseStats, getDeposite, getPhase} = this.props
-
-        compose(getMe, getPhaseStats, getDeposite, getPhase)()
-    }
 
     handleClickForTransferModalWindow = (e) => {
-        this.props.postTransferRequest()
+        this.props.postTransferRequest();
     }
 
     render() {
-        const { transfaerAllowed, transferErrorMessage } = this.props
+        const { showSetAccountPopup } = this.props;
 
         return (
-            <div className="container-fluid relative">
-                <div className="row h-100">
+            <Wrapper>
+                <HeaderWrapper>
                     <Header/>
-                </div>
-                <div className="row h-25">
-                    <Footer/>
-                </div>
-                <Modal>
-                    { (closeModal) => (
-                        <div className='confirm-modal in-middle'>
-                            <Title
-                                text='Do you realy want to confirm that ?'
-                                type='h3'
-                                center={true}
-                            />
-                            <Button
-                                text='tranfer bonus in tokens'
-                                success={true}
-                                onClick={ compose(closeModal, this.handleClickForTransferModalWindow ) }
-                            />
-                            <Button
-                                text='Cancel'
-                                danger={true}
-                                onClick={closeModal}
-                            />
-                            <Title text={transfaerAllowed ? "transfer is Allowed" : transferErrorMessage} />
-                        </div>
-                    )}
-                </Modal>
-                {this.props.children}
-            </div>
+                </HeaderWrapper>
+                <Switch>
+                    <Route exact path="/user_office" component={Dashboard} />
+                    <Route path="/user_office/verification" component={Verification} />
+                    <Route path="/user_office/settings" component={Settings} />
+                </Switch>
+                <StatusSidebar/>
+                {showSetAccountPopup && <SetAccount/>}
+            </Wrapper>
         )
     }
 }
 
+const mapStateToProps = ({bountiesBalance, UI}) => ({
+    transfaerAllowed: bountiesBalance.getIn(['transfer', 'success']),
+    transferErrorMessage: bountiesBalance.getIn(['transfer', 'error']),
+    showSetAccountPopup: UI.get('showSetAccountPopup')
+})
+
 const mapDispatchToProps = (dispatch) => ({
-    getMe() {
-        dispatch(UserActions.getUserRequest())
-    },
-    getPhaseStats() {
-         dispatch(ICOInfoActions.getICOInfoRequest())
-    },
-    getDeposite() {
-        dispatch(DepositsActions.getDepositsRequest())
-    },
     postTransferRequest() {
         dispatch(BountiesActions.postTransferRequest())
-    },
-    getPhase() {
-        dispatch(PhaseActions.getPhaseRequest())
     }
 })
 
-const mapStateToProps = ({bountiesBalance}) => ({
-    transfaerAllowed: bountiesBalance.getIn(['transfer', 'success']),
-    transferErrorMessage: bountiesBalance.getIn(['transfer', 'error'])
-})
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserOffice));
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserOffice)
+const Wrapper = styled.div`
+    width: calc(100% - 105px);
+    background: #F3F3F3;
+    flex: 1;
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+`;
+
+const HeaderWrapper = styled.div`
+    flex-basis: 100%;
+`;

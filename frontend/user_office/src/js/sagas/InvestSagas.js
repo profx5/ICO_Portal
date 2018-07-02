@@ -1,28 +1,27 @@
-import {sendTransaction} from '../../web3'
-import {
-    SEND_TRANSACTION_INIT,
-} from '../types/InvestTypes'
-import {cps, takeEvery, put} from 'redux-saga/effects'
-import InvestActions from '../actions/InvestActions'
-import {DepositsActions} from '../actions/DepositsActions'
+import {sendTransaction, ethToWei} from '../../web3';
+import {cps, takeEvery, put} from 'redux-saga/effects';
+import * as InvestActions from '../actions/InvestActions';
+import * as DepositsActions from '../actions/DepositsActions';
+
+
 
 export class InvestSagas {
     static * invest(action) {
         try {
             const {senderAccount,
                    receiverAccount,
-                   value} = action.payload
+                   value} = action.payload;
+            const valueWei = ethToWei(value);
 
-            const txnHash = yield cps(sendTransaction, senderAccount, receiverAccount, value)
+            const txnHash = yield cps(sendTransaction, senderAccount, receiverAccount, valueWei);
 
-            yield put(DepositsActions.createPreparedDepositRequest(value, txnHash))
-            yield put(InvestActions.hideForm())
+            yield put(DepositsActions.createPreparedDepositRequest(value, txnHash));
         } catch(e) {
-            console.log("CANT PERFROM INVEST ACTION")
+            console.log("CANT PERFROM INVEST ACTION");
         }
     }
 }
 
 export function* saga() {
-    yield takeEvery(SEND_TRANSACTION_INIT, InvestSagas.invest)
+    yield takeEvery(InvestActions.sendTransactionInit, InvestSagas.invest);
 }

@@ -1,56 +1,35 @@
-import {
-    GET_USER_REQUEST,
-    GET_USER_SUCCESSFULL,
-    SET_ACCOUNT_REQUEST,
-    SET_ACCOUNT_SUCCESSFULL,
-    SET_GENERETED_ETHEREUM_ACCOUNT,
-    SET_METAMASK_ACCOUNT_SUCCESSFULL,
-} from '../types/UserTypes'
-import {Map} from 'immutable'
+import { createReducer } from 'redux-act';
+import * as actions from './../actions/UserActions';
+import {Map} from 'immutable';
+
+
 
 const initialState = Map({
-    eth_account: null,
-    tokens_amount: null,
-    username: null,
-    kyc_required: false,
-    userIsLoading: false,
-    investment_threshold: 0,
-    setAccountSubmitting: false,
-    metamaskAccount: null,
-    security: Map({
-        privateKey: null
-    })
-})
+    "email": "gordon@ongrid.pro",
+    "eth_account": null,
 
-export function UserReducer (state=initialState, {type, payload, ...action}) {
-    switch(type) {
-        case GET_USER_REQUEST: {
-            return state.set("userIsLoading", true)
-        }
-        case GET_USER_SUCCESSFULL: {
-            return state.merge({
-                ...payload
-            }).set('userIsLoading', false)
-        }
-        case SET_ACCOUNT_REQUEST: {
-            return state.set("setAccountSubmitting", true)
-        }
-        case SET_ACCOUNT_SUCCESSFULL: {
-            return state.set('setAccountSubmitting', false)
-        }
-        case SET_METAMASK_ACCOUNT_SUCCESSFULL: {
-            return state.set('metamaskAccount', payload)
-        }
-        case SET_GENERETED_ETHEREUM_ACCOUNT : {
-            const {address, privateKey} = action
+    "tokens_amount": 0.00,
+    "kyc_required": false,
+    "investment_threshold": 0,
 
-            return state
-                .set('eth_account', address)
-                .setIn(['security', 'privateKey'], privateKey)
-        }
+});
 
-        default: {
-            return state
-        }
-    }
-}
+
+
+export const UserReducer = createReducer({
+    [actions.getUserRequest]: (state, payload) => state.set("userIsLoading", true),
+    [actions.getUserSuccessfull]: (state, payload) => {
+        return state.merge({
+            ...payload
+        }).set('userIsLoading', false)
+    },
+
+    [actions.showSetAccountForm]: (state, payload) => state.set('showSetAccountForm', true),
+    [actions.hideSetAccountForm]: (state, payload) => state.set('showSetAccountForm', false),
+
+    [actions.setAccountRequest]: (state, payload) => state.set("setAccountSubmitting", true),
+    [actions.setAccountSuccessfull]: (state, payload) => state.set('setAccountSubmitting', false),
+
+    [actions.setMetaMaskAccountSuccessfull]: (state, payload) => state.set('metamaskAccount', payload),
+
+}, initialState);

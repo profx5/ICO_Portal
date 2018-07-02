@@ -1,17 +1,10 @@
 import Api from '../../api'
 import axios from 'axios'
 import {extractAccount} from '../../web3'
-import {
-    GET_USER_REQUEST,
-    SET_ACCOUNT_REQUEST,
-    EXTRACT_EXISTING_METAMASK_ACCOUNT,
-    SET_GENERETED_ETHEREUM_ACCOUNT,
-    DETECT_METAMASK_ACCOUT
-} from '../types/UserTypes'
 import {call, put, takeEvery, cps, select} from 'redux-saga/effects'
-import {UserActions} from '../actions/UserActions'
-import {MetaMaskActions} from '../actions/MetaMaskActions'
-import utils from '../_utils'
+import * as UserActions from '../actions/UserActions'
+import * as MetamaskActions from '../actions/MetamaskActions'
+import Utils from '../utils/index'
 
 export class UserSagas {
     static * setAccount({address}) {
@@ -25,8 +18,8 @@ export class UserSagas {
             })
 
             yield put(UserActions.setAccountSuccessfull())
+            yield put(UserActions.hideSetAccountForm())
             yield put(UserActions.getUserRequest())
-
         } catch(e) {
             yield put(UserActions.setAccountFailed())
         }
@@ -58,28 +51,56 @@ export class UserSagas {
     }
 
     static * detectMetaMaskAccount() {
-        if(utils.path(window, 'web3')) {
+        if(Utils.path(window, 'web3')) {
             yield UserSagas.extractMetaMaskAccount({})
             const metamaskAcc = yield select( (state) => state.user.get('metamaskAccount') )
 
             if(typeof metamaskAcc === 'string' && metamaskAcc.length > 0) {
-                yield put( MetaMaskActions.showModalWithOptionsForEthAccount() )
+                yield put( MetamaskActions.showModalWithOptionsForEthAccount() )
                 return
             }
-            yield put( MetaMaskActions.metamaskIsBlocked() )
+            yield put( MetamaskActions.metamaskIsBlocked() )
             return
         }
 
-        yield put( MetaMaskActions.showModalWithOptionsForEthAccount() )
+        yield put( MetamaskActions.showModalWithOptionsForEthAccount() )
         return
+    }
+
+    static * changePassowrd(action) {
+        const response = yield call(axios, {
+            url: Api.changePassword(),
+            method: 'POST',
+            data: action.payload
+        })
+
+        if (response.data.success) {
+            yield put(UserActions.changePasswordSuccessfull())
+        } else {
+            yield put(UserActions.changePasswordFailed())
+        }
+    }
+
+    static * changeEmail(action) {
+        const response = yield call(axios, {
+            url: Api.changeEmail(),
+            method: 'POST',
+            data: action.payload
+        })
+
+        if (response.data.success) {
+            yield put(UserActions.changeEmailSuccessfull())
+        } else {
+            yield put(UserActions.changeEmailFailed())
+        }
     }
 }
 
 
 export function* saga() {
-    yield takeEvery(SET_GENERETED_ETHEREUM_ACCOUNT, UserSagas.setAccount)
-    yield takeEvery(DETECT_METAMASK_ACCOUT, UserSagas.detectMetaMaskAccount)
-    yield takeEvery(EXTRACT_EXISTING_METAMASK_ACCOUNT, UserSagas.extractMetaMaskAccount)
-    yield takeEvery(GET_USER_REQUEST, UserSagas.getUser)
-    yield takeEvery(SET_ACCOUNT_REQUEST, UserSagas.setAccount)
+    yield takeEvery(UserActions.getUserRequest, UserSagas.getUser)
+    yield takeEvery(UserActions.setAccountRequest, UserSagas.setAccount)
+    yield takeEvery(UserActions.setMetaMaskAccountRequest, UserSagas.extractMetaMaskAccount)
+    yield takeEvery(UserActions.changePasswordRequest, UserSagas.changePassowrd)
+    yield takeEvery(UserActions.changeEmailRequest, UserSagas.changeEmail)
 }

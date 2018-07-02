@@ -1,10 +1,7 @@
 import axios from 'axios'
 import Api from '../../api'
-import {
-    GET_ICO_INFO_REQUEST,
-} from '../types/ICOInfoTypes'
 import {put, call, takeEvery} from 'redux-saga/effects'
-import {ICOInfoActions} from '../actions/ICOInfoActions'
+import * as actions from '../actions/ICOInfoActions'
 
 export class ICOInfoSagas {
     static * getPhaseStatsSaga(action){
@@ -14,13 +11,31 @@ export class ICOInfoSagas {
                 url: Api.getICOInfo()
             })
 
-            yield put(ICOInfoActions.getICOInfoSuccess(response.data))
+            yield put(actions.getICOInfoSuccess(response.data))
         } catch(e) {
-            yield put(ICOInfoActions.getICOInfoFailed())
+            yield put(actions.getICOInfoFailed())
+        }
+    }
+
+    static * getCryptoAccount(action) {
+        try {
+            const response = yield call(axios, {
+                url: Api.getAccount(),
+                method: "GET",
+                params: {
+                    "currency": action.payload
+                }
+            });
+
+            yield put(actions.getCryptoAccountSuccessful(response.data.address));
+
+        } catch(e) {
+
         }
     }
 }
 
 export function* saga() {
-    yield takeEvery(GET_ICO_INFO_REQUEST, ICOInfoSagas.getPhaseStatsSaga)
+    yield takeEvery(actions.getICOInfoRequest, ICOInfoSagas.getPhaseStatsSaga)
+    yield takeEvery(actions.getCryptoAccountRequest, ICOInfoSagas.getCryptoAccount)
 }

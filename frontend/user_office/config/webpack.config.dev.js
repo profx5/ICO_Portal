@@ -14,7 +14,7 @@ const paths = require('./paths');
 const BundleTracker = require('webpack-bundle-tracker');
 
 
-const publicPath = process.env.BUNDLE_SERVING_PATH || 'http://0.0.0.0:3000/';
+const publicPath = process.env.BUNDLE_SERVING_PATH || 'http://localhost:3000/';
 const publicUrl = 'http://' + (process.env.NPM_HOST || '0.0.0.0') + ':' + (parseInt(process.env.NPM_PORT, 10) || 3000);
 
 // Get environment variables to inject into our app.
@@ -58,9 +58,9 @@ module.exports = {
     // This does not produce a real file. It's just the virtual path that is
     // served by WebpackDevServer in development. This is the JS bundle
     // containing code from all our entry points, and the Webpack runtime.
-    filename: 'static/js/bundle.js',
+    filename: 'js/bundle.js',
     // There are also additional JS chunk files if you use code splitting.
-    chunkFilename: 'static/js/[name].chunk.js',
+    chunkFilename: 'js/[name].chunk.js',
     // This is the URL that app is served from. We use "/" in development.
     publicPath: publicPath,
     // Point sourcemap entries to original disk location (format as URL on Windows)
@@ -132,10 +132,9 @@ module.exports = {
           // A missing `test` is equivalent to a match.
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            loader: require.resolve('url-loader'),
+            loader: 'file-loader',
             options: {
-              limit: 10000,
-              name: 'static/media/[name].[hash:8].[ext]',
+              name: 'img/[name].[ext]',
             },
           },
           // Process JS with Babel.
@@ -149,6 +148,13 @@ module.exports = {
               ],
               cacheDirectory: true,
             },
+          },
+          {
+            test: /\.(eot|svg|otf|ttf|woff|woff2)$/,
+            loader: 'file-loader',
+            options: {
+              name: 'fonts/[name].[ext]',
+            }
           },
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.

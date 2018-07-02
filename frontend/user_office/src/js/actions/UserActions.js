@@ -1,45 +1,26 @@
-import {
-    GET_USER_REQUEST,
-    GET_USER_SUCCESSFULL,
-    SET_ACCOUNT_REQUEST,
-    SET_ACCOUNT_SUCCESSFULL,
-    GET_USER_FAILED,
-    SET_ACCOUNT_FAILED,
-    EXTRACT_EXISTING_METAMASK_ACCOUNT,
-    SET_METAMASK_ACCOUNT_SUCCESSFULL,
-    SET_METAMASK_ACCOUNT_FAILED,
-    SET_GENERETED_ETHEREUM_ACCOUNT,
-    DETECT_METAMASK_ACCOUT
-} from '../types/UserTypes'
-import {generateEthereumAccount} from '../../web3'
+import { createAction } from 'redux-act';
 
 
-export class UserActions {
-    static getUserRequest = () => ({type: GET_USER_REQUEST})
 
-    static getUserSuccessfull = (payload) => ({type: GET_USER_SUCCESSFULL, payload})
+export const getUserRequest = createAction('GET_USER_REQUEST');
+export const getUserSuccessfull = createAction('GET_USER_SUCCESSFULL');
+export const getUserFailed = createAction('GET_USER_FAILED');
 
-    static getUserFailed = () => ({type: GET_USER_FAILED})
+export const showSetAccountForm = createAction('SHOW_SET_ACCOUNT_FORM');
+export const hideSetAccountForm = createAction('HIDE_SET_ACCOUNT_FORM');
 
-    static setAccountRequest = (accountValue) => ({type: SET_ACCOUNT_REQUEST, address: accountValue})
+export const setAccountRequest = createAction('SET_ACCOUNT_REQUEST');
+export const setAccountSuccessfull = createAction('SET_ACCOUNT_SUCCESSFULL');
+export const setAccountFailed = createAction('SET_ACCOUNT_FAILED');
 
-    static setAccountSuccessfull = () => ({type: SET_ACCOUNT_SUCCESSFULL})
+export const setMetaMaskAccountRequest = createAction('SET_METAMASK_ACCOUNT_REQUEST');
+export const setMetaMaskAccountSuccessfull = createAction('SET_METAMASK_ACCOUNT_SUCCESSFULL');
+export const setMetaMaskAccountFailed = createAction('SET_METAMASK_ACCOUNT_FAILED');
 
-    static setAccountFailed = () => ({type: SET_ACCOUNT_FAILED})
+export const changePasswordRequest = createAction('CHANGE_PASSWORD_REQUEST');
+export const changePasswordSuccessfull = createAction('CHANGE_PASSWORD_SUCCESSFULL');
+export const changePasswordFailed = createAction('CHANGE_PASSWORD_FaILED');
 
-    static setMetaMaskAccountRequest = () => ({type: EXTRACT_EXISTING_METAMASK_ACCOUNT})
-
-    static detectMetamaskAccount = () => ({type: DETECT_METAMASK_ACCOUT})
-
-    static setMetaMaskAccountSuccessfull = (account) => ({
-        type: SET_METAMASK_ACCOUNT_SUCCESSFULL,
-        payload: account
-    })
-
-    static setGeneretedAccount = () => {
-        const {address, privateKey} = generateEthereumAccount()
-        return {type: SET_GENERETED_ETHEREUM_ACCOUNT, address, privateKey }
-    }
-
-    static setMetaMaskAccountFailed = (account) => ({type: SET_METAMASK_ACCOUNT_FAILED})
-}
+export const changeEmailRequest = createAction('CHANGE_EMAIL_REQUEST');
+export const changeEmailSuccessfull = createAction('CHANGE_EMAIL_SUCCESSFULL');
+export const changeEmailFailed = createAction('CHANGE_EMAIL_FaILED');

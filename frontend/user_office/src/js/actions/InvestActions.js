@@ -1,24 +1,17 @@
-import {
-    SHOW_INVEST_FORM,
-    HIDE_INVEST_FORM,
-    SEND_TRANSACTION_INIT,
-    SEND_TRANSACTION_SUCCESSFULL,
-    SEND_TRANSACTION_FAILED
-} from '../types/InvestTypes'
+import { createAction } from 'redux-act';
 
-export default class InvestActions {
-    static showForm = () => ({type: SHOW_INVEST_FORM})
 
-    static hideForm = () => ({type: HIDE_INVEST_FORM})
+export const showForm = createAction('SHOW_INVEST_FORM');
+export const hideForm = createAction('HIDE_INVEST_FORM');
+export const sendTransactionInit = createAction('SEND_TRANSACTION_INIT', (senderAccount, receiverAccount, value, currency) => ({senderAccount, receiverAccount, value, currency}));
 
-    static sendTransactionInit = (senderAccount, receiverAccount, value) => ({
-        type: SEND_TRANSACTION_INIT,
-        payload: {
-            senderAccount, receiverAccount, value
-        }
-    })
+export const setInvestAmount = createAction('SET_INVEST_AMOUNT');
+export const setTokensAmount = createAction('GET_TOKENS_AMOUNT');
 
-    static sendTransactionSuccessfull = () => ({type: SEND_TRANSACTION_SUCCESSFULL})
+export const sendTransactionSuccessfull = createAction('SEND_TRANSACTION_SUCCESSFULL');
+export const sendTransactionFailed = createAction('SEND_TRANSACTION_FAILED');
 
-    static sendTransactionFailed = () => ({type: SEND_TRANSACTION_FAILED})
-}
+export const enableMetamaskOption = createAction('ENABLE_METAMASK_OPTION');
+export const disableMetamaskOption = createAction('DISABLE_METAMASK_OPTION');
+
+export const setQRCode = createAction('SET_QR_CODE');

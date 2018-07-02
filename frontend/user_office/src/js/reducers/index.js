@@ -1,16 +1,22 @@
-import {combineReducers} from 'redux'
-import {UserReducer} from './UserReducer'
-import {ICOInfoReducer} from './ICOInfoReducer'
-import {DepositsReducer} from './DepositsReducer'
-import {BountiesBalanceReducer} from './BountiesBalanceReducer'
-import {KYCReducer} from './KYCReducer'
-import {InvestReducer} from './InvestReducer.js'
-import {ReferralsReducer} from './ReferralsReducer.js'
-import {ModalWindowReducer} from './ModalWindowReducer.js'
-import {PhaseReducer} from './PhaseReducer.js'
-import {MetaMaskReducer} from './MetaMaskReducer'
+import {combineReducers} from 'redux';
+import { reducer as formReducer } from 'redux-form';
+//reducers
+import {UserReducer} from './UserReducer';
+import {ICOInfoReducer} from './ICOInfoReducer';
+import {DepositsReducer} from './DepositsReducer';
+import {BountiesBalanceReducer} from './BountiesBalanceReducer';
+import {KYCReducer} from './KYCReducer';
+import {InvestReducer} from './InvestReducer.js';
+import {ReferralsReducer} from './ReferralsReducer.js';
+import {ModalWindowReducer} from './ModalWindowReducer.js';
+import {PhasesReducer} from './PhasesReducer.js';
+import {CurrencyReducer} from './CurrencyReducer.js';
+import {TimerReducer} from './TimerReducer.js';
+import {UIStateReducer} from './UIStateReducer.js';
+import {MetamaskReducer} from './MetamaskReducer.js';
+import { routerReducer } from 'react-router-redux'
 
-const reducer = combineReducers({
+const reducers = combineReducers({
     user: UserReducer,
     ICOInfo: ICOInfoReducer,
     deposits: DepositsReducer,
@@ -19,8 +25,13 @@ const reducer = combineReducers({
     Invest: InvestReducer,
     referrals: ReferralsReducer,
     modals: ModalWindowReducer,
-    metamask: MetaMaskReducer,
-    Phase: PhaseReducer,
+    Phase: PhasesReducer,
+    Currencies: CurrencyReducer,
+    Timer: TimerReducer,
+    UI: UIStateReducer,
+    Metamask: MetamaskReducer,
+    form: formReducer,
+    router: routerReducer
 })
 
-export default reducer
+export default reducers;

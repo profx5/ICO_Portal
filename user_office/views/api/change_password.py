@@ -34,6 +34,7 @@ class ChangePassword(APIView):
         if isinstance(result, Right):
             logout(request)
 
-            return redirect('/login/')
+            return Response(data={'success': True})
         else:
-            return Response(data={'error': result.value}, status=400)
+            return Response(data={'success': False,
+                                  'error': result.value}, status=400)

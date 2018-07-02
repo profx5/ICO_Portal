@@ -1,23 +1,16 @@
-import {
-    OPEN_MODAL_FOR_TRANSFER,
-    CLOSE_MODAL_FOR_TRANSFER,
-} from '../types/ModalWindowTypes'
+import { createReducer } from 'redux-act';
+import * as actions from './../actions/KYCActions';
 import {Map} from 'immutable'
+
+
 
 const initialState = Map({
     isModalOpened: false
 })
 
-export function ModalWindowReducer(state=initialState, {type, ...action}) {
-    switch(type) {
-        case OPEN_MODAL_FOR_TRANSFER: {
-            return state.set('isModalOpened', true)
-        }
-        case CLOSE_MODAL_FOR_TRANSFER: {
-            return state.set('isModalOpened', false)
-        }
-        default: {
-            return state
-        }
-    }
-}
+
+
+export const ModalWindowReducer = createReducer({
+    [actions.showForm]: (state = initialState, payload) => state.set('isModalOpened', true),
+    [actions.hideForm]: (state = initialState, payload) => state.set('isModalOpened', false)
+}, initialState);

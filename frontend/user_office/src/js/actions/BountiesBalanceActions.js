@@ -1,23 +1,11 @@
-import {
-    GET_BOUNTIES_BALANCE_REQUEST,
-    GET_BOUNTIES_BALANCE_SUCCESS,
-    GET_BOUNTIES_BALANCE_FAILED,
-    TRANSFER_BOUNTIES_REQUEST,
-    TRANSFER_BOUNTIES_SUCCESS,
-    TRANSFER_BOUNTIES_FAILED,
-} from '../types/BountiesBalanceTypes'
+import { createAction } from 'redux-act';
 
-export class BountiesActions {
-    static getBountiesRequest = () => ({type: GET_BOUNTIES_BALANCE_REQUEST})
 
-    static getBountiesFailed = () => ({type: GET_BOUNTIES_BALANCE_FAILED})
 
-    static getBountiesSuccess = (payload) => ({type: GET_BOUNTIES_BALANCE_SUCCESS, payload})
+export const getBountiesRequest = createAction('GET_DEPOSITE_REQUEST');
+export const getBountiesSuccess = createAction('GET_DEPOSITE_SUCCESS');
+export const getBountiesFailed = createAction('GET_BOUNTIES_BALANCE_FAILED');
 
-    static postTransferRequest = () => ({type: TRANSFER_BOUNTIES_REQUEST})
-
-    static postTransferSuccess = (payload) => ({type: TRANSFER_BOUNTIES_SUCCESS, payload})
-
-    static postTransferFailed = () => ({type: TRANSFER_BOUNTIES_FAILED})
-
-}
+export const postTransferRequest = createAction('TRANSFER_BOUNTIES_REQUEST');
+export const postTransferSuccess = createAction('TRANSFER_BOUNTIES_SUCCESS');
+export const postTransferFailed = createAction('TRANSFER_BOUNTIES_FAILED');

@@ -3,6 +3,10 @@ class Api {
         this.prefix = '/api'
     }
 
+    getAccount() {
+        return `${this.prefix}/getAccount/`
+    }
+
     getMe() {
         return `${this.prefix}/getMe/`
     }
@@ -11,8 +15,8 @@ class Api {
         return `${this.prefix}/getICOInfo/`
     }
 
-    getPhase() {
-        return `${this.prefix}/getPhase/`
+    getPhases() {
+        return `${this.prefix}/getPhases/`
     }
 
     getOffChainBountiesBalance() {
@@ -20,7 +24,11 @@ class Api {
     }
 
     getDeposits() {
-        return `${this.prefix}/getDeposits/`
+        return `${this.prefix}/getTokensMoves/`
+    }
+
+    prepareDeposits() {
+        return `${this.prefix}/prepareTokensMove/`
     }
 
     kyc() {
@@ -29,10 +37,6 @@ class Api {
 
     setEthAccount() {
         return `${this.prefix}/setEthAccount/`
-    }
-
-    prepareDeposit() {
-        return `${this.prefix}/prepareDeposit/`
     }
 
     getReferralLink() {
@@ -45,6 +49,18 @@ class Api {
 
     transferBounties() {
         return `${this.prefix}/transferBounties/`
+    }
+
+    getAvailableCurrencies() {
+        return `${this.prefix}/getAvailableCurrencies/`
+    }
+
+    changePassword() {
+        return `${this.prefix}/changePassword/`
+    }
+
+    changeEmail() {
+        return `${this.prefix}/changeEmail/`
     }
 }
 

@@ -1,25 +1,32 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {compose} from 'redux'
-import UserOffice from './js/containers/UserOffice'
-import Banner from './js/containers/Banner'
-import WithGuard from './js/HOC/withGuard'
+import React from 'react';
+import {connect} from 'react-redux';
+//containers
+import ContentWrapper from './js/containers/ContentWrapper';
+import Warnings from './js/containers/Warnings';
+import UserOffice from './js/containers/UserOffice';
+import NavSidebar from './js/containers/NavSidebar';
 
-const App = ({children}) => (
-    <UserOffice>
-        {children}
-    </UserOffice>
-)
+import { withRouter } from 'react-router';
 
-const mapStateToProps = ({user}) => {
-    const isEthereumAccountExist = user.get('eth_account') !== null;
 
-    return {
-        isAllowed: isEthereumAccountExist
-    }
+const App = () => {
+    return (
+        <div>
+            <Warnings/>
+            <ContentWrapper
+                left={<NavSidebar/>}
+                rest={<UserOffice/>}
+            />
+        </div>
+    )
 }
 
-export default compose(
-    connect(mapStateToProps),
-    WithGuard(Banner)
-)(App)
+const mapStateToProps = ({user}) => ({
+    
+})
+
+const mapDispatchToProps = (dispatch) => ({
+
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -14,14 +14,19 @@ class GetAvailableCurrencies(APIView):
     permission_classes = (KYCAndLoginPermission,)
 
     def get_exchange_rate(self, currency):
-        return ExchangeRate.objects.get_rate_by_currency(currency)
+        obj = ExchangeRate.objects.get_rate_by_currency(currency)
+
+        if obj:
+            return obj.rate
+        else:
+            return 0
 
     def get(self, request, *args, **kwargs):
         return Response(
             [
                 {"code": c.code,
                  "name": c.name,
-                 "rate": self.get_exchange_rate(c.code).rate}
+                 "rate": self.get_exchange_rate(c.code)}
                 for c in Currencies.get_currencies()
             ]
         )

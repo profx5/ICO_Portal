@@ -1,4 +1,3 @@
-
 function makeFormula(tokensAmount = 1, discountAmount = '0%', rateAmount) {
 
   let $el = $('.CalculatorSection_formula'),
@@ -15,7 +14,7 @@ function makeFormula(tokensAmount = 1, discountAmount = '0%', rateAmount) {
 
   if (tokens <= 0) {
     priceStr = `<span class="CalculatorSection_price-resultNoDiscount">$0</span>`;
-    console.log(tokens);
+
   } else if (discount !== 0) {
     priceStr += `<strike>$${Math.round(result * 0.01)}</strike> <span class="CalculatorSection_price-result">$${Math.round(result * discountedEthRate)}</span> with ${discount}% discount!`;
   } else if (discount === 0) {
@@ -39,7 +38,7 @@ function updateProgressbar(data) {
 
   const currentPhase = data.currentPhase;
   currentPhase.startTime = new Date().getTime()
-        
+
   const stateName = currentPhase.name,
         discount = currentPhase.discountPercent;
 
@@ -56,7 +55,7 @@ function updateProgressbar(data) {
 
 }
 
-function setTimer(data) { 
+function setTimer(data) {
   let currentPhase = data.currentPhase;
 
   let startTime = moment(new Date(currentPhase.startTime)).toArray(); // Thursday, 8 March 2018 г., 00:00:00
@@ -100,18 +99,18 @@ function setTimer(data) {
         time.minutes -= 1;
         time.seconds = 59;
       }
-    
+
       if (time.minutes <= 0) {
         if (time.hours !== 0)  time.hours -= 1;
         time.minutes = 59;
       }
-   
+
       if (time.hours <= 0 && time.days !== 0) {
         if (time.days !== 0)  time.days -= 1;
         time.hours = 23;
 
       }
-   
+
       if (time.seconds <= 0 && time.minutes <= 0 && time.hours <= 0 && time.days <= 0) {
         clearInterval(interval);
       } else if (time.days <= 0) {
@@ -122,7 +121,7 @@ function setTimer(data) {
          $('.ProgressSection_day, .RoadmapSection_day').html('00');
          return;
       }
-   
+
 
    $('.ProgressSection_seconds, .RoadmapSection_seconds').html(time.seconds < 10 ? `0${time.seconds}` : time.seconds);
    $('.ProgressSection_minutes, .RoadmapSection_minutes').html(time.minutes < 10 ? `0${time.minutes}` : time.minutes);
@@ -148,7 +147,7 @@ function setTimer(data) {
 
     updateProgressbar(data);
     setTimer(data);
-    
+
     let $rateInput = $('.CalculatorSection_input-rate');
     let $currencyInput = $('.CalculatorSection_input-currency');
     $rateInput.val(`$ ${rate}`);
@@ -182,8 +181,8 @@ function setTimer(data) {
       if (val.match(/\./g) !== null && val.match(/\./g).length >= 2) {
         $(this).val(val.substr(0,val.length - 1));
       }
-      
-      let currencyNewVal = Math.floor(Number($currencyInput.val()) * 100) / 100; 
+
+      let currencyNewVal = Math.floor(Number($currencyInput.val()) * 100) / 100;
 
       let tokens = currencyNewVal;
       $('.CalculatorSection_formula').html(makeFormula(tokens, discount, rate).formula);
@@ -206,4 +205,3 @@ function setTimer(data) {
   });
 
 })();
-

@@ -1,73 +1,93 @@
 import React from 'react';
-import {connect} from 'react-redux'
-import InvestActions from '../actions/InvestActions'
-import Balance from '../components/Balance'
-import Title from '../components/Title'
-import Invest from './Invest'
-import KYCWidget from '../components/KYCWidget'
-import DepositTable from './DepositTable'
-import BountiesBalance from './BountiesBalance'
-import PhaseStats from './PhaseStats'
-import KYC from './KYC'
-import Account from './Account'
-import ReferralLink from './ReferralLink'
+import {connect} from 'react-redux';
+import styled from 'styled-components';
+import * as UIActions from '../actions/UIActions';
+
+import Balance from '../components/Balance';
+import AccountInfo from '../components/AccountInfo';
 
 class Header extends React.Component {
+
+    dropdownClickHandler = () => {
+        const {accountDropdownShown, showAccountDropdown, hideAccountDropdown} = this.props;
+        if (!accountDropdownShown) {
+            showAccountDropdown();
+        } else hideAccountDropdown();
+    }
+
     render () {
         const {
+            email,
             tokensAmount,
-            kycRequired,
             showInvestForm,
-            kyc,
-            KYCStatus,
-            privateKey
-        } = this.props
+            decimals,
+            accountDropdownShown
+        } = this.props;
 
-        const showKYCwidget = KYCStatus === 'WAITING'
+        let floatTokensAmount = '1';
+        for (let i = 0; i < decimals; i++) {
+            floatTokensAmount += '0';
+        }
+        floatTokensAmount = parseInt(floatTokensAmount, 10);
 
         return (
-            <header className="Header container col-md-10">
-                {kycRequired &&
-                 <div className="row h-5">
-                     <KYC />
-                 </div>
-                }
-                <div className="Header_row row h-100">
+            <HeaderBlock>
+                <HeaderUserBlock>
                     <Balance
-                        currentAmount={tokensAmount}
+                        currentAmount={tokensAmount / floatTokensAmount}
                         investClick={showInvestForm}
                     />
-                    <ReferralLink />
-                    <BountiesBalance />
-                    <PhaseStats />
-                    <Account />
-                    <Invest />
-                </div>
-                {privateKey && <Title text={`Private key — ${privateKey}`} type='h2'/>}
-                <DepositTable />
-                {showKYCwidget && <KYCWidget kyc={kyc} status={KYCStatus}/>}
-            </header>
+                    <AccountInfo
+                        email={email}
+                        isDropdownOpen={accountDropdownShown}
+                        dropdownClickHandler={this.dropdownClickHandler}
+                    />
+                </HeaderUserBlock>
+            </HeaderBlock>
         )
     }
 }
 
-const mapStateToProps = ({user, ICOPhaseStats, KYC, Invest}) => ({
+const mapStateToProps = ({user, ICOInfo, KYC, Invest, UI}) => ({
+    email: user.get('email'),
     tokensAmount: user.get('tokens_amount'),
-    kycRequired: user.get('kyc_required'),
-    kyc: KYC.get('kyc'),
+    decimals: ICOInfo.get('token_decimals'),
     KYCStatus: KYC.get('status'),
     userId: user.get('eth_account'),
     showInvestForm: Invest.get('showInvestForm'),
-    privateKey: user.getIn(['security', 'privateKey'])
+    accountDropdownShown: UI.get('accountDropdownShown')
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    showInvestForm() {
-        dispatch(InvestActions.showForm())
+    showAccountDropdown() {
+        dispatch(UIActions.showAccountDropdown())
     },
-    hideInvestForm() {
-        dispatch(InvestActions.hideForm())
+    hideAccountDropdown() {
+        dispatch(UIActions.hideAccountDropdown())
     },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
+
+
+const HeaderBlock = styled.header`
+    height: 100px;
+    background: #FAFBFC;
+    padding-left: 55px;
+    padding-right: 55px;
+    flex-basis: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    border-bottom: 1px solid #e7e9ea;
+    position: relative;
+    z-index: 2;
+`;
+
+const HeaderUserBlock = styled.div`
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+`;
