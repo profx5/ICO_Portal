@@ -15,6 +15,7 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/user_office/'
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 AUTHENTICATION_BACKENDS = ['user_office.auth_backend.EmailBackend',
+                           'user_office.auth_backend.MetamaskBackend',
                            'social_core.backends.email.EmailAuth',
                            'social_core.backends.twitter.TwitterOAuth',
                            'social_core.backends.facebook.FacebookOAuth2',
@@ -67,3 +68,6 @@ EMAIL_HOST_PASSWORD = os.environ.get('ICO_EMAIL_PASSWORD')
 
 REDAPTCHA_DATA_SITEKEY = '6Lf9n1IUAAAAAN2HIdZRL9RXCxXyiWb6YQ9i344A'
 RECAPTCHA_SECRET = '6Lf9n1IUAAAAAMoqA75RIx1vLi6ESNWyKBMreH04'
+
+
+METAMASK_LOGIN_TOKEN_PERIOD = 300 # 5 minutes

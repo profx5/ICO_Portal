@@ -5,3 +5,4 @@ from .change_password import ChangePassword
 from .change_email import SendChangeEmailConfirm, SetEmail
 from .ticket import CreateSupportTicket, CreateKYCTicket, UpdateKYCTicket, \
     CommentTicket
+from .metamask_login import GetMMToken, CheckMMSignature

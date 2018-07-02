@@ -79,5 +79,10 @@ form > p {
 }
 
 .linkedin {
-    background-color: #007BB6
+    background-color: #007BB6;
+}
+
+.metamask-login {
+    background-color: #138797;
+    display: none
 }

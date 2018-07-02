@@ -1,19 +1,21 @@
 {% extends "authentication/base.html" %}
+{% load static %}
 
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
 <script src='https://www.google.com/recaptcha/api.js'></script>
 
-<form action="/signup/" method="POST">
+<form action="{% url 'signup' %}" method="POST">
     <div class="container" id="main-container">
         {{ form }}
         <div class="g-recaptcha" data-sitekey="{{ sitekey }}"></div>
         <button type="submit" class="btn-primary auth-button">Sign Up</button>
     </div>
     {% if request.GET.refid %}
-        <input type="hidden" name="refid" value="{{ request.GET.refid }}">
+    <input type="hidden" name="refid" value="{{ request.GET.refid }}">
     {% endif %}
     {% csrf_token %}
 </form>
+<script src="{% static "validate_form.js" %}"></script>
 {% endblock %}

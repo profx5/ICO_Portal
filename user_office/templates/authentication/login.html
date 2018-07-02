@@ -1,10 +1,11 @@
 {% extends "authentication/base.html" %}
+{% load static %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
 <div class="container" id="main-container">
-    <form action="/login/" method="POST">
+    <form action="{% url 'login' %}" method="POST">
         <label for="email"><b>Email</b></label>
         <input type="email" placeholder="Enter email" name="email" id="email">
 
@@ -16,14 +17,16 @@
         </a>
 
         <button class="btn" type="submit">Login</button>
+        <button type="button" class="btn metamask-login">
+            <img src="/static/metamask-fox.svg" style="width:1.5em; height:1.5m;">
+            Login via Metamask
+        </button>
         {% csrf_token %}
-        <br>
     </form>
 
     <p class="text-center"> or </p>
 
     <a href="/signup/"><button class="btn btn-primary">Sign up</button></a>
-    <!-- <a href="{% url "social:begin" "email" %}">Email</a> -->
     <div class="social-signup">
         <a href="{% url "social:begin" "twitter" %}">
             <button class="btn twitter"><i class="fa fa-twitter"></i> Sign in with Twitter</button>
@@ -39,4 +42,11 @@
         </a>
     </div>
 </div>
+<form method="POST" action="{% url 'login' %}" id="metamsk-login-form" hidden>
+    <input type="hidden" name="account" id="metamask_account">
+    <input type="hidden" name="signature" id="metamask_signature">
+    {% csrf_token %}
+</form>
+<input id="metamask-login-token" type="hidden" value="{{ token }}">
+<script src="{% static "metamask_login.js" %}"></script>
 {% endblock %}
