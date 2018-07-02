@@ -32,5 +32,6 @@ script:
   # - whereis google-chrome-stable
   # - whereis chromedriver
   # - CI=false npm run build
-  - "./manage.py test"
+  - ./manage.py test
+  - flake8
   # - "./manage.py behave -D SELENIUM_CHROME_HEADLESS"
