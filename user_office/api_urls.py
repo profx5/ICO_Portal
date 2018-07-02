@@ -1,21 +1,21 @@
 from django.urls import path
 from rest_framework.routers import SimpleRouter, Route, DefaultRouter
 
-from .views.api import *
+from .views import api as api_views
 
 
 api_urlpatterns = [
-    path('getMe/', get_me),
-    path('getICOInfo/', get_ico_info),
-    path('getAvailableCurrencies/', get_available_currencies),
-    path('getAccount/', get_account),
-    path('getTokensMoves/', get_tokens_moves),
-    path('setEthAccount/', set_eth_account),
-    path('prepareTokensMove/', prepare_tokens_move),
-    path('getReferralLink/', get_referral_link),
-    path('getPhases/', get_phases),
-    path('changePassword/', change_password),
-    path('changeEmail/', change_email)
+    path('getMe/', api_views.get_me),
+    path('getICOInfo/', api_views.get_ico_info),
+    path('getAvailableCurrencies/', api_views.get_available_currencies),
+    path('getAccount/', api_views.get_account),
+    path('getTokensMoves/', api_views.get_tokens_moves),
+    path('setEthAccount/', api_views.set_eth_account),
+    path('prepareTokensMove/', api_views.prepare_tokens_move),
+    path('getReferralLink/', api_views.get_referral_link),
+    path('getPhases/', api_views.get_phases),
+    path('changePassword/', api_views.change_password),
+    path('changeEmail/', api_views.change_email)
 ]
 
 
@@ -34,16 +34,9 @@ class SingleObjectRouter(SimpleRouter):
         ),
     ]
 
-# kyc_router = SingleObjectRouter()
-# kyc_router.register(r'kyc', KYCViewSet, base_name='kyc')
-# api_urlpatterns += kyc_router.urls
-
-# ticket_router = DefaultRouter()
-# ticket_router.register(r'tickets', TicketViewSet, base_name='tickets')
-# api_urlpatterns += ticket_router.urls
 
 router = DefaultRouter()
-router.register(r'tickets', TicketViewSet, base_name='tickets')
-router.register(r'kyc', KYCViewSet, base_name='kyc')
+router.register(r'tickets', api_views.TicketViewSet, base_name='tickets')
+router.register(r'kyc', api_views.KYCViewSet, base_name='kyc')
 
 api_urlpatterns += router.urls

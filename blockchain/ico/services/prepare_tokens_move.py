@@ -1,7 +1,7 @@
 from oslash import Left, Right
 from django.db import DatabaseError
 
-from user_office.models import Transfer, TokensMove, Transaction
+from user_office.models import Transfer, TokensMove
 
 
 class PrepareTokensMove:

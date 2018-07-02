@@ -1,7 +1,6 @@
 from shutil import rmtree
 from django.conf import settings
 
-from django.core.files.uploadedfile import SimpleUploadedFile
 from .helpers.kyc import create_kyc
 from ..base import APITestCase
 from user_office.models import KYC
@@ -37,7 +36,7 @@ class TestKYC(APITestCase):
             'document_photo': f'http://testserver/media/kyc/{self._investor_id}/photo/photo.jpg',
             'decline_reason': None,
             'ticket_id': ticket_id
-    }
+        }
 
     def test_create_kyc(self):
         response = create_kyc(self.client)

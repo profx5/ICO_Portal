@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic import View
 from django.conf import settings
 from social_core.actions import do_complete
@@ -32,13 +32,12 @@ class SignUpView(View):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password2']
 
-
             strategy = load_strategy(request)
             backend = load_backend(strategy, 'email', None)
 
-            return  do_complete(backend, _do_login,
-                                 request=request,
-                                 email=email,
-                                 password=password)
+            return do_complete(backend, _do_login,
+                               request=request,
+                               email=email,
+                               password=password)
         else:
             raise Exception('Invalid signup data')

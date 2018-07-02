@@ -1,4 +1,4 @@
-from oslash import Left, Right
+from oslash import Right
 from blockchain.ico.contracts import TokenContract
 from .create_transaction import CreateTransaction
 

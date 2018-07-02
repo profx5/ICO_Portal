@@ -66,7 +66,7 @@ class SendChangeEmailConfirm:
         })
 
         send_mail('Change email', content, settings.EMAIL_HOST_USER,
-                  [investor.email,], fail_silently=True)
+                  [investor.email], fail_silently=True)
 
         return Right(args)
 
@@ -91,7 +91,7 @@ class SetEmail:
 
     def find_investor(self, args):
         try:
-            investor  = Investor.objects.get(pk=args['user_id'])
+            investor = Investor.objects.get(pk=args['user_id'])
 
             if investor.id == args['investor'].id:
                 return Right(dict(args, investor=investor))

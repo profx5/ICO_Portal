@@ -1,9 +1,8 @@
 import coreapi
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import serializers
 from rest_framework.schemas import AutoSchema
-from oslash import Right, Left
+from oslash import Right
 
 from blockchain.ico.services import CalcTokensAmount, \
     PrepareTokensMove as PrepareTokensMoveService
@@ -13,7 +12,7 @@ from .auth import KYCAndLoginPermission
 class CalcAndPrepareTM:
     def calc_tokens_amount(self, args):
         result = CalcTokensAmount()(value=args['value'],
-                                  currency=args['currency'])
+                                    currency=args['currency'])
 
         return result | (lambda result: Right(dict(args, amount=result[0])))
 

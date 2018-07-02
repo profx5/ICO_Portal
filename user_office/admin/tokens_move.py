@@ -11,7 +11,7 @@ class TokeneMoveAdmin(admin.ModelAdmin):
     list_display = ('state', 'investor', 'amount', 'created_at', 'actualized_at', 'txn_hash')
     list_filter = ('state',)
 
-    fields= ('investor', 'state', 'amount', ('created_at', 'actualized_at'), 'txn_hash', 'transfer')
+    fields = ('investor', 'state', 'amount', ('created_at', 'actualized_at'), 'txn_hash', 'transfer')
     readonly_fields = ('state', 'amount', 'created_at', 'actualized_at', 'txn_hash')
 
     inlines = [PaymentInstanceInline]

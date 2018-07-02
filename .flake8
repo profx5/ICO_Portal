@@ -1,0 +1,14 @@
+[flake8]
+exclude = .git,
+          __pycache__,
+          frontend,
+          node_modules,
+          landing,
+          assets,
+          contracts,
+          django-helpdesk,
+          features,
+          ico_portal/settings,
+          **/migrations/*
+max-line-length = 200
+statistics = True

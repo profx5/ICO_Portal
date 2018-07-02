@@ -1,7 +1,5 @@
-import itertools
 import json
 from django.test import TestCase
-from django.conf import settings
 from web3 import Web3, HTTPProvider, EthereumTesterProvider
 from eth_tester import EthereumTester
 from django.conf import settings
@@ -10,7 +8,6 @@ import blockchain.web3
 from ico_portal.utils.datetime import datetime
 from blockchain.ico.contracts.crowdsale import CrowdsaleContract
 from blockchain.ico.contracts.token import TokenContract, TransferEvent
-
 
 
 class BlockChainTestCase(TestCase):
@@ -94,12 +91,6 @@ class BlockChainTestCase(TestCase):
             cls.base_snapshot_id = cls.take_snapshot()
         else:
             cls.web3 = Web3(HTTPProvider(settings.WEB3_RPC_URL))
-
-    def stub_datetime_now(self, dt):
-        datetime.stubed_now = dt
-
-    def stub_datetime_utcnow(self, dt):
-        datetime.stubed_utcnow = dt
 
     @classmethod
     def setup_blockchain_data(cls):

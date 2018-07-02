@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from rest_framework.schemas import AutoSchema
 from oslash import Right
 from django.contrib.auth import logout
-from django.shortcuts import redirect
 
 from .auth import KYCAndLoginPermission
 from user_office.services import ChangePassword as ChangePasswordService

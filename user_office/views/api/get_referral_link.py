@@ -4,8 +4,6 @@ from rest_framework.response import Response
 from django.urls import reverse
 from django.conf import settings
 
-from user_office.models import Investor
-
 
 class GetReferralLinkView(APIView):
     """

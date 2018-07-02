@@ -7,5 +7,5 @@ class TestGetReferralLink(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data,
-                         {'link': 'http://localhost:8000/signup/?refid={}' \
+                         {'link': 'http://localhost:8000/signup/?refid={}'
                           .format(self.get_investor().referral_id)})

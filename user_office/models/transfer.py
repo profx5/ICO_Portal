@@ -1,8 +1,6 @@
 from django.db import models
 
 from ico_portal.utils.datetime import datetime
-from .fields import TokenField
-
 
 
 TRANSFER_STATE_CHOICES = [

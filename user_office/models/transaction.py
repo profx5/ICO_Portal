@@ -1,6 +1,5 @@
 import uuid
 from django.db import models
-from django.db.models import Manager
 
 from ico_portal.utils.datetime import datetime
 
@@ -9,6 +8,7 @@ TRANSACTION_STATE_CHOICES = (('SENT', 'Sent'),
                              ('MINED', 'Mined'),
                              ('PREPARED', 'Prepared'),
                              ('FAILED', 'Failed'))
+
 
 class Transaction(models.Model):
     id = models.AutoField(primary_key=True)

@@ -1,3 +1,4 @@
+# flake8: noqa
 from .get_me import GetMeView
 from .get_ico_info import GetICOInfo
 from .get_available_currencies import GetAvailableCurrencies

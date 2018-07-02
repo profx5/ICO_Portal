@@ -1,5 +1,6 @@
 from .fixture import fixture_path
 
+
 def create_kyc(client):
     with open(fixture_path('photo.jpg'), 'rb') as photo, \
          open(fixture_path('selfie.jpg'), 'rb') as selfie:

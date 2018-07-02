@@ -43,5 +43,4 @@ class Currencies:
             else:
                 return urls
 
-
         return reduce(reducer, cls._instances, [])

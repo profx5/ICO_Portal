@@ -3,7 +3,6 @@ from decimal import Decimal
 from django.db import transaction, DatabaseError
 from coinpayments.api import CoinPaymentsAPI
 
-from blockchain.ico.contracts import TokenContract
 from blockchain.ico.services import PrepareTokensMove, CalcTokensAmount, Mint
 from user_office.models import Account, Payment
 
@@ -42,7 +41,7 @@ class ProcessIPN:
             return SkipIPN('Invalid status')
 
         if not self._is_signature_valid(body, request.META['HTTP_HMAC']):
-            return  Left('Invalid signature')
+            return Left('Invalid signature')
 
         return Right(dict(args, request_data=request.POST))
 

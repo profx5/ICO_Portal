@@ -1,6 +1,6 @@
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.parsers import MultiPartParser
-from rest_framework.serializers import ModelSerializer, FileField
+from rest_framework.serializers import ModelSerializer
 from rest_framework.response import Response
 
 from .auth import KYCAndLoginPermission

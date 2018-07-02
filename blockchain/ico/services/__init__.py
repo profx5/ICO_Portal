@@ -1,3 +1,4 @@
+# flake8: noqa
 from .calc_tokens_amount import CalcTokensAmount
 from .create_transaction import CreateTransaction
 from .get_events import GetEvents

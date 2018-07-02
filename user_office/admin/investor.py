@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.forms import UserChangeForm
 
-from user_office.models import Investor, KYC
+from user_office.models import Investor
 from .mixins import PasswordFieldMixin
 from .inlines import TokensMoveInstanceInline, KYCInstanceInline, SocialAuthInline
 

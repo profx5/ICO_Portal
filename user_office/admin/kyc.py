@@ -1,4 +1,4 @@
-from oslash import Right, Left
+from oslash import Left
 from django.contrib import admin
 from django_object_actions import DjangoObjectActions
 
@@ -21,7 +21,7 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
                 return ('decline_reason',)
 
     def get_readonly_fields(self, request, obj=None):
-        fields = ['state',]
+        fields = ['state']
 
         if obj:
             if obj.state == 'APPROVED':

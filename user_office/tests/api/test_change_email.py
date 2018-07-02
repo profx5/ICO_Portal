@@ -1,6 +1,5 @@
 import django.core.mail
 from datetime import datetime
-from django.db import connection
 
 from ..base import APITestCase
 
@@ -18,6 +17,7 @@ class _Base(APITestCase):
         investor.last_login = self.utcnow
         investor.save()
 
+
 class TestChangeEmail(_Base):
     def test_successful_send_email(self):
         response = self.client.post('/api/changeEmail/', {
@@ -32,7 +32,7 @@ class TestChangeEmail(_Base):
         self.assertEqual(sent_mails[0].to[0], self.email)
         self.assertEqual(sent_mails[0].subject, 'Change email')
         self.assertEqual(sent_mails[0].body,
-                         f'To change your email to {self.new_email} follow this link ' \
+                         f'To change your email to {self.new_email} follow this link '
                          'http://localhost:8000/change_email/MTtub2Ryb2dAb25ncmlkLnBybw/4wh-d320ec9b6fcf3233767d/')
 
     def test_invalid_email(self):

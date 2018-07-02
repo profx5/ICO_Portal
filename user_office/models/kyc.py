@@ -41,7 +41,6 @@ class KYC(models.Model):
     document_date = models.DateField()
     document_photo = models.ImageField(upload_to=partial(kyc_photo_path, 'photo'))
 
-
     decline_reason = models.TextField(blank=True, null=True)
     approve_txn_id = models.UUIDField(blank=True, null=True)
 

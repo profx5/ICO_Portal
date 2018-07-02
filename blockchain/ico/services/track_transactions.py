@@ -17,7 +17,7 @@ class _Base:
         return get_web3()
 
     def get_gas_price(self, args):
-        return Right(dict(args, gas_price=5000000000)) # 5 GWei
+        return Right(dict(args, gas_price=5000000000))  # 5 GWei
 
     def sign_transaction(self, args):
         try:
@@ -114,9 +114,8 @@ class ResendTransaction(_Base):
     def calc_new_gas_price(self, args):
         old_gas_price = args['txn_object'].gas_price
 
-        new_gas_price = int((old_gas_price * self.gas_price_factor) \
+        new_gas_price = int((old_gas_price * self.gas_price_factor)
                             .quantize(Decimal('1.'), rounding=ROUND_HALF_UP))
-
 
         return Right(dict(args, gas_price=new_gas_price))
 
@@ -172,6 +171,7 @@ class ResendTransaction(_Base):
             self.save_txn_object | \
             self.send_transaction | \
             self.return_result
+
 
 class TrackTransactions(_Base):
     @property

@@ -8,6 +8,7 @@ from .services import SyncICOInfo, SyncExchangeRates, ProcessTransfer, \
 
 logger = get_task_logger(__name__)
 
+
 @shared_task
 def sync_ico_info():
     service = SyncICOInfo()
@@ -18,6 +19,7 @@ def sync_ico_info():
         logger.info(f"ICO info successfully synced, ico_info_id={result.value['ico_info'].id}")
     else:
         logger.error(f'Erorr while syncing ico info, {result.value}')
+
 
 @shared_task
 def sync_exchange_rates():
@@ -31,6 +33,7 @@ def sync_exchange_rates():
         else:
             logger.error(f'Erorr while syncing exchange rate for {currency}, {r.value}')
 
+
 @shared_task
 def process_event(event):
     processor = ProcessTransfer()
@@ -41,6 +44,7 @@ def process_event(event):
         logger.info(f"Transfer with txn_hash {event.txn_hash} successfully processed (transfer_id={result.value['transfer'].id}).")
     else:
         logger.error(f'Got error while processing transfer with txn_hash {event.txn_hash}, {result.value}')
+
 
 @shared_task
 def check_events():
@@ -53,6 +57,7 @@ def check_events():
             process_event.delay(event)
     else:
         logger.error(f'Got error while checking events {new_events.value}')
+
 
 @shared_task
 def send_transactions():

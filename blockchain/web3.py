@@ -10,7 +10,9 @@ class Web3NotAvailableException(Exception):
     def __str__(self):
         return f'WEB3_RPC_URL: {self.rpc_url}'
 
+
 _web3_instance = None
+
 
 def get_web3():
     global _web3_instance

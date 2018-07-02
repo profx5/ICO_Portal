@@ -9,7 +9,8 @@ from blockchain.currencies.coinpayments.services.process_ipn import ProcessIPN, 
     SkipIPN
 from blockchain.currencies.coinpayments.services.get_account import GetAccount
 from blockchain.currencies import Currencies
-from user_office.factories import *
+from user_office.factories import InvestorFactory, PhaseFactory, ExchangeRateFactory, \
+    AccountFactory, PaymentFactory
 from user_office.models import Payment, TokensMove, Transfer, Account, Transaction
 from uuid import UUID
 
@@ -153,7 +154,7 @@ class TestProcessIPN(BlockChainTestCase):
                                             self.request_data,
                                             HTTP_HMAC=self.signature)
 
-        payment = PaymentFactory(external_id=self.request_data['ipn_id'])
+        PaymentFactory(external_id=self.request_data['ipn_id'])
 
         result = ProcessIPN(self.settings)(request)
         self.assertTrue(isinstance(result, SkipIPN))
@@ -180,11 +181,11 @@ class TestGetAccount(BlockChainTestCase):
     @patch('blockchain.currencies.coinpayments.services.get_account.GetAccount.get_coinpayments_account')
     def test_non_existing_account(self, get_account):
         response = {
-            "error":"ok",
-            "result":{
-                "address":"LitecoinAddress",
-                "pubkey":"",
-                "dest_tag":100,
+            "error": "ok",
+            "result": {
+                "address": "LitecoinAddress",
+                "pubkey": "",
+                "dest_tag": 100,
             }
         }
 

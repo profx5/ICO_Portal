@@ -1,7 +1,6 @@
 from .auth import KYCAndLoginPermission
 from rest_framework.generics import RetrieveAPIView
 from rest_framework import serializers
-from rest_framework.response import Response
 from user_office.models import Investor
 
 

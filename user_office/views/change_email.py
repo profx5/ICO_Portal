@@ -2,9 +2,10 @@ from django.views.decorators.http import require_GET
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth import logout
-from oslash import Left, Right
+from oslash import Right
 
 from user_office.services import SetEmail
+
 
 @require_GET
 @login_required

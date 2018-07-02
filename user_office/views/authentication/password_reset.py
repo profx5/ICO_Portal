@@ -1,4 +1,4 @@
-from django.contrib.auth.views import PasswordResetView as PasswordResetViewBase , \
+from django.contrib.auth.views import PasswordResetView as PasswordResetViewBase, \
     PasswordResetDoneView as PasswordResetDoneViewBase, \
     PasswordResetConfirmView as PasswordResetConfirmViewBase, \
     PasswordResetCompleteView as PasswordResetCompleteViewBase

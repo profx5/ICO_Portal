@@ -1,9 +1,8 @@
 from oslash import Right
 from decimal import Decimal
 
-from ico_portal.utils.datetime import datetime
 from ..base import BlockChainTestCase
-from user_office.factories import *
+from user_office.factories import ExchangeRateFactory, PhaseFactory
 from blockchain.ico.services import CalcTokensAmount
 
 

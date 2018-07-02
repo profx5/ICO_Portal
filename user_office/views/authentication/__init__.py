@@ -1,3 +1,4 @@
+# flake8: noqa
 from .login import LoginView
 from .signup import SignUpView
 from .logout import logout

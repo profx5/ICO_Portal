@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth import authenticate, login
-from django.urls import reverse
 
-from user_office.models import Investor
 from user_office.services import GetMMToken
 
 
@@ -15,7 +13,6 @@ class LoginView(View):
         context = {'token': token}
 
         return render(request, self.template_name, context)
-
 
     def get(self, request):
         if self.request.user.is_authenticated:

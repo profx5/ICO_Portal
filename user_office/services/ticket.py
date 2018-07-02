@@ -57,8 +57,7 @@ class CreateSupportTicket(_Base):
 
             return Right(dict(args, follow_up=follow_up))
         except DatabaseError as e:
-            return Leftr(f'Error while creating FollowUp, {e}')
-
+            return Left(f'Error while creating FollowUp, {e}')
 
     def __call__(self, reporter, title, description):
         return Right(dict(title=title,
@@ -68,6 +67,7 @@ class CreateSupportTicket(_Base):
                           self.get_or_create_queue | \
                           self.create_ticket | \
                           self.create_description
+
 
 class CommentTicket:
     def __call__(self, investor, ticket, comment):
@@ -82,7 +82,7 @@ class CommentTicket:
 
             return Right({'followup': followup})
         except DatabaseError as e:
-            return Leftr(f'Error while creating FollowUp, {e}')
+            return Left(f'Error while creating FollowUp, {e}')
 
 
 class CreateKYCTicket(_Base):
@@ -121,7 +121,6 @@ class CreateKYCTicket(_Base):
             return Right(args)
         except DatabaseError as e:
             return Left(f'Error while saving KYC, {e}')
-
 
     def __call__(self, kyc):
         return Right(dict(kyc=kyc,

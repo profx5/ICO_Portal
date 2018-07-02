@@ -23,18 +23,18 @@ class TestGetTokensMoves(APITestCase):
                                           transfer__block_number=112312343,
                                           direction='OUT')
 
-        payment_1 = PaymentFactory(tokens_move=tokens_move_1,
-                                   currency='ETH',
-                                   payer_account='pNNnjXDEBOgsGslvWOPh',
-                                   amount=842003,
-                                   amounti=84200300000000000,
-                                   txn_id='0x3990a1ef43a957dfa6cf6bd450419369cf55d4')
+        PaymentFactory(tokens_move=tokens_move_1,
+                       currency='ETH',
+                       payer_account='pNNnjXDEBOgsGslvWOPh',
+                       amount=842003,
+                       amounti=84200300000000000,
+                       txn_id='0x3990a1ef43a957dfa6cf6bd450419369cf55d4')
 
         response = self.client.get('/api/getTokensMoves/')
 
         self.assertEqual(response.status_code, 200)
 
-        self.assertEqual(json.dumps(response.data, indent=4),
+        self.assertEqual(json.dumps(response.data, indent=4),  # noqa: E128
 '''{
     "count": 2,
     "pages": 1,

@@ -6,7 +6,7 @@ from user_office import services
 
 
 def create_or_update_tokens_move(args):
-    investor_id =  args['investor_id']
+    investor_id = args['investor_id']
     transfer = args['transfer']
     direction = args['direction']
 
@@ -40,6 +40,7 @@ def create_or_update_tokens_move(args):
         return Right(dict(args, tokens_move=tokens_move))
     except DatabaseError as e:
         return Left(f'Error while saving TokensMove, {e}')
+
 
 def recalc_tokens_balance(args):
     investor = Investor.objects.select_for_update()\

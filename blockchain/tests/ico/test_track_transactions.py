@@ -73,6 +73,8 @@ class TestSendPreparedTxns(_Base):
         transaction.save()
 
         result = SendPreparedTxns()()
+        self.assertEqual(len(result), 1)
+        self.assertIsInstance(result[0], Right)
 
         transaction.refresh_from_db()
         sent_transaction.refresh_from_db()
@@ -94,6 +96,8 @@ class TestSendPreparedTxns(_Base):
         transaction.save()
 
         result = SendPreparedTxns()()
+        self.assertEqual(len(result), 1)
+        self.assertIsInstance(result[0], Right)
 
         transaction.refresh_from_db()
         self.assertEqual(transaction.nonce, 1)

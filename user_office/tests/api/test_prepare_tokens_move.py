@@ -16,7 +16,6 @@ class TestPrepareDeposit(APITestCase):
         PhaseFactory(bonus_percents=30)
         ExchangeRateFactory(currency='ETH', rate='750.77123')
 
-
         response = self.client.post('/api/prepareTokensMove/', {
             'value': '1.23',
             'txn_hash': self.txn_hash

@@ -2,7 +2,7 @@ from oslash import Right
 from decimal import Decimal
 
 from ..base import BlockChainTestCase
-from user_office.factories import *
+from user_office.factories import InvestorFactory, TokensMoveFactory, TransferFactory
 from user_office.models import Transfer, TokensMove, Payment, Investor
 from blockchain.ico.services import ProcessTransfer, Mint, SendPreparedTxns
 
@@ -15,7 +15,7 @@ class TestProcessTransfer(BlockChainTestCase):
         recepient = InvestorFactory.create(eth_account=recepient_account)
         self.pass_KYC(recepient_account)
 
-        txn_hash = self.call_crowsdsale_fallback(recepient_account, int(1.23 * 10 ** 18)) # 1.23 ETH
+        txn_hash = self.call_crowsdsale_fallback(recepient_account, int(1.23 * 10 ** 18))  # 1.23 ETH
         event = self.get_transfer_event(txn_hash)
 
         result = ProcessTransfer()(event)

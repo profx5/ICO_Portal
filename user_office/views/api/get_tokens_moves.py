@@ -19,6 +19,7 @@ class PaymentSerializer(ModelSerializer):
         fields = ('currency', 'payer_account', 'amount', 'amounti', 'txn_id',
                   'received_at')
 
+
 class TokensMoveSerializer(ModelSerializer):
     transfer = TransferSerializer()
     payment = PaymentSerializer(many=True)

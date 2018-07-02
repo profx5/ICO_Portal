@@ -1,5 +1,6 @@
 import os
 
+
 def fixture_path(name):
     path = os.path.join(
         os.path.dirname(os.path.realpath(__file__)),

@@ -1,3 +1,4 @@
+# flake8: noqa
 from .investor import Investor
 from .phase import Phase
 from .account import Account

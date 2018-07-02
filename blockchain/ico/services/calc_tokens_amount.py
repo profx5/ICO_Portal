@@ -4,6 +4,7 @@ from decimal import Decimal, ROUND_HALF_UP
 
 from user_office.models import Phase, ExchangeRate
 
+
 class CalcTokensAmount:
     @property
     def tokens_per_usd(self):

@@ -1,11 +1,10 @@
 import math
-from oslash import Left, Right
+from oslash import Right
 from web3 import Web3
 from eth_account import Account
 from django.conf import settings
 
 from ico_portal.utils.datetime import datetime
-from user_office.models import Investor
 
 
 TOKEN_PERIOD = settings.METAMASK_LOGIN_TOKEN_PERIOD

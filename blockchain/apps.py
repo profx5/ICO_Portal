@@ -23,4 +23,4 @@ class BlockchainConfig(AppConfig):
     def discover_tasks(self):
         from ico_portal.celery import app
 
-        app.autodiscover_tasks(['blockchain.ico',], force=True)
+        app.autodiscover_tasks(['blockchain.ico'], force=True)

@@ -15,7 +15,7 @@ class TestGetMe(APITestCase):
                           'investment_threshold': 10000})
 
     def test_passed_kyc_user(self):
-        kyc = KYCFactory(investor=self.get_investor())
+        KYCFactory(investor=self.get_investor())
 
         response = self.client.get('/api/getMe/')
 

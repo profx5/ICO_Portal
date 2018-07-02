@@ -5,6 +5,7 @@ from ..base import APITestCase
 from user_office.services import CreateSupportTicket
 from helpdesk.models import FollowUp, Ticket
 
+
 class TestTickets(APITestCase):
     def setUp(self):
         super().setUp()
@@ -63,7 +64,6 @@ class TestTickets(APITestCase):
         ticket_id = result.value['ticket'].id
         response = self.client.get(f'/api/tickets/{ticket_id}/')
 
-
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, {
             'id': self._get_ticket_id(),
@@ -100,7 +100,7 @@ class TestTickets(APITestCase):
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test description',
                 'user_email': self.get_investor().email
-            },{
+            }, {
                 'id': FollowUp.objects.order_by('id').last().id,
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test comment',

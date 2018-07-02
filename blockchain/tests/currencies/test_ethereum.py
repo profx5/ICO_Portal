@@ -3,7 +3,7 @@ from decimal import Decimal
 
 from ..base import BlockChainTestCase
 from user_office.models import Payment
-from user_office.factories import *
+from user_office.factories import InvestorFactory, TokensMoveFactory
 from blockchain.currencies.ethereum.services.process_purchase import ProcessPurchase
 
 

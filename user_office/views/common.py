@@ -1,6 +1,5 @@
 from django.shortcuts import redirect
 from user_office.models import Investor
-from django.contrib.auth import logout
 
 
 def is_user_authenticated(user):

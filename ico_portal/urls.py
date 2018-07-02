@@ -3,7 +3,6 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
-from django.contrib.auth import views as auth_views
 from rest_framework.documentation import include_docs_urls
 
 from landing import views as landing_views
@@ -30,7 +29,7 @@ urlpatterns = [
     path(r'password_reset/', user_office_views.password_reset_form, name='password_reset'),
     path(r'password_reset/done/', user_office_views.password_reset_done, name='password_reset_done'),
     re_path(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        user_office_views.password_reset_confirm, name='password_reset_confirm'),
+            user_office_views.password_reset_confirm, name='password_reset_confirm'),
     path('reset/done/', user_office_views.password_reset_complete, name='password_reset_complete'),
     re_path(r'^change_email/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
             user_office_views.change_email, name='change_email_confirm'),

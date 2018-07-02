@@ -42,7 +42,7 @@ class Phase(models.Model):
     begin_date = models.DateTimeField()
     end_date = models.DateTimeField()
     bonus_percents = models.IntegerField(
-        validators=[MinValueValidator(1),MaxValueValidator(100)])
+        validators=[MinValueValidator(1), MaxValueValidator(100)])
     hard_cap = TokenField()
 
     objects = BaseManager.from_queryset(PhaseQuerySet)()
@@ -60,7 +60,6 @@ class Phase(models.Model):
         if overlaps:
             raise ValidationError('Phase %s overlaps phase %s' %
                                   (self.name, ' and '.join(overlaps)))
-
 
     def save(self, *args, **kwargs):
         self.full_clean()

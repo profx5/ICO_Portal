@@ -1,6 +1,5 @@
 from user_office.views.common import is_user_authenticated
 from rest_framework.permissions import BasePermission
-from django.conf import settings
 
 
 Non_KYC_API_Views = ['GetMeView', 'KYCViewSet']
@@ -15,7 +14,7 @@ class KYCAndLoginPermission(BasePermission):
         return request.user and is_user_authenticated(request.user)
 
     def has_permission(self, request, view):
-        if self._check_request(request): # and self._check_KYC(request.user, view):
+        if self._check_request(request):  # and self._check_KYC(request.user, view):
             return True
         else:
             return False
