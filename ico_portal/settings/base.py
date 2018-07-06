@@ -23,6 +23,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'social_django',
 
+    'feincms',
+    'feincms.module.page',
+    'adminsortable2',
+    
     'bootstrapform',
     'helpdesk',
 
@@ -114,6 +118,11 @@ WEBPACK_LOADER = {
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "frontend/landing/dist/static"),  # landing
 ]
+
+MIGRATION_MODULES = {
+    'page': 'landing.migrate.page',
+}
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/tmp/ico_portal_media/'
