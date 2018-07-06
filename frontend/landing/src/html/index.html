@@ -417,6 +417,23 @@
         <div class="swiper-container RoadmapSection_sliderContainer">
             <div class="swiper-wrapper RoadmapSection_sliderWrapper">
 
+            {%for milestone in Milestone%}
+                {% if milestone.reached %}
+                <div class="swiper-slide RoadmapSection_slide  RoadmapSection_slide-reached" data-animation-type="fadeIn" data-animation-show="200">
+                {% else %}
+                <div class="swiper-slide RoadmapSection_slide" data-animation-type="fadeIn" data-animation-show="200">
+                {% endif %}
+                    <div class="RoadmapSection_slideContent">
+                        <span class="RoadmapSection_progress"></span>
+                        <div class="RoadmapSection_slideInnerContent " data-animation-type="fadeIn" data-animation-show="200">
+                            <h4 class="RoadmapSection_slideHeader">{{ milestone.period }}</h4>
+                            <p class="RoadmapSection_slideText">{{ milestone.time_to_begin }}</p>
+                            <p class="RoadmapSection_slideText">{{ milestone.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
                 <div class="swiper-slide RoadmapSection_slide  RoadmapSection_slide-reached" data-animation-type="fadeIn" data-animation-show="200">
                     <div class="RoadmapSection_slideContent">
                         <span class="RoadmapSection_progress"></span>
@@ -477,6 +494,24 @@
             <span class="NewsSection_headerPhantom HeaderPhantom" data-animation-show="153" data-animation-delay="0.1" data-animation-type="fadeInDown" data-animation-show="200">Latest news</span>
             <h2 class="NewsSection_header sectionHeader" data-animation-type="fadeInDown" data-animation-show="125">News</h2>
             <div class="NewsSection_newsWrapper">
+
+            {% for news in News %}
+                {% if news.url %}
+                <a class="NewsSection_newsCard NewsSection_newsCard-brand" target="blank" href="{{ news.url }}" data-date="March 28, 2018" data-animation-type="fadeIn" data-animation-show="200">
+                {% else %}
+                <a class="NewsSection_newsCard NewsSection_newsCard-brand" target="blank" href="{{ news.native_news.get_absolute_url }}" data-date="March 28, 2018" data-animation-type="fadeIn" data-animation-show="200">
+                {% endif %}
+                    {% if news.logo_svg %}
+                    <span class="NewsSection_logo">
+                        <img src="{{ news.logo_svg.url }}">
+                    </span>
+                    {% endif %}
+                    <h4 class="NewsSection_newsHeader">
+                        {{ news.title }}
+                    </h4>
+                    <div style="background-image: url('{{ news.background_photo.url }}');" class="NewsSection_newsImg"></div>
+                </a>
+            {% endfor %}
 
 
                 <a class="NewsSection_newsCard NewsSection_newsCard-brand" target="blank" href="http://markets.businessinsider.com/news/stocks/ai-blockchain-for-healthy-longevity-longevity-united-launches-joint-venture-with-eterly-conducts-token-sale-ico-to-raise-15m-to-build-advanced-technological-ecosystem-1019712982" data-date="March 28, 2018" data-animation-type="fadeIn" data-animation-show="200">

@@ -1,12 +1,31 @@
 from django.contrib import admin
-# from .models import Milestone
+from .models import *
+from adminsortable2.admin import SortableAdminMixin
+from feincms.admin import item_editor
 
 
-# class MilestoneAdmin(admin.ModelAdmin):
-#     list_display = ('label', 'current',)
+class NewsAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ('title', 'order',)
 
-#     class Meta:
-#         model = Milestone
+    class Meta:
+        model = News
+
+admin.site.register(News, NewsAdmin)
 
 
-# admin.site.register(Milestone, MilestoneAdmin)
+class MilestoneAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ('period', 'order',)
+
+    class Meta:
+        model = Milestone
+
+admin.site.register(Milestone, MilestoneAdmin)
+
+
+class DocumentAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ('title', 'order',)
+
+    class Meta:
+        model =  Document
+
+admin.site.register( Document,  DocumentAdmin)
