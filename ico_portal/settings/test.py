@@ -1,4 +1,4 @@
-from .base import *
+from .development import *
 
 MEDIA_ROOT = '/tmp/ico_portal_test_media/'
 
@@ -14,7 +14,7 @@ WEBPACK_LOADER = {
         }
 }
 
-REDAPTCHA_DATA_SITEKEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+RECAPTCHA_DATA_SITEKEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
 RECAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
 
 WEB3_RPC_URL = 'https://rinkeby.infura.io/froCrQaR0EB1JP83hAjj'
@@ -39,3 +39,34 @@ CURRENCIES = {
 
 EXCHANGE_RATES = ['ETH', 'LTC']
 EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'simple': {
+            'format': '%(levelname)s [%(asctime)s] %(name)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+        },
+        'evm': {
+            'handlers': [],
+            'propagate': False
+        },
+        'web3': {
+            'handlers': [],
+            'propagate': False
+        }
+    }
+}

@@ -1,32 +1,21 @@
-from oslash import Left, Right
 from django.db import DatabaseError
 
+from ico_portal.utils.service_object import ServiceObject, service_call
 from user_office.models import Transaction
 
 
-class CreateTransaction:
-    def build_object(self, args):
-        txn = Transaction(data=args['data'],
-                          value=args['value'],
-                          to_account=args['to'],
-                          gas=args['gas'],
+class CreateTransaction(ServiceObject):
+    @service_call
+    def __call__(self, transaction_data):
+        txn = Transaction(data=transaction_data['data'],
+                          value=transaction_data['value'],
+                          to_account=transaction_data['to'],
+                          gas=transaction_data['gas'],
                           state='PREPARED')
 
-        return Right(dict(args, txn=txn))
-
-    def save_object(self, args):
         try:
-            args['txn'].save()
+            txn.save()
 
-            return Right(args)
+            return self.success(txn=txn)
         except DatabaseError as e:
-            return Left(f'Error while saving Transaction, {e}')
-
-    def return_txn(self, args):
-        return Right(args['txn'])
-
-    def __call__(self, transaction_data):
-        return Right(transaction_data) | \
-            self.build_object | \
-            self.save_object | \
-            self.return_txn
+            return self.fail(e)

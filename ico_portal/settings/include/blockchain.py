@@ -29,7 +29,7 @@ CURRENCIES = {
     },
     'litecoin': {
         'module': 'coinpayments',
-        'code': 'LTC',
+        'code': 'LTCT',
         'name': 'Litecoin',
         'merchant': '69d94a11a25bc1245847e2c5175cd254',
         'ipn_secret': 'q123q123q123',

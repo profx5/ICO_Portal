@@ -1,50 +1,46 @@
-from oslash import Right, Left
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.db import DatabaseError
 
+from ico_portal.utils.service_object import service_call, ServiceObject
 
-class ChangePassword:
-    def check_old_password(self, args):
-        if args['investor'].check_password(args['old_password']):
-            return Right(args)
+
+class ChangePassword(ServiceObject):
+    def check_old_password(self, context):
+        if context.investor.check_password(context.old_password):
+            return self.success()
         else:
-            return Left('password_incorrect')
+            return self.fail('password_incorrect')
 
-    def check_new_password(self, args):
-        old_password = args['old_password']
-        password1 = args['new_password1']
-        password2 = args['new_password2']
-
-        if (password1 and password2) and password1 == password2:
-            if old_password == password2:
-                return Left('same_password')
-
+    def check_new_password(self, context):
+        if (context.new_password1 and context.new_password2) and \
+           context.new_password1 == context.new_password2:
+            if context.old_password == context.new_password2:
+                return self.fail('same_password')
             try:
-                validate_password(password2, args['investor'])
+                validate_password(context.new_password2, context.investor)
 
-                return Right(args)
+                return self.success()
             except ValidationError as e:
-                return Left('invalid_password')
+                return self.fail('invalid_password')
 
-        return Left('password_mismatch')
+        return self.fail('password_mismatch')
 
-    def set_password(self, args):
-        investor = args['investor']
+    def set_password(self, context):
+        investor = context.investor
 
         try:
-            investor.set_password(args['new_password2'])
+            investor.set_password(context.new_password2)
             investor.save()
 
-            return Right(args)
+            return self.success()
         except DatabaseError as e:
-            return Left(f'Error while saving Investor, {e}')
+            return self.fail(e)
 
+    @service_call
     def __call__(self, investor, old_password, new_password1, new_password2):
-        return Right({'investor': investor,
-                      'old_password': old_password,
-                      'new_password1': new_password1,
-                      'new_password2': new_password2}) | \
-                      self.check_old_password | \
-                      self.check_new_password | \
-                      self.set_password
+        return self.success(investor=investor, old_password=old_password,
+                            new_password1=new_password1, new_password2=new_password2) | \
+                            self.check_old_password | \
+                            self.check_new_password | \
+                            self.set_password

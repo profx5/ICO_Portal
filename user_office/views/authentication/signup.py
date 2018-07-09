@@ -23,7 +23,7 @@ class SignUpView(View):
         form = SignUpForm()
 
         return render(request, self.template_name, {'form': form,
-                                                    'sitekey': settings.REDAPTCHA_DATA_SITEKEY})
+                                                    'sitekey': settings.RECAPTCHA_DATA_SITEKEY})
 
     def post(self, request, *args, **kwargs):
         form = SignUpForm(request.POST)

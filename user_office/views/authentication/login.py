@@ -9,7 +9,7 @@ class LoginView(View):
     template_name = "authentication/login.html"
 
     def render_login_page(self, request):
-        token = GetMMToken()().value
+        token = GetMMToken()().value.token
         context = {'token': token}
 
         return render(request, self.template_name, context)

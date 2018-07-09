@@ -22,7 +22,7 @@ class TestCreateTransaction(BlockChainTestCase):
         self.assertEqual(transactions.count(), 1)
 
         transaction = transactions.first()
-        self.assertEqual(transaction, result.value)
+        self.assertEqual(transaction, result.value.txn)
         self.assertEqual(transaction.data, txn_data['data'])
         self.assertEqual(transaction.gas, txn_data['gas'])
         self.assertEqual(transaction.to_account, txn_data['to'])

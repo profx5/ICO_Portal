@@ -58,6 +58,8 @@ class KYCViewSet(GenericViewSet):
             kyc = serializer.save(investor=self.request.user)
             CreateKYCTicket()(kyc)
 
+            kyc.refresh_from_db()
+
             retrieve_serializer = RetrieveKYCSerializer(
                 kyc,
                 context=self.get_serializer_context())

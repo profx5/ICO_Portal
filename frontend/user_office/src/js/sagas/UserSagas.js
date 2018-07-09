@@ -7,13 +7,13 @@ import * as MetamaskActions from '../actions/MetamaskActions'
 import Utils from '../utils/index'
 
 export class UserSagas {
-    static * setAccount({address}) {
+    static * setAccount(action) {
         try {
             yield call(axios, {
                 method: 'POST',
                 url: Api.setEthAccount(),
                 data: {
-                    'eth_account': address
+                    'eth_account': action.payload
                 }
             })
 

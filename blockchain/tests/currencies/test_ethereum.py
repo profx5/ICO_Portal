@@ -31,7 +31,7 @@ class TestEthereum(BlockChainTestCase):
         self.assertEqual(payments.count(), 1)
 
         payment = payments.first()
-        self.assertEqual(result.value, payment)
+        self.assertEqual(result.value.payment, payment)
 
         self.assertEqual(payment.currency, 'ETH')
         self.assertEqual(payment.payer_account, self.investor_address)
@@ -51,6 +51,6 @@ class TestEthereum(BlockChainTestCase):
         result = ProcessPurchase()(tokens_move)
 
         self.assertTrue(isinstance(result, Right))
-        self.assertEqual(result.value, None)
+        self.assertEqual(result.value.payment, None)
 
         self.assertEqual(Payment.objects.count(), 0)

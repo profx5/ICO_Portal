@@ -3,7 +3,9 @@ class BaseSettings:
         self._config = config
 
     def __getattr__(self, key):
-        if key in self._config:
-            return self._config[key]
+        config = self.__getattribute__('_config')
+
+        if key in config:
+            return config[key]
         else:
             self.__getattribute__(key)

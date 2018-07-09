@@ -1,42 +1,42 @@
-from oslash import Right, Left
 from django.db import DatabaseError
 
 from ico_portal.utils.datetime import datetime
+from ico_portal.utils.service_object import ServiceObject, service_call
 from helpdesk.models import Queue, Ticket, FollowUp
 
 
-class _Base:
-    def get_or_create_queue(self, args):
-        slug = args['queue__slug']
-        title = args['queue__title']
+class _Base(ServiceObject):
+    def get_or_create_queue(self, context):
+        slug = context.queue__slug
+        title = context.queue__title
 
         queue = Queue.objects.filter(slug=slug)
 
         if queue.exists():
-            return Right(dict(args, queue=queue.first()))
+            return self.success(queue=queue.first())
         else:
             queue = Queue(slug=slug, title=title)
 
             try:
                 queue.save()
 
-                return Right(dict(args, queue=queue))
+                return self.success(queue=queue)
             except DatabaseError as e:
-                return Left(f'Error while craeting Queue, {e}')
+                return self.fail(e)
 
-    def create_ticket(self, args):
-        ticket = Ticket(title=args['title'],
+    def create_ticket(self, context):
+        ticket = Ticket(title=context.title,
                         created=datetime.utcnow(),
                         status=Ticket.OPEN_STATUS,
-                        queue=args['queue'],
-                        reporter=args['reporter'])
+                        queue=context.queue,
+                        reporter=context.reporter)
 
         try:
             ticket.save()
 
-            return Right(dict(args, ticket=ticket))
+            return self.success(ticket=ticket)
         except DatabaseError as e:
-            return Left(f'Error while saving Ticket, {e}')
+            return self.fail(e)
 
 
 class CreateSupportTicket(_Base):
@@ -45,31 +45,31 @@ class CreateSupportTicket(_Base):
         'queue__title': 'Support'
     }
 
-    def create_description(self, args):
-        follow_up = FollowUp(ticket=args['ticket'],
+    def create_description(self, context):
+        follow_up = FollowUp(ticket=context.ticket,
                              title='Comment',
-                             comment=args['description'],
+                             comment=context.description,
                              public=True,
-                             user=args['reporter'])
+                             user=context.reporter)
 
         try:
             follow_up.save()
 
-            return Right(dict(args, follow_up=follow_up))
+            return self.success(follow_up=follow_up)
         except DatabaseError as e:
-            return Left(f'Error while creating FollowUp, {e}')
+            return self.fail(e)
 
+    @service_call
     def __call__(self, reporter, title, description):
-        return Right(dict(title=title,
-                          reporter=reporter,
-                          description=description,
-                          **self.queue_spec)) | \
-                          self.get_or_create_queue | \
-                          self.create_ticket | \
-                          self.create_description
+        return self.success(title=title, reporter=reporter,
+                            description=description, **self.queue_spec) | \
+                            self.get_or_create_queue | \
+                            self.create_ticket | \
+                            self.create_description
 
 
-class CommentTicket:
+class CommentTicket(ServiceObject):
+    @service_call
     def __call__(self, investor, ticket, comment):
         followup = FollowUp(ticket=ticket,
                             title='Comment',
@@ -80,9 +80,9 @@ class CommentTicket:
         try:
             followup.save()
 
-            return Right({'followup': followup})
+            return self.success(followup=followup)
         except DatabaseError as e:
-            return Left(f'Error while creating FollowUp, {e}')
+            return self.fail(e)
 
 
 class CreateKYCTicket(_Base):
@@ -93,70 +93,70 @@ class CreateKYCTicket(_Base):
 
     title_template = 'KYC request for user {username}'
 
-    def get_title(self, args):
-        title = self.title_template.format(username=args['kyc'].investor.email)
+    def get_title(self, context):
+        title = self.title_template.format(username=context.reporter.email)
 
-        return Right(dict(args, title=title))
+        return self.success(title=title)
 
-    def create_kyc_comment(self, args):
-        follow_up = FollowUp(ticket=args['ticket'],
+    def create_kyc_comment(self, context):
+        follow_up = FollowUp(ticket=context.ticket,
                              title='KYC link',
-                             comment=args['ticket'].reporter_kyc_url,
+                             comment=context.ticket.reporter_kyc_url,
                              public=False)
 
         try:
             follow_up.save()
 
-            return Right(dict(args, follow_up=follow_up))
+            return self.success(follow_up=follow_up)
         except DatabaseError as e:
-            return Left(f'Error while saving FollowUp, {e}')
+            return self.fail(e)
 
-    def set_ticket_id(self, args):
-        kyc = args['kyc']
+    def set_ticket_id(self, context):
+        kyc = context.kyc
 
         try:
-            kyc.ticket = args['ticket']
+            kyc.ticket = context.ticket
             kyc.save()
 
-            return Right(args)
+            return self.success(kyc=kyc)
         except DatabaseError as e:
-            return Left(f'Error while saving KYC, {e}')
+            return self.fail(e)
 
+    @service_call
     def __call__(self, kyc):
-        return Right(dict(kyc=kyc,
-                          reporter=kyc.investor,
-                          **self.queue_spec)) | \
-                          self.get_or_create_queue | \
-                          self.get_title | \
-                          self.create_ticket | \
-                          self.create_kyc_comment | \
-                          self.set_ticket_id
+        return self.success(kyc=kyc, reporter=kyc.investor, **self.queue_spec) | \
+            self.get_or_create_queue | \
+            self.get_title | \
+            self.create_ticket | \
+            self.create_kyc_comment | \
+            self.set_ticket_id
 
 
-class UpdateKYCTicket:
+class UpdateKYCTicket(ServiceObject):
     follow_up_title = 'User updated KYC data'
 
-    def find_ticket(self, args):
-        ticket = args['kyc'].ticket
+    def find_ticket(self, context):
+        ticket = context.kyc.ticket
 
         if ticket:
-            return Right(dict(args, ticket=ticket))
+            return self.success(ticket=ticket)
         else:
-            return Left('Ticket not found')
+            return self.fail('Ticket not found')
 
-    def create_follow_up(self, args):
-        follow_up = FollowUp(ticket=args['ticket'],
+    def create_follow_up(self, context):
+        follow_up = FollowUp(ticket=context.ticket,
                              title=self.follow_up_title,
                              public=False)
 
         try:
             follow_up.save()
 
-            return Right(dict(args, follow_up=follow_up))
+            return self.success(follow_up=follow_up)
         except DatabaseError as e:
-            return Left(f'Error while saving FollowUp, {e}')
+            return self.fail(e)
 
+    @service_call
     def __call__(self, kyc):
-        return Right({'kyc': kyc}) | \
+        return self.success(kyc=kyc) | \
             self.find_ticket | \
             self.create_follow_up

@@ -4,9 +4,10 @@ from rest_framework.response import Response
 
 from blockchain.currencies import Currencies
 from user_office.models import ExchangeRate
+from ico_portal.utils.logger import LoggerMixin
 
 
-class GetAvailableCurrencies(APIView):
+class GetAvailableCurrencies(APIView, LoggerMixin):
     """
     Return list of available cryptocurrencies
     """
@@ -19,6 +20,8 @@ class GetAvailableCurrencies(APIView):
         if obj:
             return obj.rate
         else:
+            self.logger.error(f"Exchange rate for currenct {currency} not found")
+
             return 0
 
     def get(self, request, *args, **kwargs):

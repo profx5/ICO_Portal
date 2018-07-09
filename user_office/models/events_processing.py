@@ -18,4 +18,4 @@ class EventsProcessing(models.Model):
         db_table = 'events_processing'
 
     def __str__(self):
-        return f'ICO info for date {self.creation_date}'
+        return f'ICO info for date {self.last_update_at}'
