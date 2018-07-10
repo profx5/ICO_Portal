@@ -22,7 +22,7 @@ class TokensPurchasedEvent:
 
 
 class CrowdsaleContract(BaseContract):
-    abi_file_path = '{BASE_DIR}/contracts/KYCCrowdsale.json'
+    abi_file_path = '{BASE_DIR}/solidity-contracts/contracts/KYCCrowdsale.json'
 
     def pass_kyc(self, address):
         gas = 50000

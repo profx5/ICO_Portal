@@ -8,7 +8,7 @@ from .base import BaseContract
 
 
 class TokenContract(BaseContract):
-    abi_file_path = '{BASE_DIR}/contracts/MintableToken.json'
+    abi_file_path = '{BASE_DIR}/solidity-contracts/contracts/MintableToken.json'
 
     def get_total_supply(self):
         return self.contract.functions.totalSupply().call()
