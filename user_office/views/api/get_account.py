@@ -30,7 +30,7 @@ class GetAccount(APIView):
         result = GetAccountService()(request.user, currency)
 
         if isinstance(result, Right):
-            return Response(data={'success': True, 'address': result.value.address})
+            return Response(data={'success': True, 'address': result.value.account.address})
         else:
             return Response(data={'success': False, 'error': result.value},
                             status=422)

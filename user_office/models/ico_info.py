@@ -15,4 +15,4 @@ class ICO_Info(models.Model):
         db_table = 'ico_info'
 
     def __str__(self):
-        return f'ICO info for date {self.creation_date}'
+        return f'ICO info for date {self.created_at}'

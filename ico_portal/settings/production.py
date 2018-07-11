@@ -9,4 +9,4 @@ WEBPACK_LOADER = {
         'CACHE': True
     }
 }
-DEBUG = True
+DEBUG = False

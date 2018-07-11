@@ -1,30 +1,29 @@
-from oslash import Left, Right, Nothing
-from django.db import transaction, DatabaseError
+from django.db import DatabaseError
 
 from blockchain.currencies.ethereum.services import process_purchase
 from user_office.models import Transfer, Transaction
 from .process_tokens_moves import ProcessIncomingTokensMove, \
     ProcessOutgoingTokensMove
+from ico_portal.utils.service_object import ServiceObject, service_call, transactional
 
 
-class ProcessTransfer:
-    def check_event(self, args):
-        if args['event'].removed:
-            return Left('Transfer event has removed=True')
+class ProcessTransfer(ServiceObject):
+    def check_event(self, context):
+        if context.event.removed:
+            return self.fail('Transfer event has removed=True')
         else:
-            return Right(args)
+            return self.success()
 
-    def find_transaction(self, args):
-        txn_hash = args['event'].txn_hash
-        transaction = Transaction.objects.filter(txn_hash=txn_hash)
+    def find_transaction(self, context):
+        transaction = Transaction.objects.filter(txn_hash=context.event.txn_hash)
 
         if transaction.exists():
-            return Right(dict(args, transaction=transaction.first()))
+            return self.success(transaction=transaction.first())
         else:
-            return Right(dict(args, transaction=None))
+            return self.success(transaction=None)
 
-    def get_transfer(self, args):
-        event = args['event']
+    def get_transfer(self, context):
+        event = context.event
 
         fields = {
             'txn_hash': event.txn_hash,
@@ -36,7 +35,7 @@ class ProcessTransfer:
             'created_at': event.accepted_at,
         }
 
-        transaction = args['transaction']
+        transaction = context.transaction
 
         if transaction:
             transfer = Transfer.objects.filter(mint_txn_id=transaction.txn_id).first()
@@ -45,7 +44,7 @@ class ProcessTransfer:
 
         if transfer:
             if transfer.actual:
-                return Left(f'Found Transfer with id={transfer.id} is already actual')
+                return self.fail(f'Found Transfer with id={transfer.id} is already actual')
 
             for k, v in fields.items():
                 setattr(transfer, k, v)
@@ -56,48 +55,39 @@ class ProcessTransfer:
 
         try:
             transfer.save()
+
+            return self.success(transfer=transfer)
         except DatabaseError as e:
-            return Left(f'Error while saving transfer {e}')
+            return self.fail(e)
 
-        return Right(dict(args, transfer=transfer))
+    def process_incoming_tokens_move(self, context):
+        return ProcessIncomingTokensMove()(context.transfer) | (
+            lambda result: self.success(incoming_TM=result.tokens_move)
+        )
 
-    def process_incoming_tokens_move(self, args):
-        incoming_TM = ProcessIncomingTokensMove()(args['transfer'])
-
-        if isinstance(incoming_TM, Nothing):
-            return Right(dict(args, incoming_TM=None))
+    def process_outgoing_tokens_move(self, context):
+        if context.event.is_purchase:
+            return self.success(outgoing_TM=None)
         else:
-            return incoming_TM | (lambda result: Right(dict(args, incoming_TM=result['tokens_move'])))
+            return ProcessOutgoingTokensMove()(context.transfer) | (
+                 lambda result: self.success(outgoing_TM=result.tokens_move)
+            )
 
-    def process_outgoing_tokens_move(self, args):
-        if args['event'].is_purchase:
-            return Right(dict(args, outgoing_TM=None))
+    def maybe_process_purchase(self, context):
+        if context.event.is_purchase and context.incoming_TM:
+            return process_purchase.ProcessPurchase()(context.incoming_TM) | (
+                lambda result: self.success(payment=result.payment)
+            )
         else:
-            outgoing_TM = ProcessOutgoingTokensMove()(args['transfer'])
+            return self.success()
 
-            if isinstance(outgoing_TM, Nothing):
-                return Right(dict(args, outgoing_TM=None))
-            else:
-                return outgoing_TM | (lambda tokens_move: Right(dict(args, outgoing_TM=tokens_move)))
-
-    def maybe_process_purchase(self, args):
-        if args['event'].is_purchase and args['incoming_TM']:
-            return process_purchase.ProcessPurchase()(args['incoming_TM']) | \
-                (lambda payment: Right(dict(args, payment=payment)))
-        else:
-            return Right(args)
-
+    @service_call
+    @transactional
     def __call__(self, event):
-        with transaction.atomic():
-            result = Right({'event': event}) | \
-                     self.check_event | \
-                     self.find_transaction | \
-                     self.get_transfer | \
-                     self.process_incoming_tokens_move | \
-                     self.process_outgoing_tokens_move | \
-                     self.maybe_process_purchase
-
-            if isinstance(result, Left):
-                transaction.set_rollback(True)
-
-            return result
+        return self.success(event=event) | \
+            self.check_event | \
+            self.find_transaction | \
+            self.get_transfer | \
+            self.process_incoming_tokens_move | \
+            self.process_outgoing_tokens_move | \
+            self.maybe_process_purchase

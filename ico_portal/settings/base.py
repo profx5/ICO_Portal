@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'webpack_loader',
     'rest_framework',
     'social_django',
+    'raven.contrib.django.raven_compat',
 
     'feincms',
     'feincms.module.page',
@@ -36,6 +37,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
+    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -127,3 +130,7 @@ MIGRATION_MODULES = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/tmp/ico_portal_media/'
 LOGIN_URL = '/login/'
+
+RAVEN_CONFIG = {
+    'dsn': 'https://98e586745597476dafda3ea15296e38f:1495fcec1c6d4d55afeeed1dce5f05bd@sentry.io/1236224',
+}
