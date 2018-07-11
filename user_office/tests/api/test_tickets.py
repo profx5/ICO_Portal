@@ -35,7 +35,7 @@ class TestTickets(APITestCase):
                 'id': self._get_follow_up_id(),
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test description',
-                'user_email': self.get_investor().email
+                'sender': self.get_investor().email
             }]
         })
 
@@ -74,7 +74,7 @@ class TestTickets(APITestCase):
                 'id': self._get_follow_up_id(),
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test description',
-                'user_email': self.get_investor().email
+                'sender': self.get_investor().email
             }]
         })
 
@@ -99,12 +99,12 @@ class TestTickets(APITestCase):
                 'id': FollowUp.objects.order_by('id').first().id,
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test description',
-                'user_email': self.get_investor().email
+                'sender': self.get_investor().email
             }, {
                 'id': FollowUp.objects.order_by('id').last().id,
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test comment',
-                'user_email': self.get_investor().email
+                'sender': self.get_investor().email
             }]
         })
 
@@ -131,6 +131,38 @@ class TestTickets(APITestCase):
                 'id': self._get_follow_up_id(),
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test description',
-                'user_email': self.get_investor().email
+                'sender': self.get_investor().email
+            }]
+        })
+
+    def test_first_last_name(self):
+        investor = self.get_investor()
+        investor.first_name = 'John'
+        investor.last_name = 'Doe'
+        investor.save()
+
+        result = CreateSupportTicket()(reporter=investor,
+                                       title='Test title',
+                                       description='Test description')
+        self.assertIsInstance(result, Right)
+
+        ticket = result.value['ticket']
+        FollowUp.objects.create(ticket=ticket,
+                                title='Private comment',
+                                public=False)
+
+        response = self.client.get(f'/api/tickets/{ticket.id}/')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {
+            'id': self._get_ticket_id(),
+            'title': 'Test title',
+            'created': self.utcnow.isoformat(),
+            'status': 1,
+            'public_follow_ups': [{
+                'id': self._get_follow_up_id(),
+                'date': self.utcnow.isoformat(),
+                'comment': 'Test description',
+                'sender': 'John Doe'
             }]
         })
