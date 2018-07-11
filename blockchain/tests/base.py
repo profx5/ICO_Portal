@@ -11,7 +11,7 @@ from blockchain.ico.contracts.token import TokenContract, TransferEvent
 
 
 class BlockChainTestCase(TestCase):
-    _compiled_contracts_path = f'{settings.BASE_DIR}/contracts/compiled.json'
+    _compiled_contracts_path = f'{settings.BASE_DIR}/solidity-contracts/contracts/compiled.json'
     crowdsale_eth_usdc = 55015
     crowdsale_bonus_percents = 40
 

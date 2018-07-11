@@ -17,6 +17,7 @@ before_install:
 
 install:
   - pip install -r requirements.txt
+  - cd solidity-contracts && npm install && cd ..
   # - npm install
   # # chromedriver
   # - wget -N http://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip -P ~/
@@ -35,3 +36,4 @@ script:
   - ./manage.py test
   - flake8
   # - "./manage.py behave -D SELENIUM_CHROME_HEADLESS"
+  - cd solidity-contracts && ./scripts/test.sh
