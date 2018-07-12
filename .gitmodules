@@ -1,3 +1,6 @@
 [submodule "django-helpdesk"]
 	path = django-helpdesk
 	url = git@github.com:OnGridSystems/django-helpdesk.git
+[submodule "solidity-contracts/openzeppelin-solidity"]
+	path = solidity-contracts/openzeppelin-solidity
+	url = https://github.com/OpenZeppelin/openzeppelin-solidity.git
