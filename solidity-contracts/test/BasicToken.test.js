@@ -1,4 +1,4 @@
-import assertRevert from './helpers/assertRevert';
+import expectThrow from './helpers/expectThrow';
 const BasicToken = artifacts.require('BasicTokenMock');
 
 contract('StandardToken', function ([_, owner, recipient, anotherAccount]) {
@@ -42,7 +42,7 @@ contract('StandardToken', function ([_, owner, recipient, anotherAccount]) {
         const amount = 101;
 
         it('reverts', async function () {
-          await assertRevert(this.token.transfer(to, amount, { from: owner }));
+          await expectThrow(this.token.transfer(to, amount, { from: owner }));
         });
       });
 
@@ -68,14 +68,6 @@ contract('StandardToken', function ([_, owner, recipient, anotherAccount]) {
           assert.equal(logs[0].args.to, to);
           assert(logs[0].args.value.eq(amount));
         });
-      });
-    });
-
-    describe('when the recipient is the zero address', function () {
-      const to = ZERO_ADDRESS;
-
-      it('reverts', async function () {
-        await assertRevert(this.token.transfer(to, 100, { from: owner }));
       });
     });
   });

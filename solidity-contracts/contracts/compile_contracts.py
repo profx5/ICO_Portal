@@ -3,8 +3,8 @@
 import json
 from solc import compile_source
 
-CONTRACT_FILENAME = 'KYCCrowdsale.sol'
-COMPILED_FILENAME = 'compiled.json'
+CONTRACT_FILENAME = 'VeraCoin.sol'
+COMPILED_FILENAME = 'VeraCoin.json'
 
 def main():
     with open(CONTRACT_FILENAME, 'r') as f:
