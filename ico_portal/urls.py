@@ -15,9 +15,8 @@ urlpatterns = [
     path('', include('social_django.urls', namespace='social')),
     path('', include('blockchain.urls', namespace='blockchain')),
 
-    re_path('^user_office/*', user_office_views.user_office, name='user_office'),
+    re_path(r'^user_office/.*', user_office_views.user_office, name='user_office'),
     path('api/', include(api_urlpatterns)),
-    path('docs/', include_docs_urls(title='User office API docs', public=False)),
 
     path('support/', include('helpdesk.urls')),
     path('admin/', admin.site.urls),
@@ -34,3 +33,8 @@ urlpatterns = [
     re_path(r'^change_email/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
             user_office_views.change_email, name='change_email_confirm'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns.append(
+        path('docs/', include_docs_urls(title='User office API docs', public=False))
+    )

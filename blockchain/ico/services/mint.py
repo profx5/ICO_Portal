@@ -1,24 +1,20 @@
-from oslash import Right
 from blockchain.ico.contracts import TokenContract
 from .create_transaction import CreateTransaction
+from ico_portal.utils.service_object import ServiceObject, service_call
 
 
-class Mint:
-    def create_txn_data(self, args):
-        txn_data = TokenContract().mint(to=args['to'], amount=args['amount'])
+class Mint(ServiceObject):
+    def create_txn_data(self, context):
+        txn_data = TokenContract().mint(to=context.to, amount=context.amount)
 
-        return Right(dict(args, txn_data=txn_data))
+        return self.success(txn_data=txn_data)
 
-    def create_transaction(self, args):
-        return CreateTransaction()(args['txn_data']) | \
-            (lambda transaction: Right(dict(args, transaction=transaction)))
+    def create_transaction(self, context):
+        return CreateTransaction()(context.txn_data) | \
+            (lambda result: self.success(transaction=result.txn))
 
-    def return_txn_id(self, args):
-        return Right(args['transaction'].txn_id)
-
+    @service_call
     def __call__(self, to, amount):
-        return Right({'to': to,
-                      'amount': amount}) | \
-                      self.create_txn_data | \
-                      self.create_transaction | \
-                      self.return_txn_id
+        return self.success(to=to, amount=amount) | \
+            self.create_txn_data | \
+            self.create_transaction

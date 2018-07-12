@@ -1,49 +1,46 @@
 from django.db.models import Sum
-from oslash import Right, Left
 from django.db import DatabaseError
 
 from user_office.models import TokensMove
+from ico_portal.utils.service_object import ServiceObject, service_call
 
 
-class RecalcBalance:
-    def calculate_incoming_amount(self, args):
-        result = TokensMove.objects.filter(investor=args['investor'],
+class RecalcBalance(ServiceObject):
+    def calculate_incoming_amount(self, context):
+        result = TokensMove.objects.filter(investor=context.investor,
                                            state='ACTUAL',
                                            direction='IN') \
                                    .aggregate(amount=Sum('amount'))
 
         if result['amount']:
-            return Right(dict(args, incoming_amount=result['amount']))
+            return self.success(incoming_amount=result['amount'])
         else:
-            return Right(dict(args, incoming_amount=0))
+            return self.success(incoming_amount=0)
 
-    def calculate_outgoing_amount(self, args):
-        result = TokensMove.objects.filter(investor=args['investor'],
+    def calculate_outgoing_amount(self, context):
+        result = TokensMove.objects.filter(investor=context.investor,
                                            state='ACTUAL',
                                            direction='OUT') \
                                    .aggregate(amount=Sum('amount'))
 
         if result['amount']:
-            return Right(dict(args, outgoing_amount=result['amount']))
+            return self.success(outgoing_amount=result['amount'])
         else:
-            return Right(dict(args, outgoing_amount=0))
+            return self.success(outgoing_amount=0)
 
-    def set_amount(self, args):
-        args['investor'].tokens_amount = args['incoming_amount'] - args['outgoing_amount']
+    def set_amount(self, context):
+        context.investor.tokens_amount = context.incoming_amount - context.outgoing_amount
 
-        return Right(args)
-
-    def save_investor(self, args):
         try:
-            args['investor'].save()
+            context.investor.save()
 
-            return Right(args)
+            return self.success(investor=context.investor)
         except DatabaseError as e:
-            return Left(f'Error while saving investor {e}')
+            return self.fail(e)
 
+    @service_call
     def __call__(self, investor):
-        return Right({'investor': investor}) | \
+        return self.success(investor=investor) | \
             self.calculate_incoming_amount | \
             self.calculate_outgoing_amount | \
-            self.set_amount | \
-            self.save_investor
+            self.set_amount

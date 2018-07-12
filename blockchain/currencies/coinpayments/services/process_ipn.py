@@ -1,10 +1,11 @@
-from oslash import Left, Right
+from oslash import Left
 from decimal import Decimal
-from django.db import transaction, DatabaseError
+from django.db import DatabaseError
 from coinpayments.api import CoinPaymentsAPI
 
 from blockchain.ico.services import PrepareTokensMove, CalcTokensAmount, Mint
 from user_office.models import Account, Payment
+from ico_portal.utils.service_object import ServiceObject, service_call, transactional
 
 
 class SkipIPN(Left):
@@ -12,7 +13,7 @@ class SkipIPN(Left):
         return SkipIPN(self._get_value())
 
 
-class ProcessIPN:
+class ProcessIPN(ServiceObject):
     def __init__(self, settings):
         self.settings = settings
 
@@ -22,95 +23,87 @@ class ProcessIPN:
 
         return api.check_signature(body, signature)
 
-    def check_request(self, args):
-        request = args['request']
-
+    def check_request(self, context):
+        request = context.request
         body = request.body
 
         if request.method != 'POST':
-            return Left('Invalid request method')
+            return self.fail('Invalid request method')
 
         if request.POST.get('merchant') != self.settings.merchant:
-            return Left('Invalid request merchant')
+            return self.fail('Invalid request merchant')
 
         if request.POST.get('ipn_type') != 'deposit':
-            return SkipIPN('Invalid ipn_type')
+            return self.fail_with(SkipIPN('Invalid ipn_type'))
 
         status = int(request.POST.get('status'))
         if status < 100 and status != 2:
-            return SkipIPN('Invalid status')
+            return self.fail_with(SkipIPN('Invalid status'))
 
         if not self._is_signature_valid(body, request.META['HTTP_HMAC']):
-            return Left('Invalid signature')
+            return self.fail('Invalid signature')
 
-        return Right(dict(args, request_data=request.POST))
+        return self.success()
 
-    def find_payment_by_ipn_id(self, args):
-        payments = Payment.objects.filter(external_id=args['request_data']['ipn_id'])
+    def find_payment_by_ipn_id(self, context):
+        payments = Payment.objects.filter(external_id=context.request.POST.get('ipn_id'))
 
         if payments.exists():
-            return SkipIPN('IPN already processed')
+            return self.fail_with(SkipIPN('IPN already processed'))
         else:
-            return Right(args)
+            return self.success()
 
-    def find_investor(self, args):
-        accounts = Account.objects.filter(address=args['request_data']['address'],
+    def find_investor(self, context):
+        accounts = Account.objects.filter(address=context.request.POST.get('address'),
                                           currency=self.settings.code)
 
         if accounts.exists():
-            return Right(dict(args, investor=accounts.first().investor))
+            return self.success(investor=accounts.first().investor)
         else:
-            return Left('Account not found')
+            return self.fail('Account not found')
 
-    def calc_tokens_amount(self, args):
-        service = CalcTokensAmount()
-        raw_amount = args['request_data']['amount']
+    def calc_tokens_amount(self, context):
+        raw_amount = context.request.POST.get('amount')
 
-        return service(Decimal(raw_amount), self.settings.code) | \
-            (lambda result: Right(dict(args,
-                                       amount=result[0],
-                                       amount_wo_bonus=result[1])))
+        return CalcTokensAmount()(Decimal(raw_amount), self.settings.code) | \
+            (lambda result: self.success(amount=result.amount, amount_wo_bonus=result.amount_wo_bonus))
 
-    def create_transaction(self, args):
-        return Mint()(to=args['investor'].eth_account,
-                      amount=args['amount']) | \
-                      (lambda txn_id: Right(dict(args, mint_txn_id=txn_id)))
+    def create_transaction(self, context):
+        return Mint()(to=context.investor.eth_account,
+                      amount=context.amount) | \
+                      (lambda result: self.success(mint_txn_id=result.transaction.txn_id))
 
-    def create_tokens_move(self, args):
-        return PrepareTokensMove()(investor=args['investor'],
-                                   mint_txn_id=args['mint_txn_id'],
+    def create_tokens_move(self, context):
+        return PrepareTokensMove()(investor=context.investor,
+                                   mint_txn_id=context.mint_txn_id,
                                    currency=self.settings.code,
-                                   amount=args['amount']) | \
-                                   (lambda result: Right(dict(args, tokens_move=result['tokens_move'])))
+                                   amount=context.amount) | \
+                                   (lambda result: self.success(tokens_move=result.tokens_move))
 
-    def create_payment(self, args):
+    def create_payment(self, context):
         payment = Payment(currency=self.settings.code,
-                          payer_account=args['request_data']['address'],
-                          amount=args['request_data']['amount'],
-                          amounti=args['request_data']['amounti'],
-                          external_id=args['request_data']['ipn_id'],
-                          txn_id=args['request_data']['txn_id'],
-                          tokens_move=args['tokens_move'])
+                          payer_account=context.request.POST.get('address'),
+                          amount=context.request.POST.get('amount'),
+                          amounti=context.request.POST.get('amounti'),
+                          external_id=context.request.POST.get('ipn_id'),
+                          txn_id=context.request.POST.get('txn_id'),
+                          tokens_move=context.tokens_move)
 
         try:
             payment.save()
 
-            return Right(dict(args, payment=payment))
+            return self.success(payment=payment)
         except DatabaseError as e:
-            return Left(f'Error while saving Payment {e}')
+            return self.fail(e)
 
+    @service_call
+    @transactional
     def __call__(self, request):
-        with transaction.atomic():
-            result = Right({'request': request}) | \
-                     self.check_request | \
-                     self.find_payment_by_ipn_id | \
-                     self.find_investor | \
-                     self.calc_tokens_amount | \
-                     self.create_transaction | \
-                     self.create_tokens_move | \
-                     self.create_payment
-
-            if isinstance(result, Left):
-                transaction.set_rollback(True)
-
-            return result
+        return self.success(request=request) | \
+            self.check_request | \
+            self.find_payment_by_ipn_id | \
+            self.find_investor | \
+            self.calc_tokens_amount | \
+            self.create_transaction | \
+            self.create_tokens_move | \
+            self.create_payment

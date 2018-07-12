@@ -195,8 +195,7 @@ class TestProcessTransfer(BlockChainTestCase):
                                         state='PREPARED', direction='IN', actualized_at=None)
 
         event = self.get_transfer_event(txn_hash)
-        processor = ProcessTransfer()
-        result = processor(event)
+        result = ProcessTransfer()(event)
 
         self.assertTrue(isinstance(result, Right))
 
@@ -231,7 +230,7 @@ class TestProcessTransfer(BlockChainTestCase):
         receipt_account = self.account['address']
         recepient = InvestorFactory.create(eth_account=receipt_account)
 
-        txn_id = Mint()(receipt_account, 90000).value
+        txn_id = Mint()(receipt_account, 90000).value.transaction.txn_id
         transfer = TransferFactory(txn_hash=None, state='PREAPARED', to_account=None,
                                    from_account=None, block_hash=None, block_number=None,
                                    actualized_at=None, mint_txn_id=txn_id)

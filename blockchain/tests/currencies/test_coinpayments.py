@@ -176,10 +176,9 @@ class TestGetAccount(BlockChainTestCase):
         result = GetAccount()(self.investor, self.settings)
 
         self.assertTrue(isinstance(result, Right))
-        self.assertEqual(result.value, account)
+        self.assertEqual(result.value.account, account)
 
-    @patch('blockchain.currencies.coinpayments.services.get_account.GetAccount.get_coinpayments_account')
-    def test_non_existing_account(self, get_account):
+    def test_non_existing_account(self):
         response = {
             "error": "ok",
             "result": {
@@ -189,12 +188,15 @@ class TestGetAccount(BlockChainTestCase):
             }
         }
 
-        get_account.side_effect = lambda args: Right(dict(args, response=response))
+        def stub_get_coinpayments_account(self, context):
+            return self.success(response=response)
 
-        result = GetAccount()(self.investor, self.settings)
+        with patch.object(GetAccount, 'get_coinpayments_account', new=stub_get_coinpayments_account):
+            result = GetAccount()(self.investor, self.settings)
+
         self.assertTrue(isinstance(result, Right))
 
-        account = result.value
+        account = result.value.account
 
         self.assertTrue(isinstance(account, Account))
 

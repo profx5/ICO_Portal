@@ -8,22 +8,23 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template import loader
 from django.db import DatabaseError
-from oslash import Left, Right
 
 from user_office.models import Investor
 from ico_portal.utils.datetime import datetime
+from ico_portal.utils.service_object import service_call, ServiceObject
 
 
-def check_email(args):
-    if args['email'] != args['investor'].email:
-        validator = EmailValidator()
+class CheckEmailMixin:
+    def check_email(self, context):
+        if context.email != context.investor.email:
+            validator = EmailValidator()
 
-        try:
-            validator(args['email'])
+            try:
+                validator(context.email)
 
-            return Right(args)
-        except ValidationError:
-            return Left('invalid email address')
+                return self.success()
+            except ValidationError:
+                return self.fail('invalid email address')
 
 
 class EmailResetTokenGenerator(PasswordResetTokenGenerator):
@@ -37,94 +38,85 @@ class EmailResetTokenGenerator(PasswordResetTokenGenerator):
         return datetime.utcnow().date()
 
 
-class SendChangeEmailConfirm:
-    def get_token(self, args):
-        token = EmailResetTokenGenerator().make_token(args['investor'])
+class SendChangeEmailConfirm(ServiceObject, CheckEmailMixin):
+    def get_token(self, context):
+        token = EmailResetTokenGenerator().make_token(context.investor)
 
-        return Right(dict(args, token=token))
+        return self.success(token=token)
 
-    def encode_user_id_and_email(self, args):
-        investor = args['investor']
-        email = args['email']
-
-        encode_string = f'{investor.id};{email}'
+    def encode_user_id_and_email(self, context):
+        encode_string = f'{context.investor.id};{context.email}'
         encoded = urlsafe_base64_encode(force_bytes(encode_string)).decode()
 
-        return Right(dict(args, uid=encoded))
+        return self.success(uid=encoded)
 
-    def send_email(self, args):
-        investor = args['investor']
-        token = args['token']
-        uid = args['uid']
-        new_email = args['email']
-
-        link = urljoin(settings.HOST, f'change_email/{uid}/{token}/')
+    def send_email(self, context):
+        link = urljoin(settings.HOST, f'change_email/{context.uid}/{context.token}/')
 
         content = loader.render_to_string('mail/change_email.html', {
             'link': link,
-            'email': new_email
+            'email': context.email
         })
 
         send_mail('Change email', content, settings.EMAIL_HOST_USER,
-                  [investor.email], fail_silently=True)
+                  [context.investor.email], fail_silently=True)
 
-        return Right(args)
+        return self.success()
 
+    @service_call
     def __call__(self, investor, email):
-        return Right({'investor': investor,
-                      'email': email.lower()}) | \
-                      check_email | \
-                      self.get_token | \
-                      self.encode_user_id_and_email | \
-                      self.send_email
+        return self.success(investor=investor, email=email.lower()) | \
+            self.check_email | \
+            self.get_token | \
+            self.encode_user_id_and_email | \
+            self.send_email
 
 
-class SetEmail:
-    def parse_uid(self, args):
+class SetEmail(ServiceObject, CheckEmailMixin):
+    def parse_uid(self, context):
         try:
-            decoded = urlsafe_base64_decode(args['uid']).decode()
+            decoded = urlsafe_base64_decode(context.uid).decode()
             user_id, new_email = decoded.split(';')
 
-            return Right(dict(args, user_id=user_id, email=new_email))
+            return self.success(user_id=user_id, email=new_email)
         except (TypeError, ValueError, OverflowError) as e:
-            return Left(f'Cant parse uid, {e}')
+            return self.fail(e)
 
-    def find_investor(self, args):
+    def find_investor(self, context):
         try:
-            investor = Investor.objects.get(pk=args['user_id'])
+            investor = Investor.objects.get(pk=context.user_id)
 
-            if investor.id == args['investor'].id:
-                return Right(dict(args, investor=investor))
+            if investor.id == context.investor.id:
+                return self.success(investor=investor)
             else:
-                return Left('Invalid investor')
+                return self.fail('Invalid investor')
         except Investor.DoesNotExist as e:
-            return Left(f'Cant find investor, {e}')
+            return self.fail(e)
 
-    def check_token(self, args):
-        is_token_valid = EmailResetTokenGenerator().check_token(args['investor'], args['token'])
+    def check_token(self, context):
+        is_token_valid = EmailResetTokenGenerator().check_token(context.investor, context.token)
 
         if is_token_valid:
-            return Right(args)
+            return self.success()
         else:
-            return Left('Invalid token')
+            return self.fail('Invalid token')
 
-    def save_email(self, args):
-        investor = args['investor']
+    def save_email(self, context):
+        investor = context.investor
 
         try:
-            investor.email = args['email']
+            investor.email = context.email
             investor.save()
 
-            return Right(args)
+            return self.success()
         except DatabaseError as e:
-            return Left(f'Error while saving investor, {e}')
+            return self.fail(e)
 
+    @service_call
     def __call__(self, investor, uid, token):
-        return Right({'uid': uid,
-                      'token': token,
-                      'investor': investor}) | \
-                      self.parse_uid | \
-                      self.find_investor | \
-                      self.check_token | \
-                      check_email | \
-                      self.save_email
+        return self.success(uid=uid, token=token, investor=investor) | \
+            self.parse_uid | \
+            self.find_investor | \
+            self.check_token | \
+            self.check_email | \
+            self.save_email

@@ -1,34 +1,35 @@
-from oslash import Left, Right
 from django.db import DatabaseError
 
 from user_office.models import ICO_Info
 from blockchain.ico.contracts import TokenContract
+from ico_portal.utils.service_object import ServiceObject, service_call
 
 
-class SyncICOInfo:
-    def get_total_supply(self, args):
+class SyncICOInfo(ServiceObject):
+    def get_total_supply(self, context):
         try:
             total_supply = TokenContract().get_total_supply()
 
-            return Right(dict(args, total_supply=total_supply))
+            return self.success(total_supply=total_supply)
         except ConnectionError as e:
-            return Left(f'Got connection error while trying get total supply')
+            return self.fail(e)
 
-    def build_object(self, args):
-        ico_info = ICO_Info(total_supply=args['total_supply'])
+    def build_object(self, context):
+        ico_info = ICO_Info(total_supply=context.total_supply)
 
-        return Right(dict(args, ico_info=ico_info))
+        return self.success(ico_info=ico_info)
 
-    def save_object(self, args):
+    def save_object(self, context):
         try:
-            args['ico_info'].save()
+            context.ico_info.save()
 
-            return Right(args)
+            return self.success(ico_info=context.ico_info)
         except (DatabaseError, ValueError) as e:
-            return Left(f'Error while saving ico info {e}')
+            return self.fail(e)
 
+    @service_call
     def __call__(self):
-        return Right({}) | \
+        return self.success() | \
             self.get_total_supply | \
             self.build_object | \
             self.save_object
