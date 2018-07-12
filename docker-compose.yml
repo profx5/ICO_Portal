@@ -1,0 +1,73 @@
+version: '3.1'
+services:
+  db:
+    image: mysql:5.7.22
+    command: --character-set-server=utf8 --collation-server=utf8_bin
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ico_portal
+      MYSQL_USER: ico_portal_user
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+    secrets:
+      - db_root_password
+      - db_password
+
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:alpine
+
+  web:
+    image: ico_portal:latest
+    environment:
+      - DB_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+      - ico_portal_secret_key
+      - raven_dsn
+    volumes:
+      - static:/static
+      - media:/media_data
+    depends_on:
+      - db
+    environment:
+      DB_NAME: ico_portal
+      DB_USER:  ico_portal_user
+      DB_PASSWORD_FILE: /run/secrets/db_password
+      DB_HOST: db
+      ICO_PORTAL_HOST: demo.ongrid.pro
+      SECRET_KEY_FILE: /run/secrets/ico_portal_secret_key
+      RAVEN_DSN_FILE: /run/secrets/raven_dsn
+  # worker:
+  #   image: main_site:latest
+  #   restart: always
+  #   command: ./run_celery.sh
+  #   depends_on:
+  #     - rabbit
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "8000:8888"
+    volumes:
+      - static:/static:ro
+      - media:/media_data:ro
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - webapp
+
+secrets:
+  db_password:
+    external: true
+  db_root_password:
+    external: true
+  ico_portal_secret_key:
+    external: true
+  raven_dsn:
+    external: true
+
+volumes:
+  dbdata:
+  static:
+  media:

@@ -1,3 +1,5 @@
+import os
+
 def tuple_exclude(orig_tuple, exclude_items):
     return tuple(
         filter(
@@ -8,3 +10,7 @@ def tuple_exclude(orig_tuple, exclude_items):
 
 def is_mixed_case(string):
     return not (string.islower() or string.isupper())
+
+
+class SecretNotFoundError(Exception):
+    pass
