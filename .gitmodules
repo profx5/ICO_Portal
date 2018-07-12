@@ -4,3 +4,6 @@
 [submodule "solidity-contracts/openzeppelin-solidity"]
 	path = solidity-contracts/openzeppelin-solidity
 	url = https://github.com/OpenZeppelin/openzeppelin-solidity.git
+[submodule "solidity-contracts/veracoin"]
+	path = solidity-contracts/veracoin
+	url = https://github.com/robotveradev/VeraCoin.git
