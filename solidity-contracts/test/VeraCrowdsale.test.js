@@ -46,46 +46,46 @@ contract('VeraCrowdsale', function ([_, investor, wallet, purchaser]) {
     });
     it('phase 0 parameters', async function () {
       result = await this.crowdsale.phases(0);
-      result[0].should.be.bignumber.equal(100);
-      result[1].should.be.bignumber.equal(200);
-      result[2].should.be.bignumber.equal(300);
+      result[0].should.be.bignumber.equal(1531490000);
+      result[1].should.be.bignumber.equal(1531499999);
+      result[2].should.be.bignumber.equal(10);
     });
     it('phase 1 parameters', async function () {
       result = await this.crowdsale.phases(1);
-      result[0].should.be.bignumber.equal(100);
-      result[1].should.be.bignumber.equal(200);
-      result[2].should.be.bignumber.equal(300);
+      result[0].should.be.bignumber.equal(1531500000);
+      result[1].should.be.bignumber.equal(1531599999);
+      result[2].should.be.bignumber.equal(20);
     });
     it('phase 2 parameters', async function () {
       result = await this.crowdsale.phases(2);
-      result[0].should.be.bignumber.equal(100);
-      result[1].should.be.bignumber.equal(200);
-      result[2].should.be.bignumber.equal(300);
+      result[0].should.be.bignumber.equal(1531600000);
+      result[1].should.be.bignumber.equal(1531600000);
+      result[2].should.be.bignumber.equal(30);
     });
     it('amount bonus 0', async function () {
       result = await this.crowdsale.amountBonuses(0);
-      result[0].should.be.bignumber.equal(10);
+      result[0].should.be.bignumber.equal(100000);
       result[1].should.be.bignumber.equal(20);
     });
     it('amount bonus 1', async function () {
       result = await this.crowdsale.amountBonuses(1);
-      result[0].should.be.bignumber.equal(20);
+      result[0].should.be.bignumber.equal(500000);
       result[1].should.be.bignumber.equal(30);
     });
   });
 
   describe('Check constant functions', function () {
     it('computePhaseBonus', async function () {
-      result = await this.crowdsale.computePhaseBonus(123);
-      result.should.be.bignumber.equal(0);
+      result = await this.crowdsale.computePhaseBonus(1531490001);
+      result.should.be.bignumber.equal(10);
     });
     it('computeAmountBonus', async function () {
-      result = await this.crowdsale.computeAmountBonus(123);
-      result.should.be.bignumber.equal(0);
+      result = await this.crowdsale.computeAmountBonus(500001);
+      result.should.be.bignumber.equal(30);
     });
     it('computeBonus', async function () {
-      result = await this.crowdsale.computeBonus(1, 2);
-      result.should.be.bignumber.equal(0);
+      result = await this.crowdsale.computeBonus(1531490001, 500001);
+      result.should.be.bignumber.equal(40);
     });
   });
 
