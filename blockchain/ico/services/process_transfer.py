@@ -5,6 +5,7 @@ from user_office.models import Transfer, Transaction
 from .process_tokens_moves import ProcessIncomingTokensMove, \
     ProcessOutgoingTokensMove
 from ico_portal.utils.service_object import ServiceObject, service_call, transactional
+from blockchain.ico.contracts import CrowdsaleContract
 
 
 class ProcessTransfer(ServiceObject):
@@ -66,15 +67,12 @@ class ProcessTransfer(ServiceObject):
         )
 
     def process_outgoing_tokens_move(self, context):
-        if context.event.is_purchase:
-            return self.success(outgoing_TM=None)
-        else:
-            return ProcessOutgoingTokensMove()(context.transfer) | (
-                 lambda result: self.success(outgoing_TM=result.tokens_move)
-            )
+        return ProcessOutgoingTokensMove()(context.transfer) | (
+            lambda result: self.success(outgoing_TM=result.tokens_move)
+        )
 
     def maybe_process_purchase(self, context):
-        if context.event.is_purchase and context.incoming_TM:
+        if CrowdsaleContract().is_purchase(context.event) and context.incoming_TM:
             return process_purchase.ProcessPurchase()(context.incoming_TM) | (
                 lambda result: self.success(payment=result.payment)
             )

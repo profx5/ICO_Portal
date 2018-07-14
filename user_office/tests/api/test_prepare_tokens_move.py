@@ -6,7 +6,7 @@ from user_office.factories import PhaseFactory, ExchangeRateFactory
 from user_office.models import Transfer, TokensMove
 
 
-class TestPrepareDeposit(APITestCase):
+class TestPrepareTokensMove(APITestCase):
     txn_hash = '0x9496849ff00c5e9cd7a42c06d3c60fd07925da7d4fd08b428f3219616976f6a8'
 
     def test_successful_request(self):
@@ -36,7 +36,7 @@ class TestPrepareDeposit(APITestCase):
 
         tokens_move = tokens_moves.first()
         self.assertEqual(tokens_move.investor, self.get_investor())
-        self.assertEqual(tokens_move.amount, Decimal('120048'))
+        self.assertEqual(tokens_move.amount, Decimal('1200483196770000000000'))
         self.assertEqual(tokens_move.transfer, transfer)
         self.assertEqual(tokens_move.state, 'PREPARED')
         self.assertEqual(tokens_move.direction, 'IN')
