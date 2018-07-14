@@ -37,7 +37,7 @@ contract VeraCrowdsale {
 
     function computePhaseBonus(uint256 _time) public constant returns (uint256) {
         for (uint i=0; i<phases.length; i++) {
-          if (now >= phases[i].start && now <= phases[i].end) {
+          if (_time >= phases[i].start && _time <= phases[i].end) {
             return phases[i].bonus;
           }
         }
@@ -47,14 +47,14 @@ contract VeraCrowdsale {
     function computeAmountBonus(uint256 _amount) public constant returns (uint256) {
         uint256 bonus = 0;
         for (uint i=0; i<amountBonuses.length; i++) {
-          if (_amount > amountBonuses[i].amountInCents) {
+          if (_amount >= amountBonuses[i].amountInCents) {
             bonus = Math.max256(bonus, amountBonuses[i].bonus);
           }
         }
         return bonus;
     }
 
-    function computeBonus(uint256 _amount, uint256 _time) public constant returns (uint256) {
+    function computeBonus(uint256 _time, uint256 _amount) public constant returns (uint256) {
         return computePhaseBonus(_time).add(computeAmountBonus(_amount));
     }
 }

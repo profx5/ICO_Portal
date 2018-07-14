@@ -31,7 +31,7 @@ contract('VeraCrowdsale', function ([_, investor, wallet, purchaser]) {
     await this.token.transfer(this.crowdsale.address, 12343);
   });
 
-  describe('Check public variables', function () {
+  describe('Check public variables', async function () {
     it('token address', async function () {
       result = await this.crowdsale.token();
       result.should.be.equal(this.token.address);
@@ -74,7 +74,7 @@ contract('VeraCrowdsale', function ([_, investor, wallet, purchaser]) {
     });
   });
 
-  describe('Check constant functions', function () {
+  describe('Check constant functions', async function () {
     it('computePhaseBonus', async function () {
       result = await this.crowdsale.computePhaseBonus(1531490001);
       result.should.be.bignumber.equal(10);
