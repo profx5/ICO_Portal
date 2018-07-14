@@ -1,12 +1,16 @@
+import json
 from django.conf import settings
 from blockchain.web3 import get_web3
 
 
 class BaseContract:
     @classmethod
-    def get_abi(cls):
-        with open(cls.abi_file_path.format(BASE_DIR=settings.BASE_DIR)) as f:
-            return f.read()
+    def get_compiled(cls):
+        if not hasattr(cls, '_compile'):
+            with open(cls.compiled_file_path.format(BASE_DIR=settings.BASE_DIR)) as f:
+                cls._compiled = json.load(f)
+
+        return cls._compiled
 
     @classmethod
     def init(cls, contract_address):
@@ -18,7 +22,7 @@ class BaseContract:
 
     @property
     def contract(self):
-        return self.web3.eth.contract(abi=self.get_abi(),
+        return self.web3.eth.contract(abi=self.get_compiled()['abi'],
                                       address=self.contract_address)
 
 

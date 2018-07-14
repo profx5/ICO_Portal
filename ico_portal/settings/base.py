@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'feincms',
     'feincms.module.page',
     'adminsortable2',
-    
+
     'bootstrapform',
     'helpdesk',
 

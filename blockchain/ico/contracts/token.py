@@ -8,7 +8,7 @@ from .base import BaseContract
 
 
 class TokenContract(BaseContract):
-    abi_file_path = '{BASE_DIR}/solidity-contracts/contracts/MintableToken.json'
+    compiled_file_path = '{BASE_DIR}/solidity-contracts/contracts/VeraCoin.json'
 
     def get_total_supply(self):
         return self.contract.functions.totalSupply().call()
@@ -18,7 +18,7 @@ class TokenContract(BaseContract):
 
         gas = 70000
 
-        return self.contract.functions.mint(to, amount).buildTransaction({
+        return self.contract.functions.transfer(to, amount).buildTransaction({
             'gas': gas
         })
 

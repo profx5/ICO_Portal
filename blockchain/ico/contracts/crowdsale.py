@@ -22,7 +22,7 @@ class TokensPurchasedEvent:
 
 
 class CrowdsaleContract(BaseContract):
-    abi_file_path = '{BASE_DIR}/solidity-contracts/contracts/KYCCrowdsale.json'
+    compiled_file_path = '{BASE_DIR}/solidity-contracts/contracts/KYCCrowdsale.json'
 
     def pass_kyc(self, address):
         gas = 50000
@@ -40,3 +40,6 @@ class CrowdsaleContract(BaseContract):
             return Just(TokensPurchasedEvent(raw_event[0]))
         else:
             return Nothing()
+
+    def is_purchase(self, event):
+        return event.from_account == self.contract.address
