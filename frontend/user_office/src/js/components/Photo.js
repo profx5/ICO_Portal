@@ -1,14 +1,19 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Photo = ({path}) => {
+const Photo = ({path, isUploaded, removePhoto, photoName}) => {
+
+    let removePhotoHandler = removePhoto.bind(this, photoName);
+
     return (
         <Wrapper>
             <PhotoWrapper src={path}/>
+            {isUploaded &&
             <div>
                 <SpanState>Загружено</SpanState>
-                <SpanRemove>Удалить</SpanRemove>
+                <SpanRemove onClick={removePhotoHandler}>Удалить</SpanRemove>
             </div>
+            }
         </Wrapper>
     );
 }

@@ -6,7 +6,7 @@ import {Map} from 'immutable'
 
 const initialState = Map({
     state: "DECLINED",
-    user_photo: "",
+    user_photo: null,
     firstname: "",
     midname: "",
     surname: "",
@@ -20,8 +20,11 @@ const initialState = Map({
     document_no: "",
     document_country: "",
     document_date: "",
-    document_photo: "",
-    decline_reason: null
+    document_photo: null,
+    decline_reason: null,
+
+    uploaded_user_photo: null,
+    uploaded_doc_photo: null,
 })
 
 
@@ -40,5 +43,17 @@ export const KYCReducer = createReducer({
     },
 
     [actions.showForm]: (state, payload) => state.set('showForm', true),
-    [actions.hideForm]: (state, payload) => state.set('showForm', false)
+    [actions.hideForm]: (state, payload) => state.set('showForm', false),
+
+    [actions.uploadPhoto]: (state, payload) => {
+        let {name, data} = payload;
+
+        if (name === 'user_photo') return state.set('uploaded_user_photo', data)
+        else if (name === 'document_photo') return state.set('uploaded_doc_photo', data)
+    },
+    [actions.removePhoto]: (state, payload) => {
+        let name = payload;
+        if (name === 'user_photo') return state.set('uploaded_user_photo', null);
+        else if (name === 'document_photo') return state.set('uploaded_doc_photo', null);
+    },
 }, initialState);

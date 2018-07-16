@@ -3,10 +3,7 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 
 import * as DepositsActions from './../actions/DepositsActions';
-
-import Button from './../components/Button';
-
-
+import DepositTable from "./DepositTable";
 
 class Transactions extends React.Component {
 
@@ -17,25 +14,19 @@ class Transactions extends React.Component {
         return (
             <Wrapper>
                 <Head>Transactions</Head>
-                <Content>
-                    {this.props.children}
-                </Content>
+                <DepositTable/>
                 <Controls>
                     {pages !== 1 &&
-                        <FetchLinksWrapper>
-                            <FetchLink disabled={currentPage <= 1} onClick={decrementPage}>Prev</FetchLink>
-                            <FetchLink disabled={currentPage === pages} onClick={incrementPage}>Next</FetchLink>
-                        </FetchLinksWrapper>
+                    <FetchLinksWrapper>
+                        <FetchLink disabled={currentPage <= 1} onClick={decrementPage}>Prev</FetchLink>
+                        <FetchLink disabled={currentPage === pages} onClick={incrementPage}>Next</FetchLink>
+                    </FetchLinksWrapper>
                     }
-                    <ButtonWrapper>
-                        <Button text="Buy TKN" />
-                    </ButtonWrapper>
                 </Controls>
             </Wrapper>
         )
     }
-};
-
+}
 
 
 const mapStateToProps = ({deposits}) => ({
@@ -58,27 +49,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(Transactions)
 
 const Wrapper = styled.div`
     flex: 1;
-    height: auto;
-    margin-top: 22px;
-    padding: 42px 30px 34px;
-    background: white;
-    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
-    border-radius: 6px;
+    height: calc(100% - 100px);
+    margin-left: 55px;
+    margin-right: 55px;
+    padding-bottom: 73px;
 `;
 
-const Head = styled.h3`
-    font-size: 20px;
-    font-weight: 500;
-    color: #323c47;
-    letter-spacing: 0.1px;
-    margin-bottom: 40px;
-`;
-
-const Content = styled.div`
-    margin-bottom: 35px;
+const Head = styled.h2`
+    font-size: 38px;
+    line-height: 1;
+    font-weight: 400;
+    color: #233539;
+    letter-spacing: 0.8px;
+    margin-top: 65px;
 `;
 
 const Controls = styled.div`
+    margin-top:35px;
     position: relative;
 `;
 
@@ -100,9 +87,4 @@ const FetchLink = styled.a`
     &:hover {
         color: #3172fd;
     }
-`;
-
-const ButtonWrapper = styled.div`
-    width: 165px;
-    margin-left: auto;
 `;

@@ -58,7 +58,6 @@ class Api {
     changePassword() {
         return `${this.prefix}/changePassword/`
     }
-
     changeEmail() {
         return `${this.prefix}/changeEmail/`
     }

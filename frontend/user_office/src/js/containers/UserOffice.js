@@ -9,6 +9,7 @@ import Settings from '../containers/Settings';
 import Header from './Header';
 import StatusSidebar from './StatusSidebar';
 import Dashboard from './Dashboard';
+import Payment from './Payment';
 
 import * as BountiesActions from '../actions/BountiesBalanceActions';
 
@@ -28,15 +29,12 @@ class UserOffice extends Component {
 
         return (
             <Wrapper>
-                <HeaderWrapper>
-                    <Header/>
-                </HeaderWrapper>
                 <Switch>
-                    <Route exact path="/user_office" component={Dashboard} />
-                    <Route path="/user_office/verification" component={Verification} />
-                    <Route path="/user_office/settings" component={Settings} />
+                    {/*<Route exact path="/user_office" component={Dashboard} />*/}
+                    {/*<Route exact path="/user_office" component={Payment} />*/}
+{/*                    <Route path="/user_office/verification" component={Verification} />
+                    <Route path="/user_office/settings" component={Settings} />*/}
                 </Switch>
-                <StatusSidebar/>
                 {showSetAccountPopup && <SetAccount/>}
             </Wrapper>
         )

@@ -11,7 +11,7 @@ const initialState = Map({
     alt_crowdsale_address: '0x',
     token_decimals: 2,
     humanizedEndTime: '',
-    countdownTime: ''
+    countdownTime: '21d : 18h : 15m : 12s'
 });
 
 

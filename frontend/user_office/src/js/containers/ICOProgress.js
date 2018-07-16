@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 
+import Roadmap from './Roadmap';
+
 import Utils from './../utils/index';
 
 import * as ICOInfoActions from './../actions/ICOInfoActions';
@@ -38,35 +40,28 @@ class ICOProgress extends React.Component {
                 <Header>
                     <Head>ICO Progress</Head>
                     <WrapperHeaderInfo>
-                        <Text>Current phase: <Span>{phaseName}</Span></Text>
-                        <Text>Current bonus: <Span>{bonusPercents}%</Span></Text>
-                        <Text>Funds raised: <Span colored>{Utils.splitDigits(raisedAmountString)} USD</Span></Text>
+                        <PartWrapper>
+                            <DescHead>Base price:</DescHead>
+                            <Desc blue bold>1 TKN = 2 USD</Desc>
+                        </PartWrapper>
+                        <PartWrapper>
+                            <DescHead>Current bonus (Phase 1):</DescHead>
+                            <Desc blue bold>33%</Desc>
+                        </PartWrapper>
+                        <PartWrapper>
+                            <DescHead>Remaining:</DescHead>
+                            <Desc>{countdownTime}</Desc>
+                        </PartWrapper>
+                        <PartWrapper>
+                            <DescHead>Funds raised:</DescHead>
+                            <Desc>{raisedAmountString}</Desc>
+                        </PartWrapper>
                     </WrapperHeaderInfo>
                 </Header>
-                <Content>
-                    <ContentPart>
-                        {<ContentProgressCell noBorderBottom progress={phaseRaisedPercents === 0 ? '2%' : phaseRaisedPercents + '%'}>
-                            {Utils.formatMoney(gainedMoney)} USD / {Utils.formatMoney(hardCupNumber)} USD
-                        </ContentProgressCell>}
-
-                        <ContentCell bold noBorderBottom>{phaseName}</ContentCell>
-                        <ContentCell noBorderBottom>Current bonus: {bonusPercents}%</ContentCell>
-                        <ContentCell>Remaining:
-                            <Span colored>&nbsp;{countdownTime}</Span>
-                        </ContentCell>
-                    </ContentPart>
-                    <ContentPart>
-                        <ContentCell noBorderBottom background="#ececec">Expectation</ContentCell>
-                        <ContentCell noBorderBottom>ICO phase 1</ContentCell>
-                        <ContentCell noBorderBottom>ICO phase 2</ContentCell>
-                        <ContentCell noBorderBottom>ICO phase 3</ContentCell>
-                        <ContentCell statusCell></ContentCell>
-                        <ContentCell statusCell></ContentCell>
-                        <ContentCell statusCell></ContentCell>
-                    </ContentPart>
-                </Content>
+                <Roadmap/>
+                <BottomText>Скидка скоро закончится</BottomText>
                 <ButtonWrapper>
-                    <Button text='Buy TKN'/>
+                    <Button text='Buy Token'/>
                 </ButtonWrapper>
             </Wrapper>
         )
@@ -99,7 +94,7 @@ const Wrapper = styled.div`
     flex: 1;
     height: auto;
     margin-top: 42px;
-    padding: 42px 30px 34px;
+    padding: 42px 50px 65px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
@@ -123,6 +118,22 @@ const Head = styled.h3`
     font-weight: 500;
     color: #323c47;
     letter-spacing: 0.1px;
+`;
+
+const PartWrapper = styled.div`
+    margin-left: 50px;
+`;
+
+const DescHead = styled.div`
+    font-size: 14px;
+    color: #000000;
+`;
+
+const Desc = styled.div`
+    color: ${props => props.blue ? '#3476fc' : '#000000'};
+    font-size: 20px;
+    font-weight: ${props => props.bold ? '600' : '500'};
+    padding-top: 5px;
 `;
 
 const Text = styled.p`
@@ -174,44 +185,13 @@ const ContentPart = styled.div`
     }
 `;
 
-const ContentCell = styled.div`
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: ${props => props.bold ? '600' : '500'}
-
-    color: ${props => props.color || '#233539'}
-
-    height: ${props => props.statusCell ? '90px' : '45px'};
-
-    background: ${props => props.statusCell ? `url(${clockImg}) no-repeat center` : props.background || 'unset'};
-
-    border-top: ${props => props.noBorderTop ? 'none' : 'solid 1px #d6dfe6'};
-    border-right: ${props => props.noBorderRight ? 'none' : 'solid 1px #d6dfe6'};
-    border-bottom: ${props => props.noBorderBottom ? 'none' : 'solid 1px #d6dfe6'};
-
-`;
-
-const ContentProgressCell = ContentCell.extend`
-    position: relative;
-    z-index: 1;
-    color: #ffffff;
-    background: rgba(79,221,190,.55);
-    &:before {
-        content: '';
-        background: linear-gradient(to right, #87f0e0, #4fddbe);
-        z-index: -1;
-        display: block;
-        position: absolute
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: ${props => props.progress || '0%'};
-    }
+const BottomText = styled.p`
+    text-align: center;
+    color: #3577fc;
 `;
 
 const ButtonWrapper = styled.div`
-    width: 165px;
-    margin-left: auto;
-    margin-top: 30px;
+    width: 250px;
+    height: 68px;
+    margin: 17px auto 0;
 `;

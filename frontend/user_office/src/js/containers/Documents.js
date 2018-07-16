@@ -3,11 +3,15 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
 
+import * as KYCActions from './../actions/KYCActions';
+
 import Photo from './../components/Photo';
 import FileUpload from './../components/FileUpload';
 import PhotoUpload from './../components/PhotoUpload';
 import DocsOptions from './../components/DocsOptions';
 import ReduxFormField from './../components/ReduxFormField';
+
+import FinalFormField from './../components/FinalFormField';
 
 import samplePhoto from './../../img/user.svg';
 
@@ -20,7 +24,7 @@ class Documents extends React.Component {
 
     render() {
 
-        const {documentPhoto} = this.props;
+        const {uploadedDocPhoto, uploadPhoto, removePhoto} = this.props;
 
         return (
             <Wrapper className="Verification__documents">
@@ -32,24 +36,24 @@ class Documents extends React.Component {
                     </ContentPart>
                     <ContentPart>
                         <InputWrapper>
-                            <ReduxFormField labelText="Series and number" name="document_no" options={{numericOnly: true}}/>
+                            <FinalFormField labelText="Series and number" name="document_no" options={{numericOnly: true}}/>
                         </InputWrapper>
                         <InputWrapper>
-                            <ReduxFormField labelText="Document country" name="document_country"/>
+                            <FinalFormField labelText="Document country" name="document_country"/>
                         </InputWrapper>
                         <InputWrapper>
-                            <ReduxFormField labelText="Date" name="document_date" options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}/>
+                            <FinalFormField labelText="Date" name="document_date" options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}/>
                         </InputWrapper>
                     </ContentPart>
                 </ContentWrapper>
                 <PhotoFileUpload>
                     <PhotoWrapper>
-                        <Photo path={documentPhoto || samplePhoto}/>
+                        <Photo removePhoto={removePhoto} photoName="document_photo" isUploaded={uploadedDocPhoto} path={uploadedDocPhoto || samplePhoto}/>
                     </PhotoWrapper>
                     <UploadWrapper>
                         <DescHead>Choose uploading way</DescHead>
                         <PhotoUpload name="document_photo"/>
-                        <FileUpload name="document_photo" onClickHandler={this.uploadOnClickHandler}/>
+                        <FileUpload name="document_photo" uploadPhoto={uploadPhoto} onClickHandler={this.uploadOnClickHandler}/>
                     </UploadWrapper>
                 </PhotoFileUpload>
             </Wrapper>
@@ -59,11 +63,16 @@ class Documents extends React.Component {
 
 
 const mapStateToProps = ({KYC}) => ({
-    documentPhoto: KYC.get('document_photo')
+    uploadedDocPhoto: KYC.get('uploaded_doc_photo')
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+    uploadPhoto(payload) {
+        dispatch(KYCActions.uploadPhoto(payload))
+    },
+    removePhoto(payload) {
+        dispatch(KYCActions.removePhoto(payload))
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Documents)

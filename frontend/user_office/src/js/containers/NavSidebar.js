@@ -26,7 +26,9 @@ export default NavSidebar;
 
 const Sidebar = styled.aside`
 
-    background: #3172FD;
-    width: 105px;
-    min-width: 105px;
+    background: white;
+    width: 79px;
+    min-width: 79px;
+    border-right: 1px solid #e6e8f1;
+    padding-top: 150px;
 `;

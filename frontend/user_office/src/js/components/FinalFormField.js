@@ -1,28 +1,34 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
+import { Field } from 'react-final-form';
 
-const FieldText = ({labelText, placeholder, options, name, value, disabled, type}) => {
+
+const FinalFormField = ({labelText, placeholder, options, name, value, disabled}) => {
+
+    let CleaveInput = (field) => (
+        <Cleave />
+    )
 
     return (
         <Wrapper>
-            <StyledLabel>{labelText}</StyledLabel> 
+            <StyledLabel htmlFor={name}>{labelText}</StyledLabel>
             <StyledInput 
-                value={value} 
-                placeholder={placeholder} 
+                options={options} 
                 className="Field" 
-                type={type || 'text'} 
-                name={name} 
-                readOnly={disabled === true ? true : false} 
-                options={options}/> 
+                component={Cleave} 
+                placeholder={placeholder} 
+                value={value} 
+                type="text" 
+                name={name}/>
         </Wrapper>
     );
 }
 
 
 
-export default FieldText;
+export default FinalFormField;
 
 const Wrapper = styled.div`
     position: relative;
@@ -35,7 +41,7 @@ const StyledLabel = styled.label`
     margin-bottom: 13px;
 `;
 
-const StyledInput = styled(Cleave)`
+const StyledInput = styled(Field)`
     color: #233539;
     font-weight: 600;
     padding: 0 20px;

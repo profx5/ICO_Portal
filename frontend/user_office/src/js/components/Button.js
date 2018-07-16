@@ -22,11 +22,11 @@ export default Button;
 const Btn = styled.button`
     border: solid 1px #4da1ffb3;
     background: 'transparent';
-    height: 45px;
+    height: 100%;
     width: 100%;
     border-radius: 2px;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 300;
     text-align: center;
     position: relative;

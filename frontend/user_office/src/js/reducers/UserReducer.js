@@ -29,6 +29,8 @@ export const UserReducer = createReducer({
 
     [actions.setAccountRequest]: (state, payload) => state.set("setAccountSubmitting", true),
     [actions.setAccountSuccessfull]: (state, payload) => state.set('setAccountSubmitting', false),
+    
+    [actions.setAccountSuccessfull]: (state, payload) => state.set('setAccountSubmitting', false),
 
     [actions.setMetaMaskAccountSuccessfull]: (state, payload) => state.set('metamaskAccount', payload),
 

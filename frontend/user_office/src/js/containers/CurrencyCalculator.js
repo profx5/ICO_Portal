@@ -61,17 +61,15 @@ class CurrencyCalculator extends React.Component {
 
         return (
             <Wrapper>
-                <div>
+                <WrapperInner>
                     <InvestInput value={this.props.investAmount} type="text" onChangeHandler={this.investOnChangeHandler} header="Amount" currency={investCurrency}/>
                     <InvestInput value={this.props.tokensAmount} type="text" header="TKN" currency="TKN"/>
                     <ButtonWrapper>
-                        <Button clickHandler={this.investClickHandler} text="INVEST"/>
+                        <Button clickHandler={this.investClickHandler} text="Купить"/>
                     </ButtonWrapper>
-                </div>
-                <Tip>
-                    {"1 " + investCurrency + ' = ' + investCurrencyRate + ' TKN'}
-                    <HoverTip>{(investAmount === '' ? 0 : investAmount) + ' ' + investCurrency + ' + ' + bonusPercent + '%' + ' = ' + tokensAmount + ' TKN'}</HoverTip>
-                </Tip>
+                </WrapperInner>
+                <BonusDesc>Пометка о бонусной программе, купи сейчас и получи еще 10% бонусных токенов до 3 июля. Cras quis 
+nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna</BonusDesc>
             </Wrapper>
         )
     }
@@ -108,63 +106,40 @@ const Wrapper = styled.div`
     margin-top: 107px;
 `;
 
+const WrapperInner = styled.div`
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid rgba(151,151,151,.2);
+    border-bottom: 1px solid rgba(151,151,151,.2);
+    padding-bottom: 50px;
+    padding-top: 90px;
+`;
+
 const ButtonWrapper = styled.div`
     display: inline-block;
-    width: 186px;
+    width: 100%;
+    max-width: 258px;
+    height: 70px;
+    border-radius: 2px;
+    border: 1px solid #d6dfe6;
+    position: relative;
 `;
 
-const Tip = styled.span`
-    font-size: 14px;
-    color: #377afc;
-    display: inline-block;
+const BonusDesc = styled.p`
+    font-size: 16px;
+    color: #000000;
+    letter-spacing: 0.5px;
     position: relative;
-    margin-top: 35px;
-    cursor: help;
+    padding-left: 15px;
+    margin-top: 45px;
     &:before {
         content: '';
         display: block;
-        width: 100%;
-        height: 1px;
+        width: 4px;
+        height: 100%;
         position: absolute;
         left: 0;
-        bottom: -1px;
-        background #377afc;
-    }
-    &:hover div {
-        transform: translate(-50%, calc(-100% - 30px));
-        opacity: 1;
-        visibility: visible;
-    }
-`;
-
-const HoverTip = styled.div`
-    height: 60px;
-    color: #222121;
-    position: absolute;
-    left: 50%;
-    bottm: 0;
-    transform: translate(-50%, calc(-100% - 15px));
-    border: 1px solid rgba(243,243,243,.8);
-
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 9px 0 rgba(0,0,0,0.03);
-    padding: 0 15px;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    transition: all .25s ease;
-    opacity: 0;
-    visibility: hidden;
-    &:before {
-        content: '';
-        display: block;
-        border 7px solid transparent;
-        border-top: 7px solid white;
-        position: absolute;
-        bottom: -14px;
-        left: 50%;
-        transform: translateX(-50%);
-        box-shadow: 0 0 1px 0 rgba(243,243,243,.8) inset;
+        top: 0;
+        background: #4f99f6;
     }
 `;
