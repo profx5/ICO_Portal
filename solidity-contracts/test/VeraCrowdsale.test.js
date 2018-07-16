@@ -1,8 +1,9 @@
 // import ether from './helpers/ether';
 import { advanceBlock } from './helpers/advanceToBlock';
 import { increaseTimeTo, duration } from './helpers/increaseTime';
+import assertRevert from '../openzeppelin-solidity/test/helpers/assertRevert';
 // import latestTime from './helpers/latestTime';
-// import EVMRevert from './helpers/EVMRevert';
+import EVMRevert from './helpers/EVMRevert';
 
 const BigNumber = web3.BigNumber;
 
@@ -14,7 +15,7 @@ require('chai')
 const Crowdsale = artifacts.require('VeraCrowdsale');
 const Token = artifacts.require('VeraCoin');
 
-contract('VeraCrowdsale', function ([_, investor, wallet, purchaser]) {
+contract('VeraCrowdsale', function (accounts) {
   // const rate = new BigNumber(1);
   // const value = ether(42);
   let result;
@@ -86,6 +87,186 @@ contract('VeraCrowdsale', function ([_, investor, wallet, purchaser]) {
     it('computeBonus', async function () {
       result = await this.crowdsale.computeBonus(1531490001, 500001);
       result.should.be.bignumber.equal(40);
+    });
+  });
+
+  describe('RBAC', async function () {
+    beforeEach(async function () {
+      this.adminRoleName = await this.crowdsale.ROLE_ADMIN();
+      this.kycManager = await this.crowdsale.ROLE_KYC_MANAGER();
+      this.kycInvestor = await this.crowdsale.ROLE_KYC_VERIFIED_INVESTOR();
+    });
+    it('Initial role checks', async function () {
+      result = await this.crowdsale.hasRole(accounts[0], this.adminRoleName);
+      result.should.be.equal(true);
+      result = await this.crowdsale.hasRole(accounts[1], this.adminRoleName);
+      result.should.be.equal(false);
+      result = await this.crowdsale.hasRole(accounts[0], this.kycManager);
+      result.should.be.equal(false);
+      result = await this.crowdsale.hasRole(accounts[1], this.kycManager);
+      result.should.be.equal(false);
+      result = await this.crowdsale.hasRole(accounts[0], this.kycInvestor);
+      result.should.be.equal(false);
+      result = await this.crowdsale.hasRole(accounts[1], this.kycInvestor);
+      result.should.be.equal(false);
+    });
+    it('Non-admin unable to add admin', async function () {
+      await this.crowdsale.addAdmin(accounts[1], { from: accounts[1] }).should.be.rejectedWith(EVMRevert);
+    });
+    it('Non-admin unable to add kycManager', async function () {
+      await this.crowdsale.addKycManager(accounts[1], { from: accounts[1] }).should.be.rejectedWith(EVMRevert);
+    });
+    it('Non-admin unable to del admin', async function () {
+      await this.crowdsale.delAdmin(accounts[0], { from: accounts[1] }).should.be.rejectedWith(EVMRevert);
+    });
+    it('Admin is able to add admins', async function () {
+      const { logs } = await this.crowdsale.addAdmin(accounts[2], { from: accounts[0] }).should.be.fulfilled;
+      const event = logs.find(e => e.event === 'RoleAdded');
+      event.args.addr.should.equal(accounts[2]);
+      event.args.roleName.should.equal(this.adminRoleName);
+    });
+    it('Admin is able to add kycManagers', async function () {
+      const { logs } = await this.crowdsale.addKycManager(accounts[2], { from: accounts[0] }).should.be.fulfilled;
+      const event = logs.find(e => e.event === 'RoleAdded');
+      event.args.addr.should.equal(accounts[2]);
+      event.args.roleName.should.equal(this.kycManager);
+    });
+    it('Admin is able to del admins (himself)', async function () {
+      const { logs } = await this.crowdsale.delAdmin(accounts[0], { from: accounts[0] }).should.be.fulfilled;
+      const event = logs.find(e => e.event === 'RoleRemoved');
+      event.args.addr.should.equal(accounts[0]);
+      event.args.roleName.should.equal(this.adminRoleName);
+    });
+    it('Non-kycManager unable to verify investors (admin privs don\'t make sense)', async function () {
+      await this.crowdsale.addKycVerifiedInvestor(accounts[0], { from: accounts[1] }).should.be.rejectedWith(EVMRevert);
+      await this.crowdsale.addKycVerifiedInvestor(accounts[0], { from: accounts[0] }).should.be.rejectedWith(EVMRevert);
+    });
+
+    describe('after Acc1 added to admins', async function () {
+
+      beforeEach(async function () {
+        await this.crowdsale.addAdmin(accounts[1]).should.be.fulfilled;
+      });
+
+      it('Role checks - both are admins', async function () {
+        result = await this.crowdsale.hasRole(accounts[0], this.adminRoleName);
+        result.should.be.equal(true);
+        result = await this.crowdsale.hasRole(accounts[1], this.adminRoleName);
+        result.should.be.equal(true);
+      });
+
+      it('Both admins able to add admins', async function () {
+        var tx = await this.crowdsale.addAdmin(accounts[2], { from: accounts[0] }).should.be.fulfilled;
+        const logs1 = tx.logs;
+        const event1 = logs1.find(e => e.event === 'RoleAdded');
+        event1.args.addr.should.equal(accounts[2]);
+        event1.args.roleName.should.equal(this.adminRoleName);
+        tx = await this.crowdsale.addAdmin(accounts[3], { from: accounts[1] }).should.be.fulfilled;
+        const logs2 = tx.logs;
+        const event2 = logs2.find(e => e.event === 'RoleAdded');
+        event2.args.addr.should.equal(accounts[3]);
+        event2.args.roleName.should.equal(this.adminRoleName);
+      });
+
+      it('Non-admin unable to add admin', async function () {
+        await this.crowdsale.addAdmin(accounts[2], { from: accounts[2] }).should.be.rejectedWith(EVMRevert);
+      });
+
+      it('Non-admin unable to del admin', async function () {
+        await this.crowdsale.delAdmin(accounts[0], { from: accounts[2] }).should.be.rejectedWith(EVMRevert);
+      });
+
+      it('Admin is able to del admins', async function () {
+        const { logs } = await this.crowdsale.delAdmin(accounts[0], { from: accounts[1] }).should.be.fulfilled;
+        const event = logs.find(e => e.event === 'RoleRemoved');
+        event.args.addr.should.equal(accounts[0]);
+        event.args.roleName.should.equal(this.adminRoleName);
+      });
+
+      describe('Acc3 added to KYC managers', async function () {
+        beforeEach(async function () {
+          await this.crowdsale.addKycManager(accounts[3]).should.be.fulfilled;
+        });
+
+        it('KYC manager is able to verify and un-verify investors', async function () {
+          result = await this.crowdsale.hasRole(accounts[2], this.kycInvestor);
+          result.should.be.equal(false);
+          var tx = await this.crowdsale.addKycVerifiedInvestor(accounts[2], { from: accounts[3] }).should.be.fulfilled;
+          const logs1 = tx.logs;
+          const event1 = logs1.find(e => e.event === 'RoleAdded');
+          event1.args.addr.should.equal(accounts[2]);
+          event1.args.roleName.should.equal(this.kycInvestor);
+          result = await this.crowdsale.hasRole(accounts[2], this.kycInvestor);
+          result.should.be.equal(true);
+          tx = await this.crowdsale.delKycVerifiedInvestor(accounts[2], { from: accounts[3] }).should.be.fulfilled;
+          const logs2 = tx.logs;
+          const event2 = logs2.find(e => e.event === 'RoleRemoved');
+          event2.args.addr.should.equal(accounts[2]);
+          event2.args.roleName.should.equal(this.kycInvestor);
+          result = await this.crowdsale.hasRole(accounts[2], this.kycInvestor);
+          result.should.be.equal(false);
+        });
+
+        it('admin is able to del kycManagers', async function () {
+          const { logs } = await this.crowdsale.delKycManager(accounts[3], { from: accounts[1] }).should.be.fulfilled;
+          const event = logs.find(e => e.event === 'RoleRemoved');
+          event.args.addr.should.equal(accounts[3]);
+          event.args.roleName.should.equal(this.kycManager);
+        });
+
+        it('another admin is able to del kycManagers', async function () {
+          const { logs } = await this.crowdsale.delKycManager(accounts[3], { from: accounts[0] }).should.be.fulfilled;
+          const event = logs.find(e => e.event === 'RoleRemoved');
+          event.args.addr.should.equal(accounts[3]);
+          event.args.roleName.should.equal(this.kycManager);
+        });
+
+        it('Non-admin unable to del kycManager', async function () {
+          await this.crowdsale.delKycManager(accounts[3], { from: accounts[2] }).should.be.rejectedWith(EVMRevert);
+        });
+
+        it('kycManager unable to del kycManager (if not admin)', async function () {
+          await this.crowdsale.delKycManager(accounts[3], { from: accounts[3] }).should.be.rejectedWith(EVMRevert);
+        });
+
+        it('kycManager unable to add admins', async function () {
+          await this.crowdsale.addAdmin(accounts[4], { from: accounts[3] }).should.be.rejectedWith(EVMRevert);
+        });
+
+        it('kycManager unable to del admins', async function () {
+          await this.crowdsale.delAdmin(accounts[1], { from: accounts[3] }).should.be.rejectedWith(EVMRevert);
+        });
+
+        describe('Acc3 removed from KYC managers', async function () {
+          beforeEach(async function () {
+            await this.crowdsale.delKycManager(accounts[3]).should.be.fulfilled;
+          });
+          it('* ToDo check KYC privileges revoked', async function () {
+            assert(true);
+          });
+        });
+      });
+
+      describe('then Acc0 removed from admins', async function () {
+        beforeEach(async function () {
+          await this.crowdsale.delAdmin(accounts[0], { from: accounts[1] }).should.be.fulfilled;
+        });
+
+        it('Role checks - admin is Acc1 only', async function () {
+          result = await this.crowdsale.hasRole(accounts[0], this.adminRoleName);
+          result.should.be.equal(false);
+          result = await this.crowdsale.hasRole(accounts[1], this.adminRoleName);
+          result.should.be.equal(true);
+        });
+
+        it('Non-admin unable to add admin', async function () {
+          await this.crowdsale.addAdmin(accounts[2], { from: accounts[0] }).should.be.rejectedWith(EVMRevert);
+        });
+
+        it('Admin is able to add admins', async function () {
+          await this.crowdsale.addAdmin(accounts[3], { from: accounts[1] }).should.be.fulfilled;
+        });
+      });
     });
   });
 
