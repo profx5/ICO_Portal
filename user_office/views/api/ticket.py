@@ -23,13 +23,13 @@ class TicketCraeteSerializer(ModelSerializer):
 
 
 class FollowUpSerializer(ModelSerializer):
-    user_email = SerializerMethodField()
+    sender = SerializerMethodField()
 
     class Meta:
         model = FollowUp
-        fields = ('id', 'date', 'comment', 'user_email')
+        fields = ('id', 'date', 'comment', 'sender')
 
-    def get_user_email(self, instance):
+    def get_sender(self, instance):
         if instance.user:
             return instance.user.get_full_name()
 
