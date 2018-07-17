@@ -14,6 +14,7 @@ import {CurrencyReducer} from './CurrencyReducer.js';
 import {TimerReducer} from './TimerReducer.js';
 import {UIStateReducer} from './UIStateReducer.js';
 import {MetamaskReducer} from './MetamaskReducer.js';
+import {TicketsReducer} from "./TicketReducer.js";
 import { routerReducer } from 'react-router-redux'
 
 const reducers = combineReducers({
@@ -31,7 +32,8 @@ const reducers = combineReducers({
     UI: UIStateReducer,
     Metamask: MetamaskReducer,
     form: formReducer,
-    router: routerReducer
+    router: routerReducer,
+    tickets: TicketsReducer
 })
 
 export default reducers;

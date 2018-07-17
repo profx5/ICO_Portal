@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?gchli9');
-  src:  url('fonts/icomoon.eot?gchli9#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?gchli9') format('truetype'),
-    url('fonts/icomoon.woff?gchli9') format('woff'),
-    url('fonts/icomoon.svg?gchli9#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?uijkrd');
+  src:  url('fonts/icomoon.eot?uijkrd#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?uijkrd') format('truetype'),
+    url('fonts/icomoon.woff?uijkrd') format('woff'),
+    url('fonts/icomoon.svg?uijkrd#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,28 +24,37 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-XCP:before {
+.icon-other:before {
   content: "\e900";
 }
+.icon-card:before {
+  content: "\ea3b";
+}
+.icon-BTG2:before {
+  content: "\ea3a";
+}
+.icon-XCP:before {
+  content: "\ea39";
+}
 .icon-XCP-alt:before {
-  content: "\e901";
+  content: "\ea38";
 }
 .icon-XEM:before {
-  content: "\e902";
+  content: "\ea37";
 }
 .icon-XEM-alt:before {
-  content: "\e903";
+  content: "\ea36";
 }
-.icon-XMR:before {
-  content: "\e904";
+.icon-XMR2:before {
+  content: "\ea35";
 }
 .icon-XPM:before {
-  content: "\e905";
+  content: "\ea34";
 }
 .icon-XPM-alt:before {
-  content: "\e906";
+  content: "\ea33";
 }
-.icon-XRP:before {
+.icon-XRP2:before {
   content: "\e907";
 }
 .icon-XRP-alt:before {
@@ -55,73 +64,73 @@
   content: "\e909";
 }
 .icon-XTZ-alt:before {
-  content: "\e90a";
+  content: "\ea32";
 }
-.icon-XVG:before {
-  content: "\e90b";
+.icon-XVG2:before {
+  content: "\ea31";
 }
 .icon-XVG-alt:before {
-  content: "\e90c";
+  content: "\ea30";
 }
 .icon-XZC:before {
-  content: "\e90d";
+  content: "\ea2f";
 }
 .icon-XZC-alt:before {
-  content: "\e90e";
+  content: "\ea2e";
 }
 .icon-YBC:before {
-  content: "\e90f";
+  content: "\ea2d";
 }
 .icon-YBC-alt:before {
-  content: "\e910";
+  content: "\ea2c";
 }
-.icon-ZEC:before {
-  content: "\e911";
+.icon-ZEC2:before {
+  content: "\ea2b";
 }
 .icon-ZEC-alt:before {
-  content: "\e912";
+  content: "\ea2a";
 }
 .icon-ZEIT:before {
-  content: "\e913";
+  content: "\ea29";
 }
 .icon-ZEIT-alt:before {
-  content: "\e914";
+  content: "\ea28";
 }
-.icon-ADA:before {
-  content: "\e915";
+.icon-ADA2:before {
+  content: "\ea27";
 }
 .icon-ADA-alt .path1:before {
-  content: "\e916";
+  content: "\ea26";
   color: rgb(0, 0, 0);
 }
 .icon-ADA-alt .path2:before {
-  content: "\e917";
+  content: "\ea3c";
   margin-left: -1em;
   color: rgb(255, 255, 255);
 }
 .icon-ADC:before {
-  content: "\e918";
+  content: "\ea25";
 }
 .icon-ADC-alt:before {
-  content: "\e919";
+  content: "\ea24";
 }
 .icon-AEON:before {
-  content: "\e91a";
+  content: "\ea23";
 }
 .icon-AEON-alt:before {
-  content: "\e91b";
+  content: "\ea22";
 }
 .icon-AMP:before {
-  content: "\e91c";
+  content: "\ea21";
 }
 .icon-AMP-alt:before {
-  content: "\e91d";
+  content: "\ea20";
 }
 .icon-ANC:before {
-  content: "\e91e";
+  content: "\ea1f";
 }
 .icon-ANC-alt:before {
-  content: "\e91f";
+  content: "\ea1e";
 }
 .icon-ARCH:before {
   content: "\e920";
@@ -177,7 +186,7 @@
 .icon-BC-alt:before {
   content: "\e930";
 }
-.icon-BCH:before {
+.icon-BCH2:before {
   content: "\e931";
 }
 .icon-BCH-alt:before {
@@ -216,7 +225,7 @@
 .icon-BTA:before {
   content: "\e93d";
 }
-.icon-BTC:before {
+.icon-BTC2:before {
   content: "\e93e";
 }
 .icon-BTC-alt:before {
@@ -264,7 +273,7 @@
 .icon-DAO-alt:before {
   content: "\e94c";
 }
-.icon-DASH:before {
+.icon-DASH2:before {
   content: "\e94d";
 }
 .icon-DASH-alt:before {
@@ -312,7 +321,7 @@
 .icon-EMC-alt:before {
   content: "\e95c";
 }
-.icon-EOS:before {
+.icon-EOS2:before {
   content: "\e95d";
 }
 .icon-EOS-alt:before {
@@ -324,13 +333,13 @@
 .icon-ERC-alt:before {
   content: "\e960";
 }
-.icon-ETC:before {
+.icon-ETC2:before {
   content: "\e961";
 }
 .icon-ETC-alt:before {
   content: "\e962";
 }
-.icon-ETH:before {
+.icon-ETH2:before {
   content: "\e963";
 }
 .icon-ETH-alt:before {
@@ -403,7 +412,7 @@
 .icon-GNO-alt:before {
   content: "\e97a";
 }
-.icon-GNT:before {
+.icon-GNT2:before {
   content: "\e97b";
 }
 .icon-GNT-alt:before {
@@ -499,7 +508,7 @@
 .icon-LSK-alt:before {
   content: "\e99a";
 }
-.icon-LTC:before {
+.icon-LTC2:before {
   content: "\e99b";
 }
 .icon-LTC-alt:before {
@@ -553,7 +562,7 @@
 .icon-NBT:before {
   content: "\e9ac";
 }
-.icon-NEO:before {
+.icon-NEO2:before {
   content: "\e9ad";
 }
 .icon-NEO-alt:before {
@@ -595,7 +604,7 @@
 .icon-NVC-alt:before {
   content: "\e9ba";
 }
-.icon-NXT:before {
+.icon-NXT2:before {
   content: "\e9bb";
 }
 .icon-NXT-alt:before {
@@ -607,7 +616,7 @@
 .icon-OK-alt:before {
   content: "\e9be";
 }
-.icon-OMG:before {
+.icon-OMG2:before {
   content: "\e9bf";
 }
 .icon-OMG-alt:before {
@@ -894,7 +903,4 @@
 }
 .icon-XBS-alt:before {
   content: "\ea1d";
-}
-.awe {
-  color: rgba(151, 151, 151, 0.02);
 }

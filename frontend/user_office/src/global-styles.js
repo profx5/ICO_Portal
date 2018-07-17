@@ -342,30 +342,4 @@ injectGlobal`
       font-display: swap;
   }
 
-  @font-face {
-      font-family: 'icomoon';
-      src:  url(${icomoonEot}?18elz6);
-      src:  url(${icomoonEot}?18elz6#iefix) format('embedded-opentype'),
-        url(${icomoonWoff}?18elz6) format('woff'),
-        url(${icomoonTtf}?18elz6) format('truetype'),
-        url(${icomoonSvg}?18elz6#icomoon) format('svg');
-        font-weight: normal;
-        font-style: normal;
-  }
-
-
-  [class^="icon-"], [class*=" icon-"] {
-
-    font-family: 'icomoon' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
 `;

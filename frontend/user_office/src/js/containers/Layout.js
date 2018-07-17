@@ -27,9 +27,9 @@ class Layout extends Component {
                     <NavSidebar/>
                     <Switch>
                         <Route exact path="/user_office" component={Dashboard}/>
-                        <Route exact path="/transactions" component={Transactions}/>
+                        <Route exact path="/user_office/transactions" component={Transactions}/>
                         <Route path="/user_office/payment" component={Payment} />
-                        <Route exact path="/faq" component={FAQFeedback}/>
+                        <Route exact path="/user_office/faq" component={FAQFeedback}/>
                         <Route path="/user_office/verification" component={Verification}/>
                         <Route path="/user_office/settings" component={Settings}/>
                     </Switch>

@@ -3,52 +3,37 @@ import styled from 'styled-components';
 
 import {connect} from 'react-redux'
 import Button from "../components/Button";
+import Comment from '../components/Comment';
 import iconCheckGreen from './../../img/check-green.svg';
 import iconTransitAmber from './../../img/icon_transit-amber.svg';
 import iconUser from './../../img/user.svg';
 import moment from "moment/moment";
 import $ from "jquery";
 import * as UIActions from './../actions/UIActions';
-import Utils from './../utils/index';
+import * as TicketActions from './../actions/TicketActions';
 
-let questions = [
-    {
-        u_id: 'qe12',
-        subject: 'Не приходят токены',
-        text: Utils.lorem(),
-        created_date: new Date(),
-        answers: [{
-            date: new Date(),
-            who: 'Светочка',
-            text: Utils.lorem(),
-        },]
-    },
-    {
-        u_id: 'qe13',
-        subject: 'Купил токены за день до окончания акции, пришли на следующий день и бонусы',
-        text: Utils.lorem(),
-        created_date: new Date(),
-        answers: [{
-            date: new Date(),
-            text: Utils.lorem(),
-            who: 'Мама Светочки'
-        },]
-    },
-    {
-        u_id: 'qe14',
-        subject: 'Че за нах? Ау, я тупой и не знаю куда нажать надо, помогите мне, пожалуйста',
-        who: 'Светочка',
-        created_date: new Date(),
-        answered_date: null,
-        answers: null
-    }
-];
-
+const STATUSES = {
+    1: 'Open',
+    2: 'Reopen',
+    3: 'Resolved',
+    4: 'Closed',
+    5: 'Duplicate',
+};
 
 class FAQFeedback extends React.Component {
 
     uploadOnClickHandler = (event) => {
         $(event.currentTarget).find('input[type="file"]').click();
+    };
+
+    setOpenedTicket = (ticketId) => {
+        const {setOpenedTicket} = this.props;
+        setOpenedTicket(ticketId);
+    };
+
+    setOpenedTicketNull = () => {
+        const {setTicketFullNull} = this.props;
+        setTicketFullNull();
     };
 
     _renderNewQuestions = () => {
@@ -79,20 +64,20 @@ class FAQFeedback extends React.Component {
         )
     };
 
-    _renderAllQuestions = () => {
+    _renderAllQuestions = (tickets) => {
         return (
-            questions.map((question) => {
+            tickets.map((ticket) => {
                 return (
-                    <FlexContainer>
+                    <FlexContainer key={ticket.id} onClick={this.setOpenedTicket.bind(this, ticket.id)}>
                         <FlexItem width={5}>
-                            {question.answers !== null &&
+                            {(ticket.status === '1' || ticket.status === '2') &&
                             <IconImg src={iconCheckGreen}/>}
-                            {question.answers === null &&
+                            {(ticket.status !== '1' && ticket.status !== '2') &&
                             <IconImg src={iconTransitAmber}/>}
                         </FlexItem>
                         <FlexItem width={75}>
-                            <div>{question.subject}</div>
-                            <span>{question.answers !== null && 'Ответ получен.' || 'В ожидании.'}</span>
+                            <div className='title'>{ticket.title}</div>
+                            <span>{(ticket.status === '1' || ticket.status === '2') && 'Ответ получен.' || 'В ожидании.'}</span>
                         </FlexItem>
                         <FlexItem width={20} padding={'none'}>
                             <FlexContainer>
@@ -100,10 +85,10 @@ class FAQFeedback extends React.Component {
                                     <IconImg src={iconUser}/>
                                 </FlexItem>
                                 <FlexItem width={80} border={'none'}>
-                                    <div>{question.answers && question.answers[0].who || 'Вы'}</div>
-                                    <span>{question.answers &&
-                                    'Ответ получен ' + moment(question.answers[0].date).format('DD MMMM YYYY') ||
-                                    'Написали ' + moment(question.created_date).format('DD MMMM YYYY')}</span>
+                                    <div>{ticket.public_follow_ups && ticket.public_follow_ups[0].user_email || 'Вы'}</div>
+                                    <span>{ticket.public_follow_ups &&
+                                    'Ответ получен ' + moment(ticket.public_follow_ups[0].date).format('DD MMMM YYYY') ||
+                                    'Написали ' + moment(ticket.created).format('DD MMMM YYYY')}</span>
                                 </FlexItem>
                             </FlexContainer>
                         </FlexItem>
@@ -113,33 +98,36 @@ class FAQFeedback extends React.Component {
         )
     };
 
-    _renderQuestionById = (u_id) => {
-        let question = questions.filter((item) => item.u_id === u_id);
+    _renderQuestionById = () => {
+        const { ticketFull } = this.props;
+        let content = [];
+        content.push(ticketFull.public_follow_ups.map((item, index) => {
+            return (
+                <Comment comment={item} key={index}/>
+            )
+        }));
         return (
             <div>
                 <HeadWrapper>
-                    Мои вопросы -> <span>{question[0].subject}</span>
+                    <span onClick={this.setOpenedTicketNull}>Мои вопросы</span> -> {ticketFull.title}
                 </HeadWrapper>
                 <Divider/>
-                Hello world!
+                {content}
             </div>
         )
     };
 
-    _renderAnswer = (answer) => {
-
-    };
-
-    _renderQuestions = (current) => {
-        if (current === null) {
-            return this._renderAllQuestions()
+    _renderQuestions = (current, tickets) => {
+        let { ticketFull } = this.props;
+        if (ticketFull === null) {
+            return this._renderAllQuestions(tickets)
         } else {
-            return this._renderQuestionById(current)
+            return this._renderQuestionById()
         }
     };
 
     render() {
-        const {tab, changeTab, openedTicket} = this.props;
+        const {tab, changeTab, openedTicket, tickets} = this.props;
         return (
             <Wrapper>
                 <Head>FAQ & Feedback</Head>
@@ -148,14 +136,14 @@ class FAQFeedback extends React.Component {
                         Новый запрос
                     </Tab>
                     <Tab id={'my'} onClick={changeTab} active={tab === 'my'}>
-                        Мои запросы <span>{questions.length}</span>
+                        Мои запросы <span>{tickets.size}</span>
                     </Tab>
                 </Tabs>
                 <Content>
                     {tab === 'new' &&
                     this._renderNewQuestions()}
                     {tab === 'my' &&
-                    this._renderQuestions(openedTicket)}
+                    this._renderQuestions(openedTicket, tickets)}
                 </Content>
             </Wrapper>
         )
@@ -163,14 +151,23 @@ class FAQFeedback extends React.Component {
 }
 
 
-const mapStateToProps = ({UI}) => ({
+const mapStateToProps = ({UI, tickets}) => ({
     tab: UI.get('faqSelectedTab'),
     openedTicket: UI.get('openedTicket'),
+    tickets: tickets.get('results'),
+    ticketFull: tickets.get('ticketFull')
 });
 
 const mapDispatchToProps = (dispatch) => ({
     changeTab(payload) {
         dispatch(UIActions.changeSelectedTab(payload.target.id))
+    },
+    setOpenedTicket(ticketId) {
+        dispatch(UIActions.setOpenedTicket(ticketId));
+        dispatch(TicketActions.getTicketFull(ticketId))
+    },
+    setTicketFullNull() {
+        dispatch(TicketActions.setTicketFullNull());
     }
 });
 
@@ -184,6 +181,7 @@ const HeadWrapper = styled.div`
     color: #000000;
     & span {
         color: #3172fd;
+        cursor: pointer;
     }
 `;
 
@@ -224,7 +222,10 @@ const FlexItem = styled.div`
         color: #031949;
     }
     & br {
-        line-height: 7px
+        line-height: 7px;
+    }
+    .title {
+        cursor: pointer;
     }
 `;
 

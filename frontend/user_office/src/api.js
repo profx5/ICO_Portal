@@ -61,6 +61,12 @@ class Api {
     changeEmail() {
         return `${this.prefix}/changeEmail/`
     }
+    getTickets() {
+        return `${this.prefix}/tickets/`
+    }
+    getTicket(id) {
+        return `${this.prefix}/tickets/${id}/`
+    }
 }
 
 const api = new Api();

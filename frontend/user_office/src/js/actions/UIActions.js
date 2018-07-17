@@ -7,6 +7,9 @@ export const hideAccountDropdown = createAction('HIDE_ACCOUNT_DROPDOWN');
 export const showStepsDropdown = createAction('SHOW_STEPS_DROPDOWN');
 export const hideStepsDropdown = createAction('HIDE_STEPS_DROPDOWN');
 
+export const showCurrenciesPopup = createAction('SHOW_CURRENCIES_POPUP');
+export const hideCurrenciesPopup = createAction('HIDE_CURRENCIES_POPUP');
+
 export const showInvestOptions = createAction('SHOW_INVEST_OPTIONS');
 export const hideInvestOptions = createAction('HIDE_INVEST_OPTIONS');
 

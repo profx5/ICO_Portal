@@ -70,7 +70,7 @@ const Step = styled.div`
             content: '';
             display: block;
             width: 387px;
-            height: 3px;
+            height: 2px;
             background: #1767f2;
             position: absolute;
             bottom: 6px;

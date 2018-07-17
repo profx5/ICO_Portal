@@ -52,7 +52,9 @@ class TestTickets(APITestCase):
             'id': self._get_ticket_id(),
             'title': 'Test title',
             'created': self.utcnow.isoformat(),
-            'status': 1
+            'status': 1,
+            'last_reply_by': self.get_investor().email,
+            'last_reply_at': self.utcnow
         }])
 
     def test_get_ticket(self):

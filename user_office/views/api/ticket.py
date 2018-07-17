@@ -11,9 +11,20 @@ from user_office.services import CreateSupportTicket, CommentTicket
 
 
 class TicketListSerializer(ModelSerializer):
+    last_reply_by = SerializerMethodField()
+    last_reply_at = SerializerMethodField()
+
+    def get_last_reply_by(self, instance):
+        if instance.followup_set.exists():
+            return instance.followup_set.last().user.get_full_name()
+
+    def get_last_reply_at(self, instance):
+        if instance.followup_set.exists():
+            return instance.followup_set.last().date
+
     class Meta:
         model = Ticket
-        fields = ('id', 'title', 'created', 'status')
+        fields = ('id', 'title', 'created', 'status', 'last_reply_by', 'last_reply_at')
 
 
 class TicketCraeteSerializer(ModelSerializer):

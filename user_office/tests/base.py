@@ -13,6 +13,8 @@ class APITestCase(TestCase):
 
     setup_login = True
 
+    maxDiff = None
+
     def setUp(self):
         investor = Investor.objects.create(id=1,
                                            email=self.email,
