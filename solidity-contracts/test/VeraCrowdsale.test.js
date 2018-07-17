@@ -14,6 +14,7 @@ require('chai')
 
 const Crowdsale = artifacts.require('VeraCrowdsale');
 const Token = artifacts.require('VeraCoin');
+const Oracle = artifacts.require('PriceOracle');
 
 contract('VeraCrowdsale', function (accounts) {
   // const rate = new BigNumber(1);
@@ -28,7 +29,8 @@ contract('VeraCrowdsale', function (accounts) {
   beforeEach(async function () {
     // this.openingTime = latestTime() + duration.weeks(1);
     this.token = await Token.new();
-    this.crowdsale = await Crowdsale.new(this.token.address);
+    this.oracle = await Oracle.new(43212, 10);
+    this.crowdsale = await Crowdsale.new(this.token.address, this.oracle.address);
     await this.token.transfer(this.crowdsale.address, 12343);
   });
 

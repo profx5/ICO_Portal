@@ -1,6 +1,7 @@
 pragma solidity ^0.4.0;
 
 import "./VeraCoin.sol";
+import "./PriceOracle.sol";
 import "../openzeppelin-solidity/contracts/ownership/rbac/RBAC.sol";
 import "../openzeppelin-solidity/contracts/math/Math.sol";
 //import "../openzeppelin-solidity/contracts/math/SafeMath.sol";
@@ -9,7 +10,6 @@ import "../openzeppelin-solidity/contracts/math/Math.sol";
 contract VeraCrowdsale is RBAC {
   using SafeMath for uint256;
   uint256 public tokenPriceInCents = 500;
-  uint256 public ethPriceInCents = 41620;
   VeraCoin public token;
   string public constant ROLE_ADMIN = "admin";
   string public constant ROLE_KYC_MANAGER = "kycManager";
@@ -49,7 +49,7 @@ contract VeraCrowdsale is RBAC {
     _;
   }
 
-  constructor( VeraCoin _token) public {
+  constructor( VeraCoin _token, ) public {
     addRole(msg.sender, ROLE_ADMIN);
     token = _token;
     phases.push(Phase(1531490000, 1531499999, 10));
