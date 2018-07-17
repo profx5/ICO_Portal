@@ -895,3 +895,6 @@
 .icon-XBS-alt:before {
   content: "\ea1d";
 }
+.awe {
+  color: rgba(151, 151, 151, 0.02);
+}

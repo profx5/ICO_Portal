@@ -32,8 +32,7 @@ class ContentWrapper extends React.Component {
 
         return (
             <Wrapper>
-                {this.props.left}
-                {this.props.rest}
+                {this.props.layout}
             </Wrapper>
         )
     }

@@ -284,7 +284,7 @@ injectGlobal`
     font-family: 'gilroy', 'Trebuchet MS', 'Tahoma', 'Arial', 'sans-serif' !important;
     font-weight: 500;
     letter-spacing: .4px;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     line-height: normal;
     color: #323c47;
     scroll-behavior: smooth;

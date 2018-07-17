@@ -8,6 +8,8 @@ import PersonalInfo from './PersonalInfo';
 import Password from './Password';
 import VerificationInfo from './VerificationInfo';
 
+import { Form } from 'react-final-form';
+
 
 class Settings extends React.Component {
 
@@ -47,6 +49,7 @@ const mapDispatchToProps = (dispatch) => ({
      *     dispatch(KYCActions.submitKYCRequest(payload))
      * }*/
 })
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
 

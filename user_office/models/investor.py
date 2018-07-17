@@ -40,6 +40,9 @@ class Investor(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     email = models.EmailField(unique=True, null=True)
 
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
+
     eth_account = ETHAddressField(verbose_name='ethereum account address',
                                   null=True,
                                   blank=True,
@@ -100,4 +103,9 @@ class Investor(AbstractBaseUser):
         return self.is_active and self.is_superuser
 
     def get_full_name(self):
-        return self.email
+        if self.first_name and self.last_name:
+            full_name = '%s %s' % (self.first_name, self.last_name)
+
+            return full_name.strip()
+        else:
+            return self.email

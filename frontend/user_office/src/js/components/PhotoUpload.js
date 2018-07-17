@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import {Field} from 'redux-form';
+import { Field } from 'react-final-form';
 
 const File = ({ input: {value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
   <input type='file' {...inputProps} {...props} />

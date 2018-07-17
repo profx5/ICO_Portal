@@ -13,23 +13,26 @@ export default InvestInput;
 
 const InputWrapper = styled.div`
     display: inline-block;
-    width: 226px;
-    height: 45px;
+    width: 345px;
+    height: 70px;
+    border-radius: 2px;
     border: 1px solid #d6dfe6;
     position: relative;
-    margin-right: 22px;
+    margin-right: 32px;
     &:before {
         content: attr(data-header);
         color: #0a0a0a;
         position: absolute;
         left: 0
         top: -35px;
+        font-size: 16px;
     }
     &:after {
         content: attr(data-currency);
-        color: #0a0a0a;
+        color: rgba(10,10,10, 0.4);
         position: absolute;
-        right: 18px;
+        font-size: 18px;
+        right: 27px;
         top: 50%;
         transform: translateY(-50%);
     }

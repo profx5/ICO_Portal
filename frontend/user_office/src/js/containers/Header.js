@@ -3,25 +3,33 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import * as UIActions from '../actions/UIActions';
 
-import Balance from '../components/Balance';
+import HeaderNav from '../components/HeaderNav';
 import AccountInfo from '../components/AccountInfo';
 
 class Header extends React.Component {
 
-    dropdownClickHandler = () => {
+    dropdownAccountClickHandler = () => {
         const {accountDropdownShown, showAccountDropdown, hideAccountDropdown} = this.props;
         if (!accountDropdownShown) {
             showAccountDropdown();
         } else hideAccountDropdown();
     }
 
-    render () {
+    dropdownStepsClickHandler = () => {
+        const {stepsDropdownShown, showStepsDropdown, hideStepsDropdown} = this.props;
+        if (!stepsDropdownShown) {
+            showStepsDropdown();
+        } else hideStepsDropdown();
+    }
+
+    render() {
         const {
             email,
             tokensAmount,
             showInvestForm,
             decimals,
-            accountDropdownShown
+            accountDropdownShown,
+            stepsDropdownShown
         } = this.props;
 
         let floatTokensAmount = '1';
@@ -32,17 +40,19 @@ class Header extends React.Component {
 
         return (
             <HeaderBlock>
-                <HeaderUserBlock>
-                    <Balance
-                        currentAmount={tokensAmount / floatTokensAmount}
-                        investClick={showInvestForm}
-                    />
+                <NavWrapper>
+                    <VeraLogo>Vera</VeraLogo>
+                    <HeaderNav/>
+                </NavWrapper>
+                <HeaderUser>
                     <AccountInfo
                         email={email}
-                        isDropdownOpen={accountDropdownShown}
-                        dropdownClickHandler={this.dropdownClickHandler}
+                        isDropdownAccountOpen={accountDropdownShown}
+                        isDropdownStepsOpen={stepsDropdownShown}
+                        dropdownAccountClickHandler={this.dropdownAccountClickHandler}
+                        dropdownStepsClickHandler={this.dropdownStepsClickHandler}
                     />
-                </HeaderUserBlock>
+                </HeaderUser>
             </HeaderBlock>
         )
     }
@@ -55,7 +65,8 @@ const mapStateToProps = ({user, ICOInfo, KYC, Invest, UI}) => ({
     KYCStatus: KYC.get('status'),
     userId: user.get('eth_account'),
     showInvestForm: Invest.get('showInvestForm'),
-    accountDropdownShown: UI.get('accountDropdownShown')
+    accountDropdownShown: UI.get('accountDropdownShown'),
+    stepsDropdownShown: UI.get('stepsDropdownShown')
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -65,27 +76,52 @@ const mapDispatchToProps = (dispatch) => ({
     hideAccountDropdown() {
         dispatch(UIActions.hideAccountDropdown())
     },
+    showStepsDropdown() {
+        dispatch(UIActions.showStepsDropdown())
+    },
+    hideStepsDropdown() {
+        dispatch(UIActions.hideStepsDropdown())
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
 
+const VeraLogo = styled.div`
+    width: 98px;
+    height: 45px;
+    font-family: Gilroy;
+    font-size: 45px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 1px;
+    color: #000000;
+    margin-top: -15px;
+`;
 
 const HeaderBlock = styled.header`
-    height: 100px;
-    background: #FAFBFC;
+    height: 90px;
+    background: white;
     padding-left: 55px;
     padding-right: 55px;
     flex-basis: 100%;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    border-bottom: 1px solid #e7e9ea;
+    justify-content: space-between;
+    border-bottom: 1px solid #e6e8f2;
     position: relative;
     z-index: 2;
 `;
 
-const HeaderUserBlock = styled.div`
-    width: 100%;
+const NavWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    height: 100%;
+`;
+
+const HeaderUser = styled.div`
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;

@@ -11,6 +11,9 @@ import PhotoUpload from './../components/PhotoUpload';
 import ReduxFormField from './../components/ReduxFormField';
 import ReduxFormRadio from './../components/ReduxFormRadio';
 
+import FinalFormField from './../components/FinalFormField';
+import FinalFormRadio from './../components/FinalFormRadio';
+
 import samplePhoto from './../../img/user.svg';
 
 
@@ -22,7 +25,7 @@ class PersonalData extends React.Component {
 
     render() {
 
-        const {userPhoto} = this.props;
+        const {uploadedUserPhoto, uploadPhoto, removePhoto} = this.props;
 
         return (
             <Wrapper className="Verification__personalData">
@@ -30,29 +33,29 @@ class PersonalData extends React.Component {
                 <PhotoFileUpload>
                     <PhotoWrapper>
                         <DescHead>Your photo</DescHead>
-                        <Photo path={userPhoto || samplePhoto}/>
+                        <Photo removePhoto={removePhoto} photoName="user_photo" isUploaded={uploadedUserPhoto} path={uploadedUserPhoto || samplePhoto}/>
                     </PhotoWrapper>
                     <UploadWrapper>
                         <DescHead>Choose uploading way</DescHead>
                         <PhotoUpload name='user_photo'/>
-                        <FileUpload name="user_photo" onClickHandler={this.uploadOnClickHandler}/>
+                        <FileUpload uploadPhoto={uploadPhoto} name="user_photo" onClickHandler={this.uploadOnClickHandler}/>
                     </UploadWrapper>
                 </PhotoFileUpload>
                 <InputSet>
                     <InputWrapper>
-                        <ReduxFormField labelText="First Name" name="firstname"/>
+                        <FinalFormField labelText="First Name" name="firstname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <ReduxFormField labelText="Last Name" name="surname"/>
+                        <FinalFormField labelText="Last Name" name="surname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <ReduxFormField labelText="Middle Name" name="midname"/>
+                        <FinalFormField labelText="Middle Name" name="midname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <ReduxFormRadio labelText="Gender" name="gender" options={['Male', 'Female']} values={['M', 'F']}/>
+                        <FinalFormRadio labelText="Gender" name="gender" options={['Male', 'Female']} values={['M', 'F']}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <ReduxFormField labelText="Date of birth" options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}} name="birthdate"/>
+                        <FinalFormField labelText="Date of birth" options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}} name="birthdate"/>
                     </InputWrapper>
             </InputSet>
             </Wrapper>
@@ -63,12 +66,19 @@ class PersonalData extends React.Component {
 
 const mapStateToProps = ({ICOInfo, Timer, KYC}) => ({
     userPhoto: KYC.get('user_photo'),
-    documentPhoto: KYC.get('document_photo')
+    documentPhoto: KYC.get('document_photo'),
+    uploadedUserPhoto: KYC.get('uploaded_user_photo')
 })
 
 const mapDispatchToProps = (dispatch) => ({
     updateKycData() {
         dispatch(KYCActions.submitKYCRequest())
+    },
+    uploadPhoto(payload) {
+        dispatch(KYCActions.uploadPhoto(payload))
+    },
+    removePhoto(payload) {
+        dispatch(KYCActions.removePhoto(payload))
     }
 })
 

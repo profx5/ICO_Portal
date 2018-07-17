@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {reduxForm} from 'redux-form';
+import { Form, Field } from 'react-final-form'
 
 import * as KYCActions from './../actions/KYCActions';
 
@@ -11,29 +12,38 @@ import Documents from './Documents';
 import VerificationInfo from './VerificationInfo';
 
 
-
 class Verification extends React.Component {
 
     onSubmitHandler = event => {
         event.preventDefault();
-        const data = new FormData(event.target);
-        this.props.submitForm(data);
+        // const data = new FormData(event.target);
+        // this.props.submitForm(data);
+        alert('bro')
     }
 
     render () {
         return (
+            <Form 
+                onSubmit={this.onSubmitHandler}
+                render={() => (
 
-            <Wrapper onSubmit={this.onSubmitHandler} id="form" className="Verification">
-                <Head>Verification</Head>
-                <MainWrapper>
-                    <PersonalData/>
-                    <Address/>
-                    <Documents/>
-                </MainWrapper>
-                <InfoWrapper>
-                    <VerificationInfo verificationStages={['Verification__personalData','Verification__address','Verification__documents']} stages={['Personal Data', 'Registration address', 'Document']}/>
-                </InfoWrapper>
-            </Wrapper>
+                    <Wrapper onSubmit={(function(e){e.preventDefault()})} id="form" className="Verification">
+                        <Head>Verification</Head>
+                        <MainWrapper>
+                            <PersonalData/>
+                            <Address/>
+                            <Documents/>
+                        </MainWrapper>
+                        <InfoWrapper>
+                            <VerificationInfo 
+                                btnText="Send data" 
+                                verificationStages={['Verification__personalData','Verification__address','Verification__documents']} 
+                                stages={['Personal Data', 'Registration address', 'Document']}
+                            />
+                        </InfoWrapper>
+                    </Wrapper>
+                )}
+            />
         )
     }
 };
@@ -47,10 +57,9 @@ const mapDispatchToProps = (dispatch) => ({
     }
 })
 
-Verification = reduxForm({
-    form: 'verification',
-    multipartForm: true
-})(Verification);
+// Verification = reduxForm({
+//     form: 'verification'
+// })(Verification);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Verification);
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
 
-const FieldText = ({labelText, placeholder, options, name, value, disabled}) => {
+const FieldText = ({labelText, placeholder, options, name, value, disabled, type}) => {
 
     return (
         <Wrapper>
@@ -12,7 +12,7 @@ const FieldText = ({labelText, placeholder, options, name, value, disabled}) => 
                 value={value} 
                 placeholder={placeholder} 
                 className="Field" 
-                type="text" 
+                type={type || 'text'} 
                 name={name} 
                 readOnly={disabled === true ? true : false} 
                 options={options}/> 
