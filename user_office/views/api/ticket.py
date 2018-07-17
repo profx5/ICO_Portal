@@ -2,10 +2,12 @@ from oslash import Right
 from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework.fields import FileField
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
-from helpdesk.models import Ticket, FollowUp
+from helpdesk.models import Ticket, FollowUp, Attachment
+from helpdesk.lib import process_attachments
 from .auth import KYCAndLoginPermission
 from user_office.services import CreateSupportTicket, CommentTicket
 
@@ -33,12 +35,19 @@ class TicketCraeteSerializer(ModelSerializer):
         fields = ('title', 'description')
 
 
+class AttachmentSerializer(ModelSerializer):
+    class Meta:
+        model = Attachment
+        fields = ('file', 'filename', 'mime_type')
+
+
 class FollowUpSerializer(ModelSerializer):
+    attachments = AttachmentSerializer(many=True, read_only=True, source='attachment_set')
     sender = SerializerMethodField()
 
     class Meta:
         model = FollowUp
-        fields = ('id', 'date', 'comment', 'sender')
+        fields = ('id', 'date', 'comment', 'sender', 'attachments')
 
     def get_sender(self, instance):
         if instance.user:
@@ -54,9 +63,11 @@ class TicketRetrieveSerializer(ModelSerializer):
 
 
 class CommentSerializer(ModelSerializer):
+    attachment = FileField()
+
     class Meta:
         model = FollowUp
-        fields = ('comment',)
+        fields = ('comment', 'attachment')
 
 
 class TicketViewSet(GenericViewSet):
@@ -84,6 +95,7 @@ class TicketViewSet(GenericViewSet):
     def retrieve(self, request, pk=None):
         queryset = self.get_queryset()
         ticket = get_object_or_404(queryset, pk=pk)
+
         serializer = self.get_serializer(ticket)
 
         return Response(serializer.data)
@@ -110,6 +122,7 @@ class TicketViewSet(GenericViewSet):
                                  comment=request.data['comment'])
 
         if isinstance(result, Right):
+            process_attachments(result.value.followup, request.FILES.getlist('attachment'))
             serializer = TicketRetrieveSerializer(ticket)
 
             return Response(serializer.data, status=201)
