@@ -24,7 +24,7 @@ contract VeraCrowdsale is RBAC {
   TransferableTokenIface public token;
   PriceOracleIface public priceOracle;
   string public constant ROLE_ADMIN = "admin";
-  string public constant ROLE_KYC_MANAGER = "kycManager";
+  string public constant ROLE_BACKEND = "backend";
   string public constant ROLE_KYC_VERIFIED_INVESTOR = "kycVerified";
 
   struct Phase {
@@ -55,9 +55,9 @@ contract VeraCrowdsale is RBAC {
    * @dev modifier to scope access to admins
    * // reverts
    */
-  modifier onlyKycManager()
+  modifier onlyBackend()
   {
-    checkRole(msg.sender, ROLE_KYC_MANAGER);
+    checkRole(msg.sender, ROLE_BACKEND);
     _;
   }
 
@@ -128,22 +128,22 @@ contract VeraCrowdsale is RBAC {
    * @dev add admin role to an address
    * @param addr address
    */
-  function addKycManager(address addr)
+  function addBackend(address addr)
     public
     onlyAdmin
   {
-    addRole(addr, ROLE_KYC_MANAGER);
+    addRole(addr, ROLE_BACKEND);
   }
 
   /**
    * @dev remove a role from an address
    * @param addr address
    */
-  function delKycManager(address addr)
+  function delBackend(address addr)
     public
     onlyAdmin
   {
-    removeRole(addr, ROLE_KYC_MANAGER);
+    removeRole(addr, ROLE_BACKEND);
   }
 
   /**
@@ -152,7 +152,7 @@ contract VeraCrowdsale is RBAC {
    */
   function addKycVerifiedInvestor(address addr)
     public
-    onlyKycManager
+    onlyBackend
   {
     addRole(addr, ROLE_KYC_VERIFIED_INVESTOR);
   }
@@ -163,7 +163,7 @@ contract VeraCrowdsale is RBAC {
    */
   function delKycVerifiedInvestor(address addr)
     public
-    onlyKycManager
+    onlyBackend
   {
     removeRole(addr, ROLE_KYC_VERIFIED_INVESTOR);
   }

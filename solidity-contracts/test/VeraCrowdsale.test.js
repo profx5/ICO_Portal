@@ -117,7 +117,7 @@ contract('VeraCrowdsale', function (accounts) {
   describe('RBAC', async function () {
     beforeEach(async function () {
       this.adminRoleName = await this.crowdsale.ROLE_ADMIN();
-      this.kycManager = await this.crowdsale.ROLE_KYC_MANAGER();
+      this.backendRoleName = await this.crowdsale.ROLE_BACKEND();
       this.kycInvestor = await this.crowdsale.ROLE_KYC_VERIFIED_INVESTOR();
     });
     it('Initial role checks', async function () {
@@ -125,9 +125,9 @@ contract('VeraCrowdsale', function (accounts) {
       result.should.be.equal(true);
       result = await this.crowdsale.hasRole(accounts[1], this.adminRoleName);
       result.should.be.equal(false);
-      result = await this.crowdsale.hasRole(accounts[0], this.kycManager);
+      result = await this.crowdsale.hasRole(accounts[0], this.backendRoleName);
       result.should.be.equal(false);
-      result = await this.crowdsale.hasRole(accounts[1], this.kycManager);
+      result = await this.crowdsale.hasRole(accounts[1], this.backendRoleName);
       result.should.be.equal(false);
       result = await this.crowdsale.hasRole(accounts[0], this.kycInvestor);
       result.should.be.equal(false);
@@ -137,8 +137,8 @@ contract('VeraCrowdsale', function (accounts) {
     it('Non-admin unable to add admin', async function () {
       await this.crowdsale.addAdmin(accounts[1], { from: accounts[1] }).should.be.rejectedWith(EVMRevert);
     });
-    it('Non-admin unable to add kycManager', async function () {
-      await this.crowdsale.addKycManager(accounts[1], { from: accounts[1] }).should.be.rejectedWith(EVMRevert);
+    it('Non-admin unable to add backendRoleName', async function () {
+      await this.crowdsale.addBackend(accounts[1], { from: accounts[1] }).should.be.rejectedWith(EVMRevert);
     });
     it('Non-admin unable to del admin', async function () {
       await this.crowdsale.delAdmin(accounts[0], { from: accounts[1] }).should.be.rejectedWith(EVMRevert);
@@ -149,11 +149,11 @@ contract('VeraCrowdsale', function (accounts) {
       event.args.addr.should.equal(accounts[2]);
       event.args.roleName.should.equal(this.adminRoleName);
     });
-    it('Admin is able to add kycManagers', async function () {
-      const { logs } = await this.crowdsale.addKycManager(accounts[2], { from: accounts[0] }).should.be.fulfilled;
+    it('Admin is able to add Backends', async function () {
+      const { logs } = await this.crowdsale.addBackend(accounts[2], { from: accounts[0] }).should.be.fulfilled;
       const event = logs.find(e => e.event === 'RoleAdded');
       event.args.addr.should.equal(accounts[2]);
-      event.args.roleName.should.equal(this.kycManager);
+      event.args.roleName.should.equal(this.backendRoleName);
     });
     it('Admin is able to del admins (himself)', async function () {
       const { logs } = await this.crowdsale.delAdmin(accounts[0], { from: accounts[0] }).should.be.fulfilled;
@@ -161,7 +161,7 @@ contract('VeraCrowdsale', function (accounts) {
       event.args.addr.should.equal(accounts[0]);
       event.args.roleName.should.equal(this.adminRoleName);
     });
-    it('Non-kycManager unable to verify investors (admin privs don\'t make sense)', async function () {
+    it('Non-backend unable to verify investors (admin privs don\'t make sense)', async function () {
       await this.crowdsale.addKycVerifiedInvestor(accounts[0], { from: accounts[1] }).should.be.rejectedWith(EVMRevert);
       await this.crowdsale.addKycVerifiedInvestor(accounts[0], { from: accounts[0] }).should.be.rejectedWith(EVMRevert);
     });
@@ -207,12 +207,12 @@ contract('VeraCrowdsale', function (accounts) {
         event.args.roleName.should.equal(this.adminRoleName);
       });
 
-      describe('Acc3 added to KYC managers', async function () {
+      describe('Acc3 added to backends', async function () {
         beforeEach(async function () {
-          await this.crowdsale.addKycManager(accounts[3]).should.be.fulfilled;
+          await this.crowdsale.addBackend(accounts[3]).should.be.fulfilled;
         });
 
-        it('KYC manager is able to verify and un-verify investors', async function () {
+        it('Backend manager is able to verify and un-verify investors', async function () {
           result = await this.crowdsale.hasRole(accounts[2], this.kycInvestor);
           result.should.be.equal(false);
           var tx = await this.crowdsale.addKycVerifiedInvestor(accounts[2], { from: accounts[3] }).should.be.fulfilled;
@@ -231,41 +231,41 @@ contract('VeraCrowdsale', function (accounts) {
           result.should.be.equal(false);
         });
 
-        it('admin is able to del kycManagers', async function () {
-          const { logs } = await this.crowdsale.delKycManager(accounts[3], { from: accounts[1] }).should.be.fulfilled;
+        it('admin is able to del Backends', async function () {
+          const { logs } = await this.crowdsale.delBackend(accounts[3], { from: accounts[1] }).should.be.fulfilled;
           const event = logs.find(e => e.event === 'RoleRemoved');
           event.args.addr.should.equal(accounts[3]);
-          event.args.roleName.should.equal(this.kycManager);
+          event.args.roleName.should.equal(this.backendRoleName);
         });
 
-        it('another admin is able to del kycManagers', async function () {
-          const { logs } = await this.crowdsale.delKycManager(accounts[3], { from: accounts[0] }).should.be.fulfilled;
+        it('another admin is able to del Backends', async function () {
+          const { logs } = await this.crowdsale.delBackend(accounts[3], { from: accounts[0] }).should.be.fulfilled;
           const event = logs.find(e => e.event === 'RoleRemoved');
           event.args.addr.should.equal(accounts[3]);
-          event.args.roleName.should.equal(this.kycManager);
+          event.args.roleName.should.equal(this.backendRoleName);
         });
 
-        it('Non-admin unable to del kycManager', async function () {
-          await this.crowdsale.delKycManager(accounts[3], { from: accounts[2] }).should.be.rejectedWith(EVMRevert);
+        it('Non-admin unable to del Backends', async function () {
+          await this.crowdsale.delBackend(accounts[3], { from: accounts[2] }).should.be.rejectedWith(EVMRevert);
         });
 
-        it('kycManager unable to del kycManager (if not admin)', async function () {
-          await this.crowdsale.delKycManager(accounts[3], { from: accounts[3] }).should.be.rejectedWith(EVMRevert);
+        it('kycManager unable to del Backend (if not admin)', async function () {
+          await this.crowdsale.delBackend(accounts[3], { from: accounts[3] }).should.be.rejectedWith(EVMRevert);
         });
 
-        it('kycManager unable to add admins', async function () {
+        it('Backend unable to add admins', async function () {
           await this.crowdsale.addAdmin(accounts[4], { from: accounts[3] }).should.be.rejectedWith(EVMRevert);
         });
 
-        it('kycManager unable to del admins', async function () {
+        it('Backend unable to del admins', async function () {
           await this.crowdsale.delAdmin(accounts[1], { from: accounts[3] }).should.be.rejectedWith(EVMRevert);
         });
 
-        describe('Acc3 removed from KYC managers', async function () {
+        describe('Acc3 removed from Backend', async function () {
           beforeEach(async function () {
-            await this.crowdsale.delKycManager(accounts[3]).should.be.fulfilled;
+            await this.crowdsale.delBackend(accounts[3]).should.be.fulfilled;
           });
-          it('* ToDo check KYC privileges revoked', async function () {
+          it('* ToDo check Backend privileges revoked', async function () {
             assert(true);
           });
         });
