@@ -16,6 +16,32 @@ const Crowdsale = artifacts.require('VeraCrowdsale');
 const Token = artifacts.require('VeraCoin');
 const Oracle = artifacts.require('PriceOracle');
 
+contract('PriceOracleIface', function () {
+  const priceOracleIface = artifacts.require('PriceOracleIface');
+  let result;
+  beforeEach(async function () {
+    this.priceOracleIface = await priceOracleIface.new();
+  });
+  describe('Check getUsdCentsFromWei method', async function () {
+    it('getUsdCentsFromWei', async function () {
+      result = await this.priceOracleIface.getUsdCentsFromWei(100).should.be.fulfilled;
+      result.should.be.bignumber.equal(0);
+    });
+  });
+});
+
+contract('TransferableTokenIface', function (accounts) {
+  const transferableTokenIface = artifacts.require('TransferableTokenIface');
+  beforeEach(async function () {
+    this.tkn = await transferableTokenIface.new().should.be.fulfilled;
+  });
+  describe('Check transfer method', async function () {
+    it('transfer', async function () {
+      await this.tkn.transfer(accounts[0], new BigNumber(100)).should.be.fulfilled;
+    });
+  });
+})
+
 contract('VeraCrowdsale', function (accounts) {
   // const rate = new BigNumber(1);
   // const value = ether(42);
@@ -42,10 +68,6 @@ contract('VeraCrowdsale', function (accounts) {
     it('tokenPriceInCents', async function () {
       result = await this.crowdsale.tokenPriceInCents();
       result.should.be.bignumber.equal(500);
-    });
-    it('ethPriceInCents', async function () {
-      result = await this.crowdsale.ethPriceInCents();
-      result.should.be.bignumber.equal(41620);
     });
     it('phase 0 parameters', async function () {
       result = await this.crowdsale.phases(0);

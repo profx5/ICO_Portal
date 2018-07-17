@@ -113,7 +113,3 @@ contract PriceOracle is RBAC {
     removeRole(addr, ROLE_ORACLE);
   }
 }
-
-contract PriceOracleIface {
-  
-}

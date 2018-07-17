@@ -1,16 +1,28 @@
 pragma solidity ^0.4.0;
 
-import "./VeraCoin.sol";
-import "./PriceOracle.sol";
 import "../openzeppelin-solidity/contracts/ownership/rbac/RBAC.sol";
 import "../openzeppelin-solidity/contracts/math/Math.sol";
-//import "../openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "../openzeppelin-solidity/contracts/math/SafeMath.sol";
+
+
+contract PriceOracleIface {
+  function getUsdCentsFromWei(uint256 _wei) public view returns (uint256) {
+  }
+}
+
+
+contract TransferableTokenIface {
+  function transfer(address to, uint256 value) public returns (bool) {
+
+  }
+}
 
 
 contract VeraCrowdsale is RBAC {
   using SafeMath for uint256;
   uint256 public tokenPriceInCents = 500;
-  VeraCoin public token;
+  TransferableTokenIface public token;
+  PriceOracleIface public priceOracle;
   string public constant ROLE_ADMIN = "admin";
   string public constant ROLE_KYC_MANAGER = "kycManager";
   string public constant ROLE_KYC_VERIFIED_INVESTOR = "kycVerified";
@@ -49,9 +61,12 @@ contract VeraCrowdsale is RBAC {
     _;
   }
 
-  constructor( VeraCoin _token, ) public {
+  constructor( TransferableTokenIface _token, PriceOracleIface _priceOracle)
+  public
+  {
     addRole(msg.sender, ROLE_ADMIN);
     token = _token;
+    priceOracle = _priceOracle;
     phases.push(Phase(1531490000, 1531499999, 10));
     phases.push(Phase(1531500000, 1531599999, 20));
     phases.push(Phase(1531600000, 1531600000, 30));
