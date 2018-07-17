@@ -1,15 +1,15 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.4.11;
 
 
-import "../KYCCrowdsale.sol";
+import "../VeraCoin.sol";
 
 
 // mock class using BasicToken
-contract BasicTokenMock is MintableToken {
+contract BasicTokenMock is VeraCoin {
 
-  constructor(address initialAccount, uint256 initialBalance) public {
+  function BasicTokenMock(address initialAccount, uint256 initialBalance) public {
     balances[initialAccount] = initialBalance;
-    totalSupply_ = initialBalance;
+    totalSupply = initialBalance;
   }
 
 }

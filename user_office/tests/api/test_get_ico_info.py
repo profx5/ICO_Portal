@@ -10,7 +10,7 @@ class TestGetICOInfo(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, {
-            'token_decimals': 2,
+            'token_decimals': 18,
             'total_supply': '100000000',
             'token_address': '0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',
             'crowdsale_address': '0x703941C626999Ede2F1630ea95AFCcB6b96a3857'

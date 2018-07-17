@@ -27,6 +27,8 @@ class TestSendPreparedTxns(_Base):
                                   data=self.txn_data)
         transaction.save()
 
+        account_nonce = self.eth_tester.get_nonce(self.sender_account)
+
         result = SendPreparedTxns()()
 
         self.assertEqual(len(result), 1)
@@ -46,7 +48,7 @@ class TestSendPreparedTxns(_Base):
         self.assertIsNone(transaction.fail_reason)
         self.assertEqual(transaction.created_at, self.utcnow)
         self.assertIsInstance(transaction.txn_id, UUID)
-        self.assertEqual(transaction.nonce, 0)
+        self.assertEqual(transaction.nonce, account_nonce)
 
         txn = self.web3.eth.getTransaction(transaction.txn_hash)
         self.assertIsNotNone(txn)
@@ -79,7 +81,7 @@ class TestSendPreparedTxns(_Base):
         transaction.refresh_from_db()
         sent_transaction.refresh_from_db()
 
-        self.assertEqual(transaction.nonce, 1)
+        self.assertEqual(transaction.nonce, sent_transaction.nonce + 1)
 
     def test_nonce_by_txn_count_calc(self):
         self.eth_tester.send_transaction({
@@ -88,6 +90,8 @@ class TestSendPreparedTxns(_Base):
             'gas': 21000,
             'value': 0,
         })
+
+        txns_count = self.web3.eth.getTransactionCount(self.sender_account)
 
         transaction = Transaction(to_account='0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',
                                   gas=40000,
@@ -100,7 +104,7 @@ class TestSendPreparedTxns(_Base):
         self.assertIsInstance(result[0], Right)
 
         transaction.refresh_from_db()
-        self.assertEqual(transaction.nonce, 1)
+        self.assertEqual(transaction.nonce, txns_count)
 
 
 class TestTrackTransactions(_Base):
