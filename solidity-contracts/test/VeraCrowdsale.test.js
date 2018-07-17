@@ -1,5 +1,4 @@
-// import ether from './helpers/ether';
-import { advanceBlock } from './helpers/advanceToBlock';
+import ether from './helpers/ether';
 import { increaseTimeTo, duration } from './helpers/increaseTime';
 import assertRevert from '../openzeppelin-solidity/test/helpers/assertRevert';
 // import latestTime from './helpers/latestTime';
@@ -40,24 +39,18 @@ contract('TransferableTokenIface', function (accounts) {
       await this.tkn.transfer(accounts[0], new BigNumber(100)).should.be.fulfilled;
     });
   });
-})
+});
 
 contract('VeraCrowdsale', function (accounts) {
   // const rate = new BigNumber(1);
-  // const value = ether(42);
   let result;
-
-  before(async function () {
-    // Advance to the next block to correctly read time in the solidity "now" function interpreted by ganache
-    await advanceBlock();
-  });
 
   beforeEach(async function () {
     // this.openingTime = latestTime() + duration.weeks(1);
     this.token = await Token.new();
     this.oracle = await Oracle.new(43212, 10);
     this.crowdsale = await Crowdsale.new(this.token.address, this.oracle.address);
-    await this.token.transfer(this.crowdsale.address, 12343);
+    await this.token.transfer(this.crowdsale.address, 1000000 * 1e18);
   });
 
   describe('Check public variables', async function () {
@@ -67,50 +60,68 @@ contract('VeraCrowdsale', function (accounts) {
     });
     it('tokenPriceInCents', async function () {
       result = await this.crowdsale.tokenPriceInCents();
-      result.should.be.bignumber.equal(500);
+      result.should.be.bignumber.equal(200);
     });
-    it('phase 0 parameters', async function () {
-      result = await this.crowdsale.phases(0);
-      result[0].should.be.bignumber.equal(1531490000);
-      result[1].should.be.bignumber.equal(1531499999);
-      result[2].should.be.bignumber.equal(10);
+    it('centsRaised', async function () {
+      result = await this.crowdsale.centsRaised();
+      result.should.be.bignumber.equal(0);
     });
-    it('phase 1 parameters', async function () {
-      result = await this.crowdsale.phases(1);
-      result[0].should.be.bignumber.equal(1531500000);
-      result[1].should.be.bignumber.equal(1531599999);
-      result[2].should.be.bignumber.equal(20);
-    });
-    it('phase 2 parameters', async function () {
-      result = await this.crowdsale.phases(2);
-      result[0].should.be.bignumber.equal(1531600000);
-      result[1].should.be.bignumber.equal(1531600000);
-      result[2].should.be.bignumber.equal(30);
+    it('tokensSold', async function () {
+      result = await this.crowdsale.tokensSold();
+      result.should.be.bignumber.equal(0);
     });
     it('amount bonus 0', async function () {
       result = await this.crowdsale.amountBonuses(0);
-      result[0].should.be.bignumber.equal(100000);
+      result[0].should.be.bignumber.equal(800000);
       result[1].should.be.bignumber.equal(20);
     });
     it('amount bonus 1', async function () {
       result = await this.crowdsale.amountBonuses(1);
-      result[0].should.be.bignumber.equal(500000);
+      result[0].should.be.bignumber.equal(2000000);
       result[1].should.be.bignumber.equal(30);
     });
   });
 
   describe('Check constant functions', async function () {
-    it('computePhaseBonus', async function () {
-      result = await this.crowdsale.computePhaseBonus(1531490001);
-      result.should.be.bignumber.equal(10);
+    it('computeBonus for 7999.99 USD', async function () {
+      result = await this.crowdsale.computeBonus(799999);
+      result.should.be.bignumber.equal(0);
     });
-    it('computeAmountBonus', async function () {
-      result = await this.crowdsale.computeAmountBonus(500001);
+    it('computeTokens for 7999.99 USD', async function () {
+      result = await this.crowdsale.computeTokens(799999);
+      result.should.be.bignumber.equal(0);
+    });
+    it('computeBonus for 8000 USD', async function () {
+      result = await this.crowdsale.computeBonus(800000);
+      result.should.be.bignumber.equal(20);
+    });
+    it('computeTokens for 8000 USD', async function () {
+      result = await this.crowdsale.computeTokens(800000);
+      result.should.be.bignumber.equal(4.8e+21);
+    });
+    it('computeBonus for 19999.99 USD', async function () {
+      result = await this.crowdsale.computeBonus(1999999);
+      result.should.be.bignumber.equal(20);
+    });
+    it('computeTokens for 19999.99 USD', async function () {
+      result = await this.crowdsale.computeTokens(1999999);
+      result.should.be.bignumber.equal(1.1999994e+22);
+    });
+    it('computeBonus for 20000 USD', async function () {
+      result = await this.crowdsale.computeBonus(2000000);
       result.should.be.bignumber.equal(30);
     });
-    it('computeBonus', async function () {
-      result = await this.crowdsale.computeBonus(1531490001, 500001);
-      result.should.be.bignumber.equal(40);
+    it('computeTokens for 20000 USD', async function () {
+      result = await this.crowdsale.computeTokens(2000000);
+      result.should.be.bignumber.equal(1.3e22);
+    });
+    it('computeBonus for 30000 USD', async function () {
+      result = await this.crowdsale.computeBonus(3000000);
+      result.should.be.bignumber.equal(30);
+    });
+    it('computeTokens for 30000 USD', async function () {
+      result = await this.crowdsale.computeTokens(3000000);
+      result.should.be.bignumber.equal(1.95e+22);
     });
   });
 
@@ -167,7 +178,6 @@ contract('VeraCrowdsale', function (accounts) {
     });
 
     describe('after Acc1 added to admins', async function () {
-
       beforeEach(async function () {
         await this.crowdsale.addAdmin(accounts[1]).should.be.fulfilled;
       });
@@ -302,22 +312,228 @@ contract('VeraCrowdsale', function (accounts) {
     // ended.should.equal(true);
   });
 
-/*  describe('accepting payments', function () {
-    it('should reject payments before start', async function () {
-      await this.crowdsale.send(value).should.be.rejectedWith(EVMRevert);
-      await this.crowdsale.buyTokens(investor, { from: purchaser, value: value }).should.be.rejectedWith(EVMRevert);
+  describe('accepting payments', function () {
+    describe('if sender is not in KYC approved investors', function () {
+      it('should reject payments less than minDeposit', async function () {
+        await this.crowdsale.send(ether(18.5)).should.be.rejectedWith(EVMRevert);
+      });
+      it('should reject payments more than minDeposit', async function () {
+        await this.crowdsale.send(ether(18.6)).should.be.rejectedWith(EVMRevert);
+      });
     });
-
-    it('should accept payments after start', async function () {
-      await increaseTimeTo(this.openingTime);
-      await this.crowdsale.send(value).should.be.fulfilled;
-      await this.crowdsale.buyTokens(investor, { value: value, from: purchaser }).should.be.fulfilled;
+    describe('if sender is KYC approved', function () {
+      beforeEach(async function () {
+        await this.crowdsale.addBackend(accounts[1]).should.be.fulfilled;
+        await this.crowdsale.addKycVerifiedInvestor(accounts[0], { from: accounts[1] }).should.be.fulfilled;
+      });
+      it('should reject payments less than minDeposit', async function () {
+        await this.crowdsale.send(ether(18.5)).should.be.rejectedWith(EVMRevert);
+      });
+      describe('check actual deposit effects', function () {
+        describe('by 432.12 USD/ETH', function () {
+          beforeEach(async function () {
+            this.ethPriceInCents = 43212;
+            this.tokenPriceInCents = 200;
+          });
+          it('check ethPrice', async function () {
+            result = await this.oracle.ethPriceInCents();
+            result.should.be.bignumber.equal(this.ethPriceInCents);
+          });
+          it('18.5 ETH should be rejected  - less than minDeposit', async function () {
+            await this.crowdsale.send(ether(18.5)).should.be.rejectedWith(EVMRevert);
+          });
+          it('18.6 ETH', async function () {
+            const etherDeposited = 18.6;
+            const discountPercent = 20;
+            const precision = 5;
+            const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
+            const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
+            const centsRaisedBefore = await this.crowdsale.centsRaised();
+            const tokensSoldBefore = await this.crowdsale.tokensSold();
+            const tx = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
+            assert.equal(tx.receipt.logs[0].topics[0],
+              '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'); // Transfer event
+            assert.equal(tx.receipt.logs.length, 1);
+            // todo add logs
+            // assert.equal(tx.receipt.logs[0].event, 'Transfer');
+            // event1.args.from.should.equal(this.crowdsale.address);
+            // event1.args.to.should.equal(accounts[0]);
+            // event1.args.value.should.equal(1.332485232e+22);
+            const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
+            const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
+            const centsRaisedAfter = await this.crowdsale.centsRaised();
+            const tokensSoldAfter = await this.crowdsale.tokensSold();
+            BigNumber.config({ ERRORS: false });
+            const tokensCalculatedAmount = new BigNumber(etherDeposited * 1e18 * this.ethPriceInCents /
+              this.tokenPriceInCents / 100 * (100 + discountPercent)).toPrecision(precision);
+            BigNumber.config({ ERRORS: true });
+            investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            contractTokenBalanceBefore.sub(contractTokenBalanceAfter).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            centsRaisedAfter.sub(centsRaisedBefore).should.be
+              .bignumber.equal(Math.floor(etherDeposited * this.ethPriceInCents));
+          });
+        });
+        describe('by 5832.12 USD/ETH', function () {
+          beforeEach(async function () {
+            this.ethPriceInCents = 583212;
+            this.tokenPriceInCents = 200;
+            await this.oracle.addOracle(accounts[0]).should.be.fulfilled;
+            var price = await this.oracle.ethPriceInCents();
+            while (price < this.ethPriceInCents) {
+              await this.oracle.setEthPrice(price).should.be.fulfilled;
+              price = Math.floor(price * 1.08);
+            }
+            await this.oracle.setEthPrice(this.ethPriceInCents).should.be.fulfilled;
+          });
+          it('check ethPrice', async function () {
+            result = await this.oracle.ethPriceInCents();
+            result.should.be.bignumber.equal(this.ethPriceInCents);
+          });
+          it('1.37 ETH should be rejected  - less than minDeposit', async function () {
+            await this.crowdsale.send(ether(1.37)).should.be.rejectedWith(EVMRevert);
+          });
+          it('1.4 ETH', async function () {
+            const etherDeposited = 1.4;
+            const discountPercent = 20;
+            const precision = 5;
+            const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
+            const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
+            const centsRaisedBefore = await this.crowdsale.centsRaised();
+            const tokensSoldBefore = await this.crowdsale.tokensSold();
+            const tx = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
+            assert.equal(tx.receipt.logs[0].topics[0],
+              '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'); // Transfer event
+            assert.equal(tx.receipt.logs.length, 1);
+            // todo add logs
+            // assert.equal(tx.receipt.logs[0].event, 'Transfer');
+            // event1.args.from.should.equal(this.crowdsale.address);
+            // event1.args.to.should.equal(accounts[0]);
+            // event1.args.value.should.equal(1.332485232e+22);
+            const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
+            const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
+            const centsRaisedAfter = await this.crowdsale.centsRaised();
+            const tokensSoldAfter = await this.crowdsale.tokensSold();
+            BigNumber.config({ ERRORS: false });
+            const tokensCalculatedAmount = new BigNumber(etherDeposited * 1e18 * this.ethPriceInCents /
+              this.tokenPriceInCents / 100 * (100 + discountPercent)).toPrecision(precision);
+            BigNumber.config({ ERRORS: true });
+            investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            contractTokenBalanceBefore.sub(contractTokenBalanceAfter).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            centsRaisedAfter.sub(centsRaisedBefore).should.be
+              .bignumber.equal(Math.floor(etherDeposited * this.ethPriceInCents));
+          });
+          it('3.4 ETH', async function () {
+            const etherDeposited = 3.4;
+            const discountPercent = 20;
+            const precision = 5;
+            const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
+            const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
+            const centsRaisedBefore = await this.crowdsale.centsRaised();
+            const tokensSoldBefore = await this.crowdsale.tokensSold();
+            const tx = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
+            assert.equal(tx.receipt.logs[0].topics[0],
+              '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'); // Transfer event
+            assert.equal(tx.receipt.logs.length, 1);
+            // todo add logs
+            // assert.equal(tx.receipt.logs[0].event, 'Transfer');
+            // event1.args.from.should.equal(this.crowdsale.address);
+            // event1.args.to.should.equal(accounts[0]);
+            // event1.args.value.should.equal(1.332485232e+22);
+            const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
+            const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
+            const centsRaisedAfter = await this.crowdsale.centsRaised();
+            const tokensSoldAfter = await this.crowdsale.tokensSold();
+            BigNumber.config({ ERRORS: false });
+            const tokensCalculatedAmount = new BigNumber(etherDeposited * 1e18 * this.ethPriceInCents /
+              this.tokenPriceInCents / 100 * (100 + discountPercent)).toPrecision(precision);
+            BigNumber.config({ ERRORS: true });
+            investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            contractTokenBalanceBefore.sub(contractTokenBalanceAfter).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            centsRaisedAfter.sub(centsRaisedBefore).should.be
+              .bignumber.equal(Math.floor(etherDeposited * this.ethPriceInCents));
+          });
+          it('3.5 ETH', async function () {
+            const etherDeposited = 3.5;
+            const discountPercent = 30;
+            const precision = 5;
+            const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
+            const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
+            const centsRaisedBefore = await this.crowdsale.centsRaised();
+            const tokensSoldBefore = await this.crowdsale.tokensSold();
+            const tx = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
+            assert.equal(tx.receipt.logs[0].topics[0],
+              '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'); // Transfer event
+            assert.equal(tx.receipt.logs.length, 1);
+            // todo add logs
+            // assert.equal(tx.receipt.logs[0].event, 'Transfer');
+            // event1.args.from.should.equal(this.crowdsale.address);
+            // event1.args.to.should.equal(accounts[0]);
+            // event1.args.value.should.equal(1.332485232e+22);
+            const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
+            const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
+            const centsRaisedAfter = await this.crowdsale.centsRaised();
+            const tokensSoldAfter = await this.crowdsale.tokensSold();
+            BigNumber.config({ ERRORS: false });
+            const tokensCalculatedAmount = new BigNumber(etherDeposited * 1e18 * this.ethPriceInCents /
+              this.tokenPriceInCents / 100 * (100 + discountPercent)).toPrecision(precision);
+            BigNumber.config({ ERRORS: true });
+            investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            contractTokenBalanceBefore.sub(contractTokenBalanceAfter).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            centsRaisedAfter.sub(centsRaisedBefore).should.be
+              .bignumber.equal(Math.floor(etherDeposited * this.ethPriceInCents));
+          });
+          it('37 ETH', async function () {
+            const etherDeposited = 37;
+            const discountPercent = 30;
+            const precision = 5;
+            const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
+            const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
+            const centsRaisedBefore = await this.crowdsale.centsRaised();
+            const tokensSoldBefore = await this.crowdsale.tokensSold();
+            const tx = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
+            assert.equal(tx.receipt.logs[0].topics[0],
+              '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'); // Transfer event
+            assert.equal(tx.receipt.logs.length, 1);
+            // todo add logs
+            // assert.equal(tx.receipt.logs[0].event, 'Transfer');
+            // event1.args.from.should.equal(this.crowdsale.address);
+            // event1.args.to.should.equal(accounts[0]);
+            // event1.args.value.should.equal(1.332485232e+22);
+            const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
+            const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
+            const centsRaisedAfter = await this.crowdsale.centsRaised();
+            const tokensSoldAfter = await this.crowdsale.tokensSold();
+            BigNumber.config({ ERRORS: false });
+            const tokensCalculatedAmount = new BigNumber(etherDeposited * 1e18 * this.ethPriceInCents /
+              this.tokenPriceInCents / 100 * (100 + discountPercent)).toPrecision(precision);
+            BigNumber.config({ ERRORS: true });
+            investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            contractTokenBalanceBefore.sub(contractTokenBalanceAfter).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
+              .bignumber.equal(tokensCalculatedAmount);
+            centsRaisedAfter.sub(centsRaisedBefore).should.be
+              .bignumber.equal(Math.floor(etherDeposited * this.ethPriceInCents));
+          });
+        });
+      });
     });
-
-    it('should reject payments after end', async function () {
-      await increaseTimeTo(this.afterClosingTime);
-      await this.crowdsale.send(value).should.be.rejectedWith(EVMRevert);
-      await this.crowdsale.buyTokens(investor, { value: value, from: purchaser }).should.be.rejectedWith(EVMRevert);
-    });
-  }); */
+  });
 });
