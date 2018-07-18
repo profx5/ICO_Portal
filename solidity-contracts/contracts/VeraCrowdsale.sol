@@ -6,6 +6,7 @@ import "../openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 
 contract PriceOracleIface {
+  uint256 public ethPriceInCents;
   function getUsdCentsFromWei(uint256 _wei) public view returns (uint256) {
   }
 }
@@ -31,13 +32,27 @@ contract VeraCrowdsale is RBAC {
   string public constant ROLE_BACKEND = "backend";
   string public constant ROLE_KYC_VERIFIED_INVESTOR = "kycVerified";
 
-
   struct AmountBonus {
     uint256 amountInCents;
     uint256 bonus;
   }
 
   AmountBonus[] public amountBonuses;
+
+  /**
+   * Event for token purchase logging
+   * @param investor who received tokens
+   * @param ethPriceInCents ETH price at the moment of purchase
+   * @param valueInCents deposit calculated to USD cents
+   * @param bonusPercent bonus percent
+   */
+
+  event TokenPurchase(
+    address indexed investor,
+    uint256 ethPriceInCents,
+    uint256 valueInCents,
+    uint256 bonusPercent
+  );
 
   /**
    * @dev modifier to scope access to admins
@@ -109,11 +124,16 @@ contract VeraCrowdsale is RBAC {
    */
   function buyTokens(address _investor, uint256 _cents) internal {
     uint256 bonus = computeBonus(_cents);
-    //ToDo add bonus logging
-    //ToDo add ETH price logging
+    uint256 ethPriceInCents = priceOracle.ethPriceInCents();
     uint256 tokens = computeTokens(_cents);
     require(tokens > 0);
     token.transfer(_investor, tokens);
+    emit TokenPurchase(
+      _investor,
+      ethPriceInCents,
+      _cents,
+      bonus
+    );
     centsRaised = centsRaised.add(_cents);
     tokensSold = tokensSold.add(tokens);
   }

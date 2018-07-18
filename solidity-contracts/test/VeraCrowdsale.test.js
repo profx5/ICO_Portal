@@ -1,7 +1,4 @@
 import ether from './helpers/ether';
-import { increaseTimeTo, duration } from './helpers/increaseTime';
-import assertRevert from '../openzeppelin-solidity/test/helpers/assertRevert';
-// import latestTime from './helpers/latestTime';
 import EVMRevert from './helpers/EVMRevert';
 
 const BigNumber = web3.BigNumber;
@@ -304,14 +301,6 @@ contract('VeraCrowdsale', function (accounts) {
     });
   });
 
-  it('should be ended only after end', async function () {
-    // let ended = await this.crowdsale.hasClosed();
-    // ended.should.equal(false);
-    await increaseTimeTo(this.afterClosingTime);
-    // ended = await this.crowdsale.hasClosed();
-    // ended.should.equal(true);
-  });
-
   describe('accepting payments', function () {
     describe('if sender is not in KYC approved investors', function () {
       it('should reject payments less than minDeposit', async function () {
@@ -344,28 +333,21 @@ contract('VeraCrowdsale', function (accounts) {
           });
           it('18.6 ETH', async function () {
             const etherDeposited = 18.6;
-            const discountPercent = 20;
+            const bonusPercent = 20;
             const precision = 5;
+            const valueInCents = Math.floor(etherDeposited * this.ethPriceInCents);
             const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
             const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
             const centsRaisedBefore = await this.crowdsale.centsRaised();
             const tokensSoldBefore = await this.crowdsale.tokensSold();
-            const tx = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
-            assert.equal(tx.receipt.logs[0].topics[0],
-              '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'); // Transfer event
-            assert.equal(tx.receipt.logs.length, 1);
-            // todo add logs
-            // assert.equal(tx.receipt.logs[0].event, 'Transfer');
-            // event1.args.from.should.equal(this.crowdsale.address);
-            // event1.args.to.should.equal(accounts[0]);
-            // event1.args.value.should.equal(1.332485232e+22);
+            const receipt = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
             const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
             const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
             const centsRaisedAfter = await this.crowdsale.centsRaised();
             const tokensSoldAfter = await this.crowdsale.tokensSold();
             BigNumber.config({ ERRORS: false });
             const tokensCalculatedAmount = new BigNumber(etherDeposited * 1e18 * this.ethPriceInCents /
-              this.tokenPriceInCents / 100 * (100 + discountPercent)).toPrecision(precision);
+              this.tokenPriceInCents / 100 * (100 + bonusPercent)).toPrecision(precision);
             BigNumber.config({ ERRORS: true });
             investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
               .bignumber.equal(tokensCalculatedAmount);
@@ -374,7 +356,14 @@ contract('VeraCrowdsale', function (accounts) {
             tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
               .bignumber.equal(tokensCalculatedAmount);
             centsRaisedAfter.sub(centsRaisedBefore).should.be
-              .bignumber.equal(Math.floor(etherDeposited * this.ethPriceInCents));
+              .bignumber.equal(valueInCents);
+            const logs = receipt.logs;
+            assert.equal(logs.length, 1);
+            assert.equal(logs[0].event, 'TokenPurchase');
+            assert.equal(logs[0].args.investor, accounts[0]);
+            assert.equal(logs[0].args.ethPriceInCents, this.ethPriceInCents);
+            assert.equal(logs[0].args.valueInCents, valueInCents);
+            assert.equal(logs[0].args.bonusPercent, bonusPercent);
           });
         });
         describe('by 5832.12 USD/ETH', function () {
@@ -397,6 +386,7 @@ contract('VeraCrowdsale', function (accounts) {
             await this.crowdsale.send(ether(1.37)).should.be.rejectedWith(EVMRevert);
           });
           it('1.4 ETH', async function () {
+            // ToDo refactor with log asserts
             const etherDeposited = 1.4;
             const discountPercent = 20;
             const precision = 5;
@@ -407,12 +397,7 @@ contract('VeraCrowdsale', function (accounts) {
             const tx = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
             assert.equal(tx.receipt.logs[0].topics[0],
               '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'); // Transfer event
-            assert.equal(tx.receipt.logs.length, 1);
-            // todo add logs
-            // assert.equal(tx.receipt.logs[0].event, 'Transfer');
-            // event1.args.from.should.equal(this.crowdsale.address);
-            // event1.args.to.should.equal(accounts[0]);
-            // event1.args.value.should.equal(1.332485232e+22);
+            assert.equal(tx.receipt.logs.length, 2);
             const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
             const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
             const centsRaisedAfter = await this.crowdsale.centsRaised();
@@ -431,6 +416,7 @@ contract('VeraCrowdsale', function (accounts) {
               .bignumber.equal(Math.floor(etherDeposited * this.ethPriceInCents));
           });
           it('3.4 ETH', async function () {
+            // ToDo refactor with log asserts
             const etherDeposited = 3.4;
             const discountPercent = 20;
             const precision = 5;
@@ -441,12 +427,7 @@ contract('VeraCrowdsale', function (accounts) {
             const tx = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
             assert.equal(tx.receipt.logs[0].topics[0],
               '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'); // Transfer event
-            assert.equal(tx.receipt.logs.length, 1);
-            // todo add logs
-            // assert.equal(tx.receipt.logs[0].event, 'Transfer');
-            // event1.args.from.should.equal(this.crowdsale.address);
-            // event1.args.to.should.equal(accounts[0]);
-            // event1.args.value.should.equal(1.332485232e+22);
+            assert.equal(tx.receipt.logs.length, 2);
             const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
             const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
             const centsRaisedAfter = await this.crowdsale.centsRaised();
@@ -465,6 +446,7 @@ contract('VeraCrowdsale', function (accounts) {
               .bignumber.equal(Math.floor(etherDeposited * this.ethPriceInCents));
           });
           it('3.5 ETH', async function () {
+            // ToDo refactor with log asserts
             const etherDeposited = 3.5;
             const discountPercent = 30;
             const precision = 5;
@@ -475,12 +457,7 @@ contract('VeraCrowdsale', function (accounts) {
             const tx = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
             assert.equal(tx.receipt.logs[0].topics[0],
               '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'); // Transfer event
-            assert.equal(tx.receipt.logs.length, 1);
-            // todo add logs
-            // assert.equal(tx.receipt.logs[0].event, 'Transfer');
-            // event1.args.from.should.equal(this.crowdsale.address);
-            // event1.args.to.should.equal(accounts[0]);
-            // event1.args.value.should.equal(1.332485232e+22);
+            assert.equal(tx.receipt.logs.length, 2);
             const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
             const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
             const centsRaisedAfter = await this.crowdsale.centsRaised();
@@ -499,6 +476,7 @@ contract('VeraCrowdsale', function (accounts) {
               .bignumber.equal(Math.floor(etherDeposited * this.ethPriceInCents));
           });
           it('37 ETH', async function () {
+            // ToDo refactor with log asserts
             const etherDeposited = 37;
             const discountPercent = 30;
             const precision = 5;
@@ -509,12 +487,7 @@ contract('VeraCrowdsale', function (accounts) {
             const tx = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
             assert.equal(tx.receipt.logs[0].topics[0],
               '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'); // Transfer event
-            assert.equal(tx.receipt.logs.length, 1);
-            // todo add logs
-            // assert.equal(tx.receipt.logs[0].event, 'Transfer');
-            // event1.args.from.should.equal(this.crowdsale.address);
-            // event1.args.to.should.equal(accounts[0]);
-            // event1.args.value.should.equal(1.332485232e+22);
+            assert.equal(tx.receipt.logs.length, 2);
             const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
             const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
             const centsRaisedAfter = await this.crowdsale.centsRaised();
