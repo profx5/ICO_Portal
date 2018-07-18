@@ -301,7 +301,10 @@ contract('VeraCrowdsale', function (accounts) {
     });
   });
 
-  describe('accepting payments', function () {
+  describe('accepting payments to fallback', function () {
+    beforeEach(async function () {
+      this.tokenPriceInCents = 200;
+    });
     describe('if sender is not in KYC approved investors', function () {
       it('should reject payments less than minDeposit', async function () {
         await this.crowdsale.send(ether(18.5)).should.be.rejectedWith(EVMRevert);
@@ -322,7 +325,6 @@ contract('VeraCrowdsale', function (accounts) {
         describe('by 432.12 USD/ETH', function () {
           beforeEach(async function () {
             this.ethPriceInCents = 43212;
-            this.tokenPriceInCents = 200;
           });
           it('check ethPrice', async function () {
             result = await this.oracle.ethPriceInCents();
@@ -506,6 +508,62 @@ contract('VeraCrowdsale', function (accounts) {
               .bignumber.equal(Math.floor(etherDeposited * this.ethPriceInCents));
           });
         });
+      });
+    });
+  });
+
+  describe('accepting backend-originated buy requests', function () {
+    beforeEach(async function () {
+      await this.crowdsale.addBackend(accounts[1]).should.be.fulfilled;
+      await this.crowdsale.addKycVerifiedInvestor(accounts[0], { from: accounts[1] }).should.be.fulfilled;
+    });
+
+    describe('by 534.96 USD/ETH', function () {
+      beforeEach(async function () {
+        this.ethPriceInCents = 53496;
+        this.tokenPriceInCents = 200;
+        await this.oracle.addOracle(accounts[0]).should.be.fulfilled;
+        var price = await this.oracle.ethPriceInCents();
+        while (price < this.ethPriceInCents) {
+          await this.oracle.setEthPrice(price).should.be.fulfilled;
+          price = Math.floor(price * 1.08);
+        }
+        await this.oracle.setEthPrice(this.ethPriceInCents).should.be.fulfilled;
+      });
+      it('8543.45 USD', async function () {
+        const bonusPercent = 20;
+        const precision = 5;
+        const valueInCents = 854345;
+        const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
+        const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
+        const centsRaisedBefore = await this.crowdsale.centsRaised();
+        const tokensSoldBefore = await this.crowdsale.tokensSold();
+        const receipt = await this.crowdsale.buyTokensViaBackend(accounts[0], valueInCents, { from: accounts[1] })
+          .should.be.fulfilled;
+        const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
+        const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
+        const centsRaisedAfter = await this.crowdsale.centsRaised();
+        const tokensSoldAfter = await this.crowdsale.tokensSold();
+        BigNumber.config({ ERRORS: true });
+        const tokensCalculatedAmount = new BigNumber(1e18 * valueInCents / this.tokenPriceInCents / 100 * (100 + bonusPercent))
+          .toPrecision(precision);
+        // const tokensCalculatedAmount = new BigNumber(5.126e+21);
+        BigNumber.config({ ERRORS: true });
+        investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
+          .bignumber.equal(tokensCalculatedAmount);
+        contractTokenBalanceBefore.sub(contractTokenBalanceAfter).toPrecision(precision).should.be
+          .bignumber.equal(tokensCalculatedAmount);
+        tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
+          .bignumber.equal(tokensCalculatedAmount);
+        centsRaisedAfter.sub(centsRaisedBefore).should.be
+          .bignumber.equal(valueInCents);
+        const logs = receipt.logs;
+        assert.equal(logs.length, 1);
+        assert.equal(logs[0].event, 'TokenPurchase');
+        assert.equal(logs[0].args.investor, accounts[0]);
+        assert.equal(logs[0].args.ethPriceInCents, this.ethPriceInCents);
+        assert.equal(logs[0].args.valueInCents, valueInCents);
+        assert.equal(logs[0].args.bonusPercent, bonusPercent);
       });
     });
   });
