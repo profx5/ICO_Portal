@@ -8,9 +8,9 @@ import iconCheckGreen from './../../img/check-green.svg';
 import iconTransitAmber from './../../img/icon_transit-amber.svg';
 import iconUser from './../../img/user.svg';
 import moment from "moment/moment";
-import $ from "jquery";
 import * as UIActions from './../actions/UIActions';
 import * as TicketActions from './../actions/TicketActions';
+import {Link} from 'react-router-dom';
 
 const STATUSES = {
     1: 'Open',
@@ -22,21 +22,32 @@ const STATUSES = {
 
 class FAQFeedback extends React.Component {
 
-    uploadOnClickHandler = (event) => {
-        $(event.currentTarget).find('input[type="file"]').click();
-    };
-
-    setOpenedTicket = (ticketId) => {
-        const {setOpenedTicket} = this.props;
-        setOpenedTicket(ticketId);
-    };
-
     setOpenedTicketNull = () => {
         const {setTicketFullNull} = this.props;
         setTicketFullNull();
     };
 
-    _renderNewQuestions = () => {
+    _backToAll = () => {
+        this.setOpenedTicketNull();
+        this.props.history.push('/user_office/faq/');
+    };
+
+    handleNewTicketFormSubmit = (e) => {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        this.props.sendNewTicket(data);
+        e.target.reset();
+    };
+
+    handleNewCommentSubmit = (e) => {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        this.props.sendNewComment(data);
+        e.target.reset();
+    };
+
+
+    _renderNewTicket = () => {
         return (
             <div>
                 <Head3>Здесь Вы можете задать любой вопрос о нашем сервисе</Head3>
@@ -64,11 +75,12 @@ class FAQFeedback extends React.Component {
         )
     };
 
-    _renderAllQuestions = (tickets) => {
+    _renderAllQuestions = () => {
+        const {tickets} = this.props;
         return (
             tickets.map((ticket) => {
                 return (
-                    <FlexContainer key={ticket.id} onClick={this.setOpenedTicket.bind(this, ticket.id)}>
+                    <FlexContainer key={ticket.id}>
                         <FlexItem width={5}>
                             {(ticket.status === '1' || ticket.status === '2') &&
                             <IconImg src={iconCheckGreen}/>}
@@ -76,7 +88,8 @@ class FAQFeedback extends React.Component {
                             <IconImg src={iconTransitAmber}/>}
                         </FlexItem>
                         <FlexItem width={75}>
-                            <div className='title'>{ticket.title}</div>
+                            <div className='title'><Link
+                                to={'/user_office/faq/ticket/' + ticket.id}>{ticket.title}</Link></div>
                             <span>{(ticket.status === '1' || ticket.status === '2') && 'Ответ получен.' || 'В ожидании.'}</span>
                         </FlexItem>
                         <FlexItem width={20} padding={'none'}>
@@ -85,7 +98,7 @@ class FAQFeedback extends React.Component {
                                     <IconImg src={iconUser}/>
                                 </FlexItem>
                                 <FlexItem width={80} border={'none'}>
-                                    <div>{ticket.public_follow_ups && ticket.public_follow_ups[0].user_email || 'Вы'}</div>
+                                    <div>{ticket.public_follow_ups && ticket.public_follow_ups[0].user_email || 'You'}</div>
                                     <span>{ticket.public_follow_ups &&
                                     'Ответ получен ' + moment(ticket.public_follow_ups[0].date).format('DD MMMM YYYY') ||
                                     'Написали ' + moment(ticket.created).format('DD MMMM YYYY')}</span>
@@ -98,8 +111,9 @@ class FAQFeedback extends React.Component {
         )
     };
 
-    _renderQuestionById = () => {
-        const { ticketFull } = this.props;
+
+    _renderOpenedTicket = () => {
+        const {ticketFull} = this.props;
         let content = [];
         content.push(ticketFull.public_follow_ups.map((item, index) => {
             return (
@@ -109,7 +123,19 @@ class FAQFeedback extends React.Component {
         return (
             <div>
                 <HeadWrapper>
-                    <span onClick={this.setOpenedTicketNull}>Мои вопросы</span> -> {ticketFull.title}
+
+                    <span onClick={this._backToAll} className='link'>Мои вопросы</span> -> {ticketFull.title}
+                    <span className='status'>
+                        <div>
+                            {(ticketFull.status === '1' || ticketFull.status === '2') &&
+                            <IconImg src={iconCheckGreen}/>}
+                            {(ticketFull.status !== '1' && ticketFull.status !== '2') &&
+                            <IconImg src={iconTransitAmber}/>}
+                            <div>{(ticketFull.status === '1' || ticketFull.status === '2')
+                            && 'Ответ получен.'
+                            || 'Вопрос открыт.'}</div>
+                        </div>
+                    </span>
                 </HeadWrapper>
                 <Divider/>
                 {content}
@@ -117,33 +143,57 @@ class FAQFeedback extends React.Component {
         )
     };
 
-    _renderQuestions = (current, tickets) => {
-        let { ticketFull } = this.props;
+
+    handleChangeTab = (e) => {
+        const {changeTab, setTicketFullNull} = this.props;
+        setTicketFullNull();
+        changeTab(e.target.id);
+        this.props.history.push('/user_office/faq/');
+    };
+
+    _renderTickets = () => {
+        const {ticketFull} = this.props;
         if (ticketFull === null) {
-            return this._renderAllQuestions(tickets)
+            return this._renderAllQuestions()
         } else {
-            return this._renderQuestionById()
+            return this._renderOpenedTicket()
         }
     };
 
     render() {
-        const {tab, changeTab, openedTicket, tickets} = this.props;
+        const {tab, changeTab, tickets, ticketFull, setOpenedTicket} = this.props;
+        const openedTicket = this.props.match.params.ticket;
+        if (openedTicket) {
+            if (ticketFull !== null) {
+                if (ticketFull.id != openedTicket) {
+                    setOpenedTicket(openedTicket);
+                }
+            } else {
+                setOpenedTicket(openedTicket);
+            }
+        }
+
+        if (ticketFull) {
+            changeTab('my');
+        }
+
         return (
             <Wrapper>
                 <Head>FAQ & Feedback</Head>
                 <Tabs>
-                    <Tab id={'new'} onClick={changeTab} active={tab === 'new'}>
-                        Новый запрос
+                    <Tab id={'new'} onClick={this.handleChangeTab} active={tab === 'new'}>
+                        New ticket
                     </Tab>
-                    <Tab id={'my'} onClick={changeTab} active={tab === 'my'}>
-                        Мои запросы <span>{tickets.size}</span>
+
+                    <Tab id={'my'} onClick={this.handleChangeTab} active={tab === 'my'}>
+                        My tickets <span>{tickets.length}</span>
                     </Tab>
                 </Tabs>
                 <Content>
                     {tab === 'new' &&
-                    this._renderNewQuestions()}
+                    this._renderNewTicket()}
                     {tab === 'my' &&
-                    this._renderQuestions(openedTicket, tickets)}
+                    this._renderTickets()}
                 </Content>
             </Wrapper>
         )
@@ -153,18 +203,16 @@ class FAQFeedback extends React.Component {
 
 const mapStateToProps = ({UI, tickets}) => ({
     tab: UI.get('faqSelectedTab'),
-    openedTicket: UI.get('openedTicket'),
     tickets: tickets.get('results'),
     ticketFull: tickets.get('ticketFull')
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    changeTab(payload) {
-        dispatch(UIActions.changeSelectedTab(payload.target.id))
+    changeTab(tab) {
+        dispatch(UIActions.changeSelectedTab(tab))
     },
     setOpenedTicket(ticketId) {
-        dispatch(UIActions.setOpenedTicket(ticketId));
-        dispatch(TicketActions.getTicketFull(ticketId))
+        dispatch(TicketActions.getTicketFull(ticketId));
     },
     setTicketFullNull() {
         dispatch(TicketActions.setTicketFullNull());
