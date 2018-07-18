@@ -13,9 +13,9 @@ contract PriceOracleIface {
 
 
 contract TransferableTokenIface {
-  uint8 public constant decimals = 2;
   function transfer(address to, uint256 value) public returns (bool) {
   }
+
   event Transfer(address indexed from, address indexed to, uint256 value);
 }
 
@@ -33,8 +33,10 @@ contract VeraCrowdsale is RBAC {
   string public constant ROLE_KYC_VERIFIED_INVESTOR = "kycVerified";
 
   struct AmountBonus {
-    uint256 amountInCents;
-    uint256 bonus;
+    uint256 id;
+    uint256 amountFrom;
+    uint256 amountTo;
+    uint256 bonusPercent;
   }
 
   AmountBonus[] public amountBonuses;
@@ -46,12 +48,12 @@ contract VeraCrowdsale is RBAC {
    * @param valueInCents deposit calculated to USD cents
    * @param bonusPercent bonus percent
    */
-
   event TokenPurchase(
     address indexed investor,
     uint256 ethPriceInCents,
     uint256 valueInCents,
-    uint256 bonusPercent
+    uint256 bonusPercent,
+    uint256 bonusIds
   );
 
   /**
@@ -90,8 +92,10 @@ contract VeraCrowdsale is RBAC {
     addRole(msg.sender, ROLE_ADMIN);
     token = _token;
     priceOracle = _priceOracle;
-    amountBonuses.push(AmountBonus(800000, 20));
-    amountBonuses.push(AmountBonus(2000000, 30));
+    // solium-disable-next-line arg-overflow
+    amountBonuses.push(AmountBonus(0x1, 800000, 1999999, 20));
+    // solium-disable-next-line arg-overflow
+    amountBonuses.push(AmountBonus(0x2, 2000000, 2**256 - 1, 30));
   }
 
   /**
@@ -103,6 +107,14 @@ contract VeraCrowdsale is RBAC {
   onlyKYCVerifiedInvestor
   {
     uint256 valueInCents = priceOracle.getUsdCentsFromWei(msg.value);
+    (uint256 bonusPercent, uint256 bonusIds) = computeBonuses(valueInCents);
+    emit TokenPurchase(
+      msg.sender,
+      priceOracle.ethPriceInCents(),
+      valueInCents,
+      bonusPercent,
+      bonusIds
+    );
     buyTokens(msg.sender, valueInCents);
   }
 
@@ -119,38 +131,26 @@ contract VeraCrowdsale is RBAC {
     buyTokens(_investor, _cents);
   }
 
-  /**
-   * @dev deposit
-   */
-  function buyTokens(address _investor, uint256 _cents) internal {
-    uint256 bonus = computeBonus(_cents);
-    uint256 ethPriceInCents = priceOracle.ethPriceInCents();
-    uint256 tokens = computeTokens(_cents);
-    require(tokens > 0);
-    token.transfer(_investor, tokens);
-    emit TokenPurchase(
-      _investor,
-      ethPriceInCents,
-      _cents,
-      bonus
-    );
-    centsRaised = centsRaised.add(_cents);
-    tokensSold = tokensSold.add(tokens);
-  }
-
-  function computeBonus(uint256 _cents) public view returns (uint256) {
-    uint256 bonus = 0;
+  function computeBonuses(uint256 _cents)
+  public
+  view
+  returns (uint256, uint256)
+  {
+    uint256 bonusTotal;
+    uint256 bonusIds;
     for (uint i = 0; i < amountBonuses.length; i++) {
-      if (_cents >= amountBonuses[i].amountInCents) {
-        bonus = Math.max256(bonus, amountBonuses[i].bonus);
+      if (_cents >= amountBonuses[i].amountFrom &&
+      _cents <= amountBonuses[i].amountTo) {
+        bonusTotal += amountBonuses[i].bonusPercent;
+        bonusIds += amountBonuses[i].id;
       }
     }
-    return bonus;
+    return (bonusTotal, bonusIds);
   }
 
   function computeTokens(uint256 _cents) public view returns (uint256) {
     uint256 tokens = _cents.mul(10 ** 18).div(tokenPriceInCents);
-    uint256 bonusPercent = computeBonus(_cents);
+    (uint256 bonusPercent, ) = computeBonuses(_cents);
     uint256 bonusTokens = tokens.mul(bonusPercent).div(100);
     if (_cents >= minDepositInCents) {
       return tokens.add(bonusTokens);
@@ -221,5 +221,16 @@ contract VeraCrowdsale is RBAC {
     onlyBackend
   {
     removeRole(addr, ROLE_KYC_VERIFIED_INVESTOR);
+  }
+
+  /**
+   * @dev deposit
+   */
+  function buyTokens(address _investor, uint256 _cents) internal {
+    uint256 tokens = computeTokens(_cents);
+    require(tokens > 0, "value is not enough");
+    token.transfer(_investor, tokens);
+    centsRaised = centsRaised.add(_cents);
+    tokensSold = tokensSold.add(tokens);
   }
 }
