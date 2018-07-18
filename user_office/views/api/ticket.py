@@ -30,9 +30,11 @@ class TicketListSerializer(ModelSerializer):
 
 
 class TicketCraeteSerializer(ModelSerializer):
+    attachment = FileField(required=False)
+
     class Meta:
         model = Ticket
-        fields = ('title', 'description')
+        fields = ('title', 'description', 'attachment')
 
 
 class AttachmentSerializer(ModelSerializer):
@@ -63,7 +65,7 @@ class TicketRetrieveSerializer(ModelSerializer):
 
 
 class CommentSerializer(ModelSerializer):
-    attachment = FileField()
+    attachment = FileField(required=False)
 
     class Meta:
         model = FollowUp
@@ -106,7 +108,8 @@ class TicketViewSet(GenericViewSet):
                                        description=request.data['description'])
 
         if isinstance(result, Right):
-            serializer = TicketRetrieveSerializer(result.value['ticket'])
+            process_attachments(result.value.follow_up, request.FILES.getlist('attachment'))
+            serializer = TicketRetrieveSerializer(result.value.ticket)
 
             return Response(serializer.data, status=201)
         else:
@@ -122,7 +125,7 @@ class TicketViewSet(GenericViewSet):
                                  comment=request.data['comment'])
 
         if isinstance(result, Right):
-            process_attachments(result.value.followup, request.FILES.getlist('attachment'))
+            process_attachments(result.value.follow_up, request.FILES.getlist('attachment'))
             serializer = TicketRetrieveSerializer(ticket)
 
             return Response(serializer.data, status=201)

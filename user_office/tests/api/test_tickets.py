@@ -41,6 +41,33 @@ class TestTickets(APITestCase):
             }]
         })
 
+    def test_create_ticket_w_attachment(self):
+        with open(fixture_path('photo.jpg'), 'rb') as photo:
+            response = self.client.post(f'/api/tickets/', {
+                'title': 'Test ticket',
+                'description': 'Test description',
+                'attachment': photo
+            }, format='multipart')
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.data, {
+            'id': self._get_ticket_id(),
+            'title': 'Test ticket',
+            'created': self.utcnow.isoformat(),
+            'status': 1,
+            'public_follow_ups': [{
+                'id': self._get_follow_up_id(),
+                'date': self.utcnow.isoformat(),
+                'comment': 'Test description',
+                'sender': self.get_investor().email,
+                'attachments': [{
+                    'file': FollowUp.objects.order_by('id').last().attachment_set.first().file.url,
+                    'filename': 'photo.jpg',
+                    'mime_type': 'image/jpeg'
+                }]
+            }]
+        })
+
     def test_get_tickets_list(self):
         result = CreateSupportTicket()(reporter=self.get_investor(),
                                        title='Test title',
@@ -176,7 +203,7 @@ class TestTickets(APITestCase):
             }]
         })
 
-    def test_attachments(self):
+    def test_comment_w_attachment(self):
         result = CreateSupportTicket()(reporter=self.get_investor(),
                                        title='Test title',
                                        description='Test description')
