@@ -1,27 +1,67 @@
-import React from "react";
+import React, {Component} from "react";
 import styled from 'styled-components';
 import moment from "moment/moment";
 import iconUser from './../../img/user.svg';
 
 
-const Comment = ({comment}) => {
-    return (
-        <CommentWrapper>
-            <FlexContainer>
-                <FlexItem width={7}>
-                    <IconImg src={iconUser}/>
-                </FlexItem>
-                <FlexItem width={93}>
-                    <div className='who'>{comment.sender}</div>
-                    <div className='comment'>{comment.comment}</div>
-                    <div className='meta'>{moment(comment.date).format('DD MMMM YYYY')}</div>
-                </FlexItem>
-            </FlexContainer>
-        </CommentWrapper>
-    )
-};
+class Comment extends Component {
 
-export default Comment
+    render() {
+        const {comment} = this.props;
+
+        return (
+            <CommentWrapper key={comment.id}>
+                <FlexContainer>
+                    <FlexItem width={7}>
+                        <IconImg src={iconUser}/>
+                    </FlexItem>
+                    <FlexItem width={93}>
+                        <div className='who'>{comment.sender}</div>
+                        <div className='comment'>{comment.comment}</div>
+                        {comment.attachments.length > 0 &&
+                        <FilesWrapper>
+                            <div>Attached files: {comment.attachments.length}</div>
+                            {comment.attachments.map((item, index) => {
+                                return (
+                                    <FileWrapper key={index} onClick={() => this.setState({isOpen: true})}>
+                                        {item.filename}
+                                    </FileWrapper>
+                                )
+                            })}
+                            <Clearfix/>
+                        </FilesWrapper>
+                        }
+                        <div className='meta'>{moment(comment.date).format('DD MMMM YYYY')}</div>
+                    </FlexItem>
+                </FlexContainer>
+            </CommentWrapper>
+        )
+    }
+
+}
+
+export default Comment;
+
+const FilesWrapper = styled.div`
+    margin: 15px 0;
+    display: block;
+    div {
+        margin: 10px 0;
+    }
+`;
+
+const FileWrapper = styled.div`
+    height: 36px;
+    background-color: #f5f5f5;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 36px;
+    letter-spacing: 0.5px;
+    color: #5c8df5; 
+    display: inline-block;
+    padding: 2px 10px;
+`;
+
 
 const IconImg = styled.img`
     width: 48px;
@@ -37,6 +77,18 @@ const CommentWrapper = styled.div`
 const FlexContainer = styled.div`
     display: flex;
     margin: 36px;
+`;
+
+const Clearfix = styled.div`
+    &:before {
+        content:"";
+        display:table-cell
+    }
+    &:after {
+        content:"";
+        display:table;
+        clear:both
+    }
 `;
 
 const FlexItem = styled.div`

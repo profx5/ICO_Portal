@@ -9,7 +9,7 @@ const initialState = Map({
     stepsDropdownShown: false,
     showInvestOptions: false,
     showSetAccountPopup: false,
-    faqSelectedTab: 'my',
+    faqSelectedTab: 'new',
     currentRoute: 1,
     showCurrenciesPopup: false,
 });

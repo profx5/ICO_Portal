@@ -30,8 +30,8 @@ class Layout extends Component {
                         <Route exact path="/user_office" component={Dashboard}/>
                         <Route path="/user_office/transactions" component={Transactions}/>
                         <Route path="/user_office/payment" component={Payment} />
-                        <Route path="/user_office/faq/ticket/:ticket" component={FAQFeedback}/>
-                        <Route path="/user_office/faq" component={FAQFeedback}/>
+                        <Route path="/user_office/support/ticket/:ticket" component={FAQFeedback}/>
+                        <Route path="/user_office/support" component={FAQFeedback}/>
                         <Route path="/user_office/verification" component={Verification}/>
                         <Route path="/user_office/settings" component={Settings}/>
                     </Switch>

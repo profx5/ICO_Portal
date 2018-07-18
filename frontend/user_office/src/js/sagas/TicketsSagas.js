@@ -30,8 +30,7 @@ export class TicketsSagas {
             yield put(actions.getTicketFullFailed())
         }
     }
-<<<<<<< HEAD
-=======
+
 
     static* sendNewTicket(ticket) {
         try {
@@ -54,7 +53,7 @@ export class TicketsSagas {
             yield call(axios, {
                 method: 'POST',
                 url: Api.newComment(comment.payload.get('ticket')),
-                data: {comment: comment.payload.get('comment')}
+                data: comment.payload
             });
             yield put(actions.sendNewCommentSuccess());
             yield put(actions.getTicketFull(comment.payload.get('ticket')))
@@ -62,10 +61,11 @@ export class TicketsSagas {
             yield put(actions.sendNewCommentFailed());
         }
     }
->>>>>>> 119c0e4... ICO-144 Update FAQ Feedback pages
 }
 
 export function* saga() {
     yield takeEvery(actions.getTicketsRequest, TicketsSagas.getTickets);
     yield takeEvery(actions.getTicketFull, TicketsSagas.getTicketFull);
+    yield takeEvery(actions.sendNewTicket, TicketsSagas.sendNewTicket);
+    yield takeEvery(actions.sendNewComment, TicketsSagas.sendNewComment);
 }
