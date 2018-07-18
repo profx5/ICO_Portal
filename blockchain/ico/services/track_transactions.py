@@ -94,7 +94,7 @@ class SendPreparedTxns(_Base):
             self.return_result
 
     def __call__(self):
-        transactions = Transaction.objects.filter(state='PREPARED')
+        transactions = Transaction.objects.filter(state='PREPARED').order_by('created_at')
 
         if transactions.count() > 0:
             self.logger.debug(f'Sending prepared transactions: {transactions}')

@@ -14,7 +14,7 @@ class TestPrepareTokensMove(APITestCase):
         self.stub_datetime_utcnow(utcnow)
 
         PhaseFactory(bonus_percents=30)
-        ExchangeRateFactory(currency='ETH', rate='750.77123')
+        ExchangeRateFactory(currency='ETH', rate=Decimal('750.77'))
 
         response = self.client.post('/api/prepareTokensMove/', {
             'value': '1.23',
@@ -36,7 +36,7 @@ class TestPrepareTokensMove(APITestCase):
 
         tokens_move = tokens_moves.first()
         self.assertEqual(tokens_move.investor, self.get_investor())
-        self.assertEqual(tokens_move.amount, Decimal('1200483196770000000000'))
+        self.assertEqual(tokens_move.amount, Decimal('1200481230000000000000'))
         self.assertEqual(tokens_move.transfer, transfer)
         self.assertEqual(tokens_move.state, 'PREPARED')
         self.assertEqual(tokens_move.direction, 'IN')

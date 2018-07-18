@@ -15,7 +15,8 @@ class ExchangeRate(models.Model):
     id = models.AutoField(primary_key=True)
     currency = CurrencyField()
     creation_date = models.DateTimeField(default=datetime.utcnow)
-    rate = models.DecimalField(max_digits=32, decimal_places=5)
+    rate = models.DecimalField(max_digits=32, decimal_places=2)
+    rate_cents = models.DecimalField(max_digits=32, decimal_places=0)
     timestamp = models.PositiveIntegerField()
 
     objects = BaseManager.from_queryset(ExchangeRateQuerySet)()

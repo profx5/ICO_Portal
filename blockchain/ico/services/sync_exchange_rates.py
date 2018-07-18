@@ -1,6 +1,7 @@
 import requests
 from json import JSONDecodeError
 from django.db import DatabaseError
+from decimal import Decimal, ROUND_HALF_UP
 
 from user_office.models import ExchangeRate
 from ico_portal.utils.service_object import ServiceObject, service_call
@@ -29,16 +30,18 @@ class SyncExchangeRates(ServiceObject):
             return self.fail(f'Invalid response data {json} from rates api')
 
         try:
-            rate = json['ticker']['price']
+            rate = Decimal(json['ticker']['price']).quantize(Decimal('1.00'), rounding=ROUND_HALF_UP)
             timestamp = json['timestamp']
+            rate_cents = rate * 100
 
-            return self.success(rate=rate, timestamp=timestamp)
+            return self.success(rate=rate, timestamp=timestamp, rate_cents=rate_cents)
         except KeyError:
             return self.fail(f'Invalid response data {json} from rates api')
 
     def create_object(self, context):
         obj = ExchangeRate(currency=context.currency.upper(),
                            rate=context.rate,
+                           rate_cents=context.rate_cents,
                            timestamp=context.timestamp)
 
         try:

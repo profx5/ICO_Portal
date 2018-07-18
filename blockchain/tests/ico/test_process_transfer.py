@@ -9,6 +9,7 @@ from blockchain.ico.services import ProcessTransfer, Mint, SendPreparedTxns
 
 class TestProcessTransfer(BlockChainTestCase):
     setup_eth_tester = True
+    setup_contracts = ['token', 'crowdsale']
 
     def test_purchase_tokens(self):
         recepient_account = self.eth_tester.get_accounts()[0]

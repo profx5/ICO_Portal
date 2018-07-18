@@ -33,6 +33,7 @@ def compile(contract_file_path, contract_name):
 def main():
     compile('VeraCoin.sol', 'VeraCoin')
     compile('KYCCrowdsale.sol', 'KYCCrowdsale')
+    compile('PriceOracle.sol', 'PriceOracle')
 
 
 if __name__ == '__main__':

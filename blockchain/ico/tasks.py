@@ -4,7 +4,8 @@ from oslash import Right
 from django.conf import settings
 
 from .services import SyncICOInfo, SyncExchangeRates, ProcessTransfer, \
-    GetEvents, SendPreparedTxns, TrackTransactions
+    GetEvents, SendPreparedTxns, TrackTransactions, UpdatePriceOracle
+from .services.update_price_oracle import TooLowChange, PendingUpdateExists
 
 logger = get_task_logger(__name__)
 
@@ -17,8 +18,6 @@ def sync_ico_info():
 
     if isinstance(result, Right):
         logger.info(f'ICO info successfully synced, ico_info_id={result.value.ico_info.id}')
-    else:
-        logger.error(f'Erorr while syncing ico info, {result.value}')
 
 
 @shared_task
@@ -30,8 +29,6 @@ def sync_exchange_rates():
     for currency, r in result.items():
         if isinstance(r, Right):
             logger.info(f'Exchange rate for {currency} successfully synced, result: {r.value}')
-        else:
-            logger.error(f'Erorr while syncing exchange rate for {currency}, {r.value}')
 
 
 @shared_task
@@ -42,8 +39,6 @@ def process_event(event):
 
     if isinstance(result, Right):
         logger.info(f'Transfer with txn_hash {event.txn_hash} successfully processed (transfer_id={result.value.transfer.id}).')
-    else:
-        logger.error(f'Got error while processing transfer with txn_hash {event.txn_hash}, {result.value}')
 
 
 @shared_task
@@ -55,8 +50,6 @@ def check_events():
             logger.info(f'Got event with transactionHash={event.txn_hash}')
 
             process_event.delay(event)
-    else:
-        logger.error(f'Got error while checking events {new_events.value}')
 
 
 @shared_task
@@ -66,8 +59,6 @@ def send_transactions():
     for r in result:
         if isinstance(r, Right):
             logger.info(f'Send trasaction {r.value.txn_object} result: {r.value.result}')
-        else:
-            logger.error(f'Send trasaction {r.value.txn_object} fail: {r.value.result}')
 
 
 @shared_task
@@ -77,5 +68,17 @@ def track_transactions():
     for r in result:
         if isinstance(r, Right):
             logger.info(f'Track trasaction {r.value.txn_object} result: {r.value.result}')
-        else:
-            logger.error(f'Track trasaction {r.value.txn_object} fail: {r.value.result}')
+
+
+@shared_task
+def update_price_oracle():
+    result = UpdatePriceOracle()()
+
+    if isinstance(result, TooLowChange):
+        logger.info(f'PriceOracle rate update wasnt complete due to too low rate chage,'
+                    f'actual_rate={result.value.actual_rate}, oracle_rate={result.value.oracle_rate}')
+    elif isinstance(result, PendingUpdateExists):
+        logger.info(f'Found Transaction with txn_id={result.value.txn.txn_id} and state {result.value.txn.state}. '
+                    'Skiping PriceOracle rate update until transaction is mined')
+    elif isinstance(result, Right):
+        logger.info(f'PriceOracle rate successfully updated POUpdate.id={result.value.po_update.id} new_rate={result.value.new_rate}')
