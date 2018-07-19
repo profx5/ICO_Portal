@@ -43,7 +43,7 @@ const AccountInfo = ({email, isDropdownAccountOpen, isDropdownStepsOpen, dropdow
                                 <Link to="/user_office/verification">Verification</Link>
                             </ListItem>
                         </ul>
-                        <LogoutLink>
+                        <LogoutLink href='/logout/'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20">
                               <g fill="#858B91" fillRule="nonzero" stroke="#979797" strokeWidth=".5">
                                 <path d="M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z"/>
