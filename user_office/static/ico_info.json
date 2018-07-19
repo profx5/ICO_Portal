@@ -1,0 +1,12 @@
+{
+    "USDcPerETHRate": 40000,
+    "USDcRaised": 0,
+    "totalHardCapUSDc": 700000000,
+    "crowdSaleAddress" : "0xeC807912F908e4CD044e147DaC2a1AEdEDeA6900",
+    "tokenAddress" : "0xAF8E6ddBAe9Bb80c63297363bb1de9B5fe2C6914",
+    "currentPhase": {
+        "name": "preICO",
+        "discountPercent": 40,
+        "endTime": 1523750399
+    }
+}

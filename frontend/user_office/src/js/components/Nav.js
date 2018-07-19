@@ -42,7 +42,7 @@ class Nav extends React.Component {
                       </g>
                     </svg>
                 </IconLink>
-            </Wrapper>            
+            </Wrapper>
         );
     }
 }

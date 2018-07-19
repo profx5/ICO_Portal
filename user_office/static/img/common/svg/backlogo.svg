@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1440px" height="760px" viewBox="0 0 1440 760" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>Регистрация Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="1440" height="760"></rect>
+        <linearGradient x1="50%" y1="74.921%" x2="50%" y2="0%" id="linearGradient-3">
+            <stop stop-color="#A20624" offset="0%"></stop>
+            <stop stop-color="#D21036" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#A20624" offset="0%"></stop>
+            <stop stop-color="#960824" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="33.7332589%" y1="0%" x2="68.3872768%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#C30D30" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="33.7332589%" y1="0%" x2="68.3872768%" y2="100%" id="linearGradient-6">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#9F0724" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Регистрация-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FAFBFB" x="0" y="0" width="1440" height="760"></rect>
+        <path d="M402,586 L402,601" id="Line-2-Copy" stroke="#FFFFFF" stroke-linecap="square"></path>
+        <g id="Header" transform="translate(1.000000, -11.000000)">
+            <g id="BG">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#FFFFFF" xlink:href="#path-1"></use>
+                <g id="header-wave-1280" mask="url(#mask-2)" fill-rule="nonzero">
+                    <g transform="translate(-817.000000, -47.000000)" id="Shape">
+                        <path d="M844.921741,622.265695 C1126.17264,693.352153 1896.65753,641.529664 2148.64015,699.161037 C2316.62825,737.581334 2528.41518,685.321787 2784,542.382397 L2708.80469,228.815121 C2310.01562,25.5104331 1778.66643,-9.59340859 1459.91709,1.95662125 C1141.16681,13.5066511 897.702392,81.7480542 729.522892,206.679903 C618.95455,436.345198 657.421143,574.874105 844.921741,622.265695 Z" fill="url(#linearGradient-3)" transform="translate(1726.000000, 355.684904) scale(-1, 1) rotate(-180.000000) translate(-1726.000000, -355.684904) "></path>
+                        <path d="M11.2587744,214.899886 C184.378223,145.479499 344.005721,153.289884 490.14034,238.332896 C709.342733,365.896023 875.60752,714 1173.62319,714 C1683.71875,714 1777.75862,508.333024 2390,97 C2035.87847,63.6666667 1763.87847,47 1574,47 C1406.05343,47 871.47978,5.38635871 614.664062,13.4609375 C438.01031,19.0151328 233.122289,46.8614869 0,97 L11.2587744,214.899886 Z" fill="url(#linearGradient-4)" transform="translate(1195.000000, 363.210681) scale(-1, 1) translate(-1195.000000, -363.210681) "></path>
+                    </g>
+                </g>
+            </g>
+            <g id="Menu" transform="translate(347.000000, 23.000000)">
+                <g id="sign-up+-sign-in-buttons" transform="translate(776.000000, 0.000000)"></g>
+            </g>
+        </g>
+        <g id="tick" transform="translate(834.000000, 334.000000)"></g>
+        <circle id="Oval-12" fill="url(#linearGradient-5)" cx="1184" cy="492" r="42"></circle>
+        <circle id="Oval-12-Copy-6" fill="url(#linearGradient-5)" opacity="0.103515625" cx="1197" cy="249" r="84"></circle>
+        <circle id="Oval-12-Copy" fill="url(#linearGradient-6)" transform="translate(200.351768, 284.351768) rotate(-370.000000) translate(-200.351768, -284.351768) " cx="200.351768" cy="284.351768" r="55.4030663"></circle>
+        <circle id="Oval-12-Copy-3" fill="url(#linearGradient-6)" transform="translate(264.551145, 372.551145) rotate(-315.000000) translate(-264.551145, -372.551145) " cx="264.551145" cy="372.551145" r="27.2597763"></circle>
+        <circle id="Oval-12-Copy-4" fill="url(#linearGradient-6)" opacity="0.155580357" transform="translate(356.862214, 256.862214) rotate(-315.000000) translate(-356.862214, -256.862214) " cx="356.862214" cy="256.862214" r="64.9563942"></circle>
+        <circle id="Oval-12-Copy-5" fill="url(#linearGradient-6)" opacity="0.179799107" transform="translate(147.224427, 411.224427) rotate(-315.000000) translate(-147.224427, -411.224427) " cx="147.224427" cy="411.224427" r="22.0790043"></circle>
+        <circle id="Oval-12-Copy-2" fill="url(#linearGradient-6)" opacity="0.391685268" transform="translate(1097.986174, 440.986174) rotate(-225.000000) translate(-1097.986174, -440.986174) " cx="1097.98617" cy="440.986174" r="21.2034271"></circle>
+    </g>
+</svg>
