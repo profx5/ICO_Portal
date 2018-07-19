@@ -5,8 +5,9 @@ from django.conf import settings
 
 import blockchain.web3
 from ico_portal.utils.datetime import datetime
-from blockchain.ico.contracts.crowdsale import CrowdsaleContract
+from blockchain.ico.contracts import CrowdsaleContract, PriceOracle
 from blockchain.ico.contracts.token import TokenContract, TransferEvent
+from django.apps import apps
 
 
 class BlockChainTestCase(TestCase):
@@ -14,7 +15,12 @@ class BlockChainTestCase(TestCase):
     crowdsale_bonus_percents = 40
     crowdsale_tokens_amount = 1000000
 
+    oracle_inital_price = 55015
+    oracle_allowed_change = 10
+    oracle_sensivity = 3
+
     setup_eth_tester = False
+    setup_contracts = []  # token, crowdsale, price_oracle
 
     def stub_datetime_now(self, dt):
         datetime.stubed_now = dt
@@ -36,9 +42,7 @@ class BlockChainTestCase(TestCase):
         })
 
     @classmethod
-    def _setup_contracts(cls):
-        cls.web3.eth.defaultAccount = cls.account['address']
-
+    def _setup_token(cls):
         VeraCoin = cls.web3.eth.contract(abi=TokenContract.get_compiled()['abi'],
                                          bytecode=TokenContract.get_compiled()['bin'])
         tx_hash = VeraCoin.constructor().transact()
@@ -46,6 +50,10 @@ class BlockChainTestCase(TestCase):
         cls.token_contract = cls.web3.eth.contract(address=tx_receipt.contractAddress,
                                                    abi=TokenContract.get_compiled()['abi'])
 
+        TokenContract.init({'address': cls.token_contract.address})
+
+    @classmethod
+    def _setup_crowdsale(cls):
         KYCCrowdsale = cls.web3.eth.contract(abi=CrowdsaleContract.get_compiled()['abi'],
                                              bytecode=CrowdsaleContract.get_compiled()['bin'])
         tx_hash = KYCCrowdsale.constructor(cls.web3.eth.accounts[0],
@@ -55,9 +63,32 @@ class BlockChainTestCase(TestCase):
         tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
         cls.crowdsale_contract = cls.web3.eth.contract(address=tx_receipt.contractAddress,
                                                        abi=CrowdsaleContract.get_compiled()['abi'])
+
         cls.token_contract.functions.transfer(cls.crowdsale_contract.address, cls.crowdsale_tokens_amount).transact({
             'gas': 100000,
         })
+
+        CrowdsaleContract.init({'address': cls.crowdsale_contract.address})
+
+    @classmethod
+    def _setup_price_oracle(cls):
+        oracle = cls.web3.eth.contract(abi=PriceOracle.get_compiled()['abi'],
+                                       bytecode=PriceOracle.get_compiled()['bin'])
+        tx_hash = oracle.constructor(cls.oracle_inital_price, cls.oracle_allowed_change).transact()
+        tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
+        cls.price_oracle = cls.web3.eth.contract(address=tx_receipt.contractAddress,
+                                                 abi=PriceOracle.get_compiled()['abi'])
+        cls.price_oracle.functions.addOracle(cls.web3.eth.defaultAccount).transact()
+
+        PriceOracle.init({'address': cls.price_oracle.address,
+                          'sensivity': cls.oracle_sensivity})
+
+    @classmethod
+    def _setup_contracts(cls):
+        cls.web3.eth.defaultAccount = cls.account['address']
+
+        for c in cls.setup_contracts:
+            getattr(cls, f'_setup_{c}')()
 
     @classmethod
     def take_snapshot(cls):
@@ -83,6 +114,13 @@ class BlockChainTestCase(TestCase):
             cls.web3 = Web3(HTTPProvider(settings.WEB3_RPC_URL))
 
     @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+
+        if cls.setup_eth_tester:
+            apps.get_app_config('blockchain').init_contracts()
+
+    @classmethod
     def setup_blockchain_data(cls):
         pass
 
@@ -91,16 +129,8 @@ class BlockChainTestCase(TestCase):
             self.eth_tester.revert_to_snapshot(self.base_snapshot_id)
             self.eth_tester.enable_auto_mine_transactions()
 
-            TokenContract.init(contract_address=self.token_contract.address)
-            CrowdsaleContract.init(contract_address=self.crowdsale_contract.address)
-
         self.utcnow = datetime.utcnow()
         self.stub_datetime_utcnow(self.utcnow)
-
-    def tearDown(self):
-        if self.setup_eth_tester:
-            CrowdsaleContract.init(contract_address=settings.CROWDSALE_CONTRACT['address'])
-            TokenContract.init(contract_address=settings.TOKEN_CONTRACT['address'])
 
     def pass_KYC(self, address):
         self.crowdsale_contract.functions.passKYC(address).transact()

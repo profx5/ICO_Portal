@@ -10,3 +10,4 @@ from .process_transfer import ProcessTransfer
 from .sync_exchange_rates import SyncExchangeRates
 from .sync_ico_info import SyncICOInfo
 from .track_transactions import SendPreparedTxns, TrackTransactions
+from .update_price_oracle import UpdatePriceOracle
