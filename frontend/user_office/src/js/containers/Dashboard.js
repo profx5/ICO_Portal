@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import ICOProgress from './ICOProgress';
 
-import Banner from './../../img/banner.jpg';
+import Banner from './../../img/Banner_Vera.png';
 
 
 const Dashboard = (props) => {
