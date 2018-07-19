@@ -22,5 +22,6 @@ file_env() {
 file_env DB_PASSWORD
 file_env SECRET_KEY
 file_env RAVEN_DSN
+file_env ICO_EMAIL_PASSWORD
 
 exec "$@"

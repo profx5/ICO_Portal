@@ -24,6 +24,7 @@ COPY user_office user_office
 COPY landing     landing
 COPY manage.py   manage.py
 COPY scripts     scripts
+COPY solidity-contracts solidity-contracts
 
 COPY --from=frontend /tmp/webpack-stats.prod.json webpack-stats.prod.json
 COPY --from=frontend /tmp/assets/ assets

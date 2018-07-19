@@ -36,3 +36,7 @@ ALLOWED_HOSTS = ['*']
 STATIC_ROOT = os.path.join(BASE_DIR, "assets")
 
 MEDIA_ROOT = '/media_data/'
+
+WEB3_RPC_URL = os.environ['WEB3_RPC_URL']
+
+CELERY_BROKER_URL = os.environ['CELERY_BROKER_URL']
