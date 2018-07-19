@@ -41,7 +41,7 @@ class Nav extends React.Component {
                       </g>
                     </svg>
                 </IconLink>
-                <IconLink active={4 === currentRoute} onClick={this.get_elem.bind(this, 4)} to="/user_office/faq">
+                <IconLink active={4 === currentRoute} onClick={this.get_elem.bind(this, 4)} to="/user_office/support">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
                       <g fill="#3172FD">
                         <circle cx="15.5" cy="23.5" r="1.5"/>
