@@ -28,6 +28,7 @@ contract VeraCrowdsale is RBAC {
   uint256 public tokensSold;
   TransferableTokenIface public token;
   PriceOracleIface public priceOracle;
+  address public wallet;
   string public constant ROLE_ADMIN = "admin";
   string public constant ROLE_BACKEND = "backend";
   string public constant ROLE_KYC_VERIFIED_INVESTOR = "kycVerified";
@@ -86,12 +87,20 @@ contract VeraCrowdsale is RBAC {
     _;
   }
 
-  constructor( TransferableTokenIface _token, PriceOracleIface _priceOracle)
-  public
+  constructor(
+    TransferableTokenIface _token,
+    PriceOracleIface _priceOracle,
+    address _wallet
+  )
+    public
   {
+    require(_token != address(0), "Need token contract address");
+    require(_priceOracle != address(0), "Need price oracle contract address");
+    require(_wallet != address(0), "Need wallet address");
     addRole(msg.sender, ROLE_ADMIN);
     token = _token;
     priceOracle = _priceOracle;
+    wallet = _wallet;
     // solium-disable-next-line arg-overflow
     amountBonuses.push(AmountBonus(0x1, 800000, 1999999, 20));
     // solium-disable-next-line arg-overflow
@@ -102,9 +111,9 @@ contract VeraCrowdsale is RBAC {
    * @dev fallback function
    */
   function ()
-  external
-  payable
-  onlyKYCVerifiedInvestor
+    external
+    payable
+    onlyKYCVerifiedInvestor
   {
     uint256 valueInCents = priceOracle.getUsdCentsFromWei(msg.value);
     (uint256 bonusPercent, uint256 bonusIds) = computeBonuses(valueInCents);
@@ -116,6 +125,7 @@ contract VeraCrowdsale is RBAC {
       bonusIds
     );
     buyTokens(msg.sender, valueInCents);
+    wallet.transfer(msg.value);
   }
 
   /**
