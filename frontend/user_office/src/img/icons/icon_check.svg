@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="11px" height="8px" viewBox="0 0 11 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Dashboard-NEW_5_6-Vera" transform="translate(-268.000000, -2675.000000)">
+            <rect fill="#F5F6FA" x="0" y="0" width="1440" height="2908"></rect>
+            <path d="M268.126923,2679.4 C268.042308,2679.32 268,2679.2 268,2679.12 C268,2679.04 268.042308,2678.92 268.126923,2678.84 L268.719231,2678.28 C268.888462,2678.12 269.142308,2678.12 269.311538,2678.28 L269.353846,2678.32 L271.680769,2680.68 C271.765385,2680.76 271.892308,2680.76 271.976923,2680.68 L277.646154,2675.12 L277.688462,2675.12 C277.857692,2674.96 278.111538,2674.96 278.280769,2675.12 L278.873077,2675.68 C279.042308,2675.84 279.042308,2676.08 278.873077,2676.24 L272.103846,2682.88 C272.019231,2682.96 271.934615,2683 271.807692,2683 C271.680769,2683 271.596154,2682.96 271.511538,2682.88 L268.211538,2679.52 L268.126923,2679.4 Z" id="Shape" fill="#11CD56" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

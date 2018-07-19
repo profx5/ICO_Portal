@@ -84,6 +84,7 @@ const Wrapper = styled.div`
 `;
 
 const ButtonWrapper = styled.div`
-    width: 165px;
+    width: 190px;
+    height: 45px;
     margin-bottom: 60px;
 `;

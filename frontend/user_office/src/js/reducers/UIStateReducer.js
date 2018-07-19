@@ -11,6 +11,8 @@ const initialState = Map({
     showSetAccountPopup: false,
     faqSelectedTab: 'new',
     currentRoute: 1,
+    openedTicket: 'qe12',
+    activeKycTab: 2
     showCurrenciesPopup: false,
 });
 
@@ -29,6 +31,8 @@ export const UIStateReducer = createReducer({
     [actions.hideCurrenciesPopup]: (state = initialState, payload) => state.set("showCurrenciesPopup", false),
     [actions.changeSelectedTab]: (state = initialState, payload) => state.set("faqSelectedTab", payload.tab),
     [actions.setCurrentRoute]: (state = initialState, payload) => state.set("currentRoute", payload.route_index),
+    [actions.setOpenedTicket]: (state = initialState, payload) => state.set("openedTicket", payload.id),
+    [actions.activateKycTab]: (state = initialState, payload) => state.set('activeKycTab', payload.id)
 
 }, initialState);
 

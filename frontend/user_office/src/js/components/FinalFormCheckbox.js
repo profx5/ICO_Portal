@@ -1,14 +1,16 @@
 import React from 'react'
 import styled from 'styled-components';
-import {Field} from 'redux-form';
+import { Field } from 'react-final-form';
 
-const ReduxFormRadio = ({labelText, name, values, options}) => {
+import iconCheck from './../../img/icons/icon_check.svg';
+
+const FinalFormCheckbox = ({labelText, name, values, options}) => {
 
     function generateRadio(data) {
         return data.map((item, index) => {
             return (
                 <React.Fragment key={index}>
-                    <RadioInput component="input" type="radio" name={name} value={values[index]} id={`radio-${item}`} hidden/>
+                    <RadioInput component="input" type="checkbox" name={name} value={values[index]} id={`radio-${item}`} hidden/>
                     <RadioLabel htmlFor={`radio-${item}`}>{item}</RadioLabel>
                 </React.Fragment>
             )
@@ -17,7 +19,6 @@ const ReduxFormRadio = ({labelText, name, values, options}) => {
 
     return (
         <Wrapper>
-            <StyledLabel>{labelText}</StyledLabel>
             <InputsWrapper>
                 {generateRadio(options)}
             </InputsWrapper>
@@ -27,7 +28,7 @@ const ReduxFormRadio = ({labelText, name, values, options}) => {
 
 
 
-export default ReduxFormRadio;
+export default FinalFormCheckbox;
 
 const Wrapper = styled.div`
     position: relative;
@@ -41,26 +42,24 @@ const InputsWrapper = styled.div`
 `;
 
 const RadioInput = styled(Field)`
-    &:checked + label {
-        color: #3476fd;
-        border-color: #3476fd;
+    &:checked + label:before {
+        background: url(${iconCheck}) no-repeat center;
     }
 `;
 
 const RadioLabel = styled.label`
-    font-weight: 500;
-    flex-basis: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    text-transform: capitalize;
-    border: 1px solid #f3f3f3;
-    cursor: pointer;
-`;
-
-const StyledLabel = styled.label`
+    font-size: 16px;
+    letter-spacing: 0.5px;
     color: #0a0a0a;
-    display: block;
-    margin-bottom: 13px;
+    margin-right: 20px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    &:before {
+        content: '';
+        width: 20px;
+        height: 20px;
+        border: 1px solid #d6dfe6;
+        margin-right: 8px;
+    }
 `;

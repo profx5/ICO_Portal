@@ -13,6 +13,8 @@ export const hideCurrenciesPopup = createAction('HIDE_CURRENCIES_POPUP');
 export const showInvestOptions = createAction('SHOW_INVEST_OPTIONS');
 export const hideInvestOptions = createAction('HIDE_INVEST_OPTIONS');
 
+export const activateKycTab = createAction('ACTIVATE_KYC_TAB');
+
 export const showSetAccountPopup = createAction('SHOW_SET_ACCOUNT_POPUP');
 export const hideSetAccountPopup = createAction('HIDE_SET_ACCOUNT_POPUP');
 export const changeSelectedTab = createAction('CHANGE_SELECTED_TAB', (tab => ({tab})));

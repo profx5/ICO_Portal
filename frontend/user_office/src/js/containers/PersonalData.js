@@ -5,19 +5,12 @@ import $ from 'jquery';
 
 import * as KYCActions from './../actions/KYCActions';
 
-import Photo from './../components/Photo';
-import FileUpload from './../components/FileUpload';
-import PhotoUpload from './../components/PhotoUpload';
-import ReduxFormField from './../components/ReduxFormField';
-import ReduxFormRadio from './../components/ReduxFormRadio';
-
 import FinalFormField from './../components/FinalFormField';
+import FinalFormCheckbox from './../components/FinalFormCheckbox';
 import FinalFormRadio from './../components/FinalFormRadio';
 
-import samplePhoto from './../../img/user.svg';
 
-
-class PersonalData extends React.Component {
+class PersonData extends React.Component {
 
     uploadOnClickHandler = (event) => {
         $(event.currentTarget).find('input[type="file"]').click();
@@ -28,36 +21,46 @@ class PersonalData extends React.Component {
         const {uploadedUserPhoto, uploadPhoto, removePhoto} = this.props;
 
         return (
-            <Wrapper className="Verification__personalData">
+            <Wrapper className="Verification__personData">
                 <Title>Personal Data</Title>
-                <PhotoFileUpload>
-                    <PhotoWrapper>
-                        <DescHead>Your photo</DescHead>
-                        <Photo removePhoto={removePhoto} photoName="user_photo" isUploaded={uploadedUserPhoto} path={uploadedUserPhoto || samplePhoto}/>
-                    </PhotoWrapper>
-                    <UploadWrapper>
-                        <DescHead>Choose uploading way</DescHead>
-                        <PhotoUpload name='user_photo'/>
-                        <FileUpload uploadPhoto={uploadPhoto} name="user_photo" onClickHandler={this.uploadOnClickHandler}/>
-                    </UploadWrapper>
-                </PhotoFileUpload>
                 <InputSet>
                     <InputWrapper>
-                        <FinalFormField labelText="First Name" name="firstname"/>
+                        <FinalFormField placeholder="Your name" labelText="First Name" name="firstname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField labelText="Last Name" name="surname"/>
+                        <FinalFormField placeholder="Your last name" labelText="Last Name" name="surname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField labelText="Middle Name" name="midname"/>
+                        <FinalFormField placeholder="Your place of birth" labelText="Place of birth" name="placeOfBirth"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormRadio labelText="Gender" name="gender" options={['Male', 'Female']} values={['M', 'F']}/>
+                        <FinalFormField placeholder="date / month / year" labelText="Date of birth" options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['/']}} name="dateOfBirth"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField labelText="Date of birth" options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}} name="birthdate"/>
+                        <FinalFormField placeholder="Your personal identification code" labelText="Personal identification code" name="personalId"/>
                     </InputWrapper>
-            </InputSet>
+                    <InputWrapper>
+                        <FinalFormField placeholder="Your phone number" labelText="Phone number" options={{phone: true, phoneRegionCode: 'RU'}} name="phone"/>
+                    </InputWrapper>
+                    <InputWrapper>
+                        <FinalFormField placeholder="Your email" labelText="Email" name="email"/>
+                    </InputWrapper>
+                    <InputWrapper>
+                        <FinalFormField placeholder="Address" labelText="Place of residence" name="placeOfResidence"/>
+                    </InputWrapper>
+                    <InputWrapper>
+                        <FinalFormField placeholder="Your profession" labelText="Profession of field of activity" name="profession"/>
+                    </InputWrapper>
+                </InputSet>
+
+                <RadioSet className="RadioSet RadioSet-1">
+                    <FinalFormCheckbox name="confirmInvestor" options={['I confirm that the investor is a beneficial owner']} values={['Yes']} />
+                </RadioSet>
+
+                <RadioSet className="RadioSet RadioSet-2">
+                    <p className="text">Are you a <span>politically exposed person</span> (PEP), family member of PEP or person known to be close associate of PEP?</p>
+                    <FinalFormRadio name="PEP" options={['Yes', 'No']} values={['Yes', 'No']} />
+                </RadioSet>
             </Wrapper>
         )
     }
@@ -82,13 +85,13 @@ const mapDispatchToProps = (dispatch) => ({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(PersonalData)
+export default connect(mapStateToProps, mapDispatchToProps)(PersonData)
 
 
 const Wrapper = styled.div`
     flex: 1;
     height: auto;
-    padding: 42px 30px 42px;
+    padding: 42px 50px 42px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
@@ -115,44 +118,32 @@ const DescHead = styled.h4`
     }
 `;
 
-
-const PhotoFileUpload = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    margin-bottom: 70px;
-`;
-
-const PhotoWrapper = styled.div`
-    flex-basis: 50%;
-    display: inline-flex;
-    flex-flow: row wrap;
-    align-items: center;
-    position: relative;
-    padding-top: 60px;
-`;
-
-const UploadWrapper = styled.div`
-    width: 285px;
-    display: inline-flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    padding-top: 60px;
-    @media (max-width: 1300px) {
-        justify-content: center;
-    }
-`;
-
-
 const InputSet = styled.div`
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: flex-start;
     position: relative;
-    border-top: 1px solid rgba(151,151,151,0.25);
-    padding-top: 55px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(151,151,151,.25);
+`;
+
+const RadioSet = styled.div`
+    &.RadioSet {
+        &-1 {
+            margin: 33px 0;
+        }
+    }
+    .text {
+        font-size: 16px;
+        color: #0a0a0a;
+        letter-spacing: 0.5px;
+        line-height: 1.44;
+        margin-bottom: 15px;
+        span {
+            text-decoration: underline;
+        }
+    }
 `;
 
 const InputWrapper = styled.div`

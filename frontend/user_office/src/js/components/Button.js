@@ -26,7 +26,7 @@ const Btn = styled.button`
     width: 100%;
     border-radius: 2px;
     color: #ffffff;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 300;
     text-align: center;
     position: relative;
