@@ -1,9 +1,9 @@
-from .auth import KYCAndLoginPermission
 from rest_framework.generics import ListAPIView
 from rest_framework.serializers import ModelSerializer
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
+from .auth import KYCAndLoginPermission
 from user_office.models import TokensMove, Transfer, Payment
 
 
@@ -17,7 +17,7 @@ class PaymentSerializer(ModelSerializer):
     class Meta:
         model = Payment
         fields = ('currency', 'payer_account', 'amount', 'amounti', 'txn_id',
-                  'received_at')
+                  'received_at', 'usdc_value')
 
 
 class TokensMoveSerializer(ModelSerializer):
@@ -26,7 +26,7 @@ class TokensMoveSerializer(ModelSerializer):
 
     class Meta:
         model = TokensMove
-        fields = ('amount', 'created_at', 'actualized_at', 'state',
+        fields = ('id', 'amount', 'created_at', 'actualized_at', 'state',
                   'transfer', 'direction', 'payment')
 
 

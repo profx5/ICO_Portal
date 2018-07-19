@@ -6,9 +6,10 @@ import Utils from './../utils';
 
 import Button from './../components/Button';
 import InvestInput from './../components/InvestInput';
+import { Link } from 'react-router-dom';
+
+
 import * as UIActions from './../actions/UIActions';
-
-
 import * as InvestActions from './../actions/InvestActions';
 import * as ICOInfoActions from './../actions/ICOInfoActions';
 
@@ -64,9 +65,9 @@ class CurrencyCalculator extends React.Component {
                 <WrapperInner>
                     <InvestInput value={this.props.investAmount} type="text" onChangeHandler={this.investOnChangeHandler} header="Amount" currency={investCurrency}/>
                     <InvestInput value={this.props.tokensAmount} type="text" header="TKN" currency="TKN"/>
-                    <ButtonWrapper>
-                        <Button clickHandler={this.investClickHandler} text="Купить"/>
-                    </ButtonWrapper>
+                        <ButtonWrapper to="/user_office/payment/buy">
+                            <Button clickHandler={this.investClickHandler} text="Купить"/>
+                        </ButtonWrapper>
                 </WrapperInner>
                 <BonusDesc>Пометка о бонусной программе, купи сейчас и получи еще 10% бонусных токенов до 3 июля. Cras quis 
 nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna</BonusDesc>
@@ -103,7 +104,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyCalculator)
 
 const Wrapper = styled.div`
-    margin-top: 107px;
+    margin-top: 65px;
 `;
 
 const WrapperInner = styled.div`
@@ -115,7 +116,7 @@ const WrapperInner = styled.div`
     padding-top: 90px;
 `;
 
-const ButtonWrapper = styled.div`
+const ButtonWrapper = styled(Link)`
     display: inline-block;
     width: 100%;
     max-width: 258px;

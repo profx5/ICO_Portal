@@ -66,8 +66,9 @@ class TestProcessIPN(BlockChainTestCase):
         self.assertEqual(transactions.count(), 1)
 
         transaction = transactions.first()
+
         self.assertEqual(transaction.data,
-                         '0x40c10f19000000000000000000000000b0a3f48478d84a497f930d8455711d9981b66a7000000000000000000000000000000000000000000000000000000000000007ca')
+                         '0xa9059cbb000000000000000000000000b0a3f48478d84a497f930d8455711d9981b66a7000000000000000000000000000000000000000000000000114becb8b7cee0000')
         self.assertIsNone(transaction.nonce)
         self.assertEqual(transaction.value, Decimal('0'))
         self.assertIsNone(transaction.from_account)
@@ -92,7 +93,7 @@ class TestProcessIPN(BlockChainTestCase):
 
         tokens_move = tokens_moves.first()
         self.assertEqual(tokens_move.investor, self.investor)
-        self.assertEqual(tokens_move.amount, Decimal('1994'))
+        self.assertEqual(tokens_move.amount, Decimal('19941600000000000000'))
         self.assertEqual(tokens_move.transfer, transfer)
         self.assertEqual(tokens_move.state, 'PREPARED')
         self.assertEqual(tokens_move.direction, 'IN')

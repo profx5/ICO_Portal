@@ -4,6 +4,7 @@ from ico_portal.utils.datetime import datetime
 from ..base import APITestCase
 from user_office.services import CreateSupportTicket
 from helpdesk.models import FollowUp, Ticket
+from .helpers.fixture import fixture_path
 
 
 class TestTickets(APITestCase):
@@ -35,7 +36,35 @@ class TestTickets(APITestCase):
                 'id': self._get_follow_up_id(),
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test description',
-                'sender': self.get_investor().email
+                'sender': self.get_investor().email,
+                'attachments': []
+            }]
+        })
+
+    def test_create_ticket_w_attachment(self):
+        with open(fixture_path('photo.jpg'), 'rb') as photo:
+            response = self.client.post(f'/api/tickets/', {
+                'title': 'Test ticket',
+                'description': 'Test description',
+                'attachment': photo
+            }, format='multipart')
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.data, {
+            'id': self._get_ticket_id(),
+            'title': 'Test ticket',
+            'created': self.utcnow.isoformat(),
+            'status': 1,
+            'public_follow_ups': [{
+                'id': self._get_follow_up_id(),
+                'date': self.utcnow.isoformat(),
+                'comment': 'Test description',
+                'sender': self.get_investor().email,
+                'attachments': [{
+                    'file': FollowUp.objects.order_by('id').last().attachment_set.first().file.url,
+                    'filename': 'photo.jpg',
+                    'mime_type': 'image/jpeg'
+                }]
             }]
         })
 
@@ -52,7 +81,9 @@ class TestTickets(APITestCase):
             'id': self._get_ticket_id(),
             'title': 'Test title',
             'created': self.utcnow.isoformat(),
-            'status': 1
+            'status': 1,
+            'last_reply_by': self.get_investor().email,
+            'last_reply_at': self.utcnow
         }])
 
     def test_get_ticket(self):
@@ -74,7 +105,8 @@ class TestTickets(APITestCase):
                 'id': self._get_follow_up_id(),
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test description',
-                'sender': self.get_investor().email
+                'sender': self.get_investor().email,
+                'attachments': []
             }]
         })
 
@@ -99,12 +131,14 @@ class TestTickets(APITestCase):
                 'id': FollowUp.objects.order_by('id').first().id,
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test description',
-                'sender': self.get_investor().email
+                'sender': self.get_investor().email,
+                'attachments': []
             }, {
                 'id': FollowUp.objects.order_by('id').last().id,
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test comment',
-                'sender': self.get_investor().email
+                'sender': self.get_investor().email,
+                'attachments': []
             }]
         })
 
@@ -131,7 +165,8 @@ class TestTickets(APITestCase):
                 'id': self._get_follow_up_id(),
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test description',
-                'sender': self.get_investor().email
+                'sender': self.get_investor().email,
+                'attachments': []
             }]
         })
 
@@ -163,6 +198,46 @@ class TestTickets(APITestCase):
                 'id': self._get_follow_up_id(),
                 'date': self.utcnow.isoformat(),
                 'comment': 'Test description',
-                'sender': 'John Doe'
+                'sender': 'John Doe',
+                'attachments': []
+            }]
+        })
+
+    def test_comment_w_attachment(self):
+        result = CreateSupportTicket()(reporter=self.get_investor(),
+                                       title='Test title',
+                                       description='Test description')
+        self.assertIsInstance(result, Right)
+
+        ticket_id = result.value['ticket'].id
+
+        with open(fixture_path('photo.jpg'), 'rb') as photo:
+            response = self.client.post(f'/api/tickets/{ticket_id}/comment/', {
+                'comment': 'Test with attachment',
+                'attachment': photo
+            }, format='multipart')
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.data, {
+            'id': self._get_ticket_id(),
+            'title': 'Test title',
+            'created': self.utcnow.isoformat(),
+            'status': 1,
+            'public_follow_ups': [{
+                'id': FollowUp.objects.order_by('id').first().id,
+                'date': self.utcnow.isoformat(),
+                'comment': 'Test description',
+                'sender': self.get_investor().email,
+                'attachments': []
+            }, {
+                'id': FollowUp.objects.order_by('id').last().id,
+                'date': self.utcnow.isoformat(),
+                'comment': 'Test with attachment',
+                'sender': self.get_investor().email,
+                'attachments': [{
+                    'file': FollowUp.objects.order_by('id').last().attachment_set.first().file.url,
+                    'filename': 'photo.jpg',
+                    'mime_type': 'image/jpeg'
+                }]
             }]
         })

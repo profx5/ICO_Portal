@@ -14,22 +14,24 @@ import Transactions from './Transactions'
 import FAQFeedback from './FAQFeedback';
 import Payment from './Payment';
 
+import history from './../utils/history';
+
 
 class Layout extends Component {
 
     render() {
 
-        const {currentRoute} = this.props;
         return (
             <Wrapper>
                 <Header/>
                 <MainWrapper>
                     <NavSidebar/>
-                    <Switch>
+                    <Switch history={history}>
                         <Route exact path="/user_office" component={Dashboard}/>
-                        <Route exact path="/transactions" component={Transactions}/>
+                        <Route path="/user_office/transactions" component={Transactions}/>
                         <Route path="/user_office/payment" component={Payment} />
-                        <Route exact path="/faq" component={FAQFeedback}/>
+                        <Route path="/user_office/support/ticket/:ticket" component={FAQFeedback}/>
+                        <Route path="/user_office/support" component={FAQFeedback}/>
                         <Route path="/user_office/verification" component={Verification}/>
                         <Route path="/user_office/settings" component={Settings}/>
                     </Switch>
@@ -37,7 +39,6 @@ class Layout extends Component {
             </Wrapper>
         )
     }
-
 }
 
 const mapStateToProps = ({UI}) => ({

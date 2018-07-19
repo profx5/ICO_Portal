@@ -1,35 +1,43 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import {Route, Switch} from 'react-router-dom';
+import {withRouter} from 'react-router';
 
 import PaymentStepOne from './PaymentStepOne';
+import PaymentStepTwo from './PaymentStepTwo';
+import CurrenciesPopup from './CurrenciesPopup';
 import Steps from './../components/Steps';
 
 
 class Payment extends React.Component {
 
     render() {
+        const {isCurrenciesPopupVisible} = this.props;
 
         return (
             <Wrapper className="">
                 <Head>Payment</Head>
                 <Steps step="1"/>
-                <PaymentStepOne/>
+                <Switch>
+                    <Route exact path="/user_office/payment" component={PaymentStepOne}/>
+                    <Route exact path="/user_office/payment/buy" component={PaymentStepTwo}/>
+                </Switch>
+                {isCurrenciesPopupVisible && <CurrenciesPopup/>}
             </Wrapper>
         )
     }
 };
 
 
-const mapStateToProps = () => ({
-
+const mapStateToProps = ({UI}) => ({
+    isCurrenciesPopupVisible: UI.get('showCurrenciesPopup')
 })
 
 const mapDispatchToProps = (dispatch) => ({
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Payment)
-
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Payment));
 
 const Wrapper = styled.div`
     flex: 1;

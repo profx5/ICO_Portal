@@ -17,18 +17,19 @@ class TestGetTokensMoves(APITestCase):
                                           transfer__txn_hash='0x3c45134db6764ceaaf4879f71be6586d59831949be460b8f6d6e479a8acd0e9a',
                                           transfer__block_number=112312313,
                                           direction='IN')
-        tokens_move_1 = TokensMoveFactory(investor=investor,
+        tokens_move_2 = TokensMoveFactory(investor=investor,
                                           amount=990122,
                                           transfer__txn_hash='0x7792b9bee82ef5e05c38858ba303d6199801c5dc362343752d847bca39fe38e4',
                                           transfer__block_number=112312343,
                                           direction='OUT')
 
-        PaymentFactory(tokens_move=tokens_move_1,
+        PaymentFactory(tokens_move=tokens_move_2,
                        currency='ETH',
                        payer_account='pNNnjXDEBOgsGslvWOPh',
                        amount=842003,
                        amounti=84200300000000000,
-                       txn_id='0x3990a1ef43a957dfa6cf6bd450419369cf55d4')
+                       txn_id='0x3990a1ef43a957dfa6cf6bd450419369cf55d4',
+                       usdc_value=1000000)
 
         response = self.client.get('/api/getTokensMoves/')
 
@@ -41,6 +42,7 @@ class TestGetTokensMoves(APITestCase):
     "current_page": 1,
     "results": [
         {
+            "id": %s,
             "amount": "123441",
             "created_at": "2018-05-14T11:11:11",
             "actualized_at": "2018-05-14T11:11:11",
@@ -54,6 +56,7 @@ class TestGetTokensMoves(APITestCase):
             "payment": []
         },
         {
+            "id": %s,
             "amount": "990122",
             "created_at": "2018-05-14T11:11:11",
             "actualized_at": "2018-05-14T11:11:11",
@@ -71,9 +74,10 @@ class TestGetTokensMoves(APITestCase):
                     "amount": "842003.000000000000000000",
                     "amounti": "84200300000000000",
                     "txn_id": "0x3990a1ef43a957dfa6cf6bd450419369cf55d4",
-                    "received_at": "2018-05-14T11:11:11"
+                    "received_at": "2018-05-14T11:11:11",
+                    "usdc_value": "1000000"
                 }
             ]
         }
     ]
-}''')
+}''' % (tokens_move_1.id, tokens_move_2.id))

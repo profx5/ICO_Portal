@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 
 import CurrencyCalculator from './CurrencyCalculator';
+import Currency from './Currency';
 
 
 class PaymentStepOne extends React.Component {
@@ -10,8 +11,9 @@ class PaymentStepOne extends React.Component {
     render() {
 
         return (
-            <Wrapper className="">
+            <Wrapper>
                 <Head>Выберите количество токенов</Head>
+                <Currency/>
                 <CurrencyCalculator/>
             </Wrapper>
         )
@@ -44,4 +46,5 @@ const Head = styled.div`
     font-size: 22px;
     font-weight: 500;
     text-align: center;
+    margin-bottom: 55px;
 `;

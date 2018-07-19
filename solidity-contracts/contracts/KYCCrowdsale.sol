@@ -1,97 +1,8 @@
 pragma solidity ^0.4.23;
 
-
-/**
- * @title SafeMath
- * @dev Math operations with safety checks that throw on error
- */
-library SafeMath {
-
-    /**
-    * @dev Multiplies two numbers, throws on overflow.
-    */
-    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
-        if (a == 0) {
-            return 0;
-        }
-        uint256 c = a * b;
-        assert(c / a == b);
-        return c;
-    }
-
-    /**
-    * @dev Integer division of two numbers, truncating the quotient.
-    */
-    function div(uint256 a, uint256 b) internal pure returns (uint256) {
-        // assert(b > 0); // Solidity automatically throws when dividing by 0
-        uint256 c = a / b;
-        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
-        return c;
-    }
-
-    /**
-    * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
-    */
-    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
-        assert(b <= a);
-        return a - b;
-    }
-
-    /**
-    * @dev Adds two numbers, throws on overflow.
-    */
-    function add(uint256 a, uint256 b) internal pure returns (uint256) {
-        uint256 c = a + b;
-        assert(c >= a);
-        return c;
-    }
-}
-
-
-contract MintableToken {
-    using SafeMath for uint256;
-
-    string public name = "Mintable Token";
-
-    string public symbol = "MNT";
-
-    uint8 public decimals = 2;
-
-    mapping (address => uint256) balances;
-
-    uint256 totalSupply_;
-
-    event Mint(address indexed to, uint256 amount);
-
-    event Transfer(address indexed from, address indexed to, uint256 value);
-
-    function mint(address _to, uint256 _amount) public returns (bool) {
-        totalSupply_ = totalSupply_.add(_amount);
-        balances[_to] = balances[_to].add(_amount);
-        emit Mint(_to, _amount);
-        emit Transfer(address(0), _to, _amount);
-        return true;
-    }
-
-    function totalSupply() public view returns (uint256) {
-        return totalSupply_;
-    }
-
-    function balanceOf(address _owner) public view returns (uint256 balance) {
-        return balances[_owner];
-    }
-
-    function transfer(address _to, uint256 _value) public returns (bool) {
-        require(_to != address(0));
-        require(_value <= balances[msg.sender]);
-        // SafeMath.sub will throw if there is not enough balance.
-        balances[msg.sender] = balances[msg.sender].sub(_value);
-        balances[_to] = balances[_to].add(_value);
-        emit Transfer(msg.sender, _to, _value);
-        return true;
-    }
-}
-
+// commented to avoid compilation errors because safeMath is already imported in VeraCoin
+// import "../openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "./VeraCoin.sol";
 
 contract KYCCrowdsale {
     using SafeMath for uint256;
@@ -113,7 +24,7 @@ contract KYCCrowdsale {
 
     address public wallet;
 
-    MintableToken public token;
+    VeraCoin public token;
 
     event FundsHold(address indexed investor, uint256 weiAmount, uint256 tokens);
 
@@ -123,9 +34,9 @@ contract KYCCrowdsale {
 
     event TokensPurchased(address indexed investor, uint256 weiAmount, uint256 tokens);
 
-    function KYCCrowdsale(address _wallet, MintableToken _token, uint256 _phaseBonus, uint256 _USDcPerETH) public {
+    constructor(address _wallet, VeraCoin _token, uint256 _phaseBonus, uint256 _USDcPerETH) public {
         require(_wallet != address(0));
-        require(_token != MintableToken(0));
+        require(_token != VeraCoin(0));
         token = _token;
         wallet = _wallet;
 
@@ -177,7 +88,7 @@ contract KYCCrowdsale {
         require(_investor != address(0));
         require(_tokens > 0);
         wallet.transfer(_weiAmount);
-        token.mint(_investor, _tokens);
+        token.transfer(_investor, _tokens);
         emit TokensPurchased(_investor, _weiAmount, _tokens);
     }
 }

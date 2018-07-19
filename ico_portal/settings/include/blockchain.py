@@ -6,7 +6,7 @@ THRESHOLDS = {
 }
 
 TOKENS_PER_USD = 1
-TOKEN_DECIMALS = 2
+TOKEN_DECIMALS = 18
 
 WEB3_RPC_URL = 'http://127.0.0.1:8545'
 
@@ -18,6 +18,11 @@ CROWDSALE_CONTRACT = {
 }
 TOKEN_CONTRACT = {
     'address': '0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',
+}
+PRICE_ORACLE = {
+    'address': '0x5202f4c358A5fDbbd35eE960534C3F9F0F1fbE43',
+    'sensivity': 3  # percents
+
 }
 
 CURRENCIES = {
@@ -68,40 +73,44 @@ CELERY_ACCEPT_CONTENT = ['pickle']
 CELERY_BEAT_SCHEDULE = {
     'check-token-events': {
         'task': 'blockchain.ico.tasks.check_events',
-        'schedule': 30.0,
+        'schedule': 30,
     },
     'sync-ico-info': {
         'task': 'blockchain.ico.tasks.sync_ico_info',
-        'schedule': 300.0,
+        'schedule': 300,
     },
     'sync_exchange_rates': {
         'task': 'blockchain.ico.tasks.sync_exchange_rates',
-        'schedule': 300.0
+        'schedule': 300
     },
     'send_transactions': {
         'task': 'blockchain.ico.tasks.send_transactions',
-        'schedule': 45.0
+        'schedule': 45
     },
     'track_transactions': {
         'task': 'blockchain.ico.tasks.track_transactions',
         'schedule': 60
+    },
+    'update_price_oracle': {
+        'task': 'blockchain.ico.tasks.update_price_oracle',
+        'schedule': 300
     }
-
 }
+
 CELERY_TASK_ROUTES = {
     'blockchain.ico.tasks.check_events': {
         'queue': 'events_beat',
     },
-    'blockchain.ico.tasks.sync_ico_info': {
-        'queue': 'events_beat',
-    },
-    'blockchain.ico.tasks.sync_exchange_rates': {
-        'queue': 'events_beat',
-    },
-    'blockchain.ico.tasks.send_transactions': {
-        'queue': 'events_beat',
-    },
-    'blockchain.ico.tasks.track_transactions': {
-        'queue': 'events_beat',
-    },
+    # 'blockchain.ico.tasks.sync_ico_info': {
+    #     'queue': 'events_beat',
+    # },
+    # 'blockchain.ico.tasks.sync_exchange_rates': {
+    #     'queue': 'events_beat',
+    # },
+    # 'blockchain.ico.tasks.send_transactions': {
+    #     'queue': 'events_beat',
+    # },
+    # 'blockchain.ico.tasks.track_transactions': {
+    #     'queue': 'events_beat',
+    # },
 }

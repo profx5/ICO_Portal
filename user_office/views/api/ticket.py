@@ -2,32 +2,54 @@ from oslash import Right
 from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework.fields import FileField
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
-from helpdesk.models import Ticket, FollowUp
+from helpdesk.models import Ticket, FollowUp, Attachment
+from helpdesk.lib import process_attachments
 from .auth import KYCAndLoginPermission
 from user_office.services import CreateSupportTicket, CommentTicket
 
 
 class TicketListSerializer(ModelSerializer):
+    last_reply_by = SerializerMethodField()
+    last_reply_at = SerializerMethodField()
+
+    def get_last_reply_by(self, instance):
+        if instance.followup_set.exists():
+            return instance.followup_set.last().user.get_full_name()
+
+    def get_last_reply_at(self, instance):
+        if instance.followup_set.exists():
+            return instance.followup_set.last().date
+
     class Meta:
         model = Ticket
-        fields = ('id', 'title', 'created', 'status')
+        fields = ('id', 'title', 'created', 'status', 'last_reply_by', 'last_reply_at')
 
 
 class TicketCraeteSerializer(ModelSerializer):
+    attachment = FileField(required=False)
+
     class Meta:
         model = Ticket
-        fields = ('title', 'description')
+        fields = ('title', 'description', 'attachment')
+
+
+class AttachmentSerializer(ModelSerializer):
+    class Meta:
+        model = Attachment
+        fields = ('file', 'filename', 'mime_type')
 
 
 class FollowUpSerializer(ModelSerializer):
+    attachments = AttachmentSerializer(many=True, read_only=True, source='attachment_set')
     sender = SerializerMethodField()
 
     class Meta:
         model = FollowUp
-        fields = ('id', 'date', 'comment', 'sender')
+        fields = ('id', 'date', 'comment', 'sender', 'attachments')
 
     def get_sender(self, instance):
         if instance.user:
@@ -43,9 +65,11 @@ class TicketRetrieveSerializer(ModelSerializer):
 
 
 class CommentSerializer(ModelSerializer):
+    attachment = FileField(required=False)
+
     class Meta:
         model = FollowUp
-        fields = ('comment',)
+        fields = ('comment', 'attachment')
 
 
 class TicketViewSet(GenericViewSet):
@@ -73,6 +97,7 @@ class TicketViewSet(GenericViewSet):
     def retrieve(self, request, pk=None):
         queryset = self.get_queryset()
         ticket = get_object_or_404(queryset, pk=pk)
+
         serializer = self.get_serializer(ticket)
 
         return Response(serializer.data)
@@ -83,7 +108,8 @@ class TicketViewSet(GenericViewSet):
                                        description=request.data['description'])
 
         if isinstance(result, Right):
-            serializer = TicketRetrieveSerializer(result.value['ticket'])
+            process_attachments(result.value.follow_up, request.FILES.getlist('attachment'))
+            serializer = TicketRetrieveSerializer(result.value.ticket)
 
             return Response(serializer.data, status=201)
         else:
@@ -99,6 +125,7 @@ class TicketViewSet(GenericViewSet):
                                  comment=request.data['comment'])
 
         if isinstance(result, Right):
+            process_attachments(result.value.follow_up, request.FILES.getlist('attachment'))
             serializer = TicketRetrieveSerializer(ticket)
 
             return Response(serializer.data, status=201)

@@ -20,6 +20,7 @@ class Payment(models.Model):
 
     tokens_move = models.ForeignKey('TokensMove', on_delete=models.DO_NOTHING,
                                     related_name='payment')
+    usdc_value = models.DecimalField(max_digits=65, decimal_places=0, default=0)
 
     objects = models.Manager()
 

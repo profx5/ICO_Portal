@@ -8,7 +8,6 @@ import * as UIActions from './../actions/UIActions';
 class Nav extends React.Component {
 
     get_elem = (t) => {
-        console.log(t);
         const {setCurrentRoute} = this.props;
         setCurrentRoute(t);
     };
@@ -26,7 +25,7 @@ class Nav extends React.Component {
                       </g>
                     </svg>
                 </IconLink>
-                <IconLink active={2 === currentRoute} onClick={this.get_elem.bind(this, 2)} to="/transactions">
+                <IconLink active={2 === currentRoute} onClick={this.get_elem.bind(this, 2)} to="/user_office/transactions">
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="33">
                       <g fill="#3172FD">
                         <path d="M24 0c-5.817 0-12 1.874-12 5.348v4.278c0 .59.489 1.07 1.09 1.07.603 0 1.092-.48 1.092-1.07V8.51c2.315 1.431 6.137 2.184 9.818 2.184 3.68 0 7.503-.753 9.818-2.184v1.115c0 1.046-2.683 2.714-7.728 3.127a1.076 1.076 0 0 0-.995 1.155c.046.558.524.98 1.085.98.032 0 .06-.002.093-.005 2.841-.233 5.671-.954 7.545-2.124v1.145c0 .913-1.977 2.226-5.644 2.862a1.073 1.073 0 0 0-.884 1.238 1.087 1.087 0 0 0 1.263.867c2.22-.383 3.995-1.01 5.265-1.806v1.117c0 .913-1.977 2.227-5.644 2.862a1.073 1.073 0 0 0-.884 1.238 1.087 1.087 0 0 0 1.263.867c2.22-.383 3.995-1.012 5.265-1.806v1.117c0 .913-1.977 2.227-5.644 2.862a1.073 1.073 0 0 0-.884 1.238 1.087 1.087 0 0 0 1.263.867c2.22-.383 3.995-1.012 5.265-1.806v1.117c0 1.046-2.683 2.714-7.728 3.127a1.076 1.076 0 0 0-.995 1.155c.046.559.524.98 1.085.98.032 0 .06-.002.093-.004C31.115 31.598 36 29.82 36 26.738V5.348C36 1.874 29.817 0 24 0zm0 8.556c-5.993 0-9.818-1.901-9.818-3.208 0-1.307 3.825-3.209 9.818-3.209 5.993 0 9.818 1.902 9.818 3.209 0 1.307-3.825 3.208-9.818 3.208z"/>
@@ -42,7 +41,7 @@ class Nav extends React.Component {
                       </g>
                     </svg>
                 </IconLink>
-                <IconLink active={4 === currentRoute} onClick={this.get_elem.bind(this, 4)} to="/faq">
+                <IconLink active={4 === currentRoute} onClick={this.get_elem.bind(this, 4)} to="/user_office/support">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
                       <g fill="#3172FD">
                         <circle cx="15.5" cy="23.5" r="1.5"/>

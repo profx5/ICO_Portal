@@ -36,4 +36,6 @@ script:
   - ./manage.py test
   - flake8
   # - "./manage.py behave -D SELENIUM_CHROME_HEADLESS"
-  - cd solidity-contracts && ./scripts/test.sh
+  - cd solidity-contracts
+  - ./scripts/test.sh
+  - npm run lint:sol

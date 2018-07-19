@@ -7,73 +7,45 @@ import iconCheckGreen from './../../img/check-green.svg';
 import iconQuestion from './../../img/icons/icon_faq.svg';
 
 
-let deposits = [
-    {
-        transfer: {
-            txn_hash: '0x23fjaasfi3rjf8knfj7wg74tsegnzjh47u304',
-            state: 'ACTUAL',
-        },
-        amount: '2',
-        usd: '700',
-        vera: '1231.12',
-        created_at: new Date(),
-        success: true
-    },
-    {
-        transfer: {
-            txn_hash: '0x23fjaasfi3rjf8knfj7wg74tsegnzjh47u304',
-            state: 'ACTUAL',
-        },
-        amount: '2',
-        usd: '700',
-        vera: '2312.72',
-        created_at: new Date(),
-        success: false
-    },
-    {
-        transfer: {
-            txn_hash: '0x23fjaasfi3rjf8knfj7wg74tsegnzjh47u304',
-            state: 'ACTUAL',
-        },
-        amount: '2',
-        usd: '700',
-        vera: '-1825.23',
-        created_at: new Date(),
-        success: true
-    },
-];
+const chainResolver = {
+    ETH: 'https://etherscan.io/tx/',
+    BTC: 'https://www.blockchain.com/en/btc/tx/'
+};
+
 
 class DepositTable extends Component {
 
     _renderAccordionItems = (deposits) => {
-        return deposits.map((item, index) => {
-            if (index === 3) return;
+        return deposits.map(item => {
             return (
-                <li key={index}>
-                    {this._renderTitle(item, index)}
-                    {this._renderContent({})}
+                <li key={item.get('id')}>
+                    {this._renderTitle(item)}
+                    {this._renderContent(item)}
                 </li>
             )
         })
     };
 
-    _renderTitle = (item, index) => {
+    _renderTitle = (item) => {
+        let amount = item.get('payment').size > 0 ? parseFloat(item.getIn(['payment', '0', 'amount'])) +
+            ' ' + item.getIn(['payment', '0', 'currency']) : '-';
         return (
             <div className='uk-accordion-title'>
-                <FlexContainer key={index} className={item.transfer.state === 'ACTUAL' ? 'prepared' : ''}>
-                    <FlexItem width={6}>{moment(item.created_at).format('YYYY-MM-DD HH:mm:ss')}</FlexItem>
-                    <FlexItem position={'relative'} width={3} failed={!item.success}>
-                        {item.transfer.txn_hash}
-                        {item.success &&
-                        <IconImgAbsolute right={7} src={iconCheckGreen}/>}
-                        {!item.success &&
-                        // ToDo change icon
-                        <IconImgAbsolute right={7} src={iconQuestion}/>}
+                <FlexContainer className={item.getIn(['transfer', 'state']) === 'ACTUAL' ? 'prepared' : ''}>
+                    <FlexItem
+                        width={6}>{moment(item.get('created_at')).format('YYYY-MM-DD HH:mm:ss')} {item.get('id')}</FlexItem>
+                    <FlexItem position={'relative'} width={3} failed={item.getIn(['transfer', 'state']) === 'FAILED'}>
+                        <span className='txn'>{item.getIn(['transfer', 'txn_hash']).substr(0, 40)}...</span>
+                        {item.getIn(['transfer', 'state']) !== 'FAILED' &&
+                        <IconImgAbsolute right={1} src={iconCheckGreen}/>}
+                        {item.getIn(['transfer', 'state']) === 'FAILED' &&
+                        <IconImgAbsolute right={1} src={iconQuestion}/>}
                     </FlexItem>
-                    <FlexItem width={6} color>{item.amount} BTC</FlexItem>
-                    <FlexItem width={6} color>{item.usd}</FlexItem>
-                    <FlexItemColor width={6} failed={!item.success} up={item.vera > 0}>
-                        {item.vera > 0 && '+'}{item.vera}
+                    <FlexItem width={6} color>{amount}</FlexItem>
+                    <FlexItem width={6} color>{item.get('usd_value')}</FlexItem>
+                    <FlexItemColor width={6} failed={item.getIn(['transfer', 'state']) === 'FAILED'}
+                                   up={item.get('direction') === 'IN'}>
+                        {item.get('direction') === 'IN' && '+' || '-'}{item.get('amount')}
                         <IconImgAbsolute right={20} src={iconQuestion}/>
                     </FlexItemColor>
                 </FlexContainer>
@@ -82,7 +54,12 @@ class DepositTable extends Component {
 
     };
 
-    _renderContent = (body) => {
+    _renderContent = (item) => {
+        let content = false;
+        if (item.get('payment').size > 0) {
+            content = chainResolver[item.getIn(['payment', '0', 'currency'])] + item.getIn(['payment', '0', 'txn_id']);
+        }
+
         return (
             <div className='uk-accordion-content'>
                 <ContentWrapper>
@@ -98,22 +75,17 @@ class DepositTable extends Component {
                             </colgroup>
                             <tbody>
                             <tr>
-                                <td>Payment:</td>
-                                <td>https://www.blockchain.com/en/btc/tx/50fe4d94baa49dcf39c77fed722740b52edc339e1bdbb7269cc189e2d6c493d4</td>
-                                <td>
-                                    <IconImg src={iconCheckGreen} alt=""/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Mint:</td>
-                                <td>https://etherscan.io/tx/0x570c59648d993ed8df658fcddb79dcb8f51e80f21f0517f582f25502aaf72566</td>
-                                <td><IconImg src={iconCheckGreen} alt=""/></td>
-                            </tr>
-                            <tr>
                                 <td>Transfer:</td>
-                                <td>https://etherscan.io/tx/0x570c59648d993ed8df658fcddb79dcb8f51e80f21f0517f582f25502aaf72566</td>
+                                <td>https://etherscan.io/tx/{item.getIn(['transfer', 'txn_hash'])}</td>
                                 <td><IconImg src={iconCheckGreen} alt=""/></td>
                             </tr>
+                            {content &&
+                            <tr>
+                                <td>Payment:</td>
+                                <td>{content}</td>
+                                <td><IconImg src={iconCheckGreen} alt=""/></td>
+                            </tr>
+                            }
                             </tbody>
                         </Table>
                         <Divider/>
@@ -157,6 +129,8 @@ class DepositTable extends Component {
     };
 
     render() {
+        const {deposits,} = this.props;
+
         return (
             <Wrapper>
                 <FlexContainer>
@@ -192,7 +166,7 @@ const Right = styled.div`
     font-stretch: normal;
     line-height: 1.88;
     letter-spacing: 0.4px;
-    & span{ 
+    & span{
       color: #11cd56;
     }
 `;
@@ -311,6 +285,13 @@ const FlexItem = styled.div`
         text-align: center;
         color: #0a0a0a;
         height: 66px;
+    }
+    .txn {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
     }
 `;
 

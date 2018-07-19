@@ -6,9 +6,10 @@ brew install pyenv
 pyenv install 3.6.4
 ```
 
-2. npm
+2. npm and python 2.7
 ```
 brew install npm
+pyenv install 3.6.4
 ```
 
 3. mysql
@@ -21,6 +22,11 @@ brew services start mysql
 ```
 brew intsall rabbitmq
 brew services start rabbitmq
+```
+
+4. (for testing) leveldb
+```
+brew install leveldb
 ```
 
 ## Installation

@@ -4,10 +4,11 @@ import styled from 'styled-components';
 
 import CurrencyCalculator from './CurrencyCalculator';
 
-import CurrencyCard from './../components/CurrencyCard';
+import CurrencyCard from './../components/CurrencyCardBig';
 import FetchButton from './../components/FetchButton';
 
 import * as CurrencyActions from '../actions/CurrencyActions.js';
+import * as UIActions from './../actions/UIActions';
 
 
 
@@ -24,7 +25,7 @@ class Currency extends React.Component {
             let {code, rate} = item;
             console.log(code)
 
-            if (index >= 7 && this.props.spreadedCurrencyCards === false) return;
+            if (index >= 3 && this.props.spreadedCurrencyCards === false) return;
             return <CurrencyCard 
                 className={this.props.investCurrency === code ? 'active' : ''}
                 name={code} 
@@ -51,17 +52,31 @@ class Currency extends React.Component {
     render() {
         const {
             currencies,
-            spreadedCurrencyCards
+            showPopup
         } = this.props;
 
         return (
             <Wrapper>
-                <Head>Currency</Head>
                 <Content>
+                    <CurrencyCard 
+                        className={this.props.investCurrency === 'credit' ? 'active' : ''}
+                        name='Credit card' 
+                        icon='icon-card' 
+                        altWay={true}
+                        clickHandler={this.cardClickHandler.bind(this, 'credit')}/>
+
                     {this.generateCurrencyCards(this.props.currencies)}
+
+                    <CurrencyCard 
+                        className={this.props.investCurrency === 'other' ? 'active' : ''}
+                        name='Other Crypto' 
+                        icon='icon-other' 
+                        altWay={true}
+                        clickHandler={() => {
+                            showPopup();
+                            this.cardClickHandler('other')
+                        }}/>
                 </Content>
-                {(currencies.length >= 7) && <FetchButton onClickHandler={this.buttonClickHandler} spread={spreadedCurrencyCards} amount={currencies.length - 7}/>}
-                <CurrencyCalculator/>
             </Wrapper>
         )
     }
@@ -84,6 +99,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     spreadVisibleCards(payload) {
         dispatch(CurrencyActions.spreadVisibleCards(payload))
+    },
+    showPopup() {
+        dispatch(UIActions.showCurrenciesPopup())
     }
 })
 
@@ -95,9 +113,7 @@ const Wrapper = styled.div`
     flex: 1;
     height: auto;
     margin-top: 22px;
-    padding: 42px 30px 34px;
     background: white;
-    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
 `;
 
@@ -111,4 +127,8 @@ const Head = styled.h3`
 
 const Content = styled.div`
     margin-bottom: 24px;
+    white-space: nowrap;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
 `;

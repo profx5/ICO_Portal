@@ -27,11 +27,6 @@ class ServiceObject(LoggerMixin):
         return Left(message)
 
     def fail_with(self, left_instance):
-        self.logger.error('Failed with %s: %s' % (
-            left_instance.__class__.__name__,
-            left_instance.value
-        ))
-
         return left_instance
 
     def _reset_context(self):
@@ -72,7 +67,7 @@ def service_call(func):
             return func(self, *args, **kwargs)
         except Exception as e:
             self.logger.error(f'Service {service_name} thrown exception, context: {self._context}',
-                              exc_info=e, stack_info=True)
+                              exc_info=e)
 
             raise
 

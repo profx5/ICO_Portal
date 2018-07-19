@@ -3,96 +3,97 @@ import styled from 'styled-components';
 
 import {connect} from 'react-redux'
 import Button from "../components/Button";
+import Comment from '../components/Comment';
 import iconCheckGreen from './../../img/check-green.svg';
 import iconTransitAmber from './../../img/icon_transit-amber.svg';
 import iconUser from './../../img/user.svg';
+import arrowRoadmap from './../../img/arrow_roadmap.svg';
 import moment from "moment/moment";
-import $ from "jquery";
 import * as UIActions from './../actions/UIActions';
-import Utils from './../utils/index';
+import * as TicketActions from './../actions/TicketActions';
+import {Link} from 'react-router-dom';
 
-let questions = [
-    {
-        u_id: 'qe12',
-        subject: 'Не приходят токены',
-        text: Utils.lorem(),
-        created_date: new Date(),
-        answers: [{
-            date: new Date(),
-            who: 'Светочка',
-            text: Utils.lorem(),
-        },]
-    },
-    {
-        u_id: 'qe13',
-        subject: 'Купил токены за день до окончания акции, пришли на следующий день и бонусы',
-        text: Utils.lorem(),
-        created_date: new Date(),
-        answers: [{
-            date: new Date(),
-            text: Utils.lorem(),
-            who: 'Мама Светочки'
-        },]
-    },
-    {
-        u_id: 'qe14',
-        subject: 'Че за нах? Ау, я тупой и не знаю куда нажать надо, помогите мне, пожалуйста',
-        who: 'Светочка',
-        created_date: new Date(),
-        answered_date: null,
-        answers: null
-    }
-];
-
+const STATUSES = {
+    1: 'Open',
+    2: 'Reopen',
+    3: 'Resolved',
+    4: 'Closed',
+    5: 'Duplicate',
+};
 
 class FAQFeedback extends React.Component {
 
-    uploadOnClickHandler = (event) => {
-        $(event.currentTarget).find('input[type="file"]').click();
+    setOpenedTicketNull = () => {
+        const {setTicketFullNull} = this.props;
+        setTicketFullNull();
     };
 
-    _renderNewQuestions = () => {
+    _backToAll = () => {
+        this.setOpenedTicketNull();
+        this.props.history.push('/user_office/support/');
+    };
+
+    handleNewTicketFormSubmit = (e) => {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        this.props.sendNewTicket(data);
+        e.target.reset();
+    };
+
+    handleNewCommentSubmit = (e) => {
+        e.preventDefault();
+
+        const data = new FormData(e.target);
+        this.props.sendNewComment(data);
+        e.target.reset();
+    };
+
+
+    _renderNewTicket = () => {
         return (
-            <div>
-                <Head3>Здесь Вы можете задать любой вопрос о нашем сервисе</Head3>
+            <form onSubmit={this.handleNewTicketFormSubmit}>
+                <Head3>Technical support</Head3>
                 <WrapperInput>
-                    <StyledLabel htmlFor={'subject'}>Тема</StyledLabel>
+                    <StyledLabel htmlFor={'title'}>Subject</StyledLabel>
                     <StyledInput
                         type="text"
-                        placeholder={'Пожалуйста, опишите Вашу проблему...'}
-                        name={'subject'}/>
+                        id={'title'}
+                        placeholder={'Please describe topic of your issue..'}
+                        name={'title'}/>
                 </WrapperInput>
                 <br/>
                 <WrapperInput>
-                    <StyledLabel htmlFor={'desc'}>Описание</StyledLabel>
+                    <StyledLabel htmlFor={'description'}>Description</StyledLabel>
                     <StyledTextarea
-                        placeholder={'Пожалуйста, расскажите о Вашей проблеме чуть подробнее...'}
-                        name={'desc'}/>
+                        id={'description'}
+                        placeholder={'Please describe your issue in details..'}
+                        name={'description'}/>
                 </WrapperInput>
                 <br/>
-                {/*<FileUpload onClickHandler={this.uploadOnClickHandler} name={'file'}/>*/}
                 <ButtonWrapper>
-                    <Button text='Отправить'/>
+                    <Button submit={true} text='Send'/>
                 </ButtonWrapper>
-                <br/>
-            </div>
+                <Clearfix/>
+            </form>
         )
     };
 
     _renderAllQuestions = () => {
+        const {tickets, email} = this.props;
         return (
-            questions.map((question) => {
+            tickets.map((ticket) => {
                 return (
-                    <FlexContainer>
+                    <FlexContainer key={ticket.id}>
                         <FlexItem width={5}>
-                            {question.answers !== null &&
+                            {[3, 4].includes(ticket.status) &&
                             <IconImg src={iconCheckGreen}/>}
-                            {question.answers === null &&
+                            {[1, 2].includes(ticket.status) &&
                             <IconImg src={iconTransitAmber}/>}
                         </FlexItem>
                         <FlexItem width={75}>
-                            <div>{question.subject}</div>
-                            <span>{question.answers !== null && 'Ответ получен.' || 'В ожидании.'}</span>
+                            <div className='title'><Link
+                                to={'/user_office/support/ticket/' + ticket.id}>{ticket.title}</Link></div>
+                            <span>{[3, 4].includes(ticket.status) && 'Ticket closed' || 'Pending'}</span>
                         </FlexItem>
                         <FlexItem width={20} padding={'none'}>
                             <FlexContainer>
@@ -100,10 +101,10 @@ class FAQFeedback extends React.Component {
                                     <IconImg src={iconUser}/>
                                 </FlexItem>
                                 <FlexItem width={80} border={'none'}>
-                                    <div>{question.answers && question.answers[0].who || 'Вы'}</div>
-                                    <span>{question.answers &&
-                                    'Ответ получен ' + moment(question.answers[0].date).format('DD MMMM YYYY') ||
-                                    'Написали ' + moment(question.created_date).format('DD MMMM YYYY')}</span>
+                                    <div>{ticket.last_reply_by === email && 'You' || ticket.last_reply_by}</div>
+                                    <span>{ticket.last_reply_by !== email &&
+                                    'Replied ' + moment(ticket.last_reply_at).format('DD MMMM YYYY') ||
+                                    'Message sent ' + moment(ticket.created).format('DD MMMM YYYY')}</span>
                                 </FlexItem>
                             </FlexContainer>
                         </FlexItem>
@@ -113,49 +114,120 @@ class FAQFeedback extends React.Component {
         )
     };
 
-    _renderQuestionById = (u_id) => {
-        let question = questions.filter((item) => item.u_id === u_id);
+
+    _renderOpenedTicket = () => {
+        const {ticketFull} = this.props;
+        let content = [];
+        content.push(ticketFull.public_follow_ups.map((item, index) => {
+            if (item.comment) {
+                return (
+                    <Comment comment={item} key={index}/>
+                )
+            }
+        }));
         return (
             <div>
                 <HeadWrapper>
-                    Мои вопросы -> <span>{question[0].subject}</span>
+                    <div className='breadcrumbs'>
+                        <span onClick={this._backToAll} className='link'>My questions</span>
+                        <IconImg src={arrowRoadmap}/>
+                        <span>{ticketFull.title}</span>
+                        <span className='status'>
+                        <div>
+                            {[3, 4].includes(ticketFull.status) &&
+                            <IconImg src={iconCheckGreen}/>}
+                            {[1, 2].includes(ticketFull.status) &&
+                            <IconImg src={iconTransitAmber}/>}
+                            <div>{[3, 4].includes(ticketFull.status)
+                            && 'Ticket closed'
+                            || 'Ticket is open'}</div>
+                        </div>
+                    </span>
+                    </div>
                 </HeadWrapper>
-                <Divider/>
-                Hello world!
+                <ContentWrapper>
+                    {content}
+                </ContentWrapper>
+                {[3, 4, 5].includes(ticketFull.status) &&
+                <ClosedDiv>
+                    Ticket was successfully closed. If you have another issue to submit - please create another ticket!
+                    Thank you!
+                </ClosedDiv>
+                }
+                {[1, 2].includes(ticketFull.status) &&
+                <form encType={'multipart/form-data'} onSubmit={this.handleNewCommentSubmit}>
+                    <input type="hidden" name={'ticket'} value={ticketFull.id}/>
+
+                    <WrapperInput>
+                        <StyledTextarea
+                            placeholder={'Your message here'}
+                            name={'comment'}
+                            id={'comment'}
+                        />
+                    </WrapperInput>
+                    {/*<input type="file" name={'attachment'} placeholder={'file here'}/>*/}
+                    <br/>
+                    <ButtonWrapper>
+                        <Button submit={true} text='Send'/>
+                    </ButtonWrapper>
+                </form>
+                }
+                <Clearfix/>
             </div>
         )
     };
 
-    _renderAnswer = (answer) => {
 
+    handleChangeTab = (e) => {
+        const {changeTab, setTicketFullNull} = this.props;
+        setTicketFullNull();
+        changeTab(e.target.id);
+        this.props.history.push('/user_office/support/');
     };
 
-    _renderQuestions = (current) => {
-        if (current === null) {
+    _renderTickets = () => {
+        const {ticketFull} = this.props;
+        if (ticketFull === null) {
             return this._renderAllQuestions()
         } else {
-            return this._renderQuestionById(current)
+            return this._renderOpenedTicket()
         }
     };
 
     render() {
-        const {tab, changeTab, openedTicket} = this.props;
+        const {tab, changeTab, tickets, ticketFull, setOpenedTicket} = this.props;
+        const openedTicket = this.props.match.params.ticket;
+        if (openedTicket) {
+            if (ticketFull !== null) {
+                if (ticketFull.id != openedTicket) {
+                    setOpenedTicket(openedTicket);
+                }
+            } else {
+                setOpenedTicket(openedTicket);
+            }
+        }
+
+        if (ticketFull) {
+            changeTab('my');
+        }
+
         return (
             <Wrapper>
-                <Head>FAQ & Feedback</Head>
+                <Head>Support</Head>
                 <Tabs>
-                    <Tab id={'new'} onClick={changeTab} active={tab === 'new'}>
-                        Новый запрос
+                    <Tab id={'new'} onClick={this.handleChangeTab} active={tab === 'new'}>
+                        New ticket
                     </Tab>
-                    <Tab id={'my'} onClick={changeTab} active={tab === 'my'}>
-                        Мои запросы <span>{questions.length}</span>
+
+                    <Tab id={'my'} onClick={this.handleChangeTab} active={tab === 'my'}>
+                        My questions <span>{tickets.length}</span>
                     </Tab>
                 </Tabs>
                 <Content>
                     {tab === 'new' &&
-                    this._renderNewQuestions()}
+                    this._renderNewTicket()}
                     {tab === 'my' &&
-                    this._renderQuestions(openedTicket)}
+                    this._renderTickets()}
                 </Content>
             </Wrapper>
         )
@@ -163,27 +235,81 @@ class FAQFeedback extends React.Component {
 }
 
 
-const mapStateToProps = ({UI}) => ({
+const mapStateToProps = ({UI, tickets, user}) => ({
     tab: UI.get('faqSelectedTab'),
-    openedTicket: UI.get('openedTicket'),
+    tickets: tickets.get('results'),
+    ticketFull: tickets.get('ticketFull'),
+    email: user.get('email'),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    changeTab(payload) {
-        dispatch(UIActions.changeSelectedTab(payload.target.id))
-    }
+    changeTab(tab) {
+        dispatch(UIActions.changeSelectedTab(tab))
+    },
+    setOpenedTicket(ticketId) {
+        dispatch(TicketActions.getTicketFull(ticketId));
+    },
+    setTicketFullNull() {
+        dispatch(TicketActions.setTicketFullNull());
+    },
+    sendNewTicket(ticket) {
+        dispatch(TicketActions.sendNewTicket(ticket));
+    },
+    sendNewComment(comment) {
+        dispatch(TicketActions.sendNewComment(comment));
+    },
 });
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(FAQFeedback)
+
+const ContentWrapper = styled.div`
+    margin-bottom: 175px;
+`;
+
+const ClosedDiv = styled.div`
+    background-color: #f6f6f6;
+    border: solid 1px #d6dfe6;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.56;
+    color: #233539;
+    padding: 10px;
+`;
 
 const HeadWrapper = styled.div`
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0.4px;
     color: #000000;
-    & span {
+    & span.link {
         color: #3172fd;
+        cursor: pointer;
+    }
+    .status {
+        margin-left: auto;
+        & div {
+            display: flex;
+        }
+    }
+    .status > div > div {
+        line-height: 30px;
+        margin-left: 5px;
+        opacity: 0.4;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.4px;
+        color: #031949;
+    }
+    .breadcrumbs {
+        display: flex;
+        & span {
+            line-height: 30px;
+        }
+        & img {
+            width: 30px;
+            height: 30px;
+        }
     }
 `;
 
@@ -194,13 +320,6 @@ const FlexContainer = styled.div`
 const IconImg = styled.img`
     width: 36px;
     height: 36px;
-`;
-
-const Divider = styled.hr`
-    width: 100%;
-    color: #979797;
-    opacity: 0.2;
-     margin: 25px 0;
 `;
 
 const FlexItem = styled.div`
@@ -224,7 +343,10 @@ const FlexItem = styled.div`
         color: #031949;
     }
     & br {
-        line-height: 7px
+        line-height: 7px;
+    }
+    .title {
+        cursor: pointer;
     }
 `;
 
@@ -232,6 +354,19 @@ const ButtonWrapper = styled.div`
     width: 165px;
     height: 45px;
     float: right;
+    margin: 15px;
+`;
+
+const Clearfix = styled.div`
+    &:before {
+        content:"";
+        display:table-cell
+    }
+    &:after {
+        content:"";
+        display:table;
+        clear:both
+    }
 `;
 
 const WrapperInput = styled.div`

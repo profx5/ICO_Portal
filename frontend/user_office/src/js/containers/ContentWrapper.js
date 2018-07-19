@@ -12,6 +12,7 @@ import * as KYCActions from '../actions/KYCActions';
 import * as PhaseActions from './../actions/PhaseActions';
 import * as CurrencyActions from './../actions/CurrencyActions';
 import * as MetamaskActions from './../actions/MetamaskActions';
+import * as TicketsActions from "../actions/TicketActions";
 
 
 
@@ -23,9 +24,9 @@ class ContentWrapper extends React.Component {
     }
 
     componentWillMount() {
-        const {getMe, getICOInfo, getKyc, getPhasesInfo, getDeposits, getCurrencies} = this.props;
+        const {getMe, getICOInfo, getKyc, getPhasesInfo, getDeposits, getCurrencies, getTickets} = this.props;
 
-        compose(getMe, getKyc, getICOInfo, getPhasesInfo, getDeposits, getCurrencies)();
+        compose(getMe, getKyc, getICOInfo, getPhasesInfo, getDeposits, getCurrencies, getTickets)();
     }
 
     render() {
@@ -57,6 +58,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getDeposits() {
         dispatch(DepositsActions.getDepositsRequest())
+    },
+    getTickets() {
+        dispatch(TicketsActions.getTicketsRequest())
     },
     getCurrencies() {
         dispatch(CurrencyActions.getCurrenciesRequest())

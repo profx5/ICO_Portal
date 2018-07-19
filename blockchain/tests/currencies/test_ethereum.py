@@ -9,6 +9,7 @@ from blockchain.currencies.ethereum.services.process_purchase import ProcessPurc
 
 class TestEthereum(BlockChainTestCase):
     setup_eth_tester = True
+    setup_contracts = ['token', 'crowdsale']
 
     def setUp(self):
         super().setUp()

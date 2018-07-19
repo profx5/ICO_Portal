@@ -71,16 +71,16 @@ class CreateSupportTicket(_Base):
 class CommentTicket(ServiceObject):
     @service_call
     def __call__(self, investor, ticket, comment):
-        followup = FollowUp(ticket=ticket,
-                            title='Comment',
-                            comment=comment,
-                            public=True,
-                            user=investor)
+        follow_up = FollowUp(ticket=ticket,
+                             title='Comment',
+                             comment=comment,
+                             public=True,
+                             user=investor)
 
         try:
-            followup.save()
+            follow_up.save()
 
-            return self.success(followup=followup)
+            return self.success(follow_up=follow_up)
         except DatabaseError as e:
             return self.fail(e)
 

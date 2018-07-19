@@ -11,6 +11,8 @@ import * as ICOInfoActions from './../actions/ICOInfoActions';
 import clockImg from './../../img/icon_progress.svg';
 import Button from './../components/Button';
 
+import { Link } from 'react-router-dom';
+
 
 
 class ICOProgress extends React.Component {
@@ -60,7 +62,7 @@ class ICOProgress extends React.Component {
                 </Header>
                 <Roadmap/>
                 <BottomText>Скидка скоро закончится</BottomText>
-                <ButtonWrapper>
+                <ButtonWrapper exact to="/user_office/payment">
                     <Button text='Buy Token'/>
                 </ButtonWrapper>
             </Wrapper>
@@ -190,8 +192,9 @@ const BottomText = styled.p`
     color: #3577fc;
 `;
 
-const ButtonWrapper = styled.div`
+const ButtonWrapper = styled(Link)`
     width: 250px;
     height: 68px;
     margin: 17px auto 0;
+    display: block;
 `;

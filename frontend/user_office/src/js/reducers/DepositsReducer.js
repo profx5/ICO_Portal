@@ -7,7 +7,8 @@ import {Map, List} from 'immutable';
 const initialState = Map({
     current_page: 1,
     pages: 1,
-    results: List()
+    results: List(),
+    isDepositsLoading: false,
 });
 
 

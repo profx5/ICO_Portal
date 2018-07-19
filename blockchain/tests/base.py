@@ -1,4 +1,3 @@
-import json
 from django.test import TestCase
 from web3 import Web3, HTTPProvider, EthereumTesterProvider
 from eth_tester import EthereumTester
@@ -6,27 +5,28 @@ from django.conf import settings
 
 import blockchain.web3
 from ico_portal.utils.datetime import datetime
-from blockchain.ico.contracts.crowdsale import CrowdsaleContract
+from blockchain.ico.contracts import CrowdsaleContract, PriceOracle
 from blockchain.ico.contracts.token import TokenContract, TransferEvent
+from django.apps import apps
 
 
 class BlockChainTestCase(TestCase):
-    _compiled_contracts_path = f'{settings.BASE_DIR}/solidity-contracts/contracts/compiled.json'
     crowdsale_eth_usdc = 55015
     crowdsale_bonus_percents = 40
+    crowdsale_tokens_amount = 1000000
+
+    oracle_inital_price = 55015
+    oracle_allowed_change = 10
+    oracle_sensivity = 3
 
     setup_eth_tester = False
+    setup_contracts = []  # token, crowdsale, price_oracle
 
     def stub_datetime_now(self, dt):
         datetime.stubed_now = dt
 
     def stub_datetime_utcnow(self, dt):
         datetime.stubed_utcnow = dt
-
-    @classmethod
-    def _get_compiled_contracts(cls):
-        with open(cls._compiled_contracts_path, 'r') as f:
-            return json.load(f)
 
     @classmethod
     def _setup_account(cls):
@@ -42,32 +42,53 @@ class BlockChainTestCase(TestCase):
         })
 
     @classmethod
-    def _setup_contracts(cls):
-        cls.web3.eth.defaultAccount = cls.eth_tester.get_accounts()[0]
-        compiled = cls._get_compiled_contracts()
-
-        token_interface = compiled['<stdin>:MintableToken']
-
-        MintableToken = cls.web3.eth.contract(abi=token_interface['abi'],
-                                              bytecode=token_interface['bin'])
-        tx_hash = MintableToken.constructor().transact()
+    def _setup_token(cls):
+        VeraCoin = cls.web3.eth.contract(abi=TokenContract.get_compiled()['abi'],
+                                         bytecode=TokenContract.get_compiled()['bin'])
+        tx_hash = VeraCoin.constructor().transact()
         tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
-
         cls.token_contract = cls.web3.eth.contract(address=tx_receipt.contractAddress,
-                                                   abi=token_interface['abi'])
+                                                   abi=TokenContract.get_compiled()['abi'])
 
-        crowdsale_interface = compiled['<stdin>:KYCCrowdsale']
-        KYCCrowdsale = cls.web3.eth.contract(abi=crowdsale_interface['abi'],
-                                             bytecode=crowdsale_interface['bin'])
+        TokenContract.init({'address': cls.token_contract.address})
 
+    @classmethod
+    def _setup_crowdsale(cls):
+        KYCCrowdsale = cls.web3.eth.contract(abi=CrowdsaleContract.get_compiled()['abi'],
+                                             bytecode=CrowdsaleContract.get_compiled()['bin'])
         tx_hash = KYCCrowdsale.constructor(cls.web3.eth.accounts[0],
                                            cls.token_contract.address,
                                            cls.crowdsale_bonus_percents,
                                            cls.crowdsale_eth_usdc).transact()
         tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
-
         cls.crowdsale_contract = cls.web3.eth.contract(address=tx_receipt.contractAddress,
-                                                       abi=crowdsale_interface['abi'])
+                                                       abi=CrowdsaleContract.get_compiled()['abi'])
+
+        cls.token_contract.functions.transfer(cls.crowdsale_contract.address, cls.crowdsale_tokens_amount).transact({
+            'gas': 100000,
+        })
+
+        CrowdsaleContract.init({'address': cls.crowdsale_contract.address})
+
+    @classmethod
+    def _setup_price_oracle(cls):
+        oracle = cls.web3.eth.contract(abi=PriceOracle.get_compiled()['abi'],
+                                       bytecode=PriceOracle.get_compiled()['bin'])
+        tx_hash = oracle.constructor(cls.oracle_inital_price, cls.oracle_allowed_change).transact()
+        tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
+        cls.price_oracle = cls.web3.eth.contract(address=tx_receipt.contractAddress,
+                                                 abi=PriceOracle.get_compiled()['abi'])
+        cls.price_oracle.functions.addOracle(cls.web3.eth.defaultAccount).transact()
+
+        PriceOracle.init({'address': cls.price_oracle.address,
+                          'sensivity': cls.oracle_sensivity})
+
+    @classmethod
+    def _setup_contracts(cls):
+        cls.web3.eth.defaultAccount = cls.account['address']
+
+        for c in cls.setup_contracts:
+            getattr(cls, f'_setup_{c}')()
 
     @classmethod
     def take_snapshot(cls):
@@ -93,6 +114,13 @@ class BlockChainTestCase(TestCase):
             cls.web3 = Web3(HTTPProvider(settings.WEB3_RPC_URL))
 
     @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+
+        if cls.setup_eth_tester:
+            apps.get_app_config('blockchain').init_contracts()
+
+    @classmethod
     def setup_blockchain_data(cls):
         pass
 
@@ -101,16 +129,8 @@ class BlockChainTestCase(TestCase):
             self.eth_tester.revert_to_snapshot(self.base_snapshot_id)
             self.eth_tester.enable_auto_mine_transactions()
 
-            TokenContract.init(contract_address=self.token_contract.address)
-            CrowdsaleContract.init(contract_address=self.crowdsale_contract.address)
-
         self.utcnow = datetime.utcnow()
         self.stub_datetime_utcnow(self.utcnow)
-
-    def tearDown(self):
-        if self.setup_eth_tester:
-            CrowdsaleContract.init(contract_address=settings.CROWDSALE_CONTRACT['address'])
-            TokenContract.init(contract_address=settings.TOKEN_CONTRACT['address'])
 
     def pass_KYC(self, address):
         self.crowdsale_contract.functions.passKYC(address).transact()
@@ -124,9 +144,7 @@ class BlockChainTestCase(TestCase):
         }).hex()
 
     def mint_tokens(self, to, amount):
-        return self.token_contract.functions.mint(to, amount).transact({
-            'gas': 100000
-        }).hex()
+        return self.transfer_tokens(from_acc=self.account['address'], to_acc=to, amount=amount)
 
     def transfer_tokens(self, from_acc, to_acc, amount):
         return self.token_contract.functions.transfer(to_acc, amount).transact({

@@ -10,3 +10,4 @@ from .exchange_rate import ExchangeRate
 from .payment import Payment
 from .events_processing import EventsProcessing
 from .transaction import Transaction
+from .po_update import POUpdate
