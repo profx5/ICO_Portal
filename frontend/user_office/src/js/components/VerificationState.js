@@ -9,21 +9,20 @@ const VerificationState = ({kycState}) => {
     return (
         <Wrapper>
             {kycState === 'APPROVED' &&
-                <Content>
-                    <img src={approvedIcon}/>
-                    <p>Вы успешно прошли верификацию</p>
+                <Content className="state-approved">
+                    <p>You've successfully passed verification!</p>
                 </Content>
             }
             {kycState === 'WAITING' &&
-                <Content>
+                <Content className="state-waiting">
                     <img src={waitingIcon}/>
-                    <p>Ваши данные находятся на рассмотрении у модераторов или кто они там</p>
+                    <p>Your data is about to be checked!</p>
                 </Content>
             }
             {kycState === 'DECLINED' &&
-                <Content>
+                <Content className="state-declined">
                     <img src={declinedIcon}/>
-                    <p>Комментарий, о том, что не прошли верификацию и свяжитесь пожалуйста с тех. поддержкой:</p>
+                    <p>You are not re-verified and contact please from those. support:</p>
                 </Content>
             }
         </Wrapper>
@@ -39,10 +38,19 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    img {
-        margin-right: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.5;
+    color: #323c47;
+    padding: 20px 30px;
+    &.state-approved {
+        border: 1px solid #4FDDBE;
+    }
+    &.state-waiting {
+        border: 1px solid #FECF33;
+    }
+    &.state-declined {
+        border: 1px solid #ff1414;
     }
 `;

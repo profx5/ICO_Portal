@@ -10,23 +10,25 @@ import Layout from './js/containers/Layout';
 import { withRouter } from 'react-router';
 
 
-const App = () => {
-    return (
-        <div>
-            <Warnings/>
-            <ContentWrapper 
-                layout={<Layout/>}
-            />
-        </div>
-    )
+class App extends React.Component {
+
+    render() {
+
+        return (
+            <div>
+                <Warnings/>
+                <ContentWrapper 
+                    layout={<Layout/>}
+                />
+            </div>
+        )
+    }
 }
 
-const mapStateToProps = ({user}) => ({
-    
+const mapStateToProps = ({UI}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

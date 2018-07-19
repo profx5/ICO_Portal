@@ -12,6 +12,7 @@ const initialState = Map({
     faqSelectedTab: 'my',
     currentRoute: 1,
     openedTicket: 'qe12',
+    activeKycTab: 2
 });
 
 
@@ -28,6 +29,7 @@ export const UIStateReducer = createReducer({
     [actions.changeSelectedTab]: (state = initialState, payload) => state.set("faqSelectedTab", payload.tab),
     [actions.setCurrentRoute]: (state = initialState, payload) => state.set("currentRoute", payload.route_index),
     [actions.setOpenedTicket]: (state = initialState, payload) => state.set("openedTicket", payload.id),
+    [actions.activateKycTab]: (state = initialState, payload) => state.set('activeKycTab', payload.id)
 
 }, initialState);
 
