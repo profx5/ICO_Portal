@@ -44,6 +44,7 @@ const Step = styled.div`
         font-weight: 500;
         letter-spacing: 0.5px;
         text-align: center;
+        margin-bottom: 5px;
     }
     .Step__desc {
         color: #000000;
@@ -52,6 +53,7 @@ const Step = styled.div`
         text-align: center;
         white-space: nowrap;
         padding-bottom: 25px;
+        font-size: 16px;
     }
     &:after {
         content: '';

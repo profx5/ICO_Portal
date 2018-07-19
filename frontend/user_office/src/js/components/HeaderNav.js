@@ -7,8 +7,8 @@ const HeaderNav = ({}) => (
     <Wrapper>
         <NavList>
             <NavItem className="active"><a>Investors cabinet</a></NavItem>
-            <NavItem><a>Referral & Bonuses</a></NavItem>
-            <NavItem><a>Fundraiser's cabinet</a></NavItem>
+{/*            <NavItem><a>Referral & Bonuses</a></NavItem>
+            <NavItem><a>Fundraiser's cabinet</a></NavItem>*/}
         </NavList>
     </Wrapper>
 )

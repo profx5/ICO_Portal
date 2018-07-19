@@ -20,24 +20,21 @@ class PaymentStepTwo extends React.Component {
                 <Head>Покупка токенов</Head>
                 <Row className="PaymentRow PaymentRow-1">
                     <RowPart className="part">
-                        <div className="head">К оплате</div>
+                        <div className="head">Payment</div>
                         <div className="amount">150 <span>TKN</span> &nbsp;<span>=</span>&nbsp; 0.0333 <span>ETH</span></div>
-                        <div className="desc">Текущий курс закреплен на 15 минут</div>
+                        <div className="desc">Current exchange rate is frozen for 15 minutes</div>
                     </RowPart>
                     <RowPart className="part">
                         <Link to="/user_office/payment">
                             <BtnWrapper>
-                                <Button text="Изменить количество" />
+                                <Button text="Change amount" />
                             </BtnWrapper>
                         </Link>
                     </RowPart>
                 </Row>
                 <Row className="PaymentRow PaymentRow-2">
-                    <div>
-                        Которая инструкция о том, что 
-                        вы можете скопировать адрес кошелька, 
-                        на который нужно перевести деньги или 
-                        вы можете это сделать через QR код, при наведении&nbsp;
+                    <div className="text">
+                        To buy tokens just copy an address below (or scan QR code&nbsp;
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
                               <g fill="none" fill-rule="evenodd">
@@ -49,31 +46,28 @@ class PaymentStepTwo extends React.Component {
                                   <path d="M4.531 11H2.656a.469.469 0 0 0-.469.469v1.875c0 .259.21.469.47.469H4.53c.26 0 .469-.21.469-.47V11.47a.469.469 0 0 0-.468-.47zm-.468 1.875h-.938v-.938h.938v.938zm11.468.332h-2.656V11.47a.469.469 0 0 0-.938 0v2.207c0 .259.21.469.47.469h2.655v.918h-2.656a.469.469 0 0 0 0 .937h3.125c.26 0 .469-.21.469-.469v-1.855a.469.469 0 0 0-.469-.469zm0-4.394a.469.469 0 0 0-.469.468v2.188a.469.469 0 0 0 .938 0V9.28a.469.469 0 0 0-.469-.469zm-4.062 0H9.28a.469.469 0 0 0-.469.468v2.188a.469.469 0 0 0 .938 0V9.75h1.719a.469.469 0 0 0 0-.938zm-2.188 4.394a.469.469 0 0 0-.469.47v1.854a.469.469 0 0 0 .938 0v-1.855a.469.469 0 0 0-.469-.469z"/>
                                 </g>
                               </g>
-                            </svg>&nbsp;. Cras quis nulla commodo, aliquam lectus sed.
+                            </svg>&nbsp; with any of your wallet apps) and transfer mentioned previously amount of crypto to this address. Tokens will arrive soon on your ETH account after transaction be mined. Also you can buy tokens for ETH <span className="text-blue">via Metamask.</span> 
                         </span>
                     </div>
                 </Row>
                 <Row className="PaymentRow-3">
                     <RowPart className="part">
-                        <div className="head">Кошелек</div>
+                        <div className="head">Payment address</div>
                         <div className="number">0x1c61431692ccd575b3849d7595d8d42e4c3d22c3</div>
                     </RowPart>
                     <RowPart className="part">
                         <BtnWrapper>
-                            <Button text="Скопировать" />
+                            <Button text="Copy address" />
                         </BtnWrapper>
                     </RowPart>
                 </Row>
                 <Row className="PaymentRow-4">
                     <RowPart className="part">
-                        <div className="text">*После того, как вы оплатите, токены 
-                            придут <span>в течении 24 часов</span>. Cras quis nulla
-                            commodo, aliquam lectus sed, blandit augue. Cras ullamcorper 
-                            bibendum bibendum.</div>
+                        <div className="text">Great! If you already transfered funds on the account - just press "I already paid!" button. This action will finish your purchase!</div>
                     </RowPart>
                     <RowPart>
                         <BtnWrapper>
-                            <Button text="Я оплатил" />
+                            <Button text="I already paid!" />
                         </BtnWrapper>
                     </RowPart>
                 </Row>
@@ -171,6 +165,11 @@ const Row = styled.div`
                     background: #4f99f6;
                 }
             }
+            .text {
+                &-blue {
+                    color: #387bfc;
+                }
+            }
         }
         &-3 {
             padding-bottom: 67px;
@@ -222,10 +221,11 @@ const Row = styled.div`
                     content: '';
                     display: block;
                     width: 4px;
-                    height: 100%;
+                    height: 110%;
                     position: absolute;
-                    top: 0;
+                    top: 50%;
                     left: 0;
+                    transform: translateY(-50%);
                     border-radius: 2px;
                     background: #4f99f6;
                 }

@@ -61,7 +61,7 @@ class ICOProgress extends React.Component {
                     </WrapperHeaderInfo>
                 </Header>
                 <Roadmap/>
-                <BottomText>Скидка скоро закончится</BottomText>
+                <BottomText>Bonuses are going to end up soon!</BottomText>
                 <ButtonWrapper exact to="/user_office/payment">
                     <Button text='Buy Token'/>
                 </ButtonWrapper>
