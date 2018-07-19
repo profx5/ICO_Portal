@@ -17,4 +17,3 @@ export const showSetAccountPopup = createAction('SHOW_SET_ACCOUNT_POPUP');
 export const hideSetAccountPopup = createAction('HIDE_SET_ACCOUNT_POPUP');
 export const changeSelectedTab = createAction('CHANGE_SELECTED_TAB', (tab => ({tab})));
 export const setCurrentRoute = createAction('SET_CURRENT_ROUTE', (route_index => ({route_index})));
-export const setOpenedTicket = createAction("SET_OPENED_TICKET", (id=>({id})));

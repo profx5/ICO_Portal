@@ -8,7 +8,6 @@ import * as UIActions from './../actions/UIActions';
 class Nav extends React.Component {
 
     get_elem = (t) => {
-        console.log(t);
         const {setCurrentRoute} = this.props;
         setCurrentRoute(t);
     };
