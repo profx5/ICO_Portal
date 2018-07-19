@@ -9,7 +9,6 @@ import Photo from './../components/Photo';
 import FileUpload from './../components/FileUpload';
 import PhotoUpload from './../components/PhotoUpload';
 import DocsOptions from './../components/DocsOptions';
-import ReduxFormField from './../components/ReduxFormField';
 
 import FinalFormField from './../components/FinalFormField';
 

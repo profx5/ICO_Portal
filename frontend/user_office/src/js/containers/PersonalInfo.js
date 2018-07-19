@@ -39,7 +39,9 @@ class PersonalInfo extends React.Component {
                         <InputWrapper>
                             <FieldText labelText="New Email" name='email'/>
                         </InputWrapper>
-                        <Button text="Change Email" submit={true} />
+                        <ButtonWrapper>
+                            <Button text="Change Email" submit={true} />
+                        </ButtonWrapper>
                     </InputSet>
                 </form>
                 <InputSet>
@@ -113,6 +115,14 @@ const InputWrapper = styled.div`
     &:last-child {
     margin-bottom: 40px;
     }
+`;
+
+const ButtonWrapper = styled.div`
+    width: 100%;
+    height: 70px;
+    border-radius: 2px;
+    border: 1px solid #d6dfe6;
+    position: relative;
 `;
 
 const IconCopy = styled.span`

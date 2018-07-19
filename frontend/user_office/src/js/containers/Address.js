@@ -2,8 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 
-import ReduxFormField from './../components/ReduxFormField';
-
 import FinalFormField from './../components/FinalFormField';
 
 

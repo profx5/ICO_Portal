@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="71px" viewBox="0 0 23 71" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 15</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Index-1-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-322.000000, -3577.000000)">
+        <g id="Group-15" transform="translate(311.000000, 3578.000000)">
+            <g id="Group-16" transform="translate(22.000000, 39.500000) rotate(-180.000000) translate(-22.000000, -39.500000) translate(0.000000, 8.000000)" fill="#F84F78">
+                <g id="navigation" transform="translate(22.052038, 21.859650) rotate(-46.000000) translate(-22.052038, -21.859650) translate(6.552038, 6.859650)" fill-rule="nonzero">
+                    <path d="M29.9368574,0.177437207 C29.7648829,-0.000366961 29.4996341,-0.0499189422 29.2751927,0.0532657716 L0.339750518,13.3331967 C0.107147689,13.4404622 -0.0286830362,13.6858903 0.00512890398,13.9400628 C0.0389408441,14.1942353 0.234233947,14.395941 0.486657569,14.4379144 L13.4651959,16.6129549 L14.9488405,28.8773618 C14.9803206,29.1327002 15.1756137,29.3384867 15.4292033,29.3816261 C15.4624322,29.3874557 15.4950782,29.3903705 15.5277243,29.3903705 C15.7463359,29.3903705 15.9509565,29.267365 16.0500604,29.0662423 L30.0412081,0.84201672 C30.1508054,0.62107318 30.108832,0.354658411 29.9368574,0.177437207 Z" id="Shape"></path>
+                </g>
+                <rect id="Rectangle" x="20" y="23" width="3" height="40"></rect>
+            </g>
+            <circle id="Oval-5" stroke="#FFFFFF" stroke-width="2" fill="#F84F78" cx="22.5" cy="7.5" r="7.5"></circle>
+        </g>
+    </g>
+</svg>

@@ -23,9 +23,10 @@ class Currency extends React.Component {
 
         return data.map((item, index) => {
             let {code, rate} = item;
-            console.log(code)
 
             if (index >= 3 && this.props.spreadedCurrencyCards === false) return;
+            if (code === 'LTCT') return;
+            
             return <CurrencyCard 
                 className={this.props.investCurrency === code ? 'active' : ''}
                 name={code} 
@@ -58,16 +59,16 @@ class Currency extends React.Component {
         return (
             <Wrapper>
                 <Content>
-                    <CurrencyCard 
+{/*                    <CurrencyCard 
                         className={this.props.investCurrency === 'credit' ? 'active' : ''}
                         name='Credit card' 
                         icon='icon-card' 
                         altWay={true}
-                        clickHandler={this.cardClickHandler.bind(this, 'credit')}/>
+                        clickHandler={this.cardClickHandler.bind(this, 'credit')}/>*/}
 
                     {this.generateCurrencyCards(this.props.currencies)}
 
-                    <CurrencyCard 
+{/*                    <CurrencyCard 
                         className={this.props.investCurrency === 'other' ? 'active' : ''}
                         name='Other Crypto' 
                         icon='icon-other' 
@@ -75,7 +76,7 @@ class Currency extends React.Component {
                         clickHandler={() => {
                             showPopup();
                             this.cardClickHandler('other')
-                        }}/>
+                        }}/>*/}
                 </Content>
             </Wrapper>
         )

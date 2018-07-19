@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
+import CleavePhone from 'cleave.js/dist/addons/cleave-phone.ru.js';
 
 import { Field } from 'react-final-form';
 
@@ -37,20 +38,26 @@ const Wrapper = styled.div`
 
 const StyledLabel = styled.label`
     color: #0a0a0a;
+    font-size: 16px;
     display: block;
     margin-bottom: 13px;
 `;
 
 const StyledInput = styled(Field)`
     color: #233539;
+    font-size: 16px;
     font-weight: 600;
     padding: 0 20px;
     display: block;
     height: 100%;
     width: 100%;
     background: #ffffff;
-    border: 1px solid #EAEFF2;
+    border: 1px solid #d6dfe6;
+    border-radius: 2px;
     &:read-only {
         color: rgba(35,53,57,.3);
+    }
+    &::-webkit-input-placeholder {
+        color: rgba(10,10,10,.4);
     }
 `;

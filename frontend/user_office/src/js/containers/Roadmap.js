@@ -20,13 +20,13 @@ class Roadmap extends React.Component {
                         <Stage data-rate="1 TKN = 2 USD" colored>
                             <div className="StageDesc">
                                 <StageName blue>Phase 1</StageName>
-                                <StageState>(В процессе)</StageState>
+                                <StageState>(In progress)</StageState>
                             </div>
                         </Stage>
                         <Stage data-rate="1 TKN = 5 USD">
                             <div className="StageDesc">
                                 <StageName>Phase 2</StageName>
-                                <StageState>(Не началось)</StageState>
+                                <StageState>(Coming soon)</StageState>
                             </div>
                         </Stage>
                         <Stage>
@@ -38,7 +38,7 @@ class Roadmap extends React.Component {
                         <Stage data-rate="1 TKN = 0,25 USD" colored>
                             <div className="StageDesc">
                                 <StageName blue>Start</StageName>
-                                <StageState>(Завершилось)</StageState>
+                                <StageState>(</StageState>
                             </div>
                         </Stage>
                     </Bar>

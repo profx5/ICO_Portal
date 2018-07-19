@@ -66,11 +66,12 @@ class CurrencyCalculator extends React.Component {
                     <InvestInput value={this.props.investAmount} type="text" onChangeHandler={this.investOnChangeHandler} header="Amount" currency={investCurrency}/>
                     <InvestInput value={this.props.tokensAmount} type="text" header="TKN" currency="TKN"/>
                         <ButtonWrapper to="/user_office/payment/buy">
-                            <Button clickHandler={this.investClickHandler} text="Купить"/>
+                            <Button clickHandler={this.investClickHandler} text="Buy"/>
                         </ButtonWrapper>
                 </WrapperInner>
-                <BonusDesc>Пометка о бонусной программе, купи сейчас и получи еще 10% бонусных токенов до 3 июля. Cras quis 
-nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna</BonusDesc>
+                <BonusDesc>Progressive bonus for private presale phase is 
+                currenty available! Investing more than 8 000 USD will grant you 20% bonus! 
+                Invest more than 20 000 USD and get <span>30% bonus tokens!</span></BonusDesc>
             </Wrapper>
         )
     }
@@ -133,14 +134,18 @@ const BonusDesc = styled.p`
     position: relative;
     padding-left: 15px;
     margin-top: 45px;
+    span {
+        color: #3679fc;
+    }
     &:before {
         content: '';
         display: block;
         width: 4px;
-        height: 100%;
+        height: 110%;
         position: absolute;
         left: 0;
-        top: 0;
+        top: 50%;
+        transform: translateY(-50%);
         background: #4f99f6;
     }
 `;

@@ -30,7 +30,9 @@ class Password extends React.Component {
                         <FieldPassword labelText="Confirm password" name="new_password2"/>
                     </InputWrapper>
                 </InputSet>
-                <Button text="Change password" submit={true}/>
+                <ButtonWrapper>
+                    <Button text="Change password" submit={true}/>
+                </ButtonWrapper>
             </Wrapper>
         )
     }
@@ -86,4 +88,12 @@ const InputWrapper = styled.div`
     &:last-child {
     margin-bottom: 40px;
     }
+`;
+
+const ButtonWrapper = styled.div`
+    width: 100%;
+    height: 70px;
+    border-radius: 2px;
+    border: 1px solid #d6dfe6;
+    position: relative;
 `;

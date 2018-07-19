@@ -103,6 +103,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, "assets")
 MEDIA_URL = '/media/'
 LOGIN_URL = '/login/'
 
+RAVEN_CONFIG = {
+    'dsn': 'https://98e586745597476dafda3ea15296e38f:1495fcec1c6d4d55afeeed1dce5f05bd@sentry.io/1236224',
+}
+
+# VERA site settings
+VERA_SITE_URL = 'https://dev.vera.wtf/'
+
 try:
     from .local import *
 except ImportError:

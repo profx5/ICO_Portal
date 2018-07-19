@@ -12,7 +12,7 @@ class PaymentStepOne extends React.Component {
 
         return (
             <Wrapper>
-                <Head>Выберите количество токенов</Head>
+                <Head>Select payment method</Head>
                 <Currency/>
                 <CurrencyCalculator/>
             </Wrapper>
