@@ -70,7 +70,7 @@ class PersonData extends React.Component {
 const mapStateToProps = ({ICOInfo, Timer, KYC}) => ({
     userPhoto: KYC.get('user_photo'),
     documentPhoto: KYC.get('document_photo'),
-    uploadedUserPhoto: KYC.get('uploaded_user_photo')
+    uploadedUserPhoto: KYC.get('uploaded_user_photo'),
 })
 
 const mapDispatchToProps = (dispatch) => ({

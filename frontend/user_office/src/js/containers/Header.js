@@ -26,11 +26,14 @@ class Header extends React.Component {
     render() {
         const {
             email,
-            tokensAmount,
             showInvestForm,
             decimals,
             accountDropdownShown,
-            stepsDropdownShown
+            stepsDropdownShown,
+            showSetAccountPopup,
+            ethAccount,
+            kycState,
+            tokensAmount,
         } = this.props;
 
         let floatTokensAmount = '1';
@@ -38,6 +41,14 @@ class Header extends React.Component {
             floatTokensAmount += '0';
         }
         floatTokensAmount = parseInt(floatTokensAmount, 10);
+
+        let stepOnePassed = ethAccount ? true : false;  
+        let stepTwoPassed = kycState !== 'DECLINED'; 
+        let stepThreePassed = tokensAmount > 0; 
+
+        let stepsPassedNumber = stepOnePassed + stepTwoPassed + stepThreePassed;
+
+
 
         return (
             <HeaderBlock>
@@ -52,7 +63,12 @@ class Header extends React.Component {
                         isDropdownAccountOpen={accountDropdownShown}
                         isDropdownStepsOpen={stepsDropdownShown}
                         dropdownAccountClickHandler={this.dropdownAccountClickHandler}
-                        dropdownStepsClickHandler={this.dropdownStepsClickHandler}
+                        dropdownStepsClickHandler={this.dropdownStepsClickHandler} 
+                        stepOnePassed={stepOnePassed} 
+                        stepTwoPassed={stepTwoPassed} 
+                        stepThreePassed={stepThreePassed} 
+                        stepsPassed={stepsPassedNumber}
+                        showSetAccountPopup={showSetAccountPopup}
                     />
                 </HeaderUser>
             </HeaderBlock>
@@ -62,13 +78,15 @@ class Header extends React.Component {
 
 const mapStateToProps = ({user, ICOInfo, KYC, Invest, UI}) => ({
     email: user.get('email'),
-    tokensAmount: user.get('tokens_amount'),
     decimals: ICOInfo.get('token_decimals'),
     KYCStatus: KYC.get('status'),
     userId: user.get('eth_account'),
     showInvestForm: Invest.get('showInvestForm'),
     accountDropdownShown: UI.get('accountDropdownShown'),
-    stepsDropdownShown: UI.get('stepsDropdownShown')
+    stepsDropdownShown: UI.get('stepsDropdownShown'),
+    ethAccount: user.get('eth_account'),
+    kycState: user.get('state'),
+    tokensAmount: user.get('tokens_amount'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -84,6 +102,9 @@ const mapDispatchToProps = (dispatch) => ({
     hideStepsDropdown() {
         dispatch(UIActions.hideStepsDropdown())
     },
+    showSetAccountPopup() {
+        dispatch(UIActions.showSetAccountPopup())
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

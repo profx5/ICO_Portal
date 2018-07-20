@@ -5,6 +5,7 @@ import ClipboardJS from 'clipboard';
 
 import * as KYCActions from './../actions/KYCActions';
 import * as UserActions from './../actions/UserActions';
+import * as UIActions from './../actions/UIActions';
 
 import FieldText from './../components/FieldText';
 import FieldTextSpan from './../components/FieldTextSpan';
@@ -26,7 +27,7 @@ class PersonalInfo extends React.Component {
 
     render() {
 
-        const {email, ethAccount} = this.props;
+        const {email, ethAccount, showSetAccountPopup} = this.props;
 
         return (
             <Wrapper className="Verification__personalData">
@@ -54,6 +55,11 @@ class PersonalInfo extends React.Component {
                             disabled
                         />
                     </InputWrapper>
+                    {!ethAccount && 
+                        <ButtonWrapper>
+                            <Button text="Add ETH account" clickHandler={showSetAccountPopup} />
+                        </ButtonWrapper>
+                    }
                 </InputSet>
             </Wrapper>
         )
@@ -72,6 +78,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     changeEmailRequest(data) {
         dispatch(UserActions.changeEmailRequest(data))
+    },
+    showSetAccountPopup() {
+        dispatch(UIActions.showSetAccountPopup())
     }
 });
 
