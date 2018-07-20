@@ -3,13 +3,9 @@ from .include import *
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), '../../../'))
 
-SECRET_KEY = 'e%1h03sc5xmbr#q^r2l7h78-^1vuwapt8%eiumxyr@^91v61v^'
-
-DEBUG = False
+SECRET_KEY = ''
 
 HOST = 'http://localhost:8000'
-
-ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -68,19 +64,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ico_portal.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ico_portal',
-        'USER': 'ico_portal_user',
-        'PASSWORD': 'read_manual',
-        'HOST': 'localhost',
-        'OPTIONS': {
-            'isolation_level': 'read committed'
-        }
-    }
-}
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -110,20 +93,9 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
-    }
-}
-
-STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "frontend/landing/dist/static"),  # landing
-]
+STATIC_ROOT = os.path.join(BASE_DIR, "assets")
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/tmp/ico_portal_media/'
 LOGIN_URL = '/login/'
 
 RAVEN_CONFIG = {
@@ -133,6 +105,10 @@ RAVEN_CONFIG = {
 # VERA site settings
 VERA_SITE_URL = 'https://dev.vera.wtf/'
 
+try:
+    from .local import *
+except ImportError:
+    pass
 
 # Authorasation settings
 
