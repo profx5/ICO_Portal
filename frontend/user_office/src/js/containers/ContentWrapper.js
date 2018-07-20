@@ -67,7 +67,7 @@ const mapDispatchToProps = (dispatch) => ({
     },
     updateMetamaskStatus(payload) {
         dispatch(MetamaskActions.updateMetamaskStatus(payload))
-    }
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentWrapper);

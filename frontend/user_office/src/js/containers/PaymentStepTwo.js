@@ -5,15 +5,28 @@ import styled from 'styled-components';
 import CurrencyCalculator from './CurrencyCalculator';
 import Currency from './Currency';
 
+import { Link } from 'react-router-dom';
+
 import Button from './../components/Button';
 import qrIcon from './../../img/icon_qr_big.svg';
+import QRCode from 'qrcode';
 
-import { Link } from 'react-router-dom';
+import * as InvestActions from './../actions/InvestActions';
 
 
 class PaymentStepTwo extends React.Component {
 
+    generateQRCode = (text) => {
+        QRCode.toDataURL(text).then(url => {
+            this.props.setQRCode(url);
+        });
+    }
+
     render() {
+
+        const {investCurrency, investAmount, tokensAmount, crowdsaleAddress, qrcode} = this.props;
+
+        this.generateQRCode(crowdsaleAddress || '0');
 
         return (
             <Wrapper>
@@ -21,7 +34,12 @@ class PaymentStepTwo extends React.Component {
                 <Row className="PaymentRow PaymentRow-1">
                     <RowPart className="part">
                         <div className="head">Payment</div>
-                        <div className="amount">150 <span>TKN</span> &nbsp;<span>=</span>&nbsp; 0.0333 <span>ETH</span></div>
+                        <div className="amount">
+                            {tokensAmount > 0 ? tokensAmount : '0'} 
+                            <span>&nbsp;TKN</span> &nbsp;
+                            <span>=</span>&nbsp; {investAmount > 0 ? investAmount : '0'} 
+                            <span>&nbsp;{investCurrency}</span>
+                        </div>
                         <div className="desc">Current exchange rate is frozen for 15 minutes</div>
                     </RowPart>
                     <RowPart className="part">
@@ -53,7 +71,14 @@ class PaymentStepTwo extends React.Component {
                 <Row className="PaymentRow-3">
                     <RowPart className="part">
                         <div className="head">Payment address</div>
-                        <div className="number">0x1c61431692ccd575b3849d7595d8d42e4c3d22c3</div>
+                        <div className="number">
+                            {crowdsaleAddress}
+                            <img src={qrIcon} className="qr_icon" />
+                            <QrWrapper className="qrwrapper">
+                                <div className="text">QR code</div>
+                                <img src={qrcode} />
+                            </QrWrapper>
+                        </div>
                     </RowPart>
                     <RowPart className="part">
                         <BtnWrapper>
@@ -79,11 +104,18 @@ class PaymentStepTwo extends React.Component {
 };
 
 
-const mapStateToProps = () => ({
-
+const mapStateToProps = ({Currencies, Invest, ICOInfo}) => ({
+    investCurrency: Currencies.get('investCurrency'),
+    investAmount: Invest.get('investAmount'),
+    tokensAmount: Invest.get('tokensAmount'),
+    qrcode: Invest.get('qrcode'),
+    crowdsaleAddress: ICOInfo.get('crowdsale_address')
 })
 
 const mapDispatchToProps = (dispatch) => ({
+    setQRCode(payload) {
+        dispatch(InvestActions.setQRCode(payload))
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentStepTwo)
@@ -177,6 +209,7 @@ const Row = styled.div`
             padding-bottom: 67px;
             border-bottom: 1px solid rgba(151,151,151,.2);
             margin-bottom: 80px;
+            position: relative;
             .head {
                 color: #323c47;
                 font-size: 16px;
@@ -193,12 +226,17 @@ const Row = styled.div`
                 display: flex;
                 align-items: center;
                 position: relative;
-                &:after {
-                    content: url(${qrIcon});
-                    position: absolute;
-                    right: 25px;
-                    top: calc(50% + 4px);
-                    transform: translateY(-50%);
+            }
+            .qr_icon {
+                position: absolute;
+                right: 25px;
+                top: calc(50% + 4px);
+                transform: translateY(-50%);
+                cursor: pointer;
+                &:hover + .qrwrapper {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translate(100px, -100%);
                 }
             }
             .part:last-of-type {
@@ -233,6 +271,45 @@ const Row = styled.div`
                 }
             }
         }
+    }
+`;
+
+const QrWrapper = styled.div`
+    width: 283px;
+    height: 294px;
+    border-radius: 4px;
+    background: white;
+    box-shadow: 0 9px 21px 0 rgba(173, 182, 217, 0.3);
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(100px, calc(-100% - 30px));
+    zIndex: 1;
+    padding-top: 30px;
+    transition: all .28s ease;
+    opacity: 0;
+    visibility: hidden;
+    &:after {
+        content: '';
+        border: 8px solid transparent;
+        border-top: 11px solid white;
+        position: absolute;
+        left: 50%;
+        bottom: -19px;
+        transform: translateX(-50%);
+    }
+    .text {
+        font-size: 16px;
+        letter-spacing: 0.4px;
+        color: rgb(0,0,0);
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    img {
+        width: 200px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
     }
 `;
 
