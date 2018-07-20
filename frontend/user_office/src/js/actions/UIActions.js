@@ -21,3 +21,6 @@ export const changeSelectedTab = createAction('CHANGE_SELECTED_TAB', (tab => ({t
 export const setCurrentRoute = createAction('SET_CURRENT_ROUTE', (route_index => ({route_index})));
 
 export const setOpenedTxn = createAction('SET_OPENED_TXN', (id => ({id})));
+
+export const setOpenedTip = createAction('SET_OPENED_TIP', (id => ({id})));
+

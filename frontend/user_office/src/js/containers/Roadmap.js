@@ -15,30 +15,25 @@ class Roadmap extends React.Component {
                 <BarWrapper>
                     <Bar>
                         <InnerBar>
-                            <Point/>
+                            <Rate/>
+                            <Point rate='1 Vera = 2 USD'/>
                         </InnerBar>
-                        <Stage data-rate="1 TKN = 2 USD" colored>
+                        <Stage colored>
                             <div className="StageDesc">
-                                <StageName blue>Phase 1</StageName>
-                                <StageState>(In progress)</StageState>
+                                <StageName blue>Private sale 2018</StageName>
+                                <StageState>(Now!)</StageState>
                             </div>
                         </Stage>
-                        <Stage data-rate="1 TKN = 5 USD">
+                        <Stage >
                             <div className="StageDesc">
-                                <StageName>Phase 2</StageName>
+                                <StageName>Public sale 2018</StageName>
                                 <StageState>(Coming soon)</StageState>
                             </div>
                         </Stage>
-                        <Stage>
+                        <Stage colored>
                             <div className="StageDesc">
-                                <StageName>End</StageName>
-                                <StageState>&nbsp;</StageState>
-                            </div>
-                        </Stage>
-                        <Stage data-rate="1 TKN = 0,25 USD" colored>
-                            <div className="StageDesc">
-                                <StageName blue>Start</StageName>
-                                <StageState></StageState>
+                                <StageName blue>Pre ICO 2017</StageName>
+                                <StageState>(Finished)</StageState>
                             </div>
                         </Stage>
                     </Bar>
@@ -99,10 +94,39 @@ const Point = styled.div`
     &:before {
         content: 'You are here';
         font-size: 18px;
-        color: #397dff;
+        color: #bfbfbf;
         white-space: nowrap;
         transform: translateX(-50%);
         top: -60px;
+        left: 50%;
+    }
+    &:after {
+        content: url(${IconArrow});
+        transform: translateX(-50%) rotate(90deg);
+        top: -42px;
+        left: calc(50% - 2px);
+    }
+    &:after, &:before {
+        position: absolute;
+    }
+`;
+const Rate = styled.div`
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 13px;
+    height: 13px;
+    border-radius: 100%;
+    background: #397dff;
+    box-shadow: 0 0 0 6px rgba(57, 125, 255, 0.16);
+    &:before {
+        content: '1 Vera = 2 USD';
+        font-size: 18px;
+        color: #397dff;
+        white-space: nowrap;
+        transform: translateX(-50%);
+        top: -90px;
         left: 50%;
     }
     &:after {
@@ -127,28 +151,23 @@ const Stage = styled.div`
         left: 0;
     }
     &:nth-child(2) {
-        left: 30%;
+        left: 33%;
     }
     &:nth-child(3) {
-        left: 60%;
-    }
-    &:nth-child(4) {
-        left: 100%;
+        left: 66%;
     }
     .StageDesc {
         position: absolute;
         bottom: -55px;
-        left: 0;
+        left: 110px;
+        text-align: center;
         div {
             white-space: nowrap;
-            &:first-of-type {
-
-            }
         }
     }
-    &:nth-of-type(4) .StageDesc {
-        right: 0 !important;
-        left: unset !important;
+    &:nth-of-type(3) .StageDesc {
+        // right: 0 !important;
+        // left: unset !important;
     }
     &:before {
         content: attr(data-rate);
