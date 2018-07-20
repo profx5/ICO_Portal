@@ -40,7 +40,7 @@ export class TicketsSagas {
                 data: ticket.payload
             });
             yield put(actions.getTicketsRequest());
-            yield history.push('/user_office/faq/ticket/' + res.data.id);
+            yield history.push('/user_office/support/ticket/' + res.data.id);
             yield put(actions.getTicketFull(res.data.id));
             yield put(uiactions.changeSelectedTab('my'));
         } catch (e) {
