@@ -116,27 +116,26 @@ class KYCFactory(factory.DjangoModelFactory):
         model = 'user_office.KYC'
 
     investor = factory.SubFactory(InvestorFactory)
+    approve_txn_id = UUID
 
     state = 'APPROVED'
+    type = 'NATURAL'
 
-    user_photo = factory.django.ImageField(color='blue')
     firstname = fuzzy.FuzzyText(length=10)
-    midname = fuzzy.FuzzyText(length=10)
-    surname = fuzzy.FuzzyText(length=10)
+    lastname = fuzzy.FuzzyText(length=10)
 
-    gender = 'M'
+    place_of_birth = fuzzy.FuzzyText(length=10)
     birthdate = fuzzy.FuzzyDate(start_date=date(1970, 1, 1))
 
-    country = fuzzy.FuzzyText(length=10)
-    city = fuzzy.FuzzyText(length=10)
-    registration_address = fuzzy.FuzzyText(length=10)
-    postcode = fuzzy.FuzzyInteger(low=1, high=100000)
+    personal_id = fuzzy.FuzzyText(length=10)
+    phone_number = fuzzy.FuzzyInteger(low=1, high=10000000)
+    email = fuzzy.FuzzyText(length=5, suffix='@ongrid.pro')
 
-    document_type = fuzzy.FuzzyText(length=10)
-    document_no = fuzzy.FuzzyInteger(low=0)
-    document_country = fuzzy.FuzzyText(length=10)
-    document_date = fuzzy.FuzzyDate(start_date=date(1970, 1, 1))
-    document_photo = factory.django.ImageField(color='green')
+    place_of_residence = fuzzy.FuzzyText(length=10)
+    profession = fuzzy.FuzzyText(length=10)
+
+    id_document_photo = factory.django.ImageField(color='green')
+    bill_photo = factory.django.ImageField(color='blue')
 
     approve_txn_id = UUID
 
