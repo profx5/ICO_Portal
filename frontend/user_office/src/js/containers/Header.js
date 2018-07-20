@@ -5,6 +5,7 @@ import * as UIActions from '../actions/UIActions';
 
 import HeaderNav from '../components/HeaderNav';
 import AccountInfo from '../components/AccountInfo';
+import { Link } from 'react-router-dom';
 
 class Header extends React.Component {
 
@@ -41,7 +42,7 @@ class Header extends React.Component {
         return (
             <HeaderBlock>
                 <NavWrapper>
-                    <VeraLogo>Vera</VeraLogo>
+                    <VeraLogo to="/user_office">Vera</VeraLogo>
                     <HeaderNav/>
                 </NavWrapper>
                 <HeaderUser>
@@ -86,7 +87,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
 
-const VeraLogo = styled.div`
+const VeraLogo = styled(Link)`
     width: 98px;
     height: 45px;
     font-family: Gilroy;
