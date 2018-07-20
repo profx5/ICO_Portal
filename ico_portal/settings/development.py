@@ -45,6 +45,8 @@ IGNORABLE_404_URLS = (
     re.compile('/sockjs-node'),
 )
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 try:
     from .local import *
 except ImportError:

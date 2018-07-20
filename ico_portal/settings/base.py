@@ -119,7 +119,7 @@ WEBPACK_LOADER = {
 }
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "frontend/landing/dist/static"),  # landing
+#     os.path.join(BASE_DIR, "frontend/landing/dist/static"),  # landing
 ]
 
 MEDIA_URL = '/media/'
@@ -132,3 +132,8 @@ RAVEN_CONFIG = {
 
 # VERA site settings
 VERA_SITE_URL = 'https://dev.vera.wtf/'
+
+
+# Authorasation settings
+
+SIGNUP_CLOSED = True
