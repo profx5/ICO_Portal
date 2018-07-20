@@ -40,10 +40,6 @@ class CurrencyCalculator extends React.Component {
         this.bonus = bonus;
     }
 
-    componentDidUpdate() {
-        this.updateTotalTokens()
-    }
-
     investOnChangeHandler = event => {
         Utils.formatInputNumber(event, this.props.setInvestAmount);
         this.updateTotalTokens();
@@ -53,6 +49,11 @@ class CurrencyCalculator extends React.Component {
         const {investCurrency, showInvestOptions, getAltCryptoAccount} = this.props;
         showInvestOptions();
         if (investCurrency !== 'ETH') getAltCryptoAccount(investCurrency);
+    }
+
+    initialUpdate = () => {
+        this.updateTotalTokens();
+        this.props.setInvestAmount(1);
     }
 
 
@@ -66,6 +67,8 @@ class CurrencyCalculator extends React.Component {
         } = this.props;
 
         let bonus = this.bonus;
+
+        this.initialUpdate();
 
         return (
             <Wrapper>

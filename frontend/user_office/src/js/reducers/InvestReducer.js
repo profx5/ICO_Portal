@@ -5,7 +5,7 @@ import {Map} from 'immutable';
 
 
 const initialState = Map({
-    investAmount: 1,
+    investAmount: 0,
     tokensAmount: 0,
     isMetamaskEnabled: true,
     qrcode: ''

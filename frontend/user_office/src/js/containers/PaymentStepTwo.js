@@ -15,13 +15,20 @@ class PaymentStepTwo extends React.Component {
 
     render() {
 
+        const {investCurrency, investAmount, tokensAmount} = this.props;
+
         return (
             <Wrapper>
                 <Head>Покупка токенов</Head>
                 <Row className="PaymentRow PaymentRow-1">
                     <RowPart className="part">
                         <div className="head">Payment</div>
-                        <div className="amount">150 <span>TKN</span> &nbsp;<span>=</span>&nbsp; 0.0333 <span>ETH</span></div>
+                        <div className="amount">
+                            {tokensAmount > 0 ? tokensAmount : '0'} 
+                            <span>&nbsp;TKN</span> &nbsp;
+                            <span>=</span>&nbsp; {investAmount > 0 ? investAmount : '0'} 
+                            <span>&nbsp;{investCurrency}</span>
+                        </div>
                         <div className="desc">Current exchange rate is frozen for 15 minutes</div>
                     </RowPart>
                     <RowPart className="part">
@@ -79,8 +86,10 @@ class PaymentStepTwo extends React.Component {
 };
 
 
-const mapStateToProps = () => ({
-
+const mapStateToProps = ({Currencies, Invest}) => ({
+    investCurrency: Currencies.get('investCurrency'),
+    investAmount: Invest.get('investAmount'),
+    tokensAmount: Invest.get('tokensAmount'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
