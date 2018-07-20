@@ -206,7 +206,7 @@ class TestKYC(APITestCase):
         rmtree(settings.MEDIA_ROOT, ignore_errors=True)
 
         with open(fixture_path('document.jpg'), 'rb') as photo, \
-             open(fixture_path('bill.jpg'), 'rb') as bill, \  # noqa
+             open(fixture_path('bill.jpg'), 'rb') as bill, \
              open(fixture_path('basis.jpg'), 'rb') as basis:  # noqa
             response = self.client.post('/api/kyc/upd/', {
                 'type': 'LEGAL',
