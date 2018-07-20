@@ -12,7 +12,8 @@ const initialState = Map({
     currentRoute: 1,
     activeKycTab: 2,
     showCurrenciesPopup: false,
-    openedTxn: null
+    openedTxn: null,
+    openedTip: null,
 });
 
 
@@ -31,6 +32,7 @@ export const UIStateReducer = createReducer({
     [actions.setCurrentRoute]: (state = initialState, payload) => state.set("currentRoute", payload.route_index),
     [actions.activateKycTab]: (state = initialState, payload) => state.set('activeKycTab', payload.id),
     [actions.setOpenedTxn]: (state = initialState, payload) => state.set('openedTxn', payload.id),
+    [actions.setOpenedTip]: (state = initialState, payload) => state.set('openedTip', payload.id),
 }, initialState);
 
 

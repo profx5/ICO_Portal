@@ -33,7 +33,7 @@ class ICOProgress extends React.Component {
             countdownTime,
         } = this.props;
 
-        const raisedAmountString = Math.round(parseInt(gainedMoney, 10)/100) + '';
+        const raisedAmountString = Math.round(parseInt(gainedMoney, 10)/100) + ' USD';
         let hardCupNumber = parseInt(hardCup, 10);
         let phaseRaisedPercents = this.getPhasePercents(gainedMoney, hardCupNumber);
 
@@ -44,15 +44,15 @@ class ICOProgress extends React.Component {
                     <WrapperHeaderInfo>
                         <PartWrapper>
                             <DescHead>Base price:</DescHead>
-                            <Desc blue bold>1 TKN = 2 USD</Desc>
+                            <Desc blue bold>1 Vera = 2 USD</Desc>
                         </PartWrapper>
                         <PartWrapper>
-                            <DescHead>Current bonus (Phase 1):</DescHead>
-                            <Desc blue bold>33%</Desc>
+                            <DescHead>Phase bonus:</DescHead>
+                            <Desc blue><span>Private sale = </span>33%</Desc>
                         </PartWrapper>
                         <PartWrapper>
-                            <DescHead>Remaining:</DescHead>
-                            <Desc>{countdownTime}</Desc>
+                            <DescHead>Bonuses:</DescHead>
+                            <Desc blue><span>From 20000$ = </span>30% <span>Bonus!</span></Desc>
                         </PartWrapper>
                         <PartWrapper>
                             <DescHead>Funds raised:</DescHead>
@@ -136,6 +136,10 @@ const Desc = styled.div`
     font-size: 20px;
     font-weight: ${props => props.bold ? '600' : '500'};
     padding-top: 5px;
+    & span {
+        color: black;
+        font-weight: 500;
+    }
 `;
 
 const Text = styled.p`
