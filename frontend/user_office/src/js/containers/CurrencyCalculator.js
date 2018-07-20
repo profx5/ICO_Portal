@@ -17,22 +17,27 @@ import * as ICOInfoActions from './../actions/ICOInfoActions';
 
 class CurrencyCalculator extends React.Component {
 
-    updateTotalTokens = () => {
-        const {investAmount, investCurrencyRate, bonusPercent, setTokensAmount} = this.props;
+    constructor() {
+        super();
 
-        let totalTokens = investAmount * investCurrencyRate;
-        let bonusAmount = totalTokens / 100 * bonusPercent;
+        this.bonus = 0;
+    }
+
+    updateTotalTokens = () => {
+        const {investAmount, investCurrencyRate, setTokensAmount} = this.props;
+        let bonus = this.bonus;
+
+        let totalTokens = investAmount * parseInt(investCurrencyRate, 10);
+
+        if (totalTokens < 8000) bonus = 0;
+            else if (totalTokens >= 8000 && totalTokens < 20000) bonus = 20;
+            else if (totalTokens >= 20000) bonus = 30;
+
+        let bonusAmount = totalTokens / 100 * bonus;
         totalTokens = parseInt(totalTokens + bonusAmount, 10);
 
         setTokensAmount(totalTokens);
-    }
-
-    updateInvestAmount = () => {
-        const {tokensAmount, investCurrencyRate, bonusPercent} = this.props;
-
-        let totalInvest = investCurrencyRate / tokensAmount;
-        let bonusAmount = totalInvest / 100 * bonusPercent;
-        totalInvest = (totalInvest + bonusAmount).toFixed(2);
+        this.bonus = bonus;
     }
 
     componentDidUpdate() {
@@ -60,14 +65,30 @@ class CurrencyCalculator extends React.Component {
             bonusPercent
         } = this.props;
 
+        let bonus = this.bonus;
+
         return (
             <Wrapper>
                 <WrapperInner>
+
                     <InvestInput value={this.props.investAmount} type="text" onChangeHandler={this.investOnChangeHandler} header="Amount" currency={investCurrency}/>
-                    <InvestInput value={this.props.tokensAmount} type="text" header="TKN" currency="TKN"/>
-                        <ButtonWrapper to="/user_office/payment/buy">
-                            <Button clickHandler={this.investClickHandler} text="Buy"/>
-                        </ButtonWrapper>
+                    <TokensInputWrapper data-currency="TKN">
+                        <div className="head">TKN (Buy till 7 july and <span>get a 30% bonus!</span>)</div>
+                        <TokensInput>
+                            {bonus > 0 &&
+                                <React.Fragment>
+                                    <span>{investAmount} + </span>
+                                    <span className="bonus">{bonus}</span>&nbsp;=&nbsp; 
+                                </React.Fragment>
+                            }
+                            {this.props.tokensAmount}
+                        </TokensInput>
+                    </TokensInputWrapper>
+
+                    <ButtonWrapper to="/user_office/payment/buy">
+                        <Button clickHandler={this.investClickHandler} text="Buy"/>
+                    </ButtonWrapper>
+
                 </WrapperInner>
                 <BonusDesc>Progressive bonus for private presale phase is 
                 currenty available! Investing more than 8 000 USD will grant you 20% bonus! 
@@ -82,7 +103,7 @@ const mapStateToProps = ({Currencies, Invest, ICOInfo, Phase}) => ({
     investCurrencyRate: Currencies.get('investCurrencyRate'),
     investAmount: Invest.get('investAmount'),
     tokensAmount: Invest.get('tokensAmount'),
-    bonusPercent: Phase.get('bonus_percents'),
+    bonusPercent: 0,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -147,5 +168,48 @@ const BonusDesc = styled.p`
         top: 50%;
         transform: translateY(-50%);
         background: #4f99f6;
+    }
+`;
+
+const TokensInputWrapper = styled.div`
+    display: inline-block;
+    width: 345px;
+    height: 70px;
+    border-radius: 2px;
+    border: 1px solid #d6dfe6;
+    position: relative;
+    margin-right: 32px;
+    .head {
+        color: #0a0a0a;
+        position: absolute;
+        left: 0
+        top: -35px;
+        font-size: 16px;
+        span {
+            color: #3476fd;
+        }
+    }
+    &:after {
+        content: attr(data-currency);
+        color: rgba(10,10,10, 0.4);
+        position: absolute;
+        font-size: 18px;
+        right: 27px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+`;
+
+const TokensInput = styled.div`
+    width: 345px;
+    height: 70px;
+    margin-right: 32px;
+    padding-right: 67px;
+    padding-left: 18px;
+    line-height: 70px;
+    font-weight: 600;
+    color: #b6b6b6;
+    .bonus {
+        color: #3476fd;
     }
 `;
