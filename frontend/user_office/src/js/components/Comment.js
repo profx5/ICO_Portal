@@ -98,7 +98,6 @@ const FlexItem = styled.div`
     font-weight: 500;
     line-height: 17px;
     letter-spacing: 0.1px;
-    height: 74.5px;
     .meta {
         opacity: 0.4;
         font-family: Gilroy;
