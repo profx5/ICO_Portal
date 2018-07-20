@@ -1,5 +1,3 @@
-import os
-
 def tuple_exclude(orig_tuple, exclude_items):
     return tuple(
         filter(

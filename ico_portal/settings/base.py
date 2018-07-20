@@ -93,15 +93,7 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "frontend/landing/dist/static"),  # landing
-# ]
-
 STATIC_ROOT = os.path.join(BASE_DIR, "assets")
-
-STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "frontend/landing/dist/static"),  # landing
-]
 
 MEDIA_URL = '/media/'
 LOGIN_URL = '/login/'

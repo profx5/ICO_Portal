@@ -38,7 +38,7 @@ git submodule update --init
 
 Install python dependencies
 ```
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 ```
 
 Install gulp

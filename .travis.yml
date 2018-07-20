@@ -16,7 +16,7 @@ before_install:
   # - nvm install 9.5.0
 
 install:
-  - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
   - cd solidity-contracts && npm install && cd ..
   # - npm install
   # # chromedriver

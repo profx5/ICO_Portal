@@ -40,3 +40,5 @@ MEDIA_ROOT = '/media_data/'
 WEB3_RPC_URL = os.environ['WEB3_RPC_URL']
 
 CELERY_BROKER_URL = os.environ['CELERY_BROKER_URL']
+
+SIGNUP_CLOSED = os.getenv('SIGNUP_CLOSED', False)

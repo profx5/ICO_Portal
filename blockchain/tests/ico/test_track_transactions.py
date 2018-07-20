@@ -84,8 +84,6 @@ class TestSendPreparedTxns(_Base):
         self.assertEqual(transaction.nonce, sent_transaction.nonce + 1)
 
     def test_nonce_by_txn_count_calc(self):
-        import ipdb; ipdb.set_trace()
-
         self.eth_tester.send_transaction({
             'from': self.sender_account,
             'to': '0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',

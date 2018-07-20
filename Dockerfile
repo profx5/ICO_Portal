@@ -17,17 +17,17 @@ WORKDIR /usr/src/app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY blockchain  blockchain
-COPY helpdesk    helpdesk
-COPY ico_portal  ico_portal
-COPY user_office user_office
-COPY landing     landing
+COPY --from=frontend /tmp/assets/ assets
+COPY --from=frontend /tmp/webpack-stats.prod.json webpack-stats.prod.json
+
 COPY manage.py   manage.py
 COPY scripts     scripts
+COPY helpdesk    helpdesk
+COPY landing     landing
 COPY solidity-contracts solidity-contracts
-
-COPY --from=frontend /tmp/webpack-stats.prod.json webpack-stats.prod.json
-COPY --from=frontend /tmp/assets/ assets
+COPY ico_portal  ico_portal
+COPY blockchain  blockchain
+COPY user_office user_office
 
 RUN ./manage.py collectstatic --no-input
 
