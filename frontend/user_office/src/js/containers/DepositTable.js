@@ -2,10 +2,10 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import moment from "moment";
-import {Accordion} from 'react-uikit3';
 import iconCheckGreen from './../../img/check-green.svg';
+import iconReload from './../../img/shape.svg';
 import iconQuestion from './../../img/icons/icon_faq.svg';
-
+import * as UIActions from './../actions/UIActions';
 
 const chainResolver = {
     ETH: 'https://etherscan.io/tx/',
@@ -33,20 +33,20 @@ class DepositTable extends Component {
             <div className='uk-accordion-title'>
                 <FlexContainer className={item.getIn(['transfer', 'state']) === 'ACTUAL' ? 'prepared' : ''}>
                     <FlexItem
-                        width={6}>{moment(item.get('created_at')).format('YYYY-MM-DD HH:mm:ss')} {item.get('id')}</FlexItem>
-                    <FlexItem position={'relative'} width={3} failed={item.getIn(['transfer', 'state']) === 'FAILED'}>
-                        <span className='txn'>{item.getIn(['transfer', 'txn_hash']).substr(0, 40)}...</span>
+                        width={15}>{moment(item.get('created_at')).format('YYYY-MM-DD HH:mm:ss')} {item.get('id')}</FlexItem>
+                    <FlexItem position={'relative'} width={40} failed={item.getIn(['transfer', 'state']) === 'FAILED'}>
+                        <span className='txn'>{item.getIn(['transfer', 'txn_hash']).substr(0, 46)}...</span>
                         {item.getIn(['transfer', 'state']) !== 'FAILED' &&
-                        <IconImgAbsolute right={1} src={iconCheckGreen}/>}
-                        {item.getIn(['transfer', 'state']) === 'FAILED' &&
-                        <IconImgAbsolute right={1} src={iconQuestion}/>}
+                        <IconImgAbsolute right={1} src={iconCheckGreen}/> ||
+                        <IconImgAbsolute className={'border'} right={1} src={iconReload}/>}
+
                     </FlexItem>
-                    <FlexItem width={6} color>{amount}</FlexItem>
-                    <FlexItem width={6} color>{item.get('usd_value')}</FlexItem>
-                    <FlexItemColor width={6} failed={item.getIn(['transfer', 'state']) === 'FAILED'}
+                    <FlexItem width={15} color>{amount}</FlexItem>
+                    <FlexItem width={15} color>{item.get('usd_value', '-')}</FlexItem>
+                    <FlexItemColor width={15} failed={item.getIn(['transfer', 'state']) === 'FAILED'}
                                    up={item.get('direction') === 'IN'}>
-                        {item.get('direction') === 'IN' && '+' || '-'}{item.get('amount')}
-                        <IconImgAbsolute right={20} src={iconQuestion}/>
+                        <span>{item.get('direction') === 'IN' && '+' || '-'}{item.get('amount')}</span>
+                        <IconImgAbsolute className='more' onClick={this.toggleContent.bind(this, item.get('id'))} right={25} src={iconQuestion}/>
                     </FlexItemColor>
                 </FlexContainer>
             </div>
@@ -54,14 +54,24 @@ class DepositTable extends Component {
 
     };
 
+    toggleContent = (id) => {
+        const { setOpenedTxn, openedTxn } = this.props;
+        if (openedTxn == null || (openedTxn !== id)) {
+            setOpenedTxn(id);
+        } else {
+            setOpenedTxn(null);
+        }
+    };
+
     _renderContent = (item) => {
+        const { openedTxn } = this.props;
         let content = false;
         if (item.get('payment').size > 0) {
             content = chainResolver[item.getIn(['payment', '0', 'currency'])] + item.getIn(['payment', '0', 'txn_id']);
         }
 
         return (
-            <div className='uk-accordion-content'>
+            <AccordionContent className='uk-accordion-content' active={openedTxn === item.get('id')}>
                 <ContentWrapper>
                     <TxInfoWrapper>
                         <Head>
@@ -124,38 +134,69 @@ class DepositTable extends Component {
                         <br/>
                     </TxInfoWrapper>
                 </ContentWrapper>
-            </div>
+            </AccordionContent>
         )
     };
 
     render() {
-        const {deposits,} = this.props;
-
+        const { deposits } = this.props;
         return (
             <Wrapper>
                 <FlexContainer>
-                    <FlexItem className={'head'} width={6}>Time</FlexItem>
-                    <FlexItem className={'head'} width={3}>Transaction</FlexItem>
-                    <FlexItem className={'head'} width={6}>Amount</FlexItem>
-                    <FlexItem className={'head'} width={6}>USD value</FlexItem>
-                    <FlexItem className={'head'} width={6}>Vera&nbsp;Tokens</FlexItem>
+                    <FlexItem className={'head'} width={15}>Time</FlexItem>
+                    <FlexItem className={'head'} width={40}>Transaction</FlexItem>
+                    <FlexItem className={'head'} width={15}>Amount</FlexItem>
+                    <FlexItem className={'head'} width={15}>USD value</FlexItem>
+                    <FlexItem className={'head'} width={15}>Vera&nbsp;Tokens</FlexItem>
                 </FlexContainer>
-                <Accordion multiple={true} toggle={'.info'}>
+                {deposits.size > 0 &&
+                <Accordion>
                     {this._renderAccordionItems(deposits)}
                 </Accordion>
+                }
+                {deposits.size === 0 &&
+                <NoTransactionsDiv>
+                    You have no transactions yet
+                </NoTransactionsDiv>
+                }
+
             </Wrapper>
         )
     }
 }
 
-const mapStateToProps = ({deposits}) => ({
+const mapStateToProps = ({deposits, UI}) => ({
     deposits: deposits.get('results'),
-    currentPage: deposits.get('current_page')
-})
+    currentPage: deposits.get('current_page'),
+    openedTxn: UI.get('openedTxn')
+});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+    setOpenedTxn(id) {
+        dispatch(UIActions.setOpenedTxn(id))
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(DepositTable)
+const NoTransactionsDiv = styled.div`
+    background-color: #f6f6f6;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.56;
+    color: #233539;
+    padding: 10px;
+`;
+const Accordion = styled.ul`
+    list-style: none;
+    & li.active > .uk-accordion-title {
+        color: #4381fc;
+    }
+`;
+
+const AccordionContent = styled.div`
+    height: ${props => props.active ? 'auto': '0'};
+    overflow-y: auto;
+`;
 
 const Right = styled.div`
     float: right;
@@ -177,6 +218,13 @@ const IconImgAbsolute = styled.img`
     position: absolute;
     top: 20px;
     right: ${props => props.right ? props.right + '%' : '5%'};
+    &.more {
+        cursor: pointer;
+    }
+    &.border {
+        border: solid 1px rgba(151,151,151,0.5);
+        border-radius: 50%;
+    }
 `;
 
 const IconImg = styled.img`
@@ -260,7 +308,7 @@ const FlexContainer = styled.div`
 `;
 
 const FlexItem = styled.div`
-    width: ${props => props.width ? 'calc(100% /' + props.width + ')' : 'auto'};
+    width: ${props => props.width ? props.width + '%' : 'auto'};
     text-align: center;
     flex-shrink: 0;
     font-family: Gilroy;
@@ -268,7 +316,7 @@ const FlexItem = styled.div`
     font-weight: 500;
     line-height: 66px;
     letter-spacing: 0.1px;
-    color: ${props => props.color ? '#031949' : props => props.failed ? 'rgba(0,0,0,0.2)' : '#000000'};
+    // color: ${props => props.color ? '#031949' : props => props.failed ? 'rgba(0,0,0,0.2)' : '#000000'};
     border-top: 1px solid rgba(150, 150, 150, 0.2);
     height: 66px;
     position: ${props => props.position ? props.position : 'inherit' }
@@ -283,7 +331,7 @@ const FlexItem = styled.div`
         line-height: 66px;
         letter-spacing: normal;
         text-align: center;
-        color: #0a0a0a;
+        // color: #0a0a0a;
         height: 66px;
     }
     .txn {
@@ -296,18 +344,18 @@ const FlexItem = styled.div`
 `;
 
 const FlexItemColor = styled.div`
-    width: ${props => props.width ? 'calc(100% /' + props.width + ')' : 'auto'};
-    text-align: center;
+    width: ${props => props.width ? props.width + '%' : 'auto'};
+    text-align: left;
     flex-shrink: 0;
-    font-family: Gilroy;
     font-size: 16px;
     font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
     line-height: 66px;
     letter-spacing: 0.1px;
     position: relative;
     color: ${props => props.failed ? '#031949' : props => props.up ? '#11cd56' : '#ef2028'};
     border-top: 1px solid rgba(150, 150, 150, 0.2);
     height: 66px;
+    & span {
+        margin-left: 45px;
+    }
 `;

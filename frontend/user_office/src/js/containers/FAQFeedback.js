@@ -157,7 +157,6 @@ class FAQFeedback extends React.Component {
                 {[1, 2].includes(ticketFull.status) &&
                 <form encType={'multipart/form-data'} onSubmit={this.handleNewCommentSubmit}>
                     <input type="hidden" name={'ticket'} value={ticketFull.id}/>
-
                     <WrapperInput>
                         <StyledTextarea
                             placeholder={'Your message here'}
@@ -166,7 +165,6 @@ class FAQFeedback extends React.Component {
                         />
                     </WrapperInput>
                     {/*<input type="file" name={'attachment'} placeholder={'file here'}/>*/}
-                    <br/>
                     <ButtonWrapper>
                         <Button submit={true} text='Send'/>
                     </ButtonWrapper>
@@ -264,7 +262,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(FAQFeedback)
 
 const ContentWrapper = styled.div`
-    margin-bottom: 175px;
+    margin-bottom: 50px;
 `;
 
 const ClosedDiv = styled.div`
@@ -331,7 +329,6 @@ const FlexItem = styled.div`
     letter-spacing: 0.1px;
     color: ${props => props.color ? '#031949' : props => props.failed ? 'rgba(0,0,0,0.2)' : '#000000'};
     border-top:  ${props => props.border ? props.border : '1px solid rgba(150, 150, 150, 0.2)'};
-    height: 74.5px;
     position: ${props => props.position ? props.position : 'inherit' }
     padding: ${props => props.padding ? props.padding : '24.5px 0'};
     & span {

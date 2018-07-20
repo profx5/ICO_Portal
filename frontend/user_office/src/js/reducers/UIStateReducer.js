@@ -1,7 +1,6 @@
-import { createReducer } from 'redux-act';
+import {createReducer} from 'redux-act';
 import * as actions from './../actions/UIActions';
 import {Map} from 'immutable';
-
 
 
 const initialState = Map({
@@ -13,8 +12,8 @@ const initialState = Map({
     currentRoute: 1,
     activeKycTab: 2,
     showCurrenciesPopup: false,
+    openedTxn: null
 });
-
 
 
 export const UIStateReducer = createReducer({
@@ -30,8 +29,8 @@ export const UIStateReducer = createReducer({
     [actions.hideCurrenciesPopup]: (state = initialState, payload) => state.set("showCurrenciesPopup", false),
     [actions.changeSelectedTab]: (state = initialState, payload) => state.set("faqSelectedTab", payload.tab),
     [actions.setCurrentRoute]: (state = initialState, payload) => state.set("currentRoute", payload.route_index),
-    [actions.activateKycTab]: (state = initialState, payload) => state.set('activeKycTab', payload.id)
-
+    [actions.activateKycTab]: (state = initialState, payload) => state.set('activeKycTab', payload.id),
+    [actions.setOpenedTxn]: (state = initialState, payload) => state.set('openedTxn', payload.id),
 }, initialState);
 
 
