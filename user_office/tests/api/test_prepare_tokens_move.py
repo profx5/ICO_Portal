@@ -2,7 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 
 from ..base import APITestCase
-from user_office.factories import PhaseFactory, ExchangeRateFactory
+from user_office.factories import PhaseFactory, ExchangeRateFactory, KYCFactory
 from user_office.models import Transfer, TokensMove
 
 
@@ -13,6 +13,7 @@ class TestPrepareTokensMove(APITestCase):
         utcnow = datetime(2018, 5, 14, 11, 11, 11)
         self.stub_datetime_utcnow(utcnow)
 
+        KYCFactory(investor=self.get_investor())
         PhaseFactory(bonus_percents=30)
         ExchangeRateFactory(currency='ETH', rate=Decimal('750.77'))
 
@@ -40,3 +41,17 @@ class TestPrepareTokensMove(APITestCase):
         self.assertEqual(tokens_move.transfer, transfer)
         self.assertEqual(tokens_move.state, 'PREPARED')
         self.assertEqual(tokens_move.direction, 'IN')
+
+    def test_non_kyc_user(self):
+        utcnow = datetime(2018, 5, 14, 11, 11, 11)
+        self.stub_datetime_utcnow(utcnow)
+
+        PhaseFactory(bonus_percents=30)
+        ExchangeRateFactory(currency='ETH', rate=Decimal('750.77'))
+
+        response = self.client.post('/api/prepareTokensMove/', {
+            'value': '1.23',
+            'txn_hash': self.txn_hash
+        })
+
+        self.assertEqual(response.status_code, 403)

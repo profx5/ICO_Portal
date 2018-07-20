@@ -1,4 +1,6 @@
 from oslash import Right
+from shutil import rmtree
+from django.conf import settings
 
 from ico_portal.utils.datetime import datetime
 from ..base import APITestCase
@@ -13,6 +15,11 @@ class TestTickets(APITestCase):
 
         self.utcnow = datetime.utcnow()
         self.stub_datetime_utcnow(self.utcnow)
+
+    def tearDown(self):
+        super().tearDown()
+
+        rmtree(settings.MEDIA_ROOT, ignore_errors=True)
 
     def _get_ticket_id(self):
         return Ticket.objects.last().id
@@ -42,11 +49,11 @@ class TestTickets(APITestCase):
         })
 
     def test_create_ticket_w_attachment(self):
-        with open(fixture_path('photo.jpg'), 'rb') as photo:
+        with open(fixture_path('document.jpg'), 'rb') as document:
             response = self.client.post(f'/api/tickets/', {
                 'title': 'Test ticket',
                 'description': 'Test description',
-                'attachment': photo
+                'attachment': document
             }, format='multipart')
 
         self.assertEqual(response.status_code, 201)
@@ -62,7 +69,7 @@ class TestTickets(APITestCase):
                 'sender': self.get_investor().email,
                 'attachments': [{
                     'file': FollowUp.objects.order_by('id').last().attachment_set.first().file.url,
-                    'filename': 'photo.jpg',
+                    'filename': 'document.jpg',
                     'mime_type': 'image/jpeg'
                 }]
             }]
@@ -211,10 +218,10 @@ class TestTickets(APITestCase):
 
         ticket_id = result.value['ticket'].id
 
-        with open(fixture_path('photo.jpg'), 'rb') as photo:
+        with open(fixture_path('document.jpg'), 'rb') as document:
             response = self.client.post(f'/api/tickets/{ticket_id}/comment/', {
                 'comment': 'Test with attachment',
-                'attachment': photo
+                'attachment': document
             }, format='multipart')
 
         self.assertEqual(response.status_code, 201)
@@ -236,7 +243,7 @@ class TestTickets(APITestCase):
                 'sender': self.get_investor().email,
                 'attachments': [{
                     'file': FollowUp.objects.order_by('id').last().attachment_set.first().file.url,
-                    'filename': 'photo.jpg',
+                    'filename': 'document.jpg',
                     'mime_type': 'image/jpeg'
                 }]
             }]
