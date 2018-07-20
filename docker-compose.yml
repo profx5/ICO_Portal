@@ -19,7 +19,7 @@ services:
     image: rabbitmq:alpine
 
   web:
-    image: ico_portal:latest
+    image: profx5/ico_portal:latest
     environment:
       - DB_PASSWORD_FILE=/run/secrets/db_password
     secrets:
@@ -36,26 +36,74 @@ services:
       DB_USER:  ico_portal_user
       DB_PASSWORD_FILE: /run/secrets/db_password
       DB_HOST: db
+      ICO_PORTAL_HOST: invest.vera.wtf
+      SECRET_KEY_FILE: /run/secrets/ico_portal_secret_key
+      RAVEN_DSN_FILE: /run/secrets/raven_dsn
+      WEB3_RPC_URL: http://172.18.0.1:8545
+      ICO_EMAIL_HOST: smtp-pulse.com
+      ICO_EMAIL_HOST_USER: k.v.varlamov@gmail.com
+      ICO_EMAIL_HOST_PASSWORD: read_manual
+      ICO_EMAIL_DEFAULT_FROM: noreply@vera.jobs
+      CELERY_BROKER_URL: amqp://guest:guest@rabbit/
+
+  workers:
+    image: profx5/ico_portal:latest
+    command: "/usr/src/app/scripts/start_workers.sh"
+    environment:
+      - DB_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+      - ico_portal_secret_key
+      - raven_dsn
+    depends_on:
+      - db
+      - rabbit
+    environment:
+      DB_NAME: ico_portal
+      DB_USER:  ico_portal_user
+      DB_PASSWORD_FILE: /run/secrets/db_password
+      DB_HOST: db
       ICO_PORTAL_HOST: demo.ongrid.pro
       SECRET_KEY_FILE: /run/secrets/ico_portal_secret_key
       RAVEN_DSN_FILE: /run/secrets/raven_dsn
-  # worker:
-  #   image: main_site:latest
-  #   restart: always
-  #   command: ./run_celery.sh
-  #   depends_on:
-  #     - rabbit
+      WEB3_RPC_URL: http://172.18.0.1:8545
+      C_FORCE_ROOT: 1
+      CELERY_BROKER_URL: amqp://guest:guest@rabbit/
+
+  events_watcher:
+    image: profx5/ico_portal:latest
+    command: "/usr/src/app/scripts/start_beath.sh"
+    environment:
+      - DB_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+      - ico_portal_secret_key
+      - raven_dsn
+    depends_on:
+      - db
+      - rabbit
+    environment:
+      DB_NAME: ico_portal
+      DB_USER:  ico_portal_user
+      DB_PASSWORD_FILE: /run/secrets/db_password
+      DB_HOST: db
+      ICO_PORTAL_HOST: demo.ongrid.pro
+      SECRET_KEY_FILE: /run/secrets/ico_portal_secret_key
+      RAVEN_DSN_FILE: /run/secrets/raven_dsn
+      WEB3_RPC_URL: http://172.18.0.1:8545
+      C_FORCE_ROOT: 1
+      CELERY_BROKER_URL: amqp://guest:guest@rabbit/
 
   nginx:
     image: nginx:stable-alpine
     ports:
-      - "8000:8888"
+      - "8080:8888"
     volumes:
       - static:/static:ro
       - media:/media_data:ro
       - ./nginx:/etc/nginx/conf.d
     depends_on:
-      - webapp
+      - web
 
 secrets:
   db_password:
