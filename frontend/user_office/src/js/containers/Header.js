@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import * as UIActions from '../actions/UIActions';
 
 import HeaderNav from '../components/HeaderNav';
-import AccountInfo from '../components/AccountInfo';
+import Account from '../components/Account';
 import { Link } from 'react-router-dom';
 
 class Header extends React.Component {
@@ -46,8 +46,9 @@ class Header extends React.Component {
                     <HeaderNav/>
                 </NavWrapper>
                 <HeaderUser>
-                    <AccountInfo
+                    <Account
                         email={email}
+                        tokensAmount={tokensAmount} 
                         isDropdownAccountOpen={accountDropdownShown}
                         isDropdownStepsOpen={stepsDropdownShown}
                         dropdownAccountClickHandler={this.dropdownAccountClickHandler}
