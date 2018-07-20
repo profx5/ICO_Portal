@@ -19,7 +19,7 @@ class InvestorAdmin(PasswordFieldMixin, admin.ModelAdmin):
     list_display = ('email', 'eth_account', 'tokens_amount')
     fields = (('email', 'eth_account'), ('first_name', 'last_name'), 'tokens_amount',
               ('date_joined', 'last_login'), 'password')
-    readonly_fields = ('email', 'tokens_amount', 'date_joined', 'last_login')
+    readonly_fields = ('tokens_amount', 'date_joined', 'last_login')
     search_fields = ('email', 'eth_account')
 
     inlines = [KYCInstanceInline, TokensMoveInstanceInline, SocialAuthInline]
