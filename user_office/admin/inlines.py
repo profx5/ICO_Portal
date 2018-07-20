@@ -11,10 +11,7 @@ class KYCInstanceInline(admin.TabularInline):
     show_change_link = True
     extra = 0
 
-    fields = ('state', 'user_photo', 'firstname', 'midname', 'surname', 'gender',
-              'birthdate', 'country', 'city', 'registration_address', 'postcode',
-              'document_type', 'document_no', 'document_country', 'document_date',
-              'document_photo', 'decline_reason')
+    fields = ('state', 'type')
     readonly_fields = fields
 
 

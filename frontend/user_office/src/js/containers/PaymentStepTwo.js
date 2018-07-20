@@ -66,9 +66,11 @@ class PaymentStepTwo extends React.Component {
                         <div className="text">Great! If you already transfered funds on the account - just press "I already paid!" button. This action will finish your purchase!</div>
                     </RowPart>
                     <RowPart>
-                        <BtnWrapper>
-                            <Button text="I already paid!" />
-                        </BtnWrapper>
+                        <Link to="/user_office/payment/finish">
+                            <BtnWrapper>
+                                <Button text="I already paid!" />
+                            </BtnWrapper>
+                        </Link>
                     </RowPart>
                 </Row>
             </Wrapper>

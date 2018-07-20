@@ -1,5 +1,6 @@
 import ether from './helpers/ether';
 import EVMRevert from './helpers/EVMRevert';
+const { ethGetBalance } = require('./helpers/web3');
 
 const BigNumber = web3.BigNumber;
 
@@ -39,18 +40,32 @@ contract('TransferableTokenIface', function (accounts) {
 });
 
 contract('VeraCrowdsale', function (accounts) {
-  // const rate = new BigNumber(1);
+
   let result;
 
   beforeEach(async function () {
-    // this.openingTime = latestTime() + duration.weeks(1);
     this.token = await Token.new();
     this.oracle = await Oracle.new(43212, 10);
-    this.crowdsale = await Crowdsale.new(this.token.address, this.oracle.address);
+    this.wallet = accounts[9];
+    this.crowdsale = await Crowdsale.new(this.token.address, this.oracle.address, this.wallet);
     await this.token.transfer(this.crowdsale.address, 1000000 * 1e18);
   });
 
+  describe('Check deployment requirements', async function () {
+    it('unable to deploy with fewer args', async function () {
+      await Crowdsale.new(this.token.address, this.oracle.address, 0).should.be.rejectedWith(EVMRevert);
+      await Crowdsale.new(this.token.address, this.wallet, 0).should.be.rejectedWith(EVMRevert);
+      await Crowdsale.new(this.oracle.address, this.wallet, 0).should.be.rejectedWith(EVMRevert);
+      await Crowdsale.new(this.token.address, 0, 0).should.be.rejectedWith(EVMRevert);
+      await Crowdsale.new(this.oracle.address, 0, 0).should.be.rejectedWith(EVMRevert);
+    });
+  });
+
   describe('Check public variables', async function () {
+    it('wallet', async function () {
+      result = await this.crowdsale.wallet();
+      result.should.be.equal(this.wallet);
+    });
     it('token address', async function () {
       result = await this.crowdsale.token();
       result.should.be.equal(this.token.address);
@@ -311,6 +326,43 @@ contract('VeraCrowdsale', function (accounts) {
   });
 
   describe('accepting payments to fallback', function () {
+    function assertPaymentOk (etherDeposited, bonusPercent, bonusId) {
+      return async function () {
+        const precision = 5;
+        const valueInCents = Math.floor(etherDeposited * this.ethPriceInCents);
+        const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
+        const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
+        const centsRaisedBefore = await this.crowdsale.centsRaised();
+        const tokensSoldBefore = await this.crowdsale.tokensSold();
+        const walletBalanceBefore = await ethGetBalance(this.wallet);
+        const receipt = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
+        const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
+        const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
+        const centsRaisedAfter = await this.crowdsale.centsRaised();
+        const tokensSoldAfter = await this.crowdsale.tokensSold();
+        const walletBalanceAfter = await ethGetBalance(this.wallet);
+        BigNumber.config({ ERRORS: false });
+        const tokensCalculatedAmount = new BigNumber(etherDeposited * 1e18 * this.ethPriceInCents /
+          this.tokenPriceInCents / 100 * (100 + bonusPercent)).toPrecision(precision);
+        BigNumber.config({ ERRORS: true });
+        investorTokenBalanceAfter.minus(investorTokenBalanceBefore).toPrecision(precision).should.be
+          .bignumber.equal(tokensCalculatedAmount);
+        contractTokenBalanceBefore.minus(contractTokenBalanceAfter).toPrecision(precision).should.be
+          .bignumber.equal(tokensCalculatedAmount);
+        tokensSoldAfter.minus(tokensSoldBefore).toPrecision(precision).should.be.bignumber
+          .equal(tokensCalculatedAmount);
+        centsRaisedAfter.minus(centsRaisedBefore).should.be.bignumber.equal(valueInCents);
+        walletBalanceAfter.minus(walletBalanceBefore).should.be.bignumber.equal(ether(etherDeposited));
+        const logs = receipt.logs;
+        assert.equal(logs.length, 1);
+        assert.equal(logs[0].event, 'TokenPurchase');
+        assert.equal(logs[0].args.investor, accounts[0]);
+        logs[0].args.ethPriceInCents.should.be.bignumber.equal(this.ethPriceInCents);
+        logs[0].args.valueInCents.should.be.bignumber.equal(new BigNumber(valueInCents));
+        logs[0].args.bonusPercent.should.be.bignumber.equal(new BigNumber(bonusPercent));
+        logs[0].args.bonusIds.should.be.bignumber.equal(new BigNumber(bonusId));
+      };
+    }
     beforeEach(async function () {
       this.tokenPriceInCents = 200;
     });
@@ -342,41 +394,7 @@ contract('VeraCrowdsale', function (accounts) {
           it('18.5 ETH should be rejected  - less than minDeposit', async function () {
             await this.crowdsale.send(ether(18.5)).should.be.rejectedWith(EVMRevert);
           });
-          it('18.6 ETH', async function () {
-            const etherDeposited = 18.6;
-            const bonusPercent = 20;
-            const precision = 5;
-            const valueInCents = Math.floor(etherDeposited * this.ethPriceInCents);
-            const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
-            const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
-            const centsRaisedBefore = await this.crowdsale.centsRaised();
-            const tokensSoldBefore = await this.crowdsale.tokensSold();
-            const receipt = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
-            const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
-            const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
-            const centsRaisedAfter = await this.crowdsale.centsRaised();
-            const tokensSoldAfter = await this.crowdsale.tokensSold();
-            BigNumber.config({ ERRORS: false });
-            const tokensCalculatedAmount = new BigNumber(etherDeposited * 1e18 * this.ethPriceInCents /
-              this.tokenPriceInCents / 100 * (100 + bonusPercent)).toPrecision(precision);
-            BigNumber.config({ ERRORS: true });
-            investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            contractTokenBalanceBefore.sub(contractTokenBalanceAfter).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            centsRaisedAfter.sub(centsRaisedBefore).should.be
-              .bignumber.equal(valueInCents);
-            const logs = receipt.logs;
-            assert.equal(logs.length, 1);
-            assert.equal(logs[0].event, 'TokenPurchase');
-            assert.equal(logs[0].args.investor, accounts[0]);
-            assert.equal(logs[0].args.ethPriceInCents, this.ethPriceInCents);
-            assert.equal(logs[0].args.valueInCents, valueInCents);
-            assert.equal(logs[0].args.bonusPercent, bonusPercent);
-            assert.equal(logs[0].args.bonusIds, 0x1);
-          });
+          it('18.6 ETH', assertPaymentOk(18.6, 20, 1));
         });
         describe('by 5832.12 USD/ETH', function () {
           beforeEach(async function () {
@@ -397,146 +415,10 @@ contract('VeraCrowdsale', function (accounts) {
           it('1.37 ETH should be rejected  - less than minDeposit', async function () {
             await this.crowdsale.send(ether(1.37)).should.be.rejectedWith(EVMRevert);
           });
-          it('1.4 ETH', async function () {
-            const etherDeposited = 1.4;
-            const bonusPercent = 20;
-            const precision = 5;
-            const valueInCents = Math.floor(etherDeposited * this.ethPriceInCents);
-            const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
-            const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
-            const centsRaisedBefore = await this.crowdsale.centsRaised();
-            const tokensSoldBefore = await this.crowdsale.tokensSold();
-            const receipt = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
-            const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
-            const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
-            const centsRaisedAfter = await this.crowdsale.centsRaised();
-            const tokensSoldAfter = await this.crowdsale.tokensSold();
-            BigNumber.config({ ERRORS: false });
-            const tokensCalculatedAmount = new BigNumber(etherDeposited * 1e18 * this.ethPriceInCents /
-              this.tokenPriceInCents / 100 * (100 + bonusPercent)).toPrecision(precision);
-            BigNumber.config({ ERRORS: true });
-            investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            contractTokenBalanceBefore.sub(contractTokenBalanceAfter).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            centsRaisedAfter.sub(centsRaisedBefore).should.be
-              .bignumber.equal(valueInCents);
-            const logs = receipt.logs;
-            assert.equal(logs.length, 1);
-            assert.equal(logs[0].event, 'TokenPurchase');
-            assert.equal(logs[0].args.investor, accounts[0]);
-            assert.equal(logs[0].args.ethPriceInCents, this.ethPriceInCents);
-            assert.equal(logs[0].args.valueInCents, valueInCents);
-            assert.equal(logs[0].args.bonusPercent, bonusPercent);
-            assert.equal(logs[0].args.bonusIds, 0x1);
-          });
-          it('3.4 ETH', async function () {
-            const etherDeposited = 3.4;
-            const bonusPercent = 20;
-            const precision = 5;
-            const valueInCents = Math.floor(etherDeposited * this.ethPriceInCents);
-            const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
-            const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
-            const centsRaisedBefore = await this.crowdsale.centsRaised();
-            const tokensSoldBefore = await this.crowdsale.tokensSold();
-            const receipt = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
-            const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
-            const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
-            const centsRaisedAfter = await this.crowdsale.centsRaised();
-            const tokensSoldAfter = await this.crowdsale.tokensSold();
-            BigNumber.config({ ERRORS: false });
-            const tokensCalculatedAmount = new BigNumber(etherDeposited * 1e18 * this.ethPriceInCents /
-              this.tokenPriceInCents / 100 * (100 + bonusPercent)).toPrecision(precision);
-            BigNumber.config({ ERRORS: true });
-            investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            contractTokenBalanceBefore.sub(contractTokenBalanceAfter).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            centsRaisedAfter.sub(centsRaisedBefore).should.be
-              .bignumber.equal(valueInCents);
-            const logs = receipt.logs;
-            assert.equal(logs.length, 1);
-            assert.equal(logs[0].event, 'TokenPurchase');
-            assert.equal(logs[0].args.investor, accounts[0]);
-            assert.equal(logs[0].args.ethPriceInCents, this.ethPriceInCents);
-            assert.equal(logs[0].args.valueInCents, valueInCents);
-            assert.equal(logs[0].args.bonusPercent, bonusPercent);
-            assert.equal(logs[0].args.bonusIds, 0x1);
-          });
-          it('3.5 ETH', async function () {
-            const etherDeposited = 3.5;
-            const bonusPercent = 30;
-            const precision = 5;
-            const valueInCents = Math.floor(etherDeposited * this.ethPriceInCents);
-            const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
-            const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
-            const centsRaisedBefore = await this.crowdsale.centsRaised();
-            const tokensSoldBefore = await this.crowdsale.tokensSold();
-            const receipt = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
-            const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
-            const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
-            const centsRaisedAfter = await this.crowdsale.centsRaised();
-            const tokensSoldAfter = await this.crowdsale.tokensSold();
-            BigNumber.config({ ERRORS: false });
-            const tokensCalculatedAmount = new BigNumber(etherDeposited * 1e18 * this.ethPriceInCents /
-              this.tokenPriceInCents / 100 * (100 + bonusPercent)).toPrecision(precision);
-            BigNumber.config({ ERRORS: true });
-            investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            contractTokenBalanceBefore.sub(contractTokenBalanceAfter).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            centsRaisedAfter.sub(centsRaisedBefore).should.be
-              .bignumber.equal(valueInCents);
-            const logs = receipt.logs;
-            assert.equal(logs.length, 1);
-            assert.equal(logs[0].event, 'TokenPurchase');
-            assert.equal(logs[0].args.investor, accounts[0]);
-            assert.equal(logs[0].args.ethPriceInCents, this.ethPriceInCents);
-            assert.equal(logs[0].args.valueInCents, valueInCents);
-            assert.equal(logs[0].args.bonusPercent, bonusPercent);
-            assert.equal(logs[0].args.bonusIds, 0x2);
-          });
-          it('37 ETH', async function () {
-            const etherDeposited = 37;
-            const bonusPercent = 30;
-            const precision = 5;
-            const valueInCents = Math.floor(etherDeposited * this.ethPriceInCents);
-            const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
-            const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
-            const centsRaisedBefore = await this.crowdsale.centsRaised();
-            const tokensSoldBefore = await this.crowdsale.tokensSold();
-            const receipt = await this.crowdsale.send(ether(etherDeposited)).should.be.fulfilled;
-            const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
-            const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
-            const centsRaisedAfter = await this.crowdsale.centsRaised();
-            const tokensSoldAfter = await this.crowdsale.tokensSold();
-            BigNumber.config({ ERRORS: false });
-            const tokensCalculatedAmount = new BigNumber(etherDeposited * 1e18 * this.ethPriceInCents /
-              this.tokenPriceInCents / 100 * (100 + bonusPercent)).toPrecision(precision);
-            BigNumber.config({ ERRORS: true });
-            investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            contractTokenBalanceBefore.sub(contractTokenBalanceAfter).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
-              .bignumber.equal(tokensCalculatedAmount);
-            centsRaisedAfter.sub(centsRaisedBefore).should.be
-              .bignumber.equal(valueInCents);
-            const logs = receipt.logs;
-            assert.equal(logs.length, 1);
-            assert.equal(logs[0].event, 'TokenPurchase');
-            assert.equal(logs[0].args.investor, accounts[0]);
-            assert.equal(logs[0].args.ethPriceInCents, this.ethPriceInCents);
-            assert.equal(logs[0].args.valueInCents, valueInCents);
-            assert.equal(logs[0].args.bonusPercent, bonusPercent);
-            assert.equal(logs[0].args.bonusIds, 0x2);
-          });
+          it('1.4 ETH', assertPaymentOk(1.4, 20, 1));
+          it('3.4 ETH', assertPaymentOk(3.4, 20, 1));
+          it('3.5 ETH', assertPaymentOk(3.5, 30, 2));
+          it('37 ETH', assertPaymentOk(37, 30, 2));
         });
       });
     });
@@ -578,15 +460,16 @@ contract('VeraCrowdsale', function (accounts) {
         const tokensCalculatedAmount = new BigNumber(1e18 * valueInCents / this.tokenPriceInCents / 100 * (100 + bonusPercent))
           .toPrecision(precision);
         BigNumber.config({ ERRORS: true });
-        investorTokenBalanceAfter.sub(investorTokenBalanceBefore).toPrecision(precision).should.be
+        investorTokenBalanceAfter.minus(investorTokenBalanceBefore).toPrecision(precision).should.be
           .bignumber.equal(tokensCalculatedAmount);
-        contractTokenBalanceBefore.sub(contractTokenBalanceAfter).toPrecision(precision).should.be
+        contractTokenBalanceBefore.minus(contractTokenBalanceAfter).toPrecision(precision).should.be
           .bignumber.equal(tokensCalculatedAmount);
-        tokensSoldAfter.sub(tokensSoldBefore).toPrecision(precision).should.be
+        tokensSoldAfter.minus(tokensSoldBefore).toPrecision(precision).should.be
           .bignumber.equal(tokensCalculatedAmount);
-        centsRaisedAfter.sub(centsRaisedBefore).should.be
+        centsRaisedAfter.minus(centsRaisedBefore).should.be
           .bignumber.equal(valueInCents);
       });
     });
   });
 });
+

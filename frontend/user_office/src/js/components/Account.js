@@ -4,45 +4,45 @@ import styled from 'styled-components';
 import userPlaceholder from './../../img/user.svg';
 import arrowImg from './../../img/arrow-down.svg';
 import exclaimIcon from './../../img/icons/icon_exclaim.svg';
+import walletIcon from './../../img/icons/icon_wallet.svg';
 
 import { Link } from 'react-router-dom';
 
-const AccountInfo = ({email, isDropdownAccountOpen, isDropdownStepsOpen, dropdownAccountClickHandler, dropdownStepsClickHandler}) => {
+const Account = ({email, tokensAmount, isDropdownAccountOpen, isDropdownStepsOpen, dropdownAccountClickHandler, dropdownStepsClickHandler}) => {
     return (
         <InfoWrapper>
-            <UserInfo>
-                <UserInfoInner onClick={dropdownStepsClickHandler}>
-                    <p>Steps completed: <span>1/3</span></p>
+            <Balance>
+                <img src={walletIcon}/>
+                <p>{tokensAmount} <span>TKN</span></p>
+            </Balance>
+
+
+
+            <AccountInfo>
+                <AccountInfoText onClick={dropdownAccountClickHandler}>
+                    <Steps>Steps completed: <span>1/3</span></Steps>
                     <UserImg/>
-                </UserInfoInner>
-                {isDropdownStepsOpen &&
-                    <DropdownSteps>
-                        <ul>
-                            <DropdownListItem passed>1. ETH wallet registration</DropdownListItem>
-                            <DropdownListItem>2. Pass KYC</DropdownListItem>
-                            <DropdownListItem>3. Buy tokens</DropdownListItem>
-                        </ul>
-                    </DropdownSteps>
-                }
-            </UserInfo>
-
-
-
-            <EmailInfo>
-                <EmailTextWrapper onClick={dropdownAccountClickHandler}>
-                    <EmailText>{email}</EmailText>
                     <ArrowImg up={isDropdownAccountOpen} src={arrowImg} />
-                </EmailTextWrapper>
+                </AccountInfoText>
                 {isDropdownAccountOpen && 
                     <DropdownAccount>
-                        <ul>
-                            <ListItem onClick={dropdownAccountClickHandler}>
+                        <StepsList>
+                            <StepsListItem passed>1.&nbsp;&nbsp;ETH wallet registration</StepsListItem>
+                            <StepsListItem>2.&nbsp;&nbsp;Pass KYC</StepsListItem>
+                            <StepsListItem>3.&nbsp;&nbsp;Buy tokens</StepsListItem>
+                        </StepsList>
+                        <EmailInfo>
+                            <div className="text">Your profile:</div>
+                            <div className="email">{email}</div>
+                        </EmailInfo>
+                        <NavList>
+                            <NavListItem onClick={dropdownAccountClickHandler}>
                                 <Link to="/user_office/settings">Account settings</Link>
-                            </ListItem>
-                            <ListItem onClick={dropdownAccountClickHandler}>
+                            </NavListItem>
+                            <NavListItem onClick={dropdownAccountClickHandler}>
                                 <Link to="/user_office/verification">Verification</Link>
-                            </ListItem>
-                        </ul>
+                            </NavListItem>
+                        </NavList>
                         <LogoutLink href='/logout/'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20">
                               <g fill="#858B91" fillRule="nonzero" stroke="#979797" strokeWidth=".5">
@@ -54,12 +54,12 @@ const AccountInfo = ({email, isDropdownAccountOpen, isDropdownStepsOpen, dropdow
                         </LogoutLink>
                     </DropdownAccount>
                 }
-            </EmailInfo>
+            </AccountInfo>
         </InfoWrapper>
     )
 }
 
-export default AccountInfo;
+export default Account;
 
 
 const InfoWrapper = styled.div`
@@ -69,45 +69,7 @@ const InfoWrapper = styled.div`
     float: right;
 `;
 
-const UserImg = styled.div`
-    width: 47px;
-    height: 47px;
-    margin-left: 25px;
-    position: relative;
-    z-index: 1;
-    background: url(${userPlaceholder}) no-repeat center;
-    background-size: cover;
-    &:before {
-        content: '';
-        width: 18px;
-        height: 18px;
-        border-radius: 100%;
-        background: url(${exclaimIcon}) no-repeat center, #f26d6d;
-        position: absolute;
-        bottom: -4px;
-        right: 0px;
-        border: 2px solid white;
-    }
-`;
-
-const UserInfo = styled.div`
-    position: relative;
-    p {
-
-    }
-    span {
-        color: #ff6268;
-        font-weight: 600;
-    }
-`;
-
-const UserInfoInner = styled.div`
-    display inline-flex;
-    align-items: center;
-    cursor: pointer;
-`;
-
-const EmailInfo = styled.span`
+const AccountInfo = styled.div`
     margin-left: 60px;
     position: relative;
     font-size: 15px;
@@ -126,9 +88,77 @@ const EmailInfo = styled.span`
     }
 `;
 
-const EmailText = styled.p`
+const AccountInfoText = styled.div`
+    display inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+`;
+
+const UserImg = styled.div`
+    width: 47px;
+    height: 47px;
+    margin-left: 20px;
+    position: relative;
+    z-index: 1;
+    background: url(${userPlaceholder}) no-repeat center;
+    background-size: cover;
+    &:before {
+        content: '';
+        width: 18px;
+        height: 18px;
+        border-radius: 100%;
+        background: url(${exclaimIcon}) no-repeat center, #f26d6d;
+        position: absolute;
+        bottom: -4px;
+        right: 0px;
+        border: 2px solid white;
+    }
+`;
+
+const Balance = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 23px;
+    img {
+        margin-right: 15px;
+    }
+    p {
+        color: #3172fd;
+        font-weight: 600;
+        font-size: 20px;
+    }
+    span {
+        font-weight: 400;
+    }
+`;
+
+
+const EmailInfo = styled.div`
+    padding: 0 23px 18px;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: #222121;
+    border-bottom: 1px solid rgba(193,193,193,.3);
+    margin-bottom: 8px;
+    .text {
+        opacity: .5;
+    }
+    .email {
+
+    }
+`;
+
+const Steps = styled.p`
     color: #222121;
     user-select: none;
+    span {
+        color: #00da36;
+        font-size: 16px;
+        font-weight: 600;
+    }
 `;
 
 const ArrowImg = styled.img`
@@ -138,43 +168,27 @@ const ArrowImg = styled.img`
     transform: ${props => props.up ? 'rotate(0)' : 'rotate(-180deg)'}
 `;
 
-const EmailTextWrapper = styled.div`
-    cursor: pointer;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: flex-end;
-    position: relative;
-    z-index: 1;
-`;
-
 const DropdownAccount = styled.div`
     width: calc(100% + 38px);
     position: absolute;
     left: 50%;
     top: -25px;
-    padding: 75px 15px 0;
-    transform: translate3d(-50%,0,0);
+    padding: 75px 0 0;
+    transform: translateX(-50%);
     border-radius: 6px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     z-index: 0;
 `;
 
-const DropdownSteps = styled.div`
-    width: 299px;
-    background: white;
-    padding: 65px 23px 26px;
-    box-shadow: 0 10px 21px 0 rgba(173, 182, 217, 0.3);
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: -11px;
-    border-radius: 3px;
-    z-index: -1;
+const StepsList = styled.ul`
+    border-bottom: 1px solid rgba(193,193,193,.3);
+    padding-bottom: 23px;
+    margin-bottom: 20px;
+    padding: 0 23px 23px;
 `;
 
-const DropdownListItem = styled.li`
+const StepsListItem = styled.li`
     font-size: 15px;
     color: ${props => props.passed ? '#11cd56' : '#323c47'};
     margin-top: 16px;
@@ -187,6 +201,7 @@ const LogoutLink = styled.a`
     display: flex;
     border-top: 1px solid rgba(193,193,193,.3);
     transition: all .25s ease;
+    padding: 0 23px;
     svg {
         margin-right: 13px;
         g {
@@ -202,9 +217,20 @@ const LogoutLink = styled.a`
     }
 `;
 
-const ListItem = styled.li`
-    margin-bottom: 14px;
+const NavList = styled.ul`
+`;
+
+const NavListItem = styled.li`
+    line-height: 45px;
+    padding: 0 23px;
+    &:hover {
+        background: rgba(216,216,216,.4);
+    }
     &:last-of-type {
-        margin-bottom: 37px;
+        margin-bottom: 7px;
+    }
+    a {
+        height: 100%;
+        display: block;
     }
 `;

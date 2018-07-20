@@ -99,6 +99,9 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "assets")
 
+STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "frontend/landing/dist/static"),  # landing
+]
 
 MEDIA_URL = '/media/'
 LOGIN_URL = '/login/'
@@ -114,3 +117,7 @@ try:
     from .local import *
 except ImportError:
     pass
+
+# Authorasation settings
+
+SIGNUP_CLOSED = True

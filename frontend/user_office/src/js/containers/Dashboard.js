@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 import ICOProgress from './ICOProgress';
+import BonusSheet from './BonusSheet';
 
-import Banner from './../../img/banner.jpg';
+
+import Banner from './../../img/Banner_Vera.png';
 
 
 const Dashboard = (props) => {
@@ -11,6 +13,7 @@ const Dashboard = (props) => {
         <Wrapper>
             <BannerWrapper />
             <Head>Dashboard</Head>
+            <BonusSheet/>
             <ICOProgress/>
         </Wrapper>
     )

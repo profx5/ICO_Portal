@@ -6,6 +6,7 @@ import {withRouter} from 'react-router';
 
 import PaymentStepOne from './PaymentStepOne';
 import PaymentStepTwo from './PaymentStepTwo';
+import PaymentStepThree from './PaymentStepThree';
 import CurrenciesPopup from './CurrenciesPopup';
 import Steps from './../components/Steps';
 
@@ -16,12 +17,13 @@ class Payment extends React.Component {
         const {isCurrenciesPopupVisible} = this.props;
 
         return (
-            <Wrapper className="">
+            <Wrapper>
                 <Head>Payment</Head>
                 <Steps step="1"/>
                 <Switch>
                     <Route exact path="/user_office/payment" component={PaymentStepOne}/>
                     <Route exact path="/user_office/payment/buy" component={PaymentStepTwo}/>
+                    <Route exact path="/user_office/payment/finish" component={PaymentStepThree}/>
                 </Switch>
                 {isCurrenciesPopupVisible && <CurrenciesPopup/>}
             </Wrapper>
