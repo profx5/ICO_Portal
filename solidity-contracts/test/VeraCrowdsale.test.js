@@ -446,11 +446,12 @@ contract('VeraCrowdsale', function (accounts) {
         const bonusPercent = 20;
         const precision = 5;
         const valueInCents = 854345;
+        const bonusId = 1;
         const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
         const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
         const centsRaisedBefore = await this.crowdsale.centsRaised();
         const tokensSoldBefore = await this.crowdsale.tokensSold();
-        await this.crowdsale.buyTokensViaBackend(accounts[0], valueInCents, { from: accounts[1] })
+        const receipt = await this.crowdsale.buyTokensViaBackend(accounts[0], valueInCents, { from: accounts[1] })
           .should.be.fulfilled;
         const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
         const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
@@ -468,6 +469,14 @@ contract('VeraCrowdsale', function (accounts) {
           .bignumber.equal(tokensCalculatedAmount);
         centsRaisedAfter.minus(centsRaisedBefore).should.be
           .bignumber.equal(valueInCents);
+        const logs = receipt.logs;
+        assert.equal(logs.length, 1);
+        assert.equal(logs[0].event, 'TokenPurchase');
+        assert.equal(logs[0].args.investor, accounts[0]);
+        logs[0].args.ethPriceInCents.should.be.bignumber.equal(this.ethPriceInCents);
+        logs[0].args.valueInCents.should.be.bignumber.equal(new BigNumber(valueInCents));
+        logs[0].args.bonusPercent.should.be.bignumber.equal(new BigNumber(bonusPercent));
+        logs[0].args.bonusIds.should.be.bignumber.equal(new BigNumber(bonusId));
       });
     });
   });
