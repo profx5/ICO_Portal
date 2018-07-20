@@ -53,7 +53,6 @@ class CurrencyCalculator extends React.Component {
 
     initialUpdate = () => {
         this.updateTotalTokens();
-        this.props.setInvestAmount(1);
     }
 
 
