@@ -11,7 +11,7 @@ from user_office.api_urls import api_urlpatterns
 
 
 urlpatterns = [
-    path('', landing_views.main),
+    path('', landing_views.IndexPage.as_view()),
     path('', include('social_django.urls', namespace='social')),
     path('', include('blockchain.urls', namespace='blockchain')),
 
