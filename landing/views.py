@@ -1,18 +1,6 @@
-from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import RedirectView
 
-from .models import *
 
-
-def main(request):
-    listed_models = [
-        News,
-        Milestone,
-        Document,
-    ]
-
-    context = {}
-
-    for model in listed_models:
-        context[model.__name__] = model.objects.all()
-
-    return render(request, 'index.html', context)
+class IndexPage(RedirectView):
+    url = reverse_lazy('login')
