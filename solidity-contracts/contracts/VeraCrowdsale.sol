@@ -1,17 +1,28 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.4.24;
 
 import "../openzeppelin-solidity/contracts/ownership/rbac/RBAC.sol";
 import "../openzeppelin-solidity/contracts/math/Math.sol";
 import "../openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 
+/**
+ * @title Interface of Price oracle
+ * @dev Implements methods of price oracle used in the crowdsale
+ * @author OnGrid Systems
+ */
 contract PriceOracleIface {
   uint256 public ethPriceInCents;
+
   function getUsdCentsFromWei(uint256 _wei) public view returns (uint256) {
   }
 }
 
 
+/**
+ * @title Interface of ERC-20 token
+ * @dev Implements transfer methods and event used throughout crowdsale
+ * @author OnGrid Systems
+ */
 contract TransferableTokenIface {
   function transfer(address to, uint256 value) public returns (bool) {
   }
@@ -20,19 +31,45 @@ contract TransferableTokenIface {
 }
 
 
+/**
+ * @title CrowdSale contract for Vera.jobs
+ * @dev Keep the list of investors passed KYC, receive ethers to fallback,
+ * calculate correspinding amount of tokens, add bonus (depending on the deposit size)
+ * then transfers tokens to the investor's account
+ * @author OnGrid Systems
+ */
 contract VeraCrowdsale is RBAC {
   using SafeMath for uint256;
+
+  // Price of one token (1.00000...) in USD cents
   uint256 public tokenPriceInCents = 200;
+
+  // Minimal amount of USD cents to invest. Transactions of less value will be reverted.
   uint256 public minDepositInCents = 800000;
+
+  // Amount of USD cents raised. Continuously increments on each transaction.
+  // Note: may be irrelevant because the actual amount of harvested ethers depends on ETH/USD price at the moment.
   uint256 public centsRaised;
+
+  // Amount of tokens distributed by this contract.
+  // Note: doesn't include previous phases of tokensale.
   uint256 public tokensSold;
+
+  // Address of VERA ERC-20 token contract
   TransferableTokenIface public token;
+
+  // Address of ETH price feed
   PriceOracleIface public priceOracle;
+
+  // Wallet address collecting received ETH
   address public wallet;
+
+  // constants defining roles for access control
   string public constant ROLE_ADMIN = "admin";
   string public constant ROLE_BACKEND = "backend";
   string public constant ROLE_KYC_VERIFIED_INVESTOR = "kycVerified";
 
+  //
   struct AmountBonus {
     uint256 id;
     uint256 amountFrom;
@@ -116,14 +153,6 @@ contract VeraCrowdsale is RBAC {
     onlyKYCVerifiedInvestor
   {
     uint256 valueInCents = priceOracle.getUsdCentsFromWei(msg.value);
-    (uint256 bonusPercent, uint256 bonusIds) = computeBonuses(valueInCents);
-    emit TokenPurchase(
-      msg.sender,
-      priceOracle.ethPriceInCents(),
-      valueInCents,
-      bonusPercent,
-      bonusIds
-    );
     buyTokens(msg.sender, valueInCents);
     wallet.transfer(msg.value);
   }
@@ -237,10 +266,18 @@ contract VeraCrowdsale is RBAC {
    * @dev deposit
    */
   function buyTokens(address _investor, uint256 _cents) internal {
+    (uint256 bonusPercent, uint256 bonusIds) = computeBonuses(_cents);
     uint256 tokens = computeTokens(_cents);
     require(tokens > 0, "value is not enough");
     token.transfer(_investor, tokens);
     centsRaised = centsRaised.add(_cents);
     tokensSold = tokensSold.add(tokens);
+    emit TokenPurchase(
+      _investor,
+      priceOracle.ethPriceInCents(),
+      _cents,
+      bonusPercent,
+      bonusIds
+    );
   }
 }
