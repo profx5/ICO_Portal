@@ -90,6 +90,7 @@ export class UserSagas {
 
         if (response.data.success) {
             yield put(UserActions.changeEmailSuccessfull())
+            yield put(UserActions.changeEmailRequest())
         } else {
             yield put(UserActions.changeEmailFailed())
         }

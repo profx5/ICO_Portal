@@ -11,7 +11,7 @@ const initialState = Map({
     "tokens_amount": 0.00,
     "kyc_required": false,
     "investment_threshold": 0,
-
+    "state": "WAITING"
 });
 
 

@@ -16,6 +16,8 @@ import Payment from './Payment';
 
 import history from './../utils/history';
 
+import SetAccount from './SetAccount';
+
 
 class Layout extends Component {
 
@@ -35,6 +37,7 @@ class Layout extends Component {
                         <Route path="/user_office/verification" component={Verification}/>
                         <Route path="/user_office/settings" component={Settings}/>
                     </Switch>
+                    {this.props.showSetAccountPopup && <SetAccount/>}
                 </MainWrapper>
             </Wrapper>
         )
@@ -43,6 +46,7 @@ class Layout extends Component {
 
 const mapStateToProps = ({UI}) => ({
     currentRoute: UI.get('currentRoute'),
+    showSetAccountPopup: UI.get('showSetAccountPopup')
 })
 
 const mapDispatchToProps = (dispatch) => ({})

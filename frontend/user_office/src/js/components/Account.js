@@ -4,11 +4,23 @@ import styled from 'styled-components';
 import userPlaceholder from './../../img/user.svg';
 import arrowImg from './../../img/arrow-down.svg';
 import exclaimIcon from './../../img/icons/icon_exclaim.svg';
+import checkIcon from './../../img/check_mini_icon.svg';
 import walletIcon from './../../img/icons/icon_wallet.svg';
 
 import { Link } from 'react-router-dom';
 
-const Account = ({email, tokensAmount, isDropdownAccountOpen, isDropdownStepsOpen, dropdownAccountClickHandler, dropdownStepsClickHandler}) => {
+const Account = ({
+    email, 
+    tokensAmount, 
+    isDropdownAccountOpen, 
+    isDropdownStepsOpen, 
+    dropdownAccountClickHandler, 
+    dropdownStepsClickHandler, 
+    stepOnePassed, 
+    stepTwoPassed, 
+    stepThreePassed, 
+    stepsPassed,
+    showSetAccountPopup}) => {
     return (
         <InfoWrapper>
             <Balance>
@@ -20,16 +32,16 @@ const Account = ({email, tokensAmount, isDropdownAccountOpen, isDropdownStepsOpe
 
             <AccountInfo>
                 <AccountInfoText onClick={dropdownAccountClickHandler}>
-                    <Steps>Steps completed: <span>1/3</span></Steps>
-                    <UserImg/>
+                    <Steps>Steps completed: <span>{stepsPassed}/3</span></Steps>
+                    <UserImg approved={stepsPassed === 3}/>
                     <ArrowImg up={isDropdownAccountOpen} src={arrowImg} />
                 </AccountInfoText>
                 {isDropdownAccountOpen && 
                     <DropdownAccount>
                         <StepsList>
-                            <StepsListItem passed>1.&nbsp;&nbsp;ETH wallet registration</StepsListItem>
-                            <StepsListItem>2.&nbsp;&nbsp;Pass KYC</StepsListItem>
-                            <StepsListItem>3.&nbsp;&nbsp;Buy tokens</StepsListItem>
+                            <StepsListItem passed={stepOnePassed}>1.&nbsp;&nbsp;ETH wallet registration</StepsListItem>
+                            <StepsListItem passed={stepOnePassed} onClick={!stepTwoPassed && showSetAccountPopup}>2.&nbsp;&nbsp;Pass KYC</StepsListItem>
+                            <StepsListItem passed={stepOnePassed}>3.&nbsp;&nbsp;Buy tokens</StepsListItem>
                         </StepsList>
                         <EmailInfo>
                             <div className="text">Your profile:</div>
@@ -109,7 +121,7 @@ const UserImg = styled.div`
         width: 18px;
         height: 18px;
         border-radius: 100%;
-        background: url(${exclaimIcon}) no-repeat center, #f26d6d;
+        background: url(${props => props.approved ? checkIcon : exclaimIcon}) no-repeat center, #f26d6d;
         position: absolute;
         bottom: -4px;
         right: 0px;
@@ -190,7 +202,8 @@ const StepsList = styled.ul`
 
 const StepsListItem = styled.li`
     font-size: 15px;
-    color: ${props => props.passed ? '#11cd56' : '#323c47'};
+    color: ${props => props.passed ? '#11cd56' : 'rgba(50, 60, 71,.5)'};
+    cursor: ${props => !props.passed ? 'pointer' : 'default'};
     margin-top: 16px;
 `;
 

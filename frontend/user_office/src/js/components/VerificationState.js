@@ -15,13 +15,11 @@ const VerificationState = ({kycState}) => {
             }
             {kycState === 'WAITING' &&
                 <Content className="state-waiting">
-                    <img src={waitingIcon}/>
                     <p>Your data is about to be checked!</p>
                 </Content>
             }
             {kycState === 'DECLINED' &&
                 <Content className="state-declined">
-                    <img src={declinedIcon}/>
                     <p>You are not re-verified and contact please from those. support:</p>
                 </Content>
             }
