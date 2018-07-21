@@ -31,8 +31,6 @@ class TokenContract(BaseContract):
 
 
 class TransferEvent:
-    purchase_account = '0x0000000000000000000000000000000000000000'
-
     def __init__(self, entry):
         self.from_account = entry['args']['from']
         self.to_account = entry['args']['to']
@@ -42,16 +40,12 @@ class TransferEvent:
         self.block_hash = entry['blockHash'].hex()
         self.block_number = entry['blockNumber']
         self.accepted_at = datetime.utcnow()
-        self.removed = entry.get('removed')
+        self.removed = entry.get('removed', False)
 
     def __str__(self):
         return f'Transfer event at {self.txn_hash}'
 
     __repr__ = __str__
-
-    @property
-    def is_purchase(self):
-        return self.from_account == self.purchase_account
 
 
 class TransfersFilter(LogFilter):

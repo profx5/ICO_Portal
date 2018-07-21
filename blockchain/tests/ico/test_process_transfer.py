@@ -4,19 +4,19 @@ from decimal import Decimal
 from ..base import BlockChainTestCase
 from user_office.factories import InvestorFactory, TokensMoveFactory, TransferFactory
 from user_office.models import Transfer, TokensMove, Payment, Investor
-from blockchain.ico.services import ProcessTransfer, Mint, SendPreparedTxns
+from blockchain.ico.services import ProcessTransfer, SendPreparedTxns, BuyTokens
 
 
 class TestProcessTransfer(BlockChainTestCase):
     setup_eth_tester = True
-    setup_contracts = ['token', 'crowdsale']
+    setup_contracts = ['price_oracle', 'token', 'crowdsale']
 
     def test_purchase_tokens(self):
         recepient_account = self.eth_tester.get_accounts()[0]
         recepient = InvestorFactory.create(eth_account=recepient_account)
         self.pass_KYC(recepient_account)
 
-        txn_hash = self.call_crowsdsale_fallback(recepient_account, int(1.23 * 10 ** 18))  # 1.23 ETH
+        txn_hash = self.call_crowsdsale_fallback(recepient_account, int(20 * 10 ** 18))  # 20 ETH
         event = self.get_transfer_event(txn_hash)
 
         result = ProcessTransfer()(event)
@@ -25,14 +25,14 @@ class TestProcessTransfer(BlockChainTestCase):
 
         recepient.refresh_from_db()
 
-        self.assertEqual(recepient.tokens_amount, Decimal('94735'))
+        self.assertEqual(recepient.tokens_amount, Decimal('6601800000000000000000'))
 
         self.assertEqual(Transfer.objects.count(), 1)
         transfer = Transfer.objects.first()
         self.assertEqual(transfer.txn_hash, txn_hash)
         self.assertEqual(transfer.to_account, recepient_account)
         self.assertEqual(transfer.from_account, self.crowdsale_contract.address)
-        self.assertEqual(transfer.amount, Decimal('94735'))
+        self.assertEqual(transfer.amount, Decimal('6601800000000000000000'))
         self.assertEqual(transfer.block_hash, self.eth_tester.get_transaction_by_hash(txn_hash)['block_hash'])
         self.assertEqual(transfer.block_number, self.eth_tester.get_transaction_by_hash(txn_hash)['block_number'])
         self.assertEqual(transfer.created_at, self.utcnow)
@@ -43,7 +43,7 @@ class TestProcessTransfer(BlockChainTestCase):
         tokens_move_in = TokensMove.objects.filter(direction='IN').first()
         self.assertEqual(tokens_move_in.investor, recepient)
         self.assertEqual(tokens_move_in.investor_id, recepient_account)
-        self.assertEqual(tokens_move_in.amount, Decimal('94735'))
+        self.assertEqual(tokens_move_in.amount, Decimal('6601800000000000000000'))
         self.assertEqual(tokens_move_in.created_at, self.utcnow)
         self.assertEqual(tokens_move_in.actualized_at, self.utcnow)
         self.assertEqual(tokens_move_in.transfer, transfer)
@@ -52,7 +52,7 @@ class TestProcessTransfer(BlockChainTestCase):
 
         tokens_move_out = TokensMove.objects.filter(direction='OUT').first()
         self.assertEqual(tokens_move_out.investor_id, self.crowdsale_contract.address)
-        self.assertEqual(tokens_move_out.amount, Decimal('94735'))
+        self.assertEqual(tokens_move_out.amount, Decimal('6601800000000000000000'))
         self.assertEqual(tokens_move_out.created_at, self.utcnow)
         self.assertEqual(tokens_move_out.actualized_at, self.utcnow)
         self.assertEqual(tokens_move_out.transfer, transfer)
@@ -63,10 +63,14 @@ class TestProcessTransfer(BlockChainTestCase):
         payment = Payment.objects.first()
         self.assertEqual(payment.currency, 'ETH')
         self.assertEqual(payment.payer_account, recepient.eth_account)
-        self.assertEqual(payment.amount, Decimal('1.23'))
-        self.assertEqual(payment.amounti, Decimal('1230000000000000000'))
+        self.assertEqual(payment.amount, Decimal('20'))
+        self.assertEqual(payment.amounti, Decimal('20000000000000000000'))
         self.assertEqual(payment.txn_id, txn_hash)
         self.assertEqual(payment.tokens_move, tokens_move_in)
+        self.assertEqual(payment.usdc_value, Decimal('1100300'))
+        self.assertEqual(payment.rate_usdc, self.oracle_inital_price)
+        self.assertEqual(payment.bonus_percent, 20)
+        self.assertEqual(payment.bonus_ids, 1)
 
     def test_transfer_tokens_to_existing_account(self):
         sender_account = self.eth_tester.get_accounts()[0]
@@ -241,14 +245,15 @@ class TestProcessTransfer(BlockChainTestCase):
         self.assertEqual(tokens_move.direction, 'IN')
 
     def test_find_transfer_by_txn_id(self):
-        receipt_account = self.eth_tester.get_accounts()[0]
+        receipt_account = self.account['address']
+        self.pass_KYC(receipt_account)
         recepient = InvestorFactory.create(eth_account=receipt_account)
 
-        txn_id = Mint()(receipt_account, 90000).value.transaction.txn_id
+        txn_id = BuyTokens()(receipt_account, 900000).value.transaction.txn_id
         transfer = TransferFactory(txn_hash=None, state='PREAPARED', to_account=None,
                                    from_account=None, block_hash=None, block_number=None,
-                                   actualized_at=None, mint_txn_id=txn_id)
-        tokens_move = TokensMoveFactory(amount=Decimal('90000'), transfer=transfer, investor=recepient,
+                                   actualized_at=None, buy_txn_id=txn_id)
+        tokens_move = TokensMoveFactory(transfer=transfer, investor=recepient,
                                         state='PREPARED', direction='IN', actualized_at=None)
 
         result = SendPreparedTxns()()
@@ -260,15 +265,15 @@ class TestProcessTransfer(BlockChainTestCase):
         self.assertTrue(isinstance(result, Right))
 
         recepient.refresh_from_db()
-        self.assertEqual(recepient.tokens_amount, Decimal('90000'))
+        self.assertEqual(recepient.tokens_amount, Decimal('5400000000000000000000'))
 
         transfer.refresh_from_db()
         self.assertEqual(Transfer.objects.count(), 1)
         self.assertEqual(Transfer.objects.first(), transfer)
         self.assertEqual(transfer.txn_hash, txn_hash)
         self.assertEqual(transfer.to_account, receipt_account)
-        self.assertEqual(transfer.from_account, self.account['address'])
-        self.assertEqual(transfer.amount, Decimal('90000'))
+        self.assertEqual(transfer.from_account, self.crowdsale_contract.address)
+        self.assertEqual(transfer.amount, Decimal('5400000000000000000000'))
         self.assertEqual(transfer.block_hash, self.eth_tester.get_transaction_by_hash(txn_hash)['block_hash'])
         self.assertEqual(transfer.block_number, self.eth_tester.get_transaction_by_hash(txn_hash)['block_number'])
         self.assertEqual(transfer.created_at, self.utcnow)
@@ -279,7 +284,7 @@ class TestProcessTransfer(BlockChainTestCase):
         self.assertEqual(TokensMove.objects.count(), 2)
         self.assertEqual(TokensMove.objects.filter(direction='IN').first(), tokens_move)
         self.assertEqual(tokens_move.investor, recepient)
-        self.assertEqual(tokens_move.amount, Decimal('90000'))
+        self.assertEqual(tokens_move.amount, Decimal('5400000000000000000000'))
         self.assertEqual(tokens_move.created_at, self.utcnow)
         self.assertEqual(tokens_move.actualized_at, self.utcnow)
         self.assertEqual(tokens_move.transfer, transfer)

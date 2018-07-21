@@ -1,5 +1,7 @@
 from .development import *
 
+TOKENS_PER_USD = 1
+
 MEDIA_ROOT = '/tmp/ico_portal_test_media/'
 
 # INSTALLED_APPS += ('behave_django',)
@@ -17,6 +19,17 @@ RECAPTCHA_DATA_SITEKEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
 RECAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
 
 WEB3_RPC_URL = 'https://rinkeby.infura.io/froCrQaR0EB1JP83hAjj'
+
+CROWDSALE_CONTRACT = {
+    'address': '0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',
+}
+TOKEN_CONTRACT = {
+    'address': '0xDf86D26bD790fBae51A3C3abf07f77D6DC691A19',
+}
+PRICE_ORACLE = {
+    'address': '0x42ac0F356c84928258483631b740584E343B80b7',
+    'sensivity': 3  # percents
+}
 
 CURRENCIES = {
     'ethereum': {

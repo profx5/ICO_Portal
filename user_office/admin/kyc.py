@@ -3,7 +3,7 @@ from django.contrib import admin
 from django_object_actions import DjangoObjectActions
 
 from user_office.models import KYC
-from user_office.services import ApproveKYC, DeclineKYC
+from blockchain.ico.services import ApproveKYC
 
 
 @admin.register(KYC)
@@ -48,9 +48,7 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
         return fields
 
     def approve_kyc(self, request, kyc):
-        service = ApproveKYC(call_contract=True)
-
-        result = service(kyc)
+        result = ApproveKYC()(kyc)
 
         if isinstance(result, Left):
             raise Exception(result.value)
@@ -59,11 +57,8 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
     approve_kyc.short_description = "Approve KYC"
 
     def decline_kyc(self, request, kyc):
-        service = DeclineKYC()
-        result = service(kyc)
-
-        if isinstance(result, Left):
-            raise Exception(result.value)
+        kyc.state = 'DECLINED'
+        kyc.save()
 
     decline_kyc.label = "Decline"
     decline_kyc.short_description = "Decline KYC"

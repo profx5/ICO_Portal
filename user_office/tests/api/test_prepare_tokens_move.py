@@ -37,7 +37,7 @@ class TestPrepareTokensMove(APITestCase):
 
         tokens_move = tokens_moves.first()
         self.assertEqual(tokens_move.investor, self.get_investor())
-        self.assertEqual(tokens_move.amount, Decimal('1200481230000000000000'))
+        self.assertIsNone(tokens_move.amount)
         self.assertEqual(tokens_move.transfer, transfer)
         self.assertEqual(tokens_move.state, 'PREPARED')
         self.assertEqual(tokens_move.direction, 'IN')

@@ -21,6 +21,9 @@ class Payment(models.Model):
     tokens_move = models.ForeignKey('TokensMove', on_delete=models.DO_NOTHING,
                                     related_name='payment')
     usdc_value = models.DecimalField(max_digits=65, decimal_places=0, default=0)
+    rate_usdc = models.DecimalField(max_digits=65, decimal_places=0, default=0)
+    bonus_percent = models.IntegerField(null=True, blank=True)
+    bonus_ids = models.IntegerField(null=True, blank=True)
 
     objects = models.Manager()
 

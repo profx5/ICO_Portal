@@ -21,7 +21,7 @@ class TokensMove(models.Model):
                                  on_delete=models.DO_NOTHING,
                                  to_field='eth_account', db_constraint=False,
                                  db_column='investor_account')
-    amount = TokenField()
+    amount = TokenField(blank=True, null=True)
 
     created_at = models.DateTimeField(default=datetime.utcnow)
     actualized_at = models.DateTimeField(blank=True, null=True)

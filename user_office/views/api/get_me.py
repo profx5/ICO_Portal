@@ -6,12 +6,10 @@ from user_office.models import Investor
 
 class InvestorSerializer(serializers.ModelSerializer):
     kyc_required = serializers.BooleanField()
-    investment_threshold = serializers.IntegerField()
 
     class Meta:
         model = Investor
-        fields = ('email', 'eth_account', 'tokens_amount',
-                  'kyc_required', 'investment_threshold')
+        fields = ('email', 'eth_account', 'tokens_amount', 'kyc_required')
 
 
 class GetMeView(RetrieveAPIView):

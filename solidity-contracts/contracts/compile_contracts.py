@@ -13,6 +13,7 @@ def compile(contract_file_path, contract_name):
             }
         },
         'settings': {
+            'remappings': ["openzeppelin-solidity=%s" % os.path.abspath(os.path.join(os.path.abspath(__file__), '../../openzeppelin-solidity'))],
             'outputSelection': {
                 contract_name: {
                     contract_name: ['abi', 'evm.bytecode.object']
@@ -29,10 +30,9 @@ def compile(contract_file_path, contract_name):
     with open(output_filename, 'w') as f:
         json.dump({'abi': abi, 'bin': bin}, f)
 
-
 def main():
     compile('VeraCoin.sol', 'VeraCoin')
-    compile('KYCCrowdsale.sol', 'KYCCrowdsale')
+    compile('VeraCrowdsale.sol', 'VeraCrowdsale')
     compile('PriceOracle.sol', 'PriceOracle')
 
 

@@ -3,7 +3,7 @@ from decimal import Decimal
 from django.db import DatabaseError
 from coinpayments.api import CoinPaymentsAPI
 
-from blockchain.ico.services import PrepareTokensMove, CalcTokensAmount, Mint
+from blockchain.ico.services import PrepareTokensMove, CalcUSDValue, BuyTokens
 from user_office.models import Account, Payment
 from ico_portal.utils.service_object import ServiceObject, service_call, transactional
 
@@ -62,22 +62,21 @@ class ProcessIPN(ServiceObject):
         else:
             return self.fail('Account not found')
 
-    def calc_tokens_amount(self, context):
+    def calc_usd_value(self, context):
         raw_amount = context.request.POST.get('amount')
 
-        return CalcTokensAmount()(Decimal(raw_amount), self.settings.code) | \
-            (lambda result: self.success(amount=result.amount, amount_wo_bonus=result.amount_wo_bonus))
+        return CalcUSDValue()(Decimal(raw_amount), self.settings.code) | \
+            (lambda result: self.success(usdc_value=result.value, rate_usdc=result.rate.rate_cents))
 
     def create_transaction(self, context):
-        return Mint()(to=context.investor.eth_account,
-                      amount=context.amount) | \
-                      (lambda result: self.success(mint_txn_id=result.transaction.txn_id))
+        return BuyTokens()(to=context.investor.eth_account,
+                           usdc_value=context.usdc_value) | \
+                           (lambda result: self.success(buy_txn_id=result.transaction.txn_id))
 
     def create_tokens_move(self, context):
         return PrepareTokensMove()(investor=context.investor,
-                                   mint_txn_id=context.mint_txn_id,
-                                   currency=self.settings.code,
-                                   amount=context.amount) | \
+                                   buy_txn_id=context.buy_txn_id,
+                                   currency=self.settings.code) | \
                                    (lambda result: self.success(tokens_move=result.tokens_move))
 
     def create_payment(self, context):
@@ -87,7 +86,9 @@ class ProcessIPN(ServiceObject):
                           amounti=context.request.POST.get('amounti'),
                           external_id=context.request.POST.get('ipn_id'),
                           txn_id=context.request.POST.get('txn_id'),
-                          tokens_move=context.tokens_move)
+                          tokens_move=context.tokens_move,
+                          usdc_value=context.usdc_value,
+                          rate_usdc=context.rate_usdc)
 
         try:
             payment.save()
@@ -103,7 +104,7 @@ class ProcessIPN(ServiceObject):
             self.check_request | \
             self.find_payment_by_ipn_id | \
             self.find_investor | \
-            self.calc_tokens_amount | \
+            self.calc_usd_value | \
             self.create_transaction | \
             self.create_tokens_move | \
             self.create_payment

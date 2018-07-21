@@ -11,8 +11,7 @@ class TestGetMe(APITestCase):
                          {'email': 'gordon@example.com',
                           'eth_account': '0x73015966604928A312F79F7E69291a656Cb88602',
                           'tokens_amount': '1231',
-                          'kyc_required': True,
-                          'investment_threshold': 10000})
+                          'kyc_required': True})
 
     def test_passed_kyc_user(self):
         KYCFactory(investor=self.get_investor())
@@ -24,5 +23,4 @@ class TestGetMe(APITestCase):
                          {'email': 'gordon@example.com',
                           'eth_account': '0x73015966604928A312F79F7E69291a656Cb88602',
                           'tokens_amount': '1231',
-                          'kyc_required': False,
-                          'investment_threshold': 5000000})
+                          'kyc_required': False})

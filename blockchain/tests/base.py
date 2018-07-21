@@ -11,9 +11,7 @@ from django.apps import apps
 
 
 class BlockChainTestCase(TestCase):
-    crowdsale_eth_usdc = 55015
-    crowdsale_bonus_percents = 40
-    crowdsale_tokens_amount = 1000000
+    crowdsale_tokens_amount = 10 ** 24
 
     oracle_inital_price = 55015
     oracle_allowed_change = 10
@@ -54,19 +52,18 @@ class BlockChainTestCase(TestCase):
 
     @classmethod
     def _setup_crowdsale(cls):
-        KYCCrowdsale = cls.web3.eth.contract(abi=CrowdsaleContract.get_compiled()['abi'],
-                                             bytecode=CrowdsaleContract.get_compiled()['bin'])
-        tx_hash = KYCCrowdsale.constructor(cls.web3.eth.accounts[0],
-                                           cls.token_contract.address,
-                                           cls.crowdsale_bonus_percents,
-                                           cls.crowdsale_eth_usdc).transact()
+        VeraCrowdsale = cls.web3.eth.contract(abi=CrowdsaleContract.get_compiled()['abi'],
+                                              bytecode=CrowdsaleContract.get_compiled()['bin'])
+        tx_hash = VeraCrowdsale.constructor(cls.token_contract.address,
+                                            cls.price_oracle.address,
+                                            cls.account['address']).transact()
         tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
         cls.crowdsale_contract = cls.web3.eth.contract(address=tx_receipt.contractAddress,
                                                        abi=CrowdsaleContract.get_compiled()['abi'])
 
-        cls.token_contract.functions.transfer(cls.crowdsale_contract.address, cls.crowdsale_tokens_amount).transact({
-            'gas': 100000,
-        })
+        cls.crowdsale_contract.functions.addBackend(cls.account['address']).transact()
+
+        cls.token_contract.functions.transfer(cls.crowdsale_contract.address, cls.crowdsale_tokens_amount).transact()
 
         CrowdsaleContract.init({'address': cls.crowdsale_contract.address})
 
@@ -133,14 +130,13 @@ class BlockChainTestCase(TestCase):
         self.stub_datetime_utcnow(self.utcnow)
 
     def pass_KYC(self, address):
-        self.crowdsale_contract.functions.passKYC(address).transact()
+        self.crowdsale_contract.functions.addKycVerifiedInvestor(address).transact()
 
     def call_crowsdsale_fallback(self, sender, value):
         return self.web3.eth.sendTransaction({
             'from': sender,
             'to': self.crowdsale_contract.address,
-            'value': value,
-            'gas': 100000
+            'value': value
         }).hex()
 
     def mint_tokens(self, to, amount):
