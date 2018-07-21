@@ -4,41 +4,51 @@ import styled from 'styled-components';
 
 import FinalFormCheckbox from './../components/FinalFormCheckbox';
 import Button from './../components/Button';
+import $ from "jquery";
 
 class InvestorsDocuments extends React.Component {
+
+    uploadOnClickHandler = (e) => {
+        e.preventDefault();
+        $(e.currentTarget).closest('div').find('input[type="file"]').click();
+    };
 
     render() {
 
         return (
             <Wrapper className="Verification__investorsDocuments">
                 <Title>Investor's documents</Title>
-                <div class="block-file">
+                <div className="block-file">
                     <SubTitle>Copy of identification document</SubTitle>
-                    <p className="text">EU ID card, passport or driving licence bearing the name, photograph or facial image, signature or image of signature and date of birth or personal identification code of the holder</p>
+                    <p className="text">EU ID card, passport or driving licence bearing the name, photograph or facial
+                        image, signature or image of signature and date of birth or personal identification code of the
+                        holder</p>
                     <ButtonWrapper>
-                        <Button text="Attach file"/>
+                        <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
+                        <input type="file" name='id_document_photo' hidden/>
                     </ButtonWrapper>
                 </div>
-                <div class="block-file">
+                <div className="block-file">
                     <SubTitle>Utility bill</SubTitle>
-                    <p className="text">For rent, electricity, gas, water, telecommunication services or other similar services), bank or credit card statement, tax bill or notice or voter’s card or similar document bearing the investor’s name and address (the document must not be older than six months.</p>
+                    <p className="text">For rent, electricity, gas, water, telecommunication services or other similar
+                        services), bank or credit card statement, tax bill or notice or voter’s card or similar document
+                        bearing the investor’s name and address (the document must not be older than six months.</p>
                     <ButtonWrapper>
-                        <Button text="Attach file"/>
+                        <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
+                        <input type="file" name='bill_photo' hidden/>
                     </ButtonWrapper>
                 </div>
-                <FinalFormCheckbox name="confirm" options={['I confirm that all the data and documents submitted are correct.']} values={['Yes']}/>
+                <FinalFormCheckbox name="confirm"
+                                   options={['I confirm that all the data and documents submitted are correct.']}
+                                   values={['Yes']}/>
             </Wrapper>
         )
     }
 }
 
-const mapStateToProps = ({}) => ({
+const mapStateToProps = ({}) => ({})
 
-})
-
-const mapDispatchToProps = (dispatch) => ({
-
-})
+const mapDispatchToProps = (dispatch) => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(InvestorsDocuments)
 

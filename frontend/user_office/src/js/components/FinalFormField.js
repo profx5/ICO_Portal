@@ -9,16 +9,16 @@ import { Field } from 'react-final-form';
 const FinalFormField = ({labelText, placeholder, options, name, value, disabled}) => {
 
     let CleaveInput = (field) => (
-        <Cleave />
+        <StyledCleave {...field.input} options={field.options} />
     )
 
     return (
         <Wrapper>
             <StyledLabel htmlFor={name}>{labelText}</StyledLabel>
-            <StyledInput 
+            <Field
                 options={options} 
                 className="Field" 
-                component={Cleave} 
+                component={CleaveInput}
                 placeholder={placeholder} 
                 value={value} 
                 type="text" 
@@ -43,7 +43,7 @@ const StyledLabel = styled.label`
     margin-bottom: 13px;
 `;
 
-const StyledInput = styled(Field)`
+const StyledCleave = styled(Cleave)`
     color: #233539;
     font-size: 16px;
     font-weight: 600;

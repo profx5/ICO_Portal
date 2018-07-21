@@ -20,7 +20,7 @@ const FinalFormCheckbox = ({labelText, name, values, options, icon, handler}) =>
                     <RadioLabel htmlFor={`radio-${item}`}>
                         {item}
                         {icon &&
-                        <IconImg onClick={handle.bind(this, handler)} src={icon}/>
+                            <IconImg onClick={handle.bind(this, handler)} src={icon}/>
                         }
                     </RadioLabel>
                 </React.Fragment>
@@ -31,7 +31,7 @@ const FinalFormCheckbox = ({labelText, name, values, options, icon, handler}) =>
     return (
         <Wrapper>
             <InputsWrapper>
-                {generateRadio(options, icon, handler)}
+                {generateRadio(options)}
             </InputsWrapper>
         </Wrapper>
     );
