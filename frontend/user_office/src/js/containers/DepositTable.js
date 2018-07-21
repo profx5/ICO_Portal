@@ -37,7 +37,7 @@ class DepositTable extends Component {
                     <FlexItem
                         width={15}>{moment(item.get('created_at')).format('YYYY-MM-DD HH:mm:ss')} {item.get('id')}</FlexItem>
                     <FlexItem position={'relative'} width={40} failed={item.getIn(['transfer', 'state']) === 'FAILED'}>
-                        <span className='txn'><a href={"https://etherscan.io/tx/" + txn_hash} target="_blank">{txn_hash}</a></span>
+                        <span className='txn'><a href={"https://etherscan.io/tx/" + txn_hash} target="_blank">{txn_hash.substr(0,46)}...</a></span>
                         {item.getIn(['transfer', 'state']) === 'ACTUAL' &&
                          <IconImgAbsolute right={1} src={iconCheckGreen}/> ||
                          <IconImgAbsolute className={'border'} right={1} src={iconReload}/>}

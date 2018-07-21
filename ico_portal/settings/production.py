@@ -42,3 +42,8 @@ WEB3_RPC_URL = os.environ['WEB3_RPC_URL']
 CELERY_BROKER_URL = os.environ['CELERY_BROKER_URL']
 
 SIGNUP_CLOSED = os.getenv('SIGNUP_CLOSED', False)
+
+try:
+    from .local import *
+except ImportError:
+    pass

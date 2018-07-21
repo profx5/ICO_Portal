@@ -105,11 +105,6 @@ RAVEN_CONFIG = {
 # VERA site settings
 VERA_SITE_URL = 'https://dev.vera.wtf/'
 
-try:
-    from .local import *
-except ImportError:
-    pass
-
 # Authorasation settings
 
 SIGNUP_CLOSED = True
