@@ -27,25 +27,27 @@ class DepositTable extends Component {
     };
 
     _renderTitle = (item) => {
-        let amount = item.get('payment').size > 0 ? parseFloat(item.getIn(['payment', '0', 'amount'])) +
-            ' ' + item.getIn(['payment', '0', 'currency']) : '-';
+        const amount = item.get('payment').size > 0 ? parseFloat(item.getIn(['payment', '0', 'amount'])) +
+                                                      ' ' + item.getIn(['payment', '0', 'currency']) : '-';
+        const usdc_value = item.get('payment').size > 0 ? parseFloat(item.getIn(['payment', '0', 'usdc_value'])) / 100 : ' - ';
+        const txn_hash = item.getIn(['transfer', 'txn_hash']);
         return (
             <div className='uk-accordion-title'>
                 <FlexContainer className={item.getIn(['transfer', 'state']) === 'ACTUAL' ? 'prepared' : ''}>
                     <FlexItem
                         width={15}>{moment(item.get('created_at')).format('YYYY-MM-DD HH:mm:ss')} {item.get('id')}</FlexItem>
                     <FlexItem position={'relative'} width={40} failed={item.getIn(['transfer', 'state']) === 'FAILED'}>
-                        <span className='txn'>{item.getIn(['transfer', 'txn_hash']).substr(0, 46)}...</span>
-                        {item.getIn(['transfer', 'state']) !== 'FAILED' &&
-                        <IconImgAbsolute right={1} src={iconCheckGreen}/> ||
-                        <IconImgAbsolute className={'border'} right={1} src={iconReload}/>}
+                        <span className='txn'><a href={"https://etherscan.io/tx/" + txn_hash} target="_blank">{txn_hash}</a></span>
+                        {item.getIn(['transfer', 'state']) === 'ACTUAL' &&
+                         <IconImgAbsolute right={1} src={iconCheckGreen}/> ||
+                         <IconImgAbsolute className={'border'} right={1} src={iconReload}/>}
 
                     </FlexItem>
                     <FlexItem width={15} color>{amount}</FlexItem>
-                    <FlexItem width={15} color>{item.get('usd_value', '-')}</FlexItem>
+                    <FlexItem width={15} color>{usdc_value}</FlexItem>
                     <FlexItemColor width={15} failed={item.getIn(['transfer', 'state']) === 'FAILED'}
                                    up={item.get('direction') === 'IN'}>
-                        <span>{item.get('direction') === 'IN' && '+' || '-'}{item.get('amount')}</span>
+                        <span>{item.get('direction') === 'IN' && '+' || '-'}{item.get('amount') / 10 ** 18}</span>
                         <IconImgAbsolute className='more' onClick={this.toggleContent.bind(this, item.get('id'))} right={25} src={iconQuestion}/>
                     </FlexItemColor>
                 </FlexContainer>
@@ -63,11 +65,42 @@ class DepositTable extends Component {
         }
     };
 
+    _get_calculations = (item) => {
+        const {
+            amount,
+            currency,
+            rate_usdc,
+            usdc_value,
+            bonus_percent
+        } = item.get('payment').get(0).toJS();
+
+        const amountFloat = parseFloat(amount),
+              rateUSD = parseFloat(rate_usdc) / 100,
+              USDValue = parseFloat(usdc_value) / 100,
+              baseTokens = USDValue / 2,
+              bonusTokens = baseTokens * bonus_percent / 100,
+              total = parseFloat(item.get('amount')) / 10 ** 18
+        return (
+            <Content>
+                {amountFloat + " " + currency + " x " + rateUSD + " USD = " + USDValue + " USD"}<br/>
+                {"Phase bonus = " + bonus_percent + "%"}<br/>
+                Token base price = 2 USD <br/>
+                {"Base tokens: " + USDValue + " / 2 = " + baseTokens + " VERA"}<br/>
+                {"Bonus tokens: " + baseTokens + " x " + bonus_percent + "% = " + bonusTokens + "VERA"}<br/>
+                {"Total: " + total}<br/>
+            </Content>
+        )
+    }
+
     _renderContent = (item) => {
         const { openedTxn } = this.props;
-        let content = false;
-        if (item.get('payment').size > 0) {
-            content = chainResolver[item.getIn(['payment', '0', 'currency'])] + item.getIn(['payment', '0', 'txn_id']);
+        let paymentLink = false;
+
+        const transferLink = chainResolver['ETH'] + item.getIn(['transfer', 'txn_hash']);
+
+        const paymentExists = item.get('payment').size > 0;
+        if (paymentExists) {
+            paymentLink = chainResolver[item.getIn(['payment', '0', 'currency'])] + item.getIn(['payment', '0', 'txn_id']);
         }
 
         return (
@@ -80,58 +113,55 @@ class DepositTable extends Component {
                         <Table>
                             <colgroup>
                                 <col width="9%"/>
-                                <col width="89%"/>
-                                <col width="2%"/>
+                                {/* <col width="89%"/>
+                                    <col width="2%"/> */}
                             </colgroup>
                             <tbody>
-                            <tr>
-                                <td>Transfer:</td>
-                                <td>https://etherscan.io/tx/{item.getIn(['transfer', 'txn_hash'])}</td>
-                                <td><IconImg src={iconCheckGreen} alt=""/></td>
-                            </tr>
-                            {content &&
-                            <tr>
-                                <td>Payment:</td>
-                                <td>{content}</td>
-                                <td><IconImg src={iconCheckGreen} alt=""/></td>
-                            </tr>
-                            }
+                                <tr>
+                                    <td>Transfer:</td>
+                                    <td><a href={transferLink} target="_blank">{transferLink}</a></td>
+                                    <td><IconImg src={iconCheckGreen} alt=""/></td>
+                                </tr>
+                                {paymentExists &&
+                                 <tr>
+                                     <td>Payment:</td>
+                                     <td><a href={paymentLink} target="_blank">{paymentLink}</a></td>
+                                     <td><IconImg src={iconCheckGreen} alt=""/></td>
+                                 </tr>
+                                }
                             </tbody>
                         </Table>
                         <Divider/>
                         <FlexContainer>
-                            <Block>
+                            {paymentExists &&
+                             <Block>
+                                 <Head>
+                                     Calculated token amount
+                                 </Head>
+                                 {this._get_calculations(item)}
+                             </Block>
+                            }
+
+                            {/* <Block>
                                 <Head>
-                                    Calculated token amount
+                                Referal bonuses
                                 </Head>
                                 <Content>
-                                    2.123467 ETH x 576.38 USD = 1223.15 USD <br/>
-                                    Phase №2 bonus = 50% <br/>
-                                    Token base price = 1 USD <br/>
-                                    Base tokens: 1223.15 USD/1 = 1223.15 VERA <br/>
-                                    Bonus tokens: 1223.15 x 50% = 611.58 VERA <br/>
+                                -
                                 </Content>
-                            </Block>
-                            <Block>
-                                <Head>
-                                    Referal bonuses
-                                </Head>
-                                <Content>
-                                    -
-                                </Content>
-                            </Block>
-                            <Block>
+                                </Block>
+                                <Block>
                                 <Head>Withdrawal</Head>
                                 <Content>
-                                    -
+                                -
                                 </Content>
-                            </Block>
+                                </Block> */}
                         </FlexContainer>
-                        <Divider/>
-                        <Right>
+                        {/* <Divider/>
+                            <Right>
                             Total: = <span>+1823.77 VERA</span>
-                        </Right>
-                        <br/>
+                            </Right>
+                            <br/> */}
                     </TxInfoWrapper>
                 </ContentWrapper>
             </AccordionContent>

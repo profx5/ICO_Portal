@@ -48,7 +48,7 @@ class ICOProgress extends React.Component {
                         </PartWrapper>
                         <PartWrapper>
                             <DescHead>Phase bonus:</DescHead>
-                            <Desc blue><span>Private sale = </span>33%</Desc>
+                            <Desc blue><span>Private sale = </span>20%</Desc>
                         </PartWrapper>
                         <PartWrapper>
                             <DescHead>Bonuses:</DescHead>

@@ -74,13 +74,12 @@ class CurrencyCalculator extends React.Component {
                 <WrapperInner>
 
                     <InvestInput value={this.props.investAmount} type="text" onChangeHandler={this.investOnChangeHandler} header="Amount" currency={investCurrency}/>
-                    <TokensInputWrapper data-currency="TKN">
-                        <div className="head">TKN (Buy till 7 july and <span>get a 30% bonus!</span>)</div>
+                    <TokensInputWrapper data-currency="VERA">
                         <TokensInput>
                             {bonus > 0 &&
                                 <React.Fragment>
                                     <span>{investAmount} + </span>
-                                    <span className="bonus">{bonus}</span>&nbsp;=&nbsp; 
+                                    <span className="bonus">{bonus}</span>&nbsp;=&nbsp;
                                 </React.Fragment>
                             }
                             {this.props.tokensAmount}
@@ -92,8 +91,8 @@ class CurrencyCalculator extends React.Component {
                     </ButtonWrapper>
 
                 </WrapperInner>
-                <BonusDesc>Progressive bonus for private presale phase is 
-                currenty available! Investing more than 8 000 USD will grant you 20% bonus! 
+                <BonusDesc>Progressive bonus for private presale phase is
+                currenty available! Investing more than 8 000 USD will grant you 20% bonus!
                 Invest more than 20 000 USD and get <span>30% bonus tokens!</span></BonusDesc>
             </Wrapper>
         )

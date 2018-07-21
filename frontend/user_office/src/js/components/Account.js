@@ -10,22 +10,22 @@ import walletIcon from './../../img/icons/icon_wallet.svg';
 import { Link } from 'react-router-dom';
 
 const Account = ({
-    email, 
-    tokensAmount, 
-    isDropdownAccountOpen, 
-    isDropdownStepsOpen, 
-    dropdownAccountClickHandler, 
-    dropdownStepsClickHandler, 
-    stepOnePassed, 
-    stepTwoPassed, 
-    stepThreePassed, 
+    email,
+    tokensAmount,
+    isDropdownAccountOpen,
+    isDropdownStepsOpen,
+    dropdownAccountClickHandler,
+    dropdownStepsClickHandler,
+    stepOnePassed,
+    stepTwoPassed,
+    stepThreePassed,
     stepsPassed,
     showSetAccountPopup}) => {
     return (
         <InfoWrapper>
             <Balance>
                 <img src={walletIcon}/>
-                <p>{tokensAmount} <span>TKN</span></p>
+                <p>{tokensAmount / 10 ** 18} <span>VERA</span></p>
             </Balance>
 
 
@@ -36,7 +36,7 @@ const Account = ({
                     <UserImg approved={stepsPassed === 3}/>
                     <ArrowImg up={isDropdownAccountOpen} src={arrowImg} />
                 </AccountInfoText>
-                {isDropdownAccountOpen && 
+                {isDropdownAccountOpen &&
                     <DropdownAccount>
                         <StepsList>
                             <StepsListItem passed={stepOnePassed}>1.&nbsp;&nbsp;ETH wallet registration</StepsListItem>
