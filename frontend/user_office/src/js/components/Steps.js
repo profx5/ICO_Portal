@@ -2,19 +2,21 @@ import React from 'react'
 import styled from 'styled-components';
 
 class Steps extends React.Component {
-    render(step) {
+    render() {
+
+        const { step } = this.props;
 
         return (
             <Wrapper>
-                <Step state={step}>
+                <Step passed={1 <= step} to_next={2<=step}>
                     <div className="Step__head">Step 1</div>
                     <div className="Step__desc">Select payment method</div>
                 </Step>
-                <Step state={step}>
+                <Step passed={2 <= step} to_next={3<=step}>
                     <div className="Step__head">Step 2</div>
                     <div className="Step__desc">Buying tokens</div>
                 </Step>
-                <Step state={step}>
+                <Step passed={3 <= step}>
                     <div className="Step__head">Step 3</div>
                     <div className="Step__desc">Transaction mining</div>
                 </Step>
@@ -60,7 +62,7 @@ const Step = styled.div`
         display: block;
         width: 16px;
         height: 16px;
-        background: #1767f2;
+        background: ${props => props.passed ? '#1767f2': 'lightgrey'};
         border: 2px solid white;
         box-shadow: 0 0 0 12px rgba(23,103,242,0.07);
         border-radius: 100%;
@@ -73,7 +75,7 @@ const Step = styled.div`
             display: block;
             width: 387px;
             height: 2px;
-            background: #1767f2;
+            background: ${props => props.to_next ? '#1767f2': 'lightgrey'};
             position: absolute;
             bottom: 6px;
             left: calc(50% + 27px);

@@ -24,3 +24,5 @@ export const setOpenedTxn = createAction('SET_OPENED_TXN', (id => ({id})));
 
 export const setOpenedTip = createAction('SET_OPENED_TIP', (id => ({id})));
 
+export const setStep = createAction('SET_STEP', (step => ({step})));
+

@@ -22,7 +22,6 @@ const initialState = Map({
     document_date: "",
     document_photo: null,
     decline_reason: null,
-
     uploaded_user_photo: null,
     uploaded_doc_photo: null,
 })

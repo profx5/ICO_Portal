@@ -21,5 +21,6 @@ export const ICOInfoReducer = createReducer({
     [actions.getICOInfoSuccess]: (state, payload) => state.merge(payload),
     [actions.humanizeEndTime]: (state, payload) => state.merge({humanizedEndTime: payload}),
     [actions.updateCountdown]: (state, payload) => state.merge({countdownTime: payload}),
+    [actions.getCryptoAccountRequest]: (state, payload) => state,
     [actions.getCryptoAccountSuccessful]: (state, payload) => state.set('alt_crowdsale_address', payload)
 }, initialState);

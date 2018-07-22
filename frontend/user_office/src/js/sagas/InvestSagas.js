@@ -17,7 +17,7 @@ export class InvestSagas {
 
             yield put(DepositsActions.createPreparedDepositRequest(value, txnHash));
         } catch(e) {
-            console.log("CANT PERFROM INVEST ACTION");
+            console.log("CANT PERFORM INVEST ACTION");
         }
     }
 }
