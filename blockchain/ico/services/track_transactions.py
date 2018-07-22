@@ -18,7 +18,12 @@ class _Base(ServiceObject):
         return get_web3()
 
     def get_gas_price(self, context):
-        return self.success(gas_price=12000000000)  # 12 GWei
+        gas_price = self.web3.eth.generateGasPrice()
+
+        if gas_price is None:
+            gas_price = 20000000000  # 20 Gwei
+
+        return self.success(gas_price=gas_price)
 
     def sign_transaction(self, context):
         try:

@@ -43,7 +43,7 @@ class TestSendPreparedTxns(_Base):
         self.assertEqual(transaction.from_account, self.sender_account)
         self.assertEqual(transaction.to_account, '0x2feB9363a9bb1E16Ab90F6d4007264774e959F34')
         self.assertEqual(transaction.gas, 40000)
-        self.assertEqual(transaction.gas_price, Decimal('12000000000'))
+        self.assertEqual(transaction.gas_price, Decimal('20000000000'))
         self.assertEqual(transaction.state, 'SENT')
         self.assertIsNone(transaction.fail_reason)
         self.assertEqual(transaction.created_at, self.utcnow)
@@ -144,7 +144,7 @@ class TestTrackTransactions(_Base):
         self.assertEqual(old_transaction.from_account, new_transaction.from_account)
         self.assertEqual(old_transaction.to_account, new_transaction.to_account)
         self.assertEqual(old_transaction.gas, new_transaction.gas)
-        self.assertEqual(new_transaction.gas_price, Decimal('13200000000'))
+        self.assertEqual(new_transaction.gas_price, Decimal('22000000000'))
 
     def test_mined_transaction(self):
         transaction = Transaction(to_account='0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',
