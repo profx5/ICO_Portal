@@ -36,8 +36,6 @@ class KYC(models.Model):
     birthdate = models.DateField('Date of birth', null=True, blank=True)
 
     personal_id = models.CharField('Personal identification code', max_length=50, null=True, blank=True)
-    phone_number = models.CharField('Phone number', max_length=50, null=True, blank=True)
-    email = models.EmailField('Email', null=True, blank=True)
 
     place_of_residence = models.CharField('Place of residence', max_length=100, null=True, blank=True)
     profession = models.CharField('Profession of field of activity', max_length=30, null=True, blank=True)
@@ -47,14 +45,11 @@ class KYC(models.Model):
     registration_number = models.CharField('Registration number', max_length=50, null=True, blank=True)
     registration_date = models.DateField('Date of registration', null=True, blank=True)
 
-    phone_number = models.CharField('Phone number', max_length=50, null=True, blank=True)
-
     director_firstname = models.CharField('First name of director', max_length=30, null=True, blank=True)
     director_lastname = models.CharField('Last Name of director', max_length=30, null=True, blank=True)
 
     basis_doc = models.FileField('Basis for representation', upload_to=partial(kyc_photo_path, 'basis'), null=True, blank=True)
 
-    email = models.EmailField('Email', null=True, blank=True)
     address = models.CharField('Address', max_length=50, null=True, blank=True)
     field_of_activity = models.CharField('Field of activity', max_length=50, null=True, blank=True)
 
@@ -69,6 +64,8 @@ class KYC(models.Model):
     # both
     id_document_photo = models.ImageField('Copy of identification document', upload_to=partial(kyc_photo_path, 'doc_photo'))
     bill_photo = models.ImageField('Utility bill', upload_to=partial(kyc_photo_path, 'bill_photo'))
+    phone_number = models.CharField('Phone number', max_length=50, null=True, blank=True)
+    email = models.EmailField('Email', null=True, blank=True)
 
     class Meta:
         ordering = ['id']
