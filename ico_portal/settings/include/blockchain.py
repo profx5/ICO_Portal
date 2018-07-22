@@ -6,7 +6,6 @@ TOKEN_DECIMALS = 18
 WEB3_RPC_URL = 'http://127.0.0.1:8545'
 RINKEBY_MIDDLEWARE = True
 
-
 ETH_ACCOUNT = {'address': '0x73015966604928A312F79F7E69291a656Cb88602',
                'private_key': 'e362e876f03abf385273ff2f5f2d9b75903d34130942ef891c378815d5ae0b71'}
 
@@ -78,17 +77,5 @@ CELERY_BEAT_SCHEDULE = {
 CELERY_TASK_ROUTES = {
     'blockchain.ico.tasks.check_events': {
         'queue': 'events_beat',
-    },
-    # 'blockchain.ico.tasks.sync_ico_info': {
-    #     'queue': 'events_beat',
-    # },
-    # 'blockchain.ico.tasks.sync_exchange_rates': {
-    #     'queue': 'events_beat',
-    # },
-    # 'blockchain.ico.tasks.send_transactions': {
-    #     'queue': 'events_beat',
-    # },
-    # 'blockchain.ico.tasks.track_transactions': {
-    #     'queue': 'events_beat',
-    # },
+    }
 }
