@@ -213,28 +213,6 @@ contract RBAC {
     checkRole(msg.sender, roleName);
     _;
   }
-
-  /**
-   * @dev modifier to scope access to a set of roles (uses msg.sender as addr)
-   * @param roleNames the names of the roles to scope access to
-   * // reverts
-   *
-   * @TODO - when solidity supports dynamic arrays as arguments to modifiers, provide this
-   *  see: https://github.com/ethereum/solidity/issues/2467
-   */
-  // modifier onlyRoles(string[] roleNames) {
-  //     bool hasAnyRole = false;
-  //     for (uint8 i = 0; i < roleNames.length; i++) {
-  //         if (hasRole(msg.sender, roleNames[i])) {
-  //             hasAnyRole = true;
-  //             break;
-  //         }
-  //     }
-
-  //     require(hasAnyRole);
-
-  //     _;
-  // }
 }
 
 // File: contracts/VeraCrowdsale.sol
@@ -259,6 +237,9 @@ contract PriceOracleIface {
  */
 contract TransferableTokenIface {
   function transfer(address to, uint256 value) public returns (bool) {
+  }
+
+  function balanceOf(address who) public view returns (uint256) {
   }
 
   event Transfer(address indexed from, address indexed to, uint256 value);
@@ -406,6 +387,16 @@ contract VeraCrowdsale is RBAC {
     uint256 valueInCents = priceOracle.getUsdCentsFromWei(msg.value);
     buyTokens(msg.sender, valueInCents);
     wallet.transfer(msg.value);
+  }
+
+  /**
+   * @dev Withdraws all remaining (not sold) tokens from the crowdsale contract
+   * @param _to address of tokens receiver
+   */
+  function withdrawTokens(address _to) public onlyAdmin {
+    uint256 amount = token.balanceOf(address(this));
+    require(amount > 0, "no tokens on the contract");
+    token.transfer(_to, amount);
   }
 
   /**
