@@ -11,27 +11,29 @@ import * as UIActions from './../actions/UIActions';
 import FinalFormField from './../components/FinalFormField';
 import FinalFormCheckbox from './../components/FinalFormCheckbox';
 import FinalFormRadio from './../components/FinalFormRadio';
+import { Field } from 'react-final-form'
 
 
 class PersonData extends React.Component {
 
     uploadOnClickHandler = (event) => {
         $(event.currentTarget).find('input[type="file"]').click();
-    }
+    };
 
     setOpenedTip = (id, e) => {
-        const { setOpenedTip } = this.props;
+        const {setOpenedTip} = this.props;
         setOpenedTip(id);
-    }
+    };
 
     render() {
 
-        const {uploadedUserPhoto, uploadPhoto, removePhoto } = this.props;
+        const {uploadedUserPhoto, uploadPhoto, removePhoto} = this.props;
 
         return (
             <Wrapper className="Verification__personData">
                 <Title>Personal Data</Title>
                 <InputSet>
+                    <input type="hidden" name='type' value='NATURAL'/>
                     <InputWrapper>
                         <FinalFormField placeholder="Your name" labelText="First Name" name="firstname"/>
                     </InputWrapper>
@@ -39,16 +41,21 @@ class PersonData extends React.Component {
                         <FinalFormField placeholder="Your last name" labelText="Last Name" name="lastname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your place of birth" labelText="Place of birth" name="place_of_birth"/>
+                        <FinalFormField placeholder="Your place of birth" labelText="Place of birth"
+                                        name="place_of_birth"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="date / month / year" labelText="Date of birth" options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['/']}} name="birthdate"/>
+                        <FinalFormField placeholder="date / month / year" labelText="Date of birth"
+                                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}
+                                        name="birthdate"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your personal identification code" labelText="Personal identification code" name="personal_id"/>
+                        <FinalFormField placeholder="Your personal identification code"
+                                        labelText="Personal identification code" name="personal_id"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your phone number" labelText="Phone number" options={{phone: true, phoneRegionCode: 'RU'}} name="phone_number"/>
+                        <FinalFormField placeholder="Your phone number" labelText="Phone number"
+                                        options={{phone: true, phoneRegionCode: 'RU'}} name="phone_number"/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="Your email" labelText="Email" name="email"/>
@@ -57,17 +64,22 @@ class PersonData extends React.Component {
                         <FinalFormField placeholder="Address" labelText="Place of residence" name="place_of_residence"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your profession" labelText="Profession of field of activity" name="profession"/>
+                        <FinalFormField placeholder="Your profession" labelText="Profession or field of activity"
+                                        name="profession"/>
                     </InputWrapper>
                 </InputSet>
 
                 <RadioSet className="RadioSet RadioSet-1">
-                    <FinalFormCheckbox name="confirmInvestor" icon={iconQuestion} handler={this.setOpenedTip.bind(this, 1)} options={['I confirm that the investor is a beneficial owner']} values={['Yes']} />
+                    <FinalFormCheckbox name="confirmInvestor" icon={iconQuestion}
+                                       handler={this.setOpenedTip.bind(this, 1)}
+                                       options={['I confirm that the investor is a beneficial owner']}
+                                       values={['Yes']}/>
                 </RadioSet>
 
                 <RadioSet className="RadioSet RadioSet-2">
-                    <p className="text">Are you a <span onClick={this.setOpenedTip.bind(this, 3)}>politically exposed person</span> (PEP), family member of PEP or person known to be close associate of PEP?</p>
-                    <FinalFormRadio name="is_pep" options={['Yes', 'No']} values={[true, false]} />
+                    <p className="text">Are you a <span onClick={this.setOpenedTip.bind(this, 3)}>politically exposed person</span> (PEP),
+                        family member of PEP or person known to be close associate of PEP?</p>
+                    <FinalFormRadio name="is_pep" options={['Yes', 'No']} values={["True", "False"]}/>
                 </RadioSet>
             </Wrapper>
         )

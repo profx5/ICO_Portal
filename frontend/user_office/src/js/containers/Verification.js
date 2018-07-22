@@ -38,109 +38,120 @@ class Verification extends React.Component {
     }
 
     closeTip = () => {
-        const { setOpenedTip } = this.props;
+        const {setOpenedTip} = this.props;
         setOpenedTip(null);
     }
 
     render() {
-        const {activeKycTab, openedTip} = this.props;
+        const { activeKycTab, openedTip, submitForm } = this.props;
 
         return (
-            <Form
-                onSubmit={this.onSubmitHandler}
-                render={() => (
-
-                    <Wrapper onSubmit={(function (e) {
-                        e.preventDefault()
-                    })} id="form" className="Verification">
-                        {openedTip &&
-                        <ModalWrapper>
-                            {openedTip === 1 &&
-                            <Modal>
-                                <ModalHeader>
-                                    Beneficial owner
-                                    <img onClick={this.closeTip} src={iconClose} alt=""/>
-                                </ModalHeader>
-                                <ModalContent>
-                                    Beneficial owner means a natural person who, taking advantage of their influence,
-                                    makes a transaction, act, action, operation or step or otherwise exercises control
-                                    over a
-                                    transaction, act, action, operation or step or over another person and in whose
-                                    interests or favour or on whose account a transaction or act, action, operation or
-                                    step is made.
-                                </ModalContent>
-                            </Modal>
-                            }
-                            {openedTip === 2 &&
-                            <Modal>
-                                <ModalHeader>
-                                    Beneficial owner
-                                    <img onClick={this.closeTip} src={iconClose} alt=""/>
-                                </ModalHeader>
-                                <ModalContent>
-                                    Beneficial owner means a natural person who ultimately owns or controls a legal
-                                    person through direct or indirect ownership of a sufficient percentage (25 per cent
-                                    plus one) of the shares or voting rights or ownership interest (more than 25 per
-                                    cent) in that person, including through bearer shareholdings, or through control via
-                                    other means.
-                                </ModalContent>
-                            </Modal>
-                            }
-                            {openedTip === 3 &&
-                            <Modal>
-                                <ModalHeader>
-                                    Beneficial owner
-                                    <img onClick={this.closeTip} src={iconClose} alt=""/>
-                                </ModalHeader>
-                                <ModalContent>
-                                    <p><span>Politically exposed person</span> means a natural person who is or who has been entrusted
-                                    with prominent public functions including a head of state, head of government,
-                                    minister or deputy or assistant minister; a member of parliament or of a similar
-                                    legislative body, a member of a governing body of a political party, a member of a
-                                    supreme court, a member of a court of auditors or of the board of a central bank; an
-                                    ambassador, a chargé d'affaires or a high-ranking officer in the armed forces; a
-                                    member of an administrative, management or supervisory body of a state-owned
-                                    enterprise; a director, deputy director or member of the board or equivalent
-                                    function of an international organisation, except middle-ranking or more junior
-                                    officials.
-                                    </p>
-                                    <p><span>Family member of a politically exposed person</span> means the spouse, or a person
-                                    considered to be equivalent to a spouse, of a politically exposed person; a child
-                                    and their spouse, or a person considered to be equivalent to a spouse, of a
-                                    politically exposed person; or a parent of a politically exposed person.</p>
-                                    <p><span>Person known to be close associate of a politically exposed person</span> means a natural
-                                    person who is known to be the beneficial owner or to have joint beneficial ownership
-                                    of a legal person or a legal arrangement, or any other close business relations,
-                                    with a politically exposed person; or a natural person who has sole beneficial
-                                    ownership of a legal entity or legal arrangement which is known to have been set up
-                                    for the de facto benefit of a politically exposed person.</p>
-                                </ModalContent>
-                            </Modal>
-                            }
-                        </ModalWrapper>
-                        }
-
-                        <Header>
-                            <HeaderInner>
-                                <Head>Verification (KYC)</Head>
-                                <KYCTabs clickHandler={this.tabClickHandler} activeTab={activeKycTab}/>
-                            </HeaderInner>
-                        </Header>
-                        <MainWrapper>
-                            {activeKycTab === 1 && <PersonalData/>}
-                            {activeKycTab === 2 && <LegalPersonData/>}
-                            <InvestorsDocuments/>
-                        </MainWrapper>
-                        <InfoWrapper>
-                            <VerificationInfo
-                                btnText="Send data"
-                                verificationStages={['Verification__personData', 'Verification__investorsDocuments']}
-                                stages={['Personal Data', 'Investor\`s documents']}
-                            />
-                        </InfoWrapper>
-                    </Wrapper>
-                )}
-            />
+            <div>
+                {openedTip &&
+                <ModalWrapper>
+                    {openedTip === 1 &&
+                    <Modal>
+                        <ModalHeader>
+                            Beneficial owner
+                            <img onClick={this.closeTip} src={iconClose} alt=""/>
+                        </ModalHeader>
+                        <ModalContent>
+                            Beneficial owner means a natural person who, taking advantage of their influence,
+                            makes a transaction, act, action, operation or step or otherwise exercises control
+                            over a
+                            transaction, act, action, operation or step or over another person and in whose
+                            interests or favour or on whose account a transaction or act, action, operation or
+                            step is made.
+                        </ModalContent>
+                    </Modal>
+                    }
+                    {openedTip === 2 &&
+                    <Modal>
+                        <ModalHeader>
+                            Beneficial owner
+                            <img onClick={this.closeTip} src={iconClose} alt=""/>
+                        </ModalHeader>
+                        <ModalContent>
+                            Beneficial owner means a natural person who ultimately owns or controls a legal
+                            person through direct or indirect ownership of a sufficient percentage (25 per cent
+                            plus one) of the shares or voting rights or ownership interest (more than 25 per
+                            cent) in that person, including through bearer shareholdings, or through control via
+                            other means.
+                        </ModalContent>
+                    </Modal>
+                    }
+                    {openedTip === 3 &&
+                    <Modal>
+                        <ModalHeader>
+                            Beneficial owner
+                            <img onClick={this.closeTip} src={iconClose} alt=""/>
+                        </ModalHeader>
+                        <ModalContent>
+                            <p><span>Politically exposed person</span> means a natural person who is or who has
+                                been entrusted
+                                with prominent public functions including a head of state, head of government,
+                                minister or deputy or assistant minister; a member of parliament or of a similar
+                                legislative body, a member of a governing body of a political party, a member of
+                                a
+                                supreme court, a member of a court of auditors or of the board of a central
+                                bank; an
+                                ambassador, a chargé d'affaires or a high-ranking officer in the armed forces; a
+                                member of an administrative, management or supervisory body of a state-owned
+                                enterprise; a director, deputy director or member of the board or equivalent
+                                function of an international organisation, except middle-ranking or more junior
+                                officials.
+                            </p>
+                            <p><span>Family member of a politically exposed person</span> means the spouse, or a
+                                person
+                                considered to be equivalent to a spouse, of a politically exposed person; a
+                                child
+                                and their spouse, or a person considered to be equivalent to a spouse, of a
+                                politically exposed person; or a parent of a politically exposed person.</p>
+                            <p>
+                                <span>Person known to be close associate of a politically exposed person</span> means
+                                a natural
+                                person who is known to be the beneficial owner or to have joint beneficial
+                                ownership
+                                of a legal person or a legal arrangement, or any other close business relations,
+                                with a politically exposed person; or a natural person who has sole beneficial
+                                ownership of a legal entity or legal arrangement which is known to have been set
+                                up
+                                for the de facto benefit of a politically exposed person.</p>
+                        </ModalContent>
+                    </Modal>
+                    }
+                </ModalWrapper>
+                }
+                <Form
+                    onSubmit={this.onSubmitHandler}
+                    render={() => (
+                        <Wrapper onSubmit={(function (e) {
+                            e.preventDefault();
+                            let data = new FormData(e.target);
+                            submitForm(data);
+                        })} id="form" className="Verification">
+                            <Header>
+                                <HeaderInner>
+                                    <Head>Verification (KYC)</Head>
+                                    <KYCTabs clickHandler={this.tabClickHandler} activeTab={activeKycTab}/>
+                                </HeaderInner>
+                            </Header>
+                            <MainWrapper>
+                                {activeKycTab === 1 && <PersonalData/>}
+                                {activeKycTab === 2 && <LegalPersonData/>}
+                                <InvestorsDocuments/>
+                            </MainWrapper>
+                            <InfoWrapper>
+                                <VerificationInfo
+                                    btnText="Send data"
+                                    verificationStages={['Verification__personData', 'Verification__investorsDocuments']}
+                                    stages={['Personal Data', 'Investor\`s documents']}
+                                />
+                            </InfoWrapper>
+                        </Wrapper>
+                    )}
+                />
+            </div>
         )
     }
 };
@@ -161,7 +172,7 @@ const mapDispatchToProps = (dispatch) => ({
     setOpenedTip(id) {
         dispatch(UIActions.setOpenedTip(id))
     }
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Verification);
 
