@@ -32,7 +32,7 @@ COPY user_office user_office
 RUN ./manage.py collectstatic --no-input
 
 RUN mkdir /static && mv assets/* /static
-RUN mkdir /media_data && chmod 600 /media_data
+RUN mkdir /media_data
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
