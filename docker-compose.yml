@@ -13,6 +13,8 @@ services:
     secrets:
       - db_root_password
       - db_password
+    ports:
+      - "3306:3306"
 
   rabbit:
     hostname: rabbit
@@ -36,6 +38,10 @@ services:
       DB_HOST: db
       CELERY_BROKER_URL: amqp://guest:guest@rabbit/
       WEB3_RPC_URL: http://172.18.0.1:8545
+    logging:
+      driver: journald
+      options:
+        tag: web
 
   workers:
     image: profx5/ico_portal:latest
@@ -55,6 +61,10 @@ services:
       CELERY_BROKER_URL: amqp://guest:guest@rabbit/
       WEB3_RPC_URL: http://172.18.0.1:8545
       C_FORCE_ROOT: 1
+    logging:
+      driver: journald
+      options:
+        tag: workers
 
   events_watcher:
     image: profx5/ico_portal:latest
@@ -74,6 +84,10 @@ services:
       CELERY_BROKER_URL: amqp://guest:guest@rabbit/
       WEB3_RPC_URL: http://172.18.0.1:8545
       C_FORCE_ROOT: 1
+    logging:
+      driver: journald
+      options:
+        tag: events_watcher
 
   nginx:
     image: nginx:stable-alpine
@@ -86,6 +100,10 @@ services:
       - ./nginx/ssl/:/etc/nginx/ssl/
     depends_on:
       - web
+    logging:
+      driver: journald
+      options:
+        tag: nginx
 
 secrets:
   db_password:
