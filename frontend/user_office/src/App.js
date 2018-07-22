@@ -16,7 +16,7 @@ class App extends React.Component {
 
         return (
             <div>
-                <Warnings/>
+                {/*<Warnings/>*/}
                 <ContentWrapper 
                     layout={<Layout/>}
                 />

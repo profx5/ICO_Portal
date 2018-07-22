@@ -9,12 +9,12 @@ class BonusSheet extends React.Component{
                 <Head>Progressive bonus for private presale!</Head>
                 <TableWrapper>
                     <div className="row">
-                        <div className="part">Minimum sum of buy $ 8 000</div>
-                        <div className="part">Get 20% tokens as a bonus!</div>
+                        <div className="part">Purchases from $ 8 000 to $19 999.99</div>
+                        <div className="part">Get 20% bonus!</div>
                     </div>
                     <div className="row">
-                        <div className="part">Minimum sum of buy $ 20 000</div>
-                        <div className="part">Get 30% tokens as a bonus!</div></div>
+                        <div className="part">Purchases with the value of $20 000 +</div>
+                        <div className="part">Get special bonus of 30%!</div></div>
                 </TableWrapper>
             </Wrapper>
         )
