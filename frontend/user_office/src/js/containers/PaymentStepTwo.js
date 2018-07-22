@@ -137,6 +137,7 @@ class PaymentStepTwo extends React.Component {
                             <div className="text">
                                 To buy tokens just copy an address below (or scan QR code&nbsp;
                                 <span>
+
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
                               <g fill="none" fill-rule="evenodd">
                                 <path fill="#F5F6FA" d="M-717-723H723V517H-717z"/>
