@@ -43,6 +43,8 @@ CELERY_BROKER_URL = os.environ['CELERY_BROKER_URL']
 
 SIGNUP_CLOSED = os.getenv('SIGNUP_CLOSED', False)
 
+RINKEBY_MIDDLEWARE = os.getenv('RINKEBY_MIDDLEWARE', False)
+
 try:
     from .local import *
 except ImportError:

@@ -40,6 +40,7 @@ services:
       SECRET_KEY_FILE: /run/secrets/ico_portal_secret_key
       RAVEN_DSN_FILE: /run/secrets/raven_dsn
       WEB3_RPC_URL: http://172.18.0.1:8545
+      RINKEBY_MIDDLEWARE: 1
       ICO_EMAIL_HOST: smtp-pulse.com
       ICO_EMAIL_HOST_USER: k.v.varlamov@gmail.com
       ICO_EMAIL_HOST_PASSWORD: read_manual
@@ -68,6 +69,7 @@ services:
       SECRET_KEY_FILE: /run/secrets/ico_portal_secret_key
       RAVEN_DSN_FILE: /run/secrets/raven_dsn
       WEB3_RPC_URL: http://172.18.0.1:8545
+      RINKEBY_MIDDLEWARE: 1
       C_FORCE_ROOT: 1
       CELERY_BROKER_URL: amqp://guest:guest@rabbit/
 
@@ -92,6 +94,7 @@ services:
       SECRET_KEY_FILE: /run/secrets/ico_portal_secret_key
       RAVEN_DSN_FILE: /run/secrets/raven_dsn
       WEB3_RPC_URL: http://172.18.0.1:8545
+      RINKEBY_MIDDLEWARE: 1
       C_FORCE_ROOT: 1
       CELERY_BROKER_URL: amqp://guest:guest@rabbit/
 
