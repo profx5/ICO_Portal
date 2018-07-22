@@ -25,7 +25,7 @@ const Account = ({
         <InfoWrapper>
             <Balance>
                 <img src={walletIcon}/>
-                <p>{tokensAmount / 10 ** 18} <span>VERA</span></p>
+                <p>{(tokensAmount / 10 ** 18).toFixed(2)} <span>VERA</span></p>
             </Balance>
 
 

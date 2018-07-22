@@ -49,6 +49,9 @@ class DepositTable extends Component {
         return item.getIn(['transfer', 'state'])
     }
 
+    _getTransferLinkAddress = (item) => {
+        return chainResolver['ETH'] + this._getTransferTxnHash(item)
+    }
     _getTransferLink = (item) => {
         const txnHash = this._getTransferTxnHash(item)
 
@@ -61,17 +64,21 @@ class DepositTable extends Component {
         }
     }
 
-    _getTokens = (item) => {
+    _getTokensString = (item) => {
+        return (parseFloat(item.get('amount')) / 10 ** 18).toFixed(2)
+
+    }
+    _getTokensWSign = (item) => {
         const tokensAmount = parseFloat(item.get('amount')),
               direction = item.get('direction')
         if (tokensAmount > 0) {
-            if (item.get('direction') === 'IN') {
-                return '+' + tokensAmount / 10 ** 18
+            if (direction === 'IN') {
+                return '+' + (tokensAmount / 10 ** 18).toFixed(2)
             } else {
-                return '-' + tokensAmount / 10 ** 18
+                return '-' + (tokensAmount / 10 ** 18).toFixed(2)
             }
         } else {
-            return '0'
+            return '0.00'
         }
     }
 
@@ -96,7 +103,7 @@ class DepositTable extends Component {
                     <FlexItem width={15} color>{this._getUSDValueString(item)}</FlexItem>
                     <FlexItemColor width={15} ffailed={failed}
                                    up={item.get('direction') === 'IN'}>
-                        <span>{this._getTokens(item)}</span>
+                        <span>{this._getTokensWSign(item)}</span>
                         <IconImgAbsolute className='more' onClick={this.toggleContent.bind(this, item.get('id'))} right={25} src={iconQuestion}/>
                     </FlexItemColor>
                 </FlexContainer>
@@ -122,20 +129,24 @@ class DepositTable extends Component {
             bonus_percent
         } = item.get('payment').get(0).toJS();
 
-        const amountFloat = parseFloat(amount),
+        const paymentAmount = this._getAmountString(item),
               rateUSD = parseFloat(rate_usdc) / 100,
+              rateUSDString = rateUSD.toFixed(2),
               USDValue = parseFloat(usdc_value) / 100,
-              baseTokens = USDValue / 2,
+              USDValueString = this._getUSDValueString(item),
+              baseTokens = (USDValue / 2),
+              baseTokensString = (USDValue / 2).toFixed(2),
               bonusTokens = baseTokens * bonus_percent / 100,
-              total = parseFloat(item.get('amount')) / 10 ** 18
+              bonusTokensString = bonusTokens.toFixed(2),
+              total = this._getTokensString(item)
         return (
             <Content>
-                {amountFloat + " " + currency + " x " + rateUSD + " USD = " + USDValue + " USD"}<br/>
-                {"Phase bonus = " + bonus_percent + "%"}<br/>
-                Token base price = 2 USD <br/>
-                {"Base tokens: " + USDValue + " / 2 = " + baseTokens + " VERA"}<br/>
-                {"Bonus tokens: " + baseTokens + " x " + bonus_percent + "% = " + bonusTokens + "VERA"}<br/>
-                {"Total: " + total}<br/>
+                {paymentAmount + " x " + rateUSDString + " USD = " + USDValueString + " USD"}<br/>
+            {"Phase bonus = " + bonus_percent + "%"}<br/>
+            Token base price = 2 USD <br/>
+            {"Base tokens: " + USDValueString + " USD / 2 = " + baseTokensString + " VERA"}<br/>
+            {"Bonus tokens: " + baseTokensString + " x " + bonus_percent + "% = " + bonusTokensString + " VERA"}<br/>
+            {"Total: " + total}<br/>
             </Content>
         )
     }
@@ -144,7 +155,7 @@ class DepositTable extends Component {
         const { openedTxn } = this.props;
         let paymentLink = false;
 
-        const transferLink = this._getTransferLink(item)
+        const transferLink = this._getTransferLinkAddress(item)
 
         const paymentExists = item.get('payment').size > 0;
         if (paymentExists) {
@@ -165,12 +176,14 @@ class DepositTable extends Component {
                                     <col width="2%"/> */}
                             </colgroup>
                             <tbody>
-                                <tr>
-                                    <td>Transfer:</td>
-                                    <td><a href={transferLink} target="_blank">{transferLink}</a></td>
-                                    {transferLink !== '-' &&
-                                     <td><IconImg src={iconCheckGreen} alt=""/></td>}
-                                </tr>
+                                {this._getTransferTxnHash(item) &&
+                                 <tr>
+                                     <td>Transfer:</td>
+                                     <td><a href={transferLink} target="_blank">{transferLink}</a></td>
+                                     {transferLink !== '-' &&
+                                      <td><IconImg src={iconCheckGreen} alt=""/></td>}
+                                 </tr>
+                                }
                                 {paymentExists &&
                                  <tr>
                                      <td>Payment:</td>
@@ -182,7 +195,7 @@ class DepositTable extends Component {
                         </Table>
                         <Divider/>
                         <FlexContainer>
-                            {paymentExists && this._getState(item) === "APPROVED" &&
+                            {paymentExists && this._getState(item) === "ACTUAL" &&
                              <Block>
                                  <Head>
                                      Calculated token amount
