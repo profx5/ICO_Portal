@@ -19,7 +19,7 @@ def get_web3():
 
     if not _web3_instance:
         _web3_instance = Web3(HTTPProvider(settings.WEB3_RPC_URL))
-        if settings.get('RINKEBY_MIDDLEWARE', True):
+        if getattr(settings, 'RINKEBY_MIDDLEWARE', True):
             _web3_instance.middleware_stack.inject(geth_poa_middleware, layer=0)
 
     if not _web3_instance.isConnected():
