@@ -16,7 +16,8 @@ from uuid import UUID
 
 
 class TestProcessIPN(BlockChainTestCase):
-    investor_eth_address = '0xB0a3f48478d84a497f930d8455711d9981B66a70'
+    setup_eth_tester = True
+    setup_contracts = ['price_oracle', 'token', 'crowdsale']
 
     request_data = {
         'ipn_version': '1.0',
@@ -42,9 +43,9 @@ class TestProcessIPN(BlockChainTestCase):
         self.utcnow = datetime.utcnow()
         self.stub_datetime_utcnow(self.utcnow)
 
-        self.investor = InvestorFactory(eth_account=self.investor_eth_address)
+        self.investor = InvestorFactory(eth_account=self.account['address'])
         self.phase = PhaseFactory(bonus_percents=40)
-        self.exchange_rate = ExchangeRateFactory(currency='LTC', rate=Decimal('142.43610'))
+        self.exchange_rate = ExchangeRateFactory(currency='LTC', rate=Decimal('142321.43610'))
         self.account = AccountFactory(investor=self.investor,
                                       currency='LTC',
                                       address='mqZutf2dbv2oW9KzTM9NpiimhpqWAYLuoG')
@@ -68,12 +69,12 @@ class TestProcessIPN(BlockChainTestCase):
         transaction = transactions.first()
 
         self.assertEqual(transaction.data,
-                         '0xa9059cbb000000000000000000000000b0a3f48478d84a497f930d8455711d9981b66a7000000000000000000000000000000000000000000000000114becb8b7cee0000')
+                         '0xa3fc81cb00000000000000000000000073015966604928a312f79f7e69291a656cb88602000000000000000000000000000000000000000000000000000000000015b76e')
         self.assertIsNone(transaction.nonce)
         self.assertEqual(transaction.value, Decimal('0'))
         self.assertIsNone(transaction.from_account)
-        self.assertEqual(transaction.to_account, '0x2feB9363a9bb1E16Ab90F6d4007264774e959F34')
-        self.assertEqual(transaction.gas, 70000)
+        self.assertEqual(transaction.to_account, self.crowdsale_contract.address)
+        self.assertEqual(transaction.gas, 150000)
         self.assertIsNone(transaction.gas_price)
         self.assertIsNone(transaction.txn_hash)
         self.assertEqual(transaction.state, 'PREPARED')
@@ -86,14 +87,14 @@ class TestProcessIPN(BlockChainTestCase):
 
         transfer = transfers.first()
         self.assertEqual(transfer.state, 'PREPARED')
-        self.assertEqual(transfer.mint_txn_id, transaction.txn_id)
+        self.assertEqual(transfer.buy_txn_id, transaction.txn_id)
 
         tokens_moves = TokensMove.objects.all()
         self.assertEqual(tokens_moves.count(), 1)
 
         tokens_move = tokens_moves.first()
         self.assertEqual(tokens_move.investor, self.investor)
-        self.assertEqual(tokens_move.amount, Decimal('19941600000000000000'))
+        self.assertIsNone(tokens_move.amount)
         self.assertEqual(tokens_move.transfer, transfer)
         self.assertEqual(tokens_move.state, 'PREPARED')
         self.assertEqual(tokens_move.direction, 'IN')
@@ -109,6 +110,10 @@ class TestProcessIPN(BlockChainTestCase):
         self.assertEqual(payment.txn_id, '007b6fb10f7906ea2ae8e99c62434dfaf0b70c89c1e0e7b8c628dca329cfad03')
         self.assertEqual(payment.received_at, self.utcnow)
         self.assertEqual(payment.tokens_move, tokens_move)
+        self.assertEqual(payment.usdc_value, Decimal('1423214'))
+        self.assertEqual(payment.rate_usdc, Decimal('14232144'))
+        self.assertIsNone(payment.bonus_percent)
+        self.assertIsNone(payment.bonus_ids)
 
     def test_invalid_signature(self):
         request = self.request_factory.post('/',

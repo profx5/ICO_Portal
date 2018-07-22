@@ -17,7 +17,7 @@ class PaymentSerializer(ModelSerializer):
     class Meta:
         model = Payment
         fields = ('currency', 'payer_account', 'amount', 'amounti', 'txn_id',
-                  'received_at', 'usdc_value')
+                  'received_at', 'usdc_value', 'rate_usdc', 'bonus_percent', 'bonus_ids')
 
 
 class TokensMoveSerializer(ModelSerializer):

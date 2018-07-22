@@ -1,14 +1,14 @@
 from django.db import DatabaseError
 
 from user_office.models import ICO_Info
-from blockchain.ico.contracts import TokenContract
+from blockchain.ico.contracts import CrowdsaleContract
 from ico_portal.utils.service_object import ServiceObject, service_call
 
 
 class SyncICOInfo(ServiceObject):
     def get_total_supply(self, context):
         try:
-            total_supply = TokenContract().get_total_supply()
+            total_supply = CrowdsaleContract().get_cents_raised()
 
             return self.success(total_supply=total_supply)
         except ConnectionError as e:

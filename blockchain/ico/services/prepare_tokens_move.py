@@ -7,7 +7,7 @@ from ico_portal.utils.service_object import ServiceObject, service_call
 class PrepareTokensMove(ServiceObject):
     def create_transfer(self, context):
         transfer = Transfer(txn_hash=context.txn_hash,
-                            mint_txn_id=context.mint_txn_id,
+                            buy_txn_id=context.buy_txn_id,
                             state='PREPARED')
 
         try:
@@ -32,8 +32,8 @@ class PrepareTokensMove(ServiceObject):
             return self.fail(e)
 
     @service_call
-    def __call__(self, investor, currency, amount, txn_hash=None, mint_txn_id=None):
-        return self.success(investor=investor, txn_hash=txn_hash, mint_txn_id=mint_txn_id,
+    def __call__(self, investor, currency, amount=None, txn_hash=None, buy_txn_id=None):
+        return self.success(investor=investor, txn_hash=txn_hash, buy_txn_id=buy_txn_id,
                             currency=currency, amount=amount) | \
                             self.create_transfer | \
                             self.create_tokens_move

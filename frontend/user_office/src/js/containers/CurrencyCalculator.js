@@ -74,6 +74,7 @@ class CurrencyCalculator extends React.Component {
                         <div className="head">Vera (Buy till 7 july and <span>get a 30% bonus!</span>)</div>
                         <TokensInput>
                             {tokensAmount && tokensAmount.toFixed(2) || 0}
+
                         </TokensInput>
                     </TokensInputWrapper>
 

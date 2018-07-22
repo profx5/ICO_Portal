@@ -6,11 +6,11 @@ import iconCheck from './../../img/icons/icon_check.svg';
 
 const FinalFormRadio = ({labelText, name, values, options}) => {
 
-    function generateRadio(data) {
+    function generateRadio(data, name) {
         return data.map((item, index) => {
             return (
                 <React.Fragment key={index}>
-                    <RadioInput component="input" type="radio" name={name} value={values[index]} id={`radio-${item}`} hidden/>
+                    <RadioInput component="input" type="radio" name={name} value={values[index]} id={`radio-${item}`} hidden />
                     <RadioLabel htmlFor={`radio-${item}`}>{item}</RadioLabel>
                 </React.Fragment>
             )
@@ -20,7 +20,7 @@ const FinalFormRadio = ({labelText, name, values, options}) => {
     return (
         <Wrapper>
             <InputsWrapper>
-                {generateRadio(options)}
+                {generateRadio(options, name)}
             </InputsWrapper>
         </Wrapper>
     );

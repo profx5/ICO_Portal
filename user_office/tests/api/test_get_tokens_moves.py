@@ -29,7 +29,10 @@ class TestGetTokensMoves(APITestCase):
                        amount=842003,
                        amounti=84200300000000000,
                        txn_id='0x3990a1ef43a957dfa6cf6bd450419369cf55d4',
-                       usdc_value=1000000)
+                       usdc_value=1000000,
+                       rate_usdc=44000,
+                       bonus_percent=20,
+                       bonus_ids=1)
 
         response = self.client.get('/api/getTokensMoves/')
 
@@ -75,7 +78,10 @@ class TestGetTokensMoves(APITestCase):
                     "amounti": "84200300000000000",
                     "txn_id": "0x3990a1ef43a957dfa6cf6bd450419369cf55d4",
                     "received_at": "2018-05-14T11:11:11",
-                    "usdc_value": "1000000"
+                    "usdc_value": "1000000",
+                    "rate_usdc": "44000",
+                    "bonus_percent": 20,
+                    "bonus_ids": 1
                 }
             ]
         }

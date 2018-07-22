@@ -1,11 +1,11 @@
-from blockchain.ico.contracts import TokenContract
+from blockchain.ico.contracts import CrowdsaleContract
 from .create_transaction import CreateTransaction
 from ico_portal.utils.service_object import ServiceObject, service_call
 
 
-class Mint(ServiceObject):
+class BuyTokens(ServiceObject):
     def create_txn_data(self, context):
-        txn_data = TokenContract().mint(to=context.to, amount=context.amount)
+        txn_data = CrowdsaleContract().buy_tokens(to=context.to, usdc_value=context.usdc_value)
 
         return self.success(txn_data=txn_data)
 
@@ -14,7 +14,7 @@ class Mint(ServiceObject):
             (lambda result: self.success(transaction=result.txn))
 
     @service_call
-    def __call__(self, to, amount):
-        return self.success(to=to, amount=amount) | \
+    def __call__(self, to, usdc_value):
+        return self.success(to=to, usdc_value=usdc_value) | \
             self.create_txn_data | \
             self.create_transaction

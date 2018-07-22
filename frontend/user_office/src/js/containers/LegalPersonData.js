@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
+import { Field } from 'react-final-form';
+
 
 import * as KYCActions from './../actions/KYCActions';
 
@@ -9,12 +11,17 @@ import FinalFormField from './../components/FinalFormField';
 import FinalFormRadio from './../components/FinalFormRadio';
 import Button from './../components/Button';
 import * as UIActions from "../actions/UIActions";
+import FileUpload from "../components/FileUpload";
 
+const File = ({ input: {value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
+  <input type='file' {...inputProps} {...props} />
+);
 
 class LegalPersonData extends React.Component {
 
     uploadOnClickHandler = (event) => {
-        $(event.currentTarget).find('input[type="file"]').click();
+        event.preventDefault();
+        $(event.currentTarget).closest('div').find('input[type="file"]').click();
     }
 
     setOpenedTip = (id) => {
@@ -30,6 +37,7 @@ class LegalPersonData extends React.Component {
             <Wrapper className="Verification__personData">
                 <Title>Legal Person Data</Title>
                 <InputSet>
+                    <input type="hidden" name='type' value='LEGAL'/>
                     <InputWrapper>
                         <FinalFormField placeholder="Your business name" labelText="Business name" name="business_name"/>
                     </InputWrapper>
@@ -37,7 +45,8 @@ class LegalPersonData extends React.Component {
                         <FinalFormField placeholder="Your registration number" labelText="Registration number" name="registration_number"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your date of registration" labelText="Date of registration" name="registration_date"/>
+                        <FinalFormField placeholder="Your date of registration" labelText="Date of registration" name="registration_date"
+                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="Your phone number"  labelText="Phone number" options={{phone: true, phoneRegionCode: 'RU'}} name="phone_number"/>
@@ -53,7 +62,8 @@ class LegalPersonData extends React.Component {
                     <div className="block-file">
                         <p className="text">Basis for representation</p>
                         <ButtonWrapper>
-                            <Button text="Attach file"/>
+                            <input type="file" name='basis_doc' hidden/>
+                            <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
                         </ButtonWrapper>
                     </div>
 
@@ -81,7 +91,7 @@ class LegalPersonData extends React.Component {
                         <FinalFormField placeholder="Your place of birth" labelText="Place of birth" name="beneficial_place_of_birth"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="date/month/year" labelText="Date of birth" options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['/']}} name="beneficial_birthdate"/>
+                        <FinalFormField placeholder="date/month/year" labelText="Date of birth" options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}} name="beneficial_birthdate"/>
                     </InputWrapper>
                     <InputWrapper fullWidth>
                         <FinalFormField placeholder="Your place of residence of the beneficial owner(s)" labelText="Place of residence of the beneficial owner(s)" name="beneficial_place_of_residence"/>
@@ -93,7 +103,7 @@ class LegalPersonData extends React.Component {
                         Is the representative or any beneficial owner a politically exposed person (PEP), 
                         family member of PEP or person known to be close associate of PEP
                     </p>
-                    <FinalFormRadio name="PEP" options={['Yes', 'No']} values={[true, false]}/>
+                    <FinalFormRadio name="is_pep" options={['Yes', 'No']} values={["True", "False"]}/>
                 </RadioSet>
 
 

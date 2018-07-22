@@ -20,15 +20,13 @@ services:
 
   web:
     image: profx5/ico_portal:latest
-    environment:
-      - DB_PASSWORD_FILE=/run/secrets/db_password
+    command: "/usr/src/app/scripts/start_server.sh"
     secrets:
       - db_password
-      - ico_portal_secret_key
-      - raven_dsn
     volumes:
       - static:/static
       - media:/media_data
+      - ${PWD}/config.py:/usr/src/app/ico_portal/settings/local.py
     depends_on:
       - db
     environment:
@@ -36,26 +34,16 @@ services:
       DB_USER:  ico_portal_user
       DB_PASSWORD_FILE: /run/secrets/db_password
       DB_HOST: db
-      ICO_PORTAL_HOST: https://investor.vera.wtf
-      SECRET_KEY_FILE: /run/secrets/ico_portal_secret_key
-      RAVEN_DSN_FILE: /run/secrets/raven_dsn
-      WEB3_RPC_URL: http://172.18.0.1:8545
-      ICO_EMAIL_HOST: smtp-pulse.com
-      ICO_EMAIL_HOST_USER: k.v.varlamov@gmail.com
-      ICO_EMAIL_HOST_PASSWORD: read_manual
-      ICO_EMAIL_DEFAULT_FROM: noreply@vera.jobs
       CELERY_BROKER_URL: amqp://guest:guest@rabbit/
-      SIGNUP_CLOSED: 1
+      WEB3_RPC_URL: http://172.18.0.1:8545
 
   workers:
     image: profx5/ico_portal:latest
     command: "/usr/src/app/scripts/start_workers.sh"
-    environment:
-      - DB_PASSWORD_FILE=/run/secrets/db_password
     secrets:
       - db_password
-      - ico_portal_secret_key
-      - raven_dsn
+    volumes:
+      - ${PWD}/config.py:/usr/src/app/ico_portal/settings/local.py
     depends_on:
       - db
       - rabbit
@@ -64,22 +52,17 @@ services:
       DB_USER:  ico_portal_user
       DB_PASSWORD_FILE: /run/secrets/db_password
       DB_HOST: db
-      ICO_PORTAL_HOST: demo.ongrid.pro
-      SECRET_KEY_FILE: /run/secrets/ico_portal_secret_key
-      RAVEN_DSN_FILE: /run/secrets/raven_dsn
+      CELERY_BROKER_URL: amqp://guest:guest@rabbit/
       WEB3_RPC_URL: http://172.18.0.1:8545
       C_FORCE_ROOT: 1
-      CELERY_BROKER_URL: amqp://guest:guest@rabbit/
 
   events_watcher:
     image: profx5/ico_portal:latest
     command: "/usr/src/app/scripts/start_beat.sh"
-    environment:
-      - DB_PASSWORD_FILE=/run/secrets/db_password
     secrets:
       - db_password
-      - ico_portal_secret_key
-      - raven_dsn
+    volumes:
+      - ${PWD}/config.py:/usr/src/app/ico_portal/settings/local.py
     depends_on:
       - db
       - rabbit
@@ -88,12 +71,9 @@ services:
       DB_USER:  ico_portal_user
       DB_PASSWORD_FILE: /run/secrets/db_password
       DB_HOST: db
-      ICO_PORTAL_HOST: demo.ongrid.pro
-      SECRET_KEY_FILE: /run/secrets/ico_portal_secret_key
-      RAVEN_DSN_FILE: /run/secrets/raven_dsn
+      CELERY_BROKER_URL: amqp://guest:guest@rabbit/
       WEB3_RPC_URL: http://172.18.0.1:8545
       C_FORCE_ROOT: 1
-      CELERY_BROKER_URL: amqp://guest:guest@rabbit/
 
   nginx:
     image: nginx:stable-alpine
@@ -111,10 +91,6 @@ secrets:
   db_password:
     external: true
   db_root_password:
-    external: true
-  ico_portal_secret_key:
-    external: true
-  raven_dsn:
     external: true
 
 volumes:

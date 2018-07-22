@@ -79,13 +79,6 @@ class Investor(AbstractBaseUser):
         return settings.KYC_ENABLED and not self.passed_kyc
 
     @property
-    def investment_threshold(self):
-        if self.kyc_required:
-            return settings.THRESHOLDS['pre_kyc']
-        else:
-            return settings.THRESHOLDS['post_kyc']
-
-    @property
     def eth_account_filled(self):
         return len(self.eth_account) == 42 and is_hex_address(self.eth_account)
 

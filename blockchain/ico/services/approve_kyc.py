@@ -5,20 +5,7 @@ from blockchain.ico import services
 from ico_portal.utils.service_object import service_call, transactional, ServiceObject
 
 
-class SaveKYCMixin:
-    def save_kyc(self, context):
-        try:
-            context.kyc.save()
-
-            return self.success()
-        except DatabaseError as e:
-            return self.fail(e)
-
-
-class ApproveKYC(ServiceObject, SaveKYCMixin):
-    def __init__(self, call_contract=False):
-        self.call_contract = call_contract
-
+class ApproveKYC(ServiceObject):
     def check_state(self, context):
         if context.kyc.state != 'APPROVED':
             return self.success()
@@ -44,6 +31,14 @@ class ApproveKYC(ServiceObject, SaveKYCMixin):
 
         return self.success(kyc=context.kyc)
 
+    def save_kyc(self, context):
+        try:
+            context.kyc.save()
+
+            return self.success()
+        except DatabaseError as e:
+            return self.fail(e)
+
     @service_call
     @transactional
     def __call__(self, kyc):
@@ -53,13 +48,4 @@ class ApproveKYC(ServiceObject, SaveKYCMixin):
             self.get_txn_data | \
             self.create_transaction | \
             self.set_approve_txn_id | \
-            self.save_kyc
-
-
-class DeclineKYC(ServiceObject, SaveKYCMixin):
-    @service_call
-    def __call__(self, kyc):
-        kyc.state = 'DECLINED'
-
-        return self.success(kyc=kyc) | \
             self.save_kyc

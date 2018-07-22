@@ -9,7 +9,8 @@ import * as UIActions from './../actions/UIActions';
 
 const chainResolver = {
     ETH: 'https://etherscan.io/tx/',
-    BTC: 'https://www.blockchain.com/en/btc/tx/'
+    BTC: 'https://www.blockchain.com/en/btc/tx/',
+    LTCT: 'https://chain.so/tx/LTCTEST/'
 };
 
 
@@ -26,32 +27,88 @@ class DepositTable extends Component {
         })
     };
 
+    _getAmount = (item) => {
+        return item.get('payment').size > 0 ? parseFloat(item.getIn(['payment', '0', 'amount'])) : 0
+    }
+    _getAmountString = (item) => {
+        return this._getAmount(item) > 0 ? this._getAmount(item) + ' ' + item.getIn(['payment', '0', 'currency']) : '-'
+    }
+
+    _getUSDValue = (item) => {
+        return item.get('payment').size > 0 ? parseFloat(item.getIn(['payment', '0', 'usdc_value'])) / 100 : 0
+    }
+    _getUSDValueString = (item) => {
+        return this._getUSDValue(item) > 0 ? this._getUSDValue(item).toFixed(2) : '-'
+    }
+
+    _getTransferTxnHash = (item) => {
+        return item.getIn(['transfer', 'txn_hash'])
+    }
+
+    _getState = (item) => {
+        return item.getIn(['transfer', 'state'])
+    }
+
+    _getTransferLinkAddress = (item) => {
+        return chainResolver['ETH'] + this._getTransferTxnHash(item)
+    }
+    _getTransferLink = (item) => {
+        const txnHash = this._getTransferTxnHash(item)
+
+        if (txnHash) {
+            return (
+                <a href={chainResolver['ETH'] + txnHash} target="_blank">{txnHash}</a>
+            )
+        } else {
+            return '-'
+        }
+    }
+
+    _getTokensString = (item) => {
+        return (parseFloat(item.get('amount')) / 10 ** 18).toFixed(2)
+
+    }
+    _getTokensWSign = (item) => {
+        const tokensAmount = parseFloat(item.get('amount')),
+              direction = item.get('direction')
+        if (tokensAmount > 0) {
+            if (direction === 'IN') {
+                return '+' + (tokensAmount / 10 ** 18).toFixed(2)
+            } else {
+                return '-' + (tokensAmount / 10 ** 18).toFixed(2)
+            }
+        } else {
+            return '0.00'
+        }
+    }
+
     _renderTitle = (item) => {
-        let amount = item.get('payment').size > 0 ? parseFloat(item.getIn(['payment', '0', 'amount'])) +
-            ' ' + item.getIn(['payment', '0', 'currency']) : '-';
+        const failed = this._getState(item) === 'FAILED'
         return (
             <div className='uk-accordion-title'>
-                <FlexContainer className={item.getIn(['transfer', 'state']) === 'ACTUAL' ? 'prepared' : ''}>
-                    <FlexItem
-                        width={15}>{moment(item.get('created_at')).format('YYYY-MM-DD HH:mm:ss')} {item.get('id')}</FlexItem>
-                    <FlexItem position={'relative'} width={40} failed={item.getIn(['transfer', 'state']) === 'FAILED'}>
-                        <span className='txn'>{item.getIn(['transfer', 'txn_hash']).substr(0, 46)}...</span>
-                        {item.getIn(['transfer', 'state']) !== 'FAILED' &&
-                        <IconImgAbsolute right={1} src={iconCheckGreen}/> ||
-                        <IconImgAbsolute className={'border'} right={1} src={iconReload}/>}
+                <FlexContainer>
+                    <FlexItem failed={failed}
+                              width={15}>{moment(item.get('created_at')).format('YYYY-MM-DD HH:mm:ss')} {item.get('id')}
+                    </FlexItem>
+                    <FlexItem position={'relative'} width={35} failed={failed} overflow_x='scroll'>
+                        <span className='txn'>{this._getTransferLink(item)}</span>
+                    </FlexItem>
+                    <FlexItem width={5} failed={failed}>
+                        {item.getIn(['transfer', 'state']) === 'ACTUAL' &&
+                         <IconImg right={1} src={iconCheckGreen}/> ||
+                         <IconImg right={1} src={iconReload}/>}
 
                     </FlexItem>
-                    <FlexItem width={15} color>{amount}</FlexItem>
-                    <FlexItem width={15} color>{item.get('usd_value', '-')}</FlexItem>
-                    <FlexItemColor width={15} failed={item.getIn(['transfer', 'state']) === 'FAILED'}
+                    <FlexItem width={15} color>{this._getAmountString(item)}</FlexItem>
+                    <FlexItem width={15} color>{this._getUSDValueString(item)}</FlexItem>
+                    <FlexItemColor width={15} ffailed={failed}
                                    up={item.get('direction') === 'IN'}>
-                        <span>{item.get('direction') === 'IN' && '+' || '-'}{item.get('amount')}</span>
+                        <span>{this._getTokensWSign(item)}</span>
                         <IconImgAbsolute className='more' onClick={this.toggleContent.bind(this, item.get('id'))} right={25} src={iconQuestion}/>
                     </FlexItemColor>
                 </FlexContainer>
             </div>
         )
-
     };
 
     toggleContent = (id) => {
@@ -63,11 +120,46 @@ class DepositTable extends Component {
         }
     };
 
+    _get_calculations = (item) => {
+        const {
+            amount,
+            currency,
+            rate_usdc,
+            usdc_value,
+            bonus_percent
+        } = item.get('payment').get(0).toJS();
+
+        const paymentAmount = this._getAmountString(item),
+              rateUSD = parseFloat(rate_usdc) / 100,
+              rateUSDString = rateUSD.toFixed(2),
+              USDValue = parseFloat(usdc_value) / 100,
+              USDValueString = this._getUSDValueString(item),
+              baseTokens = (USDValue / 2),
+              baseTokensString = (USDValue / 2).toFixed(2),
+              bonusTokens = baseTokens * bonus_percent / 100,
+              bonusTokensString = bonusTokens.toFixed(2),
+              total = this._getTokensString(item)
+        return (
+            <Content>
+                {paymentAmount + " x " + rateUSDString + " USD = " + USDValueString + " USD"}<br/>
+            {"Phase bonus = " + bonus_percent + "%"}<br/>
+            Token base price = 2 USD <br/>
+            {"Base tokens: " + USDValueString + " USD / 2 = " + baseTokensString + " VERA"}<br/>
+            {"Bonus tokens: " + baseTokensString + " x " + bonus_percent + "% = " + bonusTokensString + " VERA"}<br/>
+            {"Total: " + total}<br/>
+            </Content>
+        )
+    }
+
     _renderContent = (item) => {
         const { openedTxn } = this.props;
-        let content = false;
-        if (item.get('payment').size > 0) {
-            content = chainResolver[item.getIn(['payment', '0', 'currency'])] + item.getIn(['payment', '0', 'txn_id']);
+        let paymentLink = false;
+
+        const transferLink = this._getTransferLinkAddress(item)
+
+        const paymentExists = item.get('payment').size > 0;
+        if (paymentExists) {
+            paymentLink = chainResolver[item.getIn(['payment', '0', 'currency'])] + item.getIn(['payment', '0', 'txn_id']);
         }
 
         return (
@@ -80,58 +172,58 @@ class DepositTable extends Component {
                         <Table>
                             <colgroup>
                                 <col width="9%"/>
-                                <col width="89%"/>
-                                <col width="2%"/>
+                                {/* <col width="89%"/>
+                                    <col width="2%"/> */}
                             </colgroup>
                             <tbody>
-                            <tr>
-                                <td>Transfer:</td>
-                                <td>https://etherscan.io/tx/{item.getIn(['transfer', 'txn_hash'])}</td>
-                                <td><IconImg src={iconCheckGreen} alt=""/></td>
-                            </tr>
-                            {content &&
-                            <tr>
-                                <td>Payment:</td>
-                                <td>{content}</td>
-                                <td><IconImg src={iconCheckGreen} alt=""/></td>
-                            </tr>
-                            }
+                                {this._getTransferTxnHash(item) &&
+                                 <tr>
+                                     <td>Transfer:</td>
+                                     <td><a href={transferLink} target="_blank">{transferLink}</a></td>
+                                     {transferLink !== '-' &&
+                                      <td><IconImg src={iconCheckGreen} alt=""/></td>}
+                                 </tr>
+                                }
+                                {paymentExists &&
+                                 <tr>
+                                     <td>Payment:</td>
+                                     <td><a href={paymentLink} target="_blank">{paymentLink}</a></td>
+                                     <td><IconImg src={iconCheckGreen} alt=""/></td>
+                                 </tr>
+                                }
                             </tbody>
                         </Table>
                         <Divider/>
                         <FlexContainer>
-                            <Block>
+                            {paymentExists && this._getState(item) === "ACTUAL" &&
+                             <Block>
+                                 <Head>
+                                     Calculated token amount
+                                 </Head>
+                                 {this._get_calculations(item)}
+                             </Block>
+                            }
+
+                            {/* <Block>
                                 <Head>
-                                    Calculated token amount
+                                Referal bonuses
                                 </Head>
                                 <Content>
-                                    2.123467 ETH x 576.38 USD = 1223.15 USD <br/>
-                                    Phase №2 bonus = 50% <br/>
-                                    Token base price = 1 USD <br/>
-                                    Base tokens: 1223.15 USD/1 = 1223.15 VERA <br/>
-                                    Bonus tokens: 1223.15 x 50% = 611.58 VERA <br/>
+                                -
                                 </Content>
-                            </Block>
-                            <Block>
-                                <Head>
-                                    Referal bonuses
-                                </Head>
-                                <Content>
-                                    -
-                                </Content>
-                            </Block>
-                            <Block>
+                                </Block>
+                                <Block>
                                 <Head>Withdrawal</Head>
                                 <Content>
-                                    -
+                                -
                                 </Content>
-                            </Block>
+                                </Block> */}
                         </FlexContainer>
-                        <Divider/>
-                        <Right>
+                        {/* <Divider/>
+                            <Right>
                             Total: = <span>+1823.77 VERA</span>
-                        </Right>
-                        <br/>
+                            </Right>
+                            <br/> */}
                     </TxInfoWrapper>
                 </ContentWrapper>
             </AccordionContent>
@@ -320,6 +412,7 @@ const FlexItem = styled.div`
     border-top: 1px solid rgba(150, 150, 150, 0.2);
     height: 66px;
     position: ${props => props.position ? props.position : 'inherit' }
+    overflow-x: ${props => props.overflow_x ? props.overflow_x : 'inherit' }
     &.head {
         border-top: none;
         opacity: 0.4;

@@ -39,7 +39,7 @@ class ProcessTransfer(ServiceObject):
         transaction = context.transaction
 
         if transaction:
-            transfer = Transfer.objects.filter(mint_txn_id=transaction.txn_id).first()
+            transfer = Transfer.objects.filter(buy_txn_id=transaction.txn_id).first()
         else:
             transfer = Transfer.objects.filter(txn_hash=fields['txn_hash']).first()
 
@@ -72,8 +72,10 @@ class ProcessTransfer(ServiceObject):
         )
 
     def maybe_process_purchase(self, context):
-        if CrowdsaleContract().is_purchase(context.event) and context.incoming_TM:
-            return process_purchase.ProcessPurchase()(context.incoming_TM) | (
+        purchase_event = CrowdsaleContract().get_event_from_txn_hash(context.event.txn_hash)
+
+        if purchase_event and context.incoming_TM:
+            return process_purchase.ProcessPurchase()(context.incoming_TM, purchase_event) | (
                 lambda result: self.success(payment=result.payment)
             )
         else:

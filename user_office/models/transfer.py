@@ -14,7 +14,7 @@ class Transfer(models.Model):
 
     txn_hash = models.CharField(max_length=100, unique=True,
                                 blank=True, null=True)
-    mint_txn_id = models.UUIDField(null=True, blank=True)
+    buy_txn_id = models.UUIDField(null=True, blank=True)
 
     to_account = models.CharField(max_length=100, null=True, blank=True)
     from_account = models.CharField(max_length=100, null=True, blank=True)
