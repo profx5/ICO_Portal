@@ -197,6 +197,9 @@ contract('VeraCrowdsale', function (accounts) {
       await this.crowdsale.addKycVerifiedInvestor(accounts[0], { from: accounts[1] }).should.be.rejectedWith(EVMRevert);
       await this.crowdsale.addKycVerifiedInvestor(accounts[0], { from: accounts[0] }).should.be.rejectedWith(EVMRevert);
     });
+    it('Non-admin is unable to withdraw tokens from crowdsale', async function () {
+      await this.crowdsale.withdrawTokens(accounts[1], { from: accounts[1] }).should.be.rejectedWith(EVMRevert);
+    });
 
     describe('after Acc1 added to admins', async function () {
       beforeEach(async function () {
@@ -236,6 +239,26 @@ contract('VeraCrowdsale', function (accounts) {
         const event = logs.find(e => e.event === 'RoleRemoved');
         event.args.addr.should.equal(accounts[0]);
         event.args.roleName.should.equal(this.adminRoleName);
+      });
+
+      it('Admin is able fo withdraw tokens to himself', async function () {
+        const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
+        const adminTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
+        await this.crowdsale.withdrawTokens(accounts[0], { from: accounts[0] }).should.be.fulfilled;
+        const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
+        const adminTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
+        contractTokenBalanceAfter.should.be.bignumber.equal(0);
+        adminTokenBalanceAfter.minus(adminTokenBalanceBefore).should.be.bignumber.equal(contractTokenBalanceBefore);
+      });
+
+      it('Admin is able fo withdraw tokens to other addresses', async function () {
+        const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
+        const rcvrTokenBalanceBefore = await this.token.balanceOf(accounts[9]);
+        await this.crowdsale.withdrawTokens(accounts[9], { from: accounts[0] }).should.be.fulfilled;
+        const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
+        const rcvrTokenBalanceAfter = await this.token.balanceOf(accounts[9]);
+        contractTokenBalanceAfter.should.be.bignumber.equal(0);
+        rcvrTokenBalanceAfter.minus(rcvrTokenBalanceBefore).should.be.bignumber.equal(contractTokenBalanceBefore);
       });
 
       describe('Acc3 added to backends', async function () {
@@ -292,6 +315,10 @@ contract('VeraCrowdsale', function (accounts) {
           await this.crowdsale.delAdmin(accounts[1], { from: accounts[3] }).should.be.rejectedWith(EVMRevert);
         });
 
+        it('Backend is unable to withdraw tokens from crowdsale', async function () {
+          await this.crowdsale.withdrawTokens(accounts[0], { from: accounts[3] }).should.be.rejectedWith(EVMRevert);
+        });
+
         describe('Acc3 removed from Backend', async function () {
           beforeEach(async function () {
             await this.crowdsale.delBackend(accounts[3]).should.be.fulfilled;
@@ -316,6 +343,10 @@ contract('VeraCrowdsale', function (accounts) {
 
         it('Non-admin unable to add admin', async function () {
           await this.crowdsale.addAdmin(accounts[2], { from: accounts[0] }).should.be.rejectedWith(EVMRevert);
+        });
+
+        it('Non-admin is unable to withdraw tokens from crowdsale', async function () {
+          await this.crowdsale.withdrawTokens(accounts[0], { from: accounts[0] }).should.be.rejectedWith(EVMRevert);
         });
 
         it('Admin is able to add admins', async function () {

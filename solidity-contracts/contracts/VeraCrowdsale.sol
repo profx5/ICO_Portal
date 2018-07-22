@@ -27,6 +27,9 @@ contract TransferableTokenIface {
   function transfer(address to, uint256 value) public returns (bool) {
   }
 
+  function balanceOf(address who) public view returns (uint256) {
+  }
+
   event Transfer(address indexed from, address indexed to, uint256 value);
 }
 
@@ -172,6 +175,16 @@ contract VeraCrowdsale is RBAC {
     uint256 valueInCents = priceOracle.getUsdCentsFromWei(msg.value);
     buyTokens(msg.sender, valueInCents);
     wallet.transfer(msg.value);
+  }
+
+  /**
+   * @dev Withdraws all remaining (not sold) tokens from the crowdsale contract
+   * @param _to address of tokens receiver
+   */
+  function withdrawTokens(address _to) public onlyAdmin {
+    uint256 amount = token.balanceOf(address(this));
+    require(amount > 0, "no tokens on the contract");
+    token.transfer(_to, amount);
   }
 
   /**
