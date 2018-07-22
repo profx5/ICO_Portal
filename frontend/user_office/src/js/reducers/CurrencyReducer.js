@@ -23,9 +23,7 @@ const initialState = Map({
 export const CurrencyReducer = createReducer({
     [actions.getCurrenciesRequest]: (state, payload) => state,
     [actions.getCurrenciesSuccess]: (state, payload) => {
-        return state.set('currencies', payload)
-                    .set('investCurrency', payload[0].code)
-                    .set('investCurrencyRate', payload[0].rate);
+        return state.set('currencies', payload);
     },
     [actions.setInvestCurrency]: (state, payload) => {
         return state.merge({

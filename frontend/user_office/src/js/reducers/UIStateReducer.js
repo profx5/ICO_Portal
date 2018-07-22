@@ -14,6 +14,7 @@ const initialState = Map({
     showCurrenciesPopup: false,
     openedTxn: null,
     openedTip: null,
+    step: 1,
 });
 
 
@@ -33,6 +34,7 @@ export const UIStateReducer = createReducer({
     [actions.activateKycTab]: (state = initialState, payload) => state.set('activeKycTab', payload.id),
     [actions.setOpenedTxn]: (state = initialState, payload) => state.set('openedTxn', payload.id),
     [actions.setOpenedTip]: (state = initialState, payload) => state.set('openedTip', payload.id),
+    [actions.setStep]: (state = initialState, payload) => state.set('step', payload.step),
 }, initialState);
 
 

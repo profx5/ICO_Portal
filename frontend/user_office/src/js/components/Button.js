@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Button = ({text, className, clickHandler, submit}) => {
+const Button = ({text, className, clickHandler, submit, disabled}) => {
     const opts = {
         className: className,
-        onClick: clickHandler
+        onClick: clickHandler,
+        disabled: disabled
     }
 
     if (submit) {
@@ -25,7 +26,7 @@ const Btn = styled.button`
     height: 100%;
     width: 100%;
     border-radius: 2px;
-    color: #ffffff;
+    color: ${props=>props.disabled ? 'black' : 'white'};
     font-size: 16px;
     font-weight: 300;
     text-align: center;
@@ -43,11 +44,11 @@ const Btn = styled.button`
         transition: all .25s ease;
     }
     &:before {
-        background: linear-gradient(80deg, #54a0f5, #3172fd);
+        background: ${props=>props.disabled ? '#f5f6fa' : 'linear-gradient(80deg, #54a0f5, #3172fd)'};
         z-index: -1;
     }
     &:after {
-        background: linear-gradient(80deg, #3172fd, #54a0f5);
+        background: ${props=>props.disabled ? '#f5f6fa' : 'linear-gradient(80deg, #3172fd, #54a0f5)'};
         z-index: -2;
     }
     &:hover:before {

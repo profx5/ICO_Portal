@@ -14,12 +14,12 @@ import Steps from './../components/Steps';
 class Payment extends React.Component {
 
     render() {
-        const {isCurrenciesPopupVisible} = this.props;
+        const {isCurrenciesPopupVisible,step} = this.props;
 
         return (
             <Wrapper>
                 <Head>Payment</Head>
-                <Steps step="1"/>
+                <Steps step={step}/>
                 <Switch>
                     <Route exact path="/user_office/payment" component={PaymentStepOne}/>
                     <Route exact path="/user_office/payment/buy" component={PaymentStepTwo}/>
@@ -33,7 +33,8 @@ class Payment extends React.Component {
 
 
 const mapStateToProps = ({UI}) => ({
-    isCurrenciesPopupVisible: UI.get('showCurrenciesPopup')
+    isCurrenciesPopupVisible: UI.get('showCurrenciesPopup'),
+    step: UI.get('step')
 })
 
 const mapDispatchToProps = (dispatch) => ({

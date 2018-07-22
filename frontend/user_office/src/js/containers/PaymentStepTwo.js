@@ -2,16 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
-import CurrencyCalculator from './CurrencyCalculator';
-import Currency from './Currency';
-
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import Button from './../components/Button';
 import qrIcon from './../../img/icon_qr_big.svg';
 import QRCode from 'qrcode';
 
 import * as InvestActions from './../actions/InvestActions';
+import * as UIActions from "../actions/UIActions";
 
 
 class PaymentStepTwo extends React.Component {
@@ -20,103 +18,228 @@ class PaymentStepTwo extends React.Component {
         QRCode.toDataURL(text).then(url => {
             this.props.setQRCode(url);
         });
-    }
+    };
+
+    copyToClipboard = () => {
+        const {investCurrency, crowdsaleAddress, altCrowdsaleaddress} = this.props;
+        let text = investCurrency === 'ETH' ? crowdsaleAddress : altCrowdsaleaddress;
+        console.log(text);
+        if (window.clipboardData && window.clipboardData.setData) {
+            // IE specific code path to prevent textarea being shown while dialog is visible.
+            return window.clipboardData.setData("Text", text);
+        }
+        else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+            let textarea = document.createElement("textarea");
+            textarea.textContent = text;
+            textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+            } catch (ex) {
+                console.warn("Copy to clipboard failed.", ex);
+                return false;
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+    };
+
+    sendTransactionInit = () => {
+        const {investCurrency, crowdsaleAddress, investAmount, eth_account, sendTransactionInit} = this.props;
+
+        sendTransactionInit({senderAccount: eth_account, receiverAccount: crowdsaleAddress, value: investAmount});
+    };
 
     render() {
 
-        const {investCurrency, investAmount, tokensAmount, crowdsaleAddress, qrcode} = this.props;
-
-        this.generateQRCode(crowdsaleAddress || '0');
+        const {investCurrency, investAmount, tokensAmount, crowdsaleAddress, qrcode, altCrowdsaleaddress} = this.props;
+        if (investCurrency === 'ETH') {
+            this.generateQRCode(crowdsaleAddress || '0');
+        } else {
+            this.generateQRCode(altCrowdsaleaddress || '0')
+        }
 
         return (
             <Wrapper>
-                <Head>Покупка токенов</Head>
-                <Row className="PaymentRow PaymentRow-1">
-                    <RowPart className="part">
-                        <div className="head">Payment</div>
-                        <div className="amount">
-                            {tokensAmount > 0 ? tokensAmount : '0'} 
-                            <span>&nbsp;TKN</span> &nbsp;
-                            <span>=</span>&nbsp; {investAmount > 0 ? investAmount : '0'} 
-                            <span>&nbsp;{investCurrency}</span>
-                        </div>
-                        <div className="desc">Current exchange rate is frozen for 15 minutes</div>
-                    </RowPart>
-                    <RowPart className="part">
-                        <Link to="/user_office/payment">
-                            <BtnWrapper>
-                                <Button text="Change amount" />
-                            </BtnWrapper>
-                        </Link>
-                    </RowPart>
-                </Row>
-                <Row className="PaymentRow PaymentRow-2">
-                    <div className="text">
-                        To buy tokens just copy an address below (or scan QR code&nbsp;
-                        <span>
+                <Head>Buy tokens</Head>
+                {investAmount > 0 &&
+                <div>
+                    <Row className="PaymentRow PaymentRow-1">
+                        <RowPart className="part">
+                            <div className="head">Payment</div>
+                            <div className="amount">
+                                {tokensAmount > 0 ? tokensAmount : '0'}
+                                <span>&nbsp;Vera</span> &nbsp;
+                                <span>=</span>&nbsp; {investAmount > 0 ? investAmount : '0'}
+                                <span>&nbsp;{investCurrency}</span>
+                            </div>
+                            <div className="desc">Current exchange rate is frozen for 15 minutes</div>
+                        </RowPart>
+                        <RowPart className="part">
+                            <Link to="/user_office/payment">
+                                <BtnWrapper>
+                                    <Button text="Change amount"/>
+                                </BtnWrapper>
+                            </Link>
+                        </RowPart>
+                    </Row>
+                    {investCurrency === 'ETH' &&
+                    <div>
+                        <Row className="PaymentRow PaymentRow-2">
+                            <div className="text">
+                                To buy tokens just copy an address below (or scan QR code&nbsp;
+                                <span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
                               <g fill="none" fill-rule="evenodd">
                                 <path fill="#F5F6FA" d="M-717-723H723V517H-717z"/>
                                 <g fill="#000" fill-rule="nonzero">
-                                  <path d="M6.719 0H.469A.469.469 0 0 0 0 .469v6.25c0 .259.21.468.469.468h6.25c.259 0 .468-.21.468-.468V.469A.469.469 0 0 0 6.72 0zM6.25 6.25H.937V.937H6.25V6.25z"/>
-                                  <path d="M4.531 2.188H2.656a.469.469 0 0 0-.469.468v1.875c0 .26.21.469.47.469H4.53c.261 0 .47-.21.47-.469V2.656a.469.469 0 0 0-.469-.469zm-.468 1.874h-.938v-.937h.938v.938zM15.531 0h-6.25a.469.469 0 0 0-.469.469v6.25c0 .259.21.468.47.468h6.25c.258 0 .468-.21.468-.468V.469A.469.469 0 0 0 15.531 0zm-.469 6.25H9.75V.937h5.313V6.25z"/>
-                                  <path d="M13.344 2.188h-1.875a.469.469 0 0 0-.469.468v1.875c0 .26.21.469.469.469h1.875c.259 0 .469-.21.469-.469V2.656a.469.469 0 0 0-.47-.469zm-.469 1.874h-.938v-.937h.938v.938zM6.719 8.813H.469A.469.469 0 0 0 0 9.28v6.25c0 .26.21.469.469.469h6.25c.259 0 .468-.21.468-.469V9.28a.469.469 0 0 0-.468-.469zm-.469 6.25H.937V9.75H6.25v5.313z"/>
-                                  <path d="M4.531 11H2.656a.469.469 0 0 0-.469.469v1.875c0 .259.21.469.47.469H4.53c.26 0 .469-.21.469-.47V11.47a.469.469 0 0 0-.468-.47zm-.468 1.875h-.938v-.938h.938v.938zm11.468.332h-2.656V11.47a.469.469 0 0 0-.938 0v2.207c0 .259.21.469.47.469h2.655v.918h-2.656a.469.469 0 0 0 0 .937h3.125c.26 0 .469-.21.469-.469v-1.855a.469.469 0 0 0-.469-.469zm0-4.394a.469.469 0 0 0-.469.468v2.188a.469.469 0 0 0 .938 0V9.28a.469.469 0 0 0-.469-.469zm-4.062 0H9.28a.469.469 0 0 0-.469.468v2.188a.469.469 0 0 0 .938 0V9.75h1.719a.469.469 0 0 0 0-.938zm-2.188 4.394a.469.469 0 0 0-.469.47v1.854a.469.469 0 0 0 .938 0v-1.855a.469.469 0 0 0-.469-.469z"/>
+                                  <path
+                                      d="M6.719 0H.469A.469.469 0 0 0 0 .469v6.25c0 .259.21.468.469.468h6.25c.259 0 .468-.21.468-.468V.469A.469.469 0 0 0 6.72 0zM6.25 6.25H.937V.937H6.25V6.25z"/>
+                                  <path
+                                      d="M4.531 2.188H2.656a.469.469 0 0 0-.469.468v1.875c0 .26.21.469.47.469H4.53c.261 0 .47-.21.47-.469V2.656a.469.469 0 0 0-.469-.469zm-.468 1.874h-.938v-.937h.938v.938zM15.531 0h-6.25a.469.469 0 0 0-.469.469v6.25c0 .259.21.468.47.468h6.25c.258 0 .468-.21.468-.468V.469A.469.469 0 0 0 15.531 0zm-.469 6.25H9.75V.937h5.313V6.25z"/>
+                                  <path
+                                      d="M13.344 2.188h-1.875a.469.469 0 0 0-.469.468v1.875c0 .26.21.469.469.469h1.875c.259 0 .469-.21.469-.469V2.656a.469.469 0 0 0-.47-.469zm-.469 1.874h-.938v-.937h.938v.938zM6.719 8.813H.469A.469.469 0 0 0 0 9.28v6.25c0 .26.21.469.469.469h6.25c.259 0 .468-.21.468-.469V9.28a.469.469 0 0 0-.468-.469zm-.469 6.25H.937V9.75H6.25v5.313z"/>
+                                  <path
+                                      d="M4.531 11H2.656a.469.469 0 0 0-.469.469v1.875c0 .259.21.469.47.469H4.53c.26 0 .469-.21.469-.47V11.47a.469.469 0 0 0-.468-.47zm-.468 1.875h-.938v-.938h.938v.938zm11.468.332h-2.656V11.47a.469.469 0 0 0-.938 0v2.207c0 .259.21.469.47.469h2.655v.918h-2.656a.469.469 0 0 0 0 .937h3.125c.26 0 .469-.21.469-.469v-1.855a.469.469 0 0 0-.469-.469zm0-4.394a.469.469 0 0 0-.469.468v2.188a.469.469 0 0 0 .938 0V9.28a.469.469 0 0 0-.469-.469zm-4.062 0H9.28a.469.469 0 0 0-.469.468v2.188a.469.469 0 0 0 .938 0V9.75h1.719a.469.469 0 0 0 0-.938zm-2.188 4.394a.469.469 0 0 0-.469.47v1.854a.469.469 0 0 0 .938 0v-1.855a.469.469 0 0 0-.469-.469z"/>
                                 </g>
                               </g>
-                            </svg>&nbsp; with any of your wallet apps) and transfer mentioned previously amount of crypto to this address. Tokens will arrive soon on your ETH account after transaction be mined. Also you can buy tokens for ETH <span className="text-blue">via Metamask.</span> 
+                            </svg>
+                                    &nbsp; with any of your wallet apps) and transfer mentioned previously amount of
+                                    crypto to this address. Tokens will arrive soon on your ETH account after
+                                    transaction be mined. Also you can buy tokens for ETH&nbsp;
+                                    <span onClick={this.sendTransactionInit} className="text-blue">via Metamask.</span>
                         </span>
-                    </div>
-                </Row>
-                <Row className="PaymentRow-3">
-                    <RowPart className="part">
-                        <div className="head">Payment address</div>
-                        <div className="number">
-                            {crowdsaleAddress}
-                            <img src={qrIcon} className="qr_icon" />
-                            <QrWrapper className="qrwrapper">
-                                <div className="text">QR code</div>
-                                <img src={qrcode} />
-                            </QrWrapper>
-                        </div>
-                    </RowPart>
-                    <RowPart className="part">
-                        <BtnWrapper>
-                            <Button text="Copy address" />
-                        </BtnWrapper>
-                    </RowPart>
-                </Row>
-                <Row className="PaymentRow-4">
-                    <RowPart className="part">
-                        <div className="text">Great! If you already transfered funds on the account - just press "I already paid!" button. This action will finish your purchase!</div>
-                    </RowPart>
-                    <RowPart>
-                        <Link to="/user_office/payment/finish">
-                            <BtnWrapper>
-                                <Button text="I already paid!" />
-                            </BtnWrapper>
-                        </Link>
-                    </RowPart>
-                </Row>
+                            </div>
+                        </Row>
+                        <Row className="PaymentRow-3">
+                            <RowPart className="part">
+                                <div className="head">Payment address</div>
+                                <div className="number">
+                                    {crowdsaleAddress}
+                                    <img src={qrIcon} className="qr_icon"/>
+                                    <QrWrapper className="qrwrapper">
+                                        <div className="text">QR code</div>
+                                        <img src={qrcode}/>
+                                    </QrWrapper>
+                                </div>
+                            </RowPart>
+                            <RowPart className="part">
+                                <BtnWrapper>
+                                    <Button clickHandler={this.copyToClipboard} text="Copy address"/>
+                                </BtnWrapper>
+                            </RowPart>
+                        </Row>
+                    </div>}
+                    {investCurrency !== 'ETH' &&
+                    <div>
+                        <Row className="PaymentRow PaymentRow-2">
+                            <div className="text">
+                                To buy tokens just copy an address below (or scan QR code&nbsp;
+                                <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+                              <g fill="none" fill-rule="evenodd">
+                                <path fill="#F5F6FA" d="M-717-723H723V517H-717z"/>
+                                <g fill="#000" fill-rule="nonzero">
+                                  <path
+                                      d="M6.719 0H.469A.469.469 0 0 0 0 .469v6.25c0 .259.21.468.469.468h6.25c.259 0 .468-.21.468-.468V.469A.469.469 0 0 0 6.72 0zM6.25 6.25H.937V.937H6.25V6.25z"/>
+                                  <path
+                                      d="M4.531 2.188H2.656a.469.469 0 0 0-.469.468v1.875c0 .26.21.469.47.469H4.53c.261 0 .47-.21.47-.469V2.656a.469.469 0 0 0-.469-.469zm-.468 1.874h-.938v-.937h.938v.938zM15.531 0h-6.25a.469.469 0 0 0-.469.469v6.25c0 .259.21.468.47.468h6.25c.258 0 .468-.21.468-.468V.469A.469.469 0 0 0 15.531 0zm-.469 6.25H9.75V.937h5.313V6.25z"/>
+                                  <path
+                                      d="M13.344 2.188h-1.875a.469.469 0 0 0-.469.468v1.875c0 .26.21.469.469.469h1.875c.259 0 .469-.21.469-.469V2.656a.469.469 0 0 0-.47-.469zm-.469 1.874h-.938v-.937h.938v.938zM6.719 8.813H.469A.469.469 0 0 0 0 9.28v6.25c0 .26.21.469.469.469h6.25c.259 0 .468-.21.468-.469V9.28a.469.469 0 0 0-.468-.469zm-.469 6.25H.937V9.75H6.25v5.313z"/>
+                                  <path
+                                      d="M4.531 11H2.656a.469.469 0 0 0-.469.469v1.875c0 .259.21.469.47.469H4.53c.26 0 .469-.21.469-.47V11.47a.469.469 0 0 0-.468-.47zm-.468 1.875h-.938v-.938h.938v.938zm11.468.332h-2.656V11.47a.469.469 0 0 0-.938 0v2.207c0 .259.21.469.47.469h2.655v.918h-2.656a.469.469 0 0 0 0 .937h3.125c.26 0 .469-.21.469-.469v-1.855a.469.469 0 0 0-.469-.469zm0-4.394a.469.469 0 0 0-.469.468v2.188a.469.469 0 0 0 .938 0V9.28a.469.469 0 0 0-.469-.469zm-4.062 0H9.28a.469.469 0 0 0-.469.468v2.188a.469.469 0 0 0 .938 0V9.75h1.719a.469.469 0 0 0 0-.938zm-2.188 4.394a.469.469 0 0 0-.469.47v1.854a.469.469 0 0 0 .938 0v-1.855a.469.469 0 0 0-.469-.469z"/>
+                                </g>
+                              </g>
+                            </svg>
+                                    &nbsp; with any of your wallet apps) and transfer mentioned previously amount of crypto to this address. Tokens will arrive soon on your ETH account after transaction be mined.
+                        </span>
+                            </div>
+                        </Row>
+                        <Row className="PaymentRow-3">
+                            <RowPart className="part">
+                                <div className="head">Payment address</div>
+                                <div className="number">
+                                    {altCrowdsaleaddress}
+                                    <img src={qrIcon} className="qr_icon"/>
+                                    <QrWrapper className="qrwrapper">
+                                        <div className="text">QR code</div>
+                                        <img src={qrcode}/>
+                                    </QrWrapper>
+                                </div>
+                            </RowPart>
+                            <RowPart className="part">
+                                <BtnWrapper>
+                                    <Button clickHandler={this.copyToClipboard} text="Copy address"/>
+                                </BtnWrapper>
+                            </RowPart>
+                        </Row>
+                    </div>}
+
+                    <Row className="PaymentRow-4">
+                        <RowPart className="part">
+                            <div className="text">Great! If you already transfered funds on the account - just press "I
+                                already paid!" button. This action will finish your purchase!
+                            </div>
+                        </RowPart>
+                        <RowPart>
+                            <Link to="/user_office/payment/finish">
+                                <BtnWrapper>
+                                    <Button text="I already paid!"/>
+                                </BtnWrapper>
+                            </Link>
+                        </RowPart>
+                    </Row>
+                </div>
+                }
+                {investAmount <= 0 &&
+                <div>
+                    <Row className="PaymentRow PaymentRow-1">
+                        <RowPart className="part">
+                            <div className="head">Invalid invest amount</div>
+                        </RowPart>
+                        <RowPart className="part">
+                            <Link to="/user_office/payment/">
+                                <BtnWrapper>
+                                    <Button text="Select payment method"/>
+                                </BtnWrapper>
+                            </Link>
+                        </RowPart>
+                    </Row>
+                </div>
+                }
             </Wrapper>
         )
+    }
+
+    componentDidMount = () => {
+        const {setStep} = this.props;
+        setStep(2);
     }
 };
 
 
-const mapStateToProps = ({Currencies, Invest, ICOInfo}) => ({
+const mapStateToProps = ({Currencies, Invest, ICOInfo, user}) => ({
     investCurrency: Currencies.get('investCurrency'),
     investAmount: Invest.get('investAmount'),
     tokensAmount: Invest.get('tokensAmount'),
     qrcode: Invest.get('qrcode'),
-    crowdsaleAddress: ICOInfo.get('crowdsale_address')
-})
+    crowdsaleAddress: ICOInfo.get('crowdsale_address'),
+    altCrowdsaleaddress: ICOInfo.get('alt_crowdsale_address'),
+    eth_account: user.get('eth_account'),
+});
 
 const mapDispatchToProps = (dispatch) => ({
     setQRCode(payload) {
         dispatch(InvestActions.setQRCode(payload))
+    },
+    setStep(step) {
+        dispatch(UIActions.setStep(step));
+    },
+    sendTransactionInit(payload) {
+        dispatch(InvestActions.sendTransactionInit(payload.senderAccount, payload.receiverAccount, payload.value))
     }
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentStepTwo)
 
@@ -203,6 +326,7 @@ const Row = styled.div`
                 &-blue {
                     color: #387bfc;
                 }
+                cursor: pointer;
             }
         }
         &-3 {

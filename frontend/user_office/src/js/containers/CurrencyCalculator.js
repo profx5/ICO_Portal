@@ -6,13 +6,12 @@ import Utils from './../utils';
 
 import Button from './../components/Button';
 import InvestInput from './../components/InvestInput';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
 import * as UIActions from './../actions/UIActions';
 import * as InvestActions from './../actions/InvestActions';
 import * as ICOInfoActions from './../actions/ICOInfoActions';
-
 
 
 class CurrencyCalculator extends React.Component {
@@ -24,36 +23,34 @@ class CurrencyCalculator extends React.Component {
     }
 
     updateTotalTokens = () => {
-        const {investAmount, investCurrencyRate, setTokensAmount} = this.props;
+        const {investAmount, investCurrencyRate, setUSDAmount, setTokensAmount} = this.props;
         let bonus = this.bonus;
+        let totalUSD = investAmount * investCurrencyRate;
+        let totalTokens = totalUSD / 2;
 
-        let totalTokens = investAmount * parseInt(investCurrencyRate, 10);
-
-        if (totalTokens < 8000) bonus = 0;
-            else if (totalTokens >= 8000 && totalTokens < 20000) bonus = 20;
-            else if (totalTokens >= 20000) bonus = 30;
-
-        let bonusAmount = totalTokens / 100 * bonus;
-        totalTokens = parseInt(totalTokens + bonusAmount, 10);
-
+        if (totalUSD < 8000) bonus = 0;
+        else if (totalUSD >= 8000 && totalUSD < 20000) bonus = 20;
+        else if (totalUSD >= 20000) bonus = 30;
+        totalTokens += totalTokens / 100 * bonus;
         setTokensAmount(totalTokens);
+        setUSDAmount(totalUSD);
         this.bonus = bonus;
-    }
+    };
 
     investOnChangeHandler = event => {
         Utils.formatInputNumber(event, this.props.setInvestAmount);
         this.updateTotalTokens();
-    }
+    };
 
     investClickHandler = () => {
         const {investCurrency, showInvestOptions, getAltCryptoAccount} = this.props;
         showInvestOptions();
         if (investCurrency !== 'ETH') getAltCryptoAccount(investCurrency);
-    }
+    };
 
     initialUpdate = () => {
         this.updateTotalTokens();
-    }
+    };
 
 
     render() {
@@ -61,40 +58,60 @@ class CurrencyCalculator extends React.Component {
             investCurrency,
             investCurrencyRate,
             investAmount,
-            tokensAmount,
-            bonusPercent
+            USDAmount,
+            tokensAmount
         } = this.props;
 
         let bonus = this.bonus;
-
+        let header = investCurrency ? "Amount, min " + (8000 / investCurrencyRate).toFixed(3) + " " + investCurrency : 'Amount';
         this.initialUpdate();
-
         return (
             <Wrapper>
                 <WrapperInner>
-
-                    <InvestInput value={this.props.investAmount} type="text" onChangeHandler={this.investOnChangeHandler} header="Amount" currency={investCurrency}/>
-                    <TokensInputWrapper data-currency="TKN">
-                        <div className="head">TKN (Buy till 7 july and <span>get a 30% bonus!</span>)</div>
+                    <InvestInput value={investAmount} type="text"
+                                 onChangeHandler={this.investOnChangeHandler} header={header} currency={investCurrency}/>
+                    <TokensInputWrapper data-currency="Vera">
+                        <div className="head">Vera (Buy till 7 july and <span>get a 30% bonus!</span>)</div>
                         <TokensInput>
-                            {bonus > 0 &&
-                                <React.Fragment>
-                                    <span>{investAmount} + </span>
-                                    <span className="bonus">{bonus}</span>&nbsp;=&nbsp; 
-                                </React.Fragment>
-                            }
-                            {this.props.tokensAmount}
+                            {tokensAmount && tokensAmount.toFixed(2) || 0}
                         </TokensInput>
                     </TokensInputWrapper>
 
                     <ButtonWrapper to="/user_office/payment/buy">
-                        <Button clickHandler={this.investClickHandler} text="Buy"/>
+                        <Button disabled={USDAmount < 8000} clickHandler={this.investClickHandler} text="Buy"/>
                     </ButtonWrapper>
-
                 </WrapperInner>
-                <BonusDesc>Progressive bonus for private presale phase is 
-                currenty available! Investing more than 8 000 USD will grant you 20% bonus! 
-                Invest more than 20 000 USD and get <span>30% bonus tokens!</span></BonusDesc>
+
+                <CalculatedWrapper>
+                    {!investCurrency && 'Please select currency you d\'like to spend.'}
+                    {investCurrency &&
+                    <div>
+                        <ul>
+                            <li>You pay {investAmount} {investCurrency} </li>
+                            <li>Which is equal to {investAmount} * {investCurrencyRate} USD = {USDAmount.toFixed(2)} USD</li>
+                            <li>Token base price = 2 USD</li>
+                            {USDAmount >= 8000 &&
+                                 <div>
+                                     <li>Pre-Sale phase {bonus}% bonus applied so you get</li>
+                                     <li>{USDAmount.toFixed(2)} / 2 * 1{bonus}% = {tokensAmount.toFixed(2)} VERA</li>
+                                 </div>
+                            }
+                            {USDAmount < 8000 &&
+                                <div>
+                                    <li>It's less than minimum purchase of $ 8000 </li>
+                                    <li>Please enter amount {(8000 / investCurrencyRate).toFixed(3)} {investCurrency} or more</li>
+                                </div>
+                            }
+
+
+                        </ul>
+                    </div>
+                    }
+                </CalculatedWrapper>
+
+                <BonusDesc>Progressive bonus for private presale phase is
+                    currenty available! Investing more than 8 000 USD will grant you 20% bonus!
+                    Invest more than 20 000 USD and get <span>30% bonus tokens!</span></BonusDesc>
             </Wrapper>
         )
     }
@@ -105,12 +122,16 @@ const mapStateToProps = ({Currencies, Invest, ICOInfo, Phase}) => ({
     investCurrencyRate: Currencies.get('investCurrencyRate'),
     investAmount: Invest.get('investAmount'),
     tokensAmount: Invest.get('tokensAmount'),
+    USDAmount: Invest.get('USDAmount'),
     bonusPercent: 0,
 })
 
 const mapDispatchToProps = (dispatch) => ({
     setInvestAmount(payload) {
         dispatch(InvestActions.setInvestAmount(payload))
+    },
+    setUSDAmount(payload) {
+        dispatch(InvestActions.setUSDAmount(payload))
     },
     setTokensAmount(payload) {
         dispatch(InvestActions.setTokensAmount(payload))
@@ -124,7 +145,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyCalculator)
 
 const Wrapper = styled.div`
@@ -135,7 +155,7 @@ const WrapperInner = styled.div`
     display: flex;
     justify-content: center;
     border-top: 1px solid rgba(151,151,151,.2);
-    border-bottom: 1px solid rgba(151,151,151,.2);
+    // border-bottom: 1px solid rgba(151,151,151,.2);
     padding-bottom: 50px;
     padding-top: 90px;
 `;
@@ -148,6 +168,28 @@ const ButtonWrapper = styled(Link)`
     border-radius: 2px;
     border: 1px solid #d6dfe6;
     position: relative;
+`;
+
+const CalculatedWrapper = styled.div`
+    font-size: 16px;
+    color: #000000;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-left: 15px;
+    & ul {
+        font-weight: normal;
+    }
+    &:before {
+        content: '';
+        display: block;
+        width: 4px;
+        height: 110%;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #4f99f6;
+    }
 `;
 
 const BonusDesc = styled.p`
