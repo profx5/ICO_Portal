@@ -30,14 +30,11 @@ export function extractAccount() {
     icoWeb3.eth.getAccounts();
 }
 
-const gas = 30000;
-
 export function sendTransaction(from, to, value, callback) {
     icoWeb3.eth.sendTransaction({
         from: from,
         to: to,
-        value: value,
-        gas: gas
+        value: value
     }, callback);
 }
 

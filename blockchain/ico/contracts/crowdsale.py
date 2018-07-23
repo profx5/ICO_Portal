@@ -50,6 +50,7 @@ class CrowdsaleContract(BaseContract):
 
             return None
 
+        event = self.contract.events.TokenPurchase().processReceipt(receipt)
         if event:
             value = self.web3.eth.getTransaction(txn_hash).value
 
