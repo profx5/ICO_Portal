@@ -1,9 +1,10 @@
 import json
 from django.conf import settings
 from blockchain.web3 import get_web3
+from ico_portal.utils.logger import LoggerMixin
 
 
-class BaseContract:
+class BaseContract(LoggerMixin):
     @classmethod
     def get_compiled(cls):
         if not hasattr(cls, '_compile'):

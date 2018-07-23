@@ -44,7 +44,11 @@ class CrowdsaleContract(BaseContract):
 
     def get_event_from_txn_hash(self, txn_hash):
         receipt = self.web3.eth.getTransactionReceipt(txn_hash)
-        event = self.contract.events.TokenPurchase().processReceipt(receipt)
+
+        if not receipt:
+            self.logger.error(f'TXN receipt for transaction {txn_hash} not found')
+
+            return None
 
         if event:
             value = self.web3.eth.getTransaction(txn_hash).value
