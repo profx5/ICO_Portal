@@ -3,6 +3,7 @@ import axios from 'axios'
 import {extractAccount} from '../../web3'
 import {call, put, takeEvery, cps, select} from 'redux-saga/effects'
 import * as UserActions from '../actions/UserActions'
+import * as UIActions from '../actions/UIActions'
 import * as MetamaskActions from '../actions/MetamaskActions'
 import Utils from '../utils/index'
 
@@ -18,7 +19,7 @@ export class UserSagas {
             })
 
             yield put(UserActions.setAccountSuccessfull())
-            yield put(UserActions.hideSetAccountForm())
+            yield put(UIActions.hideSetAccountPopup())
             yield put(UserActions.getUserRequest())
         } catch(e) {
             yield put(UserActions.setAccountFailed())

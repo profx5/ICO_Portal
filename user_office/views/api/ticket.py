@@ -17,12 +17,16 @@ class TicketListSerializer(ModelSerializer):
     last_reply_at = SerializerMethodField()
 
     def get_last_reply_by(self, instance):
-        if instance.followup_set.exists():
-            return instance.followup_set.last().user.get_full_name()
+        public_replies = instance.followup_set.filter(public=True)
+
+        if public_replies.exists():
+            return public_replies.last().user.get_full_name()
 
     def get_last_reply_at(self, instance):
-        if instance.followup_set.exists():
-            return instance.followup_set.last().date
+        public_replies = instance.followup_set.filter(public=True)
+
+        if public_replies.exists():
+            return public_replies.last().date
 
     class Meta:
         model = Ticket

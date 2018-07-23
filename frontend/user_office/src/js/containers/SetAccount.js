@@ -10,16 +10,21 @@ import * as UIActions from './../actions/UIActions';
 
 
 class SetAccount extends Component {
-    
     onSubmitHandler = event => {
         event.preventDefault();
         let data = this.input.value;
         this.props.setAccountRequest(data);
     }
 
+    getMetaMaskAccount = () => {
+        if (typeof window.web3 !== 'undefined') {
+            return window.web3.eth.defaultAccount;
+        }
+    }
+
     render() {
         const {hidePopup} = this.props;
-        let metamaskEthAccount = window.web3.eth.defaultAccount;
+        let metamaskEthAccount = this.getMetaMaskAccount();
         return(
             <React.Fragment>
                 <PopupWrapper>

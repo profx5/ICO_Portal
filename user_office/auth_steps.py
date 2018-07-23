@@ -59,7 +59,7 @@ def send_validation_email(strategy, backend, code, partial_token):
         content = loader.render_to_string('mail/validation.html', {'link': url})
 
         send_mail('Activation ICO investor account', content,
-                  settings.EMAIL_HOST_USER, [code.email], fail_silently=True)
+                  settings.DEFAULT_FROM_EMAIL, [code.email], fail_silently=True)
 
 
 def check_recaptcha(backend, details, response, *args, **kwargs):

@@ -63,7 +63,7 @@ class KYC(models.Model):
 
     # both
     id_document_photo = models.ImageField('Copy of identification document', upload_to=partial(kyc_photo_path, 'doc_photo'))
-    bill_photo = models.ImageField('Utility bill', upload_to=partial(kyc_photo_path, 'bill_photo'))
+    bill_photo = models.FileField('Utility bill', upload_to=partial(kyc_photo_path, 'bill_photo'))
     phone_number = models.CharField('Phone number', max_length=50, null=True, blank=True)
     email = models.EmailField('Email', null=True, blank=True)
 

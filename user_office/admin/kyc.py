@@ -15,7 +15,7 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('investor', 'state', 'type', 'id_document_photo', 'bill_photo')
+            'fields': ('investor', 'state', 'type', 'id_document_photo', 'bill_photo', 'ticket')
         }),
         ('Natural Person', {
             'fields': (('firstname', 'lastname'), ('place_of_birth', 'birthdate'), 'personal_id',

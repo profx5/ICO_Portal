@@ -1,3 +1,4 @@
-*/node_modules*
-/frontend/landing/
-/.git/
+node_modules
+frontend/landing/
+.git
+features

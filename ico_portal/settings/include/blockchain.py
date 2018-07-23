@@ -77,5 +77,8 @@ CELERY_BEAT_SCHEDULE = {
 CELERY_TASK_ROUTES = {
     'blockchain.ico.tasks.check_events': {
         'queue': 'events_beat',
+    },
+    'blockchain.ico.tasks.process_event': {
+        'queue': 'events_beat',
     }
 }
