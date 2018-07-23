@@ -19,7 +19,7 @@ def get_web3():
     global _web3_instance
 
     if not _web3_instance:
-        _web3_instance = Web3(HTTPProvider(settings.WEB3_RPC_URL, request_kwargs={'timeout': 60}))
+        _web3_instance = Web3(HTTPProvider(settings.WEB3_RPC_URL, request_kwargs={'timeout': 300}))
         _web3_instance.eth.setGasPriceStrategy(rpc_gas_price_strategy)
         if getattr(settings, 'RINKEBY_MIDDLEWARE', True):
             _web3_instance.middleware_stack.inject(geth_poa_middleware, layer=0)

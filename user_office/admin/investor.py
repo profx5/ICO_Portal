@@ -1,10 +1,7 @@
 from django.contrib import admin
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-
 from django.contrib.auth.admin import UserAdmin
 
 from user_office.models import Investor
-from .mixins import PasswordFieldMixin
 from .inlines import TokensMoveInstanceInline, KYCInstanceInline, SocialAuthInline
 
 

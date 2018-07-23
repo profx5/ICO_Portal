@@ -22,8 +22,8 @@ class TokenContract(BaseContract):
             'gas': gas
         })
 
-    def get_filter(self, from_block):
-        return self.contract.events.Transfer.createFilter(fromBlock=from_block)
+    def get_filter(self, from_block, to_block=None):
+        return self.contract.events.Transfer.createFilter(fromBlock=from_block, toBlock=to_block)
 
     @property
     def transfer_abi(self):
