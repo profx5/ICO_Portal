@@ -51,7 +51,7 @@ class VerificationInfo extends React.Component {
 
     render() {
         const {status, verificationStages, stages, btnText} = this.props;
-
+        console.log('qeqweq: ', status);
         return (
             <Wrapper className="VerificationInfo">
                 <VerificationStages stageClickHandler={this.stageClickHandler} boundSections={verificationStages} stages={stages}/>

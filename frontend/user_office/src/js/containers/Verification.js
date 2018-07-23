@@ -16,6 +16,94 @@ import KYCTabs from './../components/KYCTabs';
 
 
 class Verification extends React.Component {
+    transformValues = values => {
+        const data = {...values};
+        data.is_pep = data.is_pep ? "True" : "False";
+        return data;
+    }
+
+    load = () => {
+        const {
+            firstname,
+            user_photo,
+            lastname,
+            birthdate,
+            country,
+            city,
+            registration_address,
+            postcode,
+            document_type,
+            document_no,
+            document_country,
+            document_date,
+            document_photo,
+            decline_reason,
+            uploaded_user_photo,
+            uploaded_doc_photo,
+            place_of_birth,
+            personal_id,
+            place_of_residence,
+            profession,
+            business_name,
+            registration_number,
+            registration_date,
+            phone_number,
+            director_firstname,
+            director_lastname,
+            basis_doc,
+            email,
+            address,
+            field_of_activity,
+            beneficial_fullname,
+            beneficial_personal_id,
+            beneficial_birthdate,
+            beneficial_place_of_birth,
+            beneficial_place_of_residence,
+            is_pep
+        } = this.props;
+        return this.transformValues({
+            firstname: firstname,
+            user_photo: user_photo,
+            lastname: lastname,
+            birthdate: birthdate,
+            country: country,
+            city: city,
+            registration_address: registration_address,
+            postcode: postcode,
+            document_type: document_type,
+            document_no: document_no,
+            document_country: document_country,
+            document_date: document_date,
+            document_photo: document_photo,
+            decline_reason: decline_reason,
+            uploaded_user_photo: uploaded_user_photo,
+            uploaded_doc_photo: uploaded_doc_photo,
+            place_of_birth: place_of_birth,
+            personal_id: personal_id,
+            place_of_residence: place_of_residence,
+            profession: profession,
+            business_name: business_name,
+            registration_number: registration_number,
+            registration_date: registration_date,
+            phone_number: phone_number,
+            director_firstname: director_firstname,
+            director_lastname: director_lastname,
+            basis_doc: basis_doc,
+            email: email,
+            address: address,
+            field_of_activity: field_of_activity,
+            beneficial_fullname: beneficial_fullname,
+            beneficial_personal_id: beneficial_personal_id,
+            beneficial_birthdate: beneficial_birthdate,
+            beneficial_place_of_birth: beneficial_place_of_birth,
+            beneficial_place_of_residence: beneficial_place_of_residence,
+            is_pep: is_pep,
+        });
+    };
+
+    componentDidMount = () => {
+        this.data = this.load()
+    };
 
     componentWillUnmount() {
         const {activeKycTab, activateKycTab} = this.props;
@@ -43,7 +131,9 @@ class Verification extends React.Component {
     }
 
     render() {
-        const { activeKycTab, openedTip, submitForm } = this.props;
+        const {activeKycTab, openedTip, submitForm, kyc_required} = this.props;
+        const initial = this.load();
+        const type = kyc_required ? 'create' : 'upd';
 
         return (
             <div>
@@ -124,10 +214,12 @@ class Verification extends React.Component {
                 }
                 <Form
                     onSubmit={this.onSubmitHandler}
+                    initialValues={initial}
                     render={() => (
                         <Wrapper onSubmit={(function (e) {
                             e.preventDefault();
                             let data = new FormData(e.target);
+                            data.set('type', type);
                             submitForm(data);
                         })} id="form" className="Verification">
                             <Header>
@@ -157,10 +249,47 @@ class Verification extends React.Component {
 };
 
 
-const mapStateToProps = ({UI}) => ({
+const mapStateToProps = ({UI, KYC, user}) => ({
     activeKycTab: UI.get('activeKycTab'),
     openedTip: UI.get('openedTip'),
-})
+    firstname: KYC.get('firstname'),
+    user_photo: KYC.get('user_photo'),
+    lastname: KYC.get('lastname'),
+    birthdate: KYC.get('birthdate'),
+    country: KYC.get('country'),
+    city: KYC.get('city'),
+    registration_address: KYC.get('registration_address'),
+    postcode: KYC.get('postcode'),
+    document_type: KYC.get('document_type'),
+    document_no: KYC.get('document_no'),
+    document_country: KYC.get('document_country'),
+    document_date: KYC.get('document_date'),
+    document_photo: KYC.get('document_photo'),
+    decline_reason: KYC.get('decline_reason'),
+    uploaded_user_photo: KYC.get('uploaded_user_photo'),
+    uploaded_doc_photo: KYC.get('uploaded_doc_photo'),
+    place_of_birth: KYC.get('place_of_birth'),
+    personal_id: KYC.get('personal_id'),
+    place_of_residence: KYC.get('place_of_residence'),
+    profession: KYC.get('profession'),
+    business_name: KYC.get('business_name'),
+    registration_number: KYC.get('registration_number'),
+    registration_date: KYC.get('registration_date'),
+    phone_number: KYC.get('phone_number'),
+    director_firstname: KYC.get('director_firstname'),
+    director_lastname: KYC.get('director_lastname'),
+    basis_doc: KYC.get('basis_doc'),
+    email: KYC.get('email'),
+    address: KYC.get('address'),
+    field_of_activity: KYC.get('field_of_activity'),
+    beneficial_fullname: KYC.get('beneficial_fullname'),
+    beneficial_personal_id: KYC.get('beneficial_personal_id'),
+    beneficial_birthdate: KYC.get('beneficial_birthdate'),
+    beneficial_place_of_birth: KYC.get('beneficial_place_of_birth'),
+    beneficial_place_of_residence: KYC.get('beneficial_place_of_residence'),
+    is_pep: KYC.get('is_pep'),
+    kyc_required: user.get('kyc_required'),
+});
 
 const mapDispatchToProps = (dispatch) => ({
     submitForm(payload) {
