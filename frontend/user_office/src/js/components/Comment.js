@@ -8,7 +8,6 @@ class Comment extends Component {
 
     render() {
         const {comment} = this.props;
-
         return (
             <CommentWrapper key={comment.id}>
                 <FlexContainer>
@@ -23,8 +22,10 @@ class Comment extends Component {
                             <div>Attached files: {comment.attachments.length}</div>
                             {comment.attachments.map((item, index) => {
                                 return (
-                                    <FileWrapper key={index} onClick={() => this.setState({isOpen: true})}>
-                                        {item.filename}
+                                    <FileWrapper key={index}>
+                                        <div>
+                                            <a target='_blank' href={item.file}>{item.filename}</a>
+                                        </div>
                                     </FileWrapper>
                                 )
                             })}
@@ -52,14 +53,17 @@ const FilesWrapper = styled.div`
 
 const FileWrapper = styled.div`
     height: 36px;
-    background-color: #f5f5f5;
     font-size: 16px;
     font-weight: bold;
     line-height: 36px;
     letter-spacing: 0.5px;
     color: #5c8df5; 
-    display: inline-block;
-    padding: 2px 10px;
+    display: block;
+    & div {
+        background-color: #f5f5f5;
+        display: inline-block;
+        padding: 2px 10px;
+    }
 `;
 
 
