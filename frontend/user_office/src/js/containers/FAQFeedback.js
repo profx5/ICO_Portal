@@ -12,6 +12,7 @@ import moment from "moment/moment";
 import * as UIActions from './../actions/UIActions';
 import * as TicketActions from './../actions/TicketActions';
 import {Link} from 'react-router-dom';
+import $ from "jquery";
 
 const STATUSES = {
     1: 'Open',
@@ -23,9 +24,32 @@ const STATUSES = {
 
 class FAQFeedback extends React.Component {
 
+    handleImage = e => {
+        const {setNewTicketFiles} = this.props;
+        let files = [];
+        for (let i = 0; i < e.target.files.length; i++) {
+            files.push(e.target.files[i].name);
+        }
+        setNewTicketFiles(files);
+    };
+
+    handleCommentImage = e => {
+        const {setNewCommentFiles} = this.props;
+        let files = [];
+        for (let i = 0; i < e.target.files.length; i++) {
+            files.push(e.target.files[i].name);
+        }
+        setNewCommentFiles(files);
+    }
+
     setOpenedTicketNull = () => {
         const {setTicketFullNull} = this.props;
         setTicketFullNull();
+    };
+
+    uploadOnClickHandler = (e) => {
+        e.preventDefault();
+        $(e.currentTarget).closest('div').find('input[type="file"]').click();
     };
 
     _backToAll = () => {
@@ -42,7 +66,6 @@ class FAQFeedback extends React.Component {
 
     handleNewCommentSubmit = (e) => {
         e.preventDefault();
-
         const data = new FormData(e.target);
         this.props.sendNewComment(data);
         e.target.reset();
@@ -50,8 +73,9 @@ class FAQFeedback extends React.Component {
 
 
     _renderNewTicket = () => {
+        const {newTicketFiles} = this.props;
         return (
-            <form onSubmit={this.handleNewTicketFormSubmit}>
+            <form onSubmit={this.handleNewTicketFormSubmit} encType='multipart/form-data'>
                 <Head3>Technical support</Head3>
                 <WrapperInput>
                     <StyledLabel htmlFor={'title'}>Subject</StyledLabel>
@@ -59,7 +83,8 @@ class FAQFeedback extends React.Component {
                         type="text"
                         id={'title'}
                         placeholder={'Please describe topic of your issue..'}
-                        name={'title'}/>
+                        name={'title'}
+                        required/>
                 </WrapperInput>
                 <br/>
                 <WrapperInput>
@@ -70,8 +95,26 @@ class FAQFeedback extends React.Component {
                         name={'description'}/>
                 </WrapperInput>
                 <br/>
+                {newTicketFiles &&
+                <div>
+                    {newTicketFiles.map((item, index) => {
+                        return (
+                            <FileWrapper key={index}>
+                                <div>
+                                    {item}
+                                </div>
+                            </FileWrapper>
+                        )
+                    })}
+                </div>
+                }
                 <ButtonWrapper>
                     <Button submit={true} text='Send'/>
+                </ButtonWrapper>
+
+                <ButtonWrapper>
+                    <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
+                    <input onChange={this.handleImage} type="file" name='attachment' multiple hidden/>
                 </ButtonWrapper>
                 <Clearfix/>
             </form>
@@ -116,10 +159,10 @@ class FAQFeedback extends React.Component {
 
 
     _renderOpenedTicket = () => {
-        const {ticketFull} = this.props;
+        const {ticketFull, newCommentFiles} = this.props;
         let content = [];
         content.push(ticketFull.public_follow_ups.map((item, index) => {
-            if (item.comment) {
+            if (item) {
                 return (
                     <Comment comment={item} key={index}/>
                 )
@@ -164,9 +207,25 @@ class FAQFeedback extends React.Component {
                             id={'comment'}
                         />
                     </WrapperInput>
-                    {/*<input type="file" name={'attachment'} placeholder={'file here'}/>*/}
+                    {newCommentFiles &&
+                    <div>
+                        {newCommentFiles.map((item, index) => {
+                            return (
+                                <FileWrapper key={index}>
+                                    <div>
+                                        {item}
+                                    </div>
+                                </FileWrapper>
+                            )
+                        })}
+                    </div>
+                    }
                     <ButtonWrapper>
                         <Button submit={true} text='Send'/>
+                    </ButtonWrapper>
+                    <ButtonWrapper>
+                        <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
+                        <input onChange={this.handleCommentImage} type="file" name='attachment' multiple hidden/>
                     </ButtonWrapper>
                 </form>
                 }
@@ -238,6 +297,8 @@ const mapStateToProps = ({UI, tickets, user}) => ({
     tickets: tickets.get('results'),
     ticketFull: tickets.get('ticketFull'),
     email: user.get('email'),
+    newTicketFiles: UI.get('newTicketFiles'),
+    newCommentFiles: UI.get('newCommentFiles'),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -256,10 +317,32 @@ const mapDispatchToProps = (dispatch) => ({
     sendNewComment(comment) {
         dispatch(TicketActions.sendNewComment(comment));
     },
+    setNewTicketFiles(files) {
+        dispatch(UIActions.setNewTicketFiles(files));
+    },
+    setNewCommentFiles(files) {
+        dispatch(UIActions.setNewCommentFiles(files));
+    }
 });
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(FAQFeedback)
+
+const FileWrapper = styled.div`
+    height: 36px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 36px;
+    letter-spacing: 0.5px;
+    color: #5c8df5; 
+    display: block;
+    margin-top: 10px;
+    & div {
+        background-color: #f5f5f5;
+        display: inline-block;
+        padding: 2px 10px;
+    }
+`;
 
 const ContentWrapper = styled.div`
     margin-bottom: 50px;

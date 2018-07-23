@@ -43,6 +43,7 @@ export class TicketsSagas {
             yield history.push('/user_office/support/ticket/' + res.data.id);
             yield put(actions.getTicketFull(res.data.id));
             yield put(uiactions.changeSelectedTab('my'));
+            yield put(uiactions.setNewTicketFilesNull());
         } catch (e) {
             yield put(actions.sendNewTicketFailed());
         }
@@ -56,7 +57,8 @@ export class TicketsSagas {
                 data: comment.payload
             });
             yield put(actions.sendNewCommentSuccess());
-            yield put(actions.getTicketFull(comment.payload.get('ticket')))
+            yield put(actions.getTicketFull(comment.payload.get('ticket')));
+            yield put(uiactions.setNewCommentFilesNull());
         } catch (e) {
             yield put(actions.sendNewCommentFailed());
         }

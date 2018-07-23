@@ -15,6 +15,8 @@ const initialState = Map({
     openedTxn: null,
     openedTip: null,
     step: 1,
+    newTicketFiles: [],
+    newCommentFiles: [],
 });
 
 
@@ -35,6 +37,10 @@ export const UIStateReducer = createReducer({
     [actions.setOpenedTxn]: (state = initialState, payload) => state.set('openedTxn', payload.id),
     [actions.setOpenedTip]: (state = initialState, payload) => state.set('openedTip', payload.id),
     [actions.setStep]: (state = initialState, payload) => state.set('step', payload.step),
+    [actions.setNewTicketFiles]: (state = initialState, payload) => state.set('newTicketFiles', payload.files),
+    [actions.setNewTicketFilesNull]: (state = initialState, payload) => state.set('newTicketFiles', []),
+    [actions.setNewCommentFiles]: (state = initialState, payload) => state.set('newCommentFiles', payload.files),
+    [actions.setNewCommentFilesNull]: (state = initialState, payload) => state.set('newCommentFiles', []),
 }, initialState);
 
 

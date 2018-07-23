@@ -26,3 +26,8 @@ export const setOpenedTip = createAction('SET_OPENED_TIP', (id => ({id})));
 
 export const setStep = createAction('SET_STEP', (step => ({step})));
 
+export const setNewTicketFiles = createAction('SET_NEW_TICKET_FILES', (files => ({files})));
+export const setNewTicketFilesNull = createAction('SET_NEW_TICKET_FILES_NULL');
+
+export const setNewCommentFiles = createAction('SET_NEW_COMMENT_FILES', (files => ({files})));
+export const setNewCommentFilesNull = createAction('SET_NEW_COMMENT_FILES_NULL');
