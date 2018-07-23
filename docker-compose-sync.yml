@@ -31,10 +31,14 @@ services:
       DB_PASSWORD_FILE: /run/secrets/db_password
       DB_HOST: db
       WEB3_RPC_URL: http://172.18.0.1:8545
+      CELERY_BROKER_URL: amqp://guest:guest@rabbit/
     logging:
       driver: journald
       options:
         tag: web
+    deploy:
+      restart_policy:
+        condition: on-failure
 
 secrets:
   db_password:
