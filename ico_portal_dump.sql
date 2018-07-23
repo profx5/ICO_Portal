@@ -30,7 +30,7 @@ CREATE TABLE `accounts` (
   PRIMARY KEY (`id`),
   KEY `accounts_investor_id_15648101_fk_investors_id` (`investor_id`),
   CONSTRAINT `accounts_investor_id_15648101_fk_investors_id` FOREIGN KEY (`investor_id`) REFERENCES `investors` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (1,'BTC','34iCkGwB1ED8YLuvGFSkhtVXQ9fzvZLuP2',2),(2,'BTC','383gwWR4yCBMVRcso5EgPewfk3pPsAsbbm',1);
+INSERT INTO `accounts` VALUES (1,'BTC','39J4auHb3XWLgyf3dhyzNYSEqEdFYZnkHN',3);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +110,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `auth_permission` (
 
 LOCK TABLES `auth_permission` WRITE;
 /*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
-INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can add permission',2,'add_permission'),(5,'Can change permission',2,'change_permission'),(6,'Can delete permission',2,'delete_permission'),(7,'Can add group',3,'add_group'),(8,'Can change group',3,'change_group'),(9,'Can delete group',3,'delete_group'),(10,'Can add content type',4,'add_contenttype'),(11,'Can change content type',4,'change_contenttype'),(12,'Can delete content type',4,'delete_contenttype'),(13,'Can add session',5,'add_session'),(14,'Can change session',5,'change_session'),(15,'Can delete session',5,'delete_session'),(16,'Can add association',6,'add_association'),(17,'Can change association',6,'change_association'),(18,'Can delete association',6,'delete_association'),(19,'Can add code',7,'add_code'),(20,'Can change code',7,'change_code'),(21,'Can delete code',7,'delete_code'),(22,'Can add nonce',8,'add_nonce'),(23,'Can change nonce',8,'change_nonce'),(24,'Can delete nonce',8,'delete_nonce'),(25,'Can add user social auth',9,'add_usersocialauth'),(26,'Can change user social auth',9,'change_usersocialauth'),(27,'Can delete user social auth',9,'delete_usersocialauth'),(28,'Can add partial',10,'add_partial'),(29,'Can change partial',10,'change_partial'),(30,'Can delete partial',10,'delete_partial'),(31,'Can add news page content',11,'add_newspagecontent'),(32,'Can change news page content',11,'change_newspagecontent'),(33,'Can delete news page content',11,'delete_newspagecontent'),(34,'Can add page',12,'add_page'),(35,'Can change page',12,'change_page'),(36,'Can delete page',12,'delete_page'),(37,'Can add Attachment',13,'add_attachment'),(38,'Can change Attachment',13,'change_attachment'),(39,'Can delete Attachment',13,'delete_attachment'),(40,'Can add Custom field',14,'add_customfield'),(41,'Can change Custom field',14,'change_customfield'),(42,'Can delete Custom field',14,'delete_customfield'),(43,'Can add e-mail template',15,'add_emailtemplate'),(44,'Can change e-mail template',15,'change_emailtemplate'),(45,'Can delete e-mail template',15,'delete_emailtemplate'),(46,'Can add Escalation exclusion',16,'add_escalationexclusion'),(47,'Can change Escalation exclusion',16,'change_escalationexclusion'),(48,'Can delete Escalation exclusion',16,'delete_escalationexclusion'),(49,'Can add Follow-up',17,'add_followup'),(50,'Can change Follow-up',17,'change_followup'),(51,'Can delete Follow-up',17,'delete_followup'),(52,'Can add Ignored e-mail address',18,'add_ignoreemail'),(53,'Can change Ignored e-mail address',18,'change_ignoreemail'),(54,'Can delete Ignored e-mail address',18,'delete_ignoreemail'),(55,'Can add Knowledge base category',19,'add_kbcategory'),(56,'Can change Knowledge base category',19,'change_kbcategory'),(57,'Can delete Knowledge base category',19,'delete_kbcategory'),(58,'Can add Knowledge base item',20,'add_kbitem'),(59,'Can change Knowledge base item',20,'change_kbitem'),(60,'Can delete Knowledge base item',20,'delete_kbitem'),(61,'Can add Pre-set reply',21,'add_presetreply'),(62,'Can change Pre-set reply',21,'change_presetreply'),(63,'Can delete Pre-set reply',21,'delete_presetreply'),(64,'Can add Queue',22,'add_queue'),(65,'Can change Queue',22,'change_queue'),(66,'Can delete Queue',22,'delete_queue'),(67,'Can add Saved search',23,'add_savedsearch'),(68,'Can change Saved search',23,'change_savedsearch'),(69,'Can delete Saved search',23,'delete_savedsearch'),(70,'Can add Ticket',24,'add_ticket'),(71,'Can change Ticket',24,'change_ticket'),(72,'Can delete Ticket',24,'delete_ticket'),(73,'Can add ticket cc',25,'add_ticketcc'),(74,'Can change ticket cc',25,'change_ticketcc'),(75,'Can delete ticket cc',25,'delete_ticketcc'),(76,'Can add Ticket change',26,'add_ticketchange'),(77,'Can change Ticket change',26,'change_ticketchange'),(78,'Can delete Ticket change',26,'delete_ticketchange'),(79,'Can add Ticket custom field value',27,'add_ticketcustomfieldvalue'),(80,'Can change Ticket custom field value',27,'change_ticketcustomfieldvalue'),(81,'Can delete Ticket custom field value',27,'delete_ticketcustomfieldvalue'),(82,'Can add Ticket dependency',28,'add_ticketdependency'),(83,'Can change Ticket dependency',28,'change_ticketdependency'),(84,'Can delete Ticket dependency',28,'delete_ticketdependency'),(85,'Can add User Setting',29,'add_usersettings'),(86,'Can change User Setting',29,'change_usersettings'),(87,'Can delete User Setting',29,'delete_usersettings'),(88,'Can add News',30,'add_news'),(89,'Can change News',30,'change_news'),(90,'Can delete News',30,'delete_news'),(91,'Can add milestone',31,'add_milestone'),(92,'Can change milestone',31,'change_milestone'),(93,'Can delete milestone',31,'delete_milestone'),(94,'Can add document',32,'add_document'),(95,'Can change document',32,'change_document'),(96,'Can delete document',32,'delete_document'),(97,'Can add investor',33,'add_investor'),(98,'Can change investor',33,'change_investor'),(99,'Can delete investor',33,'delete_investor'),(100,'Can add account',34,'add_account'),(101,'Can change account',34,'change_account'),(102,'Can delete account',34,'delete_account'),(103,'Can add events processing',35,'add_eventsprocessing'),(104,'Can change events processing',35,'change_eventsprocessing'),(105,'Can delete events processing',35,'delete_eventsprocessing'),(106,'Can add exchange rate',36,'add_exchangerate'),(107,'Can change exchange rate',36,'change_exchangerate'),(108,'Can delete exchange rate',36,'delete_exchangerate'),(109,'Can add ic o_ info',37,'add_ico_info'),(110,'Can change ic o_ info',37,'change_ico_info'),(111,'Can delete ic o_ info',37,'delete_ico_info'),(112,'Can add KYC',38,'add_kyc'),(113,'Can change KYC',38,'change_kyc'),(114,'Can delete KYC',38,'delete_kyc'),(115,'Can add payment',39,'add_payment'),(116,'Can change payment',39,'change_payment'),(117,'Can delete payment',39,'delete_payment'),(118,'Can add phase',40,'add_phase'),(119,'Can change phase',40,'change_phase'),(120,'Can delete phase',40,'delete_phase'),(121,'Can add tokens move',41,'add_tokensmove'),(122,'Can change tokens move',41,'change_tokensmove'),(123,'Can delete tokens move',41,'delete_tokensmove'),(124,'Can add transaction',42,'add_transaction'),(125,'Can change transaction',42,'change_transaction'),(126,'Can delete transaction',42,'delete_transaction'),(127,'Can add transfer',43,'add_transfer'),(128,'Can change transfer',43,'change_transfer'),(129,'Can delete transfer',43,'delete_transfer'),(130,'Permission for queue: Support',22,'queue_access_support'),(131,'Can add po update',44,'add_poupdate'),(132,'Can change po update',44,'change_poupdate'),(133,'Can delete po update',44,'delete_poupdate');
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can add permission',2,'add_permission'),(5,'Can change permission',2,'change_permission'),(6,'Can delete permission',2,'delete_permission'),(7,'Can add group',3,'add_group'),(8,'Can change group',3,'change_group'),(9,'Can delete group',3,'delete_group'),(10,'Can add content type',4,'add_contenttype'),(11,'Can change content type',4,'change_contenttype'),(12,'Can delete content type',4,'delete_contenttype'),(13,'Can add session',5,'add_session'),(14,'Can change session',5,'change_session'),(15,'Can delete session',5,'delete_session'),(16,'Can add association',6,'add_association'),(17,'Can change association',6,'change_association'),(18,'Can delete association',6,'delete_association'),(19,'Can add code',7,'add_code'),(20,'Can change code',7,'change_code'),(21,'Can delete code',7,'delete_code'),(22,'Can add nonce',8,'add_nonce'),(23,'Can change nonce',8,'change_nonce'),(24,'Can delete nonce',8,'delete_nonce'),(25,'Can add user social auth',9,'add_usersocialauth'),(26,'Can change user social auth',9,'change_usersocialauth'),(27,'Can delete user social auth',9,'delete_usersocialauth'),(28,'Can add partial',10,'add_partial'),(29,'Can change partial',10,'change_partial'),(30,'Can delete partial',10,'delete_partial'),(31,'Can add page',11,'add_page'),(32,'Can change page',11,'change_page'),(33,'Can delete page',11,'delete_page'),(34,'Can add news page content',12,'add_newspagecontent'),(35,'Can change news page content',12,'change_newspagecontent'),(36,'Can delete news page content',12,'delete_newspagecontent'),(37,'Can add Attachment',13,'add_attachment'),(38,'Can change Attachment',13,'change_attachment'),(39,'Can delete Attachment',13,'delete_attachment'),(40,'Can add Custom field',14,'add_customfield'),(41,'Can change Custom field',14,'change_customfield'),(42,'Can delete Custom field',14,'delete_customfield'),(43,'Can add e-mail template',15,'add_emailtemplate'),(44,'Can change e-mail template',15,'change_emailtemplate'),(45,'Can delete e-mail template',15,'delete_emailtemplate'),(46,'Can add Escalation exclusion',16,'add_escalationexclusion'),(47,'Can change Escalation exclusion',16,'change_escalationexclusion'),(48,'Can delete Escalation exclusion',16,'delete_escalationexclusion'),(49,'Can add Follow-up',17,'add_followup'),(50,'Can change Follow-up',17,'change_followup'),(51,'Can delete Follow-up',17,'delete_followup'),(52,'Can add Ignored e-mail address',18,'add_ignoreemail'),(53,'Can change Ignored e-mail address',18,'change_ignoreemail'),(54,'Can delete Ignored e-mail address',18,'delete_ignoreemail'),(55,'Can add Knowledge base category',19,'add_kbcategory'),(56,'Can change Knowledge base category',19,'change_kbcategory'),(57,'Can delete Knowledge base category',19,'delete_kbcategory'),(58,'Can add Knowledge base item',20,'add_kbitem'),(59,'Can change Knowledge base item',20,'change_kbitem'),(60,'Can delete Knowledge base item',20,'delete_kbitem'),(61,'Can add Pre-set reply',21,'add_presetreply'),(62,'Can change Pre-set reply',21,'change_presetreply'),(63,'Can delete Pre-set reply',21,'delete_presetreply'),(64,'Can add Queue',22,'add_queue'),(65,'Can change Queue',22,'change_queue'),(66,'Can delete Queue',22,'delete_queue'),(67,'Can add Saved search',23,'add_savedsearch'),(68,'Can change Saved search',23,'change_savedsearch'),(69,'Can delete Saved search',23,'delete_savedsearch'),(70,'Can add Ticket',24,'add_ticket'),(71,'Can change Ticket',24,'change_ticket'),(72,'Can delete Ticket',24,'delete_ticket'),(73,'Can add ticket cc',25,'add_ticketcc'),(74,'Can change ticket cc',25,'change_ticketcc'),(75,'Can delete ticket cc',25,'delete_ticketcc'),(76,'Can add Ticket change',26,'add_ticketchange'),(77,'Can change Ticket change',26,'change_ticketchange'),(78,'Can delete Ticket change',26,'delete_ticketchange'),(79,'Can add Ticket custom field value',27,'add_ticketcustomfieldvalue'),(80,'Can change Ticket custom field value',27,'change_ticketcustomfieldvalue'),(81,'Can delete Ticket custom field value',27,'delete_ticketcustomfieldvalue'),(82,'Can add Ticket dependency',28,'add_ticketdependency'),(83,'Can change Ticket dependency',28,'change_ticketdependency'),(84,'Can delete Ticket dependency',28,'delete_ticketdependency'),(85,'Can add User Setting',29,'add_usersettings'),(86,'Can change User Setting',29,'change_usersettings'),(87,'Can delete User Setting',29,'delete_usersettings'),(88,'Can add News',30,'add_news'),(89,'Can change News',30,'change_news'),(90,'Can delete News',30,'delete_news'),(91,'Can add milestone',31,'add_milestone'),(92,'Can change milestone',31,'change_milestone'),(93,'Can delete milestone',31,'delete_milestone'),(94,'Can add document',32,'add_document'),(95,'Can change document',32,'change_document'),(96,'Can delete document',32,'delete_document'),(97,'Can add investor',33,'add_investor'),(98,'Can change investor',33,'change_investor'),(99,'Can delete investor',33,'delete_investor'),(100,'Can add account',34,'add_account'),(101,'Can change account',34,'change_account'),(102,'Can delete account',34,'delete_account'),(103,'Can add events processing',35,'add_eventsprocessing'),(104,'Can change events processing',35,'change_eventsprocessing'),(105,'Can delete events processing',35,'delete_eventsprocessing'),(106,'Can add exchange rate',36,'add_exchangerate'),(107,'Can change exchange rate',36,'change_exchangerate'),(108,'Can delete exchange rate',36,'delete_exchangerate'),(109,'Can add ic o_ info',37,'add_ico_info'),(110,'Can change ic o_ info',37,'change_ico_info'),(111,'Can delete ic o_ info',37,'delete_ico_info'),(112,'Can add KYC',38,'add_kyc'),(113,'Can change KYC',38,'change_kyc'),(114,'Can delete KYC',38,'delete_kyc'),(115,'Can add payment',39,'add_payment'),(116,'Can change payment',39,'change_payment'),(117,'Can delete payment',39,'delete_payment'),(118,'Can add phase',40,'add_phase'),(119,'Can change phase',40,'change_phase'),(120,'Can delete phase',40,'delete_phase'),(121,'Can add tokens move',41,'add_tokensmove'),(122,'Can change tokens move',41,'change_tokensmove'),(123,'Can delete tokens move',41,'delete_tokensmove'),(124,'Can add transaction',42,'add_transaction'),(125,'Can change transaction',42,'change_transaction'),(126,'Can delete transaction',42,'delete_transaction'),(127,'Can add transfer',43,'add_transfer'),(128,'Can change transfer',43,'change_transfer'),(129,'Can delete transfer',43,'delete_transfer'),(130,'Can add po update',44,'add_poupdate'),(131,'Can change po update',44,'change_poupdate'),(132,'Can delete po update',44,'delete_poupdate'),(133,'Permission for queue: KYC Requests',22,'queue_access_kyc-requests'),(134,'Permission for queue: Support',22,'queue_access_support');
 /*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +144,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_investors_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_investors_id` FOREIGN KEY (`user_id`) REFERENCES `investors` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +153,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2018-07-17 15:33:05.930348','1','First phase',1,'[{\"added\": {}}]',40,1),(2,'2018-07-17 15:40:27.031821','1','KYC for Roman None Nesytov',1,'[{\"added\": {}}]',38,1),(3,'2018-07-17 15:42:40.023935','2','gordon@ongrid.pro',2,'[{\"changed\": {\"fields\": [\"eth_account\"]}}]',33,1),(4,'2018-07-19 16:57:12.553975','5','Comment',3,'',17,1),(5,'2018-07-19 16:57:29.746793','6','Comment',3,'',17,1),(6,'2018-07-19 16:57:55.755313','4','Updated',2,'[{\"deleted\": {\"name\": \"Attachment\", \"object\": \"download.jpeg\"}}]',17,1),(7,'2018-07-19 16:58:12.096886','1','1 Test ticket',3,'',24,1),(8,'2018-07-19 16:58:12.099608','2','2 New',3,'',24,1),(9,'2018-07-20 11:37:32.198219','1','KYC of gordon@ongrid.pro',2,'[{\"changed\": {\"fields\": [\"state\"]}}]',38,1),(10,'2018-07-21 16:43:01.504262','1','KYC of gordon@ongrid.pro',1,'[{\"added\": {}}]',38,1);
+INSERT INTO `django_admin_log` VALUES (1,'2018-07-23 13:19:32.509479','2','gordon@ongrid.pro',1,'[{\"added\": {}}]',33,1),(2,'2018-07-23 13:20:47.964270','2','gordon@ongrid.pro',3,'',33,1),(3,'2018-07-23 13:21:00.325898','3','gordon@ongrid.pro',1,'[{\"added\": {}}]',33,1),(4,'2018-07-23 13:29:31.071935','3','gordon@ongrid.pro',2,'[{\"changed\": {\"fields\": [\"eth_account\"]}}]',33,1),(5,'2018-07-23 14:55:58.714815','5','r.nesytov@ongrid.pro',1,'[{\"added\": {}}]',33,1),(6,'2018-07-23 14:56:06.517418','5','r.nesytov@ongrid.pro',2,'[{\"changed\": {\"fields\": [\"password\"]}}]',33,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +179,7 @@ CREATE TABLE `django_content_type` (
 
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'contenttypes','contenttype'),(13,'helpdesk','attachment'),(14,'helpdesk','customfield'),(15,'helpdesk','emailtemplate'),(16,'helpdesk','escalationexclusion'),(17,'helpdesk','followup'),(18,'helpdesk','ignoreemail'),(19,'helpdesk','kbcategory'),(20,'helpdesk','kbitem'),(21,'helpdesk','presetreply'),(22,'helpdesk','queue'),(23,'helpdesk','savedsearch'),(24,'helpdesk','ticket'),(25,'helpdesk','ticketcc'),(26,'helpdesk','ticketchange'),(27,'helpdesk','ticketcustomfieldvalue'),(28,'helpdesk','ticketdependency'),(29,'helpdesk','usersettings'),(32,'landing','document'),(31,'landing','milestone'),(30,'landing','news'),(11,'page','newspagecontent'),(12,'page','page'),(5,'sessions','session'),(6,'social_django','association'),(7,'social_django','code'),(8,'social_django','nonce'),(10,'social_django','partial'),(9,'social_django','usersocialauth'),(34,'user_office','account'),(35,'user_office','eventsprocessing'),(36,'user_office','exchangerate'),(37,'user_office','ico_info'),(33,'user_office','investor'),(38,'user_office','kyc'),(39,'user_office','payment'),(40,'user_office','phase'),(44,'user_office','poupdate'),(41,'user_office','tokensmove'),(42,'user_office','transaction'),(43,'user_office','transfer');
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'contenttypes','contenttype'),(13,'helpdesk','attachment'),(14,'helpdesk','customfield'),(15,'helpdesk','emailtemplate'),(16,'helpdesk','escalationexclusion'),(17,'helpdesk','followup'),(18,'helpdesk','ignoreemail'),(19,'helpdesk','kbcategory'),(20,'helpdesk','kbitem'),(21,'helpdesk','presetreply'),(22,'helpdesk','queue'),(23,'helpdesk','savedsearch'),(24,'helpdesk','ticket'),(25,'helpdesk','ticketcc'),(26,'helpdesk','ticketchange'),(27,'helpdesk','ticketcustomfieldvalue'),(28,'helpdesk','ticketdependency'),(29,'helpdesk','usersettings'),(32,'landing','document'),(31,'landing','milestone'),(30,'landing','news'),(12,'page','newspagecontent'),(11,'page','page'),(5,'sessions','session'),(6,'social_django','association'),(7,'social_django','code'),(8,'social_django','nonce'),(10,'social_django','partial'),(9,'social_django','usersocialauth'),(34,'user_office','account'),(35,'user_office','eventsprocessing'),(36,'user_office','exchangerate'),(37,'user_office','ico_info'),(33,'user_office','investor'),(38,'user_office','kyc'),(39,'user_office','payment'),(40,'user_office','phase'),(44,'user_office','poupdate'),(41,'user_office','tokensmove'),(42,'user_office','transaction'),(43,'user_office','transfer');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +196,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +205,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'user_office','0001_initial','2018-07-17 15:31:52.885216'),(2,'contenttypes','0001_initial','2018-07-17 15:31:52.941979'),(3,'admin','0001_initial','2018-07-17 15:31:53.054754'),(4,'admin','0002_logentry_remove_auto_add','2018-07-17 15:31:53.065833'),(5,'contenttypes','0002_remove_content_type_name','2018-07-17 15:31:53.142272'),(6,'auth','0001_initial','2018-07-17 15:31:53.369040'),(7,'auth','0002_alter_permission_name_max_length','2018-07-17 15:31:53.403203'),(8,'auth','0003_alter_user_email_max_length','2018-07-17 15:31:53.410509'),(9,'auth','0004_alter_user_username_opts','2018-07-17 15:31:53.417541'),(10,'auth','0005_alter_user_last_login_null','2018-07-17 15:31:53.427273'),(11,'auth','0006_require_contenttypes_0002','2018-07-17 15:31:53.429150'),(12,'auth','0007_alter_validators_add_error_messages','2018-07-17 15:31:53.441547'),(13,'auth','0008_alter_user_username_max_length','2018-07-17 15:31:53.454106'),(14,'auth','0009_alter_user_last_name_max_length','2018-07-17 15:31:53.512117'),(15,'helpdesk','0001_initial','2018-07-17 15:31:55.006508'),(16,'helpdesk','0002_populate_usersettings','2018-07-17 15:31:55.043587'),(17,'helpdesk','0003_initial_data_import','2018-07-17 15:31:55.229156'),(18,'helpdesk','0004_add_per_queue_staff_membership','2018-07-17 15:31:55.437089'),(19,'helpdesk','0005_queues_no_null','2018-07-17 15:31:55.794702'),(20,'helpdesk','0006_email_maxlength','2018-07-17 15:31:55.918326'),(21,'helpdesk','0007_max_length_by_integer','2018-07-17 15:31:55.927317'),(22,'helpdesk','0008_extra_for_permissions','2018-07-17 15:31:55.961585'),(23,'helpdesk','0009_migrate_queuemembership','2018-07-17 15:31:56.011256'),(24,'helpdesk','0010_remove_queuemembership','2018-07-17 15:31:56.080068'),(25,'helpdesk','0011_admin_related_improvements','2018-07-17 15:31:56.138914'),(26,'helpdesk','0012_queue_default_owner','2018-07-17 15:31:56.210511'),(27,'helpdesk','0013_email_box_local_dir_and_logging','2018-07-17 15:31:56.329582'),(28,'helpdesk','0014_usersettings_related_name','2018-07-17 15:31:56.402336'),(29,'helpdesk','0015_expand_permission_name_size','2018-07-17 15:31:56.434885'),(30,'helpdesk','0016_alter_model_options','2018-07-17 15:31:56.513039'),(31,'helpdesk','0017_default_owner_on_delete_null','2018-07-17 15:31:56.572013'),(32,'helpdesk','0018_ticket_reporter','2018-07-17 15:31:56.706999'),(33,'helpdesk','0019_auto_20180717_1522','2018-07-17 15:31:56.720748'),(34,'page','0001_initial','2018-07-17 15:31:56.976596'),(35,'sessions','0001_initial','2018-07-17 15:31:57.017320'),(36,'default','0001_initial','2018-07-17 15:31:57.258006'),(37,'social_auth','0001_initial','2018-07-17 15:31:57.261600'),(38,'default','0002_add_related_name','2018-07-17 15:31:57.320059'),(39,'social_auth','0002_add_related_name','2018-07-17 15:31:57.328005'),(40,'default','0003_alter_email_max_length','2018-07-17 15:31:57.356936'),(41,'social_auth','0003_alter_email_max_length','2018-07-17 15:31:57.364023'),(42,'default','0004_auto_20160423_0400','2018-07-17 15:31:57.382782'),(43,'social_auth','0004_auto_20160423_0400','2018-07-17 15:31:57.385619'),(44,'social_auth','0005_auto_20160727_2333','2018-07-17 15:31:57.409217'),(45,'social_django','0006_partial','2018-07-17 15:31:57.464154'),(46,'social_django','0007_code_timestamp','2018-07-17 15:31:57.549914'),(47,'social_django','0008_partial_timestamp','2018-07-17 15:31:57.617080'),(48,'social_django','0002_add_related_name','2018-07-17 15:31:57.622822'),(49,'social_django','0003_alter_email_max_length','2018-07-17 15:31:57.625647'),(50,'social_django','0001_initial','2018-07-17 15:31:57.628388'),(51,'social_django','0005_auto_20160727_2333','2018-07-17 15:31:57.631111'),(52,'social_django','0004_auto_20160423_0400','2018-07-17 15:31:57.633865'),(53,'user_office','0002_kyc_ticket','2018-07-17 15:32:10.188626'),(54,'helpdesk','0019_auto_20180709_1841','2018-07-17 15:56:23.485416'),(55,'helpdesk','0020_merge_20180717_1556','2018-07-17 15:56:23.490299'),(56,'user_office','0003_auto_20180718_1421','2018-07-18 14:22:49.435966'),(57,'user_office','0004_auto_20180718_1445','2018-07-18 14:45:08.074937'),(58,'user_office','0005_poupdate_new_rate','2018-07-18 15:04:51.666995'),(59,'user_office','0006_auto_20180720_1201','2018-07-19 19:17:04.289717'),(60,'user_office','0007_auto_20180721_1622','2018-07-21 13:30:31.441738');
+INSERT INTO `django_migrations` VALUES (1,'user_office','0001_initial','2018-07-23 12:55:24.374066'),(2,'contenttypes','0001_initial','2018-07-23 12:55:24.468663'),(3,'admin','0001_initial','2018-07-23 12:55:24.578323'),(4,'admin','0002_logentry_remove_auto_add','2018-07-23 12:55:24.588368'),(5,'contenttypes','0002_remove_content_type_name','2018-07-23 12:55:24.667346'),(6,'auth','0001_initial','2018-07-23 12:55:24.867513'),(7,'auth','0002_alter_permission_name_max_length','2018-07-23 12:55:24.896499'),(8,'auth','0003_alter_user_email_max_length','2018-07-23 12:55:24.903727'),(9,'auth','0004_alter_user_username_opts','2018-07-23 12:55:24.912281'),(10,'auth','0005_alter_user_last_login_null','2018-07-23 12:55:24.970988'),(11,'auth','0006_require_contenttypes_0002','2018-07-23 12:55:24.974849'),(12,'auth','0007_alter_validators_add_error_messages','2018-07-23 12:55:24.989821'),(13,'auth','0008_alter_user_username_max_length','2018-07-23 12:55:25.002625'),(14,'auth','0009_alter_user_last_name_max_length','2018-07-23 12:55:25.012162'),(15,'helpdesk','0001_initial','2018-07-23 12:55:26.320619'),(16,'helpdesk','0002_populate_usersettings','2018-07-23 12:55:26.375730'),(17,'helpdesk','0003_initial_data_import','2018-07-23 12:55:26.564208'),(18,'helpdesk','0004_add_per_queue_staff_membership','2018-07-23 12:55:26.707846'),(19,'helpdesk','0005_queues_no_null','2018-07-23 12:55:26.995807'),(20,'helpdesk','0006_email_maxlength','2018-07-23 12:55:27.115949'),(21,'helpdesk','0007_max_length_by_integer','2018-07-23 12:55:27.122692'),(22,'helpdesk','0008_extra_for_permissions','2018-07-23 12:55:27.152555'),(23,'helpdesk','0009_migrate_queuemembership','2018-07-23 12:55:27.207272'),(24,'helpdesk','0010_remove_queuemembership','2018-07-23 12:55:27.274809'),(25,'helpdesk','0011_admin_related_improvements','2018-07-23 12:55:27.330375'),(26,'helpdesk','0012_queue_default_owner','2018-07-23 12:55:27.395246'),(27,'helpdesk','0013_email_box_local_dir_and_logging','2018-07-23 12:55:27.510219'),(28,'helpdesk','0014_usersettings_related_name','2018-07-23 12:55:27.572949'),(29,'helpdesk','0015_expand_permission_name_size','2018-07-23 12:55:27.605068'),(30,'helpdesk','0016_alter_model_options','2018-07-23 12:55:27.741625'),(31,'helpdesk','0017_default_owner_on_delete_null','2018-07-23 12:55:27.790855'),(32,'helpdesk','0018_ticket_reporter','2018-07-23 12:55:27.859027'),(33,'helpdesk','0019_auto_20180717_1522','2018-07-23 12:55:27.872532'),(34,'helpdesk','0019_auto_20180709_1841','2018-07-23 12:55:27.884632'),(35,'helpdesk','0020_merge_20180717_1556','2018-07-23 12:55:27.887166'),(36,'sessions','0001_initial','2018-07-23 12:55:27.929114'),(37,'default','0001_initial','2018-07-23 12:55:28.140115'),(38,'social_auth','0001_initial','2018-07-23 12:55:28.142706'),(39,'default','0002_add_related_name','2018-07-23 12:55:28.192438'),(40,'social_auth','0002_add_related_name','2018-07-23 12:55:28.195395'),(41,'default','0003_alter_email_max_length','2018-07-23 12:55:28.227002'),(42,'social_auth','0003_alter_email_max_length','2018-07-23 12:55:28.230369'),(43,'default','0004_auto_20160423_0400','2018-07-23 12:55:28.247452'),(44,'social_auth','0004_auto_20160423_0400','2018-07-23 12:55:28.254549'),(45,'social_auth','0005_auto_20160727_2333','2018-07-23 12:55:28.278755'),(46,'social_django','0006_partial','2018-07-23 12:55:28.327217'),(47,'social_django','0007_code_timestamp','2018-07-23 12:55:28.390426'),(48,'social_django','0008_partial_timestamp','2018-07-23 12:55:28.454508'),(49,'user_office','0002_kyc_ticket','2018-07-23 12:55:28.521043'),(50,'user_office','0003_auto_20180718_1421','2018-07-23 12:55:28.593110'),(51,'user_office','0004_auto_20180718_1445','2018-07-23 12:55:28.621154'),(52,'user_office','0005_poupdate_new_rate','2018-07-23 12:55:28.662757'),(53,'user_office','0006_auto_20180720_1201','2018-07-23 12:55:30.170538'),(54,'user_office','0007_auto_20180721_1622','2018-07-23 12:55:30.327477'),(55,'user_office','0008_auto_20180723_1255','2018-07-23 12:55:30.340476'),(56,'social_django','0003_alter_email_max_length','2018-07-23 12:55:30.345514'),(57,'social_django','0005_auto_20160727_2333','2018-07-23 12:55:30.347852'),(58,'social_django','0001_initial','2018-07-23 12:55:30.350157'),(59,'social_django','0004_auto_20160423_0400','2018-07-23 12:55:30.352514'),(60,'social_django','0002_add_related_name','2018-07-23 12:55:30.354869');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,7 +231,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('0rnm5749nqeul5zvayacf7mzo8erd9sl','OTRmMzk1ZTczMGZkODA2YmE1ZjdkM2M5OTE0NGRlMTc3MGMwZTExOTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkFkbWluVXNlckJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3Mjk3MGIyNjQ2MjI1ODNkMDlhYzRmZGJkN2Y2MjBmZTU2NDE2ZTFkIn0=','2018-08-02 16:56:38.667155'),('2yrzp57ku8j4sj7n413x196rsvl6m4aj','OTRmMzk1ZTczMGZkODA2YmE1ZjdkM2M5OTE0NGRlMTc3MGMwZTExOTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkFkbWluVXNlckJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3Mjk3MGIyNjQ2MjI1ODNkMDlhYzRmZGJkN2Y2MjBmZTU2NDE2ZTFkIn0=','2018-08-03 20:51:14.835276'),('5kb1zyyh6j8ozagpd4wczqihafsq9zik','OTRmMzk1ZTczMGZkODA2YmE1ZjdkM2M5OTE0NGRlMTc3MGMwZTExOTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkFkbWluVXNlckJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3Mjk3MGIyNjQ2MjI1ODNkMDlhYzRmZGJkN2Y2MjBmZTU2NDE2ZTFkIn0=','2018-07-31 15:37:21.452494'),('daigadyv6nek1gaiysxpzfod9c02c9cn','OTRmMzk1ZTczMGZkODA2YmE1ZjdkM2M5OTE0NGRlMTc3MGMwZTExOTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkFkbWluVXNlckJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3Mjk3MGIyNjQ2MjI1ODNkMDlhYzRmZGJkN2Y2MjBmZTU2NDE2ZTFkIn0=','2018-08-03 11:31:58.488359'),('j7axhovks75httyj4noxvk01y46csfhz','OTRmMzk1ZTczMGZkODA2YmE1ZjdkM2M5OTE0NGRlMTc3MGMwZTExOTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkFkbWluVXNlckJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3Mjk3MGIyNjQ2MjI1ODNkMDlhYzRmZGJkN2Y2MjBmZTU2NDE2ZTFkIn0=','2018-07-31 17:53:46.429247'),('jjw5dpfrtmw413fcxxlaauvoht45oprc','Yjk4NGM0ZjZjOGE5NDA2NzM1YWFlN2YzZGFhYTViN2Y5MzEyYjIzYjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkVtYWlsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjcyOTcwYjI2NDYyMjU4M2QwOWFjNGZkYmQ3ZjYyMGZlNTY0MTZlMWQifQ==','2018-08-01 12:04:00.279447'),('mffigtucxwhn613p4o59z36wfeond7pn','OTRmMzk1ZTczMGZkODA2YmE1ZjdkM2M5OTE0NGRlMTc3MGMwZTExOTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkFkbWluVXNlckJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3Mjk3MGIyNjQ2MjI1ODNkMDlhYzRmZGJkN2Y2MjBmZTU2NDE2ZTFkIn0=','2018-08-02 19:38:07.943583'),('mp68szxa9jt1c8mqlt0fcufmcbx409aa','Yjk4NGM0ZjZjOGE5NDA2NzM1YWFlN2YzZGFhYTViN2Y5MzEyYjIzYjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkVtYWlsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjcyOTcwYjI2NDYyMjU4M2QwOWFjNGZkYmQ3ZjYyMGZlNTY0MTZlMWQifQ==','2018-08-04 18:59:02.798076'),('tlhyp7jzywrs0xv1gsjeflt5vtk3gpzz','OTRmMzk1ZTczMGZkODA2YmE1ZjdkM2M5OTE0NGRlMTc3MGMwZTExOTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkFkbWluVXNlckJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3Mjk3MGIyNjQ2MjI1ODNkMDlhYzRmZGJkN2Y2MjBmZTU2NDE2ZTFkIn0=','2018-08-04 15:54:33.591153'),('v2kmszhuszrssshh81bs5mn8d8y7issz','NGFiZGRiNDIxMjRiYWNjMWVjODE1ZTc2Mjk2Yzk2NjU3ZTYzMTUzNTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkVtYWlsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjMxMDYxY2NiZGZmN2ZmNmUzNzA1ODc0YWM3OWZmNTY0ZGNiN2IxNTkifQ==','2018-08-04 19:02:41.420744'),('vea8z4ftdgoxka7bl7hf38qy69go5nm6','OTRmMzk1ZTczMGZkODA2YmE1ZjdkM2M5OTE0NGRlMTc3MGMwZTExOTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkFkbWluVXNlckJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3Mjk3MGIyNjQ2MjI1ODNkMDlhYzRmZGJkN2Y2MjBmZTU2NDE2ZTFkIn0=','2018-08-03 11:56:15.775922');
+INSERT INTO `django_session` VALUES ('3bxag4ocbx74p7hpykvmzeo4ax1fwlzq','ODE1ZTA2MzZjM2JhNTMwNTIwZmMwYWZmYmE5MDU2MjZhZmY2NWI0Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkFkbWluVXNlckJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMTdhODZjMzY4YWVjYzU4MmM5YzEzODExMGZjMDg3NTA3YzQ0Zjc1In0=','2018-08-06 14:56:06.525219'),('ckm1j0xk4qowepvnxzy6w9csa752bkm4','YTExY2Y0MWY4ZGQ3MzU5ZDMzNTZiZjQ1MDRlOGZkNjYyOTJiY2FkNTp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkVtYWlsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6ImVjN2YyY2MyYWVkZDkxYWJlNGQyNmYwZDY4YzAzOGI0Y2ZhNzNkMTMifQ==','2018-08-06 13:21:19.213481'),('jc0o38jp99s36nil1lfraz1jyo8fag5e','ODE1ZTA2MzZjM2JhNTMwNTIwZmMwYWZmYmE5MDU2MjZhZmY2NWI0Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcl9vZmZpY2UuYXV0aF9iYWNrZW5kLkFkbWluVXNlckJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMTdhODZjMzY4YWVjYzU4MmM5YzEzODExMGZjMDg3NTA3YzQ0Zjc1In0=','2018-08-06 13:29:21.250698');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,7 +249,7 @@ CREATE TABLE `events_processing` (
   `last_processed_block` int(11) DEFAULT NULL,
   `last_update_at` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +258,7 @@ CREATE TABLE `events_processing` (
 
 LOCK TABLES `events_processing` WRITE;
 /*!40000 ALTER TABLE `events_processing` DISABLE KEYS */;
-INSERT INTO `events_processing` VALUES (4,'0x24eacbf9595e8e6a8fc4e2555a323a9f',0,2674188,'2018-07-21 14:22:05.951287');
+INSERT INTO `events_processing` VALUES (6,'0xe8313d9fcdc075d38c74a89f074ba266',0,2685074,'2018-07-23 11:43:43.343784');
 /*!40000 ALTER TABLE `events_processing` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +277,7 @@ CREATE TABLE `exchange_rates` (
   `timestamp` int(10) unsigned NOT NULL,
   `rate_cents` decimal(32,0) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,7 +286,7 @@ CREATE TABLE `exchange_rates` (
 
 LOCK TABLES `exchange_rates` WRITE;
 /*!40000 ALTER TABLE `exchange_rates` DISABLE KEYS */;
-INSERT INTO `exchange_rates` VALUES (1,'ETH','2018-07-17 12:44:46.744189',467.96,1531831441,46796),(2,'LTC','2018-07-17 12:44:47.064467',82.17,1531831441,8217),(3,'BTC','2018-07-17 12:44:47.440122',6702.38,1531831441,670238),(4,'DASH','2018-07-17 12:44:47.797577',245.59,1531831441,24559),(5,'ETH','2018-07-18 12:12:25.049770',497.89,1531915863,49789),(6,'ETH','2018-07-18 15:16:35.451436',492.10,1531926963,49210),(7,'LTC','2018-07-18 15:16:35.820222',90.26,1531926963,9026),(8,'ETH','2018-07-19 09:06:11.149060',476.37,1531991162,47637),(9,'LTC','2018-07-19 09:06:11.544365',86.24,1531991101,8624),(10,'BTC','2018-07-19 09:06:11.975861',7329.42,1531991162,732942),(11,'DASH','2018-07-19 09:06:13.030145',263.67,1531991101,26367),(12,'ETH','2018-07-19 09:11:09.146605',476.39,1531991402,47639),(13,'LTC','2018-07-19 09:11:09.506720',86.49,1531991402,8649),(14,'ETH','2018-07-19 09:11:10.811882',476.39,1531991402,47639),(15,'DASH','2018-07-19 09:11:13.263968',263.32,1531991462,26332),(16,'ETH','2018-07-19 09:11:13.385189',476.39,1531991402,47639),(17,'LTC','2018-07-19 09:11:13.674813',86.49,1531991402,8649),(18,'DASH','2018-07-19 09:11:15.649744',263.32,1531991462,26332),(19,'ETH','2018-07-19 09:16:10.894375',476.83,1531991763,47683),(20,'LTC','2018-07-19 09:16:11.191926',86.66,1531991701,8666),(21,'BTC','2018-07-19 09:16:11.577915',7343.78,1531991763,734378),(22,'DASH','2018-07-19 09:16:11.971030',263.03,1531991763,26303),(23,'ETH','2018-07-19 09:19:05.531738',476.85,1531991881,47685),(24,'LTC','2018-07-19 09:19:05.818541',86.64,1531991881,8664),(25,'BTC','2018-07-19 09:19:06.175691',7344.81,1531991941,734481),(26,'DASH','2018-07-19 09:19:11.771325',263.03,1531991941,26303),(27,'ETH','2018-07-19 14:01:31.928660',481.30,1532008861,48130),(28,'ETH','2018-07-19 14:01:32.092375',481.30,1532008861,48130),(29,'LTC','2018-07-19 14:01:32.407033',88.38,1532008861,8838),(30,'LTC','2018-07-19 14:01:32.511651',88.38,1532008861,8838),(31,'BTC','2018-07-19 14:01:32.738924',7481.49,1532008861,748149),(32,'BTC','2018-07-19 14:01:32.764568',7481.49,1532008861,748149),(33,'ETH','2018-07-19 14:01:32.770696',481.30,1532008861,48130),(34,'LTC','2018-07-19 14:01:32.865502',88.38,1532008861,8838),(35,'DASH','2018-07-19 14:01:32.889307',268.03,1532008861,26803),(36,'DASH','2018-07-19 14:01:32.933564',268.03,1532008861,26803),(37,'ETH','2018-07-19 14:01:33.208863',481.30,1532008861,48130),(38,'LTC','2018-07-19 14:01:33.325770',88.38,1532008861,8838),(39,'LTC','2018-07-19 14:01:33.389374',88.38,1532008861,8838),(40,'BTC','2018-07-19 14:01:33.434404',7481.49,1532008861,748149),(41,'BTC','2018-07-19 14:01:33.553201',7481.49,1532008861,748149),(42,'DASH','2018-07-19 14:01:33.773260',268.03,1532008861,26803),(43,'DASH','2018-07-19 14:01:34.387814',268.03,1532008861,26803),(44,'ETH','2018-07-19 14:01:34.558324',481.30,1532008861,48130),(45,'LTC','2018-07-19 14:01:34.651363',88.38,1532008861,8838),(46,'BTC','2018-07-19 14:01:34.772784',7481.49,1532008861,748149),(47,'DASH','2018-07-19 14:01:34.895369',268.03,1532008861,26803),(48,'ETH','2018-07-19 14:01:34.919381',481.30,1532008861,48130),(49,'LTC','2018-07-19 14:01:34.955265',88.38,1532008861,8838),(50,'LTC','2018-07-19 14:01:35.023901',88.38,1532008861,8838),(51,'BTC','2018-07-19 14:01:35.053526',7481.49,1532008861,748149),(52,'ETH','2018-07-19 14:01:35.058454',481.30,1532008861,48130),(53,'LTC','2018-07-19 14:01:35.189933',88.38,1532008861,8838),(54,'DASH','2018-07-19 14:01:35.283882',268.03,1532008861,26803),(55,'BTC','2018-07-19 14:01:35.368044',7481.49,1532008861,748149),(56,'ETH','2018-07-19 14:01:35.436462',481.30,1532008861,48130),(57,'DASH','2018-07-19 14:01:35.502695',268.03,1532008861,26803),(58,'LTC','2018-07-19 14:01:35.593432',88.38,1532008861,8838),(59,'BTC','2018-07-19 14:01:35.695144',7481.49,1532008861,748149),(60,'DASH','2018-07-19 14:01:35.822397',268.03,1532008861,26803),(61,'ETH','2018-07-19 14:06:25.188398',477.93,1532009161,47793),(62,'LTC','2018-07-19 14:06:25.382669',87.64,1532009161,8764),(63,'BTC','2018-07-19 14:06:25.743613',7456.80,1532009161,745680),(64,'DASH','2018-07-19 14:06:26.022200',266.83,1532009161,26683),(65,'ETH','2018-07-19 14:11:24.848275',476.64,1532009401,47664),(66,'LTC','2018-07-19 14:11:24.972784',87.33,1532009401,8733),(67,'BTC','2018-07-19 14:11:25.229543',7445.30,1532009462,744530),(68,'DASH','2018-07-19 14:11:25.392451',266.88,1532009462,26688),(69,'ETH','2018-07-19 14:16:25.016731',475.88,1532009761,47588),(70,'LTC','2018-07-19 14:16:25.166416',87.43,1532009761,8743),(71,'BTC','2018-07-19 14:16:25.363481',7451.54,1532009761,745154),(72,'DASH','2018-07-19 14:16:25.556396',266.91,1532009761,26691),(73,'ETH','2018-07-19 14:21:25.025488',474.72,1532010001,47472),(74,'ETH','2018-07-19 14:26:25.229371',473.40,1532010361,47340),(75,'LTC','2018-07-19 14:26:25.388144',87.12,1532010361,8712),(76,'BTC','2018-07-19 14:26:25.595105',7447.12,1532010361,744712),(77,'DASH','2018-07-19 14:26:25.794419',266.92,1532010361,26692),(78,'ETH','2018-07-19 14:31:25.340419',473.39,1532010661,47339),(79,'LTC','2018-07-19 14:31:25.473085',87.06,1532010661,8706),(80,'BTC','2018-07-19 14:31:25.678083',7446.69,1532010661,744669),(81,'DASH','2018-07-19 14:31:25.852744',266.93,1532010661,26693),(82,'ETH','2018-07-19 14:36:25.287115',474.59,1532010962,47459),(83,'LTC','2018-07-19 14:36:25.460166',87.18,1532010962,8718),(84,'BTC','2018-07-19 14:36:25.640118',7461.49,1532010962,746149),(85,'DASH','2018-07-19 14:36:25.800382',267.42,1532010962,26742),(86,'ETH','2018-07-19 14:41:25.659218',475.06,1532011261,47506),(87,'LTC','2018-07-19 14:41:25.833016',87.24,1532011261,8724),(88,'BTC','2018-07-19 14:41:25.977591',7456.60,1532011261,745660),(89,'DASH','2018-07-19 14:41:26.152795',267.94,1532011261,26794),(90,'ETH','2018-07-19 14:46:25.140812',475.12,1532011561,47512),(91,'BTC','2018-07-19 14:46:25.521171',7459.98,1532011561,745998),(92,'ETH','2018-07-19 14:51:25.232360',475.91,1532011861,47591),(93,'LTC','2018-07-19 14:51:25.454293',87.39,1532011861,8739),(94,'BTC','2018-07-19 14:51:25.565850',7480.95,1532011801,748095),(95,'DASH','2018-07-19 14:51:25.722636',268.84,1532011861,26884),(96,'ETH','2018-07-19 14:56:25.131942',475.53,1532012102,47553),(97,'LTC','2018-07-19 14:56:25.252347',87.18,1532012102,8718),(98,'BTC','2018-07-19 14:56:25.586156',7472.44,1532012161,747244),(99,'DASH','2018-07-19 14:56:25.906142',268.64,1532012161,26864),(100,'LTC','2018-07-19 15:01:25.376921',87.16,1532012461,8716),(101,'BTC','2018-07-19 15:01:25.746429',7460.12,1532012461,746012),(102,'DASH','2018-07-19 15:01:26.142271',267.87,1532012461,26787),(103,'ETH','2018-07-21 13:24:51.236030',460.23,1532179441,46023),(104,'LTC','2018-07-21 13:24:51.546366',83.09,1532179441,8309),(105,'BTC','2018-07-21 13:24:51.859789',7364.61,1532179441,736461),(106,'ETH','2018-07-21 13:36:06.231722',460.25,1532180161,46025),(107,'LTC','2018-07-21 13:36:06.910324',83.07,1532180161,8307),(108,'BTC','2018-07-21 13:36:07.382887',7365.25,1532180161,736525),(109,'DASH','2018-07-21 13:36:07.814529',238.99,1532180101,23899),(110,'ETH','2018-07-21 13:41:03.563661',460.42,1532180401,46042),(111,'BTC','2018-07-21 13:41:05.321863',7367.28,1532180462,736728),(112,'LTC','2018-07-21 13:46:05.435250',83.13,1532180761,8313),(113,'BTC','2018-07-21 13:46:05.809902',7367.10,1532180761,736710),(114,'ETH','2018-07-21 13:51:03.682419',460.41,1532181001,46041),(115,'BTC','2018-07-21 13:56:05.423911',7355.70,1532181361,735570),(116,'DASH','2018-07-21 13:56:05.700898',242.54,1532181361,24254),(117,'ETH','2018-07-21 14:01:04.016091',458.95,1532181601,45895),(118,'LTC','2018-07-21 14:01:04.498217',83.11,1532181661,8311),(119,'BTC','2018-07-21 14:01:05.119171',7358.01,1532181661,735801),(120,'DASH','2018-07-21 14:01:05.436171',244.17,1532181601,24417),(121,'ETH','2018-07-21 14:06:03.916134',460.48,1532181902,46048),(122,'BTC','2018-07-21 14:06:04.866816',7373.65,1532181961,737365),(123,'BTC','2018-07-21 14:16:06.066358',7375.10,1532182501,737510),(124,'BTC','2018-07-21 14:21:06.281085',7377.26,1532182862,737726);
+INSERT INTO `exchange_rates` VALUES (1,'ETH','2018-07-23 10:32:43.307076',464.70,1532341921,46470),(2,'BTC','2018-07-23 10:42:42.520943',7694.03,1532342521,769403),(3,'BTC','2018-07-23 10:47:42.313467',7699.77,1532342821,769977),(4,'ETH','2018-07-23 10:52:40.656682',463.26,1532343121,46326),(5,'BTC','2018-07-23 10:52:41.008733',7695.74,1532343121,769574),(6,'BTC','2018-07-23 11:02:42.057207',7696.69,1532343721,769669),(7,'ETH','2018-07-23 11:07:40.628141',463.33,1532344021,46333),(8,'BTC','2018-07-23 11:12:41.374226',7710.98,1532344261,771098),(9,'ETH','2018-07-23 11:22:40.594206',462.71,1532344861,46271),(10,'ETH','2018-07-23 11:27:40.646297',462.66,1532345221,46266),(11,'BTC','2018-07-23 11:27:40.945514',7699.00,1532345221,769900),(12,'ETH','2018-07-23 11:37:40.600344',461.98,1532345821,46198),(13,'ETH','2018-07-23 11:42:40.719708',461.90,1532346121,46190),(14,'BTC','2018-07-23 11:42:41.018986',7680.45,1532346121,768045);
 /*!40000 ALTER TABLE `exchange_rates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -455,7 +455,7 @@ CREATE TABLE `helpdesk_followup` (
   KEY `helpdesk_followup_user_id_5b9c07e3_fk_investors_id` (`user_id`),
   CONSTRAINT `helpdesk_followup_ticket_id_3db2d079_fk_helpdesk_ticket_id` FOREIGN KEY (`ticket_id`) REFERENCES `helpdesk_ticket` (`id`),
   CONSTRAINT `helpdesk_followup_user_id_5b9c07e3_fk_investors_id` FOREIGN KEY (`user_id`) REFERENCES `investors` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -464,7 +464,7 @@ CREATE TABLE `helpdesk_followup` (
 
 LOCK TABLES `helpdesk_followup` WRITE;
 /*!40000 ALTER TABLE `helpdesk_followup` DISABLE KEYS */;
-INSERT INTO `helpdesk_followup` VALUES (7,'2018-07-19 13:58:37.822627','Comment','Я куда-то нажал и все сломалось',1,NULL,3,2),(8,'2018-07-19 13:58:41.694558','Comment','Помогите',1,NULL,3,2),(9,'2018-07-19 13:58:59.798306','Comment','Скоро поможем ',1,NULL,3,1),(10,'2018-07-19 14:11:35.130065','Comment','тест',1,NULL,3,2),(11,'2018-07-19 14:16:58.014895','Comment','test',1,NULL,4,2);
+INSERT INTO `helpdesk_followup` VALUES (1,'2018-07-23 10:46:57.828205','KYC link','http://localhost:8000/admin/user_office/kyc/1/change/',0,NULL,1,NULL),(2,'2018-07-23 10:54:41.603733','Comment','WWWW',1,NULL,1,3),(3,'2018-07-23 10:54:53.636504','Comment','123123123',1,NULL,2,3);
 /*!40000 ALTER TABLE `helpdesk_followup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -670,7 +670,7 @@ CREATE TABLE `helpdesk_queue` (
   UNIQUE KEY `helpdesk_queue_slug_3b3429c3_uniq` (`slug`),
   KEY `helpdesk_queue_default_owner_id_b0930a66_fk_investors_id` (`default_owner_id`),
   CONSTRAINT `helpdesk_queue_default_owner_id_b0930a66_fk_investors_id` FOREIGN KEY (`default_owner_id`) REFERENCES `investors` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -679,7 +679,7 @@ CREATE TABLE `helpdesk_queue` (
 
 LOCK TABLES `helpdesk_queue` WRITE;
 /*!40000 ALTER TABLE `helpdesk_queue` DISABLE KEYS */;
-INSERT INTO `helpdesk_queue` VALUES (1,'Support','support',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,5,NULL,NULL,NULL,NULL,'helpdesk.queue_access_support',NULL,NULL,NULL,NULL);
+INSERT INTO `helpdesk_queue` VALUES (1,'KYC Requests','kyc-requests',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,5,NULL,NULL,NULL,NULL,'helpdesk.queue_access_kyc-requests',NULL,NULL,NULL,NULL),(2,'Support','support',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,5,NULL,NULL,NULL,NULL,'helpdesk.queue_access_support',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `helpdesk_queue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -741,7 +741,7 @@ CREATE TABLE `helpdesk_ticket` (
   CONSTRAINT `helpdesk_ticket_assigned_to_id_0716992e_fk_investors_id` FOREIGN KEY (`assigned_to_id`) REFERENCES `investors` (`id`),
   CONSTRAINT `helpdesk_ticket_queue_id_9b210169_fk_helpdesk_queue_id` FOREIGN KEY (`queue_id`) REFERENCES `helpdesk_queue` (`id`),
   CONSTRAINT `helpdesk_ticket_reporter_id_2151af00_fk_investors_id` FOREIGN KEY (`reporter_id`) REFERENCES `investors` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -750,7 +750,7 @@ CREATE TABLE `helpdesk_ticket` (
 
 LOCK TABLES `helpdesk_ticket` WRITE;
 /*!40000 ALTER TABLE `helpdesk_ticket` DISABLE KEYS */;
-INSERT INTO `helpdesk_ticket` VALUES (3,'Не получается купить токены','2018-07-19 13:58:37.815431','2018-07-19 14:11:35.130104',NULL,1,0,NULL,NULL,3,NULL,NULL,NULL,1,2),(4,'New','2018-07-19 14:16:58.012479','2018-07-19 14:16:58.014962',NULL,1,0,NULL,NULL,3,NULL,NULL,NULL,1,2);
+INSERT INTO `helpdesk_ticket` VALUES (1,'KYC request for user gordon@ongrid.pro','2018-07-23 10:46:57.752712','2018-07-23 10:54:41.603788',NULL,1,0,NULL,NULL,3,NULL,NULL,NULL,1,3),(2,'Hello','2018-07-23 10:54:53.635131','2018-07-23 10:54:53.636555',NULL,1,0,NULL,NULL,3,NULL,NULL,NULL,2,3);
 /*!40000 ALTER TABLE `helpdesk_ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -884,7 +884,7 @@ CREATE TABLE `helpdesk_usersettings` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`),
   CONSTRAINT `helpdesk_usersettings_user_id_58123c87_fk_investors_id` FOREIGN KEY (`user_id`) REFERENCES `investors` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -893,7 +893,7 @@ CREATE TABLE `helpdesk_usersettings` (
 
 LOCK TABLES `helpdesk_usersettings` WRITE;
 /*!40000 ALTER TABLE `helpdesk_usersettings` DISABLE KEYS */;
-INSERT INTO `helpdesk_usersettings` VALUES (1,'gAN9cQAoWBYAAAB1c2VfZW1haWxfYXNfc3VibWl0dGVycQGIWBYAAABlbWFpbF9vbl90aWNrZXRfYXNzaWducQKIWBYAAABlbWFpbF9vbl90aWNrZXRfY2hhbmdlcQOIWBUAAABsb2dpbl92aWV3X3RpY2tldGxpc3RxBIhYEAAAAHRpY2tldHNfcGVyX3BhZ2VxBUsZdS4=',1),(2,'gAN9cQAoWBYAAAB1c2VfZW1haWxfYXNfc3VibWl0dGVycQGIWBYAAABlbWFpbF9vbl90aWNrZXRfYXNzaWducQKIWBYAAABlbWFpbF9vbl90aWNrZXRfY2hhbmdlcQOIWBUAAABsb2dpbl92aWV3X3RpY2tldGxpc3RxBIhYEAAAAHRpY2tldHNfcGVyX3BhZ2VxBUsZdS4=',2);
+INSERT INTO `helpdesk_usersettings` VALUES (1,'gAN9cQAoWBYAAAB1c2VfZW1haWxfYXNfc3VibWl0dGVycQGIWBYAAABlbWFpbF9vbl90aWNrZXRfYXNzaWducQKIWBYAAABlbWFpbF9vbl90aWNrZXRfY2hhbmdlcQOIWBUAAABsb2dpbl92aWV3X3RpY2tldGxpc3RxBIhYEAAAAHRpY2tldHNfcGVyX3BhZ2VxBUsZdS4=',1),(3,'gAN9cQAoWBYAAAB1c2VfZW1haWxfYXNfc3VibWl0dGVycQGIWBYAAABlbWFpbF9vbl90aWNrZXRfYXNzaWducQKIWBYAAABlbWFpbF9vbl90aWNrZXRfY2hhbmdlcQOIWBUAAABsb2dpbl92aWV3X3RpY2tldGxpc3RxBIhYEAAAAHRpY2tldHNfcGVyX3BhZ2VxBUsZdS4=',3),(4,'gAN9cQAoWBYAAAB1c2VfZW1haWxfYXNfc3VibWl0dGVycQGIWBYAAABlbWFpbF9vbl90aWNrZXRfYXNzaWducQKIWBYAAABlbWFpbF9vbl90aWNrZXRfY2hhbmdlcQOIWBUAAABsb2dpbl92aWV3X3RpY2tldGxpc3RxBIhYEAAAAHRpY2tldHNfcGVyX3BhZ2VxBUsZdS4=',4),(5,'gAN9cQAoWBYAAAB1c2VfZW1haWxfYXNfc3VibWl0dGVycQGIWBYAAABlbWFpbF9vbl90aWNrZXRfYXNzaWducQKIWBYAAABlbWFpbF9vbl90aWNrZXRfY2hhbmdlcQOIWBUAAABsb2dpbl92aWV3X3RpY2tldGxpc3RxBIhYEAAAAHRpY2tldHNfcGVyX3BhZ2VxBUsZdS4=',5);
 /*!40000 ALTER TABLE `helpdesk_usersettings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -909,7 +909,7 @@ CREATE TABLE `ico_info` (
   `created_at` datetime(6) NOT NULL,
   `total_supply` decimal(65,0) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -918,7 +918,7 @@ CREATE TABLE `ico_info` (
 
 LOCK TABLES `ico_info` WRITE;
 /*!40000 ALTER TABLE `ico_info` DISABLE KEYS */;
-INSERT INTO `ico_info` VALUES (1,'2018-07-17 12:43:59.798133',2737334),(2,'2018-07-19 09:06:11.618784',2737334),(3,'2018-07-19 09:11:10.948030',2737334),(4,'2018-07-19 09:16:10.986330',2737334),(5,'2018-07-19 14:01:31.683554',2737334),(6,'2018-07-19 14:01:31.961634',2737334),(7,'2018-07-19 14:01:32.623598',2737334),(8,'2018-07-19 14:01:33.076180',2737334),(9,'2018-07-19 14:01:33.352225',2737334),(10,'2018-07-19 14:01:33.912354',2737334),(11,'2018-07-19 14:01:34.219210',2737334),(12,'2018-07-19 14:01:34.726849',2737334),(13,'2018-07-19 14:01:35.022820',2737334),(14,'2018-07-19 14:01:35.414667',2737334),(15,'2018-07-19 14:06:24.698727',2737334),(16,'2018-07-19 14:11:24.851489',2737334),(17,'2018-07-19 14:16:25.037413',2737334),(18,'2018-07-19 14:21:25.046642',2737334),(19,'2018-07-19 14:26:25.011454',2737334),(20,'2018-07-19 14:31:24.973552',2737334),(21,'2018-07-19 14:36:25.204321',2737334),(22,'2018-07-19 14:41:25.605619',2737334),(23,'2018-07-19 14:46:25.114644',2737334),(24,'2018-07-19 14:51:25.162737',2737334),(25,'2018-07-19 14:56:25.111956',2737334),(26,'2018-07-19 15:01:25.112720',2737334),(27,'2018-07-21 13:36:06.283376',15700000000000000000000000),(28,'2018-07-21 13:41:03.696609',15700000000000000000000000),(29,'2018-07-21 13:46:03.937041',15700000000000000000000000),(30,'2018-07-21 13:51:03.816490',15700000000000000000000000),(31,'2018-07-21 13:56:04.043380',15700000000000000000000000),(32,'2018-07-21 14:01:04.070022',15700000000000000000000000),(33,'2018-07-21 14:06:04.064130',15700000000000000000000000),(34,'2018-07-21 14:11:04.508629',15700000000000000000000000),(35,'2018-07-21 14:16:04.150729',2771280),(36,'2018-07-21 14:21:04.188500',2771280);
+INSERT INTO `ico_info` VALUES (1,'2018-07-23 10:36:12.335009',4572612),(2,'2018-07-23 10:37:40.614938',4572612),(3,'2018-07-23 10:42:40.690414',4572612),(4,'2018-07-23 10:47:40.838246',4572612),(5,'2018-07-23 10:52:40.771224',4572612),(6,'2018-07-23 10:57:40.705162',4572612),(7,'2018-07-23 11:02:40.786993',4572612),(8,'2018-07-23 11:07:40.759232',5403996),(9,'2018-07-23 11:12:40.706304',5403996),(10,'2018-07-23 11:17:40.685003',6235380),(11,'2018-07-23 11:22:40.753402',6235380),(12,'2018-07-23 11:27:40.783655',6235380),(13,'2018-07-23 11:32:40.736494',6235380),(14,'2018-07-23 11:37:40.744995',6235380),(15,'2018-07-23 11:42:40.855683',7898148);
 /*!40000 ALTER TABLE `ico_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -950,7 +950,7 @@ CREATE TABLE `investors` (
   UNIQUE KEY `eth_account` (`eth_account`),
   KEY `investors_referrer_id_fe866d5b_fk_investors_id` (`referrer_id`),
   CONSTRAINT `investors_referrer_id_fe866d5b_fk_investors_id` FOREIGN KEY (`referrer_id`) REFERENCES `investors` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -959,7 +959,7 @@ CREATE TABLE `investors` (
 
 LOCK TABLES `investors` WRITE;
 /*!40000 ALTER TABLE `investors` DISABLE KEYS */;
-INSERT INTO `investors` VALUES ('pbkdf2_sha256$100000$v7agkQFbwBhA$ZNdAEdw4Gzx9Wh8A0EQqLsmSAM5jZnbIgxScfaWG3RI=','2018-07-21 18:59:02.794990',1,'admin@ongrid.pro','','','',-5694457440000000000000000,'2018-07-17 12:32:31.340503','EgPh9kheSFWoowsz',1,1,1,NULL),('pbkdf2_sha256$100000$jz2pej1vcec8$g3Gpiv6GlDmoGWPnnSnocHydJjTtRjOn0k+HSu3CKTU=','2018-07-21 19:02:41.418049',2,'gordon@ongrid.pro','','','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',5000000000000000000000,'2018-07-17 12:36:23.701588','Fgs5NOgjYoUfezij',1,0,0,NULL);
+INSERT INTO `investors` VALUES ('pbkdf2_sha256$100000$W0GFXr3T3ET6$wvS7dHvyzwvV7aGPhgz1n+J1/Xd3h+9tX/Epcaw3xd8=','2018-07-23 14:54:05.725673',1,'admin@ongrid.pro','','',NULL,0,'2018-07-23 10:06:02.589508','grTSwLtu31kLmDGD',1,1,1,NULL),('pbkdf2_sha256$100000$w022viZLeeq2$lYHifhiYUMy5lDp0bRPumg4okeA0HhX+UDfALZZvOQo=','2018-07-23 14:33:26.863854',3,'gordon@ongrid.pro','','','0xB0a3f48478d84a497f930d8455711d9981B66a70',19953216000000000000000,'2018-07-23 10:21:00.000000','YPZcg376mSkNJ7IX',1,0,0,NULL),('pbkdf2_sha256$100000$P7IxD5FFfj2H$gMmNdlBS0Y00Qjd1Ga5ZAV676BgapPUJDDyCuMAtKng=','2018-07-23 14:30:57.399823',4,'rnesytov@gmail.com','','',NULL,0,'2018-07-23 11:30:57.192958','MGi9ld0r5yN8TGKk',1,0,0,NULL),('pbkdf2_sha256$100000$KDfogQ3AUpK5$yiDoCo57xJbQDZX8ZnYTVdCms/DCBER0qecQFMeW0rs=',NULL,5,'r.nesytov@ongrid.pro','','',NULL,0,'2018-07-23 11:55:58.605145','nkQWkECJKRVe4DO0',1,0,0,NULL);
 /*!40000 ALTER TABLE `investors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1017,81 +1017,8 @@ CREATE TABLE `kyc` (
 
 LOCK TABLES `kyc` WRITE;
 /*!40000 ALTER TABLE `kyc` DISABLE KEYS */;
-INSERT INTO `kyc` VALUES (1,'APPROVED','Roman','2018-07-21',NULL,'325a8d4cbd9f4549ba2f9c7dda030d0e',2,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,'kyc/2/bill_photo/download.jpeg',NULL,NULL,NULL,NULL,NULL,'kyc/2/doc_photo/download.jpeg',NULL,'Nesytov',NULL,NULL,'Moscow',NULL,NULL,NULL,NULL,'NATURAL');
+INSERT INTO `kyc` VALUES (1,'APPROVED','Roman','2018-04-02',NULL,'d06f15e44c36407a86ea3e4f2098d1d7',3,1,NULL,'',NULL,NULL,NULL,NULL,NULL,'kyc/3/bill_photo/scrt.txt',NULL,NULL,NULL,'rnesytov@gmail.com',NULL,'kyc/3/doc_photo/Screenshot_2018-03-05_14.36.56.png',1,'Nesytov','12313123','999 978 00 36','Moscow','12312312','Medicine',NULL,NULL,'NATURAL');
 /*!40000 ALTER TABLE `kyc` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `page_page`
---
-
-DROP TABLE IF EXISTS `page_page`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `page_page` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `active` tinyint(1) NOT NULL,
-  `title` varchar(200) COLLATE utf8_bin NOT NULL,
-  `slug` varchar(150) COLLATE utf8_bin NOT NULL,
-  `in_navigation` tinyint(1) NOT NULL,
-  `override_url` varchar(255) COLLATE utf8_bin NOT NULL,
-  `redirect_to` varchar(255) COLLATE utf8_bin NOT NULL,
-  `_cached_url` varchar(255) COLLATE utf8_bin NOT NULL,
-  `lft` int(10) unsigned NOT NULL,
-  `rght` int(10) unsigned NOT NULL,
-  `tree_id` int(10) unsigned NOT NULL,
-  `level` int(10) unsigned NOT NULL,
-  `template_key` varchar(255) COLLATE utf8_bin NOT NULL,
-  `parent_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `page_page_parent_id_3d617840_fk_page_page_id` (`parent_id`),
-  KEY `page_page_slug_d6b7c8ed` (`slug`),
-  KEY `page_page__cached_url_8366e9ae` (`_cached_url`),
-  KEY `page_page_lft_4c487c13` (`lft`),
-  KEY `page_page_rght_bcda0183` (`rght`),
-  KEY `page_page_tree_id_8d7cea49` (`tree_id`),
-  KEY `page_page_level_cb2285c4` (`level`),
-  CONSTRAINT `page_page_parent_id_3d617840_fk_page_page_id` FOREIGN KEY (`parent_id`) REFERENCES `page_page` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `page_page`
---
-
-LOCK TABLES `page_page` WRITE;
-/*!40000 ALTER TABLE `page_page` DISABLE KEYS */;
-/*!40000 ALTER TABLE `page_page` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `page_page_newspagecontent`
---
-
-DROP TABLE IF EXISTS `page_page_newspagecontent`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `page_page_newspagecontent` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) COLLATE utf8_bin NOT NULL,
-  `text` longtext COLLATE utf8_bin NOT NULL,
-  `picture` varchar(100) COLLATE utf8_bin NOT NULL,
-  `region` varchar(255) COLLATE utf8_bin NOT NULL,
-  `ordering` int(11) NOT NULL,
-  `parent_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `page_page_newspagecontent_parent_id_0e0f3fc6_fk_page_page_id` (`parent_id`),
-  CONSTRAINT `page_page_newspagecontent_parent_id_0e0f3fc6_fk_page_page_id` FOREIGN KEY (`parent_id`) REFERENCES `page_page` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `page_page_newspagecontent`
---
-
-LOCK TABLES `page_page_newspagecontent` WRITE;
-/*!40000 ALTER TABLE `page_page_newspagecontent` DISABLE KEYS */;
-/*!40000 ALTER TABLE `page_page_newspagecontent` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1118,7 +1045,7 @@ CREATE TABLE `payments` (
   PRIMARY KEY (`id`),
   KEY `payments_tokens_move_id_8d316d9f_fk_tokens_moves_id` (`tokens_move_id`),
   CONSTRAINT `payments_tokens_move_id_8d316d9f_fk_tokens_moves_id` FOREIGN KEY (`tokens_move_id`) REFERENCES `tokens_moves` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1127,7 +1054,7 @@ CREATE TABLE `payments` (
 
 LOCK TABLES `payments` WRITE;
 /*!40000 ALTER TABLE `payments` DISABLE KEYS */;
-INSERT INTO `payments` VALUES (1,'ETH','0x73015966604928A312F79F7E69291a656Cb88602',20.000000000000000000,20000000000000000000,NULL,'0x3787895064b624c5c46051b02cc45c7a8d328d75f57d1857456c3092beccf428','2018-07-21 13:36:07.188334',923760,273,1,20,46188),(2,'ETH','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',20.000000000000000000,20000000000000000000,NULL,'0x61f493131fa987986923e647aeb070337246bf91b13cf4b606a99618641bea70','2018-07-21 14:01:06.598316',923760,275,1,20,46188);
+INSERT INTO `payments` VALUES (1,'ETH','0x73015966604928A312F79F7E69291a656Cb88602',20.000000000000000000,20000000000000000000,NULL,'0x3787895064b624c5c46051b02cc45c7a8d328d75f57d1857456c3092beccf428','2018-07-23 10:34:59.852777',923760,1,1,20,46188),(2,'ETH','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',20.000000000000000000,20000000000000000000,NULL,'0x61f493131fa987986923e647aeb070337246bf91b13cf4b606a99618641bea70','2018-07-23 10:34:59.940919',923760,7,1,20,46188),(3,'ETH','0x73015966604928A312F79F7E69291a656Cb88602',20.000000000000000000,20000000000000000000,NULL,'0x9466929f8a9a2fdf8a8345c8ea836e58dda30aaf120dc8dc70d978039a07ab0e','2018-07-23 10:34:59.948082',923760,5,1,20,46188),(4,'ETH','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',21.000000000000000000,21000000000000000000,NULL,'0xc67585ca3b2ae70847bc24ebcb2811f60129c28518df4582f5383729b5a53a0b','2018-07-23 10:35:00.393998',969948,11,1,20,46188),(5,'ETH','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',18.000000000000000000,18000000000000000000,NULL,'0x1bac67e6349bb5359a216d9f2ca008ebaee341c010a62231912dc1376489a238','2018-07-23 10:35:00.495067',831384,13,1,20,46188),(6,'ETH','0xB0a3f48478d84a497f930d8455711d9981B66a70',18.000000000000000000,18000000000000000000,NULL,'0x3687e46e7e05bedf2c99d9ee686edd14d5c1543c7844447d4f119fdb9910481d','2018-07-23 11:11:28.793507',831384,15,1,20,46188),(7,'ETH','0xB0a3f48478d84a497f930d8455711d9981B66a70',18.000000000000000000,18000000000000000000,NULL,'0x973fb05205f71cc42896447ce85f01c37defe7e87abb0782d2fe5d86897fdfff','2018-07-23 11:20:20.869718',831384,17,1,20,46188),(8,'ETH','0xB0a3f48478d84a497f930d8455711d9981B66a70',18.000000000000000000,18000000000000000000,NULL,'0xb159c70b91a60eceeaf83d7829a7a67de6f1f3b7e6ff0136ef649364b67dbe77','2018-07-23 11:39:43.880531',831384,19,1,20,46188),(9,'ETH','0xB0a3f48478d84a497f930d8455711d9981B66a70',18.000000000000000000,18000000000000000000,NULL,'0x2d21d227dacff381ee297bff889e0f5bd1a4ef83b640265ea5e445edf1f3daef','2018-07-23 11:41:14.027103',831384,21,1,20,46188);
 /*!40000 ALTER TABLE `payments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1146,7 +1073,7 @@ CREATE TABLE `phases` (
   `bonus_percents` int(11) NOT NULL,
   `hard_cap` decimal(65,0) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1155,7 +1082,6 @@ CREATE TABLE `phases` (
 
 LOCK TABLES `phases` WRITE;
 /*!40000 ALTER TABLE `phases` DISABLE KEYS */;
-INSERT INTO `phases` VALUES (1,'First phase','2018-07-17 15:32:52.000000','2018-09-30 15:32:57.000000',10,10);
 /*!40000 ALTER TABLE `phases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1174,7 +1100,7 @@ CREATE TABLE `po_update_log` (
   `txn_id` char(32) COLLATE utf8_bin NOT NULL,
   `new_rate` decimal(65,0) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1232,7 +1158,7 @@ CREATE TABLE `social_auth_code` (
   UNIQUE KEY `social_auth_code_email_code_801b2d02_uniq` (`email`,`code`),
   KEY `social_auth_code_code_a2393167` (`code`),
   KEY `social_auth_code_timestamp_176b341f` (`timestamp`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1241,7 +1167,7 @@ CREATE TABLE `social_auth_code` (
 
 LOCK TABLES `social_auth_code` WRITE;
 /*!40000 ALTER TABLE `social_auth_code` DISABLE KEYS */;
-INSERT INTO `social_auth_code` VALUES (1,'gordon@ongrid.pro','80d6be63b6874444ae2831ee89b9481e',0,'2018-07-17 15:35:22.126115'),(2,'gordon@ongrid.pro','2b98816042f44427b115989a1879510b',1,'2018-07-17 15:36:15.612926');
+INSERT INTO `social_auth_code` VALUES (1,'rnesytov@gmail.com','7adc2f8ffd3a4a6cb41c24067d086e55',0,'2018-07-23 14:24:40.915336'),(2,'rnesytov@gmail.com','46847c3870f94b7fa70217d3e8380683',0,'2018-07-23 14:25:18.980292'),(3,'rnesytov@gmail.com','f9ea92192bee47cdb57303c2d37f548c',0,'2018-07-23 14:29:08.835627'),(4,'rnesytov@gmail.com','55a2579a06814f17aa8e082e93ce0987',1,'2018-07-23 14:30:26.393548');
 /*!40000 ALTER TABLE `social_auth_code` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1288,7 +1214,7 @@ CREATE TABLE `social_auth_partial` (
   PRIMARY KEY (`id`),
   KEY `social_auth_partial_token_3017fea3` (`token`),
   KEY `social_auth_partial_timestamp_50f2119f` (`timestamp`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1297,7 +1223,7 @@ CREATE TABLE `social_auth_partial` (
 
 LOCK TABLES `social_auth_partial` WRITE;
 /*!40000 ALTER TABLE `social_auth_partial` DISABLE KEYS */;
-INSERT INTO `social_auth_partial` VALUES (1,'d79402f3da0e47718f29d829eca35a54',4,'email','{\"args\": [], \"kwargs\": {\"password\": \"q123q123q123\", \"response\": {\"email\": [\"gordon@ongrid.pro\"], \"password1\": [\"q123q123q123\"], \"password2\": [\"q123q123q123\"], \"g-recaptcha-response\": [\"03AEMEkEnVhzz58c_4LlvW3SSUb6t_QShz4C5525Oh_XPN8Xv1LPmLjQzdfEc8rgd44D5G1R4glq-6hB9VKbp1OPbzl1xGFK7VtzDLpGEsSIEToUwvLXOTlNEIbQbi2qw9XNuRwK9CYqBUx1gokmFQT117jWZEwnnFCR56sCOmWIw__KrR0Z2yRtaic1nLiTSoSSODqD4q0l3Yu-Ln5wMPNJsEp4aAhRHrXv-5EkSFRiWfslMGEXcJMjUEQO-zCc8UY4fX0qZiUtyl8RN2Sk1H_U0U3bSYU1u__OWSysTBPU5iCGMw-tax1DjLhsG40RyNApTaBACHXyLB9lOsrmsPEEi80amOFo-Sf7MaJGjPHYr915a1ieFZaNawMg9tZODlJJSBLanxIvIGWLRJ7InKpytp4kuUzMlJoFNxhii2WPozN8Ave-i2cUlJp4TLtaXmcHVNeM8PBZ3f\"], \"csrfmiddlewaretoken\": [\"KewtZCQ2GNv40tBMEcONAQlPulQ9cLCgbS6vHE4G6Cs33ZNuq8sGfzpUvUv0tj5o\"]}, \"is_new\": true, \"details\": {\"username\": \"gordon\", \"email\": \"gordon@ongrid.pro\", \"fullname\": \"\", \"first_name\": \"\", \"last_name\": \"\"}, \"uid\": \"gordon@ongrid.pro\", \"new_association\": true, \"username\": null, \"user\": null, \"social\": null}}','2018-07-17 15:35:22.365590'),(2,'3f806c7089614e60bb00df9df6948be1',4,'email','{\"args\": [], \"kwargs\": {\"password\": \"q123q123q123\", \"response\": {\"email\": [\"gordon@ongrid.pro\"], \"password1\": [\"q123q123q123\"], \"password2\": [\"q123q123q123\"], \"g-recaptcha-response\": [\"03AEMEkEnVhzz58c_4LlvW3SSUb6t_QShz4C5525Oh_XPN8Xv1LPmLjQzdfEc8rgd44D5G1R4glq-6hB9VKbp1OPbzl1xGFK7VtzDLpGEsSIEToUwvLXOTlNEIbQbi2qw9XNuRwK9CYqBUx1gokmFQT117jWZEwnnFCR56sCOmWIw__KrR0Z2yRtaic1nLiTSoSSODqD4q0l3Yu-Ln5wMPNJsEp4aAhRHrXv-5EkSFRiWfslMGEXcJMjUEQO-zCc8UY4fX0qZiUtyl8RN2Sk1H_U0U3bSYU1u__OWSysTBPU5iCGMw-tax1DjLhsG40RyNApTaBACHXyLB9lOsrmsPEEi80amOFo-Sf7MaJGjPHYr915a1ieFZaNawMg9tZODlJJSBLanxIvIGWLRJ7InKpytp4kuUzMlJoFNxhii2WPozN8Ave-i2cUlJp4TLtaXmcHVNeM8PBZ3f\"], \"csrfmiddlewaretoken\": [\"KewtZCQ2GNv40tBMEcONAQlPulQ9cLCgbS6vHE4G6Cs33ZNuq8sGfzpUvUv0tj5o\"]}, \"is_new\": true, \"details\": {\"username\": \"gordon\", \"email\": \"gordon@ongrid.pro\", \"fullname\": \"\", \"first_name\": \"\", \"last_name\": \"\"}, \"uid\": \"gordon@ongrid.pro\", \"new_association\": true, \"username\": null, \"user\": null, \"social\": null}}','2018-07-17 15:36:15.631986');
+INSERT INTO `social_auth_partial` VALUES (1,'74afdd327f5841ea952aa5bcf9a23e31',4,'email','{\"args\": [], \"kwargs\": {\"password\": \"q123q123q123\", \"response\": {\"csrfmiddlewaretoken\": [\"EAhxS8gTvAmHYKpOMaPKZ2cR21oTw44gACp9aXzSrT2dZUKnKoGQXmPNvZaTVmCX\"], \"email\": [\"rnesytov@gmail.com\"], \"password1\": [\"q123q123q123\"], \"password2\": [\"q123q123q123\"], \"checkbox\": [\"on\"], \"g-recaptcha-response\": [\"03AEMEkEm_yi3CRtlNtu_3SZcj1ikgK370j7iLA_Bxs8tiJGIdXDG7COjLhJwP60rzxcD6cZ31HVvIUgWiNpBtJH7FvT2YK9hmyAd2lm8nniNRx9sKehtUp6DjhEQpgMHbSM19FAoTCiTTrjT3FU0rH8dQpG4eybX553vZ5hgQDEvBIlPzSWdTlVjo2dBJzAiJptLvWVy2AtEpThzGrZssodctaT4ptKKG5XDUCydJruGPx9G-kOOGEWijqUc3roHBI0L5fak3TAh9n90jHAqTZWIQv2JKfSsyfg\"]}, \"is_new\": true, \"details\": {\"username\": \"rnesytov\", \"email\": \"rnesytov@gmail.com\", \"fullname\": \"\", \"first_name\": \"\", \"last_name\": \"\"}, \"uid\": \"rnesytov@gmail.com\", \"new_association\": true, \"username\": null, \"user\": null, \"social\": null}}','2018-07-23 14:24:41.223158'),(2,'91d094e292b54bfba7cb3f39443494bd',4,'email','{\"args\": [], \"kwargs\": {\"password\": \"q123q123q123\", \"response\": {\"csrfmiddlewaretoken\": [\"EAhxS8gTvAmHYKpOMaPKZ2cR21oTw44gACp9aXzSrT2dZUKnKoGQXmPNvZaTVmCX\"], \"email\": [\"rnesytov@gmail.com\"], \"password1\": [\"q123q123q123\"], \"password2\": [\"q123q123q123\"], \"checkbox\": [\"on\"], \"g-recaptcha-response\": [\"03AEMEkEm_yi3CRtlNtu_3SZcj1ikgK370j7iLA_Bxs8tiJGIdXDG7COjLhJwP60rzxcD6cZ31HVvIUgWiNpBtJH7FvT2YK9hmyAd2lm8nniNRx9sKehtUp6DjhEQpgMHbSM19FAoTCiTTrjT3FU0rH8dQpG4eybX553vZ5hgQDEvBIlPzSWdTlVjo2dBJzAiJptLvWVy2AtEpThzGrZssodctaT4ptKKG5XDUCydJruGPx9G-kOOGEWijqUc3roHBI0L5fak3TAh9n90jHAqTZWIQv2JKfSsyfg\"]}, \"is_new\": true, \"details\": {\"username\": \"rnesytov\", \"email\": \"rnesytov@gmail.com\", \"fullname\": \"\", \"first_name\": \"\", \"last_name\": \"\"}, \"uid\": \"rnesytov@gmail.com\", \"new_association\": true, \"username\": null, \"user\": null, \"social\": null}}','2018-07-23 14:25:19.637026'),(3,'5bbed87f03ce4367802215e64daff18a',4,'email','{\"args\": [], \"kwargs\": {\"password\": \"q123q123q123\", \"response\": {\"csrfmiddlewaretoken\": [\"EAhxS8gTvAmHYKpOMaPKZ2cR21oTw44gACp9aXzSrT2dZUKnKoGQXmPNvZaTVmCX\"], \"email\": [\"rnesytov@gmail.com\"], \"password1\": [\"q123q123q123\"], \"password2\": [\"q123q123q123\"], \"checkbox\": [\"on\"], \"g-recaptcha-response\": [\"03AEMEkEm_yi3CRtlNtu_3SZcj1ikgK370j7iLA_Bxs8tiJGIdXDG7COjLhJwP60rzxcD6cZ31HVvIUgWiNpBtJH7FvT2YK9hmyAd2lm8nniNRx9sKehtUp6DjhEQpgMHbSM19FAoTCiTTrjT3FU0rH8dQpG4eybX553vZ5hgQDEvBIlPzSWdTlVjo2dBJzAiJptLvWVy2AtEpThzGrZssodctaT4ptKKG5XDUCydJruGPx9G-kOOGEWijqUc3roHBI0L5fak3TAh9n90jHAqTZWIQv2JKfSsyfg\"]}, \"is_new\": true, \"details\": {\"username\": \"rnesytov\", \"email\": \"rnesytov@gmail.com\", \"fullname\": \"\", \"first_name\": \"\", \"last_name\": \"\"}, \"uid\": \"rnesytov@gmail.com\", \"new_association\": true, \"username\": null, \"user\": null, \"social\": null}}','2018-07-23 14:29:09.538208'),(4,'96c75fcaed4742d8ba1338d63c3e4ab8',4,'email','{\"args\": [], \"kwargs\": {\"password\": \"q123q123q123\", \"response\": {\"csrfmiddlewaretoken\": [\"EAhxS8gTvAmHYKpOMaPKZ2cR21oTw44gACp9aXzSrT2dZUKnKoGQXmPNvZaTVmCX\"], \"email\": [\"rnesytov@gmail.com\"], \"password1\": [\"q123q123q123\"], \"password2\": [\"q123q123q123\"], \"checkbox\": [\"on\"], \"g-recaptcha-response\": [\"03AEMEkEm_yi3CRtlNtu_3SZcj1ikgK370j7iLA_Bxs8tiJGIdXDG7COjLhJwP60rzxcD6cZ31HVvIUgWiNpBtJH7FvT2YK9hmyAd2lm8nniNRx9sKehtUp6DjhEQpgMHbSM19FAoTCiTTrjT3FU0rH8dQpG4eybX553vZ5hgQDEvBIlPzSWdTlVjo2dBJzAiJptLvWVy2AtEpThzGrZssodctaT4ptKKG5XDUCydJruGPx9G-kOOGEWijqUc3roHBI0L5fak3TAh9n90jHAqTZWIQv2JKfSsyfg\"]}, \"is_new\": true, \"details\": {\"username\": \"rnesytov\", \"email\": \"rnesytov@gmail.com\", \"fullname\": \"\", \"first_name\": \"\", \"last_name\": \"\"}, \"uid\": \"rnesytov@gmail.com\", \"new_association\": true, \"username\": null, \"user\": null, \"social\": null}}','2018-07-23 14:30:27.400021');
 /*!40000 ALTER TABLE `social_auth_partial` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1327,7 +1253,7 @@ CREATE TABLE `social_auth_usersocialauth` (
 
 LOCK TABLES `social_auth_usersocialauth` WRITE;
 /*!40000 ALTER TABLE `social_auth_usersocialauth` DISABLE KEYS */;
-INSERT INTO `social_auth_usersocialauth` VALUES (1,'email','gordon@ongrid.pro','{}',2);
+INSERT INTO `social_auth_usersocialauth` VALUES (1,'email','rnesytov@gmail.com','{}',4);
 /*!40000 ALTER TABLE `social_auth_usersocialauth` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1351,7 +1277,7 @@ CREATE TABLE `tokens_moves` (
   KEY `tokens_moves_investor_account_e31641e0` (`investor_account`),
   KEY `tokens_moves_transfer_id_48e7ff8b_fk_transfers_id` (`transfer_id`),
   CONSTRAINT `tokens_moves_transfer_id_48e7ff8b_fk_transfers_id` FOREIGN KEY (`transfer_id`) REFERENCES `transfers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=280 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1360,7 +1286,7 @@ CREATE TABLE `tokens_moves` (
 
 LOCK TABLES `tokens_moves` WRITE;
 /*!40000 ALTER TABLE `tokens_moves` DISABLE KEYS */;
-INSERT INTO `tokens_moves` VALUES (271,5700000000000000000000000,'2018-07-21 13:36:05.833857','2018-07-21 13:36:05.834041','ACTUAL','IN','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',136),(272,5700000000000000000000000,'2018-07-21 13:36:05.850088','2018-07-21 13:36:05.850119','ACTUAL','OUT','0x73015966604928A312F79F7E69291a656Cb88602',136),(273,5542560000000000000000,'2018-07-21 13:36:06.303511','2018-07-21 13:36:06.303619','ACTUAL','IN','0x73015966604928A312F79F7E69291a656Cb88602',137),(274,5542560000000000000000,'2018-07-21 13:36:06.372067','2018-07-21 13:36:06.372100','ACTUAL','OUT','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',137),(275,5542560000000000000000,'2018-07-21 14:01:05.956935','2018-07-21 14:01:05.957117','ACTUAL','IN','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',138),(276,5542560000000000000000,'2018-07-21 14:01:05.966341','2018-07-21 14:01:05.966385','ACTUAL','OUT','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',138),(277,542560000000000000000,'2018-07-21 14:05:36.106608','2018-07-21 14:05:36.106659','ACTUAL','IN','0x4A2CB5F3942Dbbf09BdDc6d9e354b28c7F69dc0d',139),(278,542560000000000000000,'2018-07-21 14:05:36.109257','2018-07-21 14:05:36.109298','ACTUAL','OUT','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',139),(279,NULL,'2018-07-21 16:04:41.598893',NULL,'PREPARED','IN','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',141);
+INSERT INTO `tokens_moves` VALUES (1,5542560000000000000000,'2018-07-23 10:34:59.013005','2018-07-23 10:34:59.013180','ACTUAL','IN','0x73015966604928A312F79F7E69291a656Cb88602',1),(2,5542560000000000000000,'2018-07-23 10:34:59.028140','2018-07-23 10:34:59.028178','ACTUAL','OUT','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',1),(3,5700000000000000000000000,'2018-07-23 10:34:59.037292','2018-07-23 10:34:59.037440','ACTUAL','IN','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',2),(4,5700000000000000000000000,'2018-07-23 10:34:59.043542','2018-07-23 10:34:59.043632','ACTUAL','OUT','0x73015966604928A312F79F7E69291a656Cb88602',2),(5,5542560000000000000000,'2018-07-23 10:34:59.108424','2018-07-23 10:34:59.108567','ACTUAL','IN','0x73015966604928A312F79F7E69291a656Cb88602',3),(6,5542560000000000000000,'2018-07-23 10:34:59.117831','2018-07-23 10:34:59.117882','ACTUAL','OUT','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',3),(7,5542560000000000000000,'2018-07-23 10:34:59.127580','2018-07-23 10:34:59.127767','ACTUAL','IN','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',4),(8,5542560000000000000000,'2018-07-23 10:34:59.139285','2018-07-23 10:34:59.139424','ACTUAL','OUT','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',4),(9,542560000000000000000,'2018-07-23 10:34:59.649804','2018-07-23 10:34:59.649844','ACTUAL','IN','0x4A2CB5F3942Dbbf09BdDc6d9e354b28c7F69dc0d',5),(10,542560000000000000000,'2018-07-23 10:34:59.654433','2018-07-23 10:34:59.654466','ACTUAL','OUT','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',5),(11,5819688000000000000000,'2018-07-23 10:34:59.870277','2018-07-23 10:34:59.870350','ACTUAL','IN','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',6),(12,5819688000000000000000,'2018-07-23 10:34:59.874576','2018-07-23 10:34:59.874609','ACTUAL','OUT','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',6),(13,4988304000000000000000,'2018-07-23 10:34:59.962609','2018-07-23 10:34:59.962646','ACTUAL','IN','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',7),(14,4988304000000000000000,'2018-07-23 10:34:59.965432','2018-07-23 10:34:59.965462','ACTUAL','OUT','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',7),(15,4988304000000000000000,'2018-07-23 11:04:32.885942','2018-07-23 11:11:28.167185','ACTUAL','IN','0xB0a3f48478d84a497f930d8455711d9981B66a70',8),(16,4988304000000000000000,'2018-07-23 11:11:28.184255','2018-07-23 11:11:28.184293','ACTUAL','OUT','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',8),(17,4988304000000000000000,'2018-07-23 11:16:32.375883','2018-07-23 11:20:20.201982','ACTUAL','IN','0xB0a3f48478d84a497f930d8455711d9981B66a70',9),(18,4988304000000000000000,'2018-07-23 11:20:20.218325','2018-07-23 11:20:20.218363','ACTUAL','OUT','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',9),(19,4988304000000000000000,'2018-07-23 11:39:43.328427','2018-07-23 11:39:43.328580','ACTUAL','IN','0xB0a3f48478d84a497f930d8455711d9981B66a70',10),(20,4988304000000000000000,'2018-07-23 11:39:43.339546','2018-07-23 11:39:43.339579','ACTUAL','OUT','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',10),(21,4988304000000000000000,'2018-07-23 11:40:33.402809','2018-07-23 11:41:13.515446','ACTUAL','IN','0xB0a3f48478d84a497f930d8455711d9981B66a70',11),(22,4988304000000000000000,'2018-07-23 11:41:13.521915','2018-07-23 11:41:13.521954','ACTUAL','OUT','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',11);
 /*!40000 ALTER TABLE `tokens_moves` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1388,7 +1314,7 @@ CREATE TABLE `transactions` (
   `txn_id` char(32) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `txn_hash` (`txn_hash`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1397,7 +1323,7 @@ CREATE TABLE `transactions` (
 
 LOCK TABLES `transactions` WRITE;
 /*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
-INSERT INTO `transactions` VALUES (5,'0x7dabb4d6000000000000000000000000b63e4ecf7cece510a94a7231bafb70cdca18b91e',282,0,'0x73015966604928A312F79F7E69291a656Cb88602','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',50000,12000000000,'0xaf63b612b905c6fe67ac1bc46e60ad2e4953ec011f18250bc67359e557aa7aeb',2674035,'MINED',NULL,'2018-07-21 13:43:04.886411','325a8d4cbd9f4549ba2f9c7dda030d0e');
+INSERT INTO `transactions` VALUES (1,'0x7dabb4d6000000000000000000000000b0a3f48478d84a497f930d8455711d9981b66a70',285,0,'0x73015966604928A312F79F7E69291a656Cb88602','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',50000,1000000000,'0x409a3097e5adad69284c7d2cfcac49330369526a3608bf6aa1925d12e4e8bef6',2684853,'MINED',NULL,'2018-07-23 10:47:23.369533','d06f15e44c36407a86ea3e4f2098d1d7');
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1422,7 +1348,7 @@ CREATE TABLE `transfers` (
   `state` varchar(10) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `txn_hash` (`txn_hash`)
-) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1431,7 +1357,7 @@ CREATE TABLE `transfers` (
 
 LOCK TABLES `transfers` WRITE;
 /*!40000 ALTER TABLE `transfers` DISABLE KEYS */;
-INSERT INTO `transfers` VALUES (136,'0xfe63808b5ae451e707596f892e2784ec2e83d073954142d94eebfb636af4d7b0',NULL,'0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD','0x73015966604928A312F79F7E69291a656Cb88602',5700000000000000000000000,'0x6b54dac24e4ba4fb7089e280433970b11f4f6202f4a4a727675bffcf33829e4a',2673243,'2018-07-21 13:36:05.621551','2018-07-21 13:36:05.829593','ACTUAL'),(137,'0x3787895064b624c5c46051b02cc45c7a8d328d75f57d1857456c3092beccf428',NULL,'0x73015966604928A312F79F7E69291a656Cb88602','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',5542560000000000000000,'0x86725f644d4a7a4994e4caa0bfb36959cb95f9848abe18fcc00b5684a56dd230',2673290,'2018-07-21 13:36:05.730089','2018-07-21 13:36:06.300744','ACTUAL'),(138,'0x61f493131fa987986923e647aeb070337246bf91b13cf4b606a99618641bea70',NULL,'0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',5542560000000000000000,'0xcb29a41f02a1af35fb945515ed3f8dc84668f16b490199687d8889c40924f05c',2674104,'2018-07-21 14:01:05.909835','2018-07-21 14:01:05.952445','ACTUAL'),(139,'0xf7988ffc69f5d2369dd27f265357af827f2e200944f32e3decabd68b1c5d5b64',NULL,'0x4A2CB5F3942Dbbf09BdDc6d9e354b28c7F69dc0d','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',542560000000000000000,'0x01c3eadde67b49c36234ac97253017c36008c292205b60f948571d0b97dfdd77',2674122,'2018-07-21 14:05:36.081666','2018-07-21 14:05:36.104513','ACTUAL'),(141,'0xd04dff3daa89a5898793cd426e95e2ed39d1cccc19e1213e815aca97a0d9c0f0',NULL,NULL,NULL,NULL,NULL,NULL,'2018-07-21 16:04:41.578055',NULL,'PREPARED');
+INSERT INTO `transfers` VALUES (1,'0x3787895064b624c5c46051b02cc45c7a8d328d75f57d1857456c3092beccf428',NULL,'0x73015966604928A312F79F7E69291a656Cb88602','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',5542560000000000000000,'0x86725f644d4a7a4994e4caa0bfb36959cb95f9848abe18fcc00b5684a56dd230',2673290,'2018-07-23 10:34:58.277328','2018-07-23 10:34:59.006917','ACTUAL'),(2,'0xfe63808b5ae451e707596f892e2784ec2e83d073954142d94eebfb636af4d7b0',NULL,'0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD','0x73015966604928A312F79F7E69291a656Cb88602',5700000000000000000000000,'0x6b54dac24e4ba4fb7089e280433970b11f4f6202f4a4a727675bffcf33829e4a',2673243,'2018-07-23 10:34:58.164082','2018-07-23 10:34:59.018292','ACTUAL'),(3,'0x9466929f8a9a2fdf8a8345c8ea836e58dda30aaf120dc8dc70d978039a07ab0e',NULL,'0x73015966604928A312F79F7E69291a656Cb88602','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',5542560000000000000000,'0x518c5042409bbc23f627ffee57f7866078511170fd4b18972605bbc91df28383',2674043,'2018-07-23 10:34:58.400197','2018-07-23 10:34:59.099095','ACTUAL'),(4,'0x61f493131fa987986923e647aeb070337246bf91b13cf4b606a99618641bea70',NULL,'0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',5542560000000000000000,'0xcb29a41f02a1af35fb945515ed3f8dc84668f16b490199687d8889c40924f05c',2674104,'2018-07-23 10:34:58.527072','2018-07-23 10:34:59.119012','ACTUAL'),(5,'0xf7988ffc69f5d2369dd27f265357af827f2e200944f32e3decabd68b1c5d5b64',NULL,'0x4A2CB5F3942Dbbf09BdDc6d9e354b28c7F69dc0d','0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e',542560000000000000000,'0x01c3eadde67b49c36234ac97253017c36008c292205b60f948571d0b97dfdd77',2674122,'2018-07-23 10:34:58.699192','2018-07-23 10:34:59.647763','ACTUAL'),(6,'0xc67585ca3b2ae70847bc24ebcb2811f60129c28518df4582f5383729b5a53a0b',NULL,'0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',5819688000000000000000,'0xc07ac16fc921490e89f67ac8ba2864570340d8ffda790f38580c8e71ae6477e0',2674701,'2018-07-23 10:34:58.824601','2018-07-23 10:34:59.867894','ACTUAL'),(7,'0x1bac67e6349bb5359a216d9f2ca008ebaee341c010a62231912dc1376489a238',NULL,'0xB63e4ECF7CECe510A94A7231BaFB70cdCa18b91e','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',4988304000000000000000,'0x78f2b0e0e563cf3e4eedec04d1e6e5e7d059686dd5ebbf260fc5aa31a84f442a',2679641,'2018-07-23 10:34:58.953479','2018-07-23 10:34:59.960556','ACTUAL'),(8,'0x3687e46e7e05bedf2c99d9ee686edd14d5c1543c7844447d4f119fdb9910481d',NULL,'0xB0a3f48478d84a497f930d8455711d9981B66a70','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',4988304000000000000000,'0x39feca03cd864ac518eade287e71b15bb923d2cbed36b91bc85972d34d2ddd59',2684918,'2018-07-23 11:11:28.033047','2018-07-23 11:11:28.159772','ACTUAL'),(9,'0x973fb05205f71cc42896447ce85f01c37defe7e87abb0782d2fe5d86897fdfff',NULL,'0xB0a3f48478d84a497f930d8455711d9981B66a70','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',4988304000000000000000,'0xeff70b1147a887aec5f59e5bc781b0d5bf1b16e28159b85ac5cf155c641e50cf',2684966,'2018-07-23 11:20:19.989465','2018-07-23 11:20:20.189724','ACTUAL'),(10,'0xb159c70b91a60eceeaf83d7829a7a67de6f1f3b7e6ff0136ef649364b67dbe77',NULL,'0xB0a3f48478d84a497f930d8455711d9981B66a70','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',4988304000000000000000,'0xd9b008df66ba53c62ec6b08833bd67c27d8011df7b8ef34bed58b3bc44eb53bd',2685057,'2018-07-23 11:39:43.285175','2018-07-23 11:39:43.323907','ACTUAL'),(11,'0x2d21d227dacff381ee297bff889e0f5bd1a4ef83b640265ea5e445edf1f3daef',NULL,'0xB0a3f48478d84a497f930d8455711d9981B66a70','0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD',4988304000000000000000,'0x6c149cba16f7ae48fd86bb06a9415d63af9b46d77e2af896c893f92f0547b356',2685063,'2018-07-23 11:41:13.267115','2018-07-23 11:41:13.511619','ACTUAL');
 /*!40000 ALTER TABLE `transfers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1444,4 +1370,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-21 19:22:00
+-- Dump completed on 2018-07-23 15:06:37
