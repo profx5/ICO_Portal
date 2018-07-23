@@ -42,8 +42,8 @@ class Header extends React.Component {
         }
         floatTokensAmount = parseInt(floatTokensAmount, 10);
 
-        let stepOnePassed = ethAccount ? true : false;  
-        let stepTwoPassed = kycState !== 'DECLINED'; 
+        let stepOnePassed = ethAccount ? true : false;
+        let stepTwoPassed = kycState !== 'DECLINED';
         let stepThreePassed = tokensAmount > 0; 
 
         let stepsPassedNumber = stepOnePassed + stepTwoPassed + stepThreePassed;
@@ -85,7 +85,7 @@ const mapStateToProps = ({user, ICOInfo, KYC, Invest, UI}) => ({
     accountDropdownShown: UI.get('accountDropdownShown'),
     stepsDropdownShown: UI.get('stepsDropdownShown'),
     ethAccount: user.get('eth_account'),
-    kycState: user.get('state'),
+    kycState: KYC.get('state'),
     tokensAmount: user.get('tokens_amount'),
 })
 

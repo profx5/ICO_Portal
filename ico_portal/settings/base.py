@@ -103,7 +103,7 @@ RAVEN_CONFIG = {
 }
 
 # VERA site settings
-VERA_SITE_URL = 'https://dev.vera.wtf/'
+VERA_SITE_URL = 'https://vera.jobs/'
 
 # Authorasation settings
 

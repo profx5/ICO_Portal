@@ -8,9 +8,7 @@ const initialState = Map({
     state: "DECLINED",
     user_photo: null,
     firstname: "",
-    midname: "",
-    surname: "",
-    gender: "",
+    lastname: null,
     birthdate: "",
     country: "",
     city: "",
@@ -24,8 +22,27 @@ const initialState = Map({
     decline_reason: null,
     uploaded_user_photo: null,
     uploaded_doc_photo: null,
-})
-
+    place_of_birth: null,
+    personal_id: null,
+    place_of_residence: null,
+    profession: null,
+    business_name: null,
+    registration_number: null,
+    registration_date: null,
+    phone_number: null,
+    director_firstname: null,
+    director_lastname: null,
+    basis_doc: null,
+    email: null,
+    address: null,
+    field_of_activity: null,
+    beneficial_fullname: null,
+    beneficial_personal_id: null,
+    beneficial_birthdate: null,
+    beneficial_place_of_birth: null,
+    beneficial_place_of_residence: null,
+    is_pep: null,
+});
 
 
 export const KYCReducer = createReducer({

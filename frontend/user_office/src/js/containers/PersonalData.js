@@ -11,8 +11,6 @@ import * as UIActions from './../actions/UIActions';
 import FinalFormField from './../components/FinalFormField';
 import FinalFormCheckbox from './../components/FinalFormCheckbox';
 import FinalFormRadio from './../components/FinalFormRadio';
-import { Field } from 'react-final-form'
-
 
 class PersonData extends React.Component {
 
@@ -91,6 +89,7 @@ const mapStateToProps = ({ICOInfo, Timer, KYC}) => ({
     userPhoto: KYC.get('user_photo'),
     documentPhoto: KYC.get('document_photo'),
     uploadedUserPhoto: KYC.get('uploaded_user_photo'),
+    fistname: KYC.get('fistname')
 })
 
 const mapDispatchToProps = (dispatch) => ({
