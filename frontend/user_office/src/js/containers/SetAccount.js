@@ -28,9 +28,9 @@ class SetAccount extends Component {
                         <StyledHead>Add your ETH account</StyledHead>
                         <form>
                             <TextField type="text" value={metamaskEthAccount} innerRef={input => this.input = input}/>
-                            <FieldWrapper>
+                            <ButtonWrapper>
                                 <Button clickHandler={this.onSubmitHandler} type="submit" text="Send"/>
-                            </FieldWrapper>
+                            </ButtonWrapper>
                         </form>
                     </Popup>
                 </PopupWrapper>
@@ -54,6 +54,14 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetAccount);
+
+const ButtonWrapper = styled.div`
+    width: 100%;
+    height: 40px;
+    border-radius: 2px;
+    border: 1px solid #d6dfe6;
+    position: relative;
+`;
 
 
 const PopupWrapper = styled.div`

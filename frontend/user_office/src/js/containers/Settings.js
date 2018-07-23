@@ -2,13 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 
-import * as KYCActions from './../actions/KYCActions';
-
 import PersonalInfo from './PersonalInfo';
 import Password from './Password';
-import VerificationInfo from './VerificationInfo';
-
-import { Form } from 'react-final-form';
 
 
 class Settings extends React.Component {
@@ -22,7 +17,7 @@ class Settings extends React.Component {
      * }*/
 
 
-    render () {
+    render() {
 
         return (
             <Wrapper className="Verification">
@@ -40,9 +35,7 @@ class Settings extends React.Component {
 };
 
 
-const mapStateToProps = ({}) => ({
-
-})
+const mapStateToProps = ({}) => ({})
 
 const mapDispatchToProps = (dispatch) => ({
     /* submitForm(payload) {

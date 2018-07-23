@@ -128,7 +128,7 @@ const InputWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
     width: 100%;
-    height: 70px;
+    height: 40px;
     border-radius: 2px;
     border: 1px solid #d6dfe6;
     position: relative;
