@@ -5,11 +5,9 @@ import {call, put, takeEvery} from 'redux-saga/effects'
 
 export class KYCSagas {
     static * submitKYC(action) {
-        const type = action.payload.get('type');
-        const url = type === 'create' ? Api.kyc() : Api.kyc_upd();
         try {
             yield call(axios, {
-                url: url,
+                url: Api.kyc(),
                 method: 'POST',
                 data: action.payload
             });
