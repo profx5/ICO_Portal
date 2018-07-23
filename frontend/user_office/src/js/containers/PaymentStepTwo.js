@@ -76,7 +76,7 @@ class PaymentStepTwo extends React.Component {
                                 <span>=</span>&nbsp; {investAmount > 0 ? investAmount : '0'}
                                 <span>&nbsp;{investCurrency}</span>
                             </div>
-                            <div className="desc">Current exchange rate is frozen for 15 minutes</div>
+                            <div className="desc">Rate may change due to high volatility of crypto</div>
                         </RowPart>
                         <RowPart className="part">
                             <Link to="/user_office/payment">
