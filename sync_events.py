@@ -16,7 +16,7 @@ web3 = get_web3()
 
 contract = TokenContract()
 
-start_block = 5900000
+start_block = 4000000
 end_block = web3.eth.blockNumber
 step = 100000
 steps = int((end_block - start_block) / step) + 2
