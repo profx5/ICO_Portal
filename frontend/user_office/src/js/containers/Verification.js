@@ -133,7 +133,6 @@ class Verification extends React.Component {
     render() {
         const {activeKycTab, openedTip, submitForm, kyc_required} = this.props;
         const initial = this.load();
-        const type = kyc_required ? 'create' : 'upd';
 
         return (
             <div>
@@ -219,7 +218,6 @@ class Verification extends React.Component {
                         <Wrapper onSubmit={(function (e) {
                             e.preventDefault();
                             let data = new FormData(e.target);
-                            data.set('type', type);
                             submitForm(data);
                         })} id="form" className="Verification">
                             <Header>
