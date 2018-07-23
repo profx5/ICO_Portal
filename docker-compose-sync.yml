@@ -18,7 +18,7 @@ services:
 
   syncer:
     image: profx5/ico_portal:latest
-    command: "/usr/src/app/scripts/start_syncer.py"
+    command: "/usr/src/app/scripts/start_syncer.sh"
     secrets:
       - db_password
     volumes:

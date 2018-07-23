@@ -60,6 +60,8 @@ class PaymentStepTwo extends React.Component {
             this.generateQRCode(altCrowdsaleaddress || '0')
         }
 
+        const tokensAmountString = tokensAmount > 0 ? tokensAmount.toFixed(2) : '0';
+
         return (
             <Wrapper>
                 <Head>Buy tokens</Head>
@@ -69,7 +71,7 @@ class PaymentStepTwo extends React.Component {
                         <RowPart className="part">
                             <div className="head">Payment</div>
                             <div className="amount">
-                                {tokensAmount > 0 ? tokensAmount : '0'}
+                                {tokensAmountString}
                                 <span>&nbsp;Vera</span> &nbsp;
                                 <span>=</span>&nbsp; {investAmount > 0 ? investAmount : '0'}
                                 <span>&nbsp;{investCurrency}</span>
