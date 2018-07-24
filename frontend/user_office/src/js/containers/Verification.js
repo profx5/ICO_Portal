@@ -18,12 +18,13 @@ import KYCTabs from './../components/KYCTabs';
 class Verification extends React.Component {
     transformValues = values => {
         const data = {...values};
-        data.is_pep = data.is_pep ? "True" : "False";
+        data.is_pep = data.is_pep && data.is_pep !== null ? "True" : "False";
         return data;
     }
 
     load = () => {
         const {
+            state,
             type,
             firstname,
             user_photo,
@@ -63,6 +64,7 @@ class Verification extends React.Component {
             is_pep
         } = this.props;
         return this.transformValues({
+            state: state,
             type: type,
             firstname: firstname,
             user_photo: user_photo,
@@ -139,7 +141,7 @@ class Verification extends React.Component {
     }
 
     render() {
-        const {activeKycTab, openedTip, submitForm, kyc_required} = this.props;
+        const {activeKycTab, openedTip, submitForm, kyc_required, state} = this.props;
         const initial = this.load();
 
         return (
@@ -217,6 +219,17 @@ class Verification extends React.Component {
                         </ModalContent>
                     </Modal>
                     }
+                    {openedTip === 4 &&
+                    <Modal>
+                        <ModalHeader>
+                            Warning
+                            <img onClick={this.closeTip} src={iconClose} alt=""/>
+                        </ModalHeader>
+                        <ModalContent>
+                            Something went wrong. Check if you attached ID document photo and Utility bill photo.
+                        </ModalContent>
+                    </Modal>
+                    }
                 </ModalWrapper>
                 }
                 <Form
@@ -226,7 +239,10 @@ class Verification extends React.Component {
                         <Wrapper onSubmit={(function (e) {
                             e.preventDefault();
                             let data = new FormData(e.target);
-                            submitForm(data);
+                            submitForm({
+                                form: data,
+                                state: state
+                            });
                         })} id="form" className="Verification">
                             <Header>
                                 <HeaderInner>
@@ -256,6 +272,7 @@ class Verification extends React.Component {
 
 
 const mapStateToProps = ({UI, KYC, user}) => ({
+    state: KYC.get('state'),
     type: KYC.get('type'),
     activeKycTab: UI.get('activeKycTab'),
     openedTip: UI.get('openedTip'),

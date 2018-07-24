@@ -1,21 +1,26 @@
 import axios from 'axios'
 import Api from '../../api'
-import * as actions from './../actions/KYCActions'
+import * as KYCActions from './../actions/KYCActions'
+import * as UIActions from './../actions/UIActions'
 import {call, put, takeEvery} from 'redux-saga/effects'
 
 export class KYCSagas {
     static * submitKYC(action) {
+
+        const type = action.payload.state;
+        const url = type !== 'WAITING' ? Api.kyc() : Api.kyc_upd();
         try {
             yield call(axios, {
-                url: Api.kyc(),
+                url: url,
                 method: 'POST',
-                data: action.payload
+                data: action.payload.form
             });
-            yield put(actions.submitKYCSuccessfull());
+            yield put(KYCActions.submitKYCSuccessfull());
             yield call(KYCSagas.getKYC);
 
         } catch(e) {
-            yield put(actions.submitKYCFailed())
+            yield put(KYCActions.submitKYCFailed())
+            yield put(UIActions.setOpenedTip(4));
         }
     }
 
@@ -34,7 +39,7 @@ export class KYCSagas {
                 url: Api.kyc(),
                 method: 'GET'
             })
-            yield put(actions.getKYCSuccessfull(response.data))
+            yield put(KYCActions.getKYCSuccessfull(response.data))
         } catch(e) {
             console.log("CANT GET KYC", {e})
         }
@@ -42,7 +47,7 @@ export class KYCSagas {
 }
 
 export function* saga() {
-    yield takeEvery(actions.getKYCRequest, KYCSagas.getKYC)
-    yield takeEvery(actions.submitKYCRequest, KYCSagas.submitKYC)
-    yield takeEvery(actions.submitKYC_and_retriveKYC_Request, KYCSagas.submitKYC_and_retriveKYC)
+    yield takeEvery(KYCActions.getKYCRequest, KYCSagas.getKYC)
+    yield takeEvery(KYCActions.submitKYCRequest, KYCSagas.submitKYC)
+    yield takeEvery(KYCActions.submitKYC_and_retriveKYC_Request, KYCSagas.submitKYC_and_retriveKYC)
 }

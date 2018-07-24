@@ -10,7 +10,7 @@ const initialState = Map({
     showSetAccountPopup: false,
     faqSelectedTab: 'new',
     currentRoute: 1,
-    activeKycTab: 2,
+    activeKycTab: 1,
     showCurrenciesPopup: false,
     openedTxn: null,
     openedTip: null,

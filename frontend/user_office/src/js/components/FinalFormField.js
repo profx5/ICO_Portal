@@ -9,7 +9,7 @@ import { Field } from 'react-final-form';
 const FinalFormField = ({labelText, placeholder, options, name, value, disabled}) => {
 
     let CleaveInput = (field) => (
-        <StyledCleave {...field.input} options={field.options} />
+        <StyledCleave {...field.input} placeholder={placeholder} options={field.options} />
     )
 
     return (
