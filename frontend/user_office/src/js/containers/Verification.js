@@ -24,6 +24,7 @@ class Verification extends React.Component {
 
     load = () => {
         const {
+            type,
             firstname,
             user_photo,
             lastname,
@@ -62,6 +63,7 @@ class Verification extends React.Component {
             is_pep
         } = this.props;
         return this.transformValues({
+            type: type,
             firstname: firstname,
             user_photo: user_photo,
             lastname: lastname,
@@ -119,10 +121,16 @@ class Verification extends React.Component {
     }
 
     tabClickHandler = (event) => {
-        const {activateKycTab} = this.props;
+        const {activateKycTab, changeType} = this.props;
 
-        if (event.target.id === 'kycTab1') activateKycTab({id: 1})
-        else if (event.target.id === 'kycTab2') activateKycTab({id: 2});
+        if (event.target.id === 'kycTab1') {
+            activateKycTab({id: 1});
+            changeType('NATURAL')
+        } else if (event.target.id === 'kycTab2') {
+            activateKycTab({id: 2});
+            changeType('LEGAL');
+        }
+
     }
 
     closeTip = () => {
@@ -248,6 +256,7 @@ class Verification extends React.Component {
 
 
 const mapStateToProps = ({UI, KYC, user}) => ({
+    type: KYC.get('type'),
     activeKycTab: UI.get('activeKycTab'),
     openedTip: UI.get('openedTip'),
     firstname: KYC.get('firstname'),
@@ -298,6 +307,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     setOpenedTip(id) {
         dispatch(UIActions.setOpenedTip(id))
+    },
+    changeType(type) {
+        dispatch(KYCActions.changeType(type))
     }
 });
 

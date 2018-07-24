@@ -13,6 +13,9 @@ export const uploadPhoto = createAction('UPLOAD_PHOTO');
 export const removePhoto = createAction('REMOVE_PHOTO');
 
 
+export const changeType = createAction('CHANGE_TYPE');
+
+
 export const submitKYCRequest = createAction('SUBMIT_KYC_REQUEST');
 export const submitKYCSuccessfull = createAction('SUBMIT_KYC_SUCCESSFULL');
 export const submitKYCFailed = createAction('SUBMIT_KYC_FAILED');
