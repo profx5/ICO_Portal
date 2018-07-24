@@ -7,6 +7,7 @@ import {Map} from 'immutable'
 const initialState = Map({
     state: "DECLINED",
     user_photo: null,
+    type: '',
     firstname: "",
     lastname: null,
     birthdate: "",
@@ -60,6 +61,7 @@ export const KYCReducer = createReducer({
 
     [actions.showForm]: (state, payload) => state.set('showForm', true),
     [actions.hideForm]: (state, payload) => state.set('showForm', false),
+    [actions.changeType]: (state, payload) => state.set('showForm', payload),
 
     [actions.uploadPhoto]: (state, payload) => {
         let {name, data} = payload;
