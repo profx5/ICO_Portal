@@ -7,6 +7,7 @@ import Utils from './../utils';
 import Button from './../components/Button';
 import InvestInput from './../components/InvestInput';
 import {Link} from 'react-router-dom';
+import iconClose from './../../img/icon_close.svg';
 
 
 import * as UIActions from './../actions/UIActions';
@@ -21,6 +22,17 @@ class CurrencyCalculator extends React.Component {
 
         this.bonus = 0;
     }
+
+    closeTip = () => {
+        const {setOpenedTip} = this.props;
+        setOpenedTip(null);
+    };
+
+    openKYCTip = (e) => {
+        e.preventDefault();
+        const {setOpenedTip} = this.props;
+        setOpenedTip(4);
+    };
 
     updateTotalTokens = () => {
         const {investAmount, investCurrencyRate, setUSDAmount, setTokensAmount} = this.props;
@@ -59,17 +71,36 @@ class CurrencyCalculator extends React.Component {
             investCurrencyRate,
             investAmount,
             USDAmount,
-            tokensAmount
+            tokensAmount,
+            kycState,
+            openedTip
         } = this.props;
 
+        let kycPassed = kycState !== 'DECLINED';
         let bonus = this.bonus;
         let header = investCurrency ? "Amount, min " + (8000 / investCurrencyRate).toFixed(3) + " " + investCurrency : 'Amount';
         this.initialUpdate();
+
         return (
             <Wrapper>
+                {openedTip === 4 &&
+                <ModalWrapper>
+                    <Modal>
+                        <ModalHeader>
+                            Verification required
+                            <img onClick={this.closeTip} src={iconClose} alt=""/>
+                        </ModalHeader>
+                        <ModalContent>
+                            Sorry, but you are not allowed to buy tokens yet. Please <Link onClick={this.closeTip}
+                            to='/user_office/verification/'>pass KYC</Link> procedure first!
+                        </ModalContent>
+                    </Modal>
+                </ModalWrapper>
+                }
                 <WrapperInner>
                     <InvestInput value={investAmount} type="text"
-                                 onChangeHandler={this.investOnChangeHandler} header={header} currency={investCurrency}/>
+                                 onChangeHandler={this.investOnChangeHandler} header={header}
+                                 currency={investCurrency}/>
                     <TokensInputWrapper data-currency="Vera">
                         <div className="head">Vera (Buy till 7 july and <span>get a 30% bonus!</span>)</div>
                         <TokensInput>
@@ -79,7 +110,8 @@ class CurrencyCalculator extends React.Component {
                     </TokensInputWrapper>
 
                     <ButtonWrapper to="/user_office/payment/buy">
-                        <Button disabled={USDAmount < 8000} clickHandler={this.investClickHandler} text="Buy"/>
+                        <Button disabled={USDAmount < 8000}
+                                clickHandler={kycPassed ? this.investClickHandler : this.openKYCTip} text="Buy"/>
                     </ButtonWrapper>
                 </WrapperInner>
 
@@ -111,20 +143,22 @@ class CurrencyCalculator extends React.Component {
                 </CalculatedWrapper>
 
                 <BonusDesc>Progressive bonus for private presale phase is
-                    currenty available! Investing more than 8 000 USD will grant you 20% bonus!
-                    Invest more than 20 000 USD and get <span>30% bonus tokens!</span></BonusDesc>
+                    currenty available! Investing more than 8&nbsp;000 USD will grant you 20% bonus!
+                    Invest more than 20&nbsp;000 USD and get <span>30% bonus tokens!</span></BonusDesc>
             </Wrapper>
         )
     }
 };
 
-const mapStateToProps = ({Currencies, Invest, ICOInfo, Phase}) => ({
+const mapStateToProps = ({Currencies, Invest, UI, KYC}) => ({
     investCurrency: Currencies.get('investCurrency'),
     investCurrencyRate: Currencies.get('investCurrencyRate'),
     investAmount: Invest.get('investAmount'),
     tokensAmount: Invest.get('tokensAmount'),
     USDAmount: Invest.get('USDAmount'),
     bonusPercent: 0,
+    kycState: KYC.get('state'),
+    openedTip: UI.get('openedTip'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -142,11 +176,77 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getAltCryptoAccount(payload) {
         dispatch(ICOInfoActions.getCryptoAccountRequest(payload))
+    },
+    setOpenedTip(id) {
+        dispatch(UIActions.setOpenedTip(id))
     }
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrencyCalculator)
+export default connect(mapStateToProps, mapDispatchToProps)(CurrencyCalculator);
+
+const ModalWrapper = styled.div`
+    height: 100vh;
+    width: 100vw;
+    background: rgba(1, 7, 29, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+`;
+
+const Modal = styled.div`
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 60%;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 9px 21px 0 rgba(173, 182, 217, 0.3);
+    z-index: 100;
+    max-height: 64vh;
+    font-weight: normal;
+`;
+
+const ModalHeader = styled.div`
+    padding: 18px;
+    text-align: center;
+    line-height: 1.45;
+    height: 72px;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #000000;
+    background-color: #f5f6fa
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    & img {
+        position: absolute;
+        top: 26px;
+        right: 26px;
+        cursor: pointer;
+    }
+`;
+
+const ModalContent = styled.div`
+    padding: 32px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.44;
+    letter-spacing: 0.2px;
+    color: #0a0a0a;
+    overflow-y: auto;
+    max-height: 52.5vh;
+    & span {
+        font-weight: bold;
+    }
+    & a {
+        text-decoration: underline;
+    }
+`;
 
 const Wrapper = styled.div`
     margin-top: 65px;
@@ -154,7 +254,7 @@ const Wrapper = styled.div`
 
 const WrapperInner = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: start;
     border-top: 1px solid rgba(151,151,151,.2);
     // border-bottom: 1px solid rgba(151,151,151,.2);
     padding-bottom: 50px;
@@ -164,7 +264,7 @@ const WrapperInner = styled.div`
 const ButtonWrapper = styled(Link)`
     display: inline-block;
     width: 100%;
-    max-width: 258px;
+    max-width: 34.4%;
     height: 70px;
     border-radius: 2px;
     border: 1px solid #d6dfe6;
