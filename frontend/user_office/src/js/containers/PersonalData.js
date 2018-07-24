@@ -33,37 +33,33 @@ class PersonData extends React.Component {
                 <InputSet>
                     <input type="hidden" name='type' value='NATURAL'/>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your name" labelText="First Name" name="firstname"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your name" labelText="First Name" name="firstname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your last name" labelText="Last Name" name="lastname"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your last name" labelText="Last Name" name="lastname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your place of birth" labelText="Place of birth"
-                                        name="place_of_birth"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your place of birth" labelText="Place of birth" name="place_of_birth"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="date / month / year" labelText="Date of birth"
-                                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}
-                                        name="birthdate"/>
+                        <FinalFormField placeholder="date / month / year" labelText="Date of birth" type="date" name="birthdate"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your personal identification code"
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your personal identification code"
                                         labelText="Personal identification code" name="personal_id"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your phone number" labelText="Phone number"
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your phone number" labelText="Phone number"
                                         options={{phone: true, phoneRegionCode: 'RU'}} name="phone_number"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your email" labelText="Email" name="email"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your email" labelText="Email" name="email"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Address" labelText="Place of residence" name="place_of_residence"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Address" labelText="Place of residence" name="place_of_residence"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your profession" labelText="Profession or field of activity"
-                                        name="profession"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your profession" labelText="Profession or field of activity" name="profession"/>
                     </InputWrapper>
                 </InputSet>
 
