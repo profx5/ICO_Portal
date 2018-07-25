@@ -31,6 +31,7 @@ class InvestorsDocuments extends React.Component {
             size = obj.size,
             id = $(target).attr('id');
 
+        
 
         $(target)
             .closest('div')
@@ -140,7 +141,8 @@ class InvestorsDocuments extends React.Component {
                 </div>
                 <FinalFormCheckbox name="confirm"
                                    options={['I confirm that all the data and documents submitted are correct.']}
-                                   values={['Yes']}/>
+                                   values={['Yes']}
+                                   required/>
             </Wrapper>
         )
     }
@@ -210,6 +212,9 @@ const Wrapper = styled.div`
                 right: 13px;
                 transform: translateY(-50%);
                 cursor: pointer;
+                svg {
+                    pointer-events: none;
+                }
             }
         }
     }

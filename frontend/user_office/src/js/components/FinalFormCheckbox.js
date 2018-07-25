@@ -4,7 +4,7 @@ import {Field} from 'react-final-form';
 
 import iconCheck from './../../img/icons/icon_check.svg';
 
-const FinalFormCheckbox = ({labelText, name, values, options, icon, handler}) => {
+const FinalFormCheckbox = ({labelText, name, values, options, icon, handler, required}) => {
 
     function handle(handler, event) {
         event.preventDefault();
@@ -15,8 +15,7 @@ const FinalFormCheckbox = ({labelText, name, values, options, icon, handler}) =>
         return data.map((item, index) => {
             return (
                 <React.Fragment key={index}>
-                    <RadioInput component="input" type="checkbox" name={name} value={values[index]} id={`radio-${item}`}
-                                hidden/>
+                    <RadioInput component="input" type="checkbox" required={required} name={name} value={values[index]} id={`radio-${item}`}/>
                     <RadioLabel htmlFor={`radio-${item}`}>
                         {item}
                         {icon &&
@@ -58,6 +57,11 @@ const InputsWrapper = styled.div`
 `;
 
 const RadioInput = styled(Field)`
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    margin-left: 3px;
+    margin-top: 3px;
     &:checked + label:before {
         background: url(${iconCheck}) no-repeat center;
     }

@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Form} from 'react-final-form'
 
+import $ from 'jquery';
+
 import * as KYCActions from './../actions/KYCActions';
 import * as UIActions from './../actions/UIActions';
 
@@ -141,7 +143,7 @@ class Verification extends React.Component {
     }
 
     render() {
-        const {activeKycTab, openedTip, submitForm, kyc_required, state} = this.props;
+        const {activeKycTab, openedTip, submitForm, kyc_required, state, setOpenedTip} = this.props;
         const initial = this.load();
 
         return (
@@ -226,7 +228,29 @@ class Verification extends React.Component {
                             <img onClick={this.closeTip} src={iconClose} alt=""/>
                         </ModalHeader>
                         <ModalContent>
-                            Something went wrong. Check if you attached ID document photo and Utility bill photo.
+                            Something went wrong. Check if you submitted correct data and try again!
+                        </ModalContent>
+                    </Modal>
+                    }
+                    {openedTip === 5 &&
+                    <Modal>
+                        <ModalHeader>
+                            Warning
+                            <img onClick={this.closeTip} src={iconClose} alt=""/>
+                        </ModalHeader>
+                        <ModalContent>
+                            Please, check if you've attached the basis for representation!
+                        </ModalContent>
+                    </Modal>
+                    }
+                    {openedTip === 6 &&
+                    <Modal>
+                        <ModalHeader>
+                            Warning
+                            <img onClick={this.closeTip} src={iconClose} alt=""/>
+                        </ModalHeader>
+                        <ModalContent>
+                            Please, check if you've attached a copy of ID and Utility bill!
                         </ModalContent>
                     </Modal>
                     }
@@ -238,6 +262,19 @@ class Verification extends React.Component {
                     render={() => (
                         <Wrapper onSubmit={(function (e) {
                             e.preventDefault();
+
+                            if (activeKycTab === 2) {
+                                if ($('[name="basis_doc"]').val() === '') {
+                                    setOpenedTip(5);
+                                    return; 
+                                }
+                            }
+                            
+                            if ($('[name="id_document_photo"]').val() === '' || $('[name="bill_photo"]').val() === '') {
+                                setOpenedTip(6);
+                                return;
+                            }
+
                             let data = new FormData(e.target);
                             submitForm({
                                 form: data,

@@ -33,33 +33,39 @@ class PersonData extends React.Component {
                 <InputSet>
                     <input type="hidden" name='type' value='NATURAL'/>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your name" labelText="First Name" name="firstname"/>
+
+                        <FinalFormField placeholder="Your name" labelText="First Name" name="firstname" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your last name" labelText="Last Name" name="lastname"/>
+                        <FinalFormField placeholder="Your last name" labelText="Last Name" name="lastname" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your place of birth" labelText="Place of birth" name="place_of_birth"/>
+                        <FinalFormField placeholder="Your place of birth" labelText="Place of birth" name="place_of_birth" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="date / month / year" labelText="Date of birth" type="date" name="birthdate"/>
+                        <FinalFormField placeholder="date / month / year" labelText="Date of birth" type="date" name="birthdate" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your personal identification code"
-                                        labelText="Personal identification code" name="personal_id"/>
+                        <FinalFormField placeholder="Your personal identification code"
+                                        labelText="Personal identification code" 
+                                        name="personal_id" 
+                                        required 
+                                        options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your phone number" labelText="Phone number"
-                                        options={{phone: true, phoneRegionCode: 'RU'}} name="phone_number"/>
+                        <FinalFormField placeholder="Your phone number" labelText="Phone number"
+                                        options={{numericOnly: true, prefix: '+', noImmediatePrefix: true}} 
+                                        name="phone_number" 
+                                        required/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your email" labelText="Email" name="email"/>
+                        <FinalFormField placeholder="Your email" labelText="Email" name="email" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Address" labelText="Place of residence" name="place_of_residence"/>
+                        <FinalFormField placeholder="Address" labelText="Place of residence" name="place_of_residence" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your profession" labelText="Profession or field of activity" name="profession"/>
+                        <FinalFormField placeholder="Your profession" labelText="Profession or field of activity" name="profession" required options={{delimiter: ''}}/>
                     </InputWrapper>
                 </InputSet>
 
@@ -67,7 +73,8 @@ class PersonData extends React.Component {
                     <FinalFormCheckbox name="confirmInvestor" icon={iconQuestion}
                                        handler={this.setOpenedTip.bind(this, 1)}
                                        options={['I confirm that the investor is a beneficial owner']}
-                                       values={['Yes']}/>
+                                       values={['Yes']}
+                                       required/>
                 </RadioSet>
 
                 <RadioSet className="RadioSet RadioSet-2">

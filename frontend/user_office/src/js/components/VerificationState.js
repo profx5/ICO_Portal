@@ -10,17 +10,17 @@ const VerificationState = ({kycState}) => {
         <Wrapper>
             {kycState === 'APPROVED' &&
                 <Content className="state-approved">
-                    <p>You've successfully passed verification!</p>
+                    <p>Verification successful!</p>
                 </Content>
             }
             {kycState === 'WAITING' &&
                 <Content className="state-waiting">
-                    <p>Your data is about to be checked!</p>
+                    <p>Thank you for application! Our managers are validating your data. Soon the status will be updated!</p>
                 </Content>
             }
             {kycState === 'DECLINED' &&
                 <Content className="state-declined">
-                    <p>You are not re-verified and contact please from those. support:</p>
+                    <p>Your account is not verified yet. Please add and submit valid data.</p>
                 </Content>
             }
         </Wrapper>
@@ -43,7 +43,7 @@ const Content = styled.div`
     color: #323c47;
     padding: 20px 30px;
     &.state-approved {
-        border: 1px solid #4FDDBE;
+        border: 2px solid #4FDDBE;
     }
     &.state-waiting {
         border: 1px solid #FECF33;

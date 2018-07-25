@@ -133,22 +133,23 @@ class LegalPersonData extends React.Component {
                 <InputSet>
                     <input type="hidden" name='type' value='LEGAL'/>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your business name" labelText="Business name" name="business_name"/>
+
+                        <FinalFormField placeholder="Your business name" labelText="Business name" name="business_name" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your registration number" labelText="Registration number" name="registration_number"/>
+                        <FinalFormField placeholder="Your registration number" labelText="Registration number" name="registration_number" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField type="date" placeholder="Your date of registration" labelText="Date of registration" name="registration_date"/>
+                        <FinalFormField placeholder="Your date of registration" labelText="Date of registration" name="registration_date" required type="date"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your phone number"  labelText="Phone number" options={{phone: true, phoneRegionCode: 'RU'}} name="phone_number"/>
+                        <FinalFormField placeholder="Your phone number"  labelText="Phone number" options={{numericOnly: true, prefix:'+', noImmediatePrefix: true}} name="phone_number" required/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your director first name" labelText="First name of director" name="director_firstname"/>
+                        <FinalFormField placeholder="Your director first name" labelText="First name of director" name="director_firstname" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your director last name" labelText="Last Name of director" name="director_lastname"/>
+                        <FinalFormField placeholder="Your director last name" labelText="Last Name of director" name="director_lastname" required options={{delimiter: ''}}/>
                     </InputWrapper>
 
                     <div className="block-file">
@@ -164,32 +165,33 @@ class LegalPersonData extends React.Component {
 
 
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your email" labelText="Email" name="email"/>
+
+                        <FinalFormField placeholder="Your email" labelText="Email" name="email" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your address" labelText="Address" name="address"/>
+                        <FinalFormField placeholder="Your address" labelText="Address" name="address" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your field of activity" labelText="Field of activity" name="field_of_activity"/>
+                        <FinalFormField placeholder="Your field of activity" labelText="Field of activity" name="field_of_activity" required options={{delimiter: ''}}/>
                     </InputWrapper>
                 </InputSet>
 
                 <InputSet>
                     <SubTitle><span onClick={this.setOpenedTip.bind(this, 2)}>Beneficial owner</span> data</SubTitle>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your name" labelText="Name" name="beneficial_fullname"/>
+                        <FinalFormField placeholder="Your name" labelText="Name" name="beneficial_fullname" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your personal identification code" labelText="Personal identification code" name="beneficial_personal_id"/>
+                        <FinalFormField placeholder="Your personal identification code" labelText="Personal identification code" name="beneficial_personal_id" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your place of birth" labelText="Place of birth" name="beneficial_place_of_birth"/>
+                        <FinalFormField placeholder="Your place of birth" labelText="Place of birth" name="beneficial_place_of_birth" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="date/month/year" labelText="Date of birth" type="date" name="beneficial_birthdate"/>
+                        <FinalFormField placeholder="date/month/year" labelText="Date of birth" type="date" name="beneficial_birthdate" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper fullWidth>
-                        <FinalFormField options={{delimiter: ''}} placeholder="Your place of residence of the beneficial owner(s)" labelText="Place of residence of the beneficial owner(s)" name="beneficial_place_of_residence"/>
+                        <FinalFormField placeholder="Your place of residence of the beneficial owner(s)" labelText="Place of residence of the beneficial owner(s)" name="beneficial_place_of_residence" required options={{delimiter: ''}}/>
                     </InputWrapper>
                 </InputSet>
 
@@ -285,6 +287,9 @@ const Wrapper = styled.div`
                 transform: translateY(-50%);
                 cursor: pointer;
                 padding: 0 5px;
+                svg {
+                    pointer-events: none;
+                }
             }
         }
     }

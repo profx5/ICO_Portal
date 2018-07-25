@@ -6,17 +6,18 @@ import CleavePhone from 'cleave.js/dist/addons/cleave-phone.ru.js';
 import { Field } from 'react-final-form';
 
 
-const FinalFormField = ({labelText, placeholder, type, options, name, value, disabled}) => {
+
+const FinalFormField = ({labelText, placeholder, options, name, value, disabled, required, type}) => {
 
     let CleaveInput = (field) => (
-        <StyledCleave {...field.input} type={type} placeholder={placeholder} options={field.options} />
+        <StyledCleave {...field.input} placeholder={placeholder} type={type} required={required} options={field.options} />
     )
 
     return (
         <Wrapper>
             <StyledLabel htmlFor={name}>{labelText}</StyledLabel>
             <Field
-                options={options} 
+                options={options}
                 className="Field" 
                 component={CleaveInput}
                 placeholder={placeholder} 
