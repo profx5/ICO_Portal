@@ -41,4 +41,4 @@ class Transaction(models.Model):
         db_table = 'transactions'
 
     def __str__(self):
-        return f'Transaction {self.id}'
+        return f'Transaction {self.id} txn_id={self.txn_id}'

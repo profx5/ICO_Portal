@@ -132,10 +132,10 @@ class TestTrackTransactions(_Base):
         self.assertEqual(Transaction.objects.count(), 2)
 
         new_transaction = Transaction.objects.exclude(id=old_transaction.id).first()
-
         pending_transactions = self.eth_tester.get_all_filter_logs(filter_id)
         self.assertEqual(len(pending_transactions), 1)
         self.assertEqual(new_transaction.txn_hash, pending_transactions[0])
+        self.assertEqual(new_transaction.state, 'SENT')
 
         self.assertEqual(old_transaction.nonce, new_transaction.nonce)
         self.assertEqual(old_transaction.data, new_transaction.data)
@@ -145,6 +145,11 @@ class TestTrackTransactions(_Base):
         self.assertEqual(old_transaction.to_account, new_transaction.to_account)
         self.assertEqual(old_transaction.gas, new_transaction.gas)
         self.assertEqual(new_transaction.gas_price, Decimal('22000000000'))
+
+        result = TrackTransactions()()
+        self.assertEqual(len(result), 2)
+        self.assertIsInstance(result[0], Right)
+        self.assertIsInstance(result[1], Right)
 
     def test_mined_transaction(self):
         transaction = Transaction(to_account='0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',
@@ -193,28 +198,28 @@ class TestTrackTransactions(_Base):
         self.assertIsNone(transaction.fail_reason)
 
     def test_mined_with_same_txn_id(self):
-        mined_transaction = Transaction(to_account='0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',
-                                        gas=40000,
-                                        data=self.txn_data)
-        mined_transaction.save()
+        transaction_1 = Transaction(to_account='0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',
+                                    gas=40000,
+                                    data=self.txn_data)
+        transaction_1.save()
 
         SendPreparedTxns()()
         TrackTransactions()()
 
-        mined_transaction.refresh_from_db()
-        self.assertEqual(mined_transaction.state, 'MINED')
+        transaction_1.refresh_from_db()
+        self.assertEqual(transaction_1.state, 'MINED')
 
-        transaction = Transaction(to_account='0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',
-                                  gas=40000,
-                                  data=self.txn_data,
-                                  txn_id=mined_transaction.txn_id)
-        transaction.save()
+        transaction_2 = Transaction(to_account='0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',
+                                    gas=40000,
+                                    data=self.txn_data,
+                                    txn_id=transaction_1.txn_id)
+        transaction_2.save()
         SendPreparedTxns()()
         result = TrackTransactions()()
 
         self.assertEqual(len(result), 1)
         self.assertIsInstance(result[0], Right)
 
-        transaction.refresh_from_db()
-        self.assertEqual(transaction.state, 'FAILED')
-        self.assertEqual(transaction.fail_reason, f'Other transaction with txn_hash={mined_transaction.txn_hash} already mined')
+        transaction_2.refresh_from_db()
+        self.assertEqual(transaction_2.state, 'FAILED')
+        self.assertEqual(transaction_2.fail_reason, f'Other transaction with txn_hash={transaction_1.txn_hash} already mined')
