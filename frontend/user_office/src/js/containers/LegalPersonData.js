@@ -133,23 +133,22 @@ class LegalPersonData extends React.Component {
                 <InputSet>
                     <input type="hidden" name='type' value='LEGAL'/>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your business name" labelText="Business name" name="business_name"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your business name" labelText="Business name" name="business_name"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your registration number" labelText="Registration number" name="registration_number"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your registration number" labelText="Registration number" name="registration_number"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your date of registration" labelText="Date of registration" name="registration_date"
-                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}/>
+                        <FinalFormField type="date" placeholder="Your date of registration" labelText="Date of registration" name="registration_date"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your phone number"  labelText="Phone number" options={{phone: true, phoneRegionCode: 'RU'}} name="phone_number"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your phone number"  labelText="Phone number" options={{phone: true, phoneRegionCode: 'RU'}} name="phone_number"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your director first name" labelText="First name of director" name="director_firstname"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your director first name" labelText="First name of director" name="director_firstname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your director last name" labelText="Last Name of director" name="director_lastname"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your director last name" labelText="Last Name of director" name="director_lastname"/>
                     </InputWrapper>
 
                     <div className="block-file">
@@ -165,32 +164,32 @@ class LegalPersonData extends React.Component {
 
 
                     <InputWrapper>
-                        <FinalFormField placeholder="Your email" labelText="Email" name="email"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your email" labelText="Email" name="email"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your address" labelText="Address" name="address"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your address" labelText="Address" name="address"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your field of activity" labelText="Field of activity" name="field_of_activity"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your field of activity" labelText="Field of activity" name="field_of_activity"/>
                     </InputWrapper>
                 </InputSet>
 
                 <InputSet>
                     <SubTitle><span onClick={this.setOpenedTip.bind(this, 2)}>Beneficial owner</span> data</SubTitle>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your name" labelText="Name" name="beneficial_fullname"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your name" labelText="Name" name="beneficial_fullname"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your personal identification code" labelText="Personal identification code" name="beneficial_personal_id"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your personal identification code" labelText="Personal identification code" name="beneficial_personal_id"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your place of birth" labelText="Place of birth" name="beneficial_place_of_birth"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your place of birth" labelText="Place of birth" name="beneficial_place_of_birth"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="date/month/year" labelText="Date of birth" options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}} name="beneficial_birthdate"/>
+                        <FinalFormField placeholder="date/month/year" labelText="Date of birth" type="date" name="beneficial_birthdate"/>
                     </InputWrapper>
                     <InputWrapper fullWidth>
-                        <FinalFormField placeholder="Your place of residence of the beneficial owner(s)" labelText="Place of residence of the beneficial owner(s)" name="beneficial_place_of_residence"/>
+                        <FinalFormField options={{delimiter: ''}} placeholder="Your place of residence of the beneficial owner(s)" labelText="Place of residence of the beneficial owner(s)" name="beneficial_place_of_residence"/>
                     </InputWrapper>
                 </InputSet>
 
