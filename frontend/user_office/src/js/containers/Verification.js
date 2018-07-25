@@ -144,7 +144,7 @@ class Verification extends React.Component {
 
     onSubmitHandler = (e) => {
         const {activeKycTab, openedTip, submitForm, kyc_required, state, setOpenedTip} = this.props;
-        
+
         e.preventDefault();
 
         if (activeKycTab === 2) {
@@ -275,6 +275,17 @@ class Verification extends React.Component {
                         </ModalHeader>
                         <ModalContent>
                             Please, check if you've attached a copy of ID and Utility bill!
+                        </ModalContent>
+                    </Modal>
+                    }
+                    {openedTip === 7 &&
+                    <Modal>
+                        <ModalHeader>
+                            Congratulations
+                            <img onClick={this.closeTip} src={iconClose} alt=""/>
+                        </ModalHeader>
+                        <ModalContent>
+                            You've successfully send your data! Our managers are validating your data. Soon the status will be updated!
                         </ModalContent>
                     </Modal>
                     }

@@ -17,6 +17,7 @@ export class KYCSagas {
             });
             yield put(KYCActions.submitKYCSuccessfull());
             yield call(KYCSagas.getKYC);
+            yield put(UIActions.setOpenedTip(7));
 
         } catch(e) {
             yield put(KYCActions.submitKYCFailed())
