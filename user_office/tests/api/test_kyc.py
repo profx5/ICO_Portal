@@ -13,19 +13,17 @@ class TestKYC(APITestCase):
 
         rmtree(settings.MEDIA_ROOT, ignore_errors=True)
 
-    @property
-    def _expected_natural(self):
+    def assert_response_natural(self, response):
         ticket_id = Ticket.objects.last().id
+        wo_attacmemts = {k: v for k, v in response.data.items() if k != 'attachments'}
 
-        return {
+        self.assertDictEqual(wo_attacmemts, {
             'address': None,
-            'basis_doc': None,
             'beneficial_birthdate': None,
             'beneficial_fullname': None,
             'beneficial_personal_id': None,
             'beneficial_place_of_birth': None,
             'beneficial_place_of_residence': None,
-            'bill_photo': 'http://testserver/media/kyc/1/bill_photo/bill.jpg',
             'birthdate': None,
             'business_name': None,
             'decline_reason': None,
@@ -34,7 +32,6 @@ class TestKYC(APITestCase):
             'email': 'gordon@ongrid.pro',
             'field_of_activity': None,
             'firstname': 'John',
-            'id_document_photo': 'http://testserver/media/kyc/1/doc_photo/document.jpg',
             'is_pep': None,
             'lastname': 'Doe',
             'personal_id': None,
@@ -47,21 +44,36 @@ class TestKYC(APITestCase):
             'state': 'WAITING',
             'ticket': ticket_id,
             'type': 'NATURAL'
-        }
+        })
 
-    @property
-    def _expected_legal(self):
+        self.assertListEqual(response.data['attachments'], [
+            {
+                'file': 'http://testserver/media/kyc/1/id_document_photo/document.jpg',
+                'filename': 'document.jpg',
+                'mime_type': 'image/jpeg',
+                'size': 30236,
+                'type': 'id_document_photo'
+            },
+            {
+                'file': 'http://testserver/media/kyc/1/bill_photo/bill.jpg',
+                'filename': 'bill.jpg',
+                'mime_type': 'image/jpeg',
+                'size': 9566,
+                'type': 'bill_photo'
+            }
+            ])
+
+    def assert_response_legal(self, response):
         ticket_id = Ticket.objects.last().id
+        wo_attacmemts = {k: v for k, v in response.data.items() if k != 'attachments'}
 
-        return {
+        self.assertDictEqual(wo_attacmemts, {
             'address': 'Moscow, Russia',
-            'basis_doc': 'http://testserver/media/kyc/1/basis/basis.jpg',
             'beneficial_birthdate': '1990-01-01',
             'beneficial_fullname': 'John Doe',
             'beneficial_personal_id': '1488123',
             'beneficial_place_of_birth': 'Moscow, Russia',
             'beneficial_place_of_residence': 'Moscow, Russia',
-            'bill_photo': 'http://testserver/media/kyc/1/bill_photo/bill.jpg',
             'birthdate': None,
             'business_name': 'Vector',
             'decline_reason': None,
@@ -70,7 +82,6 @@ class TestKYC(APITestCase):
             'email': 'john@ongrid.pro',
             'field_of_activity': 'Drugs',
             'firstname': None,
-            'id_document_photo': 'http://testserver/media/kyc/1/doc_photo/document.jpg',
             'is_pep': True,
             'lastname': None,
             'personal_id': None,
@@ -83,7 +94,31 @@ class TestKYC(APITestCase):
             'state': 'WAITING',
             'ticket': ticket_id,
             'type': 'LEGAL'
-        }
+        })
+
+        self.assertListEqual(response.data['attachments'], [
+            {
+                'file': 'http://testserver/media/kyc/1/basis_doc/basis.jpg',
+                'filename': 'basis.jpg',
+                'mime_type': 'image/jpeg',
+                'size': 151959,
+                'type': 'basis_doc'
+            },
+            {
+                'file': 'http://testserver/media/kyc/1/id_document_photo/document.jpg',
+                'filename': 'document.jpg',
+                'mime_type': 'image/jpeg',
+                'size': 30236,
+                'type': 'id_document_photo'
+            },
+            {
+                'file': 'http://testserver/media/kyc/1/bill_photo/bill.jpg',
+                'filename': 'bill.jpg',
+                'mime_type': 'image/jpeg',
+                'size': 9566,
+                'type': 'bill_photo'
+            }
+        ])
 
     def test_create_natural_kyc(self):
         with open(fixture_path('document.jpg'), 'rb') as photo, \
@@ -111,7 +146,7 @@ class TestKYC(APITestCase):
         self.assertEqual(Ticket.objects.first(), ticket)
 
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.data, self._expected_natural)
+        self.assert_response_natural(response)
 
     def test_create_legal_kyc(self):
         with open(fixture_path('document.jpg'), 'rb') as photo, \
@@ -147,7 +182,7 @@ class TestKYC(APITestCase):
         self.assertEqual(Ticket.objects.first(), ticket)
 
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.data, self._expected_legal)
+        self.assert_response_legal(response)
 
     def test_get_created_kyc(self):
         with open(fixture_path('document.jpg'), 'rb') as photo, \
@@ -170,7 +205,7 @@ class TestKYC(APITestCase):
         response = self.client.get('/api/kyc/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data, self._expected_natural)
+        self.assert_response_natural(response)
 
     def test_get_not_created_kyc(self):
         response = self.client.get('/api/kyc/')
@@ -179,56 +214,75 @@ class TestKYC(APITestCase):
         self.assertEqual(response.data, {})
 
     def test_update_kyc(self):
-        with open(fixture_path('document.jpg'), 'rb') as photo, \
-             open(fixture_path('bill.jpg'), 'rb') as bill:
+        with open(fixture_path('document.jpg'), 'rb') as photo:
             self.client.post('/api/kyc/', {
-                'type': 'LEGAL',
-                'business_name': 'Vector',
-                'registration_umber': '13123123123',
-                'registration_date': '2013-01-01',
-                'phone_number': '88005553535',
-                'director_firstname': 'John',
-                'director_lastname': 'Doe',
-                'email': 'john@ongrid.pro',
-                'address': 'Moscow, Russia',
-                'field_of_activity': 'Drugs',
-                'beneficial_fullname': 'John Doe',
-                'beneficial_personal_id': '1488123',
-                'beneficial_birthdate': '1990-01-01',
-                'beneficial_place_of_birth': 'Moscow, Russia',
-                'beneficial_place_of_residence': 'Moscow, Russia',
-                'is_pep': True,
-                'id_document_photo': photo,
-                'bill_photo': bill
+                'type': 'NATURAL',
+                'firstname': 'John',
+                'lastname': 'Doe',
+                'place_of_birth': 'Moscow, Russia',
+                'birth_date': '1990-01-01',
+                'peronal_id': '1488123',
+                'phone_number': '+79999999999',
+                'email': 'gordon@ongrid.pro',
+                'place_of_residence': 'Moscow, Russia',
+                'profession': 'Medic',
+                'id_document_photo': photo
             })
         self.assertEqual(KYC.objects.count(), 1)
 
         rmtree(settings.MEDIA_ROOT, ignore_errors=True)
 
         with open(fixture_path('document.jpg'), 'rb') as photo, \
-             open(fixture_path('bill.jpg'), 'rb') as bill, \
-             open(fixture_path('basis.jpg'), 'rb') as basis:  # noqa
-            response = self.client.post('/api/kyc/upd/', {
-                'type': 'LEGAL',
-                'business_name': 'Vector',
-                'registration_umber': '13123123123',
-                'registration_date': '2013-01-01',
-                'phone_number': '88005553535',
-                'director_firstname': 'John',
-                'director_lastname': 'Doe',
-                'basis_doc': basis,  # !!!
-                'email': 'john@ongrid.pro',
-                'address': 'Moscow, Russia',
-                'field_of_activity': 'Drugs',
-                'beneficial_fullname': 'John Doe',
-                'beneficial_personal_id': '1488123',
-                'beneficial_birthdate': '1990-01-01',
-                'beneficial_place_of_birth': 'Moscow, Russia',
-                'beneficial_place_of_residence': 'Moscow, Russia',
-                'is_pep': True,
+             open(fixture_path('bill.jpg'), 'rb') as bill: # noqa
+            response = self.client.put('/api/kyc/', {
+                'type': 'NATURAL',
+                'firstname': 'John',
+                'lastname': 'Doe',
+                'place_of_birth': 'Moscow, Russia',
+                'birth_date': '1990-01-01',
+                'peronal_id': '1488123',
+                'phone_number': '+79999999999',
+                'email': 'gordon@ongrid.pro',
+                'place_of_residence': 'Moscow, Russia',
+                'profession': 'Medic',
                 'id_document_photo': photo,
                 'bill_photo': bill
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data, self._expected_legal)
+        self.assert_response_natural(response)
+
+    def test_upload_multiple_files(self):
+        with open(fixture_path('document.jpg'), 'rb') as photo, \
+             open(fixture_path('bill.jpg'), 'rb') as bill:
+            response = self.client.post('/api/kyc/', {
+                'type': 'NATURAL',
+                'firstname': 'John',
+                'lastname': 'Doe',
+                'place_of_birth': 'Moscow, Russia',
+                'birth_date': '1990-01-01',
+                'peronal_id': '1488123',
+                'phone_number': '+79999999999',
+                'email': 'gordon@ongrid.pro',
+                'place_of_residence': 'Moscow, Russia',
+                'profession': 'Medic',
+                'id_document_photo': [photo, bill]
+            })
+
+        self.assertEqual(response.status_code, 201)
+        self.assertListEqual(response.data['attachments'], [
+            {
+                'file': 'http://testserver/media/kyc/1/id_document_photo/document.jpg',
+                'filename': 'document.jpg',
+                'mime_type': 'image/jpeg',
+                'size': 30236,
+                'type': 'id_document_photo'
+            },
+            {
+                'file': 'http://testserver/media/kyc/1/id_document_photo/bill.jpg',
+                'filename': 'bill.jpg',
+                'mime_type': 'image/jpeg',
+                'size': 9566,
+                'type': 'id_document_photo'
+            }
+        ])

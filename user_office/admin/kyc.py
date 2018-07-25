@@ -4,6 +4,7 @@ from django_object_actions import DjangoObjectActions
 
 from user_office.models import KYC
 from blockchain.ico.services import ApproveKYC
+from .inlines import KYCAttachmentsInline
 
 
 @admin.register(KYC)
@@ -13,9 +14,11 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
 
     change_actions = ['approve_kyc', 'decline_kyc']
 
+    inlines = [KYCAttachmentsInline]
+
     fieldsets = (
         (None, {
-            'fields': ('investor', 'state', 'type', 'id_document_photo', 'bill_photo', 'ticket')
+            'fields': ('investor', 'state', 'type', 'ticket')
         }),
         ('Natural Person', {
             'fields': (('firstname', 'lastname'), ('place_of_birth', 'birthdate'), 'personal_id',
@@ -24,7 +27,7 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
         }),
         ('Legal Person', {
             'fields': ('business_name', ('registration_number', 'registration_date'), 'phone_number',
-                       ('director_firstname', 'director_lastname'), 'basis_doc', 'email', 'address', 'field_of_activity',
+                       ('director_firstname', 'director_lastname'), 'email', 'address', 'field_of_activity',
                        ('beneficial_fullname', 'beneficial_personal_id'), ('beneficial_place_of_birth', 'beneficial_birthdate'),
                        'beneficial_place_of_residence', 'is_pep'),
             'classes': ('collapse', ),

@@ -1,7 +1,8 @@
 from django.urls import path
-from rest_framework.routers import SimpleRouter, Route, DefaultRouter
+from rest_framework.routers import DefaultRouter
 
 from .views import api as api_views
+from .routers import SingleObjectRouter
 
 
 api_urlpatterns = [
@@ -18,25 +19,11 @@ api_urlpatterns = [
     path('changeEmail/', api_views.change_email)
 ]
 
+default_router = DefaultRouter()
+default_router.register(r'tickets', api_views.TicketViewSet, base_name='tickets')
 
-class SingleObjectRouter(SimpleRouter):
-    routes = [
-        Route(
-            url=r'^{prefix}{trailing_slash}$',
-            mapping={
-                'get': 'retrieve',
-                'post': 'create',
-                'put': 'update'
-            },
-            name='{basename}-detail',
-            initkwargs={'suffix': 'Instance'},
-            detail=True
-        ),
-    ]
+single_obj_router = SingleObjectRouter()
+single_obj_router.register(r'kyc', api_views.KYCViewSet, base_name='kyc')
 
-
-router = DefaultRouter()
-router.register(r'tickets', api_views.TicketViewSet, base_name='tickets')
-router.register(r'kyc', api_views.KYCViewSet, base_name='kyc')
-
-api_urlpatterns += router.urls
+api_urlpatterns += default_router.urls
+api_urlpatterns += single_obj_router.urls
