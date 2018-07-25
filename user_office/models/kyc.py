@@ -1,4 +1,3 @@
-from functools import partial
 from django.db import models
 
 
@@ -48,8 +47,6 @@ class KYC(models.Model):
     director_firstname = models.CharField('First name of director', max_length=30, null=True, blank=True)
     director_lastname = models.CharField('Last Name of director', max_length=30, null=True, blank=True)
 
-    basis_doc = models.FileField('Basis for representation', upload_to=partial(kyc_photo_path, 'basis'), null=True, blank=True)
-
     address = models.CharField('Address', max_length=50, null=True, blank=True)
     field_of_activity = models.CharField('Field of activity', max_length=50, null=True, blank=True)
 
@@ -62,10 +59,10 @@ class KYC(models.Model):
     is_pep = models.NullBooleanField('Politically exposed person (PEP)')
 
     # both
-    id_document_photo = models.ImageField('Copy of identification document', upload_to=partial(kyc_photo_path, 'doc_photo'))
-    bill_photo = models.FileField('Utility bill', upload_to=partial(kyc_photo_path, 'bill_photo'))
     phone_number = models.CharField('Phone number', max_length=50, null=True, blank=True)
     email = models.EmailField('Email', null=True, blank=True)
+
+    objects = models.Manager()
 
     class Meta:
         ordering = ['id']
@@ -84,3 +81,32 @@ class KYC(models.Model):
     @property
     def waiting(self):
         return self.state == 'WAITING'
+
+
+KYC_ATTACHMENT_TYPE_CHOICES = (('basis_doc', 'Basis for representation'),
+                               ('id_document_photo', 'Copy of identification document'),
+                               ('bill_photo', 'Utility bill'))
+
+
+def kyc_attachment_path(instance, filename):
+    return f'kyc/{instance.kyc.investor.id}/{instance.type}/{filename}'
+
+
+class KYCAttachment(models.Model):
+    kyc = models.ForeignKey(KYC, on_delete=models.CASCADE, related_name='attachments')
+
+    type = models.CharField(max_length=30, choices=KYC_ATTACHMENT_TYPE_CHOICES)
+
+    file = models.FileField('File', upload_to=kyc_attachment_path, max_length=1000)
+    filename = models.CharField('Filename', max_length=1000)
+    mime_type = models.CharField('MIME Type', max_length=255)
+    size = models.IntegerField('Size', help_text='Size of this file in bytes')
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return f'KYC of {self.kyc.investor.email} {self.type} {self.filename}'
+
+    class Meta:
+        ordering = ['id']
+        db_table = 'kyc_attachments'

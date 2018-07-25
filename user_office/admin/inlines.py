@@ -1,5 +1,5 @@
 from django.contrib import admin
-from user_office.models import TokensMove, Transfer, KYC, Payment
+from user_office.models import TokensMove, Transfer, KYC, KYCAttachment, Payment
 from social_django.models import UserSocialAuth
 
 
@@ -13,6 +13,14 @@ class KYCInstanceInline(admin.TabularInline):
 
     fields = ('state', 'type')
     readonly_fields = fields
+
+
+class KYCAttachmentsInline(admin.TabularInline):
+    model = KYCAttachment
+    verbose_name = 'Attachmet'
+    verbose_name_plural = 'Attachmets'
+
+    field = ('type', 'file', 'filename', 'mime_type', 'size')
 
 
 class TransferInstanceInline(admin.TabularInline):
