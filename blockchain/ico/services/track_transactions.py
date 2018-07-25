@@ -149,7 +149,8 @@ class ResendTransaction(_Base):
             gas=old_txn.gas,
             gas_price=context.gas_price,
             txn_hash=context.signed.hash.hex(),
-            txn_id=old_txn.txn_id
+            txn_id=old_txn.txn_id,
+            state='SENT'
         )
 
         try:
@@ -160,7 +161,7 @@ class ResendTransaction(_Base):
             return self.fail(e)
 
     def return_result(self, context):
-        return self.success(result=f'Sent new transaction with txn_hash={context.txn_object.txn_hash} and gas_price={context.gas_price}')
+        return self.success(result=f'Resent transaction {context.new_txn.txn_id} with txn_hash={context.new_txn.txn_hash} and gas_price={context.gas_price}')
 
     def __call__(self, txn_object):
         return self.success(txn_object=txn_object) | \
@@ -211,6 +212,9 @@ class TrackTransactions(_Base):
     def nothing_to_do(self, txn_object):
         return self.success(txn_object=txn_object, result='Transaction not mined')
 
+    def no_txn_data(self, txn_object):
+        return self.success(txn_object=txn_object, result='Cant get transaction data, seems like txn with same txn_id was mined')
+
     @service_call
     @transactional
     def track_transaction(self, txn_object):
@@ -222,6 +226,9 @@ class TrackTransactions(_Base):
             return self.failed_due_mined(txn_object, mined_transaction)
 
         txn_data = self._get_transaction(txn_object.txn_hash)
+
+        if not txn_data:
+            return self.no_txn_data(txn_object)
 
         if txn_data.blockNumber is None:
             if datetime.utcnow() - txn_object.created_at > self._resend_timedelta:
