@@ -5,7 +5,6 @@ from social_django.utils import load_strategy, load_backend
 from social_django.views import _do_login
 
 from user_office.forms import SignUpForm
-from user_office.models import Investor
 
 
 class SignUpView(FormView):
@@ -15,13 +14,6 @@ class SignUpView(FormView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.request = None
-
-    def _get_referrer(self, request):
-        if 'refid' in request.POST:
-            referrer = Investor.objects.filter(referral_id=request.POST.get('refid'))
-
-            if referrer.exists():
-                return referrer.first()
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
