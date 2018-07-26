@@ -8,11 +8,9 @@
 
       if (val.length >= 6) ++status;
       if (/[A-Z]/.test(val)) {
-        if (status === 0) return;
         ++status;
       }
       if (/\d/.test(val)) {
-        if (status === 0) return;
         ++status;
       }
       return status;

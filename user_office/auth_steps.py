@@ -42,7 +42,7 @@ def user_password(strategy, backend, user, is_new=False, *args, **kwargs):
 
 def set_referrer(strategy, backend, user, is_new=False, *args, **kwargs):
     if 'refid' in strategy.request_data():
-        referrer = Investor.objects.filter(referral_ied=strategy.request_data()['refid'])
+        referrer = Investor.objects.filter(referral_id=strategy.request_data()['refid'])
 
         if referrer:
             user.referrer = referrer

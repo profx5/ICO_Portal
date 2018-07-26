@@ -2,7 +2,6 @@
 {% load static user_office_tags %}
 
 {% block title %}Sign Up{% endblock %}
-
 {% block content %}
     <div class="Signup Popup">
         <h2 class="Signup_head">Sign up</h2>
@@ -10,14 +9,18 @@
         {% if open %}
             <form method="post" class="Signup_form">
                 {% csrf_token %}
+                {% if request.GET.refid %}
+                    <input type="hidden" name="refid" value="{{ request.GET.refid }}">
+                {% endif %}
                 <div class="Signup_inputWrapper">
-                    <input type="text" class="Signup_input" placeholder="Your Email" name="email" id="email">
-                    <span class="Signup_error"></span>
+                    <input type="text" class="Signup_input" placeholder="Your Email" name="email" id="email"
+                           {% if form.email.value %}value="{{ form.email.value }}"{% endif %}>
+                    <span class="Signup_error">{{ form.email.errors }}</span>
                 </div>
                 <div class="Signup_inputWrapper">
                     <input type="password" class="Signup_input" placeholder="Password" name="password1"
-                           id="password">
-                    <span class="Signup_error"></span>
+                           id="id_password1">
+                    <span class="Signup_error">{{ form.password2.errors }}</span>
                     <div class="Signup_passwordComplexity" data-strength-state="">
                         <div class="Signup_complexityBar Signup_complexityBar-n1"></div>
                         <div class="Signup_complexityBar Signup_complexityBar-n2"></div>
@@ -26,7 +29,7 @@
                 </div>
                 <div class="Signup_inputWrapper Signup_inputWrapper-confirm">
                     <input type="password" class="Signup_input" placeholder="Confirm password" name="password2"
-                           id="confirm">
+                           id="id_password2">
                     <span class="Signup_error"></span>
                 </div>
                 <div class="Signup_checkboxWrapper Signup_inputWrapper">
@@ -36,7 +39,7 @@
                         Conditions</a></label>
                 </div>
                 <div class="g-recaptcha Signup_captcha" data-sitekey="{{ sitekey }}"></div>
-                <button type="submit" class="Signup_btn Btn Btn-filledPink Btn-hoverWhite">Sign up
+                <button type="submit" class="Signup_btn Btn Btn-filledPink Btn-hoverWhite auth-button">Sign up
                     <div class="Btn_iconWrapper Signup_btnIconWrapper">
                         <span class="Btn_icon Signup_btnIcon"></span>
                     </div>

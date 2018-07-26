@@ -8099,3 +8099,7 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
         margin: 0
     }
 }
+
+ul.errorlist {
+    list-style: none;
+}
