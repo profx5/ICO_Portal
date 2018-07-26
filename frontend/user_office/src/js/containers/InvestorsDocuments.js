@@ -86,7 +86,6 @@ class InvestorsDocuments extends React.Component {
         let callback = (target, obj) => {
             this.buildVisualFile(target, obj);
 
-
             $(target).closest('.block-file').find('.block-file-result').addClass('block-file-result-filled');
         }
 
