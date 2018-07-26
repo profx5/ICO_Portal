@@ -260,6 +260,7 @@ const Wrapper = styled.div`
     border-radius: 6px;
     .block-file {
         flex-basis: 100%;
+        z-index: 0;
     }
     .block-file-result {
         display: none;

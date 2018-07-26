@@ -46,7 +46,6 @@ export default FinalFormField;
 const Wrapper = styled.div`
     position: relative;
     height: 100%;
-    z-index: 2;
     .DayPickerInput {
         display: block;
         height: 100%;
