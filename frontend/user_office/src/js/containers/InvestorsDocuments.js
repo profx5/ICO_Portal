@@ -19,7 +19,8 @@ class InvestorsDocuments extends React.Component {
         $(document).ready(function() {
             $('.Verification__investorsDocuments').click(function(event) {
                 if ($(event.target).hasClass('file-clear')) {
-                    onRemoveFileHandler(event.target)
+                    let parent = $(event.target).closest('.block-file');
+                    onRemoveFileHandler(event.target, parent)
                 }
             })
         })
@@ -52,15 +53,17 @@ class InvestorsDocuments extends React.Component {
             `);
     }
 
-    onRemoveFileHandler = (target) => {
+    onRemoveFileHandler = (target, parent) => {
         let id = $(target).data
-        this.renderedFiles -= 1;
         $(target).closest('.block-file').find('input[type="file"]').val('');
 
-        if (this.renderedFiles === 0) {
-            $(target).closest('.block-file-result').removeClass('block-file-result-filled');
-        }
         $(target).closest('.visual-file-block').remove();
+
+        let siblings = $(parent).find('.visual-file-block');
+
+        if (siblings.length === 0) {
+            $(parent).closest('.block-file').find('.block-file-result').removeClass('block-file-result-filled');
+        }
 
     }
 
@@ -82,7 +85,7 @@ class InvestorsDocuments extends React.Component {
 
         let callback = (target, obj) => {
             this.buildVisualFile(target, obj);
-            this.incrementRenderedFiles();
+
 
             $(target).closest('.block-file').find('.block-file-result').addClass('block-file-result-filled');
         }
@@ -104,9 +107,6 @@ class InvestorsDocuments extends React.Component {
         }
     }
 
-    incrementRenderedFiles = () => {
-        this.renderedFiles = this.renderedFiles + 1;
-    }
 
     render() {
 
