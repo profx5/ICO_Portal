@@ -295,7 +295,7 @@ class Verification extends React.Component {
                     onSubmit={this.onSubmitHandler}
                     initialValues={initial}
                     render={() => (
-                        <Wrapper onSubmit={this.onSubmitHandler} id="form" className="Verification">
+                        <Wrapper onSubmit={this.onSubmitHandler} state={state} id="form" className="Verification">
                             <Header>
                                 <HeaderInner>
                                     <Head>Verification (KYC)</Head>
@@ -456,6 +456,9 @@ const Wrapper = styled.form`
     padding-bottom: 73px;
     display: flex;
     flex-flow: row wrap;
+    input, button, label {
+        pointer-events: ${props => props.state === 'APPROVED' && 'none'};
+    }
 `;
 
 const Header = styled.div`
