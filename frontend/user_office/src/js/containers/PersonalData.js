@@ -47,7 +47,7 @@ class PersonData extends React.Component {
                                         labelText="Date of birth" 
                                         name="birthdate" 
                                         required 
-                                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}/>
+                                        type="date"/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="Your personal identification code"
