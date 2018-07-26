@@ -1,8 +1,9 @@
 import requests
-from django.template import loader
-from django.core.mail import send_mail
-from django.urls import reverse
 from django.conf import settings
+from django.core.mail import send_mail
+from django.template import loader
+from django.urls import reverse
+from django.utils.html import strip_tags
 from social_core.pipeline.social_auth import social_user, AuthForbidden
 
 from user_office.models import Investor
@@ -50,16 +51,20 @@ def set_referrer(strategy, backend, user, is_new=False, *args, **kwargs):
 
 def send_validation_email(strategy, backend, code, partial_token):
     if not code.verified:
+        email = strategy.request_data().get('email', None)
         url = strategy.absolute_uri(
             '{0}?verification_code={1}&partial_token={2}'.format(
                 reverse('social:complete', args=(backend.name,)),
                 code.code,
                 partial_token))
-
-        content = loader.render_to_string('mail/validation.html', {'link': url})
-
-        send_mail('Activation ICO investor account', content,
-                  settings.DEFAULT_FROM_EMAIL, [code.email], fail_silently=True)
+        ctx = {
+            'link': url,
+            'email': email
+        }
+        html_content = loader.render_to_string('mail/validation.html', ctx)
+        text_content = strip_tags(html_content)
+        send_mail('Activation ICO investor account', text_content,
+                  settings.DEFAULT_FROM_EMAIL, [code.email], fail_silently=True, html_message=html_content)
 
 
 def check_recaptcha(backend, details, response, *args, **kwargs):
