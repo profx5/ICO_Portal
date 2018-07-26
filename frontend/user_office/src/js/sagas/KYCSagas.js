@@ -8,15 +8,16 @@ export class KYCSagas {
     static * submitKYC(action) {
 
         const type = action.payload.state;
-        const url = type !== 'WAITING' ? Api.kyc() : Api.kyc_upd();
+        const method = type !== 'WAITING' ? "POST" : "PUT";
         try {
             yield call(axios, {
-                url: url,
-                method: 'POST',
+                url: Api.kyc(),
+                method: method,
                 data: action.payload.form
             });
             yield put(KYCActions.submitKYCSuccessfull());
             yield call(KYCSagas.getKYC);
+            yield put(UIActions.setOpenedTip(7));
 
         } catch(e) {
             yield put(KYCActions.submitKYCFailed())

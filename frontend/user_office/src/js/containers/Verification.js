@@ -142,6 +142,30 @@ class Verification extends React.Component {
         setOpenedTip(null);
     }
 
+    onSubmitHandler = (e) => {
+        const {activeKycTab, openedTip, submitForm, kyc_required, state, setOpenedTip} = this.props;
+
+        e.preventDefault();
+
+        if (activeKycTab === 2) {
+            if ($('[name="basis_doc"]').val() === '') {
+                setOpenedTip(5);
+                return; 
+            }
+        }
+        
+        if ($('[name="id_document_photo"]').val() === '' || $('[name="bill_photo"]').val() === '') {
+            setOpenedTip(6);
+            return;
+        }
+
+        let data = new FormData(e.target);
+        submitForm({
+            form: data,
+            state: state
+        });
+    }
+
     render() {
         const {activeKycTab, openedTip, submitForm, kyc_required, state, setOpenedTip} = this.props;
         const initial = this.load();
@@ -254,33 +278,24 @@ class Verification extends React.Component {
                         </ModalContent>
                     </Modal>
                     }
+                    {openedTip === 7 &&
+                    <Modal>
+                        <ModalHeader>
+                            Congratulations
+                            <img onClick={this.closeTip} src={iconClose} alt=""/>
+                        </ModalHeader>
+                        <ModalContent>
+                            You've successfully send your data! Our managers are validating your data. Soon the status will be updated!
+                        </ModalContent>
+                    </Modal>
+                    }
                 </ModalWrapper>
                 }
                 <Form
                     onSubmit={this.onSubmitHandler}
                     initialValues={initial}
                     render={() => (
-                        <Wrapper onSubmit={(function (e) {
-                            e.preventDefault();
-
-                            if (activeKycTab === 2) {
-                                if ($('[name="basis_doc"]').val() === '') {
-                                    setOpenedTip(5);
-                                    return; 
-                                }
-                            }
-                            
-                            if ($('[name="id_document_photo"]').val() === '' || $('[name="bill_photo"]').val() === '') {
-                                setOpenedTip(6);
-                                return;
-                            }
-
-                            let data = new FormData(e.target);
-                            submitForm({
-                                form: data,
-                                state: state
-                            });
-                        })} id="form" className="Verification">
+                        <Wrapper onSubmit={this.onSubmitHandler} id="form" className="Verification">
                             <Header>
                                 <HeaderInner>
                                     <Head>Verification (KYC)</Head>

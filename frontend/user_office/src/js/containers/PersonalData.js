@@ -43,7 +43,11 @@ class PersonData extends React.Component {
                         <FinalFormField placeholder="Your place of birth" labelText="Place of birth" name="place_of_birth" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="date / month / year" labelText="Date of birth" type="date" name="birthdate" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Year - month - day" 
+                                        labelText="Date of birth" 
+                                        name="birthdate" 
+                                        required 
+                                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="Your personal identification code"
@@ -59,7 +63,7 @@ class PersonData extends React.Component {
                                         required/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your email" labelText="Email" name="email" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Your email" labelText="Email" type="email" name="email" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="Address" labelText="Place of residence" name="place_of_residence" required options={{delimiter: ''}}/>
