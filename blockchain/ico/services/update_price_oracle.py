@@ -22,10 +22,10 @@ class UpdatePriceOracle(ServiceObject):
         last_update = POUpdate.objects.last()
 
         if last_update:
-            txn = Transaction.objects.get(txn_id=last_update.txn_id)
+            txn = Transaction.objects.filter(txn_id=last_update.txn_id, state__in=['PREPARED', 'SENT'])
 
-            if txn.state in ('PREPARED', 'SENT'):
-                self._update_context(txn=txn, po_update=last_update)
+            if txn.exists():
+                self._update_context(txn_id=last_update.txn_id, po_update=last_update)
 
                 return PendingUpdateExists(self._context)
 

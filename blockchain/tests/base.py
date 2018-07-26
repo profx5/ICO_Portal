@@ -123,8 +123,8 @@ class BlockChainTestCase(TestCase):
 
     def setUp(self):
         if self.setup_eth_tester:
-            self.eth_tester.revert_to_snapshot(self.base_snapshot_id)
             self.eth_tester.enable_auto_mine_transactions()
+            self.eth_tester.revert_to_snapshot(self.base_snapshot_id)
 
         self.utcnow = datetime.utcnow()
         self.stub_datetime_utcnow(self.utcnow)
