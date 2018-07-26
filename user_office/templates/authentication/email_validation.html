@@ -1,1 +1,12 @@
-We have sent you an email. Follow the link in email to continue registration.
+{% extends "authentication/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="Signin Popup">
+        <h2 class="Signin_head" style="padding-bottom: 20px;">Email verification</h2>
+        <p class="Signin_text">
+            We have sent you an email. Follow the link in email to continue registration.
+        </p>
+    </div>
+{% endblock %}
