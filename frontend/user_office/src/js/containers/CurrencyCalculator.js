@@ -31,7 +31,13 @@ class CurrencyCalculator extends React.Component {
     openKYCTip = (e) => {
         e.preventDefault();
         const {setOpenedTip} = this.props;
-        setOpenedTip(4);
+        setOpenedTip(8);
+    };
+
+    openEthSetTip = e => {
+        e.preventDefault();
+        const {setOpenedTip} = this.props;
+        setOpenedTip(9);
     };
 
     updateTotalTokens = () => {
@@ -64,6 +70,12 @@ class CurrencyCalculator extends React.Component {
         this.updateTotalTokens();
     };
 
+    showSetAccountPopupAndCloseTip = e => {
+        e.preventDefault();
+        const {setOpenedTip, showSetAccountPopup} = this.props;
+        setOpenedTip(null);
+        showSetAccountPopup();
+    };
 
     render() {
         const {
@@ -73,26 +85,60 @@ class CurrencyCalculator extends React.Component {
             USDAmount,
             tokensAmount,
             kycState,
-            openedTip
+            openedTip,
+            ethAccount,
+            type
         } = this.props;
 
-        let kycPassed = kycState !== 'DECLINED';
+        let ethSet = !!ethAccount;
+        let kycSended = !!type;
+        let kycApproved = kycState === 'APPROVED';
         let bonus = this.bonus;
         let header = investCurrency ? "Amount, min " + (8000 / investCurrencyRate).toFixed(3) + " " + investCurrency : 'Amount';
         this.initialUpdate();
-
         return (
             <Wrapper>
-                {openedTip === 4 &&
+                {openedTip === 8 &&
                 <ModalWrapper>
                     <Modal>
                         <ModalHeader>
                             Verification required
                             <img onClick={this.closeTip} src={iconClose} alt=""/>
                         </ModalHeader>
+                        {!kycSended &&
                         <ModalContent>
-                            Sorry, but you are not allowed to buy tokens yet. Please <Link onClick={this.closeTip}
-                            to='/user_office/verification/'>pass KYC</Link> procedure first!
+                            Sorry, but you are not allowed to buy tokens yet. Please <Link className='link'
+                                                                                           onClick={this.closeTip}
+                                                                                           to='/user_office/verification/'>pass
+                            KYC</Link> procedure first!
+                        </ModalContent>
+                        }
+                        {kycSended && kycState === 'WAITING' &&
+                        <ModalContent>
+                            Sorry, but you are not allowed to buy tokens yet. Please wait while we validate info you
+                            provided.
+                        </ModalContent>
+                        }
+                        {kycSended && kycState === 'DECLINED' &&
+                        <ModalContent>
+                            Sorry, but you are not allowed to buy tokens yet. Your KYC was declined. Please <Link className='link'
+                        onClick={this.closeTip} to='/user_office/support/'>contact our support</Link>.
+                        </ModalContent>
+                        }
+                    </Modal>
+                </ModalWrapper>
+                }
+                {openedTip === 9 &&
+                <ModalWrapper>
+                    <Modal>
+                        <ModalHeader>
+                            ETH Account required
+                            <img onClick={this.closeTip} src={iconClose} alt=""/>
+                        </ModalHeader>
+                        <ModalContent>
+                            Sorry, but you are not allowed to buy tokens yet. Please <span className='link'
+                                                                                           onClick={this.showSetAccountPopupAndCloseTip}>add
+                            your ETH account</span> to get tokens.
                         </ModalContent>
                     </Modal>
                 </ModalWrapper>
@@ -111,7 +157,8 @@ class CurrencyCalculator extends React.Component {
 
                     <ButtonWrapper to="/user_office/payment/buy">
                         <Button disabled={USDAmount < 8000}
-                                clickHandler={kycPassed ? this.investClickHandler : this.openKYCTip} text="Buy"/>
+                                clickHandler={ethSet ? kycApproved ? this.investClickHandler : this.openKYCTip : this.openEthSetTip}
+                                text="Buy"/>
                     </ButtonWrapper>
                 </WrapperInner>
 
@@ -121,19 +168,23 @@ class CurrencyCalculator extends React.Component {
                     <div>
                         <ul>
                             <li>You pay {investAmount} {investCurrency} </li>
-                            <li>Which is equal to {investAmount} * {investCurrencyRate} USD = {USDAmount.toFixed(2)} USD</li>
+                            <li>Which is equal to {investAmount} * {investCurrencyRate} USD
+                                = {USDAmount.toFixed(2)} USD
+                            </li>
                             <li>Token base price = 2 USD</li>
                             {USDAmount >= 8000 &&
-                                 <div>
-                                     <li>Pre-Sale phase {bonus}% bonus applied so you get</li>
-                                     <li>{USDAmount.toFixed(2)} / 2 * 1{bonus}% = {tokensAmount.toFixed(2)} VERA</li>
-                                 </div>
+                            <div>
+                                <li>Pre-Sale phase {bonus}% bonus applied so you get</li>
+                                <li>{USDAmount.toFixed(2)} / 2 * 1{bonus}% = {tokensAmount.toFixed(2)} VERA</li>
+                            </div>
                             }
                             {USDAmount < 8000 &&
-                                <div>
-                                    <li>It's less than minimum purchase of $ 8000 </li>
-                                    <li>Please enter amount {(8000 / investCurrencyRate).toFixed(3)} {investCurrency} or more</li>
-                                </div>
+                            <div>
+                                <li>It's less than minimum purchase of $ 8000</li>
+                                <li>Please enter amount {(8000 / investCurrencyRate).toFixed(3)} {investCurrency} or
+                                    more
+                                </li>
+                            </div>
                             }
 
 
@@ -150,7 +201,7 @@ class CurrencyCalculator extends React.Component {
     }
 };
 
-const mapStateToProps = ({Currencies, Invest, UI, KYC}) => ({
+const mapStateToProps = ({Currencies, Invest, UI, KYC, user}) => ({
     investCurrency: Currencies.get('investCurrency'),
     investCurrencyRate: Currencies.get('investCurrencyRate'),
     investAmount: Invest.get('investAmount'),
@@ -158,7 +209,9 @@ const mapStateToProps = ({Currencies, Invest, UI, KYC}) => ({
     USDAmount: Invest.get('USDAmount'),
     bonusPercent: 0,
     kycState: KYC.get('state'),
+    type: KYC.get('type'),
     openedTip: UI.get('openedTip'),
+    ethAccount: user.get('eth_account'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -179,7 +232,10 @@ const mapDispatchToProps = (dispatch) => ({
     },
     setOpenedTip(id) {
         dispatch(UIActions.setOpenedTip(id))
-    }
+    },
+    showSetAccountPopup() {
+        dispatch(UIActions.showSetAccountPopup())
+    },
 })
 
 
@@ -240,11 +296,12 @@ const ModalContent = styled.div`
     color: #0a0a0a;
     overflow-y: auto;
     max-height: 52.5vh;
-    & span {
+    & span~.link {
         font-weight: bold;
     }
-    & a {
+    & .link {
         text-decoration: underline;
+        cursor: pointer;
     }
 `;
 
