@@ -6,6 +6,7 @@ from django.conf import settings
 
 
 class PasswordResetView(PasswordResetViewBase):
+    html_email_template_name = 'authentication/password_reset_email.html'
     email_template_name = 'authentication/password_reset_email.html'
     subject_template_name = 'authentication/password_reset_subject.txt'
     template_name = 'authentication/password_reset_form.html'
