@@ -39,12 +39,6 @@ const FinalFormCheckbox = ({labelText, name, values, options, icon, handler, req
 
 export default FinalFormCheckbox;
 
-const IconImg = styled.img`
-    width: 16px;
-    height: 16px;
-    margin-left: 5px;
-`;
-
 const Wrapper = styled.div`
     position: relative;
     height: 100%;
@@ -82,4 +76,10 @@ const RadioLabel = styled.label`
         border: 1px solid #d6dfe6;
         margin-right: 8px;
     }
+`;
+
+const IconImg = styled.img`
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
 `;

@@ -39,8 +39,8 @@ const Account = ({
                 {isDropdownAccountOpen &&
                     <DropdownAccount>
                         <StepsList>
-                            <StepsListItem passed={stepOnePassed} onClick={!stepOnePassed ? showSetAccountPopup:undefined}>1.&nbsp;&nbsp;ETH wallet registration</StepsListItem>
-                            <StepsListItem passed={stepTwoPassed}><Link to='/user_office/verification/'>2.&nbsp;&nbsp;Pass KYC</Link></StepsListItem>
+                            <StepsListItem passed={stepOnePassed} onClick={!stepOnePassed ? showSetAccountPopup:undefined}>1.&nbsp;&nbsp;Provide your ETH address</StepsListItem>
+                            <StepsListItem passed={stepTwoPassed}><Link to='/user_office/verification/'>2.&nbsp;&nbsp;Submit KYC</Link></StepsListItem>
                             <StepsListItem passed={stepThreePassed}><Link to={stepTwoPassed ? '/user_office/payment/':''}>3.&nbsp;&nbsp;Buy tokens</Link></StepsListItem>
                         </StepsList>
                         <EmailInfo>

@@ -2,8 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
-import iconQuestion from './../../img/icons/icon_faq.svg';
 
+import iconQuestion from './../../img/icons/icon_faq.svg';
+import iconCheck from './../../img/icons/icon_check.svg';
 
 import * as KYCActions from './../actions/KYCActions';
 import * as UIActions from './../actions/UIActions';
@@ -83,7 +84,7 @@ class PersonData extends React.Component {
 
                 <RadioSet className="RadioSet RadioSet-2">
                     <p className="text">Are you a <span onClick={this.setOpenedTip.bind(this, 3)}>politically exposed person</span> (PEP),
-                        family member of PEP or person known to be close associate of PEP?</p>
+                        family member of PEP or person known to be close associate of PEP? <IconImg onClick={this.setOpenedTip.bind(this, 3)} src={iconQuestion}/></p>
                     <FinalFormRadio name="is_pep" options={['Yes', 'No']} values={["True", "False"]}/>
                 </RadioSet>
             </Wrapper>
@@ -158,6 +159,7 @@ const InputSet = styled.div`
 `;
 
 const RadioSet = styled.div`
+    position: relative;
     &.RadioSet {
         &-1 {
             margin: 33px 0;
@@ -186,4 +188,13 @@ const InputWrapper = styled.div`
     &:last-child {
         margin-bottom: 40px;
     }
+`;
+
+const IconImg = styled.img`
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+    position: relative;
+    top: 3px;
+    cursor: pointer;
 `;
