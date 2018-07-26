@@ -33,7 +33,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
