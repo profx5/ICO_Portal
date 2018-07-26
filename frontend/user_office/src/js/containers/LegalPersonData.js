@@ -140,7 +140,11 @@ class LegalPersonData extends React.Component {
                         <FinalFormField placeholder="Your registration number" labelText="Registration number" name="registration_number" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your date of registration" labelText="Date of registration" name="registration_date" required type="date"/>
+                        <FinalFormField placeholder="Year - month - day" 
+                                        labelText="Date of registration" 
+                                        name="registration_date" 
+                                        required 
+                                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="Your phone number"  labelText="Phone number" options={{numericOnly: true, prefix:'+', noImmediatePrefix: true}} name="phone_number" required/>
@@ -155,6 +159,15 @@ class LegalPersonData extends React.Component {
                     <div className="block-file">
                         <p className="text">Basis for representation</p>
                         <ButtonWrapper>
+                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
+                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
+                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
+                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
+                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
+                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
+                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
+                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
+                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
                             <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
                             <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
                         </ButtonWrapper>
@@ -188,7 +201,11 @@ class LegalPersonData extends React.Component {
                         <FinalFormField placeholder="Your place of birth" labelText="Place of birth" name="beneficial_place_of_birth" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="date/month/year" labelText="Date of birth" type="date" name="beneficial_birthdate" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Year - month - day" 
+                                        labelText="Date of birth" 
+                                        name="beneficial_birthdate" 
+                                        required
+                                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}/>
                     </InputWrapper>
                     <InputWrapper fullWidth>
                         <FinalFormField placeholder="Your place of residence of the beneficial owner(s)" labelText="Place of residence of the beneficial owner(s)" name="beneficial_place_of_residence" required options={{delimiter: ''}}/>

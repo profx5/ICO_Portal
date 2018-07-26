@@ -35,10 +35,6 @@ class Api {
         return `${this.prefix}/kyc/`
     }
 
-    kyc_upd() {
-        return `${this.prefix}/kyc/upd/`
-    }
-
     setEthAccount() {
         return `${this.prefix}/setEthAccount/`
     }

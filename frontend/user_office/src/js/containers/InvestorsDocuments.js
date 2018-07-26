@@ -120,6 +120,15 @@ class InvestorsDocuments extends React.Component {
                         holder</p>
                     <ButtonWrapper>
                         <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
                         <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
                     </ButtonWrapper>
                     <div className="block-file-result">
@@ -132,6 +141,15 @@ class InvestorsDocuments extends React.Component {
                         services), bank or credit card statement, tax bill or notice or voter’s card or similar document
                         bearing the investor’s name and address (the document must not be older than six months.</p>
                     <ButtonWrapper>
+                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
                         <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
                         <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
                     </ButtonWrapper>

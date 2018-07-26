@@ -142,6 +142,30 @@ class Verification extends React.Component {
         setOpenedTip(null);
     }
 
+    onSubmitHandler = (e) => {
+        const {activeKycTab, openedTip, submitForm, kyc_required, state, setOpenedTip} = this.props;
+        
+        e.preventDefault();
+
+        if (activeKycTab === 2) {
+            if ($('[name="basis_doc"]').val() === '') {
+                setOpenedTip(5);
+                return; 
+            }
+        }
+        
+        if ($('[name="id_document_photo"]').val() === '' || $('[name="bill_photo"]').val() === '') {
+            setOpenedTip(6);
+            return;
+        }
+
+        let data = new FormData(e.target);
+        submitForm({
+            form: data,
+            state: state
+        });
+    }
+
     render() {
         const {activeKycTab, openedTip, submitForm, kyc_required, state, setOpenedTip} = this.props;
         const initial = this.load();
@@ -260,27 +284,7 @@ class Verification extends React.Component {
                     onSubmit={this.onSubmitHandler}
                     initialValues={initial}
                     render={() => (
-                        <Wrapper onSubmit={(function (e) {
-                            e.preventDefault();
-
-                            if (activeKycTab === 2) {
-                                if ($('[name="basis_doc"]').val() === '') {
-                                    setOpenedTip(5);
-                                    return; 
-                                }
-                            }
-                            
-                            if ($('[name="id_document_photo"]').val() === '' || $('[name="bill_photo"]').val() === '') {
-                                setOpenedTip(6);
-                                return;
-                            }
-
-                            let data = new FormData(e.target);
-                            submitForm({
-                                form: data,
-                                state: state
-                            });
-                        })} id="form" className="Verification">
+                        <Wrapper onSubmit={this.onSubmitHandler} id="form" className="Verification">
                             <Header>
                                 <HeaderInner>
                                     <Head>Verification (KYC)</Head>
