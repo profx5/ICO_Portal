@@ -78,7 +78,7 @@ def update_price_oracle():
         logger.info(f'PriceOracle rate update wasnt complete due to too low rate chage,'
                     f'actual_rate={result.value.actual_rate}, oracle_rate={result.value.oracle_rate}')
     elif isinstance(result, PendingUpdateExists):
-        logger.info(f'Found Transaction with txn_id={result.value.txn.txn_id} and state {result.value.txn.state}. '
+        logger.info(f'Found Transaction with txn_id={result.value.txn_id} which is not mined. '
                     'Skiping PriceOracle rate update until transaction is mined')
     elif isinstance(result, Right):
         logger.info(f'PriceOracle rate successfully updated POUpdate.id={result.value.po_update.id} new_rate={result.value.new_rate}')

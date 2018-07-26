@@ -1,11 +1,13 @@
 from oslash import Right
 from decimal import Decimal
+from datetime import timedelta
 
 from ..base import BlockChainTestCase
-from blockchain.ico.services import UpdatePriceOracle, SendPreparedTxns
+from blockchain.ico.services import UpdatePriceOracle, SendPreparedTxns, \
+    TrackTransactions
 from blockchain.ico.services.update_price_oracle import TooLowChange, PendingUpdateExists
 from user_office.factories import ExchangeRateFactory
-from user_office.models import POUpdate
+from user_office.models import POUpdate, Transaction
 
 
 class TestUpdatePriceOracle(BlockChainTestCase):
@@ -18,6 +20,7 @@ class TestUpdatePriceOracle(BlockChainTestCase):
 
         result = UpdatePriceOracle()()
         self.assertIsInstance(result, Right)
+        self.assertNotIsInstance(result, TooLowChange)
 
         send_txn_result = SendPreparedTxns().send_prepared_transaction(result.value.transaction)
         self.assertIsInstance(send_txn_result, Right)
@@ -32,11 +35,19 @@ class TestUpdatePriceOracle(BlockChainTestCase):
         self.assertEqual(po_update.new_rate, rate.rate_cents)
 
     def test_pending_update(self):
+        self.eth_tester.disable_auto_mine_transactions()
         ExchangeRateFactory(currency='ETH', rate=Decimal('532.20'))
 
         result_pending = UpdatePriceOracle()()
         self.assertIsInstance(result_pending, Right)
         self.assertEqual(POUpdate.objects.count(), 1)
+
+        SendPreparedTxns()()
+        TrackTransactions()()
+        utcnow = self.utcnow + timedelta(hours=1)
+        self.stub_datetime_utcnow(utcnow)
+        TrackTransactions()()
+        self.assertEqual(Transaction.objects.count(), 2)
 
         result_skip = UpdatePriceOracle()()
         self.assertIsInstance(result_skip, PendingUpdateExists)
