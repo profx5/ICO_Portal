@@ -144,7 +144,7 @@ class LegalPersonData extends React.Component {
                                         labelText="Date of registration" 
                                         name="registration_date" 
                                         required 
-                                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}/>
+                                        type="date"/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="Your phone number"  labelText="Phone number" options={{numericOnly: true, prefix:'+', noImmediatePrefix: true}} name="phone_number" required/>
@@ -205,7 +205,7 @@ class LegalPersonData extends React.Component {
                                         labelText="Date of birth" 
                                         name="beneficial_birthdate" 
                                         required
-                                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiters: ['-']}}/>
+                                        type="date"/>
                     </InputWrapper>
                     <InputWrapper fullWidth>
                         <FinalFormField placeholder="Your place of residence of the beneficial owner(s)" labelText="Place of residence of the beneficial owner(s)" name="beneficial_place_of_residence" required options={{delimiter: ''}}/>

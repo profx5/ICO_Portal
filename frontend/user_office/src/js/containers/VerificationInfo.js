@@ -19,16 +19,15 @@ class VerificationInfo extends React.Component {
     }
 
     stageTracker = () => {
-        let stickyElOffset = $('.VerificationInfo').offset(),
-            sectionName, $section, sectionOffset;
+        let sectionName, $section, sectionOffset;
         const addStageOffset = this.addStageOffset;
 
         $('[data-bind-to]').each(function(index, item) {
             sectionName = $(item).data('bind-to');
             $section = $(`.${sectionName}`);
             sectionOffset = $section.offset();
-            if (stickyElOffset.top >= (sectionOffset.top - addStageOffset) &&
-                stickyElOffset.top <= (sectionOffset.top + $section.height())) {
+            if ($('.VerificationInfo').offset().top >= (sectionOffset.top - addStageOffset) &&
+                $('.VerificationInfo').offset().top <= (sectionOffset.top + $section.height())) {
                     $('[data-bind-to]').removeClass('active');
                     $(`[data-bind-to=${sectionName}]`).addClass('active');
             }
