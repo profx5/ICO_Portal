@@ -20,15 +20,14 @@ const Account = ({
     stepTwoPassed,
     stepThreePassed,
     stepsPassed,
-    showSetAccountPopup}) => {
+    showSetAccountPopup,
+    showSetAccount}) => {
     return (
         <InfoWrapper>
             <Balance>
                 <img src={walletIcon}/>
                 <p>{(tokensAmount / 10 ** 18).toFixed(2)} <span>VERA</span></p>
             </Balance>
-
-
 
             <AccountInfo>
                 <AccountInfoText onClick={dropdownAccountClickHandler}>
@@ -40,8 +39,15 @@ const Account = ({
                     <DropdownAccount>
                         <StepsList>
                             <StepsListItem passed={stepOnePassed} onClick={!stepOnePassed ? showSetAccountPopup:undefined}>1.&nbsp;&nbsp;Provide your ETH address</StepsListItem>
-                            <StepsListItem passed={stepTwoPassed}><Link to='/user_office/verification/'>2.&nbsp;&nbsp;Submit KYC</Link></StepsListItem>
-                            <StepsListItem passed={stepThreePassed}><Link to={stepTwoPassed ? '/user_office/payment/':''}>3.&nbsp;&nbsp;Buy tokens</Link></StepsListItem>
+                            <StepsListItem passed={stepTwoPassed}>
+                                {stepOnePassed &&
+                                    <Link to='/user_office/verification/'>2.&nbsp;&nbsp;Submit KYC</Link>
+                                }
+                                {!stepOnePassed &&
+                                    <span onClick={showSetAccount}>2.&nbsp;&nbsp;Submit KYC</span>
+                                }
+                            </StepsListItem>
+                            <StepsListItem passed={stepThreePassed}><Link to='/user_office/payment/'>3.&nbsp;&nbsp;Buy tokens</Link></StepsListItem>
                         </StepsList>
                         <EmailInfo>
                             <div className="text">Your profile:</div>
@@ -52,7 +58,12 @@ const Account = ({
                                 <Link to="/user_office/settings">Account settings</Link>
                             </NavListItem>
                             <NavListItem onClick={dropdownAccountClickHandler}>
+                                {stepOnePassed &&
                                 <Link to="/user_office/verification">Verification</Link>
+                                }
+                                {!stepOnePassed &&
+                                    <span onClick={showSetAccount}>Verification</span>
+                                }
                             </NavListItem>
                         </NavList>
                         <LogoutLink href='/logout/'>

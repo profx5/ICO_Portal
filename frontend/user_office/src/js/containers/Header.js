@@ -5,7 +5,7 @@ import * as UIActions from '../actions/UIActions';
 
 import HeaderNav from '../components/HeaderNav';
 import Account from '../components/Account';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class Header extends React.Component {
 
@@ -22,6 +22,11 @@ class Header extends React.Component {
             showStepsDropdown();
         } else hideStepsDropdown();
     }
+
+    showSetAccount = () => {
+        const {showSetAccountPopup} = this.props;
+        showSetAccountPopup();
+    };
 
     render() {
         const {
@@ -44,10 +49,9 @@ class Header extends React.Component {
 
         let stepOnePassed = ethAccount ? true : false;
         let stepTwoPassed = kycState !== 'DECLINED';
-        let stepThreePassed = tokensAmount > 0; 
+        let stepThreePassed = tokensAmount > 0;
 
         let stepsPassedNumber = stepOnePassed + stepTwoPassed + stepThreePassed;
-
 
 
         return (
@@ -59,16 +63,17 @@ class Header extends React.Component {
                 <HeaderUser>
                     <Account
                         email={email}
-                        tokensAmount={tokensAmount} 
+                        tokensAmount={tokensAmount}
                         isDropdownAccountOpen={accountDropdownShown}
                         isDropdownStepsOpen={stepsDropdownShown}
                         dropdownAccountClickHandler={this.dropdownAccountClickHandler}
-                        dropdownStepsClickHandler={this.dropdownStepsClickHandler} 
-                        stepOnePassed={stepOnePassed} 
-                        stepTwoPassed={stepTwoPassed} 
-                        stepThreePassed={stepThreePassed} 
+                        dropdownStepsClickHandler={this.dropdownStepsClickHandler}
+                        stepOnePassed={stepOnePassed}
+                        stepTwoPassed={stepTwoPassed}
+                        stepThreePassed={stepThreePassed}
                         stepsPassed={stepsPassedNumber}
                         showSetAccountPopup={showSetAccountPopup}
+                        showSetAccount={this.showSetAccount}
                     />
                 </HeaderUser>
             </HeaderBlock>

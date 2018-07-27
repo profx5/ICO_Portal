@@ -119,11 +119,6 @@ class Verification extends React.Component {
         }
     }
 
-    onSubmitHandler = event => {
-        event.preventDefault();
-        alert('bro')
-    }
-
     tabClickHandler = (event) => {
         const {activateKycTab, changeType} = this.props;
 
