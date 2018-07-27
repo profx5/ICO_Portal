@@ -168,7 +168,7 @@ class Verification extends React.Component {
         return (
             <div>
                 {openedTip &&
-                <ModalWrapper>
+                <ModalWrapper className="ModalWrapper">
                     {openedTip === 1 &&
                     <Modal>
                         <ModalHeader>

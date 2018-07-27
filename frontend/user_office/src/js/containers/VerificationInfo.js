@@ -57,7 +57,7 @@ class VerificationInfo extends React.Component {
                     {status !== 'APPROVED' &&
                     
                     <ButtonWrapper>
-                        <Button type="submit" text={btnText}/>
+                        <Button type="submit" text={status === 'WAITING' ? 'Update data' : btnText}/>
                     </ButtonWrapper>
                     }
                 <VerificationState kycState={status}/>
