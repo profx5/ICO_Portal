@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
+import moment from 'moment';
 
 import iconQuestion from './../../img/icons/icon_faq.svg';
 import iconCheck from './../../img/icons/icon_check.svg';
@@ -14,6 +15,19 @@ import FinalFormCheckbox from './../components/FinalFormCheckbox';
 import FinalFormRadio from './../components/FinalFormRadio';
 
 class PersonData extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+          dateOfBirth: moment()
+        };
+    }
+
+    updateDate = (date) => {
+        this.setState({
+            dateOfBirth: date
+        })
+    }
 
     uploadOnClickHandler = (event) => {
         $(event.currentTarget).find('input[type="file"]').click();
@@ -46,6 +60,8 @@ class PersonData extends React.Component {
                     <InputWrapper>
                         <FinalFormField placeholder="Year - month - day" 
                                         labelText="Date of birth" 
+                                        initialValue={this.state.dateOfBirth}
+                                        onChangeHandler={this.updateDate} 
                                         name="birthdate" 
                                         required 
                                         type="date"/>
