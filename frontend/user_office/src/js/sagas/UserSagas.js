@@ -69,30 +69,32 @@ export class UserSagas {
     }
 
     static * changePassowrd(action) {
-        const response = yield call(axios, {
-            url: Api.changePassword(),
-            method: 'POST',
-            data: action.payload
-        })
+        try {
+            const response = yield call(axios, {
+                url: Api.changePassword(),
+                method: 'POST',
+                data: action.payload
+            })
 
-        if (response.data.success) {
             yield put(UserActions.changePasswordSuccessfull())
-        } else {
+            yield put(UIActions.setOpenedTip(9));
+        } catch (e) {
             yield put(UserActions.changePasswordFailed())
+            yield put(UIActions.setOpenedTip(8));
         }
     }
 
     static * changeEmail(action) {
-        const response = yield call(axios, {
-            url: Api.changeEmail(),
-            method: 'POST',
-            data: action.payload
-        })
-
-        if (response.data.success) {
+        try {
+            const response = yield call(axios, {
+                url: Api.changeEmail(),
+                method: 'POST',
+                data: action.payload
+            })
             yield put(UserActions.changeEmailSuccessfull())
             yield put(UserActions.changeEmailRequest())
-        } else {
+            yield put(UIActions.setOpenedTip(10));
+        } catch(e) {
             yield put(UserActions.changeEmailFailed())
         }
     }

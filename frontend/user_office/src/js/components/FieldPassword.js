@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
 
-const FieldPassword = ({labelText, placeholder, options, name, value, disabled}) => {
+const FieldPassword = ({labelText, placeholder, options, name, value, disabled, errortext}) => {
 
     return (
         <Wrapper>
@@ -14,8 +14,10 @@ const FieldPassword = ({labelText, placeholder, options, name, value, disabled})
                 className="Field"
                 type="password"
                 name={name}
+                errortext={errortext}
                 readOnly={disabled === true ? true : false}
                 options={options}/>
+            <StyledError>{errortext}</StyledError>
         </Wrapper>
     );
 }
@@ -43,8 +45,14 @@ const StyledInput = styled(Cleave)`
     height: 100%;
     width: 100%;
     background: #ffffff;
-    border: 1px solid #EAEFF2;
+    border: 1px solid ${props => props.errortext ? 'rgb(242, 109, 109)' : '#EAEFF2'};
     &:read-only {
         color: rgba(35,53,57,.3);
     }
+`;
+
+const StyledError = styled.div`
+    font-size: 14px;
+    color: rgb(242, 109, 109);
+    margin-top: 10px;
 `;

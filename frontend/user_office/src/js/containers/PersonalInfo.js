@@ -12,15 +12,48 @@ import FieldTextSpan from './../components/FieldTextSpan';
 import Button from './../components/Button';
 
 import copyIcon from './../../img/icon_copy.svg';
+import iconClose from './../../img/icon_close.svg';
 
 
 class PersonalInfo extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+            errortext: {
+                email: ''
+            }
+        };
+    }
+
     componentDidMount() {
         new ClipboardJS('.CopyBtn');
     }
 
     changeEmail = (event) => {
         event.preventDefault();
+
+        let isFormValid = true;
+
+        const emailField = document.querySelector('[name="email"]');
+
+        if (emailField.value.length === 0) {
+            this.setState({
+                errortext: {
+                    email: 'The field is empty'
+                }
+            })
+            isFormValid = false;
+        } else {
+            this.setState({
+                errortext: {
+                    email: ''
+                }
+            });
+        }
+
+        if (!isFormValid) return;
+
         const data = new FormData(event.target);
         this.props.changeEmailRequest(data);
     }
@@ -28,6 +61,7 @@ class PersonalInfo extends React.Component {
     render() {
 
         const {email, ethAccount, showSetAccountPopup} = this.props;
+        const {errortext} = this.state;
 
         return (
             <Wrapper className="Verification__personalData">
@@ -38,7 +72,7 @@ class PersonalInfo extends React.Component {
                             <FieldText disabled value={email} labelText="Email"/>
                         </InputWrapper>
                         <InputWrapper>
-                            <FieldText labelText="New Email" name='email'/>
+                            <FieldText errortext={errortext.email} labelText="New Email" type="email" name='email'/>
                         </InputWrapper>
                         <ButtonWrapper>
                             <Button text="Change Email" submit={true} />
@@ -61,13 +95,14 @@ class PersonalInfo extends React.Component {
                         </ButtonWrapper>
                     }
                 </InputSet>
+
             </Wrapper>
         )
     }
 };
 
 
-const mapStateToProps = ({user}) => ({
+const mapStateToProps = ({user, UI}) => ({
     email: user.get('email'),
     ethAccount: user.get('eth_account')
 });
@@ -145,4 +180,68 @@ const IconCopy = styled.span`
     height: 20px;
     background: url(${copyIcon}) no-repeat center;
     background-size: contain;
+`;
+
+const ModalWrapper = styled.div`
+    height: 100vh;
+    width: 100vw;
+    background: rgba(1, 7, 29, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    
+`;
+
+const Modal = styled.div`
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 60%;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 9px 21px 0 rgba(173, 182, 217, 0.3);
+    z-index: 100;
+    max-height: 64vh;
+    font-weight: normal;
+`;
+
+const ModalHeader = styled.div`
+    padding: 18px;
+    text-align: center;
+    line-height: 1.45;
+    height: 72px;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #000000;
+    background-color: #f5f6fa
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    & img {
+        position: absolute;
+        top: 26px;
+        right: 26px;
+        cursor: pointer;
+    }
+`;
+
+const ModalContent = styled.div`
+    padding: 32px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.44;
+    letter-spacing: 0.2px;
+    color: #0a0a0a;
+    overflow-y: auto;
+    max-height: 52.5vh;
+    & span {
+        font-weight: bold;
+    }
+    & p {
+        margin-bottom: 10px;
+    }
 `;
