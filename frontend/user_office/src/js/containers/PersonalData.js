@@ -34,7 +34,6 @@ class PersonData extends React.Component {
                 <InputSet>
                     <input type="hidden" name='type' value='NATURAL'/>
                     <InputWrapper>
-
                         <FinalFormField placeholder="Your name" labelText="First Name" name="firstname" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>

@@ -71,7 +71,7 @@ class Password extends React.Component {
 
     render() {
         const {passwordsEqual, errortext} = this.state;
-        const {setOpenedTip, closeOpenedTip, openedTip} = this.props;
+        const {closeOpenedTip, openedTip} = this.props;
 
         return (
             <Wrapper className="Verification__password" onSubmit={this.changePasswordHandler}>
@@ -116,6 +116,17 @@ class Password extends React.Component {
                         </ModalContent>
                     </Modal>
                     }
+                    {openedTip === 10 &&
+                    <Modal>
+                        <ModalHeader>
+                            Congratulations
+                            <img onClick={closeOpenedTip} src={iconClose} alt=""/>
+                        </ModalHeader>
+                        <ModalContent>
+                            You've successfully change your email!
+                        </ModalContent>
+                    </Modal>
+                    }
                 </ModalWrapper>
                 }
 
@@ -132,9 +143,6 @@ const mapStateToProps = ({UI}) => ({
 const mapDispatchToProps = (dispatch) => ({
     changePassword(data) {
         dispatch(UserActions.changePasswordRequest(data))
-    },
-    setOpenedTip(id) {
-        dispatch(UIActions.setOpenedTip(id))
     },
     closeOpenedTip() {
         dispatch(UIActions.setOpenedTip(null))
