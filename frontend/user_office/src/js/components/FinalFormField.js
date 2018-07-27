@@ -2,23 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 import CleavePhone from 'cleave.js/dist/addons/cleave-phone.ru.js';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
-import 'react-day-picker/lib/style.css';
+
+import DatePicker from 'react-datepicker'; 
+import 'react-datepicker/dist/react-datepicker.css';
 
 import { Field } from 'react-final-form';
 
 
 
-const FinalFormField = ({labelText, placeholder, options, name, value, disabled, required, type}) => {
+const FinalFormField = ({labelText, placeholder, options, name, value, disabled, required, type, onChangeHandler, initialValue}) => {
 
     let CleaveInput = (field) => {
-        const FORMAT = 'M/D/YYYY';
 
         if (type === 'date') {
-            return <DayPickerInput inputProps={{
-                    name: name,
-                    readOnly: true,
-                    placeholder: placeholder}}/>
+            return <DatePicker  selected={initialValue} name={name} onChange={onChangeHandler} dateFormat="YYYY-MM-DD" />
         } else {
             return <StyledCleave {...field.input} placeholder={placeholder} type={type} required={required} options={field.options} />
         }
@@ -46,6 +43,28 @@ export default FinalFormField;
 const Wrapper = styled.div`
     position: relative;
     height: 100%;
+    label + div {
+       height: 100%;
+       .react-datepicker-wrapper, .react-datepicker__input-container {
+            display: block;
+            height: 100%;
+       }
+       input {
+            color: #233539;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 0 20px;
+            display: block;
+            height: 100%;
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid #d6dfe6;
+            border-radius: 2px;
+            &::-webkit-input-placeholder {
+                color: rgba(10,10,10,.4);
+            }
+       }
+    }
     .DayPickerInput {
         display: block;
         height: 100%;

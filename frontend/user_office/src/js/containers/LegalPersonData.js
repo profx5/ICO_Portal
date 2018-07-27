@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
 import { Field } from 'react-final-form';
+import moment from 'moment';
 
 import Utils from './../utils/index';
 
@@ -23,6 +24,11 @@ class LegalPersonData extends React.Component {
     constructor() {
         super()
 
+        this.state = {
+          dateOfRegistration: moment(),
+          dateOfBirth: moment()
+        };
+
         let onRemoveFileHandler = this.onRemoveFileHandler;
 
         $(document).ready(function() {
@@ -34,6 +40,19 @@ class LegalPersonData extends React.Component {
             })
         })
     }
+
+    updateDateOfRegistration = (date) => {
+        this.setState({
+            dateOfRegistration: date
+        })
+    }
+
+    updateDateOfBirth = (date) => {
+        this.setState({
+            dateOfBirth: date
+        })
+    }
+
 
 
     buildVisualFile = (target, obj) => {
@@ -142,7 +161,9 @@ class LegalPersonData extends React.Component {
                         <FinalFormField placeholder="Year - month - day" 
                                         labelText="Date of registration" 
                                         name="registration_date" 
-                                        required 
+                                        required
+                                        initialValue={this.state.dateOfRegistration} 
+                                        onChangeHandler={this.updateDateOfRegistration} 
                                         type="date"/>
                     </InputWrapper>
                     <InputWrapper>
@@ -203,7 +224,9 @@ class LegalPersonData extends React.Component {
                         <FinalFormField placeholder="Year - month - day" 
                                         labelText="Date of birth" 
                                         name="beneficial_birthdate" 
-                                        required
+                                        required 
+                                        onChangeHandler={this.updateDateOfBirth}
+                                        initialValue={this.state.dateOfBirth}
                                         type="date"/>
                     </InputWrapper>
                     <InputWrapper fullWidth>
