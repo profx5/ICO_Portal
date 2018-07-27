@@ -69,16 +69,18 @@ export class UserSagas {
     }
 
     static * changePassowrd(action) {
-        const response = yield call(axios, {
-            url: Api.changePassword(),
-            method: 'POST',
-            data: action.payload
-        })
+        try {
+            const response = yield call(axios, {
+                url: Api.changePassword(),
+                method: 'POST',
+                data: action.payload
+            })
 
-        if (response.data.success) {
             yield put(UserActions.changePasswordSuccessfull())
-        } else {
+            yield put(UIActions.setOpenedTip(9));
+        } catch(e) {
             yield put(UserActions.changePasswordFailed())
+            yield put(UIActions.setOpenedTip(8));
         }
     }
 
