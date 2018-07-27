@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 import {Route, Switch} from 'react-router-dom';
 import {withRouter} from 'react-router';
+import $ from 'jquery';
 
 import NavSidebar from './NavSidebar';
 import Header from './Header';
@@ -18,8 +19,20 @@ import history from './../utils/history';
 
 import SetAccount from './SetAccount';
 
+import * as UIActions from './../actions/UIActions';
+
 
 class Layout extends Component {
+
+    componentDidMount() {
+        const {openedTip, closeOpenedTip} = this.props;
+
+        $(document).click(function(e) {
+            if ($(e.target).hasClass('ModalWrapper')) {
+                closeOpenedTip();
+            }
+        })
+    }
 
     render() {
 
@@ -46,10 +59,15 @@ class Layout extends Component {
 
 const mapStateToProps = ({UI}) => ({
     currentRoute: UI.get('currentRoute'),
-    showSetAccountPopup: UI.get('showSetAccountPopup')
+    showSetAccountPopup: UI.get('showSetAccountPopup'),
+    openedTip: UI.get('openedTip'),
 })
 
-const mapDispatchToProps = (dispatch) => ({})
+const mapDispatchToProps = (dispatch) => ({
+    closeOpenedTip() {
+        dispatch(UIActions.setOpenedTip(null))
+    },
+})
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));
 
