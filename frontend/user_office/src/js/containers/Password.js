@@ -93,7 +93,7 @@ class Password extends React.Component {
                 </ButtonWrapper>
 
                 {openedTip &&
-                <ModalWrapper>
+                <ModalWrapper className="ModalWrapper">
                     {openedTip === 8 &&
                     <Modal>
                         <ModalHeader>
