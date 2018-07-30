@@ -62,3 +62,4 @@ events_processing = EventsProcessing(filter_id=f'syncing_events_{datetime.utcnow
 events_processing.save()
 
 print(f'Created EventsProcessing with id={events_processing.id} and last_processed_block={events_processing.last_processed_block}')
+print('Sync completed. Bye!')
