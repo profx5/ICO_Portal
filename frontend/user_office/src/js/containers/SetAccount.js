@@ -23,9 +23,9 @@ class SetAccount extends Component {
     }
 
     render() {
-        const {hidePopup} = this.props;
+        const { hidePopup, set_eth_error } = this.props;
         let metamaskEthAccount = this.getMetaMaskAccount();
-        return(
+        return (
             <React.Fragment>
                 <PopupWrapper>
                     <Popup>
@@ -33,10 +33,19 @@ class SetAccount extends Component {
                         <StyledHead>Add your ETH account</StyledHead>
                         <form>
                             <TextField type="text" value={metamaskEthAccount} innerRef={input => this.input = input}/>
+                            {set_eth_error &&
+                            <ErrorSpan>
+                                {set_eth_error}
+                            </ErrorSpan>}
                             <ButtonWrapper>
                                 <Button clickHandler={this.onSubmitHandler} type="submit" text="Send"/>
                             </ButtonWrapper>
                         </form>
+                        <Paragraph><span>IMPORTANT NOTICE:</span><br/>
+                            ADD ONLY YOUR OWN ETH ACCOUNT YOU HAVE A SECRET KEY FROM! DO NOT ADD ACCOUNTS FROM
+                            EXCHANGES, THIS WILL CAUSE YOU TO LOOSE ALL THE TOKENS!
+                            ALSO YOUR WALLET SHOULD SUPPORT ERC 20 TOKENS!
+                        </Paragraph>
                     </Popup>
                 </PopupWrapper>
             </React.Fragment>
@@ -46,7 +55,7 @@ class SetAccount extends Component {
 
 
 const mapStateToProps = ({user, KYC, UI}) => ({
-
+    set_eth_error: user.get('set_eth_error'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -59,6 +68,27 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetAccount);
+
+const ErrorSpan = styled.span`
+    color: red;
+    font-size: 0.7em;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    display: block;
+`;
+
+const Paragraph = styled.p`
+    text-align: justify;
+    font-weight: normal;
+    font-size: 0.8em;
+    letter-spacing: 0.5px;
+    color: red;
+    padding-top: 20px;
+    & span {
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+`;
 
 const ButtonWrapper = styled.div`
     width: 100%;
