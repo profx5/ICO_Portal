@@ -10,6 +10,7 @@ python:
 
 services:
   - mysql
+  - docker
 
 before_install:
   - mysql -e 'CREATE DATABASE ico_portal CHARACTER SET utf8 COLLATE utf8_bin;'
@@ -17,7 +18,7 @@ before_install:
 
 install:
   - pip install -r requirements-dev.txt
-  - cd solidity-contracts && npm install && cd ..
+  ## - cd solidity-contracts && npm install && cd ..
   # - npm install
   # # chromedriver
   # - wget -N http://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip -P ~/
@@ -36,6 +37,11 @@ script:
   - ./manage.py test
   - flake8
   # - "./manage.py behave -D SELENIUM_CHROME_HEADLESS"
-  - cd solidity-contracts
-  - ./scripts/test.sh
-  - npm run lint:sol
+  ## - cd solidity-contracts
+  ## - ./scripts/test.sh
+  ## - npm run lint:sol
+deploy:
+  provider: script
+  script: bash docker_push.sh
+  on:
+    branch: master
