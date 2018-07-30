@@ -58,7 +58,7 @@ class SendChangeEmailConfirm(ServiceObject, CheckEmailMixin):
             'email': context.email
         })
 
-        send_mail('Change email', content, settings.EMAIL_HOST_USER,
+        send_mail('Change email', content, settings.DEFAULT_FROM_EMAIL,
                   [context.investor.email], fail_silently=True)
 
         return self.success()
