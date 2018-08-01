@@ -3,7 +3,7 @@ from django.contrib import admin
 from django_object_actions import DjangoObjectActions
 
 from user_office.models import KYC
-from blockchain.ico.services import ApproveKYC
+from blockchain.ico.services import ApproveKYC, DeclineKYC
 from .inlines import KYCAttachmentsInline
 
 
@@ -12,7 +12,7 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
     list_display = ('investor', 'state', 'type')
     list_filter = ('state', 'type')
 
-    change_actions = ['approve_kyc', 'decline_kyc']
+    change_actions = ['approve_kyc', 'decline_kyc', 'to_waiting']
 
     inlines = [KYCAttachmentsInline]
 
@@ -60,11 +60,21 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
     approve_kyc.short_description = "Approve KYC"
 
     def decline_kyc(self, request, kyc):
-        kyc.state = 'DECLINED'
-        kyc.save()
+        result = DeclineKYC()(kyc)
+
+        if isinstance(result, Left):
+            raise Exception(result.value)
 
     decline_kyc.label = "Decline"
     decline_kyc.short_description = "Decline KYC"
+
+    def to_waiting(self, rquest, kyc):
+        kyc.state = "WAITING"
+
+        kyc.save()
+
+    to_waiting.label = "Waiting approval"
+    to_waiting.short_description = "Waiting approval"
 
     def get_change_actions(self, request, object_id, form_url):
         actions = []
@@ -76,5 +86,8 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
 
             if obj.investor.eth_account != '':
                 actions.append('approve_kyc')
+
+        if obj.declined:
+            actions.append('to_waiting')
 
         return actions

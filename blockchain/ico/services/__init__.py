@@ -12,4 +12,4 @@ from .sync_ico_info import SyncICOInfo
 from .track_transactions import SendPreparedTxns, TrackTransactions
 from .update_price_oracle import UpdatePriceOracle
 from .calc_usd_value import CalcUSDValue
-from .approve_kyc import ApproveKYC
+from .kyc import ApproveKYC, DeclineKYC

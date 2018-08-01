@@ -45,18 +45,11 @@ class ApproveKYC(ServiceObject):
             return self.fail(e)
 
     def send_mail(self, context):
-        if context.kyc.ticket:
-            ticket_url = "%s%ssupport/ticket/%s" % (
-                settings.HOST, reverse('user_office'), context.kyc.ticket.id
-            )
-        else:
-            ticket_url = "%s%s" % (
-                settings.HOST, reverse('user_office')
-            )
-
+        payment_url = "%s%spayment/" % (settings.HOST, reverse('user_office'))
         email = context.kyc.investor.email
+
         ctx = {
-            'ticket_url': ticket_url,
+            'payment_url': payment_url,
             'email': email
         }
 
@@ -77,5 +70,52 @@ class ApproveKYC(ServiceObject):
             self.get_txn_data | \
             self.create_transaction | \
             self.set_approve_txn_id | \
+            self.save_kyc | \
+            self.send_mail
+
+
+class DeclineKYC(ServiceObject):
+    def check_state(self, context):
+        if context.kyc.state != 'DECLINED':
+            return self.success()
+        else:
+            return self.fail('KYC already declined')
+
+    def set_state(self, context):
+        context.kyc.state = 'DECLINED'
+
+        return self.success(kyc=context.kyc)
+
+    def save_kyc(self, context):
+        try:
+            context.kyc.save()
+
+            return self.success()
+        except DatabaseError as e:
+            return self.fail(e)
+
+    def send_mail(self, context):
+        support_url = "%s%ssupport/" % (settings.HOST, reverse('user_office'))
+        email = context.kyc.investor.email
+
+        ctx = {
+            'support_url': support_url,
+            'email': email
+        }
+
+        html_content = loader.render_to_string('mail/kyc_declined.html', ctx)
+        text_content = strip_tags(html_content)
+
+        send_mail('Your KYC request was declined', text_content,
+                  settings.DEFAULT_FROM_EMAIL, [email], fail_silently=True, html_message=html_content)
+
+        return self.success()
+
+    @service_call
+    @transactional
+    def __call__(self, kyc):
+        return self.success(kyc=kyc) | \
+            self.check_state | \
+            self.set_state | \
             self.save_kyc | \
             self.send_mail

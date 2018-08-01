@@ -82,6 +82,10 @@ class KYC(models.Model):
     def waiting(self):
         return self.state == 'WAITING'
 
+    @property
+    def declined(self):
+        return self.state == 'DECLINED'
+
 
 KYC_ATTACHMENT_TYPE_CHOICES = (('basis_doc', 'Basis for representation'),
                                ('id_document_photo', 'Copy of identification document'),
