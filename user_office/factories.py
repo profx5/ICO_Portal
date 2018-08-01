@@ -158,3 +158,11 @@ class TransactionFactory(factory.DjangoModelFactory):
 
     created_at = UTCNow
     txn_id = UUID
+
+
+class BonusesFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = 'user_office.Bonus'
+
+    id_contract = fuzzy.FuzzyText(length=10)
+    description = fuzzy.FuzzyText(length=100)
