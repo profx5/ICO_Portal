@@ -1,3 +1,4 @@
+import django.core.mail
 from oslash import Right, Left
 
 from user_office.factories import InvestorFactory, KYCFactory
@@ -27,6 +28,9 @@ class TestApproveKYC(BlockChainTestCase):
         self.assertTrue(
             self.crowdsale_contract.functions.hasRole(account, 'kycVerified').call()
         )
+        sent_mails = django.core.mail.outbox
+        self.assertEqual(len(sent_mails), 1)
+        self.assertEqual(sent_mails[0].subject, 'Your KYC request was approved')
 
     def test_already_approved_kyc(self):
         account = self.eth_tester.get_accounts()[-1]
