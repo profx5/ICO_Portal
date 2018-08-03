@@ -4,7 +4,7 @@ import {Field} from 'react-final-form';
 
 import iconCheck from './../../img/icons/icon_check.svg';
 
-const FinalFormCheckbox = ({labelText, name, values, options, icon, handler, required}) => {
+const FinalFormCheckbox = ({labelText, name, values, options, icon, handler, required, checked}) => {
 
     function handle(handler, event) {
         event.preventDefault();
@@ -15,7 +15,7 @@ const FinalFormCheckbox = ({labelText, name, values, options, icon, handler, req
         return data.map((item, index) => {
             return (
                 <React.Fragment key={index}>
-                    <RadioInput component="input" type="checkbox" required={required} name={name} value={values[index]} id={`radio-${item}`}/>
+                    <RadioInput component="input" type="checkbox" checked={checked} required={required} name={name} value={values[index]} id={`radio-${item}`}/>
                     <RadioLabel htmlFor={`radio-${item}`}>
                         {item}
                         {icon &&

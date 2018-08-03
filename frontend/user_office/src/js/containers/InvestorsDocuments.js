@@ -117,7 +117,7 @@ class InvestorsDocuments extends React.Component {
     };
 
     render() {
-
+        const {type} = this.props;
         return (
             <Wrapper className="Verification__investorsDocuments">
                 <Title>Investor's documents</Title>
@@ -150,13 +150,16 @@ class InvestorsDocuments extends React.Component {
                 <FinalFormCheckbox name="confirm"
                                    options={['I confirm that all the data and documents submitted are correct.']}
                                    values={['Yes']}
+                                   checked={!!type}
                                    required/>
             </Wrapper>
         )
     }
 }
 
-const mapStateToProps = ({}) => ({})
+const mapStateToProps = ({KYC}) => ({
+    type: KYC.get('type')
+})
 
 const mapDispatchToProps = (dispatch) => ({})
 
