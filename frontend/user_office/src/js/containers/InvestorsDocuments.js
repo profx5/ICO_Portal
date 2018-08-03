@@ -16,8 +16,8 @@ class InvestorsDocuments extends React.Component {
 
         let onRemoveFileHandler = this.onRemoveFileHandler;
 
-        $(document).ready(function() {
-            $('.Verification__investorsDocuments').click(function(event) {
+        $(document).ready(function () {
+            $('.Verification__investorsDocuments').click(function (event) {
                 if ($(event.target).hasClass('file-clear')) {
                     let parent = $(event.target).closest('.block-file');
                     onRemoveFileHandler(event.target, parent)
@@ -32,7 +32,6 @@ class InvestorsDocuments extends React.Component {
             size = obj.size,
             id = $(target).attr('id');
 
-        
 
         $(target)
             .closest('div')
@@ -69,15 +68,20 @@ class InvestorsDocuments extends React.Component {
 
     uploadOnClickHandler = (event) => {
         event.preventDefault();
-
-        $(event.currentTarget).closest('div').find('input[type="file"]').each((index, item) => {
+        let $wrap_div = $(event.currentTarget).closest('div');
+        $wrap_div.find('input[type="file"]').each((index, item) => {
+            let _name = $(item).attr('name');
             if ($(item).val() == '') {
                 $(item).click();
-
+                return false;
+            } else {
+                let $new_one = $('<input type="file" name="' + _name + '" hidden/>');
+                $wrap_div.append($new_one);
+                $new_one.click();
                 return false;
             }
         })
-    }
+    };
 
     uploadFileHandler = (event) => {
         var input = event.target;
@@ -93,19 +97,24 @@ class InvestorsDocuments extends React.Component {
 
             reader.onload = function (e) {
 
-            callback(input, {
-                name: input.files[0].name,
-                size: input.files[0].size
-            })
-
-
+                callback(input, {
+                    name: input.files[0].name,
+                    size: input.files[0].size
+                })
 
 
             };
             reader.readAsDataURL(input.files[0]);
         }
-    }
+    };
 
+    componentDidMount = () => {
+        document.body.addEventListener('change', this.uploadFileHandler);
+    };
+
+    componentWillUnmount = () => {
+        document.body.removeEventListener('change', this.uploadFileHandler);
+    };
 
     render() {
 
@@ -118,16 +127,7 @@ class InvestorsDocuments extends React.Component {
                         image, signature or image of signature and date of birth or personal identification code of the
                         holder</p>
                     <ButtonWrapper>
-                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='id_document_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='id_document_photo' hidden/>
                         <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
                     </ButtonWrapper>
                     <div className="block-file-result">
@@ -140,16 +140,7 @@ class InvestorsDocuments extends React.Component {
                         services), bank or credit card statement, tax bill or notice or voter’s card or similar document
                         bearing the investor’s name and address (the document must not be older than six months.</p>
                     <ButtonWrapper>
-                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
-                        <input type="file" name='bill_photo' onChange={this.uploadFileHandler} hidden/>
+                        <input type="file" name='bill_photo' hidden/>
                         <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
                     </ButtonWrapper>
                     <div className="block-file-result">
