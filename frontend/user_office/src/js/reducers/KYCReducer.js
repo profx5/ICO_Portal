@@ -43,6 +43,7 @@ const initialState = Map({
     beneficial_place_of_birth: null,
     beneficial_place_of_residence: null,
     is_pep: null,
+    isSubmiting: false
 });
 
 
