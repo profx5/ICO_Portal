@@ -40,7 +40,7 @@ class PersonData extends React.Component {
 
     render() {
 
-        const {uploadedUserPhoto, uploadPhoto, removePhoto} = this.props;
+        const {uploadedUserPhoto, uploadPhoto, removePhoto, type} = this.props;
 
         return (
             <Wrapper className="Verification__personData">
@@ -94,6 +94,7 @@ class PersonData extends React.Component {
                                        handler={this.setOpenedTip.bind(this, 1)}
                                        options={['I confirm that the investor is a beneficial owner']}
                                        values={['Yes']}
+                                       checked={!!type}
                                        required/>
                 </RadioSet>
 
@@ -112,8 +113,9 @@ const mapStateToProps = ({ICOInfo, Timer, KYC}) => ({
     userPhoto: KYC.get('user_photo'),
     documentPhoto: KYC.get('document_photo'),
     uploadedUserPhoto: KYC.get('uploaded_user_photo'),
-    fistname: KYC.get('fistname')
-})
+    fistname: KYC.get('fistname'),
+    type: KYC.get('type'),
+});
 
 const mapDispatchToProps = (dispatch) => ({
     updateKycData() {
