@@ -89,6 +89,7 @@ class KYCViewSet(GenericViewSet):
 
         if serializer.is_valid():
             kyc = serializer.save(investor=self.request.user)
+
             self.process_attachments(kyc, request)
 
             CreateKYCTicket()(kyc)
