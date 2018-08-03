@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import $ from 'jquery';
 
 import Utils from './../utils/index';
-
+import PreloadIcon from './../../img/preload-white.svg';
 import Button from './../components/Button';
 import VerificationStages from './../components/VerificationStages';
 import VerificationState from './../components/VerificationState';
@@ -49,7 +49,9 @@ class VerificationInfo extends React.Component {
     }
 
     render() {
-        const {status, verificationStages, stages, btnText} = this.props;
+        const {status, verificationStages, stages, btnText, isSubmiting} = this.props;
+
+        let btn_text = !isSubmiting ? status === 'WAITING' ? 'Update data' : btnText : 'Submitting...';
 
         return (
             <Wrapper className="VerificationInfo">
@@ -57,7 +59,7 @@ class VerificationInfo extends React.Component {
                     {status !== 'APPROVED' &&
                     
                     <ButtonWrapper>
-                        <Button type="submit" text={status === 'WAITING' ? 'Update data' : btnText}/>
+                        <Button type="submit" text={btn_text} icon={isSubmiting && PreloadIcon}/>
                     </ButtonWrapper>
                     }
                 <VerificationState kycState={status}/>
@@ -68,7 +70,8 @@ class VerificationInfo extends React.Component {
 
 
 const mapStateToProps = ({KYC}) => ({
-    status: KYC.get('state')
+    status: KYC.get('state'),
+    isSubmiting: KYC.get('isSubmiting')
 })
 
 const mapDispatchToProps = (dispatch) => ({
