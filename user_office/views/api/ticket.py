@@ -7,9 +7,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 
 from helpdesk.models import Ticket, FollowUp, Attachment
-from helpdesk.lib import process_attachments
 from .auth import KYCAndLoginPermission
-from user_office.services import CreateSupportTicket, CommentTicket
+from user_office.services.ticket import CreateSupportTicket, CommentTicket, ValidationErrorLeft
 
 
 class TicketListSerializer(ModelSerializer):
@@ -87,7 +86,7 @@ class TicketViewSet(GenericViewSet):
     }
 
     def get_queryset(self):
-        return Ticket.objects.filter(reporter=self.request.user)
+        return Ticket.objects.filter(reporter=self.request.user).order_by('-followup__date')
 
     def get_serializer_class(self):
         return self.serializer_action_map.get(self.action)
@@ -109,13 +108,15 @@ class TicketViewSet(GenericViewSet):
     def create(self, request):
         result = CreateSupportTicket()(reporter=request.user,
                                        title=request.data['title'],
-                                       description=request.data['description'])
+                                       description=request.data['description'],
+                                       attached_files=request.FILES.getlist('attachment'))
 
         if isinstance(result, Right):
-            process_attachments(result.value.follow_up, request.FILES.getlist('attachment'))
             serializer = TicketRetrieveSerializer(result.value.ticket)
 
             return Response(serializer.data, status=201)
+        elif isinstance(result, ValidationErrorLeft):
+            return Response(result.value, status=400)
         else:
             return Response('Error while creating Ticket', status=500)
 
@@ -126,12 +127,14 @@ class TicketViewSet(GenericViewSet):
 
         result = CommentTicket()(investor=request.user,
                                  ticket=ticket,
-                                 comment=request.data['comment'])
+                                 comment=request.data['comment'],
+                                 attached_files=request.FILES.getlist('attachment'))
 
         if isinstance(result, Right):
-            process_attachments(result.value.follow_up, request.FILES.getlist('attachment'))
             serializer = TicketRetrieveSerializer(ticket)
 
             return Response(serializer.data, status=201)
+        elif isinstance(result, ValidationErrorLeft):
+            return Response(result.value, status=400)
         else:
             return Response('Error while creating comment', status=500)

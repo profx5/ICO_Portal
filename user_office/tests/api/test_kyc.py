@@ -48,14 +48,14 @@ class TestKYC(APITestCase):
 
         self.assertListEqual(response.data['attachments'], [
             {
-                'file': 'http://testserver/media/kyc/1/id_document_photo/document.jpg',
+                'file': 'http://testserver/media/ae0e9df12a898fa098779e1520334db0f051b1a4a63e5ce96588823f2c1ed78a.jpg',
                 'filename': 'document.jpg',
                 'mime_type': 'image/jpeg',
                 'size': 30236,
                 'type': 'id_document_photo'
             },
             {
-                'file': 'http://testserver/media/kyc/1/bill_photo/bill.jpg',
+                'file': 'http://testserver/media/f3a61d28437680d3850c5e8a93da69679f47739e207d93e65a8b4ba5681c3605.jpg',
                 'filename': 'bill.jpg',
                 'mime_type': 'image/jpeg',
                 'size': 9566,
@@ -98,21 +98,21 @@ class TestKYC(APITestCase):
 
         self.assertListEqual(response.data['attachments'], [
             {
-                'file': 'http://testserver/media/kyc/1/basis_doc/basis.jpg',
+                'file': 'http://testserver/media/9d672a6e07016f3c005ec7aebd9a95b4513be7a5331cc8ea8895fa69e1bd81cc.jpg',
                 'filename': 'basis.jpg',
                 'mime_type': 'image/jpeg',
                 'size': 151959,
                 'type': 'basis_doc'
             },
             {
-                'file': 'http://testserver/media/kyc/1/id_document_photo/document.jpg',
+                'file': 'http://testserver/media/ae0e9df12a898fa098779e1520334db0f051b1a4a63e5ce96588823f2c1ed78a.jpg',
                 'filename': 'document.jpg',
                 'mime_type': 'image/jpeg',
                 'size': 30236,
                 'type': 'id_document_photo'
             },
             {
-                'file': 'http://testserver/media/kyc/1/bill_photo/bill.jpg',
+                'file': 'http://testserver/media/f3a61d28437680d3850c5e8a93da69679f47739e207d93e65a8b4ba5681c3605.jpg',
                 'filename': 'bill.jpg',
                 'mime_type': 'image/jpeg',
                 'size': 9566,
@@ -272,14 +272,14 @@ class TestKYC(APITestCase):
         self.assertEqual(response.status_code, 201)
         self.assertListEqual(response.data['attachments'], [
             {
-                'file': 'http://testserver/media/kyc/1/id_document_photo/document.jpg',
+                'file': 'http://testserver/media/ae0e9df12a898fa098779e1520334db0f051b1a4a63e5ce96588823f2c1ed78a.jpg',
                 'filename': 'document.jpg',
                 'mime_type': 'image/jpeg',
                 'size': 30236,
                 'type': 'id_document_photo'
             },
             {
-                'file': 'http://testserver/media/kyc/1/id_document_photo/bill.jpg',
+                'file': 'http://testserver/media/f3a61d28437680d3850c5e8a93da69679f47739e207d93e65a8b4ba5681c3605.jpg',
                 'filename': 'bill.jpg',
                 'mime_type': 'image/jpeg',
                 'size': 9566,

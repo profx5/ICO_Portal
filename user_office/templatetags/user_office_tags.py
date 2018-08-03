@@ -12,3 +12,8 @@ def site_url():
 @register.simple_tag
 def is_signup_open():
     return not settings.SIGNUP_CLOSED
+
+
+@register.simple_tag
+def host_url():
+    return settings.HOST
