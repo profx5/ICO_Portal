@@ -23,7 +23,7 @@ class SetAccount extends Component {
     }
 
     render() {
-        const { hidePopup, set_eth_error } = this.props;
+        const {hidePopup, set_eth_error, eth_account} = this.props;
         let metamaskEthAccount = this.getMetaMaskAccount();
         return (
             <React.Fragment>
@@ -37,10 +37,19 @@ class SetAccount extends Component {
                             <ErrorSpan>
                                 {set_eth_error}
                             </ErrorSpan>}
+                            {eth_account &&
+                            <AllRightWrapper>
+                                ETH account has been added!
+                            </AllRightWrapper>
+                            }
+                            {!eth_account &&
                             <ButtonWrapper>
                                 <Button clickHandler={this.onSubmitHandler} type="submit" text="Send"/>
                             </ButtonWrapper>
+                            }
+
                         </form>
+
                         <Paragraph><span>IMPORTANT NOTICE:</span><br/>
                             ADD ONLY YOUR OWN ETH ACCOUNT YOU HAVE A SECRET KEY FROM! DO NOT ADD ACCOUNTS FROM
                             EXCHANGES, THIS WILL CAUSE YOU TO LOOSE ALL THE TOKENS!
@@ -56,6 +65,7 @@ class SetAccount extends Component {
 
 const mapStateToProps = ({user, KYC, UI}) => ({
     set_eth_error: user.get('set_eth_error'),
+    eth_account: user.get('eth_account')
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -98,6 +108,18 @@ const ButtonWrapper = styled.div`
     position: relative;
 `;
 
+const AllRightWrapper = styled.div`
+    width: 100%;
+    height: 40px;
+    border-radius: 2px;
+    border: 1px solid white;
+    background: white;
+    position: relative;
+    line-height: 40px;
+    text-align: center;
+    color: #11cd56;
+`;
+
 
 const PopupWrapper = styled.div`
     position: fixed;
@@ -113,7 +135,7 @@ const PopupWrapper = styled.div`
 `;
 
 const Popup = styled.div`
-    width: 400px;
+    width: 485px;
     border-radius: 3px;
     background: white;
     position: relative;
