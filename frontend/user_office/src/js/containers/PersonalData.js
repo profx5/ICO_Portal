@@ -94,7 +94,6 @@ class PersonData extends React.Component {
                                        handler={this.setOpenedTip.bind(this, 1)}
                                        options={['I confirm that the investor is a beneficial owner']}
                                        values={['Yes']}
-                                       checked={!!type}
                                        required/>
                 </RadioSet>
 

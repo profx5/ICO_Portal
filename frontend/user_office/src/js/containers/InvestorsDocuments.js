@@ -150,7 +150,6 @@ class InvestorsDocuments extends React.Component {
                 <FinalFormCheckbox name="confirm"
                                    options={['I confirm that all the data and documents submitted are correct.']}
                                    values={['Yes']}
-                                   checked={!!type}
                                    required/>
             </Wrapper>
         )
