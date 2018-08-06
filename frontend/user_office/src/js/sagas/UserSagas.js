@@ -19,7 +19,7 @@ export class UserSagas {
             })
 
             yield put(UserActions.setAccountSuccessfull());
-            yield put(UIActions.hideSetAccountPopup());
+            // yield put(UIActions.hideSetAccountPopup());
             yield put(UserActions.getUserRequest());
         } catch (e) {
             let error;
