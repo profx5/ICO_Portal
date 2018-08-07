@@ -54,14 +54,14 @@ class VerificationInfo extends React.Component {
     }
 
     render() {
-        const {status, verificationStages, stages, btnText, isSubmiting} = this.props;
+        const {status, verificationStages, stages, btnText, isSubmiting, type} = this.props;
         let kyc_ticket = this.getKYCTicket();
         let kyc_ticket_id = null;
         if (kyc_ticket[0]) {
             kyc_ticket_id = kyc_ticket[0].id;
         }
         let btn_text = !isSubmiting ? status === 'WAITING' ? 'Update data' : btnText : 'Submitting...';
-
+        let KYCStatus = type === '' && status;
         return (
             <Wrapper className="VerificationInfo">
                 <VerificationStages stageClickHandler={this.stageClickHandler} boundSections={verificationStages} stages={stages}/>
@@ -71,7 +71,7 @@ class VerificationInfo extends React.Component {
                         <Button type="submit" text={btn_text} icon={isSubmiting && PreloadIcon}/>
                     </ButtonWrapper>
                     }
-                <VerificationState kycState={status} kycTicketId={kyc_ticket_id}/>
+                <VerificationState kycState={KYCStatus} kycTicketId={kyc_ticket_id}/>
             </Wrapper>
         )
     }
@@ -82,6 +82,7 @@ const mapStateToProps = ({KYC, tickets}) => ({
     status: KYC.get('state'),
     isSubmiting: KYC.get('isSubmiting'),
     tickets: tickets.get('results'),
+    type: KYC.get('type'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
