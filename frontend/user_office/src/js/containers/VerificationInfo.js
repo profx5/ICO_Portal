@@ -61,7 +61,7 @@ class VerificationInfo extends React.Component {
             kyc_ticket_id = kyc_ticket[0].id;
         }
         let btn_text = !isSubmiting ? status === 'WAITING' ? 'Update data' : btnText : 'Submitting...';
-        let KYCStatus = type === '' && status;
+        let KYCStatus = type !== '' && status;
         return (
             <Wrapper className="VerificationInfo">
                 <VerificationStages stageClickHandler={this.stageClickHandler} boundSections={verificationStages} stages={stages}/>
