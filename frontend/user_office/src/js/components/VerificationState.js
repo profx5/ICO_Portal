@@ -1,11 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
-import approvedIcon from './../../img/icon_exclamation_green.svg';
-import waitingIcon from './../../img/icon_exclamation_yellow.svg';
-import declinedIcon from './../../img/icon_exclamation_red.svg';
-
-const VerificationState = ({kycState}) => {
+const VerificationState = ({kycState,kycTicketId}) => {
     return (
         <Wrapper>
             {kycState === 'APPROVED' &&
@@ -15,13 +12,19 @@ const VerificationState = ({kycState}) => {
             }
             {kycState === 'WAITING' &&
                 <Content className="state-waiting">
-                    <p>Thank you for application! Our managers are validating your data. Soon the status will be updated!</p>
-                </Content>
+                <p>Thank you for your application! Our managers are validating your data now.</p>
+                {kycTicketId &&
+                <SLink to={`/user_office/support/ticket/${kycTicketId}`}>Check the status of your application
+                    here!</SLink>}
+            </Content>
             }
             {kycState === 'DECLINED' &&
                 <Content className="state-declined">
-                    <p>Your account is not verified yet. Please add and submit valid data.</p>
-                </Content>
+                <p>Sorry, your application was declined.</p>
+                {kycTicketId &&
+                <SLink to={`/user_office/support/ticket/${kycTicketId}`}>Please contact our support via the ticket
+                    system.</SLink>}
+            </Content>
             }
         </Wrapper>
     )
@@ -33,6 +36,10 @@ export default VerificationState;
 
 const Wrapper = styled.div`
 
+`;
+
+const SLink = styled(Link)`
+    text-decoration: underline;
 `;
 
 const Content = styled.div`
