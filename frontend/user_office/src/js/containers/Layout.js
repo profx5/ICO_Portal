@@ -25,12 +25,16 @@ import * as UIActions from './../actions/UIActions';
 class Layout extends Component {
 
     componentDidMount() {
-        const {openedTip, closeOpenedTip} = this.props;
+        const {openedTip, closeOpenedTip, accountDropdownShown, hideAccountDropdown} = this.props;
 
         $(document).click(function(e) {
             if ($(e.target).hasClass('ModalWrapper')) {
                 closeOpenedTip();
             }
+            if (!$(e.target).hasClass('DropdownAccountTrigger') && !$(e.target).closest('.DropdownAccount').length) {
+                hideAccountDropdown();
+            }
+
         })
     }
 
@@ -61,11 +65,15 @@ const mapStateToProps = ({UI}) => ({
     currentRoute: UI.get('currentRoute'),
     showSetAccountPopup: UI.get('showSetAccountPopup'),
     openedTip: UI.get('openedTip'),
+    accountDropdownShown: UI.get('accountDropdownShown')
 })
 
 const mapDispatchToProps = (dispatch) => ({
     closeOpenedTip() {
         dispatch(UIActions.setOpenedTip(null))
+    },
+    hideAccountDropdown() {
+        dispatch(UIActions.hideAccountDropdown())
     },
 })
 

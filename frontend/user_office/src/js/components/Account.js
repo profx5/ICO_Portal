@@ -21,33 +21,32 @@ const Account = ({
     stepThreePassed,
     stepsPassed,
     showSetAccountPopup,
-    showSetAccount}) => {
+    showSetAccount,
+    tokenAddress,
+    crowdsaleAddress}) => {
     return (
         <InfoWrapper>
             <Balance>
                 <img src={walletIcon}/>
-                <p>{(tokensAmount / 10 ** 18).toFixed(2)} <span>VERA</span></p>
+                <a href={`https://etherscan.io/token/${tokenAddress}?a=${crowdsaleAddress}`}>{(tokensAmount / 10 ** 18).toFixed(2)} <span>VERA</span></a>
             </Balance>
 
             <AccountInfo>
-                <AccountInfoText onClick={dropdownAccountClickHandler}>
+                <AccountInfoText className="DropdownAccountTrigger" onClick={dropdownAccountClickHandler}>
                     <Steps>Steps completed: <span>{stepsPassed}/3</span></Steps>
                     <UserImg approved={stepsPassed === 3}/>
                     <ArrowImg up={isDropdownAccountOpen} src={arrowImg} />
                 </AccountInfoText>
                 {isDropdownAccountOpen &&
-                    <DropdownAccount>
+                    <DropdownAccount className="DropdownAccount">
                         <StepsList>
-                            <StepsListItem passed={stepOnePassed} onClick={!stepOnePassed ? showSetAccountPopup:undefined}>1.&nbsp;&nbsp;Provide your ETH address</StepsListItem>
-                            <StepsListItem passed={stepTwoPassed}>
+                            <StepsListItem passed={stepOnePassed} onClick={!stepOnePassed ? showSetAccountPopup : false}>1.&nbsp;&nbsp;Provide your ETH address</StepsListItem>
+                            <StepsListItem passed={stepOnePassed ? stepTwoPassed : false} onClick={!stepOnePassed ? showSetAccount : false}>
                                 {stepOnePassed &&
                                     <Link to='/user_office/verification/'>2.&nbsp;&nbsp;Submit KYC</Link>
                                 }
-                                {!stepOnePassed &&
-                                    <span onClick={showSetAccount}>2.&nbsp;&nbsp;Submit KYC</span>
-                                }
                             </StepsListItem>
-                            <StepsListItem passed={stepThreePassed}><Link to='/user_office/payment/'>3.&nbsp;&nbsp;Buy tokens</Link></StepsListItem>
+                            <StepsListItem passed={stepTwoPassed ? stepThreePassed : false}><Link to='/user_office/payment/'>3.&nbsp;&nbsp;Buy tokens</Link></StepsListItem>
                         </StepsList>
                         <EmailInfo>
                             <div className="text">Your profile:</div>
@@ -117,6 +116,9 @@ const AccountInfoText = styled.div`
     cursor: pointer;
     position: relative;
     z-index: 1;
+    & * {
+        pointer-events: none;
+    }
 `;
 
 const UserImg = styled.div`
@@ -148,7 +150,7 @@ const Balance = styled.div`
     img {
         margin-right: 15px;
     }
-    p {
+    a {
         color: #3172fd;
         font-weight: 600;
         font-size: 20px;

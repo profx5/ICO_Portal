@@ -15,7 +15,7 @@ const FinalFormField = ({labelText, placeholder, options, name, value, disabled,
     let CleaveInput = (field) => {
 
         if (type === 'date') {
-            return <DatePicker  selected={initialValue} name={name} onChange={onChangeHandler} dateFormat="YYYY-MM-DD" />
+            return <DatePicker placeholderText={placeholder} selected={initialValue} name={name} onChange={onChangeHandler} dateFormat="YYYY-MM-DD" />
         } else {
             return <StyledCleave {...field.input} placeholder={placeholder} type={type} required={required} options={field.options} />
         }

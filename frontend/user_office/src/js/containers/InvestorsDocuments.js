@@ -109,6 +109,8 @@ class InvestorsDocuments extends React.Component {
 
     render() {
 
+        const {status} = this.props;
+
         return (
             <Wrapper className="Verification__investorsDocuments">
                 <Title>Investor's documents</Title>
@@ -160,12 +162,20 @@ class InvestorsDocuments extends React.Component {
                                    options={['I confirm that all the data and documents submitted are correct.']}
                                    values={['Yes']}
                                    required/>
+                {status !== 'APPROVED' &&
+                
+                <ButtonWrapper submitBtn>
+                    <Button type="submit" text={status === 'WAITING' ? 'Update data' : 'Send data'}/>
+                </ButtonWrapper>
+                }
             </Wrapper>
         )
     }
 }
 
-const mapStateToProps = ({}) => ({})
+const mapStateToProps = ({KYC}) => ({
+    status: KYC.get('state')
+})
 
 const mapDispatchToProps = (dispatch) => ({})
 
@@ -259,4 +269,5 @@ const ButtonWrapper = styled.div`
     width: 190px;
     height: 45px;
     margin-bottom: 50px;
+    margin-top: ${props => props.submitBtn ? '30px' : '0'};
 `;

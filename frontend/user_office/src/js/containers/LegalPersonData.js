@@ -167,7 +167,7 @@ class LegalPersonData extends React.Component {
                                         type="date"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your phone number"  labelText="Phone number" options={{numericOnly: true, prefix:'+', noImmediatePrefix: true}} name="phone_number" required/>
+                        <FinalFormField placeholder="+7(999)999-99-99"  labelText="Phone number" options={{numericOnly: true, prefix:'+', noImmediatePrefix: true}} name="phone_number" required/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="Your director first name" labelText="First name of director" name="director_firstname" required options={{delimiter: ''}}/>

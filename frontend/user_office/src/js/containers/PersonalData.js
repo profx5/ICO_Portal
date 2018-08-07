@@ -40,7 +40,7 @@ class PersonData extends React.Component {
 
     render() {
 
-        const {uploadedUserPhoto, uploadPhoto, removePhoto} = this.props;
+        const {email} = this.props;
 
         return (
             <Wrapper className="Verification__personData">
@@ -49,6 +49,9 @@ class PersonData extends React.Component {
                     <input type="hidden" name='type' value='NATURAL'/>
                     <InputWrapper>
                         <FinalFormField placeholder="Your name" labelText="First Name" name="firstname" required options={{delimiter: ''}}/>
+                    </InputWrapper>
+                    <InputWrapper>
+                        <FinalFormField placeholder="Your middle name" labelText="Middle Name" name="middlename" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="Your last name" labelText="Last Name" name="lastname" required options={{delimiter: ''}}/>
@@ -73,13 +76,13 @@ class PersonData extends React.Component {
                                         options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your phone number" labelText="Phone number"
+                        <FinalFormField placeholder="+7(999)999-99-99" labelText="Phone number"
                                         options={{numericOnly: true, prefix: '+', noImmediatePrefix: true}} 
                                         name="phone_number" 
                                         required/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your email" labelText="Email" type="email" name="email" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Your email" labelText="Email" value={email} type="email" name="email" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="Address" labelText="Place of residence" name="place_of_residence" required options={{delimiter: ''}}/>
@@ -108,11 +111,8 @@ class PersonData extends React.Component {
 };
 
 
-const mapStateToProps = ({ICOInfo, Timer, KYC}) => ({
-    userPhoto: KYC.get('user_photo'),
-    documentPhoto: KYC.get('document_photo'),
-    uploadedUserPhoto: KYC.get('uploaded_user_photo'),
-    fistname: KYC.get('fistname')
+const mapStateToProps = ({ICOInfo, Timer, KYC, user}) => ({
+    email: user.get('email')
 })
 
 const mapDispatchToProps = (dispatch) => ({
