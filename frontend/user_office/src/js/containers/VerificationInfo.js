@@ -48,9 +48,18 @@ class VerificationInfo extends React.Component {
         $(window).on('scroll', Utils.throttle(this.stageTracker,30));
     }
 
+    getKYCTicket = () => {
+        const { tickets } = this.props;
+        return tickets.filter(item => item.title.startsWith('KYC request for user'));
+    }
+
     render() {
         const {status, verificationStages, stages, btnText, isSubmiting} = this.props;
-
+        let kyc_ticket = this.getKYCTicket();
+        let kyc_ticket_id = null;
+        if (kyc_ticket[0]) {
+            kyc_ticket_id = kyc_ticket[0].id;
+        }
         let btn_text = !isSubmiting ? status === 'WAITING' ? 'Update data' : btnText : 'Submitting...';
 
         return (
@@ -62,16 +71,17 @@ class VerificationInfo extends React.Component {
                         <Button type="submit" text={btn_text} icon={isSubmiting && PreloadIcon}/>
                     </ButtonWrapper>
                     }
-                <VerificationState kycState={status}/>
+                <VerificationState kycState={status} kycTicketId={kyc_ticket_id}/>
             </Wrapper>
         )
     }
 };
 
 
-const mapStateToProps = ({KYC}) => ({
+const mapStateToProps = ({KYC, tickets}) => ({
     status: KYC.get('state'),
-    isSubmiting: KYC.get('isSubmiting')
+    isSubmiting: KYC.get('isSubmiting'),
+    tickets: tickets.get('results'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
