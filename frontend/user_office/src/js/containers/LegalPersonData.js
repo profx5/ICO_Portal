@@ -25,8 +25,8 @@ class LegalPersonData extends React.Component {
         super()
 
         this.state = {
-          dateOfRegistration: moment(),
-          dateOfBirth: moment()
+          dateOfRegistration: '',
+          dateOfBirth: ''
         };
 
         let onRemoveFileHandler = this.onRemoveFileHandler;

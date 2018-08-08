@@ -19,7 +19,7 @@ class PersonData extends React.Component {
     constructor() {
         super();
         this.state = {
-          dateOfBirth: moment()
+          dateOfBirth: ''
         };
     }
 
