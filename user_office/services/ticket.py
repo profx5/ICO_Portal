@@ -1,8 +1,17 @@
+import mimetypes
 from django.db import DatabaseError
+from django.utils.encoding import smart_text
+from django.core.exceptions import ValidationError
+from oslash import Left
 
 from ico_portal.utils.datetime import datetime
 from ico_portal.utils.service_object import ServiceObject, service_call
-from helpdesk.models import Queue, Ticket, FollowUp
+from helpdesk.models import Queue, Ticket, FollowUp, Attachment
+
+
+class ValidationErrorLeft(Left):
+    def bind(self, func):
+        return ValidationError(self._get_value())
 
 
 class _Base(ServiceObject):
@@ -38,6 +47,35 @@ class _Base(ServiceObject):
         except DatabaseError as e:
             return self.fail(e)
 
+    def process_attached_files(self, context):
+        def process_file(f):
+            if f.size:
+                filename = smart_text(f.name)
+                att = Attachment(
+                    followup=context.follow_up,
+                    file=f,
+                    filename=filename,
+                    mime_type=f.content_type or
+                    mimetypes.guess_type(f, strict=False)[0] or
+                    'application/octet-stream',
+                    size=f.size,
+                )
+
+                att.full_clean()
+                att.save()
+
+                return att
+
+        if context.attached_files:
+            try:
+                attachments = list(filter(None, map(process_file, context.attached_files)))
+
+                return self.success(attachments=attachments)
+            except ValidationError as e:
+                return self.fail_with(ValidationErrorLeft(e.message_dict))
+        else:
+            return self.success()
+
 
 class CreateSupportTicket(_Base):
     queue_spec = {
@@ -60,17 +98,20 @@ class CreateSupportTicket(_Base):
             return self.fail(e)
 
     @service_call
-    def __call__(self, reporter, title, description):
+    def __call__(self, reporter, title, description, attached_files=None):
         return self.success(title=title, reporter=reporter,
-                            description=description, **self.queue_spec) | \
+                            description=description,
+                            attached_files=attached_files,
+                            **self.queue_spec) | \
                             self.get_or_create_queue | \
                             self.create_ticket | \
-                            self.create_description
+                            self.create_description | \
+                            self.process_attached_files
 
 
-class CommentTicket(ServiceObject):
+class CommentTicket(_Base):
     @service_call
-    def __call__(self, investor, ticket, comment):
+    def __call__(self, investor, ticket, comment, attached_files=None):
         follow_up = FollowUp(ticket=ticket,
                              title='Comment',
                              comment=comment,
@@ -80,7 +121,8 @@ class CommentTicket(ServiceObject):
         try:
             follow_up.save()
 
-            return self.success(follow_up=follow_up)
+            return self.success(follow_up=follow_up, attached_files=attached_files) | \
+                self.process_attached_files
         except DatabaseError as e:
             return self.fail(e)
 

@@ -1,5 +1,7 @@
 from django.db import models
 
+from .fields import DocFileField
+
 
 KYC_STATE_CHOICES = (('WAITING', 'Waiting for approval'),
                      ('DECLINED', 'Declined'),
@@ -82,6 +84,10 @@ class KYC(models.Model):
     def waiting(self):
         return self.state == 'WAITING'
 
+    @property
+    def declined(self):
+        return self.state == 'DECLINED'
+
 
 KYC_ATTACHMENT_TYPE_CHOICES = (('basis_doc', 'Basis for representation'),
                                ('id_document_photo', 'Copy of identification document'),
@@ -97,7 +103,7 @@ class KYCAttachment(models.Model):
 
     type = models.CharField(max_length=30, choices=KYC_ATTACHMENT_TYPE_CHOICES)
 
-    file = models.FileField('File', upload_to=kyc_attachment_path, max_length=1000)
+    file = DocFileField()
     filename = models.CharField('Filename', max_length=1000)
     mime_type = models.CharField('MIME Type', max_length=255)
     size = models.IntegerField('Size', help_text='Size of this file in bytes')

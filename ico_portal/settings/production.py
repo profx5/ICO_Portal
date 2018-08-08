@@ -29,6 +29,12 @@ MEDIA_ROOT = '/media_data/'
 WEB3_RPC_URL = os.environ['WEB3_RPC_URL']
 CELERY_BROKER_URL = os.environ['CELERY_BROKER_URL']
 
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+SESSION_COOKIE_SECURE = True
+
 try:
     from .local import *
 except ImportError:

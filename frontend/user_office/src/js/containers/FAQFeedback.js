@@ -168,6 +168,9 @@ class FAQFeedback extends React.Component {
                 )
             }
         }));
+        if (content[0].length === 0) {
+            content = null;
+        }
         return (
             <div>
                 <HeadWrapper>
@@ -189,7 +192,11 @@ class FAQFeedback extends React.Component {
                     </div>
                 </HeadWrapper>
                 <ContentWrapper>
-                    {content}
+                    {content && content}
+                    {!content &&
+                    <ProcessingWrapper>
+                        Your ticket is processing. Our managers will reply soon! Thank you.
+                    </ProcessingWrapper>}
                 </ContentWrapper>
                 {[3, 4, 5].includes(ticketFull.status) &&
                 <ClosedDiv>
@@ -327,6 +334,10 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(FAQFeedback)
+
+const ProcessingWrapper = styled.div`
+    margin: 45px 0;
+`;
 
 const FileWrapper = styled.div`
     height: 36px;

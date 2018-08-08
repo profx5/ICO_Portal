@@ -52,9 +52,7 @@ const Card = styled.div`
             transform: scale(1.05);
         }
     }
-    &:not(:nth-child(5n)) {
-        margin-right: 3.37%;
-    }
+    
     &.active {
         box-shadow: 0 2px 25px 0 rgba(63, 123, 244, 0.33);
         transform: scale(1.05);

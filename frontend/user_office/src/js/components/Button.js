@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Button = ({text, className, clickHandler, submit, disabled}) => {
+const Button = ({text, className, clickHandler, submit, disabled, icon}) => {
     const opts = {
         className: className,
         onClick: clickHandler,
@@ -12,13 +12,25 @@ const Button = ({text, className, clickHandler, submit, disabled}) => {
         opts['type'] = 'submit'
     }
 
-    return (<Btn {...opts}>{text}</Btn>)
+    return (<Btn {...opts}>
+        {icon &&
+            <Img src={icon} alt={'submitting'}/>
+        }
+        {text}
+    </Btn>)
 }
-
 
 
 export default Button;
 
+const Img = styled.img`
+    border-style: none;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 6px;
+    left: 15px;
+`;
 
 const Btn = styled.button`
     border: solid 1px #4da1ffb3;
@@ -26,7 +38,7 @@ const Btn = styled.button`
     height: 100%;
     width: 100%;
     border-radius: 2px;
-    color: ${props=>props.disabled ? 'black' : 'white'};
+    color: ${props => props.disabled ? 'black' : 'white'};
     font-size: 16px;
     font-weight: 300;
     text-align: center;
@@ -44,11 +56,11 @@ const Btn = styled.button`
         transition: all .25s ease;
     }
     &:before {
-        background: ${props=>props.disabled ? '#f5f6fa' : 'linear-gradient(80deg, #54a0f5, #3172fd)'};
+        background: ${props => props.disabled ? '#f5f6fa' : 'linear-gradient(80deg, #54a0f5, #3172fd)'};
         z-index: -1;
     }
     &:after {
-        background: ${props=>props.disabled ? '#f5f6fa' : 'linear-gradient(80deg, #3172fd, #54a0f5)'};
+        background: ${props => props.disabled ? '#f5f6fa' : 'linear-gradient(80deg, #3172fd, #54a0f5)'};
         z-index: -2;
     }
     &:hover:before {

@@ -34,6 +34,7 @@ class Currency extends React.Component {
 
             if (index >= 3 && this.props.spreadedCurrencyCards === false) return;
             if (code === 'LTCT') return;
+            if (code === 'BTC') return;
             return <CurrencyCard
                 className={this.props.investCurrency === code ? 'active' : ''}
                 name={code}

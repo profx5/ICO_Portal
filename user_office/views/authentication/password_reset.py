@@ -11,7 +11,7 @@ class PasswordResetView(PasswordResetViewBase):
     subject_template_name = 'authentication/password_reset_subject.txt'
     template_name = 'authentication/password_reset_form.html'
 
-    extra_context = {'site_name': settings.HOST}
+    extra_context = {'domain': settings.HOST}
 
 
 class PasswordResetDoneView(PasswordResetDoneViewBase):

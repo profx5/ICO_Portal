@@ -1,12 +1,14 @@
+import django.core.mail
 from oslash import Right
 from shutil import rmtree
 from django.conf import settings
 
 from ico_portal.utils.datetime import datetime
-from ..base import APITestCase
-from user_office.services import CreateSupportTicket
+from user_office.services import CreateSupportTicket, CommentTicket
+from user_office.factories import InvestorFactory
 from helpdesk.models import FollowUp, Ticket
 from .helpers.fixture import fixture_path
+from ..base import APITestCase
 
 
 class TestTickets(APITestCase):
@@ -47,6 +49,7 @@ class TestTickets(APITestCase):
                 'attachments': []
             }]
         })
+        self.assertEqual(len(django.core.mail.outbox), 0)
 
     def test_create_ticket_w_attachment(self):
         with open(fixture_path('document.jpg'), 'rb') as document:
@@ -74,6 +77,7 @@ class TestTickets(APITestCase):
                 }]
             }]
         })
+        self.assertEqual(len(django.core.mail.outbox), 0)
 
     def test_get_tickets_list(self):
         result = CreateSupportTicket()(reporter=self.get_investor(),
@@ -148,6 +152,7 @@ class TestTickets(APITestCase):
                 'attachments': []
             }]
         })
+        self.assertEqual(len(django.core.mail.outbox), 0)
 
     def test_private_comment(self):
         result = CreateSupportTicket()(reporter=self.get_investor(),
@@ -176,6 +181,7 @@ class TestTickets(APITestCase):
                 'attachments': []
             }]
         })
+        self.assertEqual(len(django.core.mail.outbox), 0)
 
     def test_first_last_name(self):
         investor = self.get_investor()
@@ -248,3 +254,17 @@ class TestTickets(APITestCase):
                 }]
             }]
         })
+
+    def test_email_notification_on_reply(self):
+        sender = InvestorFactory()
+
+        result = CreateSupportTicket()(reporter=self.get_investor(),
+                                       title='Test title',
+                                       description='Test description')
+        self.assertIsInstance(result, Right)
+        ticket = result.value['ticket']
+
+        result = CommentTicket()(sender, ticket, 'New comment')
+        self.assertIsInstance(result, Right)
+        self.assertEqual(len(django.core.mail.outbox), 1)
+        self.assertEqual(django.core.mail.outbox[0].subject, 'New reply in your ticket')

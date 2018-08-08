@@ -1,12 +1,13 @@
-import requests
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template import loader
 from django.urls import reverse
 from django.utils.html import strip_tags
 from social_core.pipeline.social_auth import social_user, AuthForbidden
+from oslash import Right
 
 from user_office.models import Investor
+from user_office.services import CheckRECAPTCHA
 
 
 def associate_user(backend, uid, user=None, social=None, *args, **kwargs):
@@ -64,18 +65,13 @@ def send_validation_email(strategy, backend, code, partial_token):
         html_content = loader.render_to_string('mail/validation.html', ctx)
         text_content = strip_tags(html_content)
         send_mail('Activation ICO investor account', text_content,
-                  settings.DEFAULT_FROM_EMAIL, [code.email], fail_silently=True, html_message=html_content)
+                  settings.DEFAULT_FROM_EMAIL, [code.email], fail_silently=False, html_message=html_content)
 
 
 def check_recaptcha(backend, details, response, *args, **kwargs):
     g_recaptcha_response = backend.strategy.request_data()['g-recaptcha-response']
-    secret = settings.RECAPTCHA_SECRET
 
-    response = requests.post('https://www.google.com/recaptcha/api/siteverify',
-                             data={'secret': secret,
-                                   'response': g_recaptcha_response})
+    result = CheckRECAPTCHA()(g_recaptcha_response)
 
-    result = response.json()
-
-    if not result['success']:
+    if not isinstance(result, Right):
         raise Exception('RECAPTCHA challenge failed')

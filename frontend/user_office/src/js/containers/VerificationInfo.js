@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import $ from 'jquery';
 
 import Utils from './../utils/index';
-
+import PreloadIcon from './../../img/preload-white.svg';
 import Button from './../components/Button';
 import VerificationStages from './../components/VerificationStages';
 import VerificationState from './../components/VerificationState';
@@ -48,27 +48,41 @@ class VerificationInfo extends React.Component {
         $(window).on('scroll', Utils.throttle(this.stageTracker,30));
     }
 
-    render() {
-        const {status, verificationStages, stages, btnText} = this.props;
+    getKYCTicket = () => {
+        const { tickets } = this.props;
+        return tickets.filter(item => item.title.startsWith('KYC request for user'));
+    }
 
+    render() {
+        const {status, verificationStages, stages, btnText, isSubmiting, type} = this.props;
+        let kyc_ticket = this.getKYCTicket();
+        let kyc_ticket_id = null;
+        if (kyc_ticket[0]) {
+            kyc_ticket_id = kyc_ticket[0].id;
+        }
+        let btn_text = !isSubmiting ? status === 'WAITING' ? 'Update data' : btnText : 'Submitting...';
+        let KYCStatus = type !== '' && status;
         return (
             <Wrapper className="VerificationInfo">
                 <VerificationStages stageClickHandler={this.stageClickHandler} boundSections={verificationStages} stages={stages}/>
                     {status !== 'APPROVED' &&
                     
                     <ButtonWrapper>
-                        <Button type="submit" text={status === 'WAITING' ? 'Update data' : btnText}/>
+                        <Button type="submit" text={btn_text} icon={isSubmiting && PreloadIcon}/>
                     </ButtonWrapper>
                     }
-                <VerificationState kycState={status}/>
+                <VerificationState kycState={KYCStatus} kycTicketId={kyc_ticket_id}/>
             </Wrapper>
         )
     }
 };
 
 
-const mapStateToProps = ({KYC}) => ({
-    status: KYC.get('state')
+const mapStateToProps = ({KYC, tickets}) => ({
+    status: KYC.get('state'),
+    isSubmiting: KYC.get('isSubmiting'),
+    tickets: tickets.get('results'),
+    type: KYC.get('type'),
 })
 
 const mapDispatchToProps = (dispatch) => ({

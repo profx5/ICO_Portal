@@ -1,5 +1,6 @@
 from oslash import Right
 from decimal import Decimal
+import django.core.mail
 
 from ..base import BlockChainTestCase
 from user_office.factories import InvestorFactory, TokensMoveFactory, TransferFactory
@@ -71,6 +72,10 @@ class TestProcessTransfer(BlockChainTestCase):
         self.assertEqual(payment.rate_usdc, self.oracle_inital_price)
         self.assertEqual(payment.bonus_percent, 20)
         self.assertEqual(payment.bonus_ids, 1)
+
+        sent_mails = django.core.mail.outbox
+        self.assertEqual(len(sent_mails), 1)
+        self.assertEqual(sent_mails[0].subject, 'Incoming tokens')
 
     def test_transfer_tokens_to_existing_account(self):
         sender_account = self.eth_tester.get_accounts()[0]

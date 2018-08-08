@@ -104,6 +104,8 @@ class Verification extends React.Component {
             beneficial_place_of_birth: beneficial_place_of_birth,
             beneficial_place_of_residence: beneficial_place_of_residence,
             is_pep: is_pep,
+            confirmInvestor: !!type,
+            confirm: !!type
         });
     };
 
@@ -442,7 +444,7 @@ const Wrapper = styled.form`
     padding-bottom: 73px;
     display: flex;
     flex-flow: row wrap;
-    input, button, label {
+    input, button {
         pointer-events: ${props => props.state === 'APPROVED' && 'none'};
     }
 `;

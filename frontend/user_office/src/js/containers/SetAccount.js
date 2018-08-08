@@ -23,9 +23,9 @@ class SetAccount extends Component {
     }
 
     render() {
-        const {hidePopup} = this.props;
+        const {hidePopup, set_eth_error, eth_account} = this.props;
         let metamaskEthAccount = this.getMetaMaskAccount();
-        return(
+        return (
             <React.Fragment>
                 <PopupWrapper>
                     <Popup>
@@ -33,10 +33,28 @@ class SetAccount extends Component {
                         <StyledHead>Add your ETH account</StyledHead>
                         <form>
                             <TextField type="text" value={metamaskEthAccount} innerRef={input => this.input = input}/>
+                            {set_eth_error &&
+                            <ErrorSpan>
+                                {set_eth_error}
+                            </ErrorSpan>}
+                            {eth_account &&
+                            <AllRightWrapper>
+                                ETH account has been added!
+                            </AllRightWrapper>
+                            }
+                            {!eth_account &&
                             <ButtonWrapper>
                                 <Button clickHandler={this.onSubmitHandler} type="submit" text="Send"/>
                             </ButtonWrapper>
+                            }
+
                         </form>
+
+                        <Paragraph><span>IMPORTANT NOTICE:</span><br/>
+                            ADD ONLY YOUR OWN ETH ACCOUNT YOU HAVE A SECRET KEY FROM! DO NOT ADD ACCOUNTS FROM
+                            EXCHANGES, THIS WILL CAUSE YOU TO LOOSE ALL THE TOKENS!
+                            ALSO YOUR WALLET SHOULD SUPPORT ERC 20 TOKENS!
+                        </Paragraph>
                     </Popup>
                 </PopupWrapper>
             </React.Fragment>
@@ -46,7 +64,8 @@ class SetAccount extends Component {
 
 
 const mapStateToProps = ({user, KYC, UI}) => ({
-
+    set_eth_error: user.get('set_eth_error'),
+    eth_account: user.get('eth_account')
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -60,12 +79,45 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetAccount);
 
+const ErrorSpan = styled.span`
+    color: red;
+    font-size: 0.7em;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    display: block;
+`;
+
+const Paragraph = styled.p`
+    text-align: justify;
+    font-weight: normal;
+    font-size: 0.8em;
+    letter-spacing: 0.5px;
+    color: red;
+    padding-top: 20px;
+    & span {
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+`;
+
 const ButtonWrapper = styled.div`
     width: 100%;
     height: 40px;
     border-radius: 2px;
     border: 1px solid #d6dfe6;
     position: relative;
+`;
+
+const AllRightWrapper = styled.div`
+    width: 100%;
+    height: 40px;
+    border-radius: 2px;
+    border: 1px solid white;
+    background: white;
+    position: relative;
+    line-height: 40px;
+    text-align: center;
+    color: #11cd56;
 `;
 
 
@@ -83,7 +135,7 @@ const PopupWrapper = styled.div`
 `;
 
 const Popup = styled.div`
-    width: 400px;
+    width: 485px;
     border-radius: 3px;
     background: white;
     position: relative;

@@ -40,7 +40,7 @@ class PersonData extends React.Component {
 
     render() {
 
-        const {email} = this.props;
+        const {uploadedUserPhoto, uploadPhoto, removePhoto, type, email} = this.props;
 
         return (
             <Wrapper className="Verification__personData">
@@ -110,10 +110,15 @@ class PersonData extends React.Component {
     }
 };
 
-
-const mapStateToProps = ({ICOInfo, Timer, KYC, user}) => ({
+const mapStateToProps = ({ICOInfo, Timer, KYC}) => ({
+    userPhoto: KYC.get('user_photo'),
+    documentPhoto: KYC.get('document_photo'),
+    uploadedUserPhoto: KYC.get('uploaded_user_photo'),
+    fistname: KYC.get('fistname'),
+    type: KYC.get('type'),
     email: user.get('email')
-})
+});
+
 
 const mapDispatchToProps = (dispatch) => ({
     updateKycData() {
