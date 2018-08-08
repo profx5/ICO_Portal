@@ -39,6 +39,8 @@ class Header extends React.Component {
             ethAccount,
             kycState,
             tokensAmount,
+            tokenAddress,
+            crowdsaleAddress
         } = this.props;
 
         let floatTokensAmount = '1';
@@ -73,7 +75,9 @@ class Header extends React.Component {
                         stepThreePassed={stepThreePassed}
                         stepsPassed={stepsPassedNumber}
                         showSetAccountPopup={showSetAccountPopup}
-                        showSetAccount={this.showSetAccount}
+                        showSetAccount={this.showSetAccount} 
+                        tokenAddress={tokenAddress} 
+                        crowdsaleAddress={crowdsaleAddress}
                     />
                 </HeaderUser>
             </HeaderBlock>
@@ -92,6 +96,8 @@ const mapStateToProps = ({user, ICOInfo, KYC, Invest, UI}) => ({
     ethAccount: user.get('eth_account'),
     kycState: KYC.get('state'),
     tokensAmount: user.get('tokens_amount'),
+    tokenAddress: ICOInfo.get('token_address'),
+    crowdsaleAddress: ICOInfo.get('crowdsale_address')
 })
 
 const mapDispatchToProps = (dispatch) => ({

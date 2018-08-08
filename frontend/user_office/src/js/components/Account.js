@@ -11,7 +11,6 @@ import onClickOutside from 'react-onclickoutside'
 
 class Account extends React.Component {
 
-
     handleClickOutside = evt => {
         const {dropdownAccountClickHandler, isDropdownAccountOpen} = this.props;
         if (isDropdownAccountOpen) {
@@ -43,21 +42,25 @@ class Account extends React.Component {
                     </AccountInfoText>
                     {isDropdownAccountOpen &&
                     <DropdownAccount id='modal-dropdown'>
+                      
+                      
                         <StepsList>
                             <StepsListItem passed={stepOnePassed}
                                            onClick={!stepOnePassed ? showSetAccountPopup : undefined}>1.&nbsp;&nbsp;Provide
                                 your ETH address</StepsListItem>
-                            <StepsListItem passed={stepTwoPassed}>
-                                {stepOnePassed &&
+                            <StepsListItem passed={stepOnePassed ? stepTwoPassed : false}>
+                                {stepOnePassed && stepTwoPassed &&
                                 <Link to='/user_office/verification/'>2.&nbsp;&nbsp;Submit KYC</Link>
                                 }
                                 {!stepOnePassed &&
                                 <span onClick={showSetAccount}>2.&nbsp;&nbsp;Submit KYC</span>
                                 }
                             </StepsListItem>
-                            <StepsListItem passed={stepThreePassed}><Link to='/user_office/payment/'>3.&nbsp;&nbsp;Buy
+                            <StepsListItem passed={stepTwoPassed ? stepThreePassed : false}><Link to='/user_office/payment/'>3.&nbsp;&nbsp;Buy
                                 tokens</Link></StepsListItem>
                         </StepsList>
+                     
+                     
                         <EmailInfo>
                             <div className="text">Your profile:</div>
                             <div className="email">{email}</div>
@@ -131,6 +134,9 @@ const AccountInfoText = styled.div`
     cursor: pointer;
     position: relative;
     z-index: 1;
+    & * {
+        pointer-events: none;
+    }
 `;
 
 const UserImg = styled.div`
@@ -162,7 +168,7 @@ const Balance = styled.div`
     img {
         margin-right: 15px;
     }
-    p {
+    a {
         color: #3172fd;
         font-weight: 600;
         font-size: 20px;
