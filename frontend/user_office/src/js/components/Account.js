@@ -35,13 +35,13 @@ class Account extends React.Component {
                 </Balance>
 
                 <AccountInfo>
-                    <AccountInfoText onClick={dropdownAccountClickHandler}>
+                    <AccountInfoText className="DropdownAccountTrigger" onClick={dropdownAccountClickHandler}>
                         <Steps>Steps completed: <span>{stepsPassed}/3</span></Steps>
                         <UserImg approved={stepsPassed === 3}/>
                         <ArrowImg up={isDropdownAccountOpen} src={arrowImg}/>
                     </AccountInfoText>
                     {isDropdownAccountOpen &&
-                    <DropdownAccount id='modal-dropdown'>
+                    <DropdownAccount className="DropdownAccount" id='modal-dropdown'>
                       
                       
                         <StepsList>
