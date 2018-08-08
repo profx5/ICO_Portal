@@ -31,7 +31,7 @@ class Account extends React.Component {
             <InfoWrapper>
                 <Balance>
                     <img src={walletIcon}/>
-                    <p>{(tokensAmount / 10 ** 18).toFixed(2)} <span>Vera</span></p>
+                    <p>{(tokensAmount / 10 ** 18).toFixed(2)} <span>VERA</span></p>
                 </Balance>
 
                 <AccountInfo>
