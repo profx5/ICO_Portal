@@ -99,8 +99,8 @@ class DepositTable extends Component {
                          <IconImg right={1} src={iconReload}/>}
 
                     </FlexItem>
-                    <FlexItem width={15} color>{this._getAmountString(item)}</FlexItem>
-                    <FlexItem width={15} color>{this._getUSDValueString(item)}</FlexItem>
+                    <FlexItem width={15}>{this._getAmountString(item)}</FlexItem>
+                    <FlexItem width={15}>{this._getUSDValueString(item)}</FlexItem>
                     <FlexItemColor width={15} ffailed={failed}
                                    up={item.get('direction') === 'IN'}>
                         <span>{this._getTokensWSign(item)}</span>
@@ -408,7 +408,6 @@ const FlexItem = styled.div`
     font-weight: 500;
     line-height: 66px;
     letter-spacing: 0.1px;
-    // color: ${props => props.color ? '#031949' : props => props.failed ? 'rgba(0,0,0,0.2)' : '#000000'};
     border-top: 1px solid rgba(150, 150, 150, 0.2);
     height: 66px;
     position: ${props => props.position ? props.position : 'inherit' }

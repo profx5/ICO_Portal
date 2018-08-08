@@ -216,24 +216,24 @@ const Utils = {
         return 'Разнообразный и богатый опыт рамки и место обучения кадров позволяет выполнять важные задания по разработке направлений прогрессивного развития. Не следует, однако забывать, что консультация с широким активом обеспечивает широкому кругу (специалистов) участие в формировании дальнейших направлений развития. Задача организации, в особенности же постоянный количественный рост и сфера нашей активности требуют от нас анализа систем массового участия. С другой стороны новая модель организационной деятельности представляет собой интересный эксперимент проверки форм развития. Таким образом рамки и место обучения кадров представляет собой интересный эксперимент проверки позиций, занимаемых участниками в отношении поставленных задач. '
     },
     formatFileSize: (recievedSize) => {
+      let size = recievedSize;
       let formattedSize = {
         size: size,
         units: 'K'
       }
 
-      let size = recievedSize;
 
-        if (size * 0.000001 > 1) {
-            size *= 0.000001;
-            formattedSize.size = size.toFixed(2);
-            formattedSize.units = 'B';
-        } else {
-            size *= 0.001;
-            formattedSize.size = size.toFixed(2);
-            formattedSize.units = 'K';
-        }
+      if (size * 0.000001 > 1) {
+          size *= 0.000001;
+          formattedSize.size = size.toFixed(2);
+          formattedSize.units = 'B';
+      } else {
+          size *= 0.001;
+          formattedSize.size = size.toFixed(2);
+          formattedSize.units = 'K';
+      }
 
-        return formattedSize;
+      return formattedSize;
     }
 };
 

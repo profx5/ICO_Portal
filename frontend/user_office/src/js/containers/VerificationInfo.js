@@ -38,7 +38,6 @@ class VerificationInfo extends React.Component {
         const addStageOffset = this.addStageOffset;
         let $el = $(event.currentTarget);
         let valToScroll = $(`.${$el.data('bind-to')}`).offset().top - addStageOffset;
-        console.log(this.addStageOffset)
         $('body,html').animate({
             'scrollTop': valToScroll + 'px'
         })

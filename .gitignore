@@ -14,8 +14,6 @@ yarn.lock
 webpack-stats.dev.json
 webpack-stats.prod.json
 pip-selfcheck.json
-lib
-bin
 .Python
 celerybeat-schedule
 yarn-error.log
@@ -23,6 +21,11 @@ test_artifacts/*
 assets/bundles/*
 ico_portal/settings/local.py
 ico_eth_chain/
-include
-man
-selenium
+*/lib/
+*/bin/
+*/include/
+*/man/
+*/selenium/
+*/share/
+pyvenv.cfg
+celerybeat-schedule.db

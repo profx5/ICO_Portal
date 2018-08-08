@@ -20,7 +20,7 @@ brew services start mysql
 
 4. (optional) rabbitmq
 ```
-brew intsall rabbitmq
+brew install rabbitmq
 brew services start rabbitmq
 ```
 

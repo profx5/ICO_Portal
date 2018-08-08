@@ -62,7 +62,6 @@ class Layout extends Component {
 }
 
 const mapStateToProps = ({UI}) => ({
-    currentRoute: UI.get('currentRoute'),
     showSetAccountPopup: UI.get('showSetAccountPopup'),
     openedTip: UI.get('openedTip'),
     accountDropdownShown: UI.get('accountDropdownShown')
@@ -87,4 +86,5 @@ const Wrapper = styled.div`
 const MainWrapper = styled.div`
     display: flex;
     background: #F5F6FA;
+    min-height: calc(100vh - 90px);
 `;

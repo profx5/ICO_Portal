@@ -98,7 +98,7 @@ class LegalPersonData extends React.Component {
         event.preventDefault();
 
         $(event.currentTarget).closest('div').find('input[type="file"]').each((index, item) => {
-            if ($(item).val() == '') {
+            if ($(item).val() === '') {
                 $(item).click();
 
                 return false;

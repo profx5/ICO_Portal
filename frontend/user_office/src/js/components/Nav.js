@@ -1,23 +1,14 @@
 import React from 'react';
-import {connect} from 'react-redux'
-
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
-import { Link } from 'react-router-dom';
-import * as UIActions from './../actions/UIActions';
+
 class Nav extends React.Component {
 
-    get_elem = (t) => {
-        const {setCurrentRoute} = this.props;
-        setCurrentRoute(t);
-    };
-
     render() {
-        const {currentRoute} = this.props;
-
         return (
             <Wrapper>
-                <IconLink active={1 === currentRoute} onClick={this.get_elem.bind(this, 1)} to="/user_office">
+                <IconLink exact activeClassName="active" to="/user_office">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24">
                       <g fill="#3172FD">
                         <path d="M27.334 5.525L14.434.087a1.117 1.117 0 0 0-.867 0L.666 5.525A1.08 1.08 0 0 0 0 6.52c0 .433.264.823.668.993l12.901 5.402a1.117 1.117 0 0 0 .862 0l12.9-5.402c.406-.17.669-.56.669-.993a1.08 1.08 0 0 0-.666-.994zM14 10.745L3.896 6.516 14 2.255l10.104 4.26L14 10.745zm13.91 6.858c-.239-.505-.886-.739-1.443-.522L14 21.922l-12.467-4.84c-.559-.218-1.204.017-1.444.521-.24.505.02 1.09.577 1.307l12.9 5.01a1.2 1.2 0 0 0 .868 0l12.9-5.01c.558-.217.816-.802.577-1.307z"/>
@@ -25,7 +16,7 @@ class Nav extends React.Component {
                       </g>
                     </svg>
                 </IconLink>
-                <IconLink active={2 === currentRoute} onClick={this.get_elem.bind(this, 2)} to="/user_office/transactions">
+                <IconLink activeClassName="active" to="/user_office/transactions">
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="33">
                       <g fill="#3172FD">
                         <path d="M24 0c-5.817 0-12 1.874-12 5.348v4.278c0 .59.489 1.07 1.09 1.07.603 0 1.092-.48 1.092-1.07V8.51c2.315 1.431 6.137 2.184 9.818 2.184 3.68 0 7.503-.753 9.818-2.184v1.115c0 1.046-2.683 2.714-7.728 3.127a1.076 1.076 0 0 0-.995 1.155c.046.558.524.98 1.085.98.032 0 .06-.002.093-.005 2.841-.233 5.671-.954 7.545-2.124v1.145c0 .913-1.977 2.226-5.644 2.862a1.073 1.073 0 0 0-.884 1.238 1.087 1.087 0 0 0 1.263.867c2.22-.383 3.995-1.01 5.265-1.806v1.117c0 .913-1.977 2.227-5.644 2.862a1.073 1.073 0 0 0-.884 1.238 1.087 1.087 0 0 0 1.263.867c2.22-.383 3.995-1.012 5.265-1.806v1.117c0 .913-1.977 2.227-5.644 2.862a1.073 1.073 0 0 0-.884 1.238 1.087 1.087 0 0 0 1.263.867c2.22-.383 3.995-1.012 5.265-1.806v1.117c0 1.046-2.683 2.714-7.728 3.127a1.076 1.076 0 0 0-.995 1.155c.046.559.524.98 1.085.98.032 0 .06-.002.093-.004C31.115 31.598 36 29.82 36 26.738V5.348C36 1.874 29.817 0 24 0zm0 8.556c-5.993 0-9.818-1.901-9.818-3.208 0-1.307 3.825-3.209 9.818-3.209 5.993 0 9.818 1.902 9.818 3.209 0 1.307-3.825 3.208-9.818 3.208z"/>
@@ -33,7 +24,7 @@ class Nav extends React.Component {
                       </g>
                     </svg>
                 </IconLink>
-                <IconLink active={4 === currentRoute} onClick={this.get_elem.bind(this, 4)} to="/user_office/support">
+                <IconLink activeClassName="active" to="/user_office/support">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
                       <g fill="#3172FD">
                         <circle cx="15.5" cy="23.5" r="1.5"/>
@@ -47,20 +38,7 @@ class Nav extends React.Component {
     }
 }
 
-const mapStateToProps = ({UI}) => ({
-    currentRoute: UI.get('currentRoute'),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    setCurrentRoute(route_index) {
-        dispatch(UIActions.setCurrentRoute(route_index));
-    }
-});
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Nav)
-
-
+export default Nav;
 
 
 const Wrapper = styled.div`
@@ -69,16 +47,20 @@ const Wrapper = styled.div`
     flex-flow: column nowrap;
 `;
 
-const IconLink = styled(Link)`
+const IconLink = styled(NavLink)`
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     
-    border-bottom: ${props => props.bordered ? '1px solid rgba(250,251,252,.2)' : 'unset'};
-    border-right: ${props => props.active ? '3px solid #3172fd' : 'none'};
-    background: ${props => props.active ? 'rgba(255,255,255,.2)' : 'unset'};
-    height: ${props => props.logo ? '100px' : '40px'};
-    opacity: ${props => props.active ? '1': '0.4'};
-    margin-bottom: ${props => props.marginBottom || '43px'}
+    opacity: 0.4;
+    height: 40px;
+    margin-bottom: 43px;
+    border-right: 3px solid transparent;
+
+    &.active {
+      opacity: 1;
+      background: rgba(255,255,255,.2);
+      border-right: 3px solid #3172fd;
+    }
 `;

@@ -263,7 +263,7 @@ class FAQFeedback extends React.Component {
         const openedTicket = this.props.match.params.ticket;
         if (openedTicket) {
             if (ticketFull !== null) {
-                if (ticketFull.id != openedTicket) {
+                if (ticketFull.id !== openedTicket) {
                     setOpenedTicket(openedTicket);
                 }
             } else {
