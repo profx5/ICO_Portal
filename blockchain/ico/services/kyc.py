@@ -1,9 +1,7 @@
 from django.db import DatabaseError
 from django.conf import settings
 from django.urls import reverse
-from django.utils.html import strip_tags
-from django.template import loader
-from django.core.mail import send_mail
+from user_office.tasks import send_mail
 
 from blockchain.ico.contracts import CrowdsaleContract
 from blockchain.ico import services
@@ -53,11 +51,7 @@ class ApproveKYC(ServiceObject):
             'email': email
         }
 
-        html_content = loader.render_to_string('mail/kyc_approved.html', ctx)
-        text_content = strip_tags(html_content)
-
-        send_mail('Your KYC request was approved', text_content,
-                  settings.DEFAULT_FROM_EMAIL, [email], fail_silently=True, html_message=html_content)
+        send_mail.delay('Your KYC request was approved', email, 'mail/kyc_approved.html', ctx)
 
         return self.success()
 
@@ -103,11 +97,7 @@ class DeclineKYC(ServiceObject):
             'email': email
         }
 
-        html_content = loader.render_to_string('mail/kyc_declined.html', ctx)
-        text_content = strip_tags(html_content)
-
-        send_mail('Your KYC request was declined', text_content,
-                  settings.DEFAULT_FROM_EMAIL, [email], fail_silently=True, html_message=html_content)
+        send_mail.delay('Your KYC request was declined', email, 'mail/kyc_declined.html', ctx)
 
         return self.success()
 

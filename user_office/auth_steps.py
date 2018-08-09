@@ -1,8 +1,5 @@
-from django.conf import settings
-from django.core.mail import send_mail
-from django.template import loader
+from user_office.tasks import send_mail
 from django.urls import reverse
-from django.utils.html import strip_tags
 from social_core.pipeline.social_auth import social_user, AuthForbidden
 from oslash import Right
 
@@ -62,10 +59,8 @@ def send_validation_email(strategy, backend, code, partial_token):
             'link': url,
             'email': email
         }
-        html_content = loader.render_to_string('mail/validation.html', ctx)
-        text_content = strip_tags(html_content)
-        send_mail('Activation ICO investor account', text_content,
-                  settings.DEFAULT_FROM_EMAIL, [code.email], fail_silently=False, html_message=html_content)
+
+        send_mail.delay('Activation ICO investor account', code.email, 'mail/validation.html', ctx)
 
 
 def check_recaptcha(backend, details, response, *args, **kwargs):

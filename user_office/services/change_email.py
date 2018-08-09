@@ -2,11 +2,10 @@ from urllib.parse import urljoin
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
-from django.core.mail import send_mail
+from user_office.tasks import send_mail
 from django.conf import settings
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template import loader
 from django.db import DatabaseError
 
 from user_office.models import Investor
@@ -53,13 +52,10 @@ class SendChangeEmailConfirm(ServiceObject, CheckEmailMixin):
     def send_email(self, context):
         link = urljoin(settings.HOST, f'change_email/{context.uid}/{context.token}/')
 
-        content = loader.render_to_string('mail/change_email.html', {
+        send_mail.delay('Change email', context.investor.email, 'mail/change_email.html', {
             'link': link,
             'email': context.email
         })
-
-        send_mail('Change email', content, settings.DEFAULT_FROM_EMAIL,
-                  [context.investor.email], fail_silently=True)
 
         return self.success()
 

@@ -10,6 +10,7 @@ app = Celery('ico_portal')
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
+app.autodiscover_tasks()
 
 register_logger_signal(client)
 register_signal(client)

@@ -1,7 +1,5 @@
 from django.db import DatabaseError
-from django.core.mail import send_mail
-from django.utils.html import strip_tags
-from django.template.loader import render_to_string
+from user_office.tasks import send_mail
 from django.conf import settings
 
 from user_office.models import Investor, TokensMove
@@ -60,11 +58,8 @@ class ProcessIncomingTokensMove(_Base):
             'incoming_amount': float(incoming_amount) / 10 ** settings.TOKEN_DECIMALS,
             'txn_hash': transfer.txn_hash
         }
-        html_content = render_to_string('mail/token_incoming.html', ctx)
-        text_content = strip_tags(html_content)
 
-        send_mail('Incoming tokens', text_content,
-                  settings.DEFAULT_FROM_EMAIL, [investor.email], fail_silently=False, html_message=html_content)
+        send_mail.delay('Incoming tokens', investor.email, 'mail/token_incoming.html', ctx)
 
     def recalc_tokens_balance_and_mail(self, context):
         investor = Investor.objects.select_for_update()\
