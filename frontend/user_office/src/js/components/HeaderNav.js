@@ -6,6 +6,10 @@ const navigationItems = [
   {
     location: '/user_office/',
     caption: 'Investors cabinet',
+    isActive: (match, location) => {
+      if (!match) return false;
+      return !location.pathname.startsWith('/user_office/referrals');
+    }
   },
   // {
   //   location: '/user_office/referrals',
@@ -17,7 +21,11 @@ const HeaderNav = () => (
   <Wrapper>
     <NavList>
       {navigationItems.map(navigationItem => (
-        <NavItem key={navigationItem.location} to={navigationItem.location} activeClassName='active'>
+        <NavItem
+            key={navigationItem.location}
+            to={navigationItem.location}
+            activeClassName='active' isActive={navigationItem.isActive}
+        >
            {navigationItem.caption}
         </NavItem>
       ))}
