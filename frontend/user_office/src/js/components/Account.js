@@ -49,12 +49,7 @@ class Account extends React.Component {
                                            onClick={!stepOnePassed ? showSetAccountPopup : undefined}>1.&nbsp;&nbsp;Provide
                                 your ETH address</StepsListItem>
                             <StepsListItem passed={stepOnePassed ? stepTwoPassed : false}>
-                                {stepOnePassed && stepTwoPassed &&
                                 <Link to='/user_office/verification/'>2.&nbsp;&nbsp;Submit KYC</Link>
-                                }
-                                {!stepOnePassed &&
-                                <span onClick={showSetAccount}>2.&nbsp;&nbsp;Submit KYC</span>
-                                }
                             </StepsListItem>
                             <StepsListItem passed={stepTwoPassed ? stepThreePassed : false}><Link to='/user_office/payment/'>3.&nbsp;&nbsp;Buy
                                 tokens</Link></StepsListItem>
