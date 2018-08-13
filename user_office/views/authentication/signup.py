@@ -27,7 +27,11 @@ class SignUpView(FormView):
         strategy = load_strategy(self.request)
         backend = load_backend(strategy, 'email', None)
 
-        return do_complete(backend, _do_login,
-                           request=self.request,
-                           email=email,
-                           password=password)
+        return do_complete(
+            backend,
+            _do_login,
+            request=self.request,
+            email=email,
+            password=password,
+            refid=self.request.POST.get('refid', None),
+        )
