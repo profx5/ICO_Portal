@@ -105,17 +105,49 @@ services:
       options:
         tag: nginx
 
-  geth:
-    image: ethereum/client-go
-    ports:
-      - "30303:30303"
-    command: "--rpc --rpccorsdomain=* --rpcvhosts=* --cache=1024 --syncmode=light --rpcaddr=0.0.0.0"
+  # geth:
+  #   image: ethereum/client-go
+  #   ports:
+  #     - "30303:30303"
+  #   command: "--rpc --rpccorsdomain=* --rpcvhosts=* --cache=1024 --syncmode=light --rpcaddr=0.0.0.0"
+  #   volumes:
+  #     - ${PWD}/ethereum:/root
+  #   logging:
+  #     driver: journald
+  #     options:
+  #       tag: geth
+
+  volumerize-media:
+    image: blacklabelops/volumerize
     volumes:
-      - ${PWD}/ethereum:/root
+      - volumerize_cache:/volumerize-cache
+      - media:/source:ro
+    environment:
+      VOLUMERIZE_SOURCE: "/source"
+      VOLUMERIZE_TARGET: "gs://vera_buckup/media/"
+      GS_ACCESS_KEY_ID: GS_ACCESS_KEY_ID
+      GS_SECRET_ACCESS_KEY: GS_SECRET_ACCESS_KEY
+      VOLUMERIZE_JOBBER_TIME: "0 30 3 * * *"
     logging:
       driver: journald
       options:
-        tag: nginx
+        tag: volumerize-media
+
+  volumerize-dumps:
+    image: blacklabelops/volumerize
+    volumes:
+      - volumerize_cache:/volumerize-cache
+      - ${PWD}/dumps:/source:ro
+    environment:
+      VOLUMERIZE_SOURCE: "/source"
+      VOLUMERIZE_TARGET: "gs://vera_buckup/db_dumps/"
+      GS_ACCESS_KEY_ID: GS_ACCESS_KEY_ID
+      GS_SECRET_ACCESS_KEY: GS_SECRET_ACCESS_KEY
+      VOLUMERIZE_JOBBER_TIME: "0 30 3 * * *"
+    logging:
+      driver: journald
+      options:
+        tag: volumerize-dumps
 
 secrets:
   db_password:
