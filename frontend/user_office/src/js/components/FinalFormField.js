@@ -23,7 +23,7 @@ const FinalFormField = ({labelText, placeholder, options, name, value, disabled,
 
     return (
         <Wrapper>
-            <StyledLabel htmlFor={name}>{labelText}</StyledLabel>
+            <StyledLabel htmlFor={name}>{labelText}{required && <span> *</span>}</StyledLabel>
             <Field
                 options={options}
                 className="Field"
@@ -91,6 +91,9 @@ const StyledLabel = styled.label`
     font-size: 16px;
     display: block;
     margin-bottom: 13px;
+    span {
+        color: red;
+    }
 `;
 
 const StyledCleave = styled(Cleave)`

@@ -51,7 +51,7 @@ class PersonData extends React.Component {
                         <FinalFormField placeholder="John" labelText="First Name" name="firstname" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Fitzgerald" labelText="Middle Name" name="middlename" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Fitzgerald" labelText="Middle Name" name="middlename" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="Kennedy" labelText="Last Name" name="lastname" required options={{delimiter: ''}}/>

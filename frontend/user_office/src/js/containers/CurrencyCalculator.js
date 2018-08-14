@@ -94,7 +94,7 @@ class CurrencyCalculator extends React.Component {
         let kycSended = !!type;
         let kycApproved = kycState === 'APPROVED';
         let bonus = this.bonus;
-        let header = investCurrency ? "Amount, min " + (8000 / investCurrencyRate).toFixed(3) + " " + investCurrency : 'Amount';
+        let header = investCurrency ? "Amount, min " + (10 / investCurrencyRate).toFixed(3) + " " + investCurrency : 'Amount';
         this.initialUpdate();
         return (
             <Wrapper>
@@ -156,7 +156,7 @@ class CurrencyCalculator extends React.Component {
                     </TokensInputWrapper>
 
                     <ButtonWrapper to="/user_office/payment/buy">
-                        <Button disabled={USDAmount < 8000}
+                        <Button disabled={USDAmount < 10}
                                 clickHandler={ethSet ? kycApproved ? this.investClickHandler : this.openKYCTip : this.openEthSetTip}
                                 text="Buy"/>
                     </ButtonWrapper>
@@ -172,16 +172,16 @@ class CurrencyCalculator extends React.Component {
                                 = {USDAmount.toFixed(2)} USD
                             </li>
                             <li>Token base price = 2 USD</li>
-                            {USDAmount >= 8000 &&
+                            {USDAmount >= 10 &&
                             <div>
-                                <li>Public sale phase {bonus}% bonus applied so you get</li>
-                                <li>{USDAmount.toFixed(2)} / 2 * 1{bonus}% = {tokensAmount.toFixed(2)} VERA</li>
+                                <li>Pre-Sale phase {bonus}% bonus applied so you get</li>
+                                <li>{USDAmount.toFixed(2)} / 2 * {bonus}% = {tokensAmount.toFixed(2)} VERA</li>
                             </div>
                             }
-                            {USDAmount < 8000 &&
+                            {USDAmount < 10 &&
                             <div>
-                                <li>It's less than minimum purchase of $ 8000</li>
-                                <li>Please enter amount {(8000 / investCurrencyRate).toFixed(3)} {investCurrency} or
+                                <li>It's less than minimum purchase of $ 10</li>
+                                <li>Please enter amount {(10 / investCurrencyRate).toFixed(3)} {investCurrency} or
                                     more
                                 </li>
                             </div>

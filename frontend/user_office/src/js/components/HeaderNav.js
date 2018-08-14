@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 
 
 const HeaderNav = ({}) => (
     <Wrapper>
         <NavList>
-            <NavItem className="active"><a>Investors cabinet</a></NavItem>
+            <NavItem className="active"><Link to="/user_office">Investors cabinet</Link></NavItem>
 {/*            <NavItem><a>Referral & Bonuses</a></NavItem>
             <NavItem><a>Fundraiser's cabinet</a></NavItem>*/}
         </NavList>

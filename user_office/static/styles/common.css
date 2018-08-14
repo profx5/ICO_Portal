@@ -6490,11 +6490,8 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
     height: 20px;
     border: 1px solid #316fdf;
     position: absolute;
-    top: 50%;
+    top: 0;
     bottom: auto;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
     left: 0
 }
 
