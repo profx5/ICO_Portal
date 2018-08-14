@@ -6,7 +6,7 @@ class BonusSheet extends React.Component{
     render() {
         return (
             <Wrapper>
-                <Head>Progressive bonus for private presale!</Head>
+                <Head>Progressive bonus</Head>
                 <TableWrapper>
                     <div className="row">
                         <div className="part">Purchases from $ 8 000 to $19 999.99</div>

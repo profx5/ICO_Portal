@@ -152,13 +152,13 @@ class LegalPersonData extends React.Component {
                     <input type="hidden" name='type' value='LEGAL'/>
                     <InputWrapper>
 
-                        <FinalFormField placeholder="Your business name" labelText="Business name" name="business_name" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Apple" labelText="Business name" name="business_name" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your registration number" labelText="Registration number" name="registration_number" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="3928818" labelText="Registration number" name="registration_number" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Year - month - day" 
+                        <FinalFormField placeholder="2011/03/08" 
                                         labelText="Date of registration" 
                                         name="registration_date" 
                                         required
@@ -167,13 +167,13 @@ class LegalPersonData extends React.Component {
                                         type="date"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="+7(999)999-99-99"  labelText="Phone number" options={{numericOnly: true, prefix:'+', noImmediatePrefix: true}} name="phone_number" required/>
+                        <FinalFormField placeholder="+15417543010"  labelText="Phone number" options={{numericOnly: true, prefix:'+', noImmediatePrefix: true}} name="phone_number" required/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your director first name" labelText="First name of director" name="director_firstname" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Steve" labelText="First name of director" name="director_firstname" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your director last name" labelText="Last Name of director" name="director_lastname" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Jobs" labelText="Last Name of director" name="director_lastname" required options={{delimiter: ''}}/>
                     </InputWrapper>
 
                     <div className="block-file">
@@ -199,29 +199,29 @@ class LegalPersonData extends React.Component {
 
                     <InputWrapper>
 
-                        <FinalFormField placeholder="Your email" labelText="Email" name="email" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="apple@gmail.com" labelText="Email" name="email" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your address" labelText="Address" name="address" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="4150 Sydney Place Washington, DC 20521-4150" labelText="Address" name="address" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your field of activity" labelText="Field of activity" name="field_of_activity" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Production of electronics" labelText="Field of activity" name="field_of_activity" required options={{delimiter: ''}}/>
                     </InputWrapper>
                 </InputSet>
 
                 <InputSet>
                     <SubTitle><span onClick={this.setOpenedTip.bind(this, 2)}>Beneficial owner</span> data</SubTitle>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your name" labelText="Name" name="beneficial_fullname" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="John" labelText="Name" name="beneficial_fullname" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your personal identification code" labelText="Personal identification code" name="beneficial_personal_id" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="915344722819" labelText="Personal identification code" name="beneficial_personal_id" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your place of birth" labelText="Place of birth" name="beneficial_place_of_birth" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Brookline, Massachusetts, United States" labelText="Place of birth" name="beneficial_place_of_birth" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Year - month - day" 
+                        <FinalFormField placeholder="1917/05/29" 
                                         labelText="Date of birth" 
                                         name="beneficial_birthdate" 
                                         required 
@@ -230,7 +230,7 @@ class LegalPersonData extends React.Component {
                                         type="date"/>
                     </InputWrapper>
                     <InputWrapper fullWidth>
-                        <FinalFormField placeholder="Your place of residence of the beneficial owner(s)" labelText="Place of residence of the beneficial owner(s)" name="beneficial_place_of_residence" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="4150 Sydney Place Washington, DC 20521-4150" labelText="Place of residence of the beneficial owner(s)" name="beneficial_place_of_residence" required options={{delimiter: ''}}/>
                     </InputWrapper>
                 </InputSet>
 

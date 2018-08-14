@@ -20,20 +20,14 @@ class Roadmap extends React.Component {
                         </InnerBar>
                         <Stage colored>
                             <div className="StageDesc">
-                                <StageName blue>Private sale 2018</StageName>
-                                <StageState>(Now!)</StageState>
-                            </div>
-                        </Stage>
-                        <Stage >
-                            <div className="StageDesc">
-                                <StageName>Public sale 2018</StageName>
-                                <StageState>(Coming soon)</StageState>
+                                <StageName blue>Pre ICO 2017</StageName>
+                                <StageState>(Finished)</StageState>
                             </div>
                         </Stage>
                         <Stage colored>
                             <div className="StageDesc">
-                                <StageName blue>Pre ICO 2017</StageName>
-                                <StageState>(Finished)</StageState>
+                                <StageName blue>Public sale 2018</StageName>
+                                <StageState>(Now!)</StageState>
                             </div>
                         </Stage>
                     </Bar>
@@ -159,7 +153,8 @@ const Stage = styled.div`
     .StageDesc {
         position: absolute;
         bottom: -55px;
-        left: 110px;
+        left: -50%;
+        transform: translateX(-50%);
         text-align: center;
         div {
             white-space: nowrap;

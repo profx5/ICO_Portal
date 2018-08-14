@@ -48,19 +48,19 @@ class PersonData extends React.Component {
                 <InputSet>
                     <input type="hidden" name='type' value='NATURAL'/>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your name" labelText="First Name" name="firstname" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="John" labelText="First Name" name="firstname" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your middle name" labelText="Middle Name" name="middlename" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Fitzgerald" labelText="Middle Name" name="middlename" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your last name" labelText="Last Name" name="lastname" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Kennedy" labelText="Last Name" name="lastname" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your place of birth" labelText="Place of birth" name="place_of_birth" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Brookline, Massachusetts, United States" labelText="Place of birth" name="place_of_birth" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Year - month - day" 
+                        <FinalFormField placeholder="1917/05/29" 
                                         labelText="Date of birth" 
                                         initialValue={this.state.dateOfBirth}
                                         onChangeHandler={this.updateDate} 
@@ -69,26 +69,26 @@ class PersonData extends React.Component {
                                         type="date"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your personal identification code"
+                        <FinalFormField placeholder="915344722819"
                                         labelText="Personal identification code" 
                                         name="personal_id" 
                                         required 
                                         options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="+7(999)999-99-99" labelText="Phone number"
+                        <FinalFormField placeholder="+15417543010" labelText="Phone number"
                                         options={{numericOnly: true, prefix: '+', noImmediatePrefix: true}} 
                                         name="phone_number" 
                                         required/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your email" labelText="Email" value={email} type="email" name="email" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="john@gmail.com" labelText="Email" value={email} type="email" name="email" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Address" labelText="Place of residence" name="place_of_residence" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="4150 Sydney Place Washington, DC 20521-4150" labelText="Place of residence" name="place_of_residence" required options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Your profession" labelText="Profession or field of activity" name="profession" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Software developer" labelText="Profession or field of activity" name="profession" required options={{delimiter: ''}}/>
                     </InputWrapper>
                 </InputSet>
 

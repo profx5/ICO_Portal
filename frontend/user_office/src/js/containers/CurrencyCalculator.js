@@ -174,7 +174,7 @@ class CurrencyCalculator extends React.Component {
                             <li>Token base price = 2 USD</li>
                             {USDAmount >= 8000 &&
                             <div>
-                                <li>Pre-Sale phase {bonus}% bonus applied so you get</li>
+                                <li>Public sale phase {bonus}% bonus applied so you get</li>
                                 <li>{USDAmount.toFixed(2)} / 2 * 1{bonus}% = {tokensAmount.toFixed(2)} VERA</li>
                             </div>
                             }
@@ -193,9 +193,11 @@ class CurrencyCalculator extends React.Component {
                     }
                 </CalculatedWrapper>
 
-                <BonusDesc>Progressive bonus for private presale phase is
-                    currenty available! Investing more than 8&nbsp;000 USD will grant you 20% bonus!
-                    Invest more than 20&nbsp;000 USD and get <span>30% bonus tokens!</span></BonusDesc>
+                <BonusDesc>
+                    Progressive bonus for public sale phase is
+                    currently available! Investing more than 8&nbsp;000 USD will grant you 20% bonus!
+                    Invest more than 20&nbsp;000 USD and get <span>30% bonus tokens!</span>
+                </BonusDesc>
             </Wrapper>
         )
     }

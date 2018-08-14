@@ -61,7 +61,6 @@ class ICOProgress extends React.Component {
                     </WrapperHeaderInfo>
                 </Header>
                 <Roadmap/>
-                <BottomText>Don't miss your chance to buy tokens with 20%+ bonus!</BottomText>
                 <ButtonWrapper exact to="/user_office/payment">
                     <Button text='Buy tokens'/>
                 </ButtonWrapper>
