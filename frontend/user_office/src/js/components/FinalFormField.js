@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 import CleavePhone from 'cleave.js/dist/addons/cleave-phone.ru.js';
 
-import DatePicker from 'react-datepicker'; 
-import 'react-datepicker/dist/react-datepicker.css';
-
 import { Field } from 'react-final-form';
 
 
@@ -14,11 +11,7 @@ const FinalFormField = ({labelText, placeholder, options, name, value, disabled,
 
     let CleaveInput = (field) => {
 
-        if (type === 'date') {
-            return <DatePicker placeholderText={placeholder} selected={initialValue} name={name} onChange={onChangeHandler} dateFormat="YYYY-MM-DD" />
-        } else {
-            return <StyledCleave {...field.input} placeholder={placeholder} type={type} required={required} options={field.options} />
-        }
+        return <StyledCleave {...field.input} placeholder={placeholder} type={type} required={required} options={field.options} />
     }
 
     return (

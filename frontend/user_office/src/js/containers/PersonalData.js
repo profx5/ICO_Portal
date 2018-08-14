@@ -62,11 +62,9 @@ class PersonData extends React.Component {
                     <InputWrapper>
                         <FinalFormField placeholder="1917/05/29" 
                                         labelText="Date of birth" 
-                                        initialValue={this.state.dateOfBirth}
-                                        onChangeHandler={this.updateDate} 
                                         name="birthdate" 
                                         required 
-                                        type="date"/>
+                                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiter: '-'}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="915344722819"

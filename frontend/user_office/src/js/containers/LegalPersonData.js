@@ -162,9 +162,7 @@ class LegalPersonData extends React.Component {
                                         labelText="Date of registration" 
                                         name="registration_date" 
                                         required
-                                        initialValue={this.state.dateOfRegistration} 
-                                        onChangeHandler={this.updateDateOfRegistration} 
-                                        type="date"/>
+                                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiter: '-'}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="+15417543010"  labelText="Phone number" options={{numericOnly: true, prefix:'+', noImmediatePrefix: true}} name="phone_number" required/>
@@ -225,9 +223,7 @@ class LegalPersonData extends React.Component {
                                         labelText="Date of birth" 
                                         name="beneficial_birthdate" 
                                         required 
-                                        onChangeHandler={this.updateDateOfBirth}
-                                        initialValue={this.state.dateOfBirth}
-                                        type="date"/>
+                                        options={{date: true, datePattern: ['Y', 'm', 'd'], delimiter: '-'}}/>
                     </InputWrapper>
                     <InputWrapper fullWidth>
                         <FinalFormField placeholder="4150 Sydney Place Washington, DC 20521-4150" labelText="Place of residence of the beneficial owner(s)" name="beneficial_place_of_residence" required options={{delimiter: ''}}/>
