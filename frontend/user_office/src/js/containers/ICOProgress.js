@@ -47,11 +47,12 @@ class ICOProgress extends React.Component {
                             <Desc blue bold>1 Vera = 2 USD</Desc>
                         </PartWrapper>
                         <PartWrapper>
-                            <DescHead>Phase bonus:</DescHead>
-                            <Desc blue><span>Private sale = </span>20%</Desc>
+                            <DescHead>Minimal deposit:</DescHead>
+                            <Desc blue><span>Min deposit = </span>10$</Desc>
                         </PartWrapper>
                         <PartWrapper>
                             <DescHead>Bonuses:</DescHead>
+                            <Desc blue><span>From 8000$ = </span>20% <span>Bonus!</span></Desc>
                             <Desc blue><span>From 20000$ = </span>30% <span>Bonus!</span></Desc>
                         </PartWrapper>
                         <PartWrapper>
@@ -110,7 +111,7 @@ const WrapperHeaderInfo = styled.div`
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 46px;
 `;
 
