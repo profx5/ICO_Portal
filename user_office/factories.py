@@ -134,10 +134,8 @@ class KYCFactory(factory.DjangoModelFactory):
     place_of_residence = fuzzy.FuzzyText(length=10)
     profession = fuzzy.FuzzyText(length=10)
 
-    approve_txn_id = UUID
 
-
-class ICO_InfoFacotry(factory.DjangoModelFactory):
+class ICO_InfoFactory(factory.DjangoModelFactory):
     class Meta:
         model = 'user_office.ICO_Info'
 

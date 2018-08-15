@@ -1,18 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
+const navigationItems = [
+  {
+    location: '/user_office/',
+    caption: 'Investors cabinet',
+  },
+  // {
+  //   location: '/user_office/referrals',
+  //   caption: 'Referrals',
+  // },
+];
 
-
-const HeaderNav = ({}) => (
-    <Wrapper>
-        <NavList>
-            <NavItem className="active"><Link to="/user_office">Investors cabinet</Link></NavItem>
-{/*            <NavItem><a>Referral & Bonuses</a></NavItem>
-            <NavItem><a>Fundraiser's cabinet</a></NavItem>*/}
-        </NavList>
-    </Wrapper>
-)
+const HeaderNav = () => (
+  <Wrapper>
+    <NavList>
+      {navigationItems.map(navigationItem => (
+        <NavItem key={navigationItem.location} to={navigationItem.location} activeClassName='active'>
+           {navigationItem.caption}
+        </NavItem>
+      ))}
+    </NavList>
+  </Wrapper>
+);
 
 export default HeaderNav;
 
@@ -20,14 +31,14 @@ const Wrapper = styled.div`
     height: 100%;
 `;
 
-const NavList = styled.ul`
+const NavList = styled.div`
     height: 100%;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
 `;
 
-const NavItem = styled.li`
+const NavItem = styled(NavLink)`
     height: 100%;
     color: #222121;
     margin-left: 38px;
@@ -46,10 +57,5 @@ const NavItem = styled.li`
             width: 100%;
             background: #3172fd;
         }
-    }
-    a {
-        display: flex;
-        align-items: center;
-        height: 100%;
     }
 `;

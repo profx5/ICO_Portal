@@ -71,7 +71,7 @@ class InvestorsDocuments extends React.Component {
         let $wrap_div = $(event.currentTarget).closest('div');
         $wrap_div.find('input[type="file"]').each((index, item) => {
             let _name = $(item).attr('name');
-            if ($(item).val() == '') {
+            if ($(item).val() === '') {
                 $(item).click();
                 return false;
             } else {
@@ -248,7 +248,7 @@ const Title = styled.h3`
 
 const SubTitle = styled.h4`
     font-size: 16px;
-    color: 30a0a0a;
+    color: #0a0a0a;
     letter-spacing: 0.5px;
     margin-bottom: 13px;
     & + .text {

@@ -1,10 +1,10 @@
 from ..base import APITestCase
-from user_office.factories import ICO_InfoFacotry
+from user_office.factories import ICO_InfoFactory
 
 
 class TestGetICOInfo(APITestCase):
     def test_successful_request(self):
-        ICO_InfoFacotry(total_supply=100000000)
+        ICO_InfoFactory(total_supply=100000000)
 
         response = self.client.get('/api/getICOInfo/')
 

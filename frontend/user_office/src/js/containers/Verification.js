@@ -393,6 +393,7 @@ const Modal = styled.div`
     box-shadow: 0 9px 21px 0 rgba(173, 182, 217, 0.3);
     z-index: 100;
     max-height: 64vh;
+    overflow: hidden;
     font-weight: normal;
 `;
 
