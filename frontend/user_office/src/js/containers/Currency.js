@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
-import CurrencyCard from './../components/CurrencyCardBig';
+import CurrencyCardMain from './../components/CurrencyCardMain';
+import CurrencyCardOther from './../components/CurrencyCardOther';
 
 import * as CurrencyActions from '../actions/CurrencyActions.js';
 import * as UIActions from './../actions/UIActions';
@@ -15,36 +16,34 @@ class Currency extends React.Component {
         this.props.setInvestCurrencyRate(rate);
     }
 
-    componentDidMount = () => {
-        const {updateCurrencies} = this.props;
-        this.timerID = setInterval(
-            () => updateCurrencies(),
-            5000
-        );
-    };
-
-    componentWillUnmount() {
-        clearInterval(this.timerID);
-    };
-
     generateCurrencyCards = (data) => {
+        const mainCurrenciesNum = 4;
 
         return data.map((item, index) => {
-            let {code, rate} = item;
+            let {code, rate, name} = item;
+            const {investCurrency, investCurrencyRate, showPopup} = this.props;
+            
+            if (index < mainCurrenciesNum) {
 
-            if (index >= 3 && this.props.spreadedCurrencyCards === false) return;
-            if (code === 'LTCT') return;
-            if (code === 'BTC') return;
-            return <CurrencyCard
-                className={this.props.investCurrency === code ? 'active' : ''}
-                name={code}
-                icon={'icon-' + code}
-                rate={rate.toFixed(2)}
-                key={index}
-                clickHandler={this.cardClickHandler.bind(this, code, rate)}
-            />
+                return  <CurrencyCardMain 
+                            className={investCurrency === code ? 'active' : ''}
+                            name={name} 
+                            icon={'icon-' + code} 
+                            rate={rate.toFixed(2)} 
+                            key={index} 
+                            clickHandler={this.cardClickHandler.bind(this, code, rate)}/>
+            } else if (index === mainCurrenciesNum) {
+                return  <CurrencyCardOther 
+                            rate={investCurrencyRate.toFixed(2)} 
+                            key={index} 
+                            investCurrency={investCurrency}
+                            restCurrencies={data.slice(mainCurrenciesNum)}
+                            clickHandler={showPopup}>
+                        </CurrencyCardOther>
+            } else return;
+            
         })
-    };
+    }
 
     render() {
         return (
@@ -62,7 +61,6 @@ const mapStateToProps = ({Currencies}) => ({
     currencies: Currencies.get('currencies'),
     investCurrency: Currencies.get('investCurrency'),
     investCurrencyRate: Currencies.get('investCurrencyRate'),
-    spreadedCurrencyCards: Currencies.get('spreadedCurrencyCards')
 });
 
 const mapDispatchToProps = (dispatch) => ({

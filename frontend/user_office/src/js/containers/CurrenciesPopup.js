@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 
 
-import CurrencyCard from './../components/CurrencyCardSmall';
+import CurrencyCardRest from './../components/CurrencyCardRest';
 
 import * as CurrencyActions from '../actions/CurrencyActions.js';
 import * as UIActions from './../actions/UIActions';
@@ -12,17 +12,20 @@ import * as UIActions from './../actions/UIActions';
 class CurrenciesPopup extends React.Component {
 
     cardClickHandler (code, rate) {
-        this.props.setInvestCurrency(code);
         this.props.setInvestCurrencyRate(rate);
+        this.props.setInvestCurrency(code);
     }
 
     generateCurrencyCards = (data) => {
 
         return data.map((item, index) => {
             let {code, rate} = item;
+            const {altInvestCurrencyRate} = this.props;
 
-            return <CurrencyCard 
-                className={this.props.investCurrency === code ? 'active' : ''}
+            if (index < 4) return;
+
+            return <CurrencyCardRest 
+                className={this.props.altInvestCurrency === code ? 'active' : ''}
                 name={code} 
                 icon={'icon-' + code} 
                 rate={rate.toFixed(2)} 
@@ -68,6 +71,8 @@ const mapStateToProps = ({Currencies}) => ({
     currencies: Currencies.get('currencies'),
     investCurrency: Currencies.get('investCurrency'),
     investCurrencyRate: Currencies.get('investCurrencyRate'),
+    altInvestCurrency: Currencies.get('investCurrency'),
+    altInvestCurrencyRate: Currencies.get('investCurrencyRate'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -109,6 +114,7 @@ const WrapperInner = styled.div`
 
 const Content = styled.div`
     display: flex;
+    flex-wrap: wrap;
     padding: 40px 60px;
 `;
 

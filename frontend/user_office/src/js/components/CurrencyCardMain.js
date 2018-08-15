@@ -4,24 +4,23 @@ import styled from 'styled-components';
 class CurrencyCard extends React.Component {
     render() {
 
-        let {className, name, icon, rate, clickHandler, altWay} = this.props;
+        let {className, name, icon, rate, clickHandler} = this.props;
 
         return (
             <Card onClick={clickHandler} className={className}>
                 <span className="currency-name">{name}</span>
-                <span className={icon + '-alt'}></span>
-                <span className="currency-rate">{rate}</span>
+                <span className={`${icon}-alt`}></span>
+                <span className="currency-rate">{`${rate} $`}&nbsp;</span>
             </Card>
         )
     }
 }
 
-
 export default CurrencyCard;
 
-
 const Card = styled.div`
-    width: 110px;
+    min-height: 157px;
+    width: 170px;
     padding: 14px 16px;
     margin-bottom: 18px;
     display: inline-flex;
@@ -33,15 +32,17 @@ const Card = styled.div`
     transition: all .25s ease;
     cursor: pointer;
     will-change: transform;
+    position: relative;
+    &:not(:last-of-type) {
+        margin-right: 3%;
+    }
     &:hover {
         [class^="icon-"] {
             color: rgba(80,154,245,1) !important;
             transform: scale(1.05);
         }
     }
-    &:not(:nth-child(5n)) {
-        margin-right: 3.37%;
-    }
+    
     &.active {
         box-shadow: 0 2px 25px 0 rgba(63, 123, 244, 0.33);
         transform: scale(1.05);
@@ -61,7 +62,7 @@ const Card = styled.div`
     }
     [class^="icon-"] {
         font-size: 50px;
-        margin: 12px 0;
+        margin: 20px 0 5px;
         color: rgba(80,154,245,.5);
         transition: all .25s ease;
     }
@@ -70,5 +71,22 @@ const Card = styled.div`
         color: rgba(50,60,71,.6);
         transition: color .25s ease;
         white-space: nowrap;
+    }
+    .CurrencyCard_head, .CurrencyCard_desc {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .CurrencyCard_head {
+        font-size: 16px;
+        color: rgb(42,44,47);
+        text-align: center;
+        top: -35px;
+    }
+    .CurrencyCard_desc {
+        font-size: 14px;
+        color: rgba(42,44,47,.6);
+        text-align: center;
+        bottom: -50px;
     }
 `;
