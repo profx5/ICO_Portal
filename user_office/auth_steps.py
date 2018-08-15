@@ -39,12 +39,8 @@ def user_password(strategy, backend, user, is_new=False, *args, **kwargs):
         raise AuthForbidden(backend)
 
 
-def set_referrer(strategy, backend, user, is_new=False, *args, **kwargs):
-    if 'refid' in strategy.request_data():
-        referrer = Investor.objects.filter(referral_id=strategy.request_data()['refid'])
-
-        if referrer:
-            user.referrer = referrer
+def set_referrer(user, refid, *args, **kwargs):
+    user.referrer = Investor.objects.filter(referral_id=refid).first()
 
 
 def send_validation_email(strategy, backend, code, partial_token):
