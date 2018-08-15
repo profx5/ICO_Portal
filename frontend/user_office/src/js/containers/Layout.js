@@ -14,6 +14,7 @@ import Dashboard from './Dashboard';
 import Transactions from './Transactions'
 import FAQFeedback from './FAQFeedback';
 import Payment from './Payment';
+import ReferralTab from '../components/ReferralTab';
 
 import history from './../utils/history';
 
@@ -53,6 +54,7 @@ class Layout extends Component {
                         <Route path="/user_office/support" component={FAQFeedback}/>
                         <Route path="/user_office/verification" component={Verification}/>
                         <Route path="/user_office/settings" component={Settings}/>
+                        <Route path="/user_office/referrals" component={ReferralTab}/>
                     </Switch>
                     {this.props.showSetAccountPopup && <SetAccount/>}
                 </MainWrapper>
