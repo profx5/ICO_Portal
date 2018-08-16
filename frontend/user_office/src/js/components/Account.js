@@ -21,8 +21,8 @@ class Account extends React.Component {
     render = () => {
         const {
             email, tokensAmount,
-            isDropdownAccountOpen, isDropdownStepsOpen,
-            dropdownAccountClickHandler, dropdownStepsClickHandler,
+            isDropdownAccountOpen,
+            dropdownAccountClickHandler,
             stepOnePassed, stepTwoPassed, stepThreePassed,
             stepsPassed, showSetAccountPopup, showSetAccount
         } = this.props;

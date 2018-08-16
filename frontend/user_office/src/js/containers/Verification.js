@@ -16,7 +16,6 @@ import InvestorsDocuments from './InvestorsDocuments';
 
 import KYCTabs from './../components/KYCTabs';
 
-
 class Verification extends React.Component {
     transformValues = values => {
         const data = {...values};

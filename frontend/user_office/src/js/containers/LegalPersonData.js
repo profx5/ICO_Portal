@@ -2,8 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
-import { Field } from 'react-final-form';
-import moment from 'moment';
 
 import Utils from './../utils/index';
 
@@ -13,7 +11,6 @@ import FinalFormField from './../components/FinalFormField';
 import FinalFormRadio from './../components/FinalFormRadio';
 import Button from './../components/Button';
 import * as UIActions from "../actions/UIActions";
-import FileUpload from "../components/FileUpload";
 
 const File = ({ input: {value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
   <input type='file' {...inputProps} {...props} />

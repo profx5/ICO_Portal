@@ -2,10 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
-import moment from 'moment';
 
 import iconQuestion from './../../img/icons/icon_faq.svg';
-import iconCheck from './../../img/icons/icon_check.svg';
 
 import * as KYCActions from './../actions/KYCActions';
 import * as UIActions from './../actions/UIActions';

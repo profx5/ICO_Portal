@@ -12,7 +12,6 @@ import FieldTextSpan from './../components/FieldTextSpan';
 import Button from './../components/Button';
 
 import copyIcon from './../../img/icon_copy.svg';
-import iconClose from './../../img/icon_close.svg';
 
 
 class PersonalInfo extends React.Component {
