@@ -8,7 +8,6 @@ import Utils from './../utils/index';
 
 import * as ICOInfoActions from './../actions/ICOInfoActions';
 
-import clockImg from './../../img/icon_progress.svg';
 import Button from './../components/Button';
 
 import { Link } from 'react-router-dom';
@@ -25,17 +24,9 @@ class ICOProgress extends React.Component {
     getPhasePercents = (current, goal) => current / goal * 100;
 
     render() {
-        const {
-            gainedMoney,
-            hardCup,
-            phaseName,
-            bonusPercents,
-            countdownTime,
-        } = this.props;
+        const {gainedMoney} = this.props;
 
         const raisedAmountString = Math.round(parseInt(gainedMoney, 10)/100) + 239463 + ' USD';
-        let hardCupNumber = parseInt(hardCup, 10);
-        let phaseRaisedPercents = this.getPhasePercents(gainedMoney, hardCupNumber);
 
         return (
             <Wrapper>

@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import copyIcon from './../../img/icon_copy.svg';
-
-
 class ReferralList extends React.Component {
 
     render() {

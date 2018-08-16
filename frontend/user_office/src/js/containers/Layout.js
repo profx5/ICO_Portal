@@ -26,7 +26,7 @@ import * as UIActions from './../actions/UIActions';
 class Layout extends Component {
 
     componentDidMount() {
-        const {openedTip, closeOpenedTip, accountDropdownShown, hideAccountDropdown} = this.props;
+        const {closeOpenedTip, hideAccountDropdown} = this.props;
 
         $(document).click(function(e) {
             if ($(e.target).hasClass('ModalWrapper')) {
