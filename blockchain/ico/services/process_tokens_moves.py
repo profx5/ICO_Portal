@@ -52,10 +52,10 @@ class _Base(ServiceObject):
 
 class ProcessIncomingTokensMove(_Base):
     @staticmethod
-    def send_incoming_tokens_email(investor, incoming_amount, transfer):
+    def send_incoming_tokens_email(investor, tokens_move, transfer):
         ctx = {
             'investor': investor,
-            'incoming_amount': float(incoming_amount) / 10 ** settings.TOKEN_DECIMALS,
+            'incoming_amount': tokens_move.amount / 10 ** settings.TOKEN_DECIMALS,
             'txn_hash': transfer.txn_hash
         }
 
@@ -67,7 +67,7 @@ class ProcessIncomingTokensMove(_Base):
 
         if investor:
             result = services.RecalcBalance()(investor)
-            self.send_incoming_tokens_email(investor, result.value.incoming_amount, context.transfer)
+            self.send_incoming_tokens_email(investor, context.tokens_move, context.transfer)
 
             return self.success()
         else:
