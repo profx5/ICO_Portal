@@ -24,7 +24,6 @@ class ICOProgress extends React.Component {
     getPhasePercents = (current, goal) => current / goal * 100;
 
     render() {
-
         const {gainedMoney} = this.props;
 
         const raisedAmountString = Math.round(parseInt(gainedMoney, 10)/100) + 239463 + ' USD';
