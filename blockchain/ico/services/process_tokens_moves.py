@@ -66,7 +66,7 @@ class ProcessIncomingTokensMove(_Base):
                                    .filter(eth_account=context.investor_id).first()
 
         if investor:
-            result = services.RecalcBalance()(investor)
+            services.RecalcBalance()(investor)
             self.send_incoming_tokens_email(investor, context.tokens_move, context.transfer)
 
             return self.success()
