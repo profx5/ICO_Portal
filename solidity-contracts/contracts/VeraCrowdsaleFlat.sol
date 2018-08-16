@@ -260,7 +260,7 @@ contract VeraCrowdsale is RBAC {
   uint256 public tokenPriceInCents = 200;
 
   // Minimal amount of USD cents to invest. Transactions of less value will be reverted.
-  uint256 public minDepositInCents = 800000;
+  uint256 public minDepositInCents = 100;
 
   // Amount of USD cents raised. Continuously increments on each transaction.
   // Note: may be irrelevant because the actual amount of harvested ethers depends on ETH/USD price at the moment.

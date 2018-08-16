@@ -7,7 +7,7 @@ from ico_portal.utils.logger import LoggerMixin
 class BaseContract(LoggerMixin):
     @classmethod
     def get_compiled(cls):
-        if not hasattr(cls, '_compile'):
+        if not hasattr(cls, '_compiled'):
             with open(cls.compiled_file_path.format(BASE_DIR=settings.BASE_DIR)) as f:
                 cls._compiled = json.load(f)
 

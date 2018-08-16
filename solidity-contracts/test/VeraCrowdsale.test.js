@@ -99,23 +99,28 @@ contract('VeraCrowdsale', function (accounts) {
   });
 
   describe('Check constant functions', async function () {
+    it('computeBonus for .99 USD', async function () {
+      result = await this.crowdsale.computeBonuses(99);
+      result[0].should.be.bignumber.equal(0);
+      result[1].should.be.bignumber.equal(0x0);
+    });
+    it('computeTokens for .99 USD', async function () {
+      result = await this.crowdsale.computeTokens(99);
+      result.should.be.bignumber.equal(0);
+    });
+    it('computeTokens for 1 USD', async function () {
+      result = await this.crowdsale.computeTokens(100);
+      result.should.be.bignumber.equal(5e+17);
+    });
     it('computeBonus for 7999.99 USD', async function () {
       result = await this.crowdsale.computeBonuses(799999);
       result[0].should.be.bignumber.equal(0);
       result[1].should.be.bignumber.equal(0x0);
     });
-    it('computeTokens for 7999.99 USD', async function () {
-      result = await this.crowdsale.computeTokens(799999);
-      result.should.be.bignumber.equal(0);
-    });
     it('computeBonus for 8000 USD', async function () {
       result = await this.crowdsale.computeBonuses(800000);
       result[0].should.be.bignumber.equal(20);
       result[1].should.be.bignumber.equal(0x1);
-    });
-    it('computeTokens for 8000 USD', async function () {
-      result = await this.crowdsale.computeTokens(800000);
-      result.should.be.bignumber.equal(4.8e+21);
     });
     it('computeBonus for 19999.99 USD', async function () {
       result = await this.crowdsale.computeBonuses(1999999);
@@ -357,9 +362,9 @@ contract('VeraCrowdsale', function (accounts) {
   });
 
   describe('accepting payments to fallback', function () {
-    function assertPaymentOk (etherDeposited, bonusPercent, bonusId) {
+    function assertPaymentOk (etherDeposited, bonusPercent, bonusId, precision) {
       return async function () {
-        const precision = 5;
+        precision = precision || 5;
         const valueInCents = Math.floor(etherDeposited * this.ethPriceInCents);
         const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
         const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
@@ -411,7 +416,7 @@ contract('VeraCrowdsale', function (accounts) {
         await this.crowdsale.addKycVerifiedInvestor(accounts[0], { from: accounts[1] }).should.be.fulfilled;
       });
       it('should reject payments less than minDeposit', async function () {
-        await this.crowdsale.send(ether(18.5)).should.be.rejectedWith(EVMRevert);
+        await this.crowdsale.send(ether(23e-4)).should.be.rejectedWith(EVMRevert);
       });
       describe('check actual deposit effects', function () {
         describe('by 432.12 USD/ETH', function () {
@@ -422,10 +427,10 @@ contract('VeraCrowdsale', function (accounts) {
             result = await this.oracle.ethPriceInCents();
             result.should.be.bignumber.equal(this.ethPriceInCents);
           });
-          it('18.5 ETH should be rejected  - less than minDeposit', async function () {
-            await this.crowdsale.send(ether(18.5)).should.be.rejectedWith(EVMRevert);
+          it('23.125e-4 ETH should be rejected  - less than minDeposit', async function () {
+            await this.crowdsale.send(ether(23e-4)).should.be.rejectedWith(EVMRevert);
           });
-          it('18.6 ETH', assertPaymentOk(18.6, 20, 1));
+          it('23.25e-4 ETH', assertPaymentOk(23.4e-4, 0, 0, 3));
         });
         describe('by 5832.12 USD/ETH', function () {
           beforeEach(async function () {
@@ -443,10 +448,10 @@ contract('VeraCrowdsale', function (accounts) {
             result = await this.oracle.ethPriceInCents();
             result.should.be.bignumber.equal(this.ethPriceInCents);
           });
-          it('1.37 ETH should be rejected  - less than minDeposit', async function () {
-            await this.crowdsale.send(ether(1.37)).should.be.rejectedWith(EVMRevert);
+          it('171e-6 ETH should be rejected  - less than minDeposit', async function () {
+            await this.crowdsale.send(ether(171.25e-6)).should.be.rejectedWith(EVMRevert);
           });
-          it('1.4 ETH', assertPaymentOk(1.4, 20, 1));
+          it('180e-6 ETH', assertPaymentOk(180e-6, 0, 0, 2));
           it('3.4 ETH', assertPaymentOk(3.4, 20, 1));
           it('3.5 ETH', assertPaymentOk(3.5, 30, 2));
           it('37 ETH', assertPaymentOk(37, 30, 2));
