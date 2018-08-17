@@ -1,39 +1,44 @@
+from django.test import override_settings
 from oslash import Right
 from decimal import Decimal
 import django.core.mail
 
 from ..base import BlockChainTestCase
 from user_office.factories import InvestorFactory, TokensMoveFactory, TransferFactory
-from user_office.models import Transfer, TokensMove, Payment, Investor
+from user_office.models import Transfer, TokensMove, Payment, Investor, ReferralBonus
 from blockchain.ico.services import ProcessTransfer, SendPreparedTxns, BuyTokens
+
+
+TOKENS_FOR_20_ETH = Decimal('6601800000000000000000')
 
 
 class TestProcessTransfer(BlockChainTestCase):
     setup_eth_tester = True
     setup_contracts = ['price_oracle', 'token', 'crowdsale']
 
-    def test_purchase_tokens(self):
-        recepient_account = self.eth_tester.get_accounts()[0]
-        recepient = InvestorFactory.create(eth_account=recepient_account)
-        self.pass_KYC(recepient_account)
+    def setup_purchase(self, recipient):
+        self.pass_KYC(recipient.eth_account)
 
-        txn_hash = self.call_crowsdsale_fallback(recepient_account, int(20 * 10 ** 18))  # 20 ETH
+        txn_hash = self.call_crowsdsale_fallback(recipient.eth_account, int(20 * 10 ** 18))  # 20 ETH
         event = self.get_transfer_event(txn_hash)
 
         result = ProcessTransfer()(event)
-
         self.assertTrue(isinstance(result, Right))
+        return txn_hash
 
-        recepient.refresh_from_db()
+    def test_purchase_tokens(self):
+        recipient = InvestorFactory.create(eth_account=self.eth_tester.get_accounts()[0])
+        txn_hash = self.setup_purchase(recipient)
 
-        self.assertEqual(recepient.tokens_amount, Decimal('6601800000000000000000'))
+        recipient.refresh_from_db()
+        self.assertEqual(recipient.tokens_amount, TOKENS_FOR_20_ETH)
 
         self.assertEqual(Transfer.objects.count(), 1)
         transfer = Transfer.objects.first()
         self.assertEqual(transfer.txn_hash, txn_hash)
-        self.assertEqual(transfer.to_account, recepient_account)
+        self.assertEqual(transfer.to_account, recipient.eth_account)
         self.assertEqual(transfer.from_account, self.crowdsale_contract.address)
-        self.assertEqual(transfer.amount, Decimal('6601800000000000000000'))
+        self.assertEqual(transfer.amount, TOKENS_FOR_20_ETH)
         self.assertEqual(transfer.block_hash, self.eth_tester.get_transaction_by_hash(txn_hash)['block_hash'])
         self.assertEqual(transfer.block_number, self.eth_tester.get_transaction_by_hash(txn_hash)['block_number'])
         self.assertEqual(transfer.created_at, self.utcnow)
@@ -42,9 +47,9 @@ class TestProcessTransfer(BlockChainTestCase):
 
         self.assertEqual(TokensMove.objects.count(), 2)
         tokens_move_in = TokensMove.objects.filter(direction='IN').first()
-        self.assertEqual(tokens_move_in.investor, recepient)
-        self.assertEqual(tokens_move_in.investor_id, recepient_account)
-        self.assertEqual(tokens_move_in.amount, Decimal('6601800000000000000000'))
+        self.assertEqual(tokens_move_in.investor, recipient)
+        self.assertEqual(tokens_move_in.investor_id, recipient.eth_account)
+        self.assertEqual(tokens_move_in.amount, TOKENS_FOR_20_ETH)
         self.assertEqual(tokens_move_in.created_at, self.utcnow)
         self.assertEqual(tokens_move_in.actualized_at, self.utcnow)
         self.assertEqual(tokens_move_in.transfer, transfer)
@@ -53,7 +58,7 @@ class TestProcessTransfer(BlockChainTestCase):
 
         tokens_move_out = TokensMove.objects.filter(direction='OUT').first()
         self.assertEqual(tokens_move_out.investor_id, self.crowdsale_contract.address)
-        self.assertEqual(tokens_move_out.amount, Decimal('6601800000000000000000'))
+        self.assertEqual(tokens_move_out.amount, TOKENS_FOR_20_ETH)
         self.assertEqual(tokens_move_out.created_at, self.utcnow)
         self.assertEqual(tokens_move_out.actualized_at, self.utcnow)
         self.assertEqual(tokens_move_out.transfer, transfer)
@@ -63,7 +68,7 @@ class TestProcessTransfer(BlockChainTestCase):
         self.assertEqual(Payment.objects.count(), 1)
         payment = Payment.objects.first()
         self.assertEqual(payment.currency, 'ETH')
-        self.assertEqual(payment.payer_account, recepient.eth_account)
+        self.assertEqual(payment.payer_account, recipient.eth_account)
         self.assertEqual(payment.amount, Decimal('20'))
         self.assertEqual(payment.amounti, Decimal('20000000000000000000'))
         self.assertEqual(payment.txn_id, txn_hash)
@@ -255,7 +260,7 @@ class TestProcessTransfer(BlockChainTestCase):
         recepient = InvestorFactory.create(eth_account=receipt_account)
 
         txn_id = BuyTokens()(receipt_account, 900000).value.transaction.txn_id
-        transfer = TransferFactory(txn_hash=None, state='PREAPARED', to_account=None,
+        transfer = TransferFactory(txn_hash=None, state='PREPARED', to_account=None,
                                    from_account=None, block_hash=None, block_number=None,
                                    actualized_at=None, buy_txn_id=txn_id)
         tokens_move = TokensMoveFactory(transfer=transfer, investor=recepient,
@@ -295,3 +300,39 @@ class TestProcessTransfer(BlockChainTestCase):
         self.assertEqual(tokens_move.transfer, transfer)
         self.assertEqual(tokens_move.state, 'ACTUAL')
         self.assertEqual(tokens_move.direction, 'IN')
+
+    @override_settings(
+        REFERRER_BONUS_PERCENT=Decimal('5'),
+        REFERRAL_BONUS_PERCENT=Decimal('1'),
+        REFERRAL_MAX_NUMBER_OF_PAYMENTS=1)
+    def test_referral_bonuses_creation(self):
+        self.assertEqual(ReferralBonus.objects.count(), 0)
+
+        dad = InvestorFactory.create(eth_account=self.eth_tester.get_accounts()[0])
+        son = InvestorFactory.create(eth_account=self.eth_tester.get_accounts()[1], referrer=dad)
+        self.setup_purchase(son)
+        dad.refresh_from_db()
+        son.refresh_from_db()
+        self.assertEqual(dad.tokens_amount, Decimal('0'))
+        self.assertEqual(son.tokens_amount, TOKENS_FOR_20_ETH)
+
+        self.assertEqual(ReferralBonus.objects.count(), 2)
+
+        dad_bonus = ReferralBonus.objects.get(beneficiary=dad)
+        son_bonus = ReferralBonus.objects.get(beneficiary=son)
+        self.assertFalse(dad_bonus.is_from_referrer)
+        self.assertTrue(son_bonus.is_from_referrer)
+        self.assertEqual(dad_bonus.amount, TOKENS_FOR_20_ETH * Decimal('0.05'))
+        self.assertEqual(son_bonus.amount, TOKENS_FOR_20_ETH * Decimal('0.01'))
+
+        # exceeded the transaction limit
+        self.setup_purchase(son)
+        son.refresh_from_db()
+        self.assertEqual(son.tokens_amount, TOKENS_FOR_20_ETH * 2)
+        self.assertEqual(ReferralBonus.objects.count(), 2)
+
+        # no referrer
+        self.setup_purchase(dad)
+        dad.refresh_from_db()
+        self.assertEqual(dad.tokens_amount, TOKENS_FOR_20_ETH)
+        self.assertEqual(ReferralBonus.objects.count(), 2)
