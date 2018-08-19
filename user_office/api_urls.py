@@ -14,7 +14,7 @@ api_urlpatterns = [
     path('getTokensMoves/', api_views.get_tokens_moves),
     path('setEthAccount/', api_views.set_eth_account),
     path('prepareTokensMove/', api_views.prepare_tokens_move),
-    path('getReferralLink/', api_views.get_referral_link),
+    path('getReferralInfo/', api_views.get_referral_info),
     path('getPhases/', api_views.get_phases),
     path('changePassword/', api_views.change_password),
     path('changeEmail/', api_views.change_email)

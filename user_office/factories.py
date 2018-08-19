@@ -164,3 +164,12 @@ class BonusesFactory(factory.DjangoModelFactory):
 
     id_contract = fuzzy.FuzzyText(length=10)
     description = fuzzy.FuzzyText(length=100)
+
+
+class ReferralBonusFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = 'user_office.ReferralBonus'
+
+    beneficiary = factory.SubFactory(InvestorFactory)
+    amount = fuzzy.FuzzyDecimal(low=0, high=1000000)
+    created_from = factory.SubFactory(PaymentFactory)
