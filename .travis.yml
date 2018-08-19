@@ -42,6 +42,6 @@ script:
   ## - npm run lint:sol
 deploy:
   provider: script
-  script: bash docker_push.sh
+  script: bash docker-build.sh ongridpro1/ico_master
   on:
     branch: master
