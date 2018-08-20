@@ -13,6 +13,7 @@ from .get_phases import GetPhases
 from .change_password import ChangePassword
 from .change_email import ChangeEmail
 from .ticket import TicketViewSet
+from .prepare_referral_bonuses import PrepareReferralBonuses
 
 get_me = GetMeView.as_view()
 get_ico_info = GetICOInfo.as_view()
@@ -26,3 +27,4 @@ get_referral_info = GetReferralInfoView.as_view()
 get_phases = GetPhases.as_view()
 change_password = ChangePassword.as_view()
 change_email = ChangeEmail.as_view()
+prepare_referral_bonuses = PrepareReferralBonuses.as_view()

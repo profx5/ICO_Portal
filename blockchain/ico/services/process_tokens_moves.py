@@ -2,7 +2,7 @@ from django.db import DatabaseError
 from user_office.tasks import send_mail
 from django.conf import settings
 
-from user_office.models import Investor, TokensMove
+from user_office.models import Investor, TokensMove, ReferralBonus
 from user_office import services
 from ico_portal.utils.service_object import ServiceObject, service_call
 
@@ -73,10 +73,16 @@ class ProcessIncomingTokensMove(_Base):
         else:
             return self.success()
 
+    def accrue_referral_bonus(self, context):
+        context.tokens_move.referral_bonuses.update(state=ReferralBonus.State.accrued)
+
+        return self.success()
+
     @service_call
     def __call__(self, transfer):
         return self.success(transfer=transfer, investor_id=transfer.to_account, direction='IN') | \
             self.create_or_update_tokens_move | \
+            self.accrue_referral_bonus | \
             self.recalc_tokens_balance_and_mail
 
 

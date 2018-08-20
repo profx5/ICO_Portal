@@ -4,7 +4,7 @@ from django.conf import settings
 from user_office.views.common import is_user_authenticated
 
 
-KYC_Required_Views = ['GetAccount', 'PrepareTokensMove']
+KYC_Required_Views = ['GetAccount', 'PrepareTokensMove', 'CollectReferralBonuses', ]
 
 
 class KYCAndLoginPermission(BasePermission):

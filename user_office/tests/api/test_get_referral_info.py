@@ -4,10 +4,9 @@ from django.conf import settings
 from django.test import override_settings
 from django.urls import reverse
 
-from user_office.factories import ReferralBonusFactory, InvestorFactory, KYCFactory, PaymentFactory, TokensMoveFactory
+from user_office.factories import ReferralBonusFactory, InvestorFactory, KYCFactory, PaymentFactory
 from user_office.models import ReferralBonus
 from ..base import APITestCase
-
 
 INVITATION_TEXT = 'Some marketing text'
 
@@ -33,7 +32,7 @@ class TestGetReferralInfo(APITestCase):
             })
 
     @override_settings(
-        REFERRAL_TOKENS_THRESHOLD_TO_COLLECT_BONUSES=Decimal(500) / 10 ** settings.TOKEN_DECIMALS,
+        REFERRAL_TOKENS_THRESHOLD=Decimal(500) / 10 ** settings.TOKEN_DECIMALS,
         REFERRAL_INVITATION_TEXT=INVITATION_TEXT
     )
     def test_successful_request(self):
@@ -48,11 +47,13 @@ class TestGetReferralInfo(APITestCase):
             referrals=[],
             is_possible_to_collect=False)
 
-        for state, number in [(ReferralBonus.State.created, 2), (ReferralBonus.State.accrued, 3)]:
+        for state, number in [
+            (ReferralBonus.State.created, 2), (ReferralBonus.State.prepared, 4), (ReferralBonus.State.accrued, 3)
+        ]:
             for _ in range(number):
                 ReferralBonusFactory(
                     beneficiary=investor, amount=Decimal('200'), state=state)
-        amounts = {'created': Decimal('400'), 'accrued': Decimal('600')}
+        amounts = {'created': Decimal('400'), 'pending': Decimal('800'), 'accrued': Decimal('600')}
         self.assert_referral_info(
             referral_id=investor.referral_id,
             amounts=amounts,
@@ -108,10 +109,8 @@ class TestGetReferralInfo(APITestCase):
             referrals=referrals,
             is_possible_to_collect=True)
 
-        for referral_bonus in ReferralBonus.objects.filter(state=ReferralBonus.State.created):
-            referral_bonus.accrued_in = TokensMoveFactory(investor=investor, amount=referral_bonus.amount)
-            referral_bonus.save()
-        amounts['pending'] = amounts['created']
+        ReferralBonus.objects.filter(state=ReferralBonus.State.created).update(state=ReferralBonus.State.prepared)
+        amounts['pending'] += amounts['created']
         amounts['created'] = Decimal('0')
         self.assert_referral_info(
             referral_id=investor.referral_id,

@@ -1,6 +1,6 @@
 KYC_ENABLED = True
 
-TOKENS_PER_USD = 2
+TOKEN_PRICE_IN_USD = 2
 TOKEN_DECIMALS = 18
 
 WEB3_RPC_URL = 'http://127.0.0.1:8545'
@@ -71,7 +71,11 @@ CELERY_BEAT_SCHEDULE = {
     'update_price_oracle': {
         'task': 'blockchain.ico.tasks.update_price_oracle',
         'schedule': 300
-    }
+    },
+    'collect_bonuses': {
+        'task': 'blockchain.ico.tasks.collect_bonuses',
+        'schedule': 60
+    },
 }
 
 CELERY_TASK_ROUTES = {

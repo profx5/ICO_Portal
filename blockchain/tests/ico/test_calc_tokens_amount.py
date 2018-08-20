@@ -15,5 +15,5 @@ class TestCalcTokensAmount(BlockChainTestCase):
 
         self.assertTrue(isinstance(result, Right))
 
-        self.assertEqual(result.value.amount, Decimal('1240374316487040000000'))
-        self.assertEqual(result.value.amount_wo_bonus, Decimal('885981654633600000000'))
+        self.assertEqual(result.value.amount, Decimal('620187158243520000000'))
+        self.assertEqual(result.value.amount_wo_bonus, Decimal('442990827316800000000'))
