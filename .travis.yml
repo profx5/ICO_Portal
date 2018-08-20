@@ -42,6 +42,6 @@ script:
   ## - npm run lint:sol
 deploy:
   provider: script
-  script: bash docker-build.sh ongridpro1/ico_master:${TRAVIS_COMMIT:0:8}
+  script: bash docker-build.sh ongridpro1/ico_master ${TRAVIS_COMMIT:0:8}
   on:
     branch: master
