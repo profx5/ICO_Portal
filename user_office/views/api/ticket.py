@@ -1,5 +1,6 @@
 from oslash import Right
 from django.shortcuts import get_object_or_404
+from django.db.models import Max
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from rest_framework.fields import FileField
@@ -86,13 +87,14 @@ class TicketViewSet(GenericViewSet):
     }
 
     def get_queryset(self):
-        return Ticket.objects.filter(reporter=self.request.user).order_by('-followup__date')
+        return Ticket.objects.filter(reporter=self.request.user)
 
     def get_serializer_class(self):
         return self.serializer_action_map.get(self.action)
 
     def list(self, request):
-        queryset = self.get_queryset()
+        queryset = self.get_queryset().annotate(order_date=Max("followup__date"))\
+                                      .order_by('-order_date')
         serializer = self.get_serializer(queryset, many=True)
 
         return Response(serializer.data)
