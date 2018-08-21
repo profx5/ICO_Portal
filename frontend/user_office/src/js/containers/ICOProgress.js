@@ -35,7 +35,7 @@ class ICOProgress extends React.Component {
                     <WrapperHeaderInfo>
                         <PartWrapper>
                             <DescHead>Base price:</DescHead>
-                            <Desc blue bold>1 Vera = 2 USD</Desc>
+                            <Desc blue bold>1 OGD = 2 USD</Desc>
                         </PartWrapper>
                         <PartWrapper>
                             <DescHead>Minimal deposit:</DescHead>

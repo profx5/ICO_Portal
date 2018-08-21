@@ -5,7 +5,7 @@ import ICOProgress from './ICOProgress';
 import BonusSheet from './BonusSheet';
 
 
-import Banner from './../../img/Banner_Vera.png';
+import Banner from './../../img/banner.jpg';
 
 
 const Dashboard = (props) => {

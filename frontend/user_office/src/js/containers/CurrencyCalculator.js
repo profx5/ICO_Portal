@@ -147,7 +147,7 @@ class CurrencyCalculator extends React.Component {
                     <InvestInput value={investAmount} type="text"
                                  onChangeHandler={this.investOnChangeHandler} header={header}
                                  currency={investCurrency}/>
-                    <TokensInputWrapper data-currency="Vera">
+                    <TokensInputWrapper data-currency="OGD">
                         {/*<div className="head">Vera (Buy till 7 july and <span>get a 30% bonus!</span>)</div>*/}
                         <TokensInput>
                             {tokensAmount && tokensAmount.toFixed(2) || 0}
