@@ -24,37 +24,14 @@ class InvestorsDocuments extends React.Component {
                 }
             })
         })
-    }
-
-
-    buildVisualFile = (target, obj) => {
-        let name = obj.name,
-            size = obj.size,
-            id = $(target).attr('id');
-
-
-        $(target)
-            .closest('div')
-            .siblings('.block-file-result')
-            .append(`
-                <div class="visual-file-block" data-bind-to='${id}'>
-                    <span class="file-name">${name}</span> (<span class="file-size">${Utils.formatFileSize(size).size} ${Utils.formatFileSize(size).units})</span>
-                    <div class="file-clear">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
-                            <g fill="#C8C8C8" fill-rule="evenodd">
-                                <path d="M.05 1.464L1.464.05 9.95 8.536 8.536 9.95z"/>
-                                <path d="M1.464 9.95L.05 8.536 8.536.05 9.95 1.464z"/>
-                            </g>
-                        </svg>
-                    </div>
-
-                </div>
-            `);
+        
     }
 
     onRemoveFileHandler = (target, parent) => {
-        let id = $(target).data
-        $(target).closest('.block-file').find('input[type="file"]').val('');
+        let $fileInput = $(target).closest('.block-file').find('input[type="file"]');
+        
+        if ($fileInput.length <= 1) $fileInput.val('');
+        else $fileInput[$fileInput.length - 1].remove();
 
         $(target).closest('.visual-file-block').remove();
 
@@ -66,58 +43,8 @@ class InvestorsDocuments extends React.Component {
 
     }
 
-    uploadOnClickHandler = (event) => {
-        event.preventDefault();
-        let $wrap_div = $(event.currentTarget).closest('div');
-        $wrap_div.find('input[type="file"]').each((index, item) => {
-            let _name = $(item).attr('name');
-            if ($(item).val() === '') {
-                $(item).click();
-                return false;
-            } else {
-                let $new_one = $('<input type="file" name="' + _name + '" hidden/>');
-                $wrap_div.append($new_one);
-                $new_one.click();
-                return false;
-            }
-        })
-    };
-
-    uploadFileHandler = (event) => {
-        var input = event.target;
-        var reader = new FileReader();
-
-        let callback = (target, obj) => {
-            this.buildVisualFile(target, obj);
-
-            $(target).closest('.block-file').find('.block-file-result').addClass('block-file-result-filled');
-        }
-
-        if (input.files && input.files[0]) {
-
-            reader.onload = function (e) {
-
-                callback(input, {
-                    name: input.files[0].name,
-                    size: input.files[0].size
-                })
-
-
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    };
-
-    componentDidMount = () => {
-        document.body.addEventListener('change', this.uploadFileHandler);
-    };
-
-    componentWillUnmount = () => {
-        document.body.removeEventListener('change', this.uploadFileHandler);
-    };
-
     render() {
-        const {type, status} = this.props;
+        const {type, status, uploadOnClickHandler} = this.props;
 
         return (
             <Wrapper className="Verification__investorsDocuments">
@@ -129,7 +56,7 @@ class InvestorsDocuments extends React.Component {
                         holder</p>
                     <ButtonWrapper>
                         <input type="file" name='id_document_photo' hidden/>
-                        <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
+                        <Button clickHandler={uploadOnClickHandler} text="Attach file"/>
                     </ButtonWrapper>
                     <div className="block-file-result">
                         <p className="files-head">Uploaded:</p>
@@ -142,7 +69,7 @@ class InvestorsDocuments extends React.Component {
                         bearing the investor’s name and address (the document must not be older than six months.</p>
                     <ButtonWrapper>
                         <input type="file" name='bill_photo' hidden/>
-                        <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
+                        <Button clickHandler={uploadOnClickHandler} text="Attach file"/>
                     </ButtonWrapper>
                     <div className="block-file-result">
                         <p className="files-head">Uploaded:</p>

@@ -31,8 +31,6 @@ class Header extends React.Component {
     render() {
         const {
             email,
-            showInvestForm,
-            decimals,
             accountDropdownShown,
             stepsDropdownShown,
             showSetAccountPopup,
@@ -43,18 +41,11 @@ class Header extends React.Component {
             crowdsaleAddress
         } = this.props;
 
-        let floatTokensAmount = '1';
-        for (let i = 0; i < decimals; i++) {
-            floatTokensAmount += '0';
-        }
-        floatTokensAmount = parseInt(floatTokensAmount, 10);
-
         let stepOnePassed = ethAccount ? true : false;
-        let stepTwoPassed = kycState !== 'DECLINED';
-        let stepThreePassed = tokensAmount > 0;
+        let stepTwoPassed = stepOnePassed ? kycState !== 'DECLINED': false;
+        let stepThreePassed = stepTwoPassed ? tokensAmount > 0 : false;
 
-        let stepsPassedNumber = stepOnePassed + stepTwoPassed + stepThreePassed;
-
+        let passedStepsNumber = [stepOnePassed, stepTwoPassed, stepThreePassed].reduce((acc, c) => acc + c);
 
         return (
             <HeaderBlock>
@@ -73,7 +64,7 @@ class Header extends React.Component {
                         stepOnePassed={stepOnePassed}
                         stepTwoPassed={stepTwoPassed}
                         stepThreePassed={stepThreePassed}
-                        stepsPassed={stepsPassedNumber}
+                        stepsPassed={passedStepsNumber}
                         showSetAccountPopup={showSetAccountPopup}
                         showSetAccount={this.showSetAccount} 
                         tokenAddress={tokenAddress} 

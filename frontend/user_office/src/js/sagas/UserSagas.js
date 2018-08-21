@@ -92,15 +92,16 @@ export class UserSagas {
         }
     }
 
-    static* changeEmail(action) {
+    static * changeEmail(action) {
         try {
-            const response = yield call(axios, {
+            yield call(axios, {
                 url: Api.changeEmail(),
                 method: 'POST',
                 data: action.payload
             })
+
             yield put(UserActions.changeEmailSuccessfull())
-            yield put(UserActions.changeEmailRequest())
+            yield put(UserActions.getUserRequest())
             yield put(UIActions.setOpenedTip(10));
         } catch (e) {
             yield put(UserActions.changeEmailFailed())

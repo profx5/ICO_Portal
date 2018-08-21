@@ -36,6 +36,7 @@ class LegalPersonData extends React.Component {
                 }
             })
         })
+
     }
 
     updateDateOfRegistration = (date) => {
@@ -48,32 +49,6 @@ class LegalPersonData extends React.Component {
         this.setState({
             dateOfBirth: date
         })
-    }
-
-
-
-    buildVisualFile = (target, obj) => {
-        let name = obj.name,
-            size = obj.size,
-            id = $(target).attr('id');
-
-        $(target)
-            .closest('div')
-            .siblings('.block-file-result')
-            .append(`
-                <div class="visual-file-block" data-bind-to='${id}'>
-                    <span class="file-name">${name}</span> (<span class="file-size">${Utils.formatFileSize(size).size} ${Utils.formatFileSize(size).units})</span>
-                    <div class="file-clear">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
-                            <g fill="#C8C8C8" fill-rule="evenodd">
-                                <path d="M.05 1.464L1.464.05 9.95 8.536 8.536 9.95z"/>
-                                <path d="M1.464 9.95L.05 8.536 8.536.05 9.95 1.464z"/>
-                            </g>
-                        </svg>
-                    </div>
-
-                </div>
-            `);
     }
 
     onRemoveFileHandler = (target, parent) => {
@@ -90,57 +65,14 @@ class LegalPersonData extends React.Component {
 
     }
 
-
-    uploadOnClickHandler = (event) => {
-        event.preventDefault();
-
-        $(event.currentTarget).closest('div').find('input[type="file"]').each((index, item) => {
-            if ($(item).val() === '') {
-                $(item).click();
-
-                return false;
-            }
-        })
-    }
-
-    uploadFileHandler = (event) => {
-        var input = event.target;
-        var reader = new FileReader();
-
-        let callback = (target, obj) => {
-            this.buildVisualFile(target, obj);
-
-            $(target).closest('.block-file').find('.block-file-result').addClass('block-file-result-filled');
-        }
-
-        if (input.files && input.files[0]) {
-
-            reader.onload = function (e) {
-
-            callback(input, {
-                name: input.files[0].name,
-                size: input.files[0].size
-            })
-
-
-
-
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-
     setOpenedTip = (id) => {
         const { setOpenedTip } = this.props;
         setOpenedTip(id);
     }
 
-
-
     render() {
 
-        const {uploadedUserPhoto, uploadPhoto, removePhoto} = this.props;
+        const {uploadedUserPhoto, uploadPhoto, removePhoto, uploadOnClickHandler} = this.props;
 
         return (
             <Wrapper className="Verification__personData">
@@ -175,16 +107,7 @@ class LegalPersonData extends React.Component {
                         <p className="text">Basis for representation</p>
                         <ButtonWrapper>
                             <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
-                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
-                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
-                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
-                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
-                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
-                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
-                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
-                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
-                            <input type="file" name='basis_doc' onChange={this.uploadFileHandler} hidden/>
-                            <Button clickHandler={this.uploadOnClickHandler} text="Attach file"/>
+                            <Button clickHandler={uploadOnClickHandler} text="Attach file"/>
                         </ButtonWrapper>
                         <div className="block-file-result">
                             <p className="files-head">Uploaded:</p>

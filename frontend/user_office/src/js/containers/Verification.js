@@ -15,6 +15,7 @@ import VerificationInfo from './VerificationInfo';
 import InvestorsDocuments from './InvestorsDocuments';
 
 import KYCTabs from './../components/KYCTabs';
+import Utils from './../utils/index';
 
 class Verification extends React.Component {
     transformValues = values => {
@@ -110,14 +111,16 @@ class Verification extends React.Component {
 
     componentDidMount = () => {
         this.data = this.load()
+        document.body.addEventListener('change', this.uploadFileHandler);
     };
-
+    
     componentWillUnmount() {
         const {activeKycTab, activateKycTab} = this.props;
-
+        
         if (activeKycTab === 2) {
             activateKycTab({id: 1});
         }
+        document.body.removeEventListener('change', this.uploadFileHandler);
     }
 
     tabClickHandler = (event) => {
@@ -161,6 +164,77 @@ class Verification extends React.Component {
             state: state
         });
     }
+
+    buildVisualFile = (target, obj) => {
+        let name = obj.name,
+            size = obj.size,
+            id = $(target).attr('id');
+
+        $(target)
+            .closest('.block-file')
+            .find('.block-file-result')
+            .append(`
+                <div class="visual-file-block" data-bind-to='${id}'>
+                    <span class="file-name">${name}</span> (<span class="file-size">${Utils.formatFileSize(size).size} ${Utils.formatFileSize(size).units})</span>
+                    <div class="file-clear">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
+                            <g fill="#C8C8C8" fill-rule="evenodd">
+                                <path d="M.05 1.464L1.464.05 9.95 8.536 8.536 9.95z"/>
+                                <path d="M1.464 9.95L.05 8.536 8.536.05 9.95 1.464z"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                </div>
+            `);
+    }
+
+    uploadFileHandler = (event) => {
+        var input = event.target;
+        var reader = new FileReader();
+        var file = input.files[0];
+        
+        let callback = (target, obj) => {
+            this.buildVisualFile(target, obj);
+
+            $(target).closest('.block-file').find('.block-file-result').addClass('block-file-result-filled');
+        }
+
+        if (file && file.type.match('[jpeg]') && file.type.match('[png]') && file.type.match('[svg]')) {
+
+            reader.addEventListener('load', function(e) {
+
+                callback(input, {
+                    name: file.name,
+                    size: file.size
+                })
+            }, {once: true})
+
+            reader.readAsDataURL(file);
+        } else {
+            let $fileInput = $(input).closest('.block-file').find('input[type="file"]');
+
+            if ($fileInput.length <= 1) $fileInput.val('');
+            else $fileInput[$fileInput.length - 1].remove();
+        }
+    }
+
+    uploadOnClickHandler = (event) => {
+        event.preventDefault();
+        let $wrap_div = $(event.currentTarget).closest('div');
+        $wrap_div.find('input[type="file"]').each((index, item) => {
+            let _name = $(item).attr('name');
+            if ($(item).val() === '') {
+                $(item).click();
+                return false;
+            } else {
+                let $new_one = $('<input type="file" name="' + _name + '" hidden/>');
+                $wrap_div.append($new_one);
+                $new_one.click();
+                return false;
+            }
+        })
+    };
 
     render() {
         const {activeKycTab, openedTip, submitForm, kyc_required, state, setOpenedTip} = this.props;
@@ -290,9 +364,9 @@ class Verification extends React.Component {
                                 </HeaderInner>
                             </Header>
                             <MainWrapper>
-                                {activeKycTab === 1 && <PersonalData/>}
-                                {activeKycTab === 2 && <LegalPersonData/>}
-                                <InvestorsDocuments/>
+                                {activeKycTab === 1 && <PersonalData uploadOnClickHandler={this.uploadOnClickHandler} buildVisualFile={this.buildVisualFile}/>}
+                                {activeKycTab === 2 && <LegalPersonData uploadOnClickHandler={this.uploadOnClickHandler} buildVisualFile={this.buildVisualFile}/>}
+                                <InvestorsDocuments uploadOnClickHandler={this.uploadOnClickHandler} buildVisualFile={this.buildVisualFile}/>
                             </MainWrapper>
                             <InfoWrapper>
                                 <VerificationInfo

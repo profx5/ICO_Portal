@@ -5,7 +5,7 @@ import {Map} from 'immutable';
 
 
 const initialState = Map({
-    "email": "gordon@ongrid.pro",
+    "email": "",
     "eth_account": null,
     "set_eth_error": null,
     "tokens_amount": 0.00,
