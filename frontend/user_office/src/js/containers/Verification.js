@@ -200,7 +200,7 @@ class Verification extends React.Component {
             $(target).closest('.block-file').find('.block-file-result').addClass('block-file-result-filled');
         }
 
-        if (file && /(jpeg|png|svg|webp)/g.test(file.type)) {
+        if (file && /(jpeg|png|pdf|doc|docx|zip)/g.test(file.type)) {
 
             reader.addEventListener('load', function(e) {
 
