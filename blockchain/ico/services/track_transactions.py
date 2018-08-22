@@ -239,7 +239,7 @@ class TrackTransactions(_Base):
             return self.mark_as_mined(txn_object, txn_data)
 
     def __call__(self):
-        transactions = Transaction.objects.filter(state='SENT').order_by('nonce', 'txn_hash')
+        transactions = Transaction.objects.filter(state='SENT').order_by('nonce', 'created_at')
 
         if transactions.count() > 0:
             self.logger.debug(f'Tracking transactions: {transactions}')
