@@ -80,8 +80,7 @@ class ExchangeRateFactory(factory.DjangoModelFactory):
         model = 'user_office.ExchangeRate'
 
     currency = CurrencyFuzzy
-    rate = fuzzy.FuzzyDecimal(low=0, high=10000, precision=5)
-    rate_cents = factory.LazyAttribute(lambda o: o.rate * 100)
+    rate = fuzzy.FuzzyDecimal(low=0, high=10000, precision=8)
     timestamp = factory.LazyFunction(lambda: int(datetime.utcnow().timestamp()))
 
 

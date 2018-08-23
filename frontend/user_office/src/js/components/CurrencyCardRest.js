@@ -5,6 +5,7 @@ class CurrencyCard extends React.Component {
     render() {
 
         let {className, name, icon, rate, clickHandler} = this.props;
+        rate = rate > 0.01 ? rate.toFixed(2) : rate.toFixed(4)
 
         return (
             <Card onClick={clickHandler} className={className}>

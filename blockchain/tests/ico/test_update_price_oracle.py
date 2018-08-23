@@ -16,7 +16,7 @@ class TestUpdatePriceOracle(BlockChainTestCase):
     setup_contracts = ['price_oracle']
 
     def test_successfult_update(self):
-        rate = ExchangeRateFactory(currency='ETH', rate=Decimal('532.20'))
+        ExchangeRateFactory(currency='ETH', rate=Decimal('532.20182884'))
 
         result = UpdatePriceOracle()()
         self.assertIsInstance(result, Right)
@@ -31,12 +31,12 @@ class TestUpdatePriceOracle(BlockChainTestCase):
         po_update = POUpdate.objects.first()
         self.assertEqual(po_update.created_at, self.utcnow)
         self.assertEqual(po_update.oracle_rate, self.oracle_inital_price)
-        self.assertEqual(po_update.actual_rate, rate.rate_cents)
-        self.assertEqual(po_update.new_rate, rate.rate_cents)
+        self.assertEqual(po_update.actual_rate, 53220)
+        self.assertEqual(po_update.new_rate, 53220)
 
     def test_pending_update(self):
         self.eth_tester.disable_auto_mine_transactions()
-        ExchangeRateFactory(currency='ETH', rate=Decimal('532.20'))
+        ExchangeRateFactory(currency='ETH', rate=Decimal('532.20182884'))
 
         result_pending = UpdatePriceOracle()()
         self.assertIsInstance(result_pending, Right)
@@ -54,7 +54,7 @@ class TestUpdatePriceOracle(BlockChainTestCase):
         self.assertEqual(POUpdate.objects.count(), 1)
 
     def test_too_low_change(self):
-        ExchangeRateFactory(currency='ETH', rate=Decimal('511.20'))
+        ExchangeRateFactory(currency='ETH', rate=Decimal('511.20433398'))
 
         result = UpdatePriceOracle()()
         self.assertIsInstance(result, TooLowChange)
@@ -68,7 +68,15 @@ class TestUpdatePriceOracle(BlockChainTestCase):
 
         send_txn_result = SendPreparedTxns().send_prepared_transaction(result.value.transaction)
         self.assertIsInstance(send_txn_result, Right)
-
         self.assertEqual(self.price_oracle.functions.ethPriceInCents().call(), 56113)
+        self.assertEqual(POUpdate.objects.count(), 1)
 
+    def test_to_high_change_negative(self):
+        ExchangeRateFactory(currency='ETH', rate=Decimal('230.12321355'))
+        result = UpdatePriceOracle()()
+        self.assertIsInstance(result, Right)
+
+        send_txn_result = SendPreparedTxns().send_prepared_transaction(result.value.transaction)
+        self.assertIsInstance(send_txn_result, Right)
+        self.assertEqual(self.price_oracle.functions.ethPriceInCents().call(), 45910)
         self.assertEqual(POUpdate.objects.count(), 1)

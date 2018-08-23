@@ -5,6 +5,7 @@ class CurrencyCard extends React.Component {
     render() {
 
         let {rate, investCurrency, clickHandler, restCurrencies} = this.props;
+        rate = rate > 0.01 ? rate.toFixed(2) : rate.toFixed(4)
         let selectedRestCode;
 
         restCurrencies.forEach(item => {
@@ -16,8 +17,8 @@ class CurrencyCard extends React.Component {
                 <span className={selectedRestCode ? `icon-${selectedRestCode}-alt` : 'icon-other'}></span>
                 <span className="currency-name">{selectedRestCode ? investCurrency : 'Other Crypto'}</span>
                 <span className="currency-rate">{selectedRestCode ? `${rate} $` : ''}&nbsp;</span>
-                {selectedRestCode && 
-                    <React.Fragment>                       
+                {selectedRestCode &&
+                    <React.Fragment>
                         <span className="CurrencyCard_head">Other crypto</span>
                         <span className="CurrencyCard_desc">Click to select another<br/>crypto as a payment method</span>
                     </React.Fragment>
@@ -53,7 +54,7 @@ const Card = styled.div`
             transform: scale(1.05);
         }
     }
-    
+
     &.active {
         box-shadow: 0 2px 25px 0 rgba(63, 123, 244, 0.33);
         transform: scale(1.05);

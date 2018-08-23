@@ -24,12 +24,12 @@ class CurrenciesPopup extends React.Component {
 
             if (index < 4) return;
 
-            return <CurrencyCardRest 
+            return <CurrencyCardRest
                 className={this.props.altInvestCurrency === code ? 'active' : ''}
-                name={code} 
-                icon={'icon-' + code} 
-                rate={rate.toFixed(2)} 
-                key={index} 
+                name={code}
+                icon={'icon-' + code}
+                rate={rate}
+                key={index}
                 clickHandler={this.cardClickHandler.bind(this, code, rate)}
             />
         })

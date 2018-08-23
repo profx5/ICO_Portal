@@ -10,3 +10,4 @@ ipdb==0.11
 py-solc==3.0.0
 selenium==3.11.0
 jedi==0.12.1
+responses==0.9.0

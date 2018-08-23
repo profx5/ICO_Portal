@@ -55,9 +55,7 @@ class TestProcessIPN(BlockChainTestCase):
         self.settings = Currencies.get_currency('LTC')
 
     def test_successful_processing(self):
-        request = self.request_factory.post('/',
-                                            self.request_data,
-                                            HTTP_HMAC=self.signature)
+        request = self.request_factory.post('/', self.request_data, HTTP_HMAC=self.signature)
 
         result = ProcessIPN(self.settings)(request)
 

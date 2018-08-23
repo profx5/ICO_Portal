@@ -5,6 +5,7 @@ class CurrencyCard extends React.Component {
     render() {
 
         let {className, name, icon, rate, clickHandler} = this.props;
+        rate = rate > 0.01 ? rate.toFixed(2) : rate.toFixed(4)
 
         return (
             <Card onClick={clickHandler} className={className}>
@@ -42,7 +43,7 @@ const Card = styled.div`
             transform: scale(1.05);
         }
     }
-    
+
     &.active {
         box-shadow: 0 2px 25px 0 rgba(63, 123, 244, 0.33);
         transform: scale(1.05);

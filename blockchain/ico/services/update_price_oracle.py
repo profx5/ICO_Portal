@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 from oslash import Right
 from django.db import DatabaseError
 
@@ -35,7 +35,9 @@ class UpdatePriceOracle(ServiceObject):
         rate = ExchangeRate.objects.filter(currency='ETH').last()
 
         if rate:
-            return self.success(actual_rate=rate.rate_cents)
+            actual_rate = rate.rate_cents.quantize(Decimal('1.'), rounding=ROUND_HALF_UP)
+
+            return self.success(actual_rate=actual_rate)
         else:
             return self.fail('ExchangeRate object not found')
 
@@ -49,17 +51,17 @@ class UpdatePriceOracle(ServiceObject):
                             sensivity=Decimal(sensivity))
 
     def calc_rate_change(self, context):
-        diff = abs(context.actual_rate - context.oracle_rate)
+        diff = context.actual_rate - context.oracle_rate
 
         min_change = context.oracle_rate * context.sensivity / 100
         max_change = context.oracle_rate * context.allowed_change / 100
 
-        if diff < min_change:
+        if abs(diff) < min_change:
             return TooLowChange(self._context)
-        elif min_change <= diff <= max_change:
+        elif min_change <= abs(diff) <= max_change:
             return self.success(new_rate=context.actual_rate)
         else:
-            new_rate = context.oracle_rate + max_change
+            new_rate = context.oracle_rate + max_change.copy_sign(diff)
 
             return self.success(new_rate=new_rate)
 

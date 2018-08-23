@@ -1,5 +1,6 @@
 from ..base import BlockChainTestCase
 from oslash import Right
+
 from blockchain.ico.services.get_events import GetEvents, FilterNotFound
 
 

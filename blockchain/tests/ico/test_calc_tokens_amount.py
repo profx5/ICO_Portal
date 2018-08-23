@@ -8,12 +8,12 @@ from blockchain.ico.services import CalcTokensAmount
 
 class TestCalcTokensAmount(BlockChainTestCase):
     def test_successful_calc(self):
-        ExchangeRateFactory(currency='ETH', rate=Decimal('720.31'))
+        ExchangeRateFactory(currency='ETH', rate=Decimal('720.31028832'))
         PhaseFactory(bonus_percents=40)
 
         result = CalcTokensAmount()('1.23', 'ETH')
 
         self.assertTrue(isinstance(result, Right))
 
-        self.assertEqual(result.value.amount, Decimal('1240373820000000000000'))
-        self.assertEqual(result.value.amount_wo_bonus, Decimal('885981300000000000000'))
+        self.assertEqual(result.value.amount, Decimal('1240374316487040000000'))
+        self.assertEqual(result.value.amount_wo_bonus, Decimal('885981654633600000000'))

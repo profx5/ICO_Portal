@@ -15,7 +15,7 @@ class TestPrepareTokensMove(APITestCase):
 
         KYCFactory(investor=self.get_investor())
         PhaseFactory(bonus_percents=30)
-        ExchangeRateFactory(currency='ETH', rate=Decimal('750.77'))
+        ExchangeRateFactory(currency='ETH', rate=Decimal('750.77085033'))
 
         response = self.client.post('/api/prepareTokensMove/', {
             'value': '1.23',
@@ -47,7 +47,7 @@ class TestPrepareTokensMove(APITestCase):
         self.stub_datetime_utcnow(utcnow)
 
         PhaseFactory(bonus_percents=30)
-        ExchangeRateFactory(currency='ETH', rate=Decimal('750.77'))
+        ExchangeRateFactory(currency='ETH', rate=Decimal('750.77085033'))
 
         response = self.client.post('/api/prepareTokensMove/', {
             'value': '1.23',
