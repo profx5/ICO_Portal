@@ -31,7 +31,7 @@ services:
       - ${PWD}/config.py:/usr/src/app/ico_portal/settings/local.py
     depends_on:
       - db
-    environment:
+    environment: &ico_env
       DB_NAME: ico_portal
       DB_USER:  ico_portal_user
       DB_PASSWORD_FILE: /run/secrets/db_password
@@ -54,12 +54,7 @@ services:
       - db
       - rabbit
     environment:
-      DB_NAME: ico_portal
-      DB_USER:  ico_portal_user
-      DB_PASSWORD_FILE: /run/secrets/db_password
-      DB_HOST: db
-      CELERY_BROKER_URL: amqp://guest:guest@rabbit/
-      WEB3_RPC_URL: http://geth:8545
+      <<: *ico_evn
       C_FORCE_ROOT: 1
     logging:
       driver: journald
@@ -77,12 +72,7 @@ services:
       - db
       - rabbit
     environment:
-      DB_NAME: ico_portal
-      DB_USER:  ico_portal_user
-      DB_PASSWORD_FILE: /run/secrets/db_password
-      DB_HOST: db
-      CELERY_BROKER_URL: amqp://guest:guest@rabbit/
-      WEB3_RPC_URL: http://geth:8545
+      <<: *ico_evn
       C_FORCE_ROOT: 1
     logging:
       driver: journald
