@@ -74,6 +74,9 @@ $('.Signup_form').validate({
             required: 'Obligatory field',
             pwcheck: 'Password must contain 6 letters or more',
             correct: 'Incorrect symbols'
+        },
+        checkbox: {
+            required: 'Obligatory field'
         }
     },
     submitHandler: signupHandler

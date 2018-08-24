@@ -37,6 +37,7 @@
                     <label for="checkbox" class="Signup_checkboxLabel">I agree to the <a class="Signup_termsLink" href="{% static 'docs/ICO_Terms and Conditions.pdf' %}">Terms and Conditions</a>
 {#                        and <a class="Signup_termsLink" href="{% static 'docs/ICO_Privacy_Policy.pdf' %}">Privacy Policy</a>#}
                     </label>
+                    <span class="Signup_error"></span>
                 </div>
                 <div class="g-recaptcha Signup_captcha" data-sitekey="{{ sitekey }}"></div>
                 <button type="submit" class="Signup_btn Btn Btn-filledPink Btn-hoverWhite auth-button">Sign up
