@@ -123,7 +123,7 @@ class Password extends React.Component {
                             <img onClick={closeOpenedTip} src={iconClose} alt=""/>
                         </ModalHeader>
                         <ModalContent>
-                            You've successfully change your email!
+                            You've successfully sent your request for change of email! Check your email and follow the attached link.
                         </ModalContent>
                     </Modal>
                     }
