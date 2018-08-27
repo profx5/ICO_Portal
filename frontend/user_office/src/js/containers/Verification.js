@@ -10,7 +10,6 @@ import * as UIActions from './../actions/UIActions';
 
 import PersonalData from './PersonalData';
 import LegalPersonData from './LegalPersonData';
-import iconClose from './../../img/icon_close.svg';
 import VerificationInfo from './VerificationInfo';
 import InvestorsDocuments from './InvestorsDocuments';
 
@@ -136,25 +135,26 @@ class Verification extends React.Component {
 
     }
 
-    closeTip = () => {
-        const {setOpenedTip} = this.props;
-        setOpenedTip(null);
-    }
-
     onSubmitHandler = (e) => {
-        const {activeKycTab, openedTip, submitForm, kyc_required, state, setOpenedTip} = this.props;
+        const {activeKycTab, submitForm, showModal, state} = this.props;
 
         e.preventDefault();
 
         if (activeKycTab === 2) {
             if ($('[name="basis_doc"]').val() === '') {
-                setOpenedTip(5);
+                showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'Please, check if you\'ve attached the basis for representation!'
+                });
                 return; 
             }
         }
         
         if ($('[name="id_document_photo"]').val() === '' || $('[name="bill_photo"]').val() === '') {
-            setOpenedTip(6);
+            showModal({
+                modalHead: 'Warning',
+                modalContent: 'Please, check if you\'ve attached a copy of ID and Utility bill!'
+            });
             return;
         }
 
@@ -237,121 +237,11 @@ class Verification extends React.Component {
     };
 
     render() {
-        const {activeKycTab, openedTip, submitForm, kyc_required, state, setOpenedTip} = this.props;
+        const {activeKycTab, state} = this.props;
         const initial = this.load();
 
         return (
             <div>
-                {openedTip &&
-                <ModalWrapper className="ModalWrapper">
-                    {openedTip === 1 &&
-                    <Modal>
-                        <ModalHeader>
-                            Beneficial owner
-                            <img onClick={this.closeTip} src={iconClose} alt=""/>
-                        </ModalHeader>
-                        <ModalContent>
-                            Beneficial owner means a natural person who, taking advantage of their influence,
-                            makes a transaction, act, action, operation or step or otherwise exercises control
-                            over a
-                            transaction, act, action, operation or step or over another person and in whose
-                            interests or favour or on whose account a transaction or act, action, operation or
-                            step is made.
-                        </ModalContent>
-                    </Modal>
-                    }
-                    {openedTip === 2 &&
-                    <Modal>
-                        <ModalHeader>
-                            Beneficial owner
-                            <img onClick={this.closeTip} src={iconClose} alt=""/>
-                        </ModalHeader>
-                        <ModalContent>
-                            Beneficial owner means a natural person who ultimately owns or controls a legal
-                            person through direct or indirect ownership of a sufficient percentage (25 per cent
-                            plus one) of the shares or voting rights or ownership interest (more than 25 per
-                            cent) in that person, including through bearer shareholdings, or through control via
-                            other means.
-                        </ModalContent>
-                    </Modal>
-                    }
-                    {openedTip === 3 &&
-                    <Modal>
-                        <ModalHeader>
-                            What is PEP?
-                            <img onClick={this.closeTip} src={iconClose} alt=""/>
-                        </ModalHeader>
-                        <ModalContent>
-                            <p><span>Politically exposed person</span> means a natural person who is or who has 
-                            been entrusted with prominent public functions including a head of state, head of government, 
-                            minister or deputy or assistant minister; a member of parliament or of a similar legislative
-                             body, a member of a governing body of a political party, a member of a supreme court, a
-                              member of a court of auditors or of the board of a central bank; an ambassador, a chargé 
-                              d'affaires or a high-ranking officer in the armed forces; a member of an administrative, 
-                              management or supervisory body of a state-owned enterprise; a director, deputy director or
-                               member of the board or equivalent function of an international organisation, except 
-                               middle-ranking or more junior officials.
-                            </p>
-                            <p><span>Family member of a politically exposed person</span> means the spouse, or a person 
-                            considered to be equivalent to a spouse, of a politically exposed person; a child and their 
-                            spouse, or a person considered to be equivalent to a spouse, of a politically exposed person; 
-                            or a parent of a politically exposed person.</p>
-                            <p>
-                                <span>Person known to be close associate of a politically exposed person</span> means a natural 
-                                person who is known to be the beneficial owner or to have joint beneficial ownership of a legal
-                                 person or a legal arrangement, or any other close business relations, with a politically exposed
-                                  person; or a natural person who has sole beneficial ownership of a legal entity or legal 
-                                  arrangement which is known to have been set up for the de facto benefit of a politically 
-                                  exposed person.</p>
-                        </ModalContent>
-                    </Modal>
-                    }
-                    {openedTip === 4 &&
-                    <Modal>
-                        <ModalHeader>
-                            Warning
-                            <img onClick={this.closeTip} src={iconClose} alt=""/>
-                        </ModalHeader>
-                        <ModalContent>
-                            Something went wrong. Check if you submitted correct data and try again!
-                        </ModalContent>
-                    </Modal>
-                    }
-                    {openedTip === 5 &&
-                    <Modal>
-                        <ModalHeader>
-                            Warning
-                            <img onClick={this.closeTip} src={iconClose} alt=""/>
-                        </ModalHeader>
-                        <ModalContent>
-                            Please, check if you've attached the basis for representation!
-                        </ModalContent>
-                    </Modal>
-                    }
-                    {openedTip === 6 &&
-                    <Modal>
-                        <ModalHeader>
-                            Warning
-                            <img onClick={this.closeTip} src={iconClose} alt=""/>
-                        </ModalHeader>
-                        <ModalContent>
-                            Please, check if you've attached a copy of ID and Utility bill!
-                        </ModalContent>
-                    </Modal>
-                    }
-                    {openedTip === 7 &&
-                    <Modal>
-                        <ModalHeader>
-                            Congratulations
-                            <img onClick={this.closeTip} src={iconClose} alt=""/>
-                        </ModalHeader>
-                        <ModalContent>
-                            You've successfully send your data! Our managers are validating your data. Soon the status will be updated!
-                        </ModalContent>
-                    </Modal>
-                    }
-                </ModalWrapper>
-                }
                 <Form
                     onSubmit={this.onSubmitHandler}
                     initialValues={initial}
@@ -368,13 +258,13 @@ class Verification extends React.Component {
                                 {activeKycTab === 2 && <LegalPersonData uploadOnClickHandler={this.uploadOnClickHandler} buildVisualFile={this.buildVisualFile}/>}
                                 <InvestorsDocuments uploadOnClickHandler={this.uploadOnClickHandler} buildVisualFile={this.buildVisualFile}/>
                             </MainWrapper>
-                            <InfoWrapper>
+                            <div>
                                 <VerificationInfo
                                     btnText="Send data"
                                     verificationStages={['Verification__personData', 'Verification__investorsDocuments']}
-                                    stages={['Personal Data', 'Investor\`s documents']}
+                                    stages={['Personal Data', 'Investor\'s documents']}
                                 />
-                            </InfoWrapper>
+                            </div>
                         </Wrapper>
                     )}
                 />
@@ -440,76 +330,13 @@ const mapDispatchToProps = (dispatch) => ({
     },
     changeType(type) {
         dispatch(KYCActions.changeType(type))
+    },
+    showModal(payload) {
+        dispatch(UIActions.showModal(payload))
     }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Verification);
-
-const ModalWrapper = styled.div`
-    height: 100vh;
-    width: 100vw;
-    background: rgba(1, 7, 29, 0.3);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99;
-    
-`;
-
-const Modal = styled.div`
-    position: absolute;
-    top: 10%;
-    left: 20%;
-    width: 60%;
-    border-radius: 4px;
-    background-color: white;
-    box-shadow: 0 9px 21px 0 rgba(173, 182, 217, 0.3);
-    z-index: 100;
-    max-height: 64vh;
-    overflow: hidden;
-    font-weight: normal;
-`;
-
-const ModalHeader = styled.div`
-    padding: 18px;
-    text-align: center;
-    line-height: 1.45;
-    height: 72px;
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-align: center;
-    color: #000000;
-    background-color: #f5f6fa
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-    & img {
-        position: absolute;
-        top: 26px;
-        right: 26px;
-        cursor: pointer;
-    }
-`;
-
-const ModalContent = styled.div`
-    padding: 32px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    text-align: justify;
-    font-size: 16px;
-    line-height: 1.44;
-    letter-spacing: 0.2px;
-    color: #0a0a0a;
-    overflow-y: auto;
-    max-height: 52.5vh;
-    & span {
-        font-weight: bold;
-    }
-    & p {
-        margin-bottom: 10px;
-    }
-`;
-
 
 const Wrapper = styled.form`
     flex: 1;
@@ -548,8 +375,4 @@ const Head = styled.h2`
 const MainWrapper = styled.div`
     flex: 1;
     max-width: 720px;
-`;
-
-const InfoWrapper = styled.div`
-
 `;

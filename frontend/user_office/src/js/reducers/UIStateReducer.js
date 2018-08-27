@@ -16,6 +16,10 @@ const initialState = Map({
     step: 1,
     newTicketFiles: [],
     newCommentFiles: [],
+    openedModalId: null,
+    modalOpened: false,
+    modalHead: null,
+    modalContent: null,
 });
 
 
@@ -24,6 +28,17 @@ export const UIStateReducer = createReducer({
     [actions.hideAccountDropdown]: (state = initialState, payload) => state.set("accountDropdownShown", false),
     [actions.showStepsDropdown]: (state = initialState, payload) => state.set("stepsDropdownShown", true),
     [actions.hideStepsDropdown]: (state = initialState, payload) => state.set("stepsDropdownShown", false),
+    [actions.showModal]: (state = initialState, payload) => {
+        if (payload.id) {
+            return state.set('modalOpened', true).set('openedModalId', payload.id).set('modalHead', null).set('modalContent', null);
+        }
+        return state.merge({
+            ...payload
+        }).set('modalOpened', true)
+    },
+    [actions.hideModal]: (state = initialState, payload) => {
+        return state.set('openedModalId', null).set('modalHead', null).set('modalContent', null).set('modalOpened', false)
+    },
     [actions.showInvestOptions]: (state = initialState, payload) => state.set("showInvestOptions", true),
     [actions.hideInvestOptions]: (state = initialState, payload) => state.set("showInvestOptions", false),
     [actions.showSetAccountPopup]: (state = initialState, payload) => state.set("showSetAccountPopup", true),
