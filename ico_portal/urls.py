@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
-from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 from rest_framework.documentation import include_docs_urls
+from django.conf.urls.static import static
 
 from landing import views as landing_views
 from user_office import views as user_office_views
@@ -34,9 +34,14 @@ urlpatterns = [
     path('reset/done/', user_office_views.password_reset_complete, name='password_reset_complete'),
     re_path(r'^change_email/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
             user_office_views.change_email, name='change_email_confirm'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 if settings.DEBUG:
     urlpatterns.append(
         path('docs/', include_docs_urls(title='User office API docs', public=False))
+    )
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns.append(
+        path('media/<path:file_path>/', user_office_views.serve_media)
     )
