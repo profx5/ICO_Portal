@@ -15,10 +15,12 @@ import Transactions from './Transactions'
 import FAQFeedback from './FAQFeedback';
 import Payment from './Payment';
 import ReferralTab from '../components/ReferralTab';
+import CustomModals from './CustomModals';
 
 import history from './../utils/history';
 
 import SetAccount from './SetAccount';
+import Modal from './../components/Modal';
 
 import * as UIActions from './../actions/UIActions';
 
@@ -26,20 +28,20 @@ import * as UIActions from './../actions/UIActions';
 class Layout extends Component {
 
     componentDidMount() {
-        const {closeOpenedTip, hideAccountDropdown} = this.props;
+        const {closeOpenedTip, hideAccountDropdown, hideModal} = this.props;
 
         $(document).click(function(e) {
             if ($(e.target).hasClass('ModalWrapper')) {
-                closeOpenedTip();
+                hideModal();
             }
             if (!$(e.target).hasClass('DropdownAccountTrigger') && !$(e.target).closest('.DropdownAccount').length) {
                 hideAccountDropdown();
             }
-
         })
     }
 
     render() {
+        const {showSetAccountPopup, modalOpened, openedModalId, modalHead, modalContent} = this.props;
 
         return (
             <Wrapper>
@@ -56,7 +58,9 @@ class Layout extends Component {
                         <Route path="/user_office/settings" component={Settings}/>
                         <Route path="/user_office/referrals" component={ReferralTab}/>
                     </Switch>
-                    {this.props.showSetAccountPopup && <SetAccount/>}
+                    {showSetAccountPopup && <SetAccount/>}
+                    {modalOpened && modalHead && modalContent && <Modal/>}
+                    {modalOpened && openedModalId && <CustomModals/>}
                 </MainWrapper>
             </Wrapper>
         )
@@ -66,7 +70,11 @@ class Layout extends Component {
 const mapStateToProps = ({UI}) => ({
     showSetAccountPopup: UI.get('showSetAccountPopup'),
     openedTip: UI.get('openedTip'),
-    accountDropdownShown: UI.get('accountDropdownShown')
+    accountDropdownShown: UI.get('accountDropdownShown'),
+    modalOpened: UI.get('modalOpened'),
+    openedModalId: UI.get('openedModalId'),
+    modalHead: UI.get('modalHead'),
+    modalContent: UI.get('modalContent'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -76,6 +84,9 @@ const mapDispatchToProps = (dispatch) => ({
     hideAccountDropdown() {
         dispatch(UIActions.hideAccountDropdown())
     },
+    hideModal() {
+        dispatch(UIActions.hideModal())
+    }
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));
