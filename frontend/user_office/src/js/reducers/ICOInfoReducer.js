@@ -9,7 +9,7 @@ const initialState = Map({
     token_address: "0x",
     crowdsale_address: '0x',
     alt_crowdsale_address: '0x',
-    token_decimals: 2,
+    token_decimals: 18,
     humanizedEndTime: '',
     countdownTime: '21d : 18h : 15m : 12s'
 });

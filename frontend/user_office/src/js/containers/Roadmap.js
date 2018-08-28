@@ -16,7 +16,7 @@ class Roadmap extends React.Component {
                     <Bar>
                         <InnerBar>
                             <Rate/>
-                            <Point rate='1 OGD = 2 USD'/>
+                            <Point rate='1 OGD = 10 USD'/>
                         </InnerBar>
                         <Stage colored>
                             <div className="StageDesc">
@@ -115,7 +115,7 @@ const Rate = styled.div`
     background: #397dff;
     box-shadow: 0 0 0 6px rgba(57, 125, 255, 0.16);
     &:before {
-        content: '1 OGD = 2 USD';
+        content: '1 OGD = 10 USD';
         font-size: 18px;
         color: #397dff;
         white-space: nowrap;

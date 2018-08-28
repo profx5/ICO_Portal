@@ -35,16 +35,16 @@ class ICOProgress extends React.Component {
                     <WrapperHeaderInfo>
                         <PartWrapper>
                             <DescHead>Base price:</DescHead>
-                            <Desc blue bold>1 OGD = 2 USD</Desc>
+                            <Desc blue bold>1 OGD = 10 USD</Desc>
                         </PartWrapper>
                         <PartWrapper>
                             <DescHead>Minimal deposit:</DescHead>
-                            <Desc blue><span>Min deposit = </span>10$</Desc>
+                            <Desc blue><span>Min deposit = </span>5$</Desc>
                         </PartWrapper>
                         <PartWrapper>
                             <DescHead>Bonuses:</DescHead>
-                            <Desc blue><span>From 8000$ = </span>20% <span>Bonus!</span></Desc>
-                            <Desc blue><span>From 20000$ = </span>30% <span>Bonus!</span></Desc>
+                            <Desc blue><span>From 150$ = </span>20% <span>Bonus!</span></Desc>
+                            <Desc blue><span>From 1000$ = </span>40% <span>Bonus!</span></Desc>
                         </PartWrapper>
                         <PartWrapper>
                             <DescHead>Funds raised:</DescHead>
