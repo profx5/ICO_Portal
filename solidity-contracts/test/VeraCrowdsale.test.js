@@ -516,5 +516,30 @@ contract('VeraCrowdsale', function (accounts) {
       });
     });
   });
+
+  describe('bonuses', function () {
+      it('addition', async function () {
+        const bonusesAmount = 5e18;
+        const precision = 5;
+        const investorTokenBalanceBefore = await this.token.balanceOf(accounts[0]);
+        const contractTokenBalanceBefore = await this.token.balanceOf(this.crowdsale.address);
+        const receipt = await this.crowdsale.addBonuses(accounts[0], bonusesAmount).should.be.fulfilled;
+        const centsRaised = await this.crowdsale.centsRaised();
+        centsRaised.should.be.bignumber.equal(0);
+        const tokensSold = await this.crowdsale.tokensSold();
+        tokensSold.should.be.bignumber.equal(0);
+        const investorTokenBalanceAfter = await this.token.balanceOf(accounts[0]);
+        const contractTokenBalanceAfter = await this.token.balanceOf(this.crowdsale.address);
+        investorTokenBalanceAfter.minus(investorTokenBalanceBefore).toPrecision(precision).should.be
+          .bignumber.equal(bonusesAmount);
+        contractTokenBalanceBefore.minus(contractTokenBalanceAfter).toPrecision(precision).should.be
+          .bignumber.equal(bonusesAmount);
+        const logs = receipt.logs;
+        assert.equal(logs.length, 1);
+        assert.equal(logs[0].event, 'BonusPayment');
+        assert.equal(logs[0].args.investor, accounts[0]);
+        logs[0].args.tokensAmount.should.be.bignumber.equal(bonusesAmount);
+      });
+    });
 });
 

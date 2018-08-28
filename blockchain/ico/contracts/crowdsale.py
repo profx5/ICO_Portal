@@ -42,6 +42,13 @@ class CrowdsaleContract(BaseContract):
             'gas': gas
         })
 
+    def add_bonuses(self, to, tokens_amount):
+        gas = 150000
+
+        return self.contract.functions.addBonuses(to, int(tokens_amount)).buildTransaction({
+            'gas': gas
+        })
+
     def get_event_from_txn_hash(self, txn_hash):
         receipt = self.web3.eth.getTransactionReceipt(txn_hash)
 

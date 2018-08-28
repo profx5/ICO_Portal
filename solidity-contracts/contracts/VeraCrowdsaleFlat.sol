@@ -319,6 +319,16 @@ contract VeraCrowdsale is RBAC {
   );
 
   /**
+   * Event for bonus addition logging
+   * @param investor who received the bonus
+   * @param tokensAmount amount of bonus tokens
+   */
+  event BonusPayment(
+    address indexed investor,
+    uint256 tokensAmount
+  );
+
+  /**
    * @dev modifier to scope access to admins
    * // reverts if called not by admin
    */
@@ -535,5 +545,16 @@ contract VeraCrowdsale is RBAC {
       bonusPercent,
       bonusIds
     );
+  }
+
+  /**
+   * @dev Transfers the bonus amount to investor's account
+   * @param _investor address of the beneficiary receiving bonuses
+   * @param _tokensAmount amount of bonus tokens
+   */
+  function addBonuses(address _investor, uint256 _tokensAmount) public {
+    require(_tokensAmount > 0, "No bonuses to add");
+    token.transfer(_investor, _tokensAmount);
+    emit BonusPayment(_investor, _tokensAmount);
   }
 }
