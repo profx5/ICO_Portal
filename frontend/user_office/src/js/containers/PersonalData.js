@@ -11,6 +11,7 @@ import * as UIActions from './../actions/UIActions';
 import FinalFormField from './../components/FinalFormField';
 import FinalFormCheckbox from './../components/FinalFormCheckbox';
 import FinalFormRadio from './../components/FinalFormRadio';
+import Modal from './../components/Modal';
 
 class PersonData extends React.Component {
 
@@ -37,8 +38,7 @@ class PersonData extends React.Component {
     };
 
     render() {
-
-        const {email} = this.props;
+        const {email, showModal} = this.props;
 
         return (
             <Wrapper className="Verification__personData">
@@ -87,15 +87,23 @@ class PersonData extends React.Component {
 
                 <RadioSet className="RadioSet RadioSet-1">
                     <FinalFormCheckbox name="confirmInvestor" icon={iconQuestion}
-                                       handler={this.setOpenedTip.bind(this, 1)}
+                                       handler={showModal.bind(this, {
+                                           modalHead: 'Beneficial owner',
+                                           modalContent: `Beneficial owner means a natural person who, taking advantage of their influence,
+                                           makes a transaction, act, action, operation or step or otherwise exercises control
+                                           over a
+                                           transaction, act, action, operation or step or over another person and in whose
+                                           interests or favour or on whose account a transaction or act, action, operation or
+                                           step is made.`
+                                       })}
                                        options={['I confirm that the investor is a beneficial owner']}
                                        values={['Yes']}
                                        required/>
                 </RadioSet>
 
                 <RadioSet className="RadioSet RadioSet-2">
-                    <p className="text">Are you a <span onClick={this.setOpenedTip.bind(this, 3)}>politically exposed person</span> (PEP),
-                        family member of PEP or person known to be close associate of PEP? <IconImg onClick={this.setOpenedTip.bind(this, 3)} src={iconQuestion}/></p>
+                    <p className="text">Are you a <span onClick={showModal.bind(this, {id: 1})}>politically exposed person</span> (PEP),
+                        family member of PEP or person known to be close associate of PEP? <IconImg onClick={showModal.bind(this, {id: 1})} src={iconQuestion}/></p>
                     <FinalFormRadio name="is_pep" options={['Yes', 'No']} values={["True", "False"]}/>
                 </RadioSet>
             </Wrapper>
@@ -112,7 +120,6 @@ const mapStateToProps = ({ICOInfo, Timer, KYC, user}) => ({
     email: user.get('email')
 });
 
-
 const mapDispatchToProps = (dispatch) => ({
     updateKycData() {
         dispatch(KYCActions.submitKYCRequest())
@@ -125,6 +132,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     setOpenedTip(id) {
         dispatch(UIActions.setOpenedTip(id))
+    },
+    showModal(payload) {
+        dispatch(UIActions.showModal(payload))
     }
 })
 

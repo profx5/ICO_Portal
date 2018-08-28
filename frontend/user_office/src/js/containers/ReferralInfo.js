@@ -7,7 +7,6 @@ import ClipboardJS from 'clipboard';
 
 import Utils from '../utils';
 import copyIcon from './../../img/icon_copy.svg';
-import iconClose from "../../img/icon_close.svg";
 import * as UIActions from "../actions/UIActions";
 import iconQuestion from "../../img/icons/icon_faq.svg";
 import Button from '../components/Button';
@@ -23,14 +22,11 @@ import {
 
 class ReferralList extends React.Component {
 
-    closeTip = () => {this.props.setOpenedTip(null)};
-
     componentDidMount() {
         new ClipboardJS('#referral-link');
     }
 
     render() {
-        const {openedTip} = this.props;
         const shareIconSize = 32;
         const shareIconBgStyle = {fill: 'white'};
         const shareLogoFillColor = "#3172fd";
@@ -40,20 +36,6 @@ class ReferralList extends React.Component {
         return (
             <Wrapper>
                 {/*FIXME use common way of opening modals and replace numbers with identifiers*/}
-                {openedTip &&
-                    <ModalWrapper className="ModalWrapper">
-                        {openedTip === 11 &&
-                          <Modal>
-                              <ModalHeader>
-                                  Pending bonuses info
-                                  <img onClick={this.closeTip} src={iconClose} alt=""/>
-                              </ModalHeader>
-                              <ModalContent>
-                                  {Utils.lorem()}
-                              </ModalContent>
-                          </Modal>
-                          }
-                    </ModalWrapper>}
                 <Title>Referral info</Title>
                 <Field>
                     <FieldTitle># of referrals</FieldTitle>
@@ -64,7 +46,10 @@ class ReferralList extends React.Component {
                     <Value>250.4</Value>
                 </Field>
                 <Field>
-                    <FieldTitle>Pending referral bonus <IconImg onClick={() => this.props.setOpenedTip(11)} src={iconQuestion}/></FieldTitle>
+                    <FieldTitle>Pending referral bonus <IconImg onClick={() => this.props.showModal.bind(this, {
+                        modalHead: 'Pending bonuses info',
+                        modalContent: Utils.lorem()
+                    })} src={iconQuestion}/></FieldTitle>
                     <Value>174.6</Value>
                     <ButtonWrapper>
                         <Button text="Collect"/>
@@ -106,17 +91,14 @@ class ReferralList extends React.Component {
     }
 }
 
-const mapStateToProps = ({UI}) => ({
-    openedTip: UI.get('openedTip'),
-});
 
 const mapDispatchToProps = dispatch => ({
-    setOpenedTip(id) {
-        dispatch(UIActions.setOpenedTip(id))
-    },
+    showModal(payload) {
+        dispatch(UIActions.showModal(payload))
+    }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReferralList);
+export default connect(mapDispatchToProps)(ReferralList);
 
 
 // FIXME that's A LOT of copypasting

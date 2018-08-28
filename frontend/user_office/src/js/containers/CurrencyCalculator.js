@@ -7,7 +7,6 @@ import Utils from './../utils';
 import Button from './../components/Button';
 import InvestInput from './../components/InvestInput';
 import {Link} from 'react-router-dom';
-import iconClose from './../../img/icon_close.svg';
 
 
 import * as UIActions from './../actions/UIActions';
@@ -23,21 +22,14 @@ class CurrencyCalculator extends React.Component {
         this.bonus = 0;
     }
 
-    closeTip = () => {
-        const {setOpenedTip} = this.props;
-        setOpenedTip(null);
-    };
-
     openKYCTip = (e) => {
         e.preventDefault();
-        const {setOpenedTip} = this.props;
-        setOpenedTip(8);
+        this.props.showModal({id: 2});
     };
 
     openEthSetTip = e => {
         e.preventDefault();
-        const {setOpenedTip} = this.props;
-        setOpenedTip(9);
+        this.props.showModal({id: 3});
     };
 
     updateTotalTokens = () => {
@@ -70,13 +62,6 @@ class CurrencyCalculator extends React.Component {
         this.updateTotalTokens();
     };
 
-    showSetAccountPopupAndCloseTip = e => {
-        e.preventDefault();
-        const {setOpenedTip, showSetAccountPopup} = this.props;
-        setOpenedTip(null);
-        showSetAccountPopup();
-    };
-
     render() {
         const {
             investCurrency,
@@ -85,64 +70,16 @@ class CurrencyCalculator extends React.Component {
             USDAmount,
             tokensAmount,
             kycState,
-            openedTip,
             ethAccount,
-            type
         } = this.props;
 
         let ethSet = !!ethAccount;
-        let kycSended = !!type;
         let kycApproved = kycState === 'APPROVED';
         let bonus = this.bonus;
         let header = investCurrency ? "Amount, min " + (10 / investCurrencyRate).toFixed(3) + " " + investCurrency : 'Amount';
         this.initialUpdate();
         return (
             <Wrapper>
-                {openedTip === 8 &&
-                <ModalWrapper>
-                    <Modal>
-                        <ModalHeader>
-                            Verification required
-                            <img onClick={this.closeTip} src={iconClose} alt=""/>
-                        </ModalHeader>
-                        {!kycSended &&
-                        <ModalContent>
-                            Sorry, but you are not allowed to buy tokens yet. Please <Link className='link'
-                                                                                           onClick={this.closeTip}
-                                                                                           to='/user_office/verification/'>pass
-                            KYC</Link> procedure first!
-                        </ModalContent>
-                        }
-                        {kycSended && kycState === 'WAITING' &&
-                        <ModalContent>
-                            Sorry, but you are not allowed to buy tokens yet. Please wait while we validate info you
-                            provided.
-                        </ModalContent>
-                        }
-                        {kycSended && kycState === 'DECLINED' &&
-                        <ModalContent>
-                            Sorry, but you are not allowed to buy tokens yet. Your KYC was declined. Please <Link className='link'
-                        onClick={this.closeTip} to='/user_office/support/'>contact our support</Link>.
-                        </ModalContent>
-                        }
-                    </Modal>
-                </ModalWrapper>
-                }
-                {openedTip === 9 &&
-                <ModalWrapper>
-                    <Modal>
-                        <ModalHeader>
-                            ETH Account required
-                            <img onClick={this.closeTip} src={iconClose} alt=""/>
-                        </ModalHeader>
-                        <ModalContent>
-                            Sorry, but you are not allowed to buy tokens yet. Please <span className='link'
-                                                                                           onClick={this.showSetAccountPopupAndCloseTip}>add
-                            your ETH account</span> to get tokens.
-                        </ModalContent>
-                    </Modal>
-                </ModalWrapper>
-                }
                 <WrapperInner>
                     <InvestInput value={investAmount} type="text"
                                  onChangeHandler={this.investOnChangeHandler} header={header}
@@ -211,7 +148,6 @@ const mapStateToProps = ({Currencies, Invest, UI, KYC, user}) => ({
     USDAmount: Invest.get('USDAmount'),
     bonusPercent: 0,
     kycState: KYC.get('state'),
-    type: KYC.get('type'),
     openedTip: UI.get('openedTip'),
     ethAccount: user.get('eth_account'),
 })
@@ -232,81 +168,13 @@ const mapDispatchToProps = (dispatch) => ({
     getAltCryptoAccount(payload) {
         dispatch(ICOInfoActions.getCryptoAccountRequest(payload))
     },
-    setOpenedTip(id) {
-        dispatch(UIActions.setOpenedTip(id))
-    },
-    showSetAccountPopup() {
-        dispatch(UIActions.showSetAccountPopup())
-    },
+    showModal(payload) {
+        dispatch(UIActions.showModal(payload))
+    }
 })
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyCalculator);
-
-const ModalWrapper = styled.div`
-    height: 100vh;
-    width: 100vw;
-    background: rgba(1, 7, 29, 0.3);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99;
-`;
-
-const Modal = styled.div`
-    position: absolute;
-    top: 10%;
-    left: 20%;
-    width: 60%;
-    border-radius: 4px;
-    background-color: white;
-    box-shadow: 0 9px 21px 0 rgba(173, 182, 217, 0.3);
-    z-index: 100;
-    max-height: 64vh;
-    overflow: hidden;
-    font-weight: normal;
-`;
-
-const ModalHeader = styled.div`
-    padding: 18px;
-    text-align: center;
-    line-height: 1.45;
-    height: 72px;
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-align: center;
-    color: #000000;
-    background-color: #f5f6fa
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-    & img {
-        position: absolute;
-        top: 26px;
-        right: 26px;
-        cursor: pointer;
-    }
-`;
-
-const ModalContent = styled.div`
-    padding: 32px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    text-align: justify;
-    font-size: 16px;
-    line-height: 1.44;
-    letter-spacing: 0.2px;
-    color: #0a0a0a;
-    overflow-y: auto;
-    max-height: 52.5vh;
-    & span~.link {
-        font-weight: bold;
-    }
-    & .link {
-        text-decoration: underline;
-        cursor: pointer;
-    }
-`;
 
 const Wrapper = styled.div`
     margin-top: 65px;
@@ -387,7 +255,7 @@ const TokensInputWrapper = styled.div`
     .head {
         color: #0a0a0a;
         position: absolute;
-        left: 0
+        left: 0;
         top: -35px;
         font-size: 16px;
         span {

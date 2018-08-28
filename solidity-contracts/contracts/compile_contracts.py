@@ -3,36 +3,46 @@ import json
 import os
 from solc import compile_standard
 
-def compile(contract_file_path, contract_name):
+
+CONTRACTS_DIR = os.path.dirname(os.path.abspath(__file__))
+SOLIDITY_DIR = os.path.dirname(CONTRACTS_DIR)
+
+
+def compile_contract(contract_name):
+    contract_source = os.path.join(CONTRACTS_DIR, f'{contract_name}.sol')
+    if not os.path.isfile(contract_source):
+        raise FileNotFoundError(f'Expected {contract_source} to exist.')
+
     compiled = compile_standard({
         'language': 'Solidity',
         'sources': {
             contract_name: {
-                'urls': [contract_file_path]
+                'urls': [contract_source]
             }
         },
         'settings': {
-            'remappings': ["openzeppelin-solidity=%s" % os.path.abspath(os.path.join(os.path.abspath(__file__), '../../openzeppelin-solidity'))],
+            'remappings': ["openzeppelin-solidity=%s" % os.path.join(SOLIDITY_DIR, 'openzeppelin-solidity')],
             'outputSelection': {
                 contract_name: {
                     contract_name: ['abi', 'evm.bytecode.object']
                 }
             }
         }
-    }, allow_paths=os.path.abspath(os.path.join(os.path.abspath(__file__), '../../../')))
+    }, allow_paths=SOLIDITY_DIR)
 
     abi = compiled['contracts'][contract_name][contract_name]['abi']
-    bin = compiled['contracts'][contract_name][contract_name]['evm']['bytecode']['object']
+    bytecode = compiled['contracts'][contract_name][contract_name]['evm']['bytecode']['object']
 
-    output_filename = contract_file_path.replace('.sol', '.json')
+    output_filename = os.path.join(CONTRACTS_DIR, f'{contract_name}.json')
 
     with open(output_filename, 'w') as f:
-        json.dump({'abi': abi, 'bin': bin}, f)
+        json.dump({'abi': abi, 'bin': bytecode}, f)
+
 
 def main():
-    compile('VeraCoin.sol', 'VeraCoin')
-    compile('VeraCrowdsale.sol', 'VeraCrowdsale')
-    compile('PriceOracle.sol', 'PriceOracle')
+    compile_contract('VeraCoin')
+    compile_contract('VeraCrowdsale')
+    compile_contract('PriceOracle')
 
 
 if __name__ == '__main__':
