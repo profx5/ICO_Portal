@@ -80,27 +80,25 @@ class LegalPersonData extends React.Component {
                 <InputSet>
                     <input type="hidden" name='type' value='LEGAL'/>
                     <InputWrapper>
-
-                        <FinalFormField placeholder="Apple" labelText="Business name" name="business_name" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Apple" labelText="Business name" name="business_name" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="3928818" labelText="Registration number" name="registration_number" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="3928818" labelText="Registration number" name="registration_number" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="2011/03/08" 
                                         labelText="Date of registration" 
                                         name="registration_date" 
-                                        required
                                         options={{date: true, datePattern: ['Y', 'm', 'd'], delimiter: '-'}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="+15417543010"  labelText="Phone number" options={{numericOnly: true, prefix:'+', noImmediatePrefix: true}} name="phone_number" required/>
+                        <FinalFormField placeholder="+15417543010"  labelText="Phone number" options={{numericOnly: true, prefix:'+', noImmediatePrefix: true}} name="phone_number"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Steve" labelText="First name of director" name="director_firstname" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Steve" labelText="First name of director" name="director_firstname" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Jobs" labelText="Last Name of director" name="director_lastname" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Jobs" labelText="Last Name of director" name="director_lastname" options={{delimiter: ''}}/>
                     </InputWrapper>
 
                     <div className="block-file">
@@ -117,36 +115,35 @@ class LegalPersonData extends React.Component {
 
                     <InputWrapper>
 
-                        <FinalFormField placeholder="apple@gmail.com" labelText="Email" name="email" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="apple@gmail.com" labelText="Email" name="email" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="4150 Sydney Place Washington, DC 20521-4150" labelText="Address" name="address" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="4150 Sydney Place Washington, DC 20521-4150" labelText="Address" name="address" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Production of electronics" labelText="Field of activity" name="field_of_activity" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Production of electronics" labelText="Field of activity" name="field_of_activity" options={{delimiter: ''}}/>
                     </InputWrapper>
                 </InputSet>
 
                 <InputSet>
                     <SubTitle><span onClick={this.setOpenedTip.bind(this, 2)}>Beneficial owner</span> data</SubTitle>
                     <InputWrapper>
-                        <FinalFormField placeholder="John" labelText="Name" name="beneficial_fullname" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="John" labelText="Name" name="beneficial_fullname" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="915344722819" labelText="Personal identification code" name="beneficial_personal_id" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="915344722819" labelText="Personal identification code" name="beneficial_personal_id" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Brookline, Massachusetts, United States" labelText="Place of birth" name="beneficial_place_of_birth" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Brookline, Massachusetts, United States" labelText="Place of birth" name="beneficial_place_of_birth" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="1917/05/29" 
                                         labelText="Date of birth" 
                                         name="beneficial_birthdate" 
-                                        required 
                                         options={{date: true, datePattern: ['Y', 'm', 'd'], delimiter: '-'}}/>
                     </InputWrapper>
                     <InputWrapper fullWidth>
-                        <FinalFormField placeholder="4150 Sydney Place Washington, DC 20521-4150" labelText="Place of residence of the beneficial owner(s)" name="beneficial_place_of_residence" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="4150 Sydney Place Washington, DC 20521-4150" labelText="Place of residence of the beneficial owner(s)" name="beneficial_place_of_residence" options={{delimiter: ''}}/>
                     </InputWrapper>
                 </InputSet>
 
