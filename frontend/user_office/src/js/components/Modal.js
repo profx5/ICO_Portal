@@ -80,7 +80,7 @@ const ModalHeader = styled.div`
     letter-spacing: 0.5px;
     text-align: center;
     color: #000000;
-    background-color: #f5f6fa
+    background-color: #f5f6fa;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
     & img {

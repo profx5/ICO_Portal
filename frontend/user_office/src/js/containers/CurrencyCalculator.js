@@ -255,7 +255,7 @@ const TokensInputWrapper = styled.div`
     .head {
         color: #0a0a0a;
         position: absolute;
-        left: 0
+        left: 0;
         top: -35px;
         font-size: 16px;
         span {
