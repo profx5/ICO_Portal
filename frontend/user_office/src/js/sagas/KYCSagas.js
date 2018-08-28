@@ -17,11 +17,17 @@ export class KYCSagas {
             });
             yield put(KYCActions.submitKYCSuccessfull());
             yield call(KYCSagas.getKYC);
-            yield put(UIActions.setOpenedTip(7));
+            yield put(UIActions.showModal({
+                modalHead: 'Congratulations',
+                modalContent: 'You\'ve successfully send your data! Our managers are validating your data. Soon the status will be updated!'
+            }));
 
         } catch(e) {
             yield put(KYCActions.submitKYCFailed())
-            yield put(UIActions.setOpenedTip(4));
+            yield put(UIActions.showModal({
+                modalHead: 'Warning',
+                modalContent: 'Something went wrong. Check if you submitted correct data and try again!'
+            }));
         }
     }
 

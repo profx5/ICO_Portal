@@ -2,10 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 
 const KYCTabs = ({clickHandler, activeTab}) => {
-
-
     return (
-
         <Wrapper>
             <Tab onClick={clickHandler} id="kycTab1" className={activeTab === 1 ? 'active' : ''}>Natural Person</Tab>
             <Tab onClick={clickHandler} id="kycTab2" className={activeTab === 2 ? 'active' : ''}>Legal Person</Tab>
@@ -25,7 +22,7 @@ const Tab = styled.div`
     width: 193px;
     height: 45px;
     border-radius: 100px;
-    background> transparent;
+    background: transparent;
     border: 1px solid #3273fd;
     color: #0a0a0a;
     letter-spacing: 0.5px;

@@ -76,7 +76,7 @@ export class UserSagas {
         return
     }
 
-    static* changePassowrd(action) {
+    static* changePassoword(action) {
         try {
             const response = yield call(axios, {
                 url: Api.changePassword(),
@@ -85,10 +85,16 @@ export class UserSagas {
             })
 
             yield put(UserActions.changePasswordSuccessfull())
-            yield put(UIActions.setOpenedTip(9));
+            yield put(UIActions.showModal({
+                modalHead: 'Congratulations',
+                modalContent: 'You\'ve successfully change your password!'
+            }));
         } catch (e) {
             yield put(UserActions.changePasswordFailed())
-            yield put(UIActions.setOpenedTip(8));
+            yield put(UIActions.showModal({
+                modalHead: 'Warning',
+                modalContent: 'Something went wrong... Please, check if the passwords are valid!'
+            }));
         }
     }
 
@@ -102,7 +108,10 @@ export class UserSagas {
 
             yield put(UserActions.changeEmailSuccessfull())
             yield put(UserActions.getUserRequest())
-            yield put(UIActions.setOpenedTip(10));
+            yield put(UIActions.showModal({
+                modalHead: 'Congratulations',
+                modalContent: 'You\'ve successfully sent your request for change of email! Check your email and follow the attached link.'
+            }));
         } catch (e) {
             yield put(UserActions.changeEmailFailed())
         }
@@ -114,6 +123,6 @@ export function* saga() {
     yield takeEvery(UserActions.getUserRequest, UserSagas.getUser)
     yield takeEvery(UserActions.setAccountRequest, UserSagas.setAccount)
     yield takeEvery(UserActions.setMetaMaskAccountRequest, UserSagas.extractMetaMaskAccount)
-    yield takeEvery(UserActions.changePasswordRequest, UserSagas.changePassowrd)
+    yield takeEvery(UserActions.changePasswordRequest, UserSagas.changePassoword)
     yield takeEvery(UserActions.changeEmailRequest, UserSagas.changeEmail)
 }
