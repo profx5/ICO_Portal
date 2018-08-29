@@ -80,7 +80,7 @@ class Investor(AbstractBaseUser):
 
     @property
     def eth_account_filled(self):
-        return len(self.eth_account) == 42 and is_hex_address(self.eth_account)
+        return self.eth_account and is_hex_address(self.eth_account)
 
     @property
     def is_superuser(self):

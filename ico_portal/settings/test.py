@@ -1,7 +1,5 @@
 from .development import *
 
-TOKENS_PER_USD = 1
-
 MEDIA_ROOT = '/tmp/ico_portal_test_media/'
 
 # INSTALLED_APPS += ('behave_django',)

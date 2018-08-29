@@ -1,8 +1,9 @@
 from celery import shared_task
 from celery.utils.log import get_task_logger
-from oslash import Right
 from django.conf import settings
+from oslash import Right
 
+from blockchain.ico.services import CollectReferralBonuses
 from .services import SyncICOInfo, SyncExchangeRates, ProcessTransfer, \
     GetEvents, SendPreparedTxns, TrackTransactions, UpdatePriceOracle
 from .services.update_price_oracle import TooLowChange, PendingUpdateExists
@@ -82,3 +83,11 @@ def update_price_oracle():
                     'Skiping PriceOracle rate update until transaction is mined')
     elif isinstance(result, Right):
         logger.info(f'PriceOracle rate successfully updated POUpdate.id={result.value.po_update.id} new_rate={result.value.new_rate}')
+
+
+@shared_task
+def collect_bonuses():
+    result = CollectReferralBonuses()()
+    for r in result:
+        if isinstance(r, Right):
+            logger.info(f'Prepared transaction on referral bonuses accrual for investor {r.investor.eth_account}')

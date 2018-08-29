@@ -8,7 +8,7 @@ from user_office.models import Phase, ExchangeRate
 class CalcTokensAmount(ServiceObject):
     @property
     def tokens_per_usd(self):
-        return Decimal(settings.TOKENS_PER_USD)
+        return Decimal(1 / settings.TOKEN_PRICE_IN_USD)
 
     def find_phase(self, context):
         current_phase = Phase.objects.get_phase()

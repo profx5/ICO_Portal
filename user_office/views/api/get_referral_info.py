@@ -4,6 +4,7 @@ from rest_framework.fields import SerializerMethodField
 from rest_framework.generics import ListAPIView
 from rest_framework.serializers import ModelSerializer
 
+from user_office.helpers import get_referral_tokens_treshold
 from user_office.models import Investor, ReferralBonus, Payment
 from .auth import KYCAndLoginPermission
 from rest_framework.response import Response
@@ -43,10 +44,10 @@ class GetReferralInfoView(ListAPIView):
 
         link = '{}{}?refid={}'.format(settings.HOST, reverse('signup'), request.user.referral_id)
         amounts = ReferralBonus.objects.filter(beneficiary=request.user).aggregate(
-            created=Coalesce(Sum('amount', filter=Q(state=ReferralBonus.State.created, accrued_in__isnull=True)), 0),
-            pending=Coalesce(Sum('amount', filter=Q(state=ReferralBonus.State.created, accrued_in__isnull=False)), 0),
+            created=Coalesce(Sum('amount', filter=Q(state=ReferralBonus.State.created)), 0),
+            pending=Coalesce(Sum('amount', filter=Q(state=ReferralBonus.State.prepared)), 0),
             accrued=Coalesce(Sum('amount', filter=Q(state=ReferralBonus.State.accrued)), 0))
-        threshold = settings.REFERRAL_TOKENS_THRESHOLD_TO_COLLECT_BONUSES * 10 ** settings.TOKEN_DECIMALS
+        threshold = get_referral_tokens_treshold()
         is_possible_to_collect = \
             not request.user.kyc_required and request.user.eth_account_filled and amounts['created'] >= threshold
 
