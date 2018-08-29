@@ -5,18 +5,17 @@ import {Map} from 'immutable';
 
 const initialState = Map({
     currencies: [
-        {
-            code: "",
-            name: "",
-            rate: 0
-        },
-
+        {code: "ETH", name: "Ethereum", rate: 461.9},
+        {code: "BTC", name: "Bitcoin", rate: 0.00},
+        {code: "LTC", name: "Litecoin", rate: 0.00},
+        {code: "DOGE", name: "Dogecoin", rate: 0.00},
+        {code: "DASH", name: "Dash", rate: 0.00},
+        {code: "ZEC", name: "Zcash", rate: 0.00}
     ],
     investCurrency: '',
-    investCurrencyRate: '',
+    investCurrencyRate: 0.00,
     spreadedCurrencyCards: false
 });
-
 
 export const CurrencyReducer = createReducer({
     [actions.getCurrenciesRequest]: (state, payload) => state,

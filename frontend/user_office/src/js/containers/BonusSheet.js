@@ -9,12 +9,12 @@ class BonusSheet extends React.Component{
                 <Head>Progressive bonus</Head>
                 <TableWrapper>
                     <div className="row">
-                        <div className="part">Purchases from $ 8 000 to $19 999.99</div>
+                        <div className="part">Purchases from $150 to $999</div>
                         <div className="part">Get 20% bonus!</div>
                     </div>
                     <div className="row">
-                        <div className="part">Purchases with the value of $20 000 +</div>
-                        <div className="part">Get special bonus of 30%!</div></div>
+                        <div className="part">Purchases with the value of $1 000 +</div>
+                        <div className="part">Get special bonus of 40%!</div></div>
                 </TableWrapper>
             </Wrapper>
         )

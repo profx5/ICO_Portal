@@ -36,11 +36,11 @@ class CurrencyCalculator extends React.Component {
         const {investAmount, investCurrencyRate, setUSDAmount, setTokensAmount} = this.props;
         let bonus = this.bonus;
         let totalUSD = investAmount * investCurrencyRate;
-        let totalTokens = totalUSD / 2;
+        let totalTokens = totalUSD / 10;
 
         if (totalUSD < 8000) bonus = 0;
-        else if (totalUSD >= 8000 && totalUSD < 20000) bonus = 20;
-        else if (totalUSD >= 20000) bonus = 30;
+        else if (totalUSD >= 150 && totalUSD < 1000) bonus = 20;
+        else if (totalUSD >= 1000) bonus = 40;
         totalTokens += totalTokens / 100 * bonus;
         setTokensAmount(totalTokens);
         setUSDAmount(totalUSD);
@@ -93,7 +93,7 @@ class CurrencyCalculator extends React.Component {
                     </TokensInputWrapper>
 
                     <ButtonWrapper to="/user_office/payment/buy">
-                        <Button disabled={USDAmount < 10}
+                        <Button disabled={USDAmount < 5}
                                 clickHandler={ethSet ? kycApproved ? this.investClickHandler : this.openKYCTip : this.openEthSetTip}
                                 text="Buy"/>
                     </ButtonWrapper>
@@ -108,11 +108,11 @@ class CurrencyCalculator extends React.Component {
                             <li>Which is equal to {investAmount} * {investCurrencyRate} USD
                                 = {USDAmount.toFixed(2)} USD
                             </li>
-                            <li>Token base price = 2 USD</li>
+                            <li>Token base price = 10 USD</li>
                             {USDAmount >= 10 &&
                             <div>
                                 <li>Pre-Sale phase {bonus}% bonus applied so you get</li>
-                                <li>{USDAmount.toFixed(2)} / 2 * {bonus}% = {tokensAmount.toFixed(2)} VERA</li>
+                                <li>{USDAmount.toFixed(2)} / 2 * {bonus}% = {tokensAmount.toFixed(2)} OGD</li>
                             </div>
                             }
                             {USDAmount < 10 &&
@@ -132,8 +132,8 @@ class CurrencyCalculator extends React.Component {
 
                 <BonusDesc>
                     Progressive bonus for public sale phase is
-                    currently available! Investing more than 8&nbsp;000 USD will grant you 20% bonus!
-                    Invest more than 20&nbsp;000 USD and get <span>30% bonus tokens!</span>
+                    currently available! Investing more than 150 USD will grant you 20% bonus!
+                    Invest more than 1&nbsp;000 USD and get <span>40% bonus tokens!</span>
                 </BonusDesc>
             </Wrapper>
         )
