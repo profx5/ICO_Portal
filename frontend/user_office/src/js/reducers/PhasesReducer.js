@@ -6,8 +6,8 @@ import {Map} from 'immutable';
 
 const initialState = Map({
     name: "",
-    begin_date: null,
-    end_date: null,
+    begin_date: '2018-08-29T15:10:47+00:00',
+    end_date: '2018-12-29T15:10:47+00:00',
     bonus_percents: 0,
     hard_cap: 0
 });

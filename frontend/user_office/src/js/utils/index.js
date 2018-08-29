@@ -197,7 +197,7 @@ const Utils = {
               hours: '00',
               days: '00'
             };
-            callback(`${newTime.days} days ${newTime.hours}h ${newTime.minutes}m ${newTime.seconds}s`);
+            callback(newTime);
             return;
           }
 
@@ -207,7 +207,7 @@ const Utils = {
         hours: time.hours < 10 ? `0${time.hours}` : time.hours + '',
         days: time.days < 10 ? `0${time.days}` : time.days + ''
       };
-      callback(`${newTime.days} days ${newTime.hours}h ${newTime.minutes}m ${newTime.seconds}s`);
+      callback(newTime);
 
       },1000);
 
