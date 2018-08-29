@@ -38,8 +38,7 @@ class PersonData extends React.Component {
     };
 
     render() {
-
-        const {uploadedUserPhoto, uploadPhoto, removePhoto, type, email, showModal} = this.props;
+        const {email, showModal} = this.props;
 
         return (
             <Wrapper className="Verification__personData">
@@ -47,45 +46,42 @@ class PersonData extends React.Component {
                 <InputSet>
                     <input type="hidden" name='type' value='NATURAL'/>
                     <InputWrapper>
-                        <FinalFormField placeholder="John" labelText="First Name" name="firstname" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="John" labelText="First Name" name="firstname" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="Fitzgerald" labelText="Middle Name" name="middlename" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Kennedy" labelText="Last Name" name="lastname" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Kennedy" labelText="Last Name" name="lastname" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Brookline, Massachusetts, United States" labelText="Place of birth" name="place_of_birth" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Brookline, Massachusetts, United States" labelText="Place of birth" name="place_of_birth" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="1917/05/29" 
                                         labelText="Date of birth" 
-                                        name="birthdate" 
-                                        required 
+                                        name="birthdate"  
                                         options={{date: true, datePattern: ['Y', 'm', 'd'], delimiter: '-'}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="915344722819"
                                         labelText="Personal identification code" 
-                                        name="personal_id" 
-                                        required 
+                                        name="personal_id"  
                                         options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
                         <FinalFormField placeholder="+15417543010" labelText="Phone number"
                                         options={{numericOnly: true, prefix: '+', noImmediatePrefix: true}} 
-                                        name="phone_number" 
-                                        required/>
+                                        name="phone_number"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="john@gmail.com" labelText="Email" value={email} type="email" name="email" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="john@gmail.com" labelText="Email" value={email} type="email" name="email" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="4150 Sydney Place Washington, DC 20521-4150" labelText="Place of residence" name="place_of_residence" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="4150 Sydney Place Washington, DC 20521-4150" labelText="Place of residence" name="place_of_residence" options={{delimiter: ''}}/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FinalFormField placeholder="Software developer" labelText="Profession or field of activity" name="profession" required options={{delimiter: ''}}/>
+                        <FinalFormField placeholder="Software developer" labelText="Profession or field of activity" name="profession" options={{delimiter: ''}}/>
                     </InputWrapper>
                 </InputSet>
 
