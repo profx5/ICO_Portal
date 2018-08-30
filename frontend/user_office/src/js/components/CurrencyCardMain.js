@@ -8,7 +8,7 @@ class CurrencyCard extends React.Component {
         rate = rate > 0.01 ? rate.toFixed(2) : rate.toFixed(4)
 
         return (
-            <Card onClick={clickHandler} className={className}>
+            <Card disabled={this.props.disabled} onClick={clickHandler} className={className}>
                 <span className="currency-name">{name}</span>
                 <span className={`${icon}-alt`}></span>
                 <span className="currency-rate">{`${rate} $`}&nbsp;</span>
@@ -34,6 +34,7 @@ const Card = styled.div`
     cursor: pointer;
     will-change: transform;
     position: relative;
+    pointer-events: ${props => props.disabled ? 'none' : 'unset'};
     &:not(:last-of-type) {
         margin-right: 3%;
     }

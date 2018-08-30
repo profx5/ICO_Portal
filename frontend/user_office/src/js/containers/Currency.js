@@ -29,12 +29,14 @@ class Currency extends React.Component {
                             name={name}
                             icon={'icon-' + code}
                             rate={rate}
-                            key={index}
+                            key={index} 
+                            disabled={index !== 0 ? true : false}
                             clickHandler={this.cardClickHandler.bind(this, code, rate)}/>
             } else if (index === mainCurrenciesNum) {
                 return  <CurrencyCardOther
                             rate={investCurrencyRate}
-                            key={index}
+                            key={index} 
+                            disabled
                             investCurrency={investCurrency}
                             restCurrencies={data.slice(mainCurrenciesNum)}
                             clickHandler={showPopup}>

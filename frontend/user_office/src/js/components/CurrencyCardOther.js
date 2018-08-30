@@ -13,7 +13,7 @@ class CurrencyCard extends React.Component {
         })
 
         return (
-            <Card onClick={clickHandler} className={selectedRestCode ? 'active' : ''}>
+            <Card disabled={this.props.disabled} onClick={clickHandler} className={selectedRestCode ? 'active' : ''}>
                 <span className={selectedRestCode ? `icon-${selectedRestCode}-alt` : 'icon-other'}></span>
                 <span className="currency-name">{selectedRestCode ? investCurrency : 'Other Crypto'}</span>
                 <span className="currency-rate">{selectedRestCode ? `${rate} $` : ''}&nbsp;</span>
@@ -45,6 +45,7 @@ const Card = styled.div`
     cursor: pointer;
     will-change: transform;
     position: relative;
+    pointer-events: ${props => props.disabled ? 'none' : 'unset'};
     &:not(:last-of-type) {
         margin-right: 3%;
     }

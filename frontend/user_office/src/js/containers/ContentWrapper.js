@@ -24,9 +24,9 @@ class ContentWrapper extends React.Component {
     }
 
     componentWillMount() {
-        const {getMe, getICOInfo, getKyc, getPhasesInfo, getDeposits, getTickets} = this.props;
+        const {getMe, getICOInfo, getKyc, getPhasesInfo, getDeposits, getCurrencies, getTickets} = this.props;
 
-        compose(getMe, getKyc, getICOInfo, getPhasesInfo, getDeposits, getTickets)();
+        compose(getMe, getKyc, getICOInfo, getPhasesInfo, getDeposits, getCurrencies, getTickets)();
     }
 
     render() {
