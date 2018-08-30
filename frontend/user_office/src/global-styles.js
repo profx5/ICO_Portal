@@ -1,4 +1,5 @@
 import { injectGlobal } from 'styled-components';
+
 import gilroyLightWoff from './fonts/Gilroy-Light.woff';
 import gilroyLightWoff2 from './fonts/Gilroy-Light.woff2';
 import gilroyLightTtf from './fonts/Gilroy-Light.ttf';
@@ -14,6 +15,14 @@ import gilroyMediumTtf from './fonts/Gilroy-Medium.ttf';
 import gilroyBoldWoff from './fonts/Gilroy-Bold.woff';
 import gilroyBoldWoff2 from './fonts/Gilroy-Bold.woff2';
 import gilroyBoldTtf from './fonts/Gilroy-Bold.ttf';
+
+import robotoRegularWoff from './fonts/Roboto-Regular.woff';
+import robotoRegularWoff2 from './fonts/Roboto-Regular.woff2';
+import robotoRegularTtf from './fonts/Roboto-Regular.ttf';
+
+import robotoMediumWoff from './fonts/Roboto-Medium.woff';
+import robotoMediumWoff2 from './fonts/Roboto-Medium.woff2';
+import robotoMediumTtf from './fonts/Roboto-Medium.ttf';
 
 
 import icomoonEot from './fonts/icomoon.eot';
@@ -338,6 +347,26 @@ injectGlobal`
           url(${gilroyBoldWoff}) format('woff'),
           url(${gilroyBoldTtf}) format('truetype');
       font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+  }
+
+  @font-face {
+      font-family: 'roboto';
+      src: url(${robotoRegularWoff2}) format('woff2'),
+          url(${robotoRegularWoff}) format('woff'),
+          url(${robotoRegularTtf}) format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+  }
+
+  @font-face {
+      font-family: 'roboto';
+      src: url(${robotoMediumWoff2}) format('woff2'),
+          url(${robotoMediumWoff}) format('woff'),
+          url(${robotoMediumTtf}) format('truetype');
+      font-weight: 500;
       font-style: normal;
       font-display: swap;
   }

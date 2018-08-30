@@ -1,16 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import Roadmap from './Roadmap';
+import ProgressBar from './../components/ProgressBar';
+import Timer from './../components/Timer';
 
 import Utils from './../utils/index';
-
 import * as ICOInfoActions from './../actions/ICOInfoActions';
 
-import Button from './../components/Button';
-
-import { Link } from 'react-router-dom';
+import dotsIcon from './../../img/dots.svg';
 
 
 
@@ -24,9 +23,9 @@ class ICOProgress extends React.Component {
     getPhasePercents = (current, goal) => current / goal * 100;
 
     render() {
-        const {gainedMoney} = this.props;
+        const {gainedMoney, countdownTime} = this.props;
 
-        const raisedAmountString = Math.round(parseInt(gainedMoney, 10)/100) + 239463 + ' USD';
+        const raisedAmountString = Utils.splitDigits(Math.round(parseInt(gainedMoney, 10)/100) + 239463) + ' USD';
 
         return (
             <Wrapper>
@@ -38,23 +37,23 @@ class ICOProgress extends React.Component {
                             <Desc blue bold>1 OGD = 10 USD</Desc>
                         </PartWrapper>
                         <PartWrapper>
-                            <DescHead>Minimal deposit:</DescHead>
-                            <Desc blue><span>Min deposit = </span>5$</Desc>
-                        </PartWrapper>
-                        <PartWrapper>
-                            <DescHead>Bonuses:</DescHead>
-                            <Desc blue><span>From 150$ = </span>20% <span>Bonus!</span></Desc>
-                            <Desc blue><span>From 1000$ = </span>40% <span>Bonus!</span></Desc>
+                            <DescHead>Deposit:</DescHead>
+                            <Desc blue bold><span>Min deposit = </span>5 USD</Desc>
                         </PartWrapper>
                         <PartWrapper>
                             <DescHead>Funds raised:</DescHead>
-                            <Desc>{raisedAmountString}</Desc>
+                            <Desc bold>{raisedAmountString}</Desc>
                         </PartWrapper>
                     </WrapperHeaderInfo>
                 </Header>
-                <Roadmap/>
+                <ProgressBar>
+                    <Timer countdownTime={countdownTime}/>
+                </ProgressBar>
+                <BonusInfoText>Bonuses are going to end up soon!</BonusInfoText>
                 <ButtonWrapper to="/user_office/payment">
-                    <Button text='Buy tokens'/>
+                    <StyledButton>
+                        Buy token
+                    </StyledButton>
                 </ButtonWrapper>
             </Wrapper>
         )
@@ -96,6 +95,7 @@ const Wrapper = styled.div`
 const Header = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-bottom: 30px;
 `;
 
 const WrapperHeaderInfo = styled.div`
@@ -115,6 +115,11 @@ const Head = styled.h3`
 
 const PartWrapper = styled.div`
     margin-left: 50px;
+    &:nth-of-type(2) {
+        border-left: 1px solid rgb(233, 233, 233);
+        border-right: 1px solid rgb(233, 233, 233);
+        padding: 0 45px;
+    }
 `;
 
 const DescHead = styled.div`
@@ -124,67 +129,21 @@ const DescHead = styled.div`
 
 const Desc = styled.div`
     color: ${props => props.blue ? '#3476fc' : '#000000'};
-    font-size: 20px;
+    font-size: 18px;
     font-weight: ${props => props.bold ? '600' : '500'};
     padding-top: 5px;
     & span {
         color: black;
-        font-weight: 500;
+        font-weight: ${props => props.bold ? '600' : '500'};
     }
 `;
 
-const Text = styled.p`
-    &:not(:only-child):not(:first-child):before {
-        content: '';
-        display: inline-block;
-        width: 1px;
-        height: 20px;
-        margin: 0 23px;
-        opacity: 0.3;
-        background: #282b2a;
-        position: relative;
-        top: 4px;
-    }
-`;
-
-const Span = styled.span`
-    font-weight: 600;
-    letter-spacing: normal;
-    color: ${props => props.colored ? '#4fddbe' : '#323c47'};
-`;
-
-const Content = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-`;
-
-const ContentPart = styled.div`
-    display: inline-flex;
-    flex-flow: row wrap;
-    align-items: flex-start;
-    &:first-of-type {
-        flex-basis: 57%;
-        border-left: solid 1px #d6dfe6;
-        div {
-            flex-basis: 100%;
-        }
-    }
-    &:last-of-type {
-        flex-basis: 43%;
-        div {
-            &:first-of-type {
-                flex-basis: 100%;
-            }
-            &:not(:first-of-type) {
-                flex-basis: 33.33%;
-            }
-        }
-    }
-`;
-
-const BottomText = styled.p`
+const BonusInfoText = styled.p`
+    font-size: 18px;
+    color: rgb(49, 114, 253);
     text-align: center;
-    color: #3577fc;
+    display: block;
+    white-space: nowrap;
 `;
 
 const ButtonWrapper = styled(Link)`
@@ -192,4 +151,25 @@ const ButtonWrapper = styled(Link)`
     height: 68px;
     margin: 17px auto 0;
     display: block;
+`;
+
+const StyledButton = styled.button`
+    background: rgb(248, 79, 119);
+    width: 100%;
+    height: 100%;
+    text-transform: uppercase;
+    border-radius: 100px;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    position: relative;
+    cursor: pointer;
+    &:after {
+        content: url(${dotsIcon});
+        position: absolute;
+        top: 50%;
+        right: 25px;
+        transform: translateY(-50%);
+    }
 `;
