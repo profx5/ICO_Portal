@@ -129,7 +129,7 @@ const AccountInfo = styled.div`
 `;
 
 const AccountInfoText = styled.div`
-    display inline-flex;
+    display: inline-flex;
     align-items: center;
     cursor: pointer;
     position: relative;
