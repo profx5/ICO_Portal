@@ -107,3 +107,6 @@ VERA_SITE_URL = 'https://vera.jobs/'
 # Authorasation settings
 
 SIGNUP_CLOSED = True
+
+#KYC settings
+AUTO_APPROVE_KYC = False

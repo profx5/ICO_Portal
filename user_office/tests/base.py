@@ -3,6 +3,7 @@ from rest_framework.test import APIClient
 
 from ico_portal.utils.datetime import datetime
 from user_office.models import Investor
+from blockchain.tests.base import BlockChainTestCase
 
 
 class APITestCase(TestCase):
@@ -43,3 +44,12 @@ class APITestCase(TestCase):
 
     def stub_datetime_utcnow(self, dt):
         datetime.stubed_utcnow = dt
+
+
+class EthTesterAPITestCase(APITestCase, BlockChainTestCase):
+    setup_eth_tester = True
+    setup_contracts = ['price_oracle', 'token', 'crowdsale']
+
+    def setUp(self):
+        BlockChainTestCase.setUp(self)
+        APITestCase.setUp(self)
