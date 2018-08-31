@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import ProgressBar from './../components/ProgressBar';
 import Timer from './../components/Timer';
+import CustomButton from './../components/CustomButton';
 
 import Utils from './../utils/index';
 import * as ICOInfoActions from './../actions/ICOInfoActions';
@@ -25,7 +26,8 @@ class ICOProgress extends React.Component {
     render() {
         const {gainedMoney, countdownTime} = this.props;
 
-        const raisedAmountString = Utils.splitDigits(Math.round(parseInt(gainedMoney, 10)/100) + 239463) + ' USD';
+        const raisedAmountNum = Math.ceil(parseInt(gainedMoney, 10));
+        const raisedAmountStr = Utils.splitDigits(Math.ceil(parseInt(gainedMoney, 10)/100)) + ' USD';
 
         return (
             <Wrapper>
@@ -42,18 +44,16 @@ class ICOProgress extends React.Component {
                         </PartWrapper>
                         <PartWrapper>
                             <DescHead>Funds raised:</DescHead>
-                            <Desc bold>{raisedAmountString}</Desc>
+                            <Desc bold>{raisedAmountStr}</Desc>
                         </PartWrapper>
                     </WrapperHeaderInfo>
                 </Header>
-                <ProgressBar>
+                <ProgressBar raisedAmountNum={raisedAmountNum}>
                     <Timer countdownTime={countdownTime}/>
                 </ProgressBar>
                 <BonusInfoText>Bonuses are going to end up soon!</BonusInfoText>
                 <ButtonWrapper to="/user_office/payment">
-                    <StyledButton>
-                        Buy token
-                    </StyledButton>
+                    <CustomButton text="Buy token"/>
                 </ButtonWrapper>
             </Wrapper>
         )

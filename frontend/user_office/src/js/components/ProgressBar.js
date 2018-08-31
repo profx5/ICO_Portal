@@ -1,15 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import Utils from './../utils/index';
 
 
-const ProgressBar = ({children}) => {
+const ProgressBar = ({children, raisedAmountNum}) => {
+    const raisedAmountPercents =  raisedAmountNum / 260000;
+
     return (
         <Wrapper>
             {children}
             <BarWrapper>
                 <Bar>
-                    <InnerBar>
-                        <Point rate='1 OGD = 10 USD'/>
+                    <InnerBar width={raisedAmountPercents >= 100 ? 100 : raisedAmountPercents}>
+                        <Point rate='1 OGD = 10 USD' data-raised-amount={Utils.splitDigits(Math.ceil(raisedAmountNum / 100)) + ' USD'}/>
                     </InnerBar>
                     <Stage>
                         <div className="StageDesc">
@@ -78,10 +81,11 @@ const InnerBar = styled.div`
     top: 0;
     left: 0;
     height: 100%;
-    width: 48%;
+    width: ${props => props.width ? props.width + '%' : '1%'};
     background: #397dff;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    transition: width .5s ease .5s;
 `;
 
 const Point = styled.div`
@@ -110,7 +114,7 @@ const Point = styled.div`
         top: -65px;
     }
     &:after {
-        content: '30 500 USD';
+        content: attr(data-raised-amount);
         font-family: 'roboto';
         font-weight: 500;
         font-size: 16px;
