@@ -54,7 +54,8 @@ class SendChangeEmailConfirm(ServiceObject, CheckEmailMixin):
 
         send_mail.delay('Change email', context.investor.email, 'mail/change_email.html', {
             'link': link,
-            'email': context.email
+            'old_email': context.investor.email,
+            'new_email': context.email
         })
 
         return self.success()
