@@ -1,10 +1,12 @@
 from shutil import rmtree  # noqa
 from django.conf import settings
+from django.test.utils import override_settings
 
 from .helpers.fixture import fixture_path
-from ..base import APITestCase
+from ..base import EthTesterAPITestCase, APITestCase
 from user_office.models import KYC
 from helpdesk.models import Ticket
+from blockchain.ico.services import SendPreparedTxns
 
 
 class TestKYC(APITestCase):
@@ -286,3 +288,91 @@ class TestKYC(APITestCase):
                 'type': 'id_document_photo'
             }
         ])
+
+
+class TestKYCAutoApprove(EthTesterAPITestCase):
+    def tearDown(self):
+        super().tearDown()
+
+        rmtree(settings.MEDIA_ROOT, ignore_errors=True)
+
+    def assert_response_natural(self, response):
+        wo_attacmemts = {k: v for k, v in response.data.items() if k != 'attachments'}
+
+        self.assertDictEqual(wo_attacmemts, {
+            'address': None,
+            'beneficial_birthdate': None,
+            'beneficial_fullname': None,
+            'beneficial_personal_id': None,
+            'beneficial_place_of_birth': None,
+            'beneficial_place_of_residence': None,
+            'birthdate': None,
+            'business_name': None,
+            'decline_reason': None,
+            'director_firstname': None,
+            'director_lastname': None,
+            'email': 'gordon@ongrid.pro',
+            'field_of_activity': None,
+            'firstname': 'John',
+            'is_pep': None,
+            'lastname': 'Doe',
+            'personal_id': None,
+            'phone_number': '+79999999999',
+            'place_of_birth': 'Moscow, Russia',
+            'place_of_residence': 'Moscow, Russia',
+            'profession': 'Medic',
+            'registration_date': None,
+            'registration_number': None,
+            'state': 'APPROVED',
+            'ticket': None,
+            'type': 'NATURAL'
+        })
+
+        self.assertListEqual(response.data['attachments'], [
+            {
+                'file': 'http://testserver/media/ae0e9df12a898fa098779e1520334db0f051b1a4a63e5ce96588823f2c1ed78a.jpg',
+                'filename': 'document.jpg',
+                'mime_type': 'image/jpeg',
+                'size': 30236,
+                'type': 'id_document_photo'
+            },
+            {
+                'file': 'http://testserver/media/f3a61d28437680d3850c5e8a93da69679f47739e207d93e65a8b4ba5681c3605.jpg',
+                'filename': 'bill.jpg',
+                'mime_type': 'image/jpeg',
+                'size': 9566,
+                'type': 'bill_photo'
+            }
+            ])
+
+    @override_settings(AUTO_APPROVE_KYC=True)
+    def test_create_approved_kyc(self):
+        with open(fixture_path('document.jpg'), 'rb') as photo, \
+             open(fixture_path('bill.jpg'), 'rb') as bill:
+            response = self.client.post('/api/kyc/', {
+                'type': 'NATURAL',
+                'firstname': 'John',
+                'lastname': 'Doe',
+                'place_of_birth': 'Moscow, Russia',
+                'birth_date': '1990-01-01',
+                'peronal_id': '1488123',
+                'phone_number': '+79999999999',
+                'email': 'gordon@ongrid.pro',
+                'place_of_residence': 'Moscow, Russia',
+                'profession': 'Medic',
+                'id_document_photo': photo,
+                'bill_photo': bill
+            })
+
+        self.assertEqual(KYC.objects.count(), 1)
+        kyc = KYC.objects.first()
+        self.assertEqual(kyc.investor, self.get_investor())
+
+        self.assertEqual(response.status_code, 201)
+        self.assert_response_natural(response)
+
+        SendPreparedTxns()()
+
+        self.assertTrue(
+            self.crowdsale_contract.functions.hasRole(self.get_investor().eth_account, 'kycVerified').call()
+        )

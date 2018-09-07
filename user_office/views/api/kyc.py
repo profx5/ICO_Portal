@@ -1,13 +1,16 @@
 import mimetypes
 from django.utils.encoding import smart_text
+from django.conf import settings
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.parsers import MultiPartParser
 from rest_framework.serializers import ModelSerializer
 from rest_framework.response import Response
+from oslash import Left
 
 from .auth import KYCAndLoginPermission
 from user_office.models.kyc import KYC, KYCAttachment, KYC_ATTACHMENT_TYPE_CHOICES
 from user_office.services import CreateKYCTicket, UpdateKYCTicket
+from blockchain.ico.services import ApproveKYC
 
 
 class KYCAttachmentSerializer(ModelSerializer):
@@ -92,7 +95,13 @@ class KYCViewSet(GenericViewSet):
 
             self.process_attachments(kyc, request)
 
-            CreateKYCTicket()(kyc)
+            if settings.AUTO_APPROVE_KYC:
+                result = ApproveKYC()(kyc)
+
+                if isinstance(result, Left):
+                    return Response(result.value, status=500)
+            else:
+                CreateKYCTicket()(kyc)
 
             kyc.refresh_from_db()
 
