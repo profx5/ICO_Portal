@@ -6,7 +6,6 @@ import Button from './../common/Button';
 import FieldPassword from './../common/FieldPassword';
 
 import * as UserActions from './../../actions/UserActions';
-import * as UIActions from './../../actions/UIActions';
 
 
 class Password extends React.Component {
@@ -101,9 +100,6 @@ const mapStateToProps = () => ({
 const mapDispatchToProps = (dispatch) => ({
     changePassword(data) {
         dispatch(UserActions.changePasswordRequest(data))
-    },
-    closeOpenedTip() {
-        dispatch(UIActions.setOpenedTip(null))
     }
 })
 

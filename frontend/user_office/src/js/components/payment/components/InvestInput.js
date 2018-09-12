@@ -2,12 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 
 
+const InvestInput = ({value, type, onChangeHandler, header, currency}) => {
 
-const InvestInput = ({value, type, onChangeHandler, header, currency}) => (
-    <InputWrapper data-header={header} data-currency={currency}>
-        <Input value={value} type={type} onChange={onChangeHandler}/>
-    </InputWrapper>
-)
+    return (
+        <InputWrapper data-header={header} data-currency={currency}>
+            <Input value={value} type={type} onChange={onChangeHandler}/>
+        </InputWrapper>
+    )
+}
+
 
 export default InvestInput;
 

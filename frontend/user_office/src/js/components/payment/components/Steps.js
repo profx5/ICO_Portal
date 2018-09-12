@@ -1,28 +1,25 @@
 import React from 'react'
 import styled from 'styled-components';
 
-class Steps extends React.Component {
-    render() {
 
-        const { step } = this.props;
+const Steps = ({step}) => {
 
-        return (
-            <Wrapper>
-                <Step passed={1 <= step} to_next={2<=step}>
-                    <div className="Step__head">Step 1</div>
-                    <div className="Step__desc">Select payment method</div>
-                </Step>
-                <Step passed={2 <= step} to_next={3<=step}>
-                    <div className="Step__head">Step 2</div>
-                    <div className="Step__desc">Buying tokens</div>
-                </Step>
-                <Step passed={3 <= step}>
-                    <div className="Step__head">Step 3</div>
-                    <div className="Step__desc">Transaction mining</div>
-                </Step>
-            </Wrapper>
-        );
-    }
+    return (
+        <Wrapper>
+            <Step passed={1 <= step} to_next={2<=step}>
+                <div className="Step__head">Step 1</div>
+                <div className="Step__desc">Select payment method</div>
+            </Step>
+            <Step passed={2 <= step} to_next={3<=step}>
+                <div className="Step__head">Step 2</div>
+                <div className="Step__desc">Buying tokens</div>
+            </Step>
+            <Step passed={3 <= step}>
+                <div className="Step__head">Step 3</div>
+                <div className="Step__desc">Transaction mining</div>
+            </Step>
+        </Wrapper>
+    );
 }
 
 

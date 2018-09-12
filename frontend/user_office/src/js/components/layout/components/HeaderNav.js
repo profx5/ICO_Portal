@@ -11,10 +11,6 @@ const navigationItems = [
       return !location.pathname.startsWith('/user_office/referrals');
     }
   },
-  // {
-  //   location: '/user_office/referrals',
-  //   caption: 'Referrals',
-  // },
 ];
 
 const HeaderNav = () => (

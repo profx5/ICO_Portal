@@ -1,18 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import Utils from './../../utils/index';
+import Utils from './../../../utils/index';
 
 
-class ReferralRules extends React.Component {
+const ReferralRules = () => {
 
-    render() {
-        return (
-            <Wrapper>
-                <Title>Referral program rules</Title>
-                <Content>{Utils.lorem()}</Content>
-            </Wrapper>
-        )
-    }
+    return (
+        <Wrapper>
+            <Title>Referral program rules</Title>
+            <Content>{Utils.lorem()}</Content>
+        </Wrapper>
+    )
 }
 
 export default ReferralRules;

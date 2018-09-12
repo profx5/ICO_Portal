@@ -174,8 +174,6 @@ class DepositTable extends Component {
                         <Table>
                             <colgroup>
                                 <col width="9%"/>
-                                {/* <col width="89%"/>
-                                    <col width="2%"/> */}
                             </colgroup>
                             <tbody>
                                 {this._getTransferTxnHash(item) &&
@@ -205,27 +203,7 @@ class DepositTable extends Component {
                                  {this._get_calculations(item)}
                              </Block>
                             }
-
-                            {/* <Block>
-                                <Head>
-                                Referal bonuses
-                                </Head>
-                                <Content>
-                                -
-                                </Content>
-                                </Block>
-                                <Block>
-                                <Head>Withdrawal</Head>
-                                <Content>
-                                -
-                                </Content>
-                                </Block> */}
                         </FlexContainer>
-                        {/* <Divider/>
-                            <Right>
-                            Total: = <span>+1823.77 VERA</span>
-                            </Right>
-                            <br/> */}
                     </TxInfoWrapper>
                 </ContentWrapper>
             </AccordionContent>

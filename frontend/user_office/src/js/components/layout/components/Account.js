@@ -9,97 +9,84 @@ import exclaimIcon from './../../../../img/icons/icon_exclaim.svg';
 import checkIcon from './../../../../img/check_mini_icon.svg';
 import walletIcon from './../../../../img/icons/icon_wallet.svg';
 
-class Account extends React.Component {
+const Account = ({
+    email, tokensAmount,
+    isDropdownAccountOpen,
+    dropdownAccountClickHandler,
+    stepOnePassed, stepTwoPassed, stepThreePassed,
+    stepsPassed, showSetAccountPopup, showSetAccount
+}) => {
 
-    handleClickOutside = evt => {
-        const {dropdownAccountClickHandler, isDropdownAccountOpen} = this.props;
-        if (isDropdownAccountOpen) {
-            dropdownAccountClickHandler();
-        }
-    };
+    return (
+        <InfoWrapper>
+            <Balance>
+                <img src={walletIcon}/>
+                <p>{(tokensAmount / 10 ** 18).toFixed(2)} <span>OGD</span></p>
+            </Balance>
 
-    render = () => {
-        const {
-            email, tokensAmount,
-            isDropdownAccountOpen,
-            dropdownAccountClickHandler,
-            stepOnePassed, stepTwoPassed, stepThreePassed,
-            stepsPassed, showSetAccountPopup, showSetAccount
-        } = this.props;
-
-        return (
-            <InfoWrapper>
-                <Balance>
-                    <img src={walletIcon}/>
-                    <p>{(tokensAmount / 10 ** 18).toFixed(2)} <span>OGD</span></p>
-                </Balance>
-
-                <AccountInfo>
-                    <AccountInfoText className="DropdownAccountTrigger" onClick={dropdownAccountClickHandler}>
-                        <Steps>Steps completed: <span>{stepsPassed}/3</span></Steps>
-                        <UserImg approved={stepsPassed === 3}/>
-                        <ArrowImg up={isDropdownAccountOpen} src={arrowImg}/>
-                    </AccountInfoText>
-                    {isDropdownAccountOpen &&
-                    <DropdownAccount className="DropdownAccount" id='modal-dropdown'>
-                      
-                      
-                        <StepsList>
-                            <StepsListItem passed={stepOnePassed}
-                                           onClick={!stepOnePassed ? showSetAccountPopup : undefined}>1.&nbsp;&nbsp;Provide
-                                your ETH address</StepsListItem>
-                            <StepsListItem passed={stepOnePassed ? stepTwoPassed : false}>
-                                {stepOnePassed &&
-                                <Link to='/user_office/verification/'>2.&nbsp;&nbsp;Submit KYC</Link>
-                                }
-                                {!stepOnePassed &&
-                                <span onClick={showSetAccount}>2.&nbsp;&nbsp;Submit KYC</span>
-                                }
-                            </StepsListItem>
-                            <StepsListItem passed={stepTwoPassed ? stepThreePassed : false}><Link to='/user_office/payment/'>3.&nbsp;&nbsp;Buy
-                                tokens</Link></StepsListItem>
-                        </StepsList>
-                     
-                     
-                        <EmailInfo>
-                            <div className="text">Your profile:</div>
-                            <div className="email">{email}</div>
-                        </EmailInfo>
-                        <NavList>
-                            <NavListItem onClick={dropdownAccountClickHandler}>
-                                <Link to="/user_office/settings">Account settings</Link>
-                            </NavListItem>
-                            <NavListItem onClick={dropdownAccountClickHandler}>
-                                {stepOnePassed &&
-                                <Link to="/user_office/verification">Verification</Link>
-                                }
-                                {!stepOnePassed &&
-                                <span onClick={showSetAccount}>Verification</span>
-                                }
-                            </NavListItem>
-                        </NavList>
-                        <LogoutLink href='/logout/'>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20">
-                                <g fill="#858B91" fillRule="nonzero" stroke="#979797" strokeWidth=".5">
-                                    <path
-                                        d="M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z"/>
-                                    <path
-                                        d="M17.8455 9.6131L14.5006 6.16c-.2066-.2133-.538-.2133-.7446 0s-.2066.5554 0 .7687l2.4483 2.5275H5.5263c-.2924 0-.5263.2414-.5263.5433 0 .3018.234.5433.5263.5433h10.678l-2.4483 2.5275c-.2066.2133-.2066.5554 0 .7687.1014.1047.2378.161.3704.161a.5057.5057 0 0 0 .3703-.161l3.345-3.4531c.2104-.2174.2104-.5635.0038-.7728z"/>
-                                </g>
-                            </svg>
-                            Log out
-                        </LogoutLink>
-                    </DropdownAccount>
-                    }
-                </AccountInfo>
-            </InfoWrapper>
-        )
-    }
-
-
+            <AccountInfo>
+                <AccountInfoText className="DropdownAccountTrigger" onClick={dropdownAccountClickHandler}>
+                    <Steps>Steps completed: <span>{stepsPassed}/3</span></Steps>
+                    <UserImg approved={stepsPassed === 3}/>
+                    <ArrowImg up={isDropdownAccountOpen} src={arrowImg}/>
+                </AccountInfoText>
+                {isDropdownAccountOpen &&
+                <DropdownAccount className="DropdownAccount" id='modal-dropdown'>
+                    
+                    
+                    <StepsList>
+                        <StepsListItem passed={stepOnePassed}
+                                        onClick={!stepOnePassed ? showSetAccountPopup : undefined}>1.&nbsp;&nbsp;Provide
+                            your ETH address</StepsListItem>
+                        <StepsListItem passed={stepOnePassed ? stepTwoPassed : false}>
+                            {stepOnePassed &&
+                            <Link to='/user_office/verification/'>2.&nbsp;&nbsp;Submit KYC</Link>
+                            }
+                            {!stepOnePassed &&
+                            <span onClick={showSetAccount}>2.&nbsp;&nbsp;Submit KYC</span>
+                            }
+                        </StepsListItem>
+                        <StepsListItem passed={stepTwoPassed ? stepThreePassed : false}><Link to='/user_office/payment/'>3.&nbsp;&nbsp;Buy
+                            tokens</Link></StepsListItem>
+                    </StepsList>
+                    
+                    
+                    <EmailInfo>
+                        <div className="text">Your profile:</div>
+                        <div className="email">{email}</div>
+                    </EmailInfo>
+                    <NavList>
+                        <NavListItem onClick={dropdownAccountClickHandler}>
+                            <Link to="/user_office/settings">Account settings</Link>
+                        </NavListItem>
+                        <NavListItem onClick={dropdownAccountClickHandler}>
+                            {stepOnePassed &&
+                            <Link to="/user_office/verification">Verification</Link>
+                            }
+                            {!stepOnePassed &&
+                            <span onClick={showSetAccount}>Verification</span>
+                            }
+                        </NavListItem>
+                    </NavList>
+                    <LogoutLink href='/logout/'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20">
+                            <g fill="#858B91" fillRule="nonzero" stroke="#979797" strokeWidth=".5">
+                                <path
+                                    d="M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z"/>
+                                <path
+                                    d="M17.8455 9.6131L14.5006 6.16c-.2066-.2133-.538-.2133-.7446 0s-.2066.5554 0 .7687l2.4483 2.5275H5.5263c-.2924 0-.5263.2414-.5263.5433 0 .3018.234.5433.5263.5433h10.678l-2.4483 2.5275c-.2066.2133-.2066.5554 0 .7687.1014.1047.2378.161.3704.161a.5057.5057 0 0 0 .3703-.161l3.345-3.4531c.2104-.2174.2104-.5635.0038-.7728z"/>
+                            </g>
+                        </svg>
+                        Log out
+                    </LogoutLink>
+                </DropdownAccount>
+                }
+            </AccountInfo>
+        </InfoWrapper>
+    )
 }
 
-export default onClickOutside(Account);
+export default Account;
 
 
 const InfoWrapper = styled.div`

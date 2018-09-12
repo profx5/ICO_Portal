@@ -8,15 +8,6 @@ import Password from './Password';
 
 class Settings extends React.Component {
 
-    /* onSubmitHandler = (event) => {
-     *     event.preventDefault();
-
-     *     const data = new FormData(event.target);
-
-     *     this.props.submitForm(data);
-     * }*/
-
-
     render() {
 
         return (

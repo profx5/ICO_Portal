@@ -7,7 +7,6 @@ import FieldText from './../common/FieldText';
 import FieldTextSpan from './../common/FieldTextSpan';
 import Button from './../common/Button';
 
-import * as KYCActions from './../../actions/KYCActions';
 import * as UserActions from './../../actions/UserActions';
 import * as UIActions from './../../actions/UIActions';
 
@@ -107,9 +106,6 @@ const mapStateToProps = ({user, UI}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    updateKycData() {
-        dispatch(KYCActions.submitKYCRequest())
-    },
     changeEmailRequest(data) {
         dispatch(UserActions.changeEmailRequest(data))
     },

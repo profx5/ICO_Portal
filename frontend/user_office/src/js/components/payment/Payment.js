@@ -8,7 +8,7 @@ import PaymentStepOne from './PaymentStepOne';
 import PaymentStepTwo from './PaymentStepTwo';
 import PaymentStepThree from './PaymentStepThree';
 import CurrenciesPopup from './CurrenciesPopup';
-import Steps from './Steps';
+import Steps from './components/Steps';
 
 
 class Payment extends React.Component {

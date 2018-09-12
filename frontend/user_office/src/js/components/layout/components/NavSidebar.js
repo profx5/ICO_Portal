@@ -1,27 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Nav from './components/Nav';
+import Nav from './Nav';
 
 
-class NavSidebar extends React.Component {
+const NavSidebar = ({children}) => {
 
-    render() {
-        return (
+    return (
 
-            <Sidebar>
-                <Nav />
-            </Sidebar>            
-        );
-    }
+        <Sidebar>
+            {children}
+        </Sidebar>            
+    );
 }
 
 
 export default NavSidebar;
 
 
-
-// STYLES
 
 const Sidebar = styled.aside`
 

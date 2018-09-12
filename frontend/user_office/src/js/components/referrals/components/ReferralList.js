@@ -1,33 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 
-class ReferralList extends React.Component {
+const ReferralList = () => {
 
-    render() {
-      return (
-            <Wrapper>
-                <Title>Your referrals</Title>
-                <Table>
-                    <Header>
-                        <Time>Date and time</Time>
-                        <Status>Status</Status>
-                    </Header>
-                    <Row>
-                        <Time>27.04.2018 15:44</Time>
-                        <Status completed>Completed</Status>
-                    </Row>
-                    <Row>
-                        <Time>27.04.2018 15:44</Time>
-                        <Status pending>Pending</Status>
-                    </Row>
-                    <Row>
-                        <Time>27.04.2018 15:44</Time>
-                        <Status failure>Failure</Status>
-                    </Row>
-                </Table>
-            </Wrapper>
-        )
-    }
+    return (
+        <Wrapper>
+            <Title>Your referrals</Title>
+            <Table>
+                <Header>
+                    <Time>Date and time</Time>
+                    <Status>Status</Status>
+                </Header>
+                <Row>
+                    <Time>27.04.2018 15:44</Time>
+                    <Status completed>Completed</Status>
+                </Row>
+                <Row>
+                    <Time>27.04.2018 15:44</Time>
+                    <Status pending>Pending</Status>
+                </Row>
+                <Row>
+                    <Time>27.04.2018 15:44</Time>
+                    <Status failure>Failure</Status>
+                </Row>
+            </Table>
+        </Wrapper>
+    )
 }
 
 export default ReferralList;

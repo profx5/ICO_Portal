@@ -71,14 +71,8 @@ const mapDispatchToProps = (dispatch) => ({
     setInvestCurrencyRate(payload) {
         dispatch(CurrencyActions.setInvestCurrencyRate(payload))
     },
-    spreadVisibleCards(payload) {
-        dispatch(CurrencyActions.spreadVisibleCards(payload))
-    },
     showPopup() {
         dispatch(UIActions.showCurrenciesPopup())
-    },
-    updateCurrencies() {
-        dispatch(CurrencyActions.getCurrenciesRequest())
     }
 });
 

@@ -120,6 +120,10 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header))
 
+
+// STYLES ——————————————————————————————————————————————————————————————————
+
+
 const VeraLogo = styled(Link)`
     width: 98px;
     height: 45px;

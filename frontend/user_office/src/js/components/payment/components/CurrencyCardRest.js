@@ -1,20 +1,18 @@
 import React from 'react'
 import styled from 'styled-components';
 
-class CurrencyCard extends React.Component {
-    render() {
 
-        let {className, name, icon, rate, clickHandler} = this.props;
-        rate = rate > 0.01 ? rate.toFixed(2) : rate.toFixed(4)
+const CurrencyCard = ({className, name, icon, rate, clickHandler}) => {
 
-        return (
-            <Card onClick={clickHandler} className={className}>
-                <span className="currency-name">{name}</span>
-                <span className={`${icon}-alt`}></span>
-                <span className="currency-rate">{`${rate} $`}</span>
-            </Card>
-        )
-    }
+    let currencyRate = rate > 0.01 ? rate.toFixed(2) : rate.toFixed(4)
+
+    return (
+        <Card onClick={clickHandler} className={className}>
+            <span className="currency-name">{name}</span>
+            <span className={`${icon}-alt`}></span>
+            <span className="currency-rate">{`${currencyRate} $`}</span>
+        </Card>
+    )
 }
 
 export default CurrencyCard;
