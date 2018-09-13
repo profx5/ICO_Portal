@@ -80,9 +80,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(ICOProgress)
 
 
-//———————————————————————————————————————————————————————————————————————————————
-
-
 const Wrapper = styled.div`
     flex: 1;
     height: auto;
