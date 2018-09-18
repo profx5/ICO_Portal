@@ -10,6 +10,7 @@ import {saga as UserSaga} from './js/sagas/UserSagas'
 import {saga as CurrencySaga} from './js/sagas/CurrencySagas'
 import {saga as PhasesSaga} from './js/sagas/PhasesSagas'
 import {saga as TicketsSagas} from "./js/sagas/TicketsSagas";
+import {saga as UISagas} from "./js/sagas/UISagas";
 
 export default function* rootSaga() {
     yield all([
@@ -22,6 +23,7 @@ export default function* rootSaga() {
         InvestSaga(),
         CurrencySaga(),
         PhasesSaga(),
-        TicketsSagas()
+        TicketsSagas(),
+        UISagas()
     ])
 }

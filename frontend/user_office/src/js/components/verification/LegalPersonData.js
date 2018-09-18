@@ -71,7 +71,7 @@ class LegalPersonData extends React.Component {
 
     render() {
 
-        const {uploadedUserPhoto, uploadPhoto, removePhoto, uploadOnClickHandler} = this.props;
+        const {uploadOnClickHandler} = this.props;
 
         return (
             <Wrapper className="Verification__personData">

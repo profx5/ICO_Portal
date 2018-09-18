@@ -15,6 +15,7 @@ import {TimerReducer} from './TimerReducer.js';
 import {UIStateReducer} from './UIStateReducer.js';
 import {MetamaskReducer} from './MetamaskReducer.js';
 import {TicketsReducer} from "./TicketReducer.js";
+import {FilesReducer} from "./FilesReducer.js";
 import { routerReducer } from 'react-router-redux'
 
 const reducers = combineReducers({
@@ -33,7 +34,8 @@ const reducers = combineReducers({
     Metamask: MetamaskReducer,
     form: formReducer,
     router: routerReducer,
-    tickets: TicketsReducer
+    tickets: TicketsReducer,
+    Files: FilesReducer
 })
 
 export default reducers;

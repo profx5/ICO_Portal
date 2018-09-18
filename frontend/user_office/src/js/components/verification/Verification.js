@@ -183,7 +183,6 @@ class Verification extends React.Component {
                             </g>
                         </svg>
                     </div>
-
                 </div>
             `);
     }
