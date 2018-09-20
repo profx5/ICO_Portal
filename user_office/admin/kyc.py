@@ -84,7 +84,7 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
         if obj.waiting:
             actions.append('decline_kyc')
 
-            if obj.investor.eth_account != '':
+            if obj.investor.eth_account != '' and not obj.mining:
                 actions.append('approve_kyc')
 
         if obj.declined:
