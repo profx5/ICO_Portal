@@ -9,6 +9,8 @@ TRANSACTION_STATE_CHOICES = (('SENT', 'Sent'),
                              ('PREPARED', 'Prepared'),
                              ('FAILED', 'Failed'))
 
+TRANSACTION_TYPE_CHOICES = [('PASS_KYC', 'pass kyc')]
+
 
 class Transaction(models.Model):
     id = models.AutoField(primary_key=True)
@@ -33,6 +35,14 @@ class Transaction(models.Model):
 
     created_at = models.DateTimeField(default=datetime.utcnow)
     txn_id = models.UUIDField(default=uuid.uuid4)
+
+    txn_type = models.CharField(
+        max_length=10,
+        blank=True,
+        null=True,
+        choices=TRANSACTION_TYPE_CHOICES,
+        default=None
+    )
 
     objects = models.Manager()
 
