@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import ReferralInfo from './ReferralInfo';
-import ReferralList from './ReferralList';
-import ReferralRules from "./ReferralRules";
+import ReferralList from './components/ReferralList';
+import ReferralRules from "./components/ReferralRules";
 
 
 class ReferralTab extends React.Component {

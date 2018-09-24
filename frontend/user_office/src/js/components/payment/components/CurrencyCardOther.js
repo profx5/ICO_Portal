@@ -1,31 +1,28 @@
 import React from 'react'
 import styled from 'styled-components';
 
-class CurrencyCard extends React.Component {
-    render() {
+const CurrencyCard = ({rate, investCurrency, clickHandler, restCurrencies, disabled}) => {
 
-        let {rate, investCurrency, clickHandler, restCurrencies} = this.props;
-        rate = rate > 0.01 ? rate.toFixed(2) : rate.toFixed(4)
-        let selectedRestCode;
+    let currencyRate = rate > 0.01 ? rate.toFixed(2) : rate.toFixed(4)
+    let selectedRestCode;
 
-        restCurrencies.forEach(item => {
-            if (investCurrency === item.code) selectedRestCode = item.code;
-        })
+    restCurrencies.forEach(item => {
+        if (investCurrency === item.code) selectedRestCode = item.code;
+    })
 
-        return (
-            <Card disabled={this.props.disabled} onClick={clickHandler} className={selectedRestCode ? 'active' : ''}>
-                <span className={selectedRestCode ? `icon-${selectedRestCode}-alt` : 'icon-other'}></span>
-                <span className="currency-name">{selectedRestCode ? investCurrency : 'Other Crypto'}</span>
-                <span className="currency-rate">{selectedRestCode ? `${rate} $` : ''}&nbsp;</span>
-                {selectedRestCode &&
-                    <React.Fragment>
-                        <span className="CurrencyCard_head">Other crypto</span>
-                        <span className="CurrencyCard_desc">Click to select another<br/>crypto as a payment method</span>
-                    </React.Fragment>
-                }
-            </Card>
-        )
-    }
+    return (
+        <Card disabled={disabled} onClick={clickHandler} className={selectedRestCode ? 'active' : ''}>
+            <span className={selectedRestCode ? `icon-${selectedRestCode}-alt` : 'icon-other'}></span>
+            <span className="currency-name">{selectedRestCode ? investCurrency : 'Other Crypto'}</span>
+            <span className="currency-rate">{selectedRestCode ? `${currencyRate} $` : ''}&nbsp;</span>
+            {selectedRestCode &&
+                <React.Fragment>
+                    <span className="CurrencyCard_head">Other crypto</span>
+                    <span className="CurrencyCard_desc">Click to select another<br/>crypto as a payment method</span>
+                </React.Fragment>
+            }
+        </Card>
+    )
 }
 
 export default CurrencyCard;

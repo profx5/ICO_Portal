@@ -13,7 +13,6 @@ import * as ICOInfoActions from './../../actions/ICOInfoActions';
 import dotsIcon from './../../../img/dots.svg';
 
 
-
 class ICOProgress extends React.Component {
 
     componentDidUpdate() {
@@ -59,7 +58,6 @@ class ICOProgress extends React.Component {
         )
     }
 };
-
 
 const mapStateToProps = ({Phase, ICOInfo, Timer}) => ({
 

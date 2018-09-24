@@ -1,20 +1,17 @@
 import React from 'react'
 import styled from 'styled-components';
 
-class CurrencyCard extends React.Component {
-    render() {
+const CurrencyCard = ({className, name, icon, rate, clickHandler, disabled}) => {
 
-        let {className, name, icon, rate, clickHandler} = this.props;
-        rate = rate > 0.01 ? rate.toFixed(2) : rate.toFixed(4)
+    rate = rate > 0.01 ? rate.toFixed(2) : rate.toFixed(4)
 
-        return (
-            <Card disabled={this.props.disabled} onClick={clickHandler} className={className}>
-                <span className="currency-name">{name}</span>
-                <span className={`${icon}-alt`}></span>
-                <span className="currency-rate">{`${rate} $`}&nbsp;</span>
-            </Card>
-        )
-    }
+    return (
+        <Card disabled={disabled} onClick={clickHandler} className={className}>
+            <span className="currency-name">{name}</span>
+            <span className={`${icon}-alt`}></span>
+            <span className="currency-rate">{`${rate} $`}&nbsp;</span>
+        </Card>
+    )
 }
 
 export default CurrencyCard;
@@ -44,7 +41,6 @@ const Card = styled.div`
             transform: scale(1.05);
         }
     }
-
     &.active {
         box-shadow: 0 2px 25px 0 rgba(63, 123, 244, 0.33);
         transform: scale(1.05);

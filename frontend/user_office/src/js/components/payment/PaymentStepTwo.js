@@ -45,7 +45,7 @@ class PaymentStepTwo extends React.Component {
     };
 
     sendTransactionInit = () => {
-        const {investCurrency, crowdsaleAddress, investAmount, eth_account, sendTransactionInit} = this.props;
+        const {crowdsaleAddress, investAmount, eth_account, sendTransactionInit} = this.props;
 
         sendTransactionInit({senderAccount: eth_account, receiverAccount: crowdsaleAddress, value: investAmount});
     };

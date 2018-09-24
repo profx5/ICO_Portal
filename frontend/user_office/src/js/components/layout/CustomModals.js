@@ -11,8 +11,7 @@ class CustomModals extends React.Component {
 
     showSetAccountPopupAndCloseTip = e => {
         e.preventDefault();
-        const {setOpenedTip, showSetAccountPopup} = this.props;
-        setOpenedTip(null);
+        const {showSetAccountPopup} = this.props;
         showSetAccountPopup();
     };
 

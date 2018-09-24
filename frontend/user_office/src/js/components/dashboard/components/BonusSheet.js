@@ -2,34 +2,26 @@ import React from 'react'
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 
-class BonusSheet extends React.Component{
-    render() {
-        return (
-            <Wrapper>
-                <Head>Progressive bonus</Head>
-                <TableWrapper>
-                    <div className="row">
-                        <div className="part">Purchases from $150 to $999</div>
-                        <div className="part">Get 20% bonus!</div>
-                    </div>
-                    <div className="row">
-                        <div className="part">Purchases with the value of $1 000 +</div>
-                        <div className="part">Get special bonus of 40%!</div></div>
-                </TableWrapper>
-            </Wrapper>
-        )
-    }
+
+const BonusSheet = () => {
+    return (
+        <Wrapper>
+            <Head>Progressive bonus</Head>
+            <TableWrapper>
+                <div className="row">
+                    <div className="part">Purchases from $150 to $999</div>
+                    <div className="part">Get 20% bonus!</div>
+                </div>
+                <div className="row">
+                    <div className="part">Purchases with the value of $1 000 +</div>
+                    <div className="part">Get special bonus of 40%!</div></div>
+            </TableWrapper>
+        </Wrapper>
+    )
 }
 
-const mapStateToProps = ({user}) => ({
+export default BonusSheet;
 
-})
-
-const mapDispatchToProps = (dispatch) => ({
-
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(BonusSheet)
 
 const Wrapper = styled.div`
     flex: 1;

@@ -19,7 +19,6 @@ class CurrenciesPopup extends React.Component {
 
         return data.map((item, index) => {
             let {code, rate} = item;
-            const {altInvestCurrencyRate} = this.props;
 
             if (index < 4) return;
 
@@ -70,8 +69,7 @@ const mapStateToProps = ({Currencies}) => ({
     currencies: Currencies.get('currencies'),
     investCurrency: Currencies.get('investCurrency'),
     investCurrencyRate: Currencies.get('investCurrencyRate'),
-    altInvestCurrency: Currencies.get('investCurrency'),
-    altInvestCurrencyRate: Currencies.get('investCurrencyRate'),
+    altInvestCurrency: Currencies.get('investCurrency')
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -6,7 +6,8 @@ import {withRouter} from 'react-router';
 import $ from 'jquery';
 import history from './../../utils/history';
 
-import NavSidebar from './NavSidebar';
+import NavSidebar from './components/NavSidebar';
+import Nav from './components/Nav';
 import Header from './Header';
 
 import Dashboard from './../dashboard/Dashboard';
@@ -28,7 +29,7 @@ import * as UIActions from './../../actions/UIActions';
 class Layout extends Component {
 
     componentDidMount() {
-        const {closeOpenedTip, hideAccountDropdown, hideModal} = this.props;
+        const {hideAccountDropdown, hideModal} = this.props;
 
         $(document).click(function(e) {
             if ($(e.target).hasClass('ModalWrapper')) {
@@ -47,7 +48,9 @@ class Layout extends Component {
             <Wrapper>
                 <Header/>
                 <MainWrapper>
-                    <NavSidebar/>
+                    <NavSidebar>
+                        <Nav/>
+                    </NavSidebar>
                     <Switch history={history}>
                         <Route exact path="/user_office" component={Dashboard}/>
                         <Route path="/user_office/transactions" component={Transactions}/>
@@ -90,6 +93,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));
+
 
 const Wrapper = styled.div`
     width: 100%;

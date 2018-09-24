@@ -6,7 +6,7 @@ import moment from "moment/moment";
 import $ from "jquery";
 
 import Button from "./../common/Button";
-import Comment from './Comment';
+import Comment from './components/Comment';
 
 import * as UIActions from './../../actions/UIActions';
 import * as TicketActions from './../../actions/TicketActions';

@@ -2,43 +2,40 @@ import React, {Component} from "react";
 import styled from 'styled-components';
 import moment from "moment/moment";
 
-import iconUser from './../../../img/user.svg';
+import iconUser from './../../../../img/user.svg';
 
 
-class Comment extends Component {
+const Comment = ({comment}) => {
 
-    render() {
-        const {comment} = this.props;
-        return (
-            <CommentWrapper key={comment.id}>
-                <FlexContainer>
-                    <FlexItem width={7}>
-                        <IconImg src={iconUser}/>
-                    </FlexItem>
-                    <FlexItem width={93}>
-                        <div className='who'>{comment.sender}</div>
-                        <div className='comment'>{comment.comment}</div>
-                        {comment.attachments.length > 0 &&
-                        <FilesWrapper>
-                            <div>Attached files: {comment.attachments.length}</div>
-                            {comment.attachments.map((item, index) => {
-                                return (
-                                    <FileWrapper key={index}>
-                                        <div>
-                                            <a target='_blank' href={item.file}>{item.filename}</a>
-                                        </div>
-                                    </FileWrapper>
-                                )
-                            })}
-                            <Clearfix/>
-                        </FilesWrapper>
-                        }
-                        <div className='meta'>{moment(comment.date).format('DD MMMM YYYY')}</div>
-                    </FlexItem>
-                </FlexContainer>
-            </CommentWrapper>
-        )
-    }
+    return (
+        <CommentWrapper key={comment.id}>
+            <FlexContainer>
+                <FlexItem width={7}>
+                    <IconImg src={iconUser}/>
+                </FlexItem>
+                <FlexItem width={93}>
+                    <div className='who'>{comment.sender}</div>
+                    <div className='comment'>{comment.comment}</div>
+                    {comment.attachments.length > 0 &&
+                    <FilesWrapper>
+                        <div>Attached files: {comment.attachments.length}</div>
+                        {comment.attachments.map((item, index) => {
+                            return (
+                                <FileWrapper key={index}>
+                                    <div>
+                                        <a target='_blank' href={item.file}>{item.filename}</a>
+                                    </div>
+                                </FileWrapper>
+                            )
+                        })}
+                        <Clearfix/>
+                    </FilesWrapper>
+                    }
+                    <div className='meta'>{moment(comment.date).format('DD MMMM YYYY')}</div>
+                </FlexItem>
+            </FlexContainer>
+        </CommentWrapper>
+    )
 
 }
 

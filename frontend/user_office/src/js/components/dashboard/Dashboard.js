@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import ICOProgress from './ICOProgress';
-import BonusSheet from './BonusSheet';
+import BonusSheet from './components/BonusSheet';
 
 import Banner from './../../../img/banner.jpg';
 
@@ -19,6 +19,7 @@ const Dashboard = (props) => {
 };
 
 export default Dashboard;
+
 
 const Wrapper = styled.div`
     flex: 1;
