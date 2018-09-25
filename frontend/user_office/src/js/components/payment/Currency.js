@@ -79,7 +79,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Currency)
 
-
 const Wrapper = styled.div`
     flex: 1;
     height: auto;

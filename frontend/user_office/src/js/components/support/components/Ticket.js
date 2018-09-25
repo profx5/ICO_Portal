@@ -38,6 +38,7 @@ const Ticket = ({email, id, status, title, lastReplyBy, lastReplyAt, created, on
     )
 }
 
+
 export default Ticket;
 
 const StyledTicket = styled.tr`

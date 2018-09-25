@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
+
 const KYCTabs = ({clickHandler, activeTab}) => {
     return (
         <Wrapper>
@@ -9,6 +10,7 @@ const KYCTabs = ({clickHandler, activeTab}) => {
         </Wrapper>
     )
 }
+
 
 export default KYCTabs;
 

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
+
 const VerificationState = ({kycState,kycTicketId}) => {
     return (
         <Wrapper>
@@ -29,7 +30,6 @@ const VerificationState = ({kycState,kycTicketId}) => {
         </Wrapper>
     )
 }
-
 
 
 export default VerificationState;

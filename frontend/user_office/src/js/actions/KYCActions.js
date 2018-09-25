@@ -1,7 +1,6 @@
 import { createAction } from 'redux-act';
 
 
-
 export const showForm = createAction('SHOW_KYC_FORM');
 export const hideForm = createAction('HIDE_KYC_FORM');
 

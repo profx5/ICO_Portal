@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+
 const Timer = ({countdownTime}) => {
 
     return (
@@ -15,6 +16,7 @@ const Timer = ({countdownTime}) => {
         </React.Fragment>
     )
 }
+
 
 export default Timer;
 

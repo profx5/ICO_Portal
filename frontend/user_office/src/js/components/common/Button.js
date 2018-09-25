@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Button = ({text, className, clickHandler, submit, disabled, icon, attach, transparent}) => {
+const Button = ({text, className, clickHandler, submit, disabled, icon, style, attach, transparent}) => {
     const opts = {
         className: className,
         onClick: clickHandler,
@@ -106,6 +106,7 @@ const Btn = styled.button`
         transform: translateY(-50%);
         path {
             transition: all .25s ease;
+            fill: ${props => !props.transparent && '#ffffff'};
         }
     }
 `;

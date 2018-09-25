@@ -10,6 +10,11 @@ import * as UIActions from './../../actions/UIActions';
 
 class PaymentStepOne extends React.Component {
 
+    componentDidMount() {
+        const { setStep } = this.props;
+        setStep(1);
+    }
+
     render() {
 
         return (
@@ -19,11 +24,6 @@ class PaymentStepOne extends React.Component {
                 <CurrencyCalculator/>
             </Wrapper>
         )
-    }
-
-    componentDidMount = () => {
-        const { setStep } = this.props;
-        setStep(1);
     }
 };
 
@@ -37,7 +37,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentStepOne)
-
 
 const Wrapper = styled.div`
     flex: 1;

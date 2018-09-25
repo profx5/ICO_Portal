@@ -3,7 +3,6 @@ import * as actions from './../actions/KYCActions';
 import {Map} from 'immutable'
 
 
-
 const initialState = Map({
     state: "DECLINED",
     user_photo: null,

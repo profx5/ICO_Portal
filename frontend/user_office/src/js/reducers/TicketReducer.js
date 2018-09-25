@@ -3,14 +3,12 @@ import * as actions from './../actions/TicketActions';
 import {List, Map} from 'immutable';
 
 
-
 const initialState = Map({
     results: List(),
     isTicketsLoading: false,
     selectedTicket: null,
     isSelectedTicketLoading: false
 });
-
 
 
 export const TicketsReducer = createReducer({

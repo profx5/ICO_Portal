@@ -85,6 +85,7 @@ class Header extends React.Component {
     }
 }
 
+
 const mapStateToProps = ({user, ICOInfo, KYC, Invest, UI}) => ({
     email: user.get('email'),
     decimals: ICOInfo.get('token_decimals'),
@@ -118,12 +119,7 @@ const mapDispatchToProps = (dispatch) => ({
     }
 })
 
-
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header))
-
-
-// STYLES ——————————————————————————————————————————————————————————————————
-
 
 const VeraLogo = styled(Link)`
     width: 98px;

@@ -10,6 +10,7 @@ const initialState = Map({
     spreadedCurrencyCards: false
 });
 
+
 export const CurrencyReducer = createReducer({
     [actions.getCurrenciesRequest]: (state, payload) => state,
     [actions.getCurrenciesSuccess]: (state, payload) => {

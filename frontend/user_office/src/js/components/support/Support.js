@@ -11,6 +11,7 @@ import Comment from './components/Comment';
 
 import * as UIActions from './../../actions/UIActions';
 
+
 class Support extends React.Component {
 
     render() {
@@ -28,6 +29,7 @@ class Support extends React.Component {
     }
 }
 
+
 const mapStateToProps = ({tickets, UI}) => ({
     tickets: tickets.get('results'),
     selectedTicket: tickets.get('selectedTicket'),
@@ -39,7 +41,6 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(UIActions.changeActiveTab(payload))
     }
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Support)
 

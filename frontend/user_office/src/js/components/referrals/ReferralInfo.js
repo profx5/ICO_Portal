@@ -101,7 +101,6 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(mapDispatchToProps)(ReferralList);
 
-
 // FIXME that's A LOT of copypasting
 const Wrapper = styled.div`
     padding: 42px 30px 42px;

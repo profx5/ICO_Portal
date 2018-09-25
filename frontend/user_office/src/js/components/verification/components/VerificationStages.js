@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
+
 const VerificationStages = ({stages, boundSections, stageClickHandler}) => {
     return (
         <List>
@@ -10,7 +11,6 @@ const VerificationStages = ({stages, boundSections, stageClickHandler}) => {
         </List>
     )
 }
-
 
 
 export default VerificationStages;

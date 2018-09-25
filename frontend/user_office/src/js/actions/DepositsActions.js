@@ -1,7 +1,6 @@
 import { createAction } from 'redux-act';
 
 
-
 export const getDepositsRequest = createAction('GET_DEPOSITS_REQUEST');
 export const getDepositsSuccess = createAction('GET_DEPOSITS_SUCCESS');
 export const getDepositsFailed = createAction('GET_DEPOSITE_FAILED');

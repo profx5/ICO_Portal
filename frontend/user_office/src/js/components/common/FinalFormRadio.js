@@ -4,6 +4,7 @@ import { Field } from 'react-final-form';
 
 import iconCheck from './../../../img/icons/icon_check.svg';
 
+
 const FinalFormRadio = ({labelText, name, values, options}) => {
 
     function generateRadio(data, name) {
@@ -25,7 +26,6 @@ const FinalFormRadio = ({labelText, name, values, options}) => {
         </Wrapper>
     );
 }
-
 
 
 export default FinalFormRadio;

@@ -32,6 +32,7 @@ class Modal extends React.Component {
     }
 }
 
+
 const mapStateToProps = ({UI}) => ({
     modalOpened: UI.get('modalOpened'),
     modalHead: UI.get('modalHead'),

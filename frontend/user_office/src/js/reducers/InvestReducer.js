@@ -3,7 +3,6 @@ import * as actions from './../actions/InvestActions';
 import {Map} from 'immutable';
 
 
-
 const initialState = Map({
     investAmount: 0,
     USDAmount: 0,
@@ -11,7 +10,6 @@ const initialState = Map({
     isMetamaskEnabled: true,
     qrcode: ''
 })
-
 
 
 export const InvestReducer = createReducer({

@@ -138,6 +138,7 @@ class CurrencyCalculator extends React.Component {
     }
 };
 
+
 const mapStateToProps = ({Currencies, Invest, UI, KYC, user}) => ({
     investCurrency: Currencies.get('investCurrency'),
     investCurrencyRate: Currencies.get('investCurrencyRate'),
@@ -170,7 +171,6 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(UIActions.showModal(payload))
     }
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyCalculator);
 

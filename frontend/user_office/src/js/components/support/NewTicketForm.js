@@ -5,7 +5,6 @@ import $ from "jquery";
 
 import AttachedFile from './../common/AttachedFile';
 import Button from './../common/Button';
-// import AttachButton from './../common/AttachButton';
 
 import * as TicketActions from './../../actions/TicketActions';
 import * as FilesActions from './../../actions/FilesActions';
@@ -19,14 +18,6 @@ class NewTicketForm extends React.Component {
 
     componentWillUnmount() {
         $('body').unbind('change.newTicketFileUpload', this.uploadFileHandler)
-    }
-
-    onRemoveFileHandler = (id, event) => {
-        const {removeNewTicketFile} = this.props;
-        const $filesWrapper = $(event.currentTarget).closest('.files-container');
-
-        $($filesWrapper).find(`.file-input[id="${id}"]`).remove();
-        removeNewTicketFile(id);
     }
 
     renderAttachedFiles = () => {
@@ -72,6 +63,14 @@ class NewTicketForm extends React.Component {
         $newFileInput.click();
     }
 
+    onRemoveFileHandler = (id, event) => {
+        const {removeNewTicketFile} = this.props;
+        const $filesWrapper = $(event.currentTarget).closest('.files-container');
+
+        $($filesWrapper).find(`.file-input[id="${id}"]`).remove();
+        removeNewTicketFile(id);
+    }
+
     onSubmitHandler = (e) => {
         e.preventDefault();
         const data = new FormData(e.target);
@@ -104,6 +103,7 @@ class NewTicketForm extends React.Component {
     }
 }
 
+
 const mapStateToProps = ({tickets, user, Files}) => ({
     email: user.get('email'),
     newTicketFiles: Files.get('newTicketFiles')
@@ -120,7 +120,6 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(TicketActions.createNewTicket(payload))
     }
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewTicketForm)
 

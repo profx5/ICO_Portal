@@ -4,6 +4,7 @@ import {Field} from 'react-final-form';
 
 import iconCheck from './../../../img/icons/icon_check.svg';
 
+
 const FinalFormCheckbox = ({labelText, name, values, options, icon, handler, required}) => {
 
     function handle(handler, event) {

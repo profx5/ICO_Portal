@@ -1,7 +1,6 @@
 import { createAction } from 'redux-act';
 
 
-
 export const getBountiesRequest = createAction('GET_DEPOSITE_REQUEST');
 export const getBountiesSuccess = createAction('GET_DEPOSITE_SUCCESS');
 export const getBountiesFailed = createAction('GET_BOUNTIES_BALANCE_FAILED');

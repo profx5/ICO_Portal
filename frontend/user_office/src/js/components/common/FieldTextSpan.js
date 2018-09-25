@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
+
 const FieldTextSpan = ({labelText, value, children, id}) => {
 
     return (
@@ -13,7 +14,6 @@ const FieldTextSpan = ({labelText, value, children, id}) => {
         </Wrapper>
     );
 }
-
 
 
 export default FieldTextSpan;

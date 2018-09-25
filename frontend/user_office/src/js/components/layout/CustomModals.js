@@ -87,6 +87,7 @@ class CustomModals extends React.Component {
     }
 }
 
+
 const mapStateToProps = ({UI, KYC, Currencies, Invest, user}) => ({
     openedModalId: UI.get('openedModalId'),
     kycState: KYC.get('state'),

@@ -17,6 +17,7 @@ class NewTicket extends React.Component {
     }
 }
 
+
 const mapStateToProps = ({}) => ({
 
 });
@@ -24,7 +25,6 @@ const mapStateToProps = ({}) => ({
 const mapDispatchToProps = (dispatch) => ({
 
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewTicket)
 

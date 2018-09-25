@@ -1,7 +1,6 @@
 import { createAction } from 'redux-act';
 
 
-
 export const getTicketsRequest = createAction('GET_TICKETS_REQUEST');
 export const getTicketsSuccess = createAction('GET_TICKETS_SUCCESS');
 export const getTicketsFailed = createAction('GET_TICKETS_FAILED');

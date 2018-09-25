@@ -23,7 +23,6 @@ const FieldText = ({labelText, placeholder, options, name, value, disabled, type
 }
 
 
-
 export default FieldText;
 
 const Wrapper = styled.div`

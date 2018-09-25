@@ -14,6 +14,11 @@ import qrIcon from './../../../img/icon_qr_big.svg';
 
 class PaymentStepTwo extends React.Component {
 
+    componentDidMount() {
+        const {setStep} = this.props;
+        setStep(2);
+    }
+
     generateQRCode = (text) => {
         QRCode.toDataURL(text).then(url => {
             this.props.setQRCode(url);
@@ -71,7 +76,7 @@ class PaymentStepTwo extends React.Component {
                             <div className="head">Payment</div>
                             <div className="amount">
                                 {tokensAmountString}
-                                <span>&nbsp;Vera</span> &nbsp;
+                                <span>&nbsp;OGD</span> &nbsp;
                                 <span>=</span>&nbsp; {investAmount > 0 ? investAmount : '0'}
                                 <span>&nbsp;{investCurrency}</span>
                             </div>
@@ -213,11 +218,6 @@ class PaymentStepTwo extends React.Component {
             </Wrapper>
         )
     }
-
-    componentDidMount = () => {
-        const {setStep} = this.props;
-        setStep(2);
-    }
 };
 
 
@@ -244,7 +244,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentStepTwo)
-
 
 const Wrapper = styled.div`
     flex: 1;
@@ -410,7 +409,7 @@ const QrWrapper = styled.div`
     top: 0;
     right: 0;
     transform: translate(100px, calc(-100% - 30px));
-    zIndex: 1;
+    z-index: 1;
     padding-top: 30px;
     transition: all .28s ease;
     opacity: 0;

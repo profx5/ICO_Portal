@@ -17,8 +17,6 @@ const NavSidebar = ({children}) => {
 
 export default NavSidebar;
 
-
-
 const Sidebar = styled.aside`
 
     background: white;
