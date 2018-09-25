@@ -323,7 +323,7 @@ class TestKYCAutoApprove(EthTesterAPITestCase):
             'profession': 'Medic',
             'registration_date': None,
             'registration_number': None,
-            'state': 'APPROVED',
+            'state': 'MINING',
             'ticket': None,
             'type': 'NATURAL'
         })

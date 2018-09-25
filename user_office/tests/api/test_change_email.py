@@ -28,12 +28,10 @@ class TestChangeEmail(_Base):
         self.assertEqual(response.data, {'success': True})
 
         sent_mails = django.core.mail.outbox
+
         self.assertEqual(len(sent_mails), 1)
         self.assertEqual(sent_mails[0].to[0], self.email)
         self.assertEqual(sent_mails[0].subject, 'Change email')
-        self.assertEqual(sent_mails[0].body,
-                         f'To change your email to {self.new_email} follow this link '
-                         'http://localhost:8000/change_email/MTtub2Ryb2dAb25ncmlkLnBybw/4wh-d320ec9b6fcf3233767d/')
 
     def test_invalid_email(self):
         new_email = 'it_is_no_email'

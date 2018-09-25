@@ -6,6 +6,8 @@ import SupportTabs from './components/SupportTabs';
 import NewTicket from './NewTicket';
 import AllQuestions from './AllQuestions';
 import OpenedTicket from './OpenedTicket';
+import Button from "./../common/Button";
+import Comment from './components/Comment';
 
 import * as UIActions from './../../actions/UIActions';
 

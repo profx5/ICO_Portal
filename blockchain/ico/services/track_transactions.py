@@ -10,6 +10,7 @@ from ico_portal.utils.datetime import datetime
 from user_office.models import Transaction
 from blockchain.web3 import get_web3
 from ico_portal.utils.service_object import ServiceObject, service_call, transactional
+from user_office.signals import txn_mined
 
 
 class _Base(ServiceObject):
@@ -203,6 +204,7 @@ class TrackTransactions(_Base):
 
         try:
             txn_object.save()
+            txn_mined.send(Transaction, transaction=txn_object)
 
             return self.success(txn_object=txn_object,
                                 result=f'Mined with block_number={txn_data.blockNumber}')
