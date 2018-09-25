@@ -116,7 +116,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(PersonalInfo)
 
-
 const Wrapper = styled.div`
     flex: 1;
     height: auto;
@@ -141,7 +140,7 @@ const InputSet = styled.div`
     justify-content: space-between;
     align-items: flex-start;
     position: relative;
-    margin-bottom: 10px
+    margin-bottom: 10px;
 `;
 
 const InputWrapper = styled.div`
@@ -175,69 +174,4 @@ const IconCopy = styled.span`
     height: 20px;
     background: url(${copyIcon}) no-repeat center;
     background-size: contain;
-`;
-
-const ModalWrapper = styled.div`
-    height: 100vh;
-    width: 100vw;
-    background: rgba(1, 7, 29, 0.3);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99;
-    
-`;
-
-const Modal = styled.div`
-    position: absolute;
-    top: 10%;
-    left: 20%;
-    width: 60%;
-    border-radius: 4px;
-    background-color: white;
-    box-shadow: 0 9px 21px 0 rgba(173, 182, 217, 0.3);
-    z-index: 100;
-    max-height: 64vh;
-    overflow: hidden;
-    font-weight: normal;
-`;
-
-const ModalHeader = styled.div`
-    padding: 18px;
-    text-align: center;
-    line-height: 1.45;
-    height: 72px;
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-align: center;
-    color: #000000;
-    background-color: #f5f6fa
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-    & img {
-        position: absolute;
-        top: 26px;
-        right: 26px;
-        cursor: pointer;
-    }
-`;
-
-const ModalContent = styled.div`
-    padding: 32px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    text-align: justify;
-    font-size: 16px;
-    line-height: 1.44;
-    letter-spacing: 0.2px;
-    color: #0a0a0a;
-    overflow-y: auto;
-    max-height: 52.5vh;
-    & span {
-        font-weight: bold;
-    }
-    & p {
-        margin-bottom: 10px;
-    }
 `;

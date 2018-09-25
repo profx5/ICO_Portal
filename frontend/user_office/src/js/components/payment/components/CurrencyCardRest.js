@@ -15,6 +15,7 @@ const CurrencyCard = ({className, name, icon, rate, clickHandler}) => {
     )
 }
 
+
 export default CurrencyCard;
 
 const Card = styled.div`

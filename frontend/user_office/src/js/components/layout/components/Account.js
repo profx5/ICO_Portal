@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import onClickOutside from 'react-onclickoutside'
 
 import userPlaceholder from './../../../../img/user.svg';
 import arrowImg from './../../../../img/arrow-down.svg';
 import exclaimIcon from './../../../../img/icons/icon_exclaim.svg';
 import checkIcon from './../../../../img/check_mini_icon.svg';
 import walletIcon from './../../../../img/icons/icon_wallet.svg';
+
 
 const Account = ({
     email, tokensAmount,
@@ -86,8 +86,8 @@ const Account = ({
     )
 }
 
-export default Account;
 
+export default Account;
 
 const InfoWrapper = styled.div`
     display: flex;

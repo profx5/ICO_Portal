@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Utils from './../../utils/index';
 
 
-
 const AttachedFile = ({fileName, fileSize, id, removable, onRemoveHandler, style}) => {
     return (
         <Wrapper className="attached-file" id={id} style={style}>

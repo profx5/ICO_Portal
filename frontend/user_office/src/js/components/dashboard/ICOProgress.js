@@ -59,6 +59,7 @@ class ICOProgress extends React.Component {
     }
 };
 
+
 const mapStateToProps = ({Phase, ICOInfo, Timer}) => ({
 
     timerTime: Timer.get('timerTime'),
@@ -78,10 +79,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ICOProgress)
-
-
-//———————————————————————————————————————————————————————————————————————————————
-
 
 const Wrapper = styled.div`
     flex: 1;

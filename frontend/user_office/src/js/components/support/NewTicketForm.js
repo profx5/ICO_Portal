@@ -5,7 +5,6 @@ import $ from "jquery";
 
 import AttachedFile from './../common/AttachedFile';
 import Button from './../common/Button';
-// import AttachButton from './../common/AttachButton';
 
 import * as TicketActions from './../../actions/TicketActions';
 import * as FilesActions from './../../actions/FilesActions';

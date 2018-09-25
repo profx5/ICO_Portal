@@ -3,7 +3,6 @@ import * as actions from './../actions/BountiesBalanceActions';
 import {Map} from 'immutable'
 
 
-
 const initialState = Map({
     isBountiesBalanceLoading: false,
     currency: null,
@@ -20,7 +19,6 @@ const initialState = Map({
     }),
     transferIsLoading: false
 });
-
 
 
 export const BountiesBalanceReducer = createReducer({

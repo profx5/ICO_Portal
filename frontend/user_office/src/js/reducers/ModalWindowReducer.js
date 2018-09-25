@@ -3,11 +3,9 @@ import * as actions from './../actions/KYCActions';
 import {Map} from 'immutable'
 
 
-
 const initialState = Map({
     isModalOpened: false
 })
-
 
 
 export const ModalWindowReducer = createReducer({

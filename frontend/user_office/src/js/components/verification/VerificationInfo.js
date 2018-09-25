@@ -90,7 +90,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(VerificationInfo)
 
-
 const Wrapper = styled.div`
     margin-left: 38px;
     max-width: 315px;

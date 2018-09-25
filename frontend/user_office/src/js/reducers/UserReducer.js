@@ -3,7 +3,6 @@ import * as actions from './../actions/UserActions';
 import {Map} from 'immutable';
 
 
-
 const initialState = Map({
     "email": "",
     "eth_account": null,
@@ -13,7 +12,6 @@ const initialState = Map({
     "investment_threshold": 0,
     "state": "WAITING"
 });
-
 
 
 export const UserReducer = createReducer({

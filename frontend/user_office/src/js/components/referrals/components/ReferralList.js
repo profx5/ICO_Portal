@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+
 const ReferralList = () => {
 
     return (
@@ -28,8 +29,8 @@ const ReferralList = () => {
     )
 }
 
-export default ReferralList;
 
+export default ReferralList;
 
 // FIXME that's a lot of copypasting
 const Wrapper = styled.div`

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
+
 const FieldRadio = ({labelText, options}) => {
 
     function generateRadio(data) {
@@ -23,7 +24,6 @@ const FieldRadio = ({labelText, options}) => {
         </Wrapper>
     );
 }
-
 
 
 export default FieldRadio;

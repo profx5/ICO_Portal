@@ -50,8 +50,8 @@ const ProgressBar = ({children, raisedAmountNum}) => {
     )
 }
 
-export default ProgressBar;
 
+export default ProgressBar;
 
 const Wrapper = styled.div`
     border: 1px solid rgba(151,151,151,.2);

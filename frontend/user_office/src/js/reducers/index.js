@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import { reducer as formReducer } from 'redux-form';
-//reducers
+
 import {UserReducer} from './UserReducer';
 import {ICOInfoReducer} from './ICOInfoReducer';
 import {DepositsReducer} from './DepositsReducer';
@@ -17,6 +17,7 @@ import {MetamaskReducer} from './MetamaskReducer.js';
 import {TicketsReducer} from "./TicketReducer.js";
 import {FilesReducer} from "./FilesReducer.js";
 import { routerReducer } from 'react-router-redux'
+
 
 const reducers = combineReducers({
     user: UserReducer,
@@ -37,5 +38,6 @@ const reducers = combineReducers({
     tickets: TicketsReducer,
     Files: FilesReducer
 })
+
 
 export default reducers;

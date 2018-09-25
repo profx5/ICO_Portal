@@ -3,12 +3,10 @@ import * as actions from './../actions/FilesActions';
 import {Map, List} from 'immutable';
 
 
-
 const initialState = Map({
     commentFiles: List(),
     newTicketFiles: List()
 });
-
 
 
 export const FilesReducer = createReducer({

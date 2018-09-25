@@ -25,7 +25,6 @@ class ReferralTab extends React.Component {
 
 export default ReferralTab;
 
-
 const Wrapper = styled.div`
     height: calc(100% - 100px);
     margin-left: 60px;

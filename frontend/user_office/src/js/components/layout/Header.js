@@ -85,6 +85,7 @@ class Header extends React.Component {
     }
 }
 
+
 const mapStateToProps = ({user, ICOInfo, KYC, Invest, UI}) => ({
     email: user.get('email'),
     decimals: ICOInfo.get('token_decimals'),
@@ -117,7 +118,6 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(UIActions.showSetAccountPopup())
     }
 })
-
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header))
 

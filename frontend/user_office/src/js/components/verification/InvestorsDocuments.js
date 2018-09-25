@@ -43,7 +43,7 @@ class InvestorsDocuments extends React.Component {
     }
 
     render() {
-        const {type, status, uploadOnClickHandler} = this.props;
+        const {status, uploadOnClickHandler} = this.props;
 
         return (
             <Wrapper className="Verification__investorsDocuments">
@@ -88,6 +88,7 @@ class InvestorsDocuments extends React.Component {
         )
     }
 }
+
 
 const mapStateToProps = ({KYC}) => ({
     status: KYC.get('state'),

@@ -36,8 +36,8 @@ const Nav =  () => {
     );
 }
 
-export default Nav;
 
+export default Nav;
 
 const Wrapper = styled.div`
     height: 100%;

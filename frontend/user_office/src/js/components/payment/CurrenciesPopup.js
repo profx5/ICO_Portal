@@ -33,7 +33,6 @@ class CurrenciesPopup extends React.Component {
         })
     }
 
-
     render() {
         const {
             currencies,
@@ -84,9 +83,7 @@ const mapDispatchToProps = (dispatch) => ({
     }
 })
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(CurrenciesPopup)
-
 
 const Wrapper = styled.div`
     position: fixed;

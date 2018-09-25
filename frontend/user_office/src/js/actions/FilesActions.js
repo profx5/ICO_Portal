@@ -1,7 +1,6 @@
 import { createAction } from 'redux-act';
 
 
-
 export const addCommentFile = createAction('ADD_COMMENT_FILE');
 export const removeCommentFile = createAction('REMOVE_COMMENT_FILE');
 export const clearCommentFiles = createAction('CLEAR_COMMENT_FILES');

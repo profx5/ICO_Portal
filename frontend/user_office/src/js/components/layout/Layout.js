@@ -70,6 +70,7 @@ class Layout extends Component {
     }
 }
 
+
 const mapStateToProps = ({UI}) => ({
     showSetAccountPopup: UI.get('showSetAccountPopup'),
     openedTip: UI.get('openedTip'),

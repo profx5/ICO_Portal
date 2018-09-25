@@ -23,7 +23,6 @@ const FieldPassword = ({labelText, placeholder, options, name, value, disabled, 
 }
 
 
-
 export default FieldPassword;
 
 const Wrapper = styled.div`
