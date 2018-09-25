@@ -2,8 +2,9 @@ import axios from 'axios'
 import Api from '../../api'
 import {call, put, takeEvery} from 'redux-saga/effects';
 import { push } from 'react-router-redux';
-import * as actions from './../actions/TicketActions';
-import * as uiactions from './../actions/UIActions';
+import * as ticketActions from './../actions/TicketActions';
+import * as UIActions from './../actions/UIActions';
+import * as FilesActions from './../actions/FilesActions';
 import history from './../utils/history';
 
 export class TicketsSagas {
@@ -13,61 +14,61 @@ export class TicketsSagas {
                 method: 'GET',
                 url: Api.getTickets(),
             });
-            yield put(actions.getTicketsSuccess(response.data))
+            yield put(ticketActions.getTicketsSuccess(response.data))
         } catch (e) {
-            yield put(actions.getTicketsFailed())
+            yield put(ticketActions.getTicketsFailed())
          }
     }
 
-    static* getTicketFull(id) {
+    static* getSelectedTicket(id) {
         try {
             const res = yield call(axios, {
                 method: 'GET',
                 url: Api.getTicket(id.payload),
             });
-            yield put(actions.getTicketFullSuccess(res.data))
+            yield put(ticketActions.getSelectedTicketSuccess(res.data))
         } catch (e) {
-            yield put(actions.getTicketFullFailed())
+            yield put(ticketActions.getSelectedTicketFailed())
         }
     }
 
 
-    static* sendNewTicket(ticket) {
+    static* createNewTicket(ticket) {
         try {
             const res = yield call(axios, {
                 method: 'POST',
                 url: Api.newTicket(),
                 data: ticket.payload
             });
-            yield put(actions.getTicketsRequest());
+            yield put(ticketActions.getTicketsRequest());
             yield history.push('/user_office/support/ticket/' + res.data.id);
-            yield put(actions.getTicketFull(res.data.id));
-            yield put(uiactions.changeSelectedTab('my'));
-            yield put(uiactions.setNewTicketFilesNull());
+            yield put(ticketActions.getSelectedTicket(res.data.id));
+            yield put(UIActions.changeActiveTab(2));
+            yield put(FilesActions.clearNewTicketFiles());
         } catch (e) {
-            yield put(actions.sendNewTicketFailed());
+            yield put(ticketActions.createNewTicketFailed());
         }
     }
 
-    static* sendNewComment(comment) {
+    static* createNewComment(comment) {
         try {
             yield call(axios, {
                 method: 'POST',
                 url: Api.newComment(comment.payload.get('ticket')),
                 data: comment.payload
             });
-            yield put(actions.sendNewCommentSuccess());
-            yield put(actions.getTicketFull(comment.payload.get('ticket')));
-            yield put(uiactions.setNewCommentFilesNull());
+            yield put(ticketActions.createNewCommentSuccess());
+            yield put(ticketActions.getSelectedTicket(comment.payload.get('ticket')));
+            yield put(FilesActions.clearCommentFiles());
         } catch (e) {
-            yield put(actions.sendNewCommentFailed());
+            yield put(ticketActions.createNewCommentFailed());
         }
     }
 }
 
 export function* saga() {
-    yield takeEvery(actions.getTicketsRequest, TicketsSagas.getTickets);
-    yield takeEvery(actions.getTicketFull, TicketsSagas.getTicketFull);
-    yield takeEvery(actions.sendNewTicket, TicketsSagas.sendNewTicket);
-    yield takeEvery(actions.sendNewComment, TicketsSagas.sendNewComment);
+    yield takeEvery(ticketActions.getTicketsRequest, TicketsSagas.getTickets);
+    yield takeEvery(ticketActions.getSelectedTicket, TicketsSagas.getSelectedTicket);
+    yield takeEvery(ticketActions.createNewTicket, TicketsSagas.createNewTicket);
+    yield takeEvery(ticketActions.createNewComment, TicketsSagas.createNewComment);
 }

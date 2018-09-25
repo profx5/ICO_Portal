@@ -70,6 +70,7 @@ class Layout extends Component {
     }
 }
 
+
 const mapStateToProps = ({UI}) => ({
     showSetAccountPopup: UI.get('showSetAccountPopup'),
     openedTip: UI.get('openedTip'),
@@ -93,7 +94,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));
-
 
 const Wrapper = styled.div`
     width: 100%;

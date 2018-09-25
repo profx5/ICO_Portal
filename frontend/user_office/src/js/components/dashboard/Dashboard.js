@@ -18,8 +18,8 @@ const Dashboard = (props) => {
     )
 };
 
-export default Dashboard;
 
+export default Dashboard;
 
 const Wrapper = styled.div`
     flex: 1;

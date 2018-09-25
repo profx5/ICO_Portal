@@ -3,14 +3,12 @@ import * as actions from './../actions/DepositsActions';
 import {Map, List} from 'immutable';
 
 
-
 const initialState = Map({
     current_page: 1,
     pages: 1,
     results: List(),
     isDepositsLoading: false,
 });
-
 
 
 export const DepositsReducer = createReducer({

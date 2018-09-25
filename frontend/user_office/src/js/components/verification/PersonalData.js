@@ -111,6 +111,7 @@ class PersonData extends React.Component {
     }
 };
 
+
 const mapStateToProps = ({ICOInfo, Timer, KYC, user}) => ({
     userPhoto: KYC.get('user_photo'),
     documentPhoto: KYC.get('document_photo'),
@@ -156,19 +157,6 @@ const Title = styled.h3`
     color: #323c47;
     letter-spacing: 0.1px;
     margin-bottom: 45px;
-`;
-
-const DescHead = styled.h4`
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: #0a0a0a;
-    font-weight: 500;
-    flex-basis: 100%;
-    @media (max-width: 1300px) {
-        text-align: center
-        width: 100%;
-    }
 `;
 
 const InputSet = styled.div`

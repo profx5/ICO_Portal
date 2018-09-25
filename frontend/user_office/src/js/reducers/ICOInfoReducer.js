@@ -3,7 +3,6 @@ import * as actions from './../actions/ICOInfoActions';
 import {Map} from 'immutable';
 
 
-
 const initialState = Map({
     total_supply: "0",
     token_address: "0x",
@@ -13,7 +12,6 @@ const initialState = Map({
     humanizedEndTime: '',
     countdownTime: ''
 });
-
 
 
 export const ICOInfoReducer = createReducer({

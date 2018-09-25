@@ -22,6 +22,7 @@ const CustomButton = ({text, className, clickHandler, submit, disabled, icon}) =
     )
 }
 
+
 export default CustomButton;
 
 const bgpin = keyframes`

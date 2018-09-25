@@ -10,6 +10,7 @@ import Button from './../common/Button';
 import * as KYCActions from './../../actions/KYCActions';
 import * as UIActions from "./../../actions/UIActions";
 
+
 const File = ({ input: {value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
   <input type='file' {...inputProps} {...props} />
 );
@@ -71,7 +72,7 @@ class LegalPersonData extends React.Component {
 
     render() {
 
-        const {uploadedUserPhoto, uploadPhoto, removePhoto, uploadOnClickHandler} = this.props;
+        const {uploadOnClickHandler} = this.props;
 
         return (
             <Wrapper className="Verification__personData">
@@ -184,7 +185,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LegalPersonData)
-
 
 const Wrapper = styled.div`
     flex: 1;

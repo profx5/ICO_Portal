@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
+
 const CurrencyCard = ({rate, investCurrency, clickHandler, restCurrencies, disabled}) => {
 
     let currencyRate = rate > 0.01 ? rate.toFixed(2) : rate.toFixed(4)
@@ -24,6 +25,7 @@ const CurrencyCard = ({rate, investCurrency, clickHandler, restCurrencies, disab
         </Card>
     )
 }
+
 
 export default CurrencyCard;
 

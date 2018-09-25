@@ -13,8 +13,8 @@ const ReferralRules = () => {
     )
 }
 
-export default ReferralRules;
 
+export default ReferralRules;
 
 const Wrapper = styled.div`
     height: auto;

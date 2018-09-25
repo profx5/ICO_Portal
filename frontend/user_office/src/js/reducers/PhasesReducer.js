@@ -3,7 +3,6 @@ import * as actions from './../actions/PhaseActions';
 import {Map} from 'immutable';
 
 
-
 const initialState = Map({
     name: "",
     begin_date: '2018-08-29T15:10:47+00:00',
@@ -11,7 +10,6 @@ const initialState = Map({
     bonus_percents: 0,
     hard_cap: 0
 });
-
 
 
 export const PhasesReducer = createReducer({

@@ -17,9 +17,6 @@ class Settings extends React.Component {
                     <PersonalInfo/>
                     <Password/>
                 </MainWrapper>
-                {/* <InfoWrapper>
-                    <VerificationInfo verificationStages={['Verification__personalData','Verification__password']} stages={['Personal Data', 'Password']}/>
-                    </InfoWrapper> */}
             </Wrapper>
         )
     }
@@ -28,15 +25,9 @@ class Settings extends React.Component {
 
 const mapStateToProps = ({}) => ({})
 
-const mapDispatchToProps = (dispatch) => ({
-    /* submitForm(payload) {
-     *     dispatch(KYCActions.submitKYCRequest(payload))
-     * }*/
-})
-
+const mapDispatchToProps = (dispatch) => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
-
 
 const Wrapper = styled.div`
     flex: 1;
@@ -62,8 +53,4 @@ const Head = styled.h2`
 const MainWrapper = styled.div`
     flex: 1;
     max-width: 620px;
-`;
-
-const InfoWrapper = styled.div`
-
 `;

@@ -37,8 +37,7 @@ const mapStateToProps = ({UI}) => ({
     step: UI.get('step')
 })
 
-const mapDispatchToProps = (dispatch) => ({
-})
+const mapDispatchToProps = (dispatch) => ({})
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Payment));
 

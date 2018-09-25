@@ -237,6 +237,7 @@ class DepositTable extends Component {
     }
 }
 
+
 const mapStateToProps = ({deposits, UI}) => ({
     deposits: deposits.get('results'),
     currentPage: deposits.get('current_page'),
@@ -250,6 +251,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DepositTable)
+
 const NoTransactionsDiv = styled.div`
     background-color: #f6f6f6;
     font-size: 16px;

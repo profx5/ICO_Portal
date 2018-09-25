@@ -15,6 +15,7 @@ import KYCTabs from './components/KYCTabs';
 import * as KYCActions from './../../actions/KYCActions';
 import * as UIActions from './../../actions/UIActions';
 
+
 class Verification extends React.Component {
     transformValues = values => {
         const data = {...values};
@@ -183,7 +184,6 @@ class Verification extends React.Component {
                             </g>
                         </svg>
                     </div>
-
                 </div>
             `);
     }
@@ -369,7 +369,6 @@ const Head = styled.h2`
     margin-top: 40px;
     margin-bottom: 40px;
 `;
-
 
 const MainWrapper = styled.div`
     flex: 1;

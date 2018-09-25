@@ -23,7 +23,6 @@ const Steps = ({step}) => {
 }
 
 
-
 export default Steps;
 
 const Wrapper = styled.div`

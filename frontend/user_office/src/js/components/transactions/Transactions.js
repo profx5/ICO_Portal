@@ -45,9 +45,7 @@ const mapDispatchToProps = (dispatch) => ({
     }
 })
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(Transactions)
-
 
 const Wrapper = styled.div`
     flex: 1;

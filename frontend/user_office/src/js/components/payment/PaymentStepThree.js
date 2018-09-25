@@ -10,6 +10,11 @@ import * as UIActions from "./../../actions/UIActions";
 
 class PaymentStepThree extends React.Component {
 
+    componentDidMount() {
+        const {setStep} = this.props;
+        setStep(3);
+    }
+
     getTokenData = (token) => {
         const tokens_info = [
             {
@@ -61,11 +66,6 @@ class PaymentStepThree extends React.Component {
             </Wrapper>
         )
     };
-
-    componentDidMount = () => {
-        const {setStep} = this.props;
-        setStep(3);
-    };
 };
 
 
@@ -86,7 +86,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentStepThree)
-
 
 const Wrapper = styled.div`
     flex: 1;
