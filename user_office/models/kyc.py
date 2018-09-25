@@ -4,6 +4,7 @@ from .fields import DocFileField
 
 
 KYC_STATE_CHOICES = (('WAITING', 'Waiting for approval'),
+                     ('MINING', 'Waiting to be mined'),
                      ('DECLINED', 'Declined'),
                      ('APPROVED', 'Approved'))
 
@@ -75,6 +76,10 @@ class KYC(models.Model):
 
     def __str__(self):
         return f'KYC of {self.investor.email}'
+
+    @property
+    def mining(self):
+        return self.state == 'MINING'
 
     @property
     def approved(self):

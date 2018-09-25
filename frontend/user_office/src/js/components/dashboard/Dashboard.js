@@ -20,10 +20,6 @@ const Dashboard = (props) => {
 
 export default Dashboard;
 
-
-//———————————————————————————————————————————————————————————————————————————————
-
-
 const Wrapper = styled.div`
     flex: 1;
     height: calc(100% - 100px);

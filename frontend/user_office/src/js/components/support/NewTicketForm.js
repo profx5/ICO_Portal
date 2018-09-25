@@ -104,6 +104,7 @@ class NewTicketForm extends React.Component {
     }
 }
 
+
 const mapStateToProps = ({tickets, user, Files}) => ({
     email: user.get('email'),
     newTicketFiles: Files.get('newTicketFiles')
@@ -120,7 +121,6 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(TicketActions.createNewTicket(payload))
     }
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewTicketForm)
 

@@ -12,8 +12,8 @@ const SupportTabs = ({ticketsAmount, activeTab, tabClickHandler}) => {
     )
 }
 
-export default SupportTabs;
 
+export default SupportTabs;
 
 const Wrapper = styled.div`
     height: 56px;

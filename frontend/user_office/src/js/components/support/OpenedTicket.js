@@ -80,6 +80,7 @@ class OpenedTicket extends React.Component {
     }
 }
 
+
 const mapStateToProps = ({tickets, user}) => ({
     selectedTicket: tickets.get('selectedTicket'),
     email: user.get('email'),
@@ -90,7 +91,6 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(TicketActions.unselectTicket())
     }
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(OpenedTicket)
 

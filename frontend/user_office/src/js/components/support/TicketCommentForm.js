@@ -103,6 +103,7 @@ class TicketCommentForm extends React.Component {
     }
 }
 
+
 const mapStateToProps = ({tickets, user, Files}) => ({
     selectedTicket: tickets.get('selectedTicket'),
     commentFiles: Files.get('commentFiles')
@@ -122,7 +123,6 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(TicketActions.createNewComment(payload))
     }
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(TicketCommentForm)
 

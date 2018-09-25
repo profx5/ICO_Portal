@@ -39,6 +39,7 @@ const Comment = ({comment}) => {
 
 }
 
+
 export default Comment;
 
 const FilesWrapper = styled.div`
