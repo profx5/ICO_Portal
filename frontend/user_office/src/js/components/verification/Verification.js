@@ -133,7 +133,7 @@ class Verification extends React.Component {
             }
         }
 
-        if (!$('[name="id_document_photo"]').val() || !$('[name="bill_photo"]').val()) {
+        if (!($('[name="id_document_photo"]').val() && $('[name="bill_photo"]').val())) {
 
             showModal({
                 modalHead: 'Warning',
