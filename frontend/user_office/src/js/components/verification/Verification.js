@@ -3,14 +3,12 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Form} from 'react-final-form'
 import $ from 'jquery';
-import Utils from './../../utils/index';
-
-import PersonalData from './PersonalData';
-import LegalPersonData from './LegalPersonData';
-import VerificationInfo from './VerificationInfo';
-import InvestorsDocuments from './InvestorsDocuments';
 
 import KYCTabs from './components/KYCTabs';
+import NaturalPerson from './NaturalPerson';
+import LegalPerson from './LegalPerson';
+import VerificationInfo from './VerificationInfo';
+import InvestorsDocuments from './InvestorsDocuments';
 
 import * as KYCActions from './../../actions/KYCActions';
 import * as UIActions from './../../actions/UIActions';
@@ -108,20 +106,6 @@ class Verification extends React.Component {
         });
     };
 
-    componentDidMount = () => {
-        this.data = this.load()
-        document.body.addEventListener('change', this.uploadFileHandler);
-    };
-    
-    componentWillUnmount() {
-        const {activeKycTab, activateKycTab} = this.props;
-        
-        if (activeKycTab === 2) {
-            activateKycTab({id: 1});
-        }
-        document.body.removeEventListener('change', this.uploadFileHandler);
-    }
-
     tabClickHandler = (event) => {
         const {activateKycTab, changeType} = this.props;
 
@@ -132,7 +116,6 @@ class Verification extends React.Component {
             activateKycTab({id: 2});
             changeType('LEGAL');
         }
-
     }
 
     onSubmitHandler = (e) => {
@@ -141,7 +124,7 @@ class Verification extends React.Component {
         e.preventDefault();
 
         if (activeKycTab === 2) {
-            if ($('[name="basis_doc"]').val() === '') {
+            if (!$('[name="basis_doc"]').val()) {
                 showModal({
                     modalHead: 'Warning',
                     modalContent: 'Please, check if you\'ve attached the basis for representation!'
@@ -149,8 +132,9 @@ class Verification extends React.Component {
                 return; 
             }
         }
-        
-        if ($('[name="id_document_photo"]').val() === '' || $('[name="bill_photo"]').val() === '') {
+
+        if (!($('[name="id_document_photo"]').val() && $('[name="bill_photo"]').val())) {
+
             showModal({
                 modalHead: 'Warning',
                 modalContent: 'Please, check if you\'ve attached a copy of ID and Utility bill!'
@@ -165,75 +149,15 @@ class Verification extends React.Component {
         });
     }
 
-    buildVisualFile = (target, obj) => {
-        let name = obj.name,
-            size = obj.size,
-            id = $(target).attr('id');
-
-        $(target)
-            .closest('.block-file')
-            .find('.block-file-result')
-            .append(`
-                <div class="visual-file-block" data-bind-to='${id}'>
-                    <span class="file-name">${name}</span> (<span class="file-size">${Utils.formatFileSize(size).size} ${Utils.formatFileSize(size).units})</span>
-                    <div class="file-clear">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
-                            <g fill="#C8C8C8" fill-rule="evenodd">
-                                <path d="M.05 1.464L1.464.05 9.95 8.536 8.536 9.95z"/>
-                                <path d="M1.464 9.95L.05 8.536 8.536.05 9.95 1.464z"/>
-                            </g>
-                        </svg>
-                    </div>
-                </div>
-            `);
-    }
-
-    uploadFileHandler = (event) => {
-        var input = event.target;
-        var reader = new FileReader();
-        var file = input.files[0];
-        
-        let callback = (target, obj) => {
-            this.buildVisualFile(target, obj);
-
-            $(target).closest('.block-file').find('.block-file-result').addClass('block-file-result-filled');
-        }
-
-        if (file && /(jpeg|png|pdf|doc|docx|zip)/g.test(file.type)) {
-
-            reader.addEventListener('load', function(e) {
-
-                callback(input, {
-                    name: file.name,
-                    size: file.size
-                })
-            }, {once: true})
-
-            reader.readAsDataURL(file);
-        } else {
-            let $fileInput = $(input).closest('.block-file').find('input[type="file"]');
-
-            if ($fileInput.length <= 1) $fileInput.val('');
-            else $fileInput[$fileInput.length - 1].remove();
-        }
-    }
-
-    uploadOnClickHandler = (event) => {
+    onAttachClickHandler = (name, event) => {
         event.preventDefault();
-        let $wrap_div = $(event.currentTarget).closest('div');
-        $wrap_div.find('input[type="file"]').each((index, item) => {
-            let _name = $(item).attr('name');
-            if ($(item).val() === '') {
-                $(item).click();
-                return false;
-            } else {
-                let $new_one = $('<input type="file" name="' + _name + '" hidden/>');
-                $wrap_div.append($new_one);
-                $new_one.click();
-                return false;
-            }
-        })
-    };
+        const $filesBlock = $(event.target).closest('.files-section').find('.files-container');
+
+        const $newFileInput = $(`<input class="file-input" id=${Math.floor(Math.random() * (10000000 - 0 + 1)) + 0} type="file" name="${name}" hidden/>`);
+
+        $filesBlock.append($newFileInput);
+        $newFileInput.click();
+    }
 
     render() {
         const {activeKycTab, state} = this.props;
@@ -253,9 +177,9 @@ class Verification extends React.Component {
                                 </HeaderInner>
                             </Header>
                             <MainWrapper>
-                                {activeKycTab === 1 && <PersonalData uploadOnClickHandler={this.uploadOnClickHandler} buildVisualFile={this.buildVisualFile}/>}
-                                {activeKycTab === 2 && <LegalPersonData uploadOnClickHandler={this.uploadOnClickHandler} buildVisualFile={this.buildVisualFile}/>}
-                                <InvestorsDocuments uploadOnClickHandler={this.uploadOnClickHandler} buildVisualFile={this.buildVisualFile}/>
+                                {activeKycTab === 1 && <NaturalPerson/>}
+                                {activeKycTab === 2 && <LegalPerson onAttachClickHandler={this.onAttachClickHandler}/>}
+                                <InvestorsDocuments onAttachClickHandler={this.onAttachClickHandler}/>
                             </MainWrapper>
                             <div>
                                 <VerificationInfo

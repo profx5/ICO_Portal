@@ -76,7 +76,7 @@ class PaymentStepTwo extends React.Component {
                             <div className="head">Payment</div>
                             <div className="amount">
                                 {tokensAmountString}
-                                <span>&nbsp;Vera</span> &nbsp;
+                                <span>&nbsp;OGD</span> &nbsp;
                                 <span>=</span>&nbsp; {investAmount > 0 ? investAmount : '0'}
                                 <span>&nbsp;{investCurrency}</span>
                             </div>
@@ -409,7 +409,7 @@ const QrWrapper = styled.div`
     top: 0;
     right: 0;
     transform: translate(100px, calc(-100% - 30px));
-    zIndex: 1;
+    z-index: 1;
     padding-top: 30px;
     transition: all .28s ease;
     opacity: 0;

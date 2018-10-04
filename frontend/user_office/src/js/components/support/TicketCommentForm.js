@@ -20,14 +20,6 @@ class TicketCommentForm extends React.Component {
         $('body').unbind('change.commentFileUpload', this.uploadFileHandler)
     }
 
-    onRemoveFileHandler = (id, event) => {
-        const {removeCommentFile} = this.props;
-        const $filesWrapper = $(event.currentTarget).closest('.files-container');
-
-        $($filesWrapper).find(`.file-input[id="${id}"]`).remove();
-        removeCommentFile(id);
-    }
-
     renderAttachedFiles = () => {
         const {commentFiles} = this.props;
 
@@ -69,6 +61,14 @@ class TicketCommentForm extends React.Component {
 
         $filesBlock.append($newFileInput);
         $newFileInput.click();
+    }
+
+    onRemoveFileHandler = (id, event) => {
+        const {removeCommentFile} = this.props;
+        const $filesWrapper = $(event.currentTarget).closest('.files-container');
+
+        $($filesWrapper).find(`.file-input[id="${id}"]`).remove();
+        removeCommentFile(id);
     }
 
     onSubmitHandler = (e) => {
