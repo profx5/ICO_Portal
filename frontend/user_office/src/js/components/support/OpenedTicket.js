@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom';
 import moment from "moment/moment";
-import $ from "jquery";
 
 import TicketCommentForm from './TicketCommentForm';
 import AttachedFile from './../common/AttachedFile';
@@ -55,7 +54,7 @@ class OpenedTicket extends React.Component {
     }
 
     render() {
-        const {selectedTicket, unselectTicket} = this.props;
+        const {selectedTicket, unselectTicket, onAttachClickHandler} = this.props;
         const {title, status, public_follow_ups} = selectedTicket;
 
         return (
@@ -74,7 +73,7 @@ class OpenedTicket extends React.Component {
                 <Content>
                     {this.renderMessages(public_follow_ups)}
                 </Content>
-                <TicketCommentForm/>
+                <TicketCommentForm onAttachClickHandler={onAttachClickHandler}/>
             </Wrapper>
         )
     }
