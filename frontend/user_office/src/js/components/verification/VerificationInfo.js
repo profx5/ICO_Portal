@@ -19,17 +19,18 @@ class VerificationInfo extends React.Component {
     }
 
     stageTracker = () => {
-        let sectionName, $section, sectionOffset;
+        let sectionName, $section, sectionHeight, sectionOffset;
         const addStageOffset = this.addStageOffset;
 
         $('[data-bind-to]').each(function(index, item) {
             sectionName = $(item).data('bind-to');
             $section = $(`.${sectionName}`);
+            sectionHeight = $section.height();
             sectionOffset = $section.offset();
             if ($('.VerificationInfo').offset().top >= (sectionOffset.top - addStageOffset) &&
-                $('.VerificationInfo').offset().top <= (sectionOffset.top + $section.height())) {
+                $('.VerificationInfo').offset().top <= (sectionOffset.top + sectionHeight)) {
                     $('[data-bind-to]').removeClass('active');
-                    $(`[data-bind-to=${sectionName}]`).addClass('active');
+                    $(`[data-bind-to="${sectionName}"]`).addClass('active');
             }
         });
     }
@@ -39,7 +40,7 @@ class VerificationInfo extends React.Component {
         let $el = $(event.currentTarget);
         let valToScroll = $(`.${$el.data('bind-to')}`).offset().top - addStageOffset;
         $('body,html').animate({
-            'scrollTop': valToScroll + 'px'
+            'scrollTop': `${valToScroll}px`
         })
     }
 
@@ -49,15 +50,16 @@ class VerificationInfo extends React.Component {
 
     getKYCTicket = () => {
         const { tickets } = this.props;
+
         return tickets.filter(item => item.title.startsWith('KYC request for user'));
     }
 
     render() {
         const {status, verificationStages, stages, btnText, isSubmiting, type} = this.props;
-        let kyc_ticket = this.getKYCTicket();
-        let kyc_ticket_id = null;
-        if (kyc_ticket[0]) {
-            kyc_ticket_id = kyc_ticket[0].id;
+        let kycTicket = this.getKYCTicket();
+        let kycTicketId = null;
+        if (kycTicket[0]) {
+            kycTicketId = kycTicket[0].id;
         }
         let btn_text = !isSubmiting ? status === 'WAITING' ? 'Update data' : btnText : 'Submitting...';
         let KYCStatus = type !== '' && status;
@@ -70,7 +72,7 @@ class VerificationInfo extends React.Component {
                         <Button type="submit" text={btn_text} icon={isSubmiting && PreloadIcon}/>
                     </ButtonWrapper>
                     }
-                <VerificationState kycState={KYCStatus} kycTicketId={kyc_ticket_id}/>
+                <VerificationState kycState={KYCStatus} kycTicketId={kycTicketId}/>
             </Wrapper>
         )
     }
