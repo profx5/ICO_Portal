@@ -11,7 +11,7 @@ class NewTicket extends React.Component {
         return (
             <Wrapper>
                 <Head>Technical support</Head>
-                <NewTicketForm/>
+                <NewTicketForm onAttachClickHandler={this.props.onAttachClickHandler}/>
             </Wrapper>
         )
     }

@@ -44,7 +44,7 @@ class CurrenciesPopup extends React.Component {
                     <Head>Select another crypto currency
                         <div onClick={hidePopup} className="close-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15">
-                              <g fill="none" fill-rule="evenodd">
+                              <g fill="none" fillRule="evenodd">
                                 <path fill="#F5F6FA" d="M-1083-366H357V793h-1440z"/>
                                 <g fill="#000">
                                   <path d="M.282 2.197L1.697.782l12.02 12.021-1.414 1.415z"/>

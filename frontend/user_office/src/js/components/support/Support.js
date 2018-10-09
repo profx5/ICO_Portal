@@ -1,18 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
+import $ from 'jquery';
 
 import SupportTabs from './components/SupportTabs';
 import NewTicket from './NewTicket';
 import AllQuestions from './AllQuestions';
 import OpenedTicket from './OpenedTicket';
-import Button from "./../common/Button";
-import Comment from './components/Comment';
 
 import * as UIActions from './../../actions/UIActions';
 
 
 class Support extends React.Component {
+
+    onAttachClickHandler = (name, event) => {
+        event.preventDefault();
+        const $filesBlock = $(event.target).closest('.files-section').find('.files-container');
+
+        const $newFileInput = $(`<input class="file-input" id=${Math.floor(Math.random() * (10000000 - 0 + 1)) + 0} type="file" name="${name}" hidden/>`);
+
+        $filesBlock.append($newFileInput);
+        $newFileInput.click();
+    }
+
 
     render() {
         const {tickets, selectedTicket, activeSupportTab, activateSupportTab} = this.props;
@@ -23,7 +33,7 @@ class Support extends React.Component {
                 <SupportTabs tabClickHandler={activateSupportTab} ticketsAmount={tickets} activeTab={activeSupportTab} isTicketOpened={!!selectedTicket}/>
                 {!selectedTicket && activeSupportTab === 1 && <NewTicket/>}
                 {!selectedTicket && activeSupportTab === 2 && <AllQuestions/>}
-                {selectedTicket && <OpenedTicket/>}
+                {selectedTicket && <OpenedTicket onAttachClickHandler={this.onAttachClickHandler}/>}
             </Wrapper>
         )
     }

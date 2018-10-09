@@ -97,9 +97,9 @@ class PaymentStepTwo extends React.Component {
                                 To buy tokens just copy an address below (or scan QR code&nbsp;
                                 <span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-                              <g fill="none" fill-rule="evenodd">
+                              <g fill="none" fillRule="evenodd">
                                 <path fill="#F5F6FA" d="M-717-723H723V517H-717z"/>
-                                <g fill="#000" fill-rule="nonzero">
+                                <g fill="#000" fillRule="nonzero">
                                   <path
                                       d="M6.719 0H.469A.469.469 0 0 0 0 .469v6.25c0 .259.21.468.469.468h6.25c.259 0 .468-.21.468-.468V.469A.469.469 0 0 0 6.72 0zM6.25 6.25H.937V.937H6.25V6.25z"/>
                                   <path
@@ -145,9 +145,9 @@ class PaymentStepTwo extends React.Component {
                                 <span>
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-                              <g fill="none" fill-rule="evenodd">
+                              <g fill="none" fillRule="evenodd">
                                 <path fill="#F5F6FA" d="M-717-723H723V517H-717z"/>
-                                <g fill="#000" fill-rule="nonzero">
+                                <g fill="#000" fillRule="nonzero">
                                   <path
                                       d="M6.719 0H.469A.469.469 0 0 0 0 .469v6.25c0 .259.21.468.469.468h6.25c.259 0 .468-.21.468-.468V.469A.469.469 0 0 0 6.72 0zM6.25 6.25H.937V.937H6.25V6.25z"/>
                                   <path

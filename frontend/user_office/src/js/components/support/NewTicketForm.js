@@ -1,75 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import $ from "jquery";
 
-import AttachedFile from './../common/AttachedFile';
 import Button from './../common/Button';
+import FilesAttacher from './../../utils/FilesAttacher';
 
 import * as TicketActions from './../../actions/TicketActions';
 import * as FilesActions from './../../actions/FilesActions';
 
 
 class NewTicketForm extends React.Component {
-
-    componentDidMount = () => {
-        $('body').on('change.newTicketFileUpload', this.uploadFileHandler)
-    };
-
-    componentWillUnmount() {
-        $('body').unbind('change.newTicketFileUpload', this.uploadFileHandler)
-    }
-
-    renderAttachedFiles = () => {
-        const {newTicketFiles} = this.props;
-
-        return newTicketFiles.map((file, index) => {
-            return <AttachedFile onRemoveHandler={this.onRemoveFileHandler.bind(this, file.id)} fileName={file.name} fileSize={file.size} id={file.id} key={index} removable/>
-        })
-    }
-
-    uploadFileHandler = (event) => {
-        const {addNewTicketFile} = this.props;
-        var fileInput = event.target;
-        var id = +event.target.id;
-        var reader = new FileReader();
-        var file = fileInput.files[0];
-        
-
-        if (file && /(jpeg|png|pdf|doc|docx|zip)/g.test(file.type)) {
-
-            reader.addEventListener('load', function(e) {
- 
-                addNewTicketFile({
-                    name: file.name,
-                    size: file.size,
-                    id: id
-                })
-            }, {once: true})
-
-            reader.readAsDataURL(file);
-        } else {
-            $(fileInput).remove();
-        }
-    }
-
-    onAttachClickHandler = (event) => {
-        event.preventDefault();
-        const $filesBlock = $(event.target).closest('form').find('.files-container');
-
-        const $newFileInput = $(`<input class="file-input" id=${Math.floor(Math.random() * (10000000 - 0 + 1)) + 0} type="file" name="attachment" hidden/>`);
-
-        $filesBlock.append($newFileInput);
-        $newFileInput.click();
-    }
-
-    onRemoveFileHandler = (id, event) => {
-        const {removeNewTicketFile} = this.props;
-        const $filesWrapper = $(event.currentTarget).closest('.files-container');
-
-        $($filesWrapper).find(`.file-input[id="${id}"]`).remove();
-        removeNewTicketFile(id);
-    }
 
     onSubmitHandler = (e) => {
         e.preventDefault();
@@ -79,6 +19,8 @@ class NewTicketForm extends React.Component {
     };
 
     render() {
+        const {newTicketFiles, addNewTicketFile, removeNewTicketFile} = this.props;
+
         return (
             <Wrapper>
                 <Form onSubmit={this.onSubmitHandler} encType='multipart/form-data'>
@@ -86,11 +28,17 @@ class NewTicketForm extends React.Component {
                     <input type="text" placeholder="Please describe topic of your issue.." name="title" required/>
                     <label>Detailed description</label>
                     <textarea placeholder="Please describe your issue in details." name="description" required></textarea>
-                    <div className="controls-container">
-                        <div className="files-container">{this.renderAttachedFiles()}</div>
+                    <div className="controls-container files-section files-section-newTicket">
+                        <div className="files-container">
+                            <FilesAttacher files={newTicketFiles} 
+                                name="attachment" 
+                                filesWrapper={document.querySelector('.files-section-newTicket')} 
+                                uploadFileHandler={addNewTicketFile} 
+                                removeFileHandler={removeNewTicketFile}/>
+                        </div>
                         <div className="buttons-container">
                             <div className="button-wrapper">
-                                <Button text="Attach file" clickHandler={this.onAttachClickHandler} attach transparent/>
+                                <Button text="Attach file" clickHandler={this.props.onAttachClickHandler.bind(this,'attachment')} attach transparent/>
                             </div>
                             <div className="button-wrapper">
                                 <Button text="Send"/>
