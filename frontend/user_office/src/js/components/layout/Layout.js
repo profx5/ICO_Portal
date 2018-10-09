@@ -24,9 +24,26 @@ import CustomModals from './CustomModals';
 import Modal from './Modal';
 
 import * as UIActions from './../../actions/UIActions';
+import * as TicketActions from './../../actions/TicketActions';
 
 
 class Layout extends Component {
+
+    getTicket() {
+        const {getSelectedTicket, unselectTicket} = this.props;
+        const url = this.props.history.location.pathname;
+        const ticketID = url.match(/\d+/g) || '';
+
+        if (ticketID.length > 0) getSelectedTicket(+ticketID);
+        else unselectTicket();
+    }
+
+    componentWillMount() {
+        this.getTicket();
+        this.unlisten = this.props.history.listen((location, action) => {
+            this.getTicket(location.pathname);
+        });
+    }
 
     componentDidMount() {
         const {hideAccountDropdown, hideModal} = this.props;
@@ -42,14 +59,14 @@ class Layout extends Component {
     }
 
     render() {
-        const {showSetAccountPopup, modalOpened, openedModalId, modalHead, modalContent} = this.props;
+        const {showSetAccountPopup, modalOpened, openedModalId, modalHead, modalContent, changeSupportActiveTab} = this.props;
 
         return (
             <Wrapper>
                 <Header/>
                 <MainWrapper>
                     <NavSidebar>
-                        <Nav/>
+                        <Nav changeSupportActiveTab={changeSupportActiveTab}/>
                     </NavSidebar>
                     <Switch history={history}>
                         <Route exact path="/user_office" component={Dashboard}/>
@@ -79,6 +96,7 @@ const mapStateToProps = ({UI}) => ({
     openedModalId: UI.get('openedModalId'),
     modalHead: UI.get('modalHead'),
     modalContent: UI.get('modalContent'),
+    activeSupportTab: UI.get('activeSupportTab')
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -90,6 +108,15 @@ const mapDispatchToProps = (dispatch) => ({
     },
     hideModal() {
         dispatch(UIActions.hideModal())
+    },
+    getSelectedTicket(payload) {
+        dispatch(TicketActions.getSelectedTicket(payload))
+    },
+    unselectTicket() {
+        dispatch(TicketActions.unselectTicket())
+    },
+    changeSupportActiveTab(payload) {
+        dispatch(UIActions.changeActiveTab(payload))
     }
 })
 
