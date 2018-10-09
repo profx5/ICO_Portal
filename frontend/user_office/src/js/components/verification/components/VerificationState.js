@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 const VerificationState = ({kycState,kycTicketId}) => {
     return (
-        <Wrapper>
+        <div>
             {kycState === 'APPROVED' &&
                 <Content className="state-approved">
                     <p>Verification successful!</p>
@@ -13,32 +13,28 @@ const VerificationState = ({kycState,kycTicketId}) => {
             }
             {kycState === 'WAITING' &&
                 <Content className="state-waiting">
-                <p>Thank you for your application! Our managers are validating your data now.</p>
-                {kycTicketId &&
-                <SLink to={`/user_office/support/ticket/${kycTicketId}`}>Check the status of your application
-                    here!</SLink>}
-            </Content>
+                    <p>Thank you for your application! Our managers are validating your data now.</p>
+                    {kycTicketId &&
+                    <StyledLink to={`/user_office/support/ticket/${kycTicketId}`}>Check the status of your application
+                        here!</StyledLink>}
+                </Content>
             }
             {kycState === 'DECLINED' &&
                 <Content className="state-declined">
-                <p>Sorry, your application was declined.</p>
-                {kycTicketId &&
-                <SLink to={`/user_office/support/ticket/${kycTicketId}`}>Please contact our support via the ticket
-                    system.</SLink>}
-            </Content>
+                    <p>Sorry, your application was declined.</p>
+                    {kycTicketId &&
+                    <StyledLink to={`/user_office/support/ticket/${kycTicketId}`}>Please contact our support via the ticket
+                        system.</StyledLink>}
+                </Content>
             }
-        </Wrapper>
+        </div>
     )
 }
 
 
 export default VerificationState;
 
-const Wrapper = styled.div`
-
-`;
-
-const SLink = styled(Link)`
+const StyledLink = styled(Link)`
     text-decoration: underline;
 `;
 

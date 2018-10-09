@@ -12,7 +12,7 @@ const AttachedFile = ({fileName, fileSize, id, removable, onRemoveHandler, style
             {removable && 
                 <div onClick={onRemoveHandler} className="file-close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
-                        <g fill="#C8C8C8" fill-rule="evenodd">
+                        <g fill="#C8C8C8" fillRule="evenodd">
                             <path d="M.05 1.464L1.464.05 9.95 8.536 8.536 9.95z"/>
                             <path d="M1.464 9.95L.05 8.536 8.536.05 9.95 1.464z"/>
                         </g>

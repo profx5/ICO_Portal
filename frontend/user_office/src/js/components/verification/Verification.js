@@ -185,7 +185,7 @@ class Verification extends React.Component {
                                 <VerificationInfo
                                     btnText="Send data"
                                     verificationStages={['Verification__personData', 'Verification__investorsDocuments']}
-                                    stages={['Personal Data', 'Investor\'s documents']}
+                                    stages={activeKycTab === 1 ? ['Personal Data', 'Investor\'s documents'] : ['Legal Person Data', 'Investor\'s documents']}
                                 />
                             </div>
                         </Wrapper>
