@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import $ from "jquery";
+import {Link} from 'react-router-dom';
 
 
-const SupportTabs = ({ticketsAmount, activeTab, tabClickHandler}) => {
+const SupportTabs = ({ticketsAmount, activeTab, isTicketOpened, tabClickHandler}) => {
     return (
         <Wrapper>
-            <Tab onClick={tabClickHandler.bind(this, 1)} active={activeTab === 1 ? true : false}>New question</Tab>
-            <Tab onClick={tabClickHandler.bind(this, 2)} active={activeTab === 2 ? true : false}>My questions {ticketsAmount.length}</Tab>
+            <Link to="/user_office/support"><Tab onClick={tabClickHandler.bind(this, 1)} active={!isTicketOpened && activeTab === 1 ? true : false}>New question</Tab></Link>
+            <Link to="/user_office/support"><Tab onClick={tabClickHandler.bind(this, 2)} active={isTicketOpened || activeTab === 2 ? true : false}>My questions {ticketsAmount.length}</Tab></Link>
         </Wrapper>
     )
 }
