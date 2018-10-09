@@ -15,7 +15,7 @@ import dotsIcon from './../../../img/dots.svg';
 
 class ICOProgress extends React.Component {
 
-    componentDidUpdate() {
+    componentDidMount() {
         const {startTime, endTime, countdownTime, updateCountdown} = this.props;
         if (countdownTime === '') Utils.setTimer(startTime, endTime, updateCountdown);
     }
