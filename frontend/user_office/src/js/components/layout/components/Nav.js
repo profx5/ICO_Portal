@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 
-const Nav = ({changeSupportActiveTab}) => {
+const Nav =  () => {
 
     return (
         <Wrapper>
@@ -23,7 +23,7 @@ const Nav = ({changeSupportActiveTab}) => {
                     </g>
                 </svg>
             </IconLink>
-            <IconLink onClick={changeSupportActiveTab.bind(this, 1)} activeClassName="active" to="/user_office/support">
+            <IconLink activeClassName="active" to="/user_office/support">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
                     <g fill="#3172FD">
                     <circle cx="15.5" cy="23.5" r="1.5"/>
