@@ -31,7 +31,7 @@ class Support extends React.Component {
             <Wrapper>
                 <Head>FAQ & Feedback</Head>
                 <SupportTabs tabClickHandler={activateSupportTab} ticketsAmount={tickets} activeTab={activeSupportTab} isTicketOpened={!!selectedTicket}/>
-                {!selectedTicket && activeSupportTab === 1 && <NewTicket/>}
+                {!selectedTicket && activeSupportTab === 1 && <NewTicket onAttachClickHandler={this.onAttachClickHandler}/>}
                 {!selectedTicket && activeSupportTab === 2 && <AllQuestions/>}
                 {selectedTicket && <OpenedTicket onAttachClickHandler={this.onAttachClickHandler}/>}
             </Wrapper>
