@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 
-import PersonalInfo from './PersonalInfo';
+import PersonalData from './PersonalData';
 import Password from './Password';
 
 
@@ -14,7 +14,7 @@ class Settings extends React.Component {
             <Wrapper className="Verification">
                 <Head>Settings</Head>
                 <MainWrapper>
-                    <PersonalInfo/>
+                    <PersonalData/>
                     <Password/>
                 </MainWrapper>
             </Wrapper>

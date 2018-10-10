@@ -3,42 +3,37 @@ import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
 
-const FieldPassword = ({labelText, placeholder, options, name, value, disabled, errortext}) => {
+const InputText = ({placeholder, options, name, value, disabled, type, errortext}) => {
 
     return (
         <Wrapper>
-            <StyledLabel>{labelText}</StyledLabel>
-            <StyledInput
-                value={value}
-                placeholder={placeholder}
-                className="Field"
-                type="password"
-                name={name}
-                errortext={errortext}
-                readOnly={disabled === true ? true : false}
-                options={options}/>
+            <StyledInput 
+                value={value} 
+                placeholder={placeholder} 
+                className="Field" 
+                type={type || 'text'} 
+                name={name} 
+                errortext={errortext} 
+                readOnly={disabled === true ? true : false} 
+                options={options}/> 
             <StyledError>{errortext}</StyledError>
         </Wrapper>
     );
 }
 
 
-export default FieldPassword;
+export default InputText;
 
 const Wrapper = styled.div`
     position: relative;
-    height: 100%;
-`;
-
-const StyledLabel = styled.label`
-    color: #0a0a0a;
-    display: block;
-    margin-bottom: 13px;
+    height: 45px;
 `;
 
 const StyledInput = styled(Cleave)`
     color: #233539;
+    font-size: 16px;
     font-weight: 600;
+    height: 100%;
     padding: 0 20px;
     display: block;
     height: 100%;
