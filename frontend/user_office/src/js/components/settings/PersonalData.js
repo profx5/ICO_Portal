@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 import ClipboardJS from 'clipboard';
 
-import FieldText from './../common/FieldText';
-import FieldTextSpan from './../common/FieldTextSpan';
+import InputText from './components/InputText';
+import InputLabel from './components/InputLabel';
 import Button from './../common/Button';
 
 import * as UserActions from './../../actions/UserActions';
@@ -13,7 +13,7 @@ import * as UIActions from './../../actions/UIActions';
 import copyIcon from './../../../img/icon_copy.svg';
 
 
-class PersonalInfo extends React.Component {
+class PersonalData extends React.Component {
 
     constructor() {
         super();
@@ -67,30 +67,34 @@ class PersonalInfo extends React.Component {
                 <form onSubmit={this.changeEmail}>
                     <InputSet>
                         <InputWrapper>
-                            <FieldText disabled value={email} labelText="Email"/>
+                            <InputLabel>Email</InputLabel>
+                            <InputText disabled value={email}/>
                         </InputWrapper>
                         <InputWrapper>
-                            <FieldText errortext={errortext.email} labelText="New Email" type="email" name='email'/>
+                            <InputLabel>New Email</InputLabel>
+                            <InputText errortext={errortext.email} type="email" name='email'/>
                         </InputWrapper>
-                        <ButtonWrapper>
-                            <Button text="Change Email" submit={true} />
-                        </ButtonWrapper>
+                        <InputWrapper></InputWrapper>
+                        <InputWrapper>
+                            <Button text="Change Email" submit={true}/>
+                        </InputWrapper>
                     </InputSet>
                 </form>
                 <InputSet>
                     <InputWrapper fullWidth>
-                        <FieldTextSpan
-                            id="EthAccount"
-                            children={<IconCopy className="CopyBtn" data-clipboard-target="#EthAccount" onClick={this.copyOnClickHandler}/>}
-                            value={ethAccount}
-                            labelText="Ethereum wallet address"
-                            disabled
-                        />
+                        <InputLabel>Ethereum wallet address</InputLabel>
+                        <StyledTextField className="field-ethAccount" id="EthAccount">
+                            {ethAccount || 'No address has been added!'}
+                            {ethAccount && <IconCopy className="CopyBtn" data-clipboard-target="#EthAccount" onClick={this.copyOnClickHandler}/>}
+                        </StyledTextField>
                     </InputWrapper>
                     {!ethAccount && 
-                        <ButtonWrapper>
-                            <Button text="Add ETH account" clickHandler={showSetAccountPopup} />
-                        </ButtonWrapper>
+                        <React.Fragment>
+                            <InputWrapper></InputWrapper>
+                            <InputWrapper>
+                                <Button text="Add ETH account" clickHandler={showSetAccountPopup} />
+                            </InputWrapper>
+                        </React.Fragment>
                     }
                 </InputSet>
 
@@ -114,12 +118,12 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PersonalInfo)
+export default connect(mapStateToProps, mapDispatchToProps)(PersonalData)
 
 const Wrapper = styled.div`
     flex: 1;
     height: auto;
-    padding: 42px 30px 42px;
+    padding: 42px 30px 50px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
@@ -140,28 +144,37 @@ const InputSet = styled.div`
     justify-content: space-between;
     align-items: flex-start;
     position: relative;
-    margin-bottom: 10px;
 `;
 
 const InputWrapper = styled.div`
-    height: 45px;
     flex-basis: ${props => props.fullWidth ? '100%' : '48%'};
-
-    &:not(:last-child) {
-    margin-bottom: 70px;
-    }
-    &:last-child {
     margin-bottom: 40px;
+    position: relative;
+    &:only-child {
+        margin-bottom: 0;
+    }
+    input, button {
+        min-height: 45px;
     }
 `;
 
-const ButtonWrapper = styled.div`
+const StyledTextField = styled.div`
+    font-weight: 600;
+    font-size: 16px;
+    color: rgba(35,53,57,.3);
+    padding-left: 20px;
+    padding-right: 48px;
+    display: flex;
+    align-items: center;
+    height: 100%;
     width: 100%;
-    height: 40px;
-    border-radius: 2px;
-    border: 1px solid #d6dfe6;
+    background: #ffffff;
+    border: 1px solid #EAEFF2;
     position: relative;
+    word-break: break-all;
+    min-height: 45px;
 `;
+
 
 const IconCopy = styled.span`
     display: block;

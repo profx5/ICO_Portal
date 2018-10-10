@@ -2,8 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
+import InputLabel from './components/InputLabel';
+import InputText from './components/InputText';
 import Button from './../common/Button';
-import FieldPassword from './../common/FieldPassword';
 
 import * as UserActions from './../../actions/UserActions';
 
@@ -74,19 +75,22 @@ class Password extends React.Component {
                 <Title>Password</Title>
                 <InputSet>
                     <InputWrapper>
-                        <FieldPassword errortext={errortext.old_password} labelText="Old password" name="old_password"/>
-                    </InputWrapper>
-                    <InputWrapper></InputWrapper>
-                    <InputWrapper>
-                        <FieldPassword equal={passwordsEqual} errortext={errortext.new_password1} labelText="New password" name="new_password1"/>
+                        <InputLabel>Old password</InputLabel>
+                        <InputText type="password" errortext={errortext.old_password} name="old_password"/>
                     </InputWrapper>
                     <InputWrapper>
-                        <FieldPassword errortext={errortext.new_password2} equal={passwordsEqual} labelText="Confirm password" name="new_password2"/>
+                        <InputLabel>New password</InputLabel>
+                        <InputText type="password" equal={passwordsEqual} errortext={errortext.new_password1} name="new_password1"/>
+                    </InputWrapper>
+                    <InputWrapper>
+                        <InputLabel>Confirm password</InputLabel>
+                        <InputText type="password" errortext={errortext.new_password2} equal={passwordsEqual} name="new_password2"/>
+                    </InputWrapper>
+                    <InputWrapper>
+                        <InputLabel>&nbsp;</InputLabel>
+                        <Button text="Change password" submit={true}/>
                     </InputWrapper>
                 </InputSet>
-                <ButtonWrapper>
-                    <Button text="Change password" submit={true}/>
-                </ButtonWrapper>
             </Wrapper>
         )
     }
@@ -109,7 +113,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Password)
 const Wrapper = styled.form`
     flex: 1;
     height: auto;
-    padding: 42px 30px 42px;
+    padding: 42px 30px 70px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
@@ -133,21 +137,13 @@ const InputSet = styled.div`
 `;
 
 const InputWrapper = styled.div`
-    height: 45px;
     flex-basis: ${props => props.fullWidth ? '100%' : '48%'};
-
-    &:not(:last-child) {
-    margin-bottom: 70px;
-    }
-    &:last-child {
     margin-bottom: 40px;
-    }
-`;
-
-const ButtonWrapper = styled.div`
-    width: 100%;
-    height: 40px;
-    border-radius: 2px;
-    border: 1px solid #d6dfe6;
     position: relative;
+    &:nth-last-of-type(1), &:nth-last-of-type(2) {
+        margin-bottom: 0;
+    }
+    input, button {
+        min-height: 45px;
+    }
 `;
