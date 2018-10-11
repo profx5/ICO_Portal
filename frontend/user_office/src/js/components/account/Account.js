@@ -2,8 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 
-import PersonalData from './PersonalData';
+import AccountInfo from './AccountInfo';
 import Password from './Password';
+import VerificationInfo from './VerificationInfo';
 
 
 class Settings extends React.Component {
@@ -12,11 +13,18 @@ class Settings extends React.Component {
 
         return (
             <Wrapper className="Verification">
-                <Head>Settings</Head>
+                <HeaderInner>
+                    <Head>Account setup</Head>
+                </HeaderInner>
                 <MainWrapper>
-                    <PersonalData/>
+                    <AccountInfo/>
                     <Password/>
                 </MainWrapper>
+                <div>
+                    <VerificationInfo
+                        verificationStages={['Settings__accountInfo', 'Settings__password']} 
+                        stages={['Account information', 'Password']}/>
+                </div>
             </Wrapper>
         )
     }
@@ -33,24 +41,27 @@ const Wrapper = styled.div`
     flex: 1;
     height: calc(100% - 100px);
     margin-left: 60px;
-    padding-bottom: 73px;
+    padding-bottom: 90px;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
 `;
 
+const HeaderInner = styled.div`
+    flex-basis: 100%;
+    margin-top: 60px;
+    margin-bottom: 40px;
+`;
+
 const Head = styled.h2`
     font-size: 38px;
     line-height: 1;
-    font-weight: 500;
+    font-weight: 400;
     color: #233539;
     letter-spacing: -1.1px;
-    margin-top: 34px;
-    flex-basis: 100%;
-    margin-bottom: 45px;
 `;
 
 const MainWrapper = styled.div`
     flex: 1;
-    max-width: 620px;
+    max-width: 720px;
 `;

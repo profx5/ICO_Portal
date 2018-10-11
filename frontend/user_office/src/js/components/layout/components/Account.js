@@ -57,7 +57,7 @@ const Account = ({
                     </EmailInfo>
                     <NavList>
                         <NavListItem onClick={dropdownAccountClickHandler}>
-                            <Link to="/user_office/settings">Account settings</Link>
+                            <Link to="/user_office/account">Account settings</Link>
                         </NavListItem>
                         <NavListItem onClick={dropdownAccountClickHandler}>
                             {stepOnePassed &&

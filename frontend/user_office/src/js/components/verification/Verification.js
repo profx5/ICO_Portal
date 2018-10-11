@@ -265,7 +265,7 @@ const Wrapper = styled.form`
     flex: 1;
     height: calc(100% - 100px);
     margin-left: 60px;
-    padding-bottom: 73px;
+    padding-bottom: 90px;
     display: flex;
     flex-flow: row wrap;
     input, button {
@@ -282,6 +282,8 @@ const HeaderInner = styled.div`
     justify-content: space-between;
     align-items: center;
     max-width: 720px;
+    margin-top: 60px;
+    margin-bottom: 40px;
 `;
 
 const Head = styled.h2`
@@ -290,8 +292,6 @@ const Head = styled.h2`
     font-weight: 400;
     color: #233539;
     letter-spacing: 0.8px;
-    margin-top: 40px;
-    margin-bottom: 40px;
 `;
 
 const MainWrapper = styled.div`
