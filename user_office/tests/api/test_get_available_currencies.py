@@ -18,5 +18,6 @@ class TestGetAvailableCurrencies(APITestCase):
         self.assertEqual(response.data, [
             {'code': 'ETH', 'name': 'Ethereum', 'rate': Decimal('720.11418839')},
             {'code': 'LTC', 'name': 'Litecoin', 'rate': Decimal('151.43323231')},
-            {'code': 'DOGE', 'name': 'Dogecoin', 'rate': Decimal('0.00233829')}
+            {'code': 'DOGE', 'name': 'Dogecoin', 'rate': Decimal('0.00233829')},
+            {'code': 'DAI', 'name': 'DAI', 'rate': 0}
         ])
