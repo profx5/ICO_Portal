@@ -15,7 +15,7 @@ import Transactions from './../transactions/Transactions'
 import Payment from './../payment/Payment';
 import Support from './../support/Support';
 import Verification from './../verification/Verification';
-import Settings from './../settings/Settings';
+import Account from './../account/Account';
 import Referrals from './../referrals/Referrals';
 
 import SetAccount from './SetAccount';
@@ -75,7 +75,7 @@ class Layout extends Component {
                         <Route path="/user_office/support/ticket/:ticket" component={Support}/>
                         <Route path="/user_office/support" component={Support}/>
                         <Route path="/user_office/verification" component={Verification}/>
-                        <Route path="/user_office/settings" component={Settings}/>
+                        <Route path="/user_office/account" component={Account}/>
                         <Route path="/user_office/referrals" component={Referrals}/>
                     </Switch>
                     {showSetAccountPopup && <SetAccount/>}

@@ -13,7 +13,7 @@ import * as UIActions from './../../actions/UIActions';
 import copyIcon from './../../../img/icon_copy.svg';
 
 
-class PersonalData extends React.Component {
+class AccountInfo extends React.Component {
 
     constructor() {
         super();
@@ -62,8 +62,8 @@ class PersonalData extends React.Component {
         const {errortext} = this.state;
 
         return (
-            <Wrapper className="Verification__personalData">
-                <Title>Personal Data</Title>
+            <Wrapper className="Settings__accountInfo">
+                <Title>Account information</Title>
                 <form onSubmit={this.changeEmail}>
                     <InputSet>
                         <InputWrapper>
@@ -118,12 +118,12 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PersonalData)
+export default connect(mapStateToProps, mapDispatchToProps)(AccountInfo)
 
 const Wrapper = styled.div`
     flex: 1;
     height: auto;
-    padding: 42px 30px 50px;
+    padding: 42px 55px 50px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;

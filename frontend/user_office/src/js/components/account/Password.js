@@ -71,7 +71,7 @@ class Password extends React.Component {
         const {passwordsEqual, errortext} = this.state;
 
         return (
-            <Wrapper className="Verification__password" onSubmit={this.changePasswordHandler}>
+            <Wrapper className="Settings__password" onSubmit={this.changePasswordHandler}>
                 <Title>Password</Title>
                 <InputSet>
                     <InputWrapper>
@@ -113,11 +113,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(Password)
 const Wrapper = styled.form`
     flex: 1;
     height: auto;
-    padding: 42px 30px 70px;
+    padding: 42px 55px 70px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
-    margin-bottom: 30px;
 `;
 
 const Title = styled.h3`
