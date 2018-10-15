@@ -9,7 +9,9 @@ TRANSACTION_STATE_CHOICES = (('SENT', 'Sent'),
                              ('PREPARED', 'Prepared'),
                              ('FAILED', 'Failed'))
 
-TRANSACTION_TYPE_CHOICES = [('PASS_KYC', 'pass kyc')]
+TRANSACTION_TYPE_CHOICES = (
+    ('PASS_KYC', 'pass kyc'),
+)
 
 
 class Transaction(models.Model):

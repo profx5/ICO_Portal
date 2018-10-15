@@ -12,14 +12,19 @@ class FilterNotFound(Left):
         return FilterNotFound(self._get_value())
 
 
-class GetEvents(ServiceObject):
+class BaseGetEvents(ServiceObject):
     start_block = 0
+    contract_class = None
+    from_contract = None
+    filter_class = None
 
     def __init__(self):
-        self.contract = TokenContract()
+        self.contract = self.contract_class()
 
     def find_events_processing(self):
-        return EventsProcessing.objects.order_by('last_update_at').last()
+        return EventsProcessing.objects \
+                .filter(from_contract=self.from_contract) \
+                .order_by('last_update_at').last()
 
     def create_events_processing(self, context):
         try:
@@ -28,7 +33,8 @@ class GetEvents(ServiceObject):
             return self.fail(e)
 
         events_processing = EventsProcessing(from_block=context.from_block,
-                                             filter_id=raw_filter.filter_id)
+                                             filter_id=raw_filter.filter_id,
+                                             from_contract=self.from_contract)
 
         try:
             events_processing.save()
@@ -38,7 +44,7 @@ class GetEvents(ServiceObject):
             return self.fail(e)
 
     def wrap_filter(self, context):
-        events_filter = TransfersFilter(self.contract.web3, context.events_processing.filter_id)
+        events_filter = self.filter_class(self.contract.web3, context.events_processing.filter_id)
 
         return self.success(events_filter=events_filter)
 
@@ -114,3 +120,9 @@ class GetEvents(ServiceObject):
 
         return result | \
             self.save_max_block
+
+
+class GetEvents(BaseGetEvents):
+    start_block = 0
+    contract_class = TokenContract
+    filter_class = TransfersFilter

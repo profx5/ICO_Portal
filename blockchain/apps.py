@@ -25,3 +25,7 @@ class BlockchainConfig(AppConfig):
         from ico_portal.celery import app
 
         app.autodiscover_tasks(['blockchain.ico'], force=True)
+
+        for currency in Currencies._instances:
+            if getattr(currency, 'tasks', False):
+                app.autodiscover_tasks([f'blockchain.currencies.{currency.module}'], force=True)
