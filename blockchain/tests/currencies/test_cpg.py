@@ -1,16 +1,15 @@
+import urllib
+import responses
 from oslash import Right, Left
 from decimal import Decimal
-from unittest.mock import patch
 from uuid import UUID
 
 from ..base import BlockChainTestCase
 from django.test.client import RequestFactory
-from blockchain.currencies.coinpayments.services.process_ipn import ProcessIPN, \
-    SkipIPN
-from blockchain.currencies.coinpayments.services.get_account import GetAccount
+from blockchain.currencies.cpg.services import GetAccount
+from blockchain.currencies.cpg.services.process_ipn import ProcessIPN, SkipIPN
 from blockchain.currencies import Currencies
-from user_office.factories import InvestorFactory, PhaseFactory, ExchangeRateFactory, \
-    AccountFactory, PaymentFactory
+from user_office.factories import InvestorFactory, AccountFactory, ExchangeRateFactory, PaymentFactory
 from user_office.models import Payment, TokensMove, Transfer, Account, Transaction
 
 
@@ -19,38 +18,29 @@ class TestProcessIPN(BlockChainTestCase):
     setup_contracts = ['price_oracle', 'token', 'crowdsale']
 
     request_data = {
-        'ipn_version': '1.0',
-        'ipn_id': 'f790dc4cc3f0e5f565efe50593de8cc5',
-        'ipn_mode': 'hmac',
-        'merchant': '69d94a11a25bc1245847e2c5175cd254',
-        'ipn_type': 'deposit',
-        'address': 'mqZutf2dbv2oW9KzTM9NpiimhpqWAYLuoG',
-        'txn_id': '007b6fb10f7906ea2ae8e99c62434dfaf0b70c89c1e0e7b8c628dca329cfad03',
-        'status': '100',
-        'status_text': 'Deposit confirmed',
-        'currency': 'LTC',
-        'amount': '0.10000000',
-        'amounti': '10000000',
-        'fee': '0.00050000',
-        'feei': '50000',
-        'confirms': '0'
+        'address': 'mwHHRbLcC394T7vsLQZVh8FsB3QkDNRKK9',
+        'tx_id': '25705000a564b7852947faa1fea2987143410bb3ada53458b6eead67e7469d60',
+        'code': '100',
+        'block_hash': '000000004c3604d758cba41c30c1f2be2ffa3e730a3017ded08078dc422a614e',
+        'confirmations': '6',
+        'value': '0.39654376'
     }
 
-    signature = '4e1f63eb7c5bfb68433408893944f14a2b1ca9ff1d3a3e0d38aaa70077ae7c26ba781942e485d4a8b741dbe57289401e0c3b44d786cc4a79cc7fca6b72065a5c'
+    signature = 'e9d9b8dd920acb8bc3cb6878f15e178569aff0e66b9545bd6d64f77e3ff27568' \
+                '0a6462f93ef8b5bbf1ea06fba9b68f6d8d97de3a3218049ae0236daff52a5e0f'
 
     def setUp(self):
         super().setUp()
 
         self.investor = InvestorFactory(eth_account=self.account['address'])
-        self.phase = PhaseFactory(bonus_percents=40)
-        self.exchange_rate = ExchangeRateFactory(currency='LTC', rate=Decimal('142321.43610'))
+        self.exchange_rate = ExchangeRateFactory(currency='BTC', rate=Decimal('142321.43610'))
         self.account = AccountFactory(investor=self.investor,
-                                      currency='LTC',
-                                      address='mqZutf2dbv2oW9KzTM9NpiimhpqWAYLuoG')
+                                      currency='BTC',
+                                      address='mwHHRbLcC394T7vsLQZVh8FsB3QkDNRKK9')
 
         self.request_factory = RequestFactory()
 
-        self.settings = Currencies.get_currency('LTC')
+        self.settings = Currencies.get_currency('BTC')
 
     def test_successful_processing(self):
         request = self.request_factory.post('/', self.request_data, HTTP_HMAC=self.signature)
@@ -66,7 +56,7 @@ class TestProcessIPN(BlockChainTestCase):
 
         self.assertEqual(transaction.data,
                          '0xa3fc81cb00000000000000000000000073015966604928a312f79f7e69291a656cb'
-                         '88602000000000000000000000000000000000000000000000000000000000015b76e')
+                         '886020000000000000000000000000000000000000000000000000000000000561d94')
         self.assertIsNone(transaction.nonce)
         self.assertEqual(transaction.value, Decimal('0'))
         self.assertIsNone(transaction.from_account)
@@ -100,64 +90,39 @@ class TestProcessIPN(BlockChainTestCase):
         self.assertEqual(payments.count(), 1)
 
         payment = payments.first()
-        self.assertEqual(payment.currency, 'LTC')
-        self.assertEqual(payment.payer_account, 'mqZutf2dbv2oW9KzTM9NpiimhpqWAYLuoG')
-        self.assertEqual(payment.amount, Decimal('0.1'))
-        self.assertEqual(payment.amounti, Decimal('10000000'))
-        self.assertEqual(payment.txn_id, '007b6fb10f7906ea2ae8e99c62434dfaf0b70c89c1e0e7b8c628dca329cfad03')
+        self.assertEqual(payment.currency, 'BTC')
+        self.assertEqual(payment.payer_account, 'mwHHRbLcC394T7vsLQZVh8FsB3QkDNRKK9')
+        self.assertEqual(payment.amount, Decimal('0.39654376'))
+        self.assertEqual(payment.amounti, Decimal('39654376'))
+        self.assertEqual(payment.txn_id, '25705000a564b7852947faa1fea2987143410bb3ada53458b6eead67e7469d60')
         self.assertEqual(payment.received_at, self.utcnow)
         self.assertEqual(payment.tokens_move, tokens_move)
-        self.assertEqual(payment.usdc_value, Decimal('1423214'))
+        self.assertEqual(payment.usdc_value, Decimal('5643668'))
         self.assertEqual(payment.rate_usdc, Decimal('14232144'))
         self.assertIsNone(payment.bonus_percent)
         self.assertIsNone(payment.bonus_ids)
 
     def test_invalid_signature(self):
-        request = self.request_factory.post('/',
-                                            self.request_data,
-                                            HTTP_HMAC='python')
-
+        request = self.request_factory.post('/', self.request_data, HTTP_HMAC='python')
         result = ProcessIPN(self.settings)(request)
 
         self.assertTrue(isinstance(result, Left))
         self.assertEqual(result.value, 'Invalid signature')
 
-    def test_invalid_merchant(self):
-        request = self.request_factory.post('/',
-                                            dict(self.request_data, merchant='0'),
-                                            HTTP_HMAC=self.signature)
+    def test_invalid_code(self):
+        request_data = {**self.request_data, 'code': 10}
+        signature = 'f0239e4821d633fba535033f573e428a567c0c300bdfbcec10810bfc04eaeae1' \
+                    '35f4b4d5b9e12b6f04b93edb9793730ec1fd36f7c53434cc01ce1cd791e4d20f'
+
+        request = self.request_factory.post('/', request_data, HTTP_HMAC=signature)
 
         result = ProcessIPN(self.settings)(request)
-
-        self.assertTrue(isinstance(result, Left))
-        self.assertEqual(result.value, 'Invalid request merchant')
-
-    def test_invalid_status(self):
-        request = self.request_factory.post('/',
-                                            dict(self.request_data, status=3),
-                                            HTTP_HMAC=self.signature)
-
-        result = ProcessIPN(self.settings)(request)
-
-        self.assertTrue(isinstance(result, SkipIPN))
-        self.assertEqual(result.value, 'Invalid status')
-
-    def test_invalid_type(self):
-        request = self.request_factory.post('/',
-                                            dict(self.request_data, ipn_type='button'),
-                                            HTTP_HMAC=self.signature)
-
-        result = ProcessIPN(self.settings)(request)
-
-        self.assertTrue(isinstance(result, SkipIPN))
-        self.assertEqual(result.value, 'Invalid ipn_type')
+        self.assertIsInstance(result, SkipIPN)
 
     def test_processed_payment(self):
-        request = self.request_factory.post('/',
-                                            self.request_data,
-                                            HTTP_HMAC=self.signature)
+        request = self.request_factory.post('/', self.request_data, HTTP_HMAC=self.signature)
 
-        PaymentFactory(external_id=self.request_data['ipn_id'])
+        PaymentFactory(external_id=self.request_data['tx_id'])
 
         result = ProcessIPN(self.settings)(request)
         self.assertTrue(isinstance(result, SkipIPN))
@@ -170,32 +135,29 @@ class TestGetAccount(BlockChainTestCase):
     def setUp(self):
         self.investor = InvestorFactory(eth_account=self.investor_eth_address)
 
-        self.settings = Currencies.get_currency('LTC')
+        self.settings = Currencies.get_currency('BTC')
 
     def test_existing_account(self):
         account = AccountFactory(investor=self.investor,
-                                 currency='LTC')
+                                 currency='BTC')
 
         result = GetAccount()(self.investor, self.settings)
 
         self.assertTrue(isinstance(result, Right))
         self.assertEqual(result.value.account, account)
 
+    @responses.activate
     def test_non_existing_account(self):
-        response = {
-            "error": "ok",
-            "result": {
-                "address": "LitecoinAddress",
-                "pubkey": "",
-                "dest_tag": 100,
+        responses.add(
+            method='POST',
+            url='http://cpg_host:8080/api/get_account/',
+            json={
+                'success': True,
+                'account': 'ms1kWBYg35mCCsfaSEXaGiYegk9JsYkbEJ'
             }
-        }
+        )
 
-        def stub_get_coinpayments_account(self, context):
-            return self.success(response=response)
-
-        with patch.object(GetAccount, 'get_coinpayments_account', new=stub_get_coinpayments_account):
-            result = GetAccount()(self.investor, self.settings)
+        result = GetAccount()(self.investor, self.settings)
 
         self.assertTrue(isinstance(result, Right))
 
@@ -207,5 +169,12 @@ class TestGetAccount(BlockChainTestCase):
         self.assertEqual(Account.objects.first(), account)
 
         self.assertEqual(account.investor, self.investor)
-        self.assertEqual(account.currency, 'LTC')
-        self.assertEqual(account.address, 'LitecoinAddress')
+        self.assertEqual(account.currency, 'BTC')
+        self.assertEqual(account.address, 'ms1kWBYg35mCCsfaSEXaGiYegk9JsYkbEJ')
+
+        self.assertEqual(responses.calls[0].request.url, 'http://cpg_host:8080/api/get_account/')
+        self.assertEqual(urllib.parse.unquote(responses.calls[0].request.body),
+                         'notify_url=http://localhost:8000/cpg_ipn/btc/')
+
+        headers = responses.calls[0].request.headers
+        self.assertEqual(headers['CPG_API_KEY'], 'KBMwMKJ748JH5v0CTHJ71Q')

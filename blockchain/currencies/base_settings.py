@@ -9,3 +9,6 @@ class BaseSettings:
             return config[key]
         else:
             self.__getattribute__(key)
+
+    def get_pay_address(self, investor):
+        raise NotImplementedError
