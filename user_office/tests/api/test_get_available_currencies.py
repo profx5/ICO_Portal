@@ -20,5 +20,6 @@ class TestGetAvailableCurrencies(APITestCase):
             {'code': 'ETH', 'name': 'Ethereum', 'rate': Decimal('720.11418839')},
             {'code': 'LTC', 'name': 'Litecoin', 'rate': Decimal('151.43323231')},
             {'code': 'DOGE', 'name': 'Dogecoin', 'rate': Decimal('0.00233829')},
-            {'code': 'BTC', 'name': 'Bitcoin', 'rate': Decimal('6802.43323231')}
+            {'code': 'BTC', 'name': 'Bitcoin', 'rate': Decimal('6802.43323231')},
+            {'code': 'DAI', 'name': 'DAI', 'rate': Decimal('1')}
         ])

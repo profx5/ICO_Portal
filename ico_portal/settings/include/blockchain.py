@@ -35,10 +35,10 @@ CURRENCIES = {
         'ipn_secret': 'q123q123q123',
         'public_key': '3eaf230a98bd62a69305f1d06ca50f69095be5d23bef32c06b328eb0f134129f',
         'private_key': '87cbfc69BAB5fbdC910e9080b363d63352fc4fAdcDad46280b80767537849e24'
-    },
+    }
 }
 
-TXN_TRACKER_RESEND_SECONDS = 600 # 10 minutes
+TXN_TRACKER_RESEND_SECONDS = 600  # 10 minutes
 RESEND_GAS_PRICE_FACTOR = 1.1
 
 # Celery

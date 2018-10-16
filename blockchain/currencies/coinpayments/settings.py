@@ -36,9 +36,4 @@ class Settings(BaseSettings):
             return HttpResponse(result.value, status=422)
 
     def get_pay_address(self, investor):
-        result = GetAccount()(investor, self)
-
-        if isinstance(result, Right):
-            return Right(result.value.account.address)
-        else:
-            return result
+        return (lambda result: result.account.address) % GetAccount()(investor, self)

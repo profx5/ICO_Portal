@@ -28,6 +28,9 @@ PRICE_ORACLE = {
     'address': '0x42ac0F356c84928258483631b740584E343B80b7',
     'sensivity': 3  # percents
 }
+DAI_CONTRACT = {
+    'address': '0x42ac0F356c84928258483631b740584E343B80b7'
+}
 
 CURRENCIES = {
     'ethereum': {
@@ -62,6 +65,14 @@ CURRENCIES = {
         'api_key': 'KBMwMKJ748JH5v0CTHJ71Q',
         'secret': '5ET4lEfvKLHcWOo3DyWgJodPFZG9udptq8cDzgyYPaFWILZOEWV+FjvQ60jVsCBoIzkz//Tp99joFo0S0cF1ig',
         'decimals': 8
+    },
+    'DAI': {
+        'module': 'DAI',
+        'code': 'DAI',
+        'name': 'DAI',
+        'address': '0x42ac0F356c84928258483631b740584E343B80b7',
+        'contract': 'DAI_CONTRACT',
+        'rate_usdc': 100
     }
 }
 

@@ -12,6 +12,8 @@ class EventsProcessing(models.Model):
 
     last_update_at = models.DateTimeField(default=datetime.utcnow)
 
+    from_contract = models.CharField(max_length=50, null=True, blank=True)
+
     objects = models.Manager()
 
     class Meta:

@@ -3,7 +3,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from blockchain.currencies import Currencies
-from user_office.models import ExchangeRate
 from ico_portal.utils.logger import LoggerMixin
 
 
@@ -14,22 +13,12 @@ class GetAvailableCurrencies(APIView, LoggerMixin):
 
     permission_classes = (KYCAndLoginPermission,)
 
-    def get_exchange_rate(self, currency):
-        obj = ExchangeRate.objects.get_rate_by_currency(currency)
-
-        if obj:
-            return obj.rate
-        else:
-            self.logger.error(f"Exchange rate for currenct {currency} not found")
-
-            return 0
-
     def get(self, request, *args, **kwargs):
         return Response(
             [
                 {"code": c.code,
                  "name": c.name,
-                 "rate": self.get_exchange_rate(c.code)}
+                 "rate": c.exchange_rate}
                 for c in Currencies.get_currencies()
             ]
         )
