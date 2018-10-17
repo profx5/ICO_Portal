@@ -57,6 +57,15 @@ CURRENCIES = {
         'public_key': '3eaf230a98bd62a69305f1d06ca50f69095be5d23bef32c06b328eb0f134129f',
         'private_key': '87cbfc69BAB5fbdC910e9080b363d63352fc4fAdcDad46280b80767537849e24'
     },
+    'bitcoin': {
+        'module': 'cpg',
+        'code': 'BTC',
+        'name': 'Bitcoin',
+        'cpg_url': 'http://cpg_host:8080',
+        'api_key': 'KBMwMKJ748JH5v0CTHJ71Q',
+        'secret': '5ET4lEfvKLHcWOo3DyWgJodPFZG9udptq8cDzgyYPaFWILZOEWV+FjvQ60jVsCBoIzkz//Tp99joFo0S0cF1ig',
+        'decimals': 8
+    },
     'DAI': {
         'module': 'DAI',
         'code': 'DAI',

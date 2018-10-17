@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from rest_framework.schemas import AutoSchema
 from oslash import Right
 
-from blockchain.currencies.coinpayments.services import GetAccount as GetAccountService
 from blockchain.currencies import Currencies
 from .auth import KYCAndLoginPermission
 
@@ -27,10 +26,10 @@ class GetAccount(APIView):
 
         currency = Currencies.get_currency(currency_code)
 
-        result = GetAccountService()(request.user, currency)
+        result = currency.get_pay_address(request.user)
 
         if isinstance(result, Right):
-            return Response(data={'success': True, 'address': result.value.account.address})
+            return Response(data={'success': True, 'address': result.value})
         else:
             return Response(data={'success': False, 'error': result.value},
                             status=422)

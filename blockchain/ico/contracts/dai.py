@@ -9,20 +9,6 @@ from ico_portal.utils.datetime import datetime
 class DAIContract(BaseContract):
     compiled_file_path = '{BASE_DIR}/solidity-contracts/contracts/DSToken.json'
 
-    def get_event_from_txn_hash(self, txn_hash):
-        receipt = self.web3.eth.getTransactionReceipt(txn_hash)
-
-        if not receipt:
-            self.logger.error(f'TXN receipt for transaction {txn_hash} not found')
-
-            return None
-
-        event = self.contract.events.Transfer().processReceipt(receipt)
-        if event:
-            value = self.web3.eth.getTransaction(txn_hash).value
-
-            return TokensPurchasedEvent(event[0], value)
-
     def get_filter(self, dst, from_block, to_block=None):
         return self.contract.events.Transfer.createFilter(
             fromBlock=from_block,

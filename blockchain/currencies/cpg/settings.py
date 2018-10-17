@@ -14,7 +14,7 @@ from .services import GetAccount
 class Settings(BaseSettings):
     @property
     def ipn_path(self):
-        return f'ipn/{self.code.lower()}/'
+        return f'cpg_ipn/{self.code.lower()}/'
 
     @property
     def ipn_url(self):
@@ -22,7 +22,7 @@ class Settings(BaseSettings):
 
     @property
     def urls(self):
-        return path(self.ipn_path, self.process_ipn, name='coinpayments_process_ipn')
+        return path(self.ipn_path, self.process_ipn, name='cpg_process_ipn')
 
     @method_decorator(csrf_exempt)
     def process_ipn(self, request):
@@ -31,9 +31,14 @@ class Settings(BaseSettings):
         result = service(request)
 
         if isinstance(result, Right) or isinstance(result, SkipIPN):
-            return HttpResponse('ok', status=200)
+            return HttpResponse('OK', status=200)
         else:
             return HttpResponse(result.value, status=422)
 
     def get_pay_address(self, investor):
-        return (lambda result: result.account.address) % GetAccount()(investor, self)
+        result = GetAccount()(investor, self)
+
+        if isinstance(result, Right):
+            return Right(result.value.account.address)
+        else:
+            return result
