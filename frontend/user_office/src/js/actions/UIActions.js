@@ -22,7 +22,7 @@ export const showSetAccountPopup = createAction('SHOW_SET_ACCOUNT_POPUP');
 export const hideSetAccountPopup = createAction('HIDE_SET_ACCOUNT_POPUP');
 export const changeActiveTab = createAction('CHANGE_ACTIVE_TAB', (tab => ({tab})));
 
-export const setOpenedTxn = createAction('SET_OPENED_TXN', (id => ({id})));
+export const openTransaction = createAction('OPEN_TRANSACTION', (id => ({id})));
 
 export const setOpenedTip = createAction('SET_OPENED_TIP', (id => ({id})));
 

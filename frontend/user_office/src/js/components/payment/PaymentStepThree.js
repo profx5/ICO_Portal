@@ -19,7 +19,7 @@ class PaymentStepThree extends React.Component {
         const tokens_info = [
             {
                 token: "ETH",
-                explorerUrl: "https://etherscan.io/address/",
+                explorerUrl: "https://rinkeby.etherscan.io/address/",
                 explorerName: "Etherscan",
                 perBlock: "15 seconds"
             }, {
