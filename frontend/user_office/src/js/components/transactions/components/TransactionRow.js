@@ -10,7 +10,7 @@ import iconReload from './../../../../img/shape.svg';
 const TransactionsRow = ({state, onIconClickHandler, openedTransaction, id, date, time, transferTxnHash, paymentTxnId, amount, currency, usdc_value, tokens, rate_usdc, bonus_percent}) => {
     const isTokenRise = tokens > 0 ? true : false;
     const chainResolver = {
-        ETH: 'https://rinkeby.etherscan.io/',
+        ETH: 'https://rinkeby.etherscan.io/tx/',
         BTC: 'https://www.blockchain.com/en/btc/tx/',
         LTCT: 'https://chain.so/tx/LTCTEST/'
     };
@@ -55,7 +55,7 @@ const TransactionsRow = ({state, onIconClickHandler, openedTransaction, id, date
                     </svg>
                 </div>
             </Cell>
-            {isOpened && 
+            {isOpened &&
                 <Cell className="TransactionContent">
                     <TransactionInfo
                         payementHashLink={payementHashLink}
@@ -63,7 +63,7 @@ const TransactionsRow = ({state, onIconClickHandler, openedTransaction, id, date
                         amount={parseFloat(amount)}
                         currency={currency}
                         rate_usdc={parseFloat(rate_usdc)}
-                        usdc_value={parseFloat(usdc_value)} 
+                        usdc_value={parseFloat(usdc_value)}
                         bonus_percent={parseFloat(bonus_percent)}
                         tokens={tokens}
                     />
@@ -127,7 +127,7 @@ const Cell = styled.div`
             &:hover {
                 background-color: rgba(0,0,0,.3);
             }
-        } 
+        }
     }
     &:nth-of-type(3) {
         flex-basis: 5%;
