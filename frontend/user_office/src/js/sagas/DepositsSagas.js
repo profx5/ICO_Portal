@@ -10,10 +10,7 @@ export class DepositsSagas {
 
             const response = yield call(axios, {
                 method: 'GET',
-                url: Api.getDeposits(),
-                params: {
-                    page: page
-                }
+                url: Api.getDeposits()
             })
 
             yield put(actions.getDepositsSuccess(response.data))

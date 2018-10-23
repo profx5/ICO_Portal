@@ -41,7 +41,7 @@ const Head = styled.h2`
 const BannerWrapper = styled.div`
     width: 100%;
     height: 309px;
-    background: url(${Banner}) no-repeat center;
+    background: url(${Banner}) no-repeat center left;
     background-size: cover;
     margin-top: 52px;
     border-radius: 3px;
