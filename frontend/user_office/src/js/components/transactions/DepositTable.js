@@ -22,17 +22,17 @@ class DepositTable extends Component {
 
     renderRows = (transactions) => {
         const {openedTransaction} = this.props;
-        return transactions.map((item, index) => {
 
+        return transactions.map((item, index) => {
             return (
-                <TransactionRow 
+                <TransactionRow
                     key={index}
                     id={index}
                     openedTransaction={openedTransaction}
                     onIconClickHandler={this.onIconClickHandler.bind(this, index)}
-                    state={item.getIn(['transfer', 'state'])} 
-                    date={moment(item.created_at).format('YYYY-MM-DD')}
-                    time={moment(item.created_at).format('HH:mm:ss')}
+                    state={item.getIn(['transfer', 'state'])}
+                    date={moment(item.get('created_at')).format('YYYY-MM-DD')}
+                    time={moment(item.get('created_at')).format('HH:mm:ss')}
                     transferTxnHash={item.getIn(['transfer', 'txn_hash'])}
                     paymentTxnId={item.getIn(['payment', '0', 'txn_id'])}
                     amount={parseFloat(item.getIn(['payment', '0', 'amount'])).toFixed(2)}
@@ -57,9 +57,9 @@ class DepositTable extends Component {
                         <div>USD value</div>
                         <div>Vera Tokens</div>
                     </Row>
-                    {deposits.size ? 
-                        this.renderRows(deposits) : 
-                        <div className="Table_text">You have no transactions yet</div>    
+                    {deposits.size ?
+                        this.renderRows(deposits) :
+                        <div className="Table_text">You have no transactions yet</div>
                     }
             </Table>
         )
