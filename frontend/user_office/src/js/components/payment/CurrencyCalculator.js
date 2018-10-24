@@ -34,7 +34,7 @@ class CurrencyCalculator extends React.Component {
         const {investAmount, investCurrencyRate, setUSDAmount, setTokensAmount} = this.props;
         let bonus = this.bonus;
         let totalUSD = investAmount * investCurrencyRate;
-        let totalTokens = totalUSD / 10;
+        let totalTokens = totalUSD / 2;
 
         if (totalUSD < 8000) bonus = 0;
         else if (totalUSD >= 150 && totalUSD < 1000) bonus = 20;
@@ -83,7 +83,6 @@ class CurrencyCalculator extends React.Component {
                                  onChangeHandler={this.investOnChangeHandler} header={header}
                                  currency={investCurrency}/>
                     <TokensInputWrapper data-currency="OGD">
-                        {/*<div className="head">Vera (Buy till 7 july and <span>get a 30% bonus!</span>)</div>*/}
                         <TokensInput>
                             {tokensAmount && tokensAmount.toFixed(2) || 0}
 
@@ -106,7 +105,7 @@ class CurrencyCalculator extends React.Component {
                             <li>Which is equal to {investAmount} * {investCurrencyRate} USD
                                 = {USDAmount.toFixed(2)} USD
                             </li>
-                            <li>Token base price = 10 USD</li>
+                            <li>Token base price = 2 USD</li>
                             {USDAmount >= 10 &&
                             <div>
                                 <li>Pre-Sale phase {bonus}% bonus applied so you get</li>

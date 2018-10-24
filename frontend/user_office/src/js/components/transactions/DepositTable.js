@@ -55,7 +55,7 @@ class DepositTable extends Component {
                         <div>Transaction</div>
                         <div>Amount</div>
                         <div>USD value</div>
-                        <div>Vera Tokens</div>
+                        <div>OGD Tokens</div>
                     </Row>
                     {deposits.size ?
                         this.renderRows(deposits) :

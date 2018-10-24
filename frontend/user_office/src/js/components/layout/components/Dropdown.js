@@ -9,15 +9,15 @@ const Dropdown = ({email, stepOnePassed, stepTwoPassed, stepThreePassed, showSet
 
             <StepsList>
                 <StepsListItem passed={stepOnePassed} onClick={!stepOnePassed ? showSetAccountPopup : undefined}>
-                    1.&nbsp;&nbsp;Provide your ETH address
+                    <span>1.&nbsp;&nbsp;Provide your ETH address</span>
                 </StepsListItem>
                 <StepsListItem passed={stepOnePassed ? stepTwoPassed : false}>
-                    {stepOnePassed && <Link onClick={dropdownAccountClickHandler} to='/user_office/verification/'>2.&nbsp;&nbsp;Submit KYC</Link>}
+                    {stepOnePassed && <Link onClick={dropdownAccountClickHandler} to='/user_office/verification/'><span>2.&nbsp;&nbsp;Submit KYC</span></Link>}
                     {!stepOnePassed && <span onClick={showSetAccount}>2.&nbsp;&nbsp;Submit KYC</span>}
                 </StepsListItem>
                 <StepsListItem passed={stepTwoPassed ? stepThreePassed : false}>
                     <Link onClick={dropdownAccountClickHandler} to='/user_office/payment/'>
-                        3.&nbsp;&nbsp;Buy tokens
+                        <span>3.&nbsp;&nbsp;Buy tokens</span>
                     </Link>
                 </StepsListItem>
             </StepsList>
