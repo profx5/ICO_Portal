@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import {Link, withRouter} from 'react-router-dom';
 
 import HeaderNav from './components/HeaderNav';
-import Account from './components/Account';
+import Balance from './components/Balance';
+import Steps from './components/Steps';
+import Dropdown from './components/Dropdown';
 
 import * as UIActions from './../../actions/UIActions';
 
@@ -34,13 +36,10 @@ class Header extends React.Component {
         const {
             email,
             accountDropdownShown,
-            stepsDropdownShown,
             showSetAccountPopup,
             ethAccount,
             kycState,
             tokensAmount,
-            tokenAddress,
-            crowdsaleAddress
         } = this.props;
 
         let stepOnePassed = ethAccount ? true : false;
@@ -62,23 +61,22 @@ class Header extends React.Component {
                     </VeraLogo>
                     <HeaderNav/>
                 </NavWrapper>
+
                 <HeaderUser>
-                    <Account
-                        email={email}
-                        tokensAmount={tokensAmount}
-                        isDropdownAccountOpen={accountDropdownShown}
-                        isDropdownStepsOpen={stepsDropdownShown}
-                        dropdownAccountClickHandler={this.dropdownAccountClickHandler}
-                        dropdownStepsClickHandler={this.dropdownStepsClickHandler}
-                        stepOnePassed={stepOnePassed}
-                        stepTwoPassed={stepTwoPassed}
-                        stepThreePassed={stepThreePassed}
-                        stepsPassed={passedStepsNumber}
-                        showSetAccountPopup={showSetAccountPopup}
-                        showSetAccount={this.showSetAccount} 
-                        tokenAddress={tokenAddress} 
-                        crowdsaleAddress={crowdsaleAddress}
-                    />
+                    <Balance amount={tokensAmount}/>
+                    <AccountInfo>
+                        <Steps onClickHandler={this.dropdownAccountClickHandler} stepsPassed={passedStepsNumber}/>
+                        {accountDropdownShown &&
+                            <Dropdown email={email}
+                            stepOnePassed={stepOnePassed}
+                            stepTwoPassed={stepTwoPassed}
+                            stepThreePassed={stepThreePassed}
+                            showSetAccount={this.showSetAccount}
+                            showSetAccountPopup={showSetAccountPopup}
+                            dropdownAccountClickHandler={this.dropdownAccountClickHandler}
+                            />
+                        }
+                    </AccountInfo>
                 </HeaderUser>
             </HeaderBlock>
         )
@@ -160,4 +158,23 @@ const HeaderUser = styled.div`
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+`;
+
+const AccountInfo = styled.div`
+    margin-left: 60px;
+    position: relative;
+    font-size: 15px;
+    color: rgba(50,60,71,.6);
+    &:before {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 69px;
+        background: #3d57aa;
+        opacity: .15;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: -30px;
+    }
 `;
