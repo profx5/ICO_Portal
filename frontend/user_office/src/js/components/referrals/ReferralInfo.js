@@ -32,7 +32,7 @@ class ReferralList extends React.Component {
         const shareIconBgStyle = {fill: 'white'};
         const shareLogoFillColor = "#3172fd";
         const referralLink = 'https://your.own/link';
-        const referralTitle = 'Vera';
+        const referralTitle = 'OGD';
         const referralText = 'Check this out';
         return (
             <Wrapper>
