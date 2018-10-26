@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Utils from './../../../utils/index';
 
 
-const ProgressBar = ({children, raisedAmountNum}) => {
+const ProgressBar = ({children, raisedAmountNum, tokenPrice}) => {
     const raisedAmountPercents =  raisedAmountNum / 260000;
 
     return (
@@ -12,7 +12,7 @@ const ProgressBar = ({children, raisedAmountNum}) => {
             <BarWrapper>
                 <Bar>
                     <InnerBar width={raisedAmountPercents >= 100 ? 100 : raisedAmountPercents}>
-                        <Point rate='1 OGD = 2 USD' data-raised-amount={Utils.splitDigits(Math.ceil(raisedAmountNum / 100)) + ' USD'}/>
+                        <Point rate={`1 OGD = ${tokenPrice} USD`} data-raised-amount={Utils.splitDigits(Math.ceil(raisedAmountNum / 100)) + ' USD'}/>
                     </InnerBar>
                     <Stage>
                         <div className="StageDesc">
@@ -162,8 +162,8 @@ const Stage = styled.div`
         }
     }
     &:nth-of-type(3) .StageDesc {
-        // right: 0 !important;
-        // left: unset !important;
+        right: 0 !important;
+        left: unset !important;
     }
     &:before {
         content: attr(data-rate);

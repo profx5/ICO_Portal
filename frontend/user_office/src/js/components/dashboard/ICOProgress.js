@@ -23,7 +23,7 @@ class ICOProgress extends React.Component {
     getPhasePercents = (current, goal) => current / goal * 100;
 
     render() {
-        const {gainedMoney, countdownTime} = this.props;
+        const {gainedMoney, countdownTime, tokenPrice} = this.props;
 
         const raisedAmountNum = Math.ceil(parseInt(gainedMoney, 10));
         const raisedAmountStr = Utils.splitDigits(Math.ceil(parseInt(gainedMoney, 10)/100)) + ' USD';
@@ -35,7 +35,7 @@ class ICOProgress extends React.Component {
                     <WrapperHeaderInfo>
                         <PartWrapper>
                             <DescHead>Base price:</DescHead>
-                            <Desc blue bold>1 OGD = 2 USD</Desc>
+                            <Desc blue bold>1 OGD = {tokenPrice} USD</Desc>
                         </PartWrapper>
                         <PartWrapper>
                             <DescHead>Deposit:</DescHead>
@@ -47,7 +47,7 @@ class ICOProgress extends React.Component {
                         </PartWrapper>
                     </WrapperHeaderInfo>
                 </Header>
-                <ProgressBar raisedAmountNum={raisedAmountNum}>
+                <ProgressBar tokenPrice={tokenPrice} raisedAmountNum={raisedAmountNum}>
                     <Timer countdownTime={countdownTime}/>
                 </ProgressBar>
                 <BonusInfoText>Bonuses are going to end up soon!</BonusInfoText>
@@ -60,7 +60,7 @@ class ICOProgress extends React.Component {
 };
 
 
-const mapStateToProps = ({Phase, ICOInfo, Timer}) => ({
+const mapStateToProps = ({Phase, ICOInfo, Timer, Invest}) => ({
 
     timerTime: Timer.get('timerTime'),
     phaseName: Phase.get('name'),
@@ -69,7 +69,8 @@ const mapStateToProps = ({Phase, ICOInfo, Timer}) => ({
     startTime: Phase.get('begin_date'),
     endTime: Phase.get('end_date'),
     bonusPercents: Phase.get('bonus_percents'),
-    countdownTime: ICOInfo.get('countdownTime')
+    countdownTime: ICOInfo.get('countdownTime'),
+    tokenPrice: Invest.get('tokenPrice')
 })
 
 const mapDispatchToProps = (dispatch) => ({

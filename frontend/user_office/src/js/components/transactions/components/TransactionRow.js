@@ -7,7 +7,7 @@ import iconCheckGreen from './../../../../img/check-green.svg';
 import iconReload from './../../../../img/shape.svg';
 
 
-const TransactionsRow = ({state, onIconClickHandler, openedTransaction, id, date, time, transferTxnHash, paymentTxnId, amount, currency, usdc_value, tokens, rate_usdc, bonus_percent}) => {
+const TransactionsRow = ({state, onIconClickHandler, openedTransaction, id, date, time, transferTxnHash, paymentTxnId, amount, currency, usdc_value, tokens, rate_usdc, bonus_percent, tokenPrice}) => {
     const isTokenRise = tokens > 0 ? true : false;
     const chainResolver = {
         ETH: 'https://rinkeby.etherscan.io/tx/',
@@ -58,6 +58,7 @@ const TransactionsRow = ({state, onIconClickHandler, openedTransaction, id, date
             {isOpened &&
                 <Cell className="TransactionContent">
                     <TransactionInfo
+                        tokenPrice={tokenPrice}
                         payementHashLink={payementHashLink}
                         transferHashLink={transferHashLink}
                         amount={parseFloat(amount)}

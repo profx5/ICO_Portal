@@ -31,10 +31,10 @@ class CurrencyCalculator extends React.Component {
     };
 
     updateTotalTokens = () => {
-        const {investAmount, investCurrencyRate, setUSDAmount, setTokensAmount} = this.props;
+        const {investAmount, investCurrencyRate, setUSDAmount, setTokensAmount, tokenPrice} = this.props;
         let bonus = this.bonus;
         let totalUSD = investAmount * investCurrencyRate;
-        let totalTokens = totalUSD / 2;
+        let totalTokens = totalUSD / tokenPrice;
 
         if (totalUSD < 8000) bonus = 0;
         else if (totalUSD >= 150 && totalUSD < 1000) bonus = 20;
@@ -62,6 +62,7 @@ class CurrencyCalculator extends React.Component {
 
     render() {
         const {
+            tokenPrice,
             investCurrency,
             investCurrencyRate,
             investAmount,
@@ -105,11 +106,11 @@ class CurrencyCalculator extends React.Component {
                             <li>Which is equal to {investAmount} * {investCurrencyRate} USD
                                 = {USDAmount.toFixed(2)} USD
                             </li>
-                            <li>Token base price = 2 USD</li>
+                            <li>Token base price = {tokenPrice} USD</li>
                             {USDAmount >= 10 &&
                             <div>
                                 <li>Pre-Sale phase {bonus}% bonus applied so you get</li>
-                                <li>{USDAmount.toFixed(2)} / 2 * {bonus}% = {tokensAmount.toFixed(2)} OGD</li>
+                                <li>{USDAmount.toFixed(2)} / {tokenPrice} * {bonus}% = {tokensAmount.toFixed(2)} OGD</li>
                             </div>
                             }
                             {USDAmount < 10 &&
@@ -148,6 +149,7 @@ const mapStateToProps = ({Currencies, Invest, UI, KYC, user}) => ({
     kycState: KYC.get('state'),
     openedTip: UI.get('openedTip'),
     ethAccount: user.get('eth_account'),
+    tokenPrice: Invest.get('tokenPrice')
 })
 
 const mapDispatchToProps = (dispatch) => ({
