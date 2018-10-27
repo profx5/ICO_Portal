@@ -12,7 +12,7 @@ export class InvestSagas {
                    receiverAccount,
                    value} = action.payload;
             const valueWei = ethToWei(value);
-
+            
             const txnHash = yield cps(sendTransaction, senderAccount, receiverAccount, valueWei);
 
             yield put(DepositsActions.createPreparedDepositRequest(value, txnHash));

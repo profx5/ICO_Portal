@@ -14,20 +14,18 @@ window.addEventListener('load', function() {
 
 export function canSendTransaction(userAccount) {
     if (typeof window.web3 === 'undefined') {
-        return [false, 'Install MetaMask'];
+        return [false, 'Sorry, but you should\'ve installed Metamask!'];
     } else if (!window.web3.eth.defaultAccount) {
-        return [false, 'Unlock MetaMask'];
-    } else if (!userAccount) {
-        return [false, 'Define Ethereum account'];
+        return [false, 'Please, unlock Metamask in order to use it!'];
     } else if (window.web3.eth.defaultAccount.toUpperCase() !== userAccount.toUpperCase()) {
-        return [false, 'Select MetaMask Ethereum account defined in your profile'];
+        return [false, 'Added Ethereum address differs from an address in Metamask!'];
     } else {
         return [true, ''];
     }
 }
 
 export function extractAccount() {
-    icoWeb3.eth.getAccounts();
+    return window.web3.eth.defaultAccount.toUpperCase();
 }
 
 export function sendTransaction(from, to, value, callback) {

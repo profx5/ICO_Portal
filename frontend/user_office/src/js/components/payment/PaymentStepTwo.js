@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import {canSendTransaction} from './../../../web3';
 import QRCode from 'qrcode';
 
 import Button from './../common/Button';
@@ -50,9 +51,15 @@ class PaymentStepTwo extends React.Component {
     };
 
     sendTransactionInit = () => {
-        const {crowdsaleAddress, investAmount, eth_account, sendTransactionInit} = this.props;
+        const {crowdsaleAddress, investAmount, eth_account, sendTransactionInit, showModal} = this.props;
+        let canSendTransactionResponse = canSendTransaction(eth_account);
 
-        sendTransactionInit({senderAccount: eth_account, receiverAccount: crowdsaleAddress, value: investAmount});
+        if (!canSendTransactionResponse[0]) {
+            showModal({
+                modalHead: 'Warning',
+                modalContent: canSendTransactionResponse[1]
+            })
+        } else sendTransactionInit({senderAccount: eth_account, receiverAccount: crowdsaleAddress, value: investAmount});
     };
 
     render() {
@@ -240,6 +247,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     sendTransactionInit(payload) {
         dispatch(InvestActions.sendTransactionInit(payload.senderAccount, payload.receiverAccount, payload.value))
+    },
+    showModal(payload) {
+        dispatch(UIActions.showModal(payload))
     }
 });
 
