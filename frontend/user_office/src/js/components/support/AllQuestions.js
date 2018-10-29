@@ -29,10 +29,16 @@ class AllQuestions extends React.Component {
     }
 
     render() {
+        const {tickets} = this.props;
+
         return (
             <Wrapper>
                 <TicketsList>
-                    <tbody>{this.renderTickets()}</tbody>
+                    <tbody>
+                        {tickets.length && this.renderTickets() || 
+                            <tr><td>There are no tickets yet...</td></tr>
+                        }
+                    </tbody>
                 </TicketsList>
             </Wrapper>
         )
