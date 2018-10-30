@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
+import { Formik, Field, Form } from "formik";
+import ValidationSchema from './utils/TicketCommentFormValidation';
 
 import Button from './../common/Button';
 import FilesAttacher from './../../utils/FilesAttacher';
+import ErrorMessage from './../common/ErrorMessage';
 
 import * as TicketActions from './../../actions/TicketActions';
 import * as FilesActions from './../../actions/FilesActions';
@@ -11,11 +14,12 @@ import * as FilesActions from './../../actions/FilesActions';
 
 class TicketCommentForm extends React.Component {
 
-    onSubmitHandler = (e) => {
-        e.preventDefault();
-        const data = new FormData(e.target);
-        this.props.createNewComment(data);
-        e.target.reset();
+    onSubmitHandler = (values, {resetForm}) => {
+        const form = document.querySelector('.TicketCommentForm');
+        const formData = new FormData(form);
+
+        this.props.createNewComment(formData);
+        resetForm({});
     };
 
     render() {
@@ -23,27 +27,47 @@ class TicketCommentForm extends React.Component {
 
         return (
             <Wrapper>
-                <Form onSubmit={this.onSubmitHandler} encType={'multipart/form-data'}>
-                <input type="hidden" name={'ticket'} value={selectedTicket.id}/>
-                    <CommentField placeholder="Your message here..." name="comment" required></CommentField>
-                    <div className="controls-container files-section files-section-comment">
-                        <div className="files-container">
-                            <FilesAttacher files={commentFiles} 
-                                    name="attachment" 
-                                    filesWrapper={document.querySelector('.files-section-comment')} 
-                                    uploadFileHandler={addCommentFile} 
-                                    removeFileHandler={removeCommentFile}/>
-                        </div>
-                        <div className="buttons-container">
-                            <div className="button-wrapper">
-                                <Button text="Attach file" clickHandler={this.props.onAttachClickHandler.bind(this,'attachment')} attach transparent/>
+                <Formik
+                    initialValues={{
+                        title: '',
+                        description: ''
+                    }} 
+                    validationSchema={ValidationSchema} 
+                    onSubmit={this.onSubmitHandler} 
+                    render={({errors, touched, values}) => (
+                        <Form className="TicketCommentForm" encType={'multipart/form-data'}>
+                            <input type="hidden" name={'ticket'} value={selectedTicket.id}/>
+
+                            <FormGroup>
+                                <CommentField component="textarea"
+                                    className={errors.comment && "isInvalid"}  
+                                    value={values.comment || ''} 
+                                    placeholder="Your message here..." 
+                                    name="comment"
+                                />
+                                {errors.comment && <ErrorMessage text={errors.comment}/>}
+                            </FormGroup>
+
+                            <div className="controls-container files-section files-section-comment">
+                                <div className="files-container">
+                                    <FilesAttacher files={commentFiles} 
+                                            name="attachment" 
+                                            filesWrapper={document.querySelector('.files-section-comment')} 
+                                            uploadFileHandler={addCommentFile} 
+                                            removeFileHandler={removeCommentFile}/>
+                                </div>
+                                <div className="buttons-container">
+                                    <div className="button-wrapper">
+                                        <Button text="Attach file" clickHandler={this.props.onAttachClickHandler.bind(this,'attachment')} attach transparent/>
+                                    </div>
+                                    <div className="button-wrapper">
+                                        <Button type="submit" text="Send"/>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="button-wrapper">
-                                <Button text="Send"/>
-                            </div>
-                        </div>
-                    </div>
-                </Form>
+                        </Form>
+                    )}
+                />
             </Wrapper>
         )
     }
@@ -100,11 +124,7 @@ const Wrapper = styled.div`
     }
 `;
 
-const Form = styled.form`
-    
-`;
-
-const CommentField = styled.textarea`
+const CommentField = styled(Field)`
     display: block;
     height: 180px;
     width: 100%;
@@ -120,4 +140,11 @@ const CommentField = styled.textarea`
         font-weight: 400;
         color: #233539;
     }
+    &.isInvalid {
+        border-color: rgb(242, 109, 109);
+    }
+`;
+
+const FormGroup = styled.div`
+    position: relative;
 `;
