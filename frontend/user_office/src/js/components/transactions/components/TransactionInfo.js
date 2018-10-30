@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import iconCheckGreen from './../../../../img/check-green.svg';
 
 
-const TransactionsInfo = ({transferHashLink, payementHashLink, amount, currency, rate_usdc, usdc_value, bonus_percent, tokens}) => {
+const TransactionsInfo = ({transferHashLink, payementHashLink, amount, currency, rate_usdc, usdc_value, bonus_percent, tokens, tokenPrice}) => {
     
     const rateUSD = (rate_usdc / 100).toFixed(2),
         USDValue = usdc_value.toFixed(2),
-        baseTokens = (USDValue / 2).toFixed(2),
-        bonusTokens = (USDValue / 2 * bonus_percent / 100).toFixed(2)
+        baseTokens = (USDValue / tokenPrice).toFixed(2),
+        bonusTokens = (USDValue / tokenPrice * bonus_percent / 100).toFixed(2)
 
     return (
         <Wrapper>
@@ -37,11 +37,14 @@ const TransactionsInfo = ({transferHashLink, payementHashLink, amount, currency,
                     <div className="Info_partContent">
 
                         <div>{`${amount} ${currency} x ` + rateUSD + " USD = " + USDValue + " USD"}<br/></div>
-                        <div>{"Phase bonus = " + bonus_percent + "%"}<br/></div>
-                        <div>Token base price = 2 USD <br/></div>
-                        <div>{"Base tokens: " + USDValue + " USD / 2 = " + baseTokens + " OGD"}<br/></div>
-                        <div>{"Bonus tokens: " + baseTokens + " x " + bonus_percent + "% = " + bonusTokens + " OGD"}<br/></div>
-                        <div>{"Total: " + tokens}<br/></div>
+                        <div>{`Phase bonus = ${bonus_percent}%`}<br/></div>
+                        <div>{`Token base price = ${tokenPrice} USD`}<br/></div>
+                        <div>{`Base tokens: ${USDValue} USD / ${tokenPrice} = ${baseTokens} OGD`}<br/></div>
+                        <div>{`Bonus tokens: ${baseTokens} x ${bonus_percent}% = ${bonusTokens} OGD`}<br/></div>
+                        <div>{`Total: ${tokens}`}<br/></div>
+
+                        
+
 
                     </div>
                 </Part>

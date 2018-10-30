@@ -21,7 +21,7 @@ class DepositTable extends Component {
     }
 
     renderRows = (transactions) => {
-        const {openedTransaction} = this.props;
+        const {openedTransaction, tokenPrice} = this.props;
 
         return transactions.map((item, index) => {
             return (
@@ -40,7 +40,8 @@ class DepositTable extends Component {
                     usdc_value={parseFloat(item.getIn(['payment', '0', 'usdc_value']) / 100).toFixed(2)}
                     tokens={parseFloat(item.get('amount') / 10 ** 18).toFixed(2)}
                     rate_usdc={item.getIn(['payment', '0', 'rate_usdc'])}
-                    bonus_percent={item.getIn(['payment', '0', 'bonus_percent'])}>
+                    bonus_percent={item.getIn(['payment', '0', 'bonus_percent'])}
+                    tokenPrice={tokenPrice}>
                 </TransactionRow>
             )
         })
@@ -67,10 +68,11 @@ class DepositTable extends Component {
 }
 
 
-const mapStateToProps = ({deposits, UI}) => ({
+const mapStateToProps = ({deposits, UI, Invest}) => ({
     deposits: deposits.get('results'),
     currentPage: deposits.get('current_page'),
-    openedTransaction: UI.get('openedTransaction')
+    openedTransaction: UI.get('openedTransaction'),
+    tokenPrice: Invest.get('tokenPrice')
 });
 
 const mapDispatchToProps = (dispatch) => ({
