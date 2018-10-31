@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
+import { Formik, Field, Form } from "formik";
+import ValidationSchema from './utils/NewTicketFormValidation';
 
 import Button from './../common/Button';
+import ErrorMessage from './../common/ErrorMessage';
 import FilesAttacher from './../../utils/FilesAttacher';
 
 import * as TicketActions from './../../actions/TicketActions';
@@ -11,41 +14,73 @@ import * as FilesActions from './../../actions/FilesActions';
 
 class NewTicketForm extends React.Component {
 
-    onSubmitHandler = (e) => {
-        e.preventDefault();
-        const data = new FormData(e.target);
-        this.props.createNewTicket(data);
-        e.target.reset();
+    onSubmitHandler = (values, {resetForm}) => {
+        const form = document.querySelector('.NewTicketForm');
+        const formData = new FormData(form);
+
+        this.props.createNewTicket(formData);
+        resetForm({});
     };
 
     render() {
         const {newTicketFiles, addNewTicketFile, removeNewTicketFile} = this.props;
 
         return (
+
             <Wrapper>
-                <Form onSubmit={this.onSubmitHandler} encType='multipart/form-data'>
-                    <label>Subject</label>
-                    <input type="text" placeholder="Please describe topic of your issue.." name="title" required/>
-                    <label>Detailed description</label>
-                    <textarea placeholder="Please describe your issue in details." name="description" required></textarea>
-                    <div className="controls-container files-section files-section-newTicket">
-                        <div className="files-container">
-                            <FilesAttacher files={newTicketFiles} 
-                                name="attachment" 
-                                filesWrapper={document.querySelector('.files-section-newTicket')} 
-                                uploadFileHandler={addNewTicketFile} 
-                                removeFileHandler={removeNewTicketFile}/>
-                        </div>
-                        <div className="buttons-container">
-                            <div className="button-wrapper">
-                                <Button text="Attach file" clickHandler={this.props.onAttachClickHandler.bind(this,'attachment')} attach transparent/>
+                <Formik
+                    initialValues={{
+                        title: '',
+                        description: ''
+                    }} 
+                    validationSchema={ValidationSchema} 
+                    onSubmit={this.onSubmitHandler} 
+                    render={({errors, touched, values}) => (
+                        <StyledForm className="NewTicketForm" encType='multipart/form-data'>
+
+                            <FormGroup>
+                                <label htmlFor="title">Subject</label>
+                                <Field component="input" 
+                                    className={errors.title && "isInvalid"} 
+                                    value={values.title || ''} 
+                                    type="text" 
+                                    placeholder="Please describe topic of your issue.." 
+                                    name="title"
+                                />
+                                {errors.title && <ErrorMessage text={errors.title}/>}
+                            </FormGroup>
+
+                            <FormGroup>
+                                <label htmlFor="description">Detailed description</label>
+                                <Field component="textarea" 
+                                    className={errors.description && "isInvalid"} 
+                                    value={values.description || ''} 
+                                    placeholder="Please describe your issue in details." 
+                                    name="description"
+                                />
+                                {errors.description && <ErrorMessage text={errors.description}/>}
+                            </FormGroup>
+
+                            <div className="controls-container files-section files-section-newTicket">
+                                <div className="files-container">
+                                    <FilesAttacher files={newTicketFiles} 
+                                        name="attachment" 
+                                        filesWrapper={document.querySelector('.files-section-newTicket')} 
+                                        uploadFileHandler={addNewTicketFile} 
+                                        removeFileHandler={removeNewTicketFile}/>
+                                </div>
+                                <div className="buttons-container">
+                                    <div className="button-wrapper">
+                                        <Button text="Attach file" clickHandler={this.props.onAttachClickHandler.bind(this,'attachment')} attach transparent/>
+                                    </div>
+                                    <div className="button-wrapper">
+                                        <Button type="submit" text="Send"/>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="button-wrapper">
-                                <Button text="Send"/>
-                            </div>
-                        </div>
-                    </div>
-                </Form>
+                        </StyledForm>  
+                    )}
+                />
             </Wrapper>
         )
     }
@@ -99,7 +134,7 @@ const Wrapper = styled.div`
     }
 `;
 
-const Form = styled.form`
+const StyledForm = styled(Form)`
     label, input, textarea {
         font-size: 16px;
         font-weight: 500;
@@ -109,6 +144,9 @@ const Form = styled.form`
     input, textarea {
         padding: 0 15px;
         margin-bottom: 40px;
+        &.isInvalid {
+            border-color: rgb(242, 109, 109);
+        }
     }
     label {
         display: block;
@@ -143,4 +181,8 @@ const Form = styled.form`
     input[type="file"] {
         display: none !important;
     }
+`;
+
+const FormGroup = styled.div`
+    position: relative;
 `;

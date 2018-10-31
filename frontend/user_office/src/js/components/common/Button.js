@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Button = ({text, className, clickHandler, submit, disabled, icon, style, attach, transparent}) => {
+const Button = ({text, className, clickHandler, submit, disabled, icon, style, attach, transparent, type}) => {
     const opts = {
         className: className,
         onClick: clickHandler,
         disabled: disabled,
         attach: attach,
         transparent: transparent,
+        type: type
     }
 
     if (submit) {
