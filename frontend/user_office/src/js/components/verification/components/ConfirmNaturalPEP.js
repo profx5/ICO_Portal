@@ -1,15 +1,20 @@
 import React from 'react'
 import styled from 'styled-components';
 
-import FinalFormRadio from './../../common/FinalFormRadio';
+import FormikRadio from './../../common/FormikRadio';
 
 
-const ConfirmNaturalPEP = ({showModalHandler, iconQuestion}) => {
+const ConfirmNaturalPEP = ({showModalHandler, iconQuestion, errors, touched, is_pep}) => {
     return (
         <RadioSet className="RadioSet RadioSet-2">
             <p className="text">Are you a <span onClick={showModalHandler.bind(this, {id: 1})}>politically exposed person</span> (PEP),
                 family member of PEP or person known to be close associate of PEP? <IconImg onClick={showModalHandler.bind(this, {id: 1})} src={iconQuestion}/></p>
-            <FinalFormRadio name="is_pep" options={['Yes', 'No']} values={["True", "False"]}/>
+            <FormikRadio name="is_pep" 
+                values={["True", "False"]}
+                errors={errors} 
+                touched={touched}
+                is_pep={is_pep}
+                options={['Yes', 'No']}/>
         </RadioSet>
     )
 }

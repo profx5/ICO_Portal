@@ -18,7 +18,8 @@ class InvestorsDocuments extends React.Component {
             idDocumentFiles, utilityBillFiles, 
             addIdDocumentFile, addUtilityBillFile,
             removeIdDocumentFile, removeUtilityBillFile,
-            onAttachClickHandler, status
+            onAttachClickHandler, status,
+            errors, touched, values
         } = this.props;
 
         return (
@@ -37,15 +38,18 @@ class InvestorsDocuments extends React.Component {
                     name="bill_photo"
                     filesWrapper={document.querySelector('.files-section-utility')}/>
 
-                <ConfirmCorrectness/>
+                <ConfirmCorrectness values={values} errors={errors} touched={touched} labelText="I confirm that all the data and documents submitted are correct."/>
                 
-                <ButtonWrapper submitBtn>
-                    <Button type="submit" text={status === 'WAITING' ? 'Update data' : 'Send data'}/>
-                </ButtonWrapper>
+                {status !== 'APPROVED' && 
+                    <ButtonWrapper submitBtn>
+                        <Button type="submit" text={status === 'WAITING' ? 'Update data' : 'Send data'}/>
+                    </ButtonWrapper>
+                }
             </Wrapper>
         )
     }
 }
+
 
 const mapStateToProps = ({KYC, Files}) => ({
     status: KYC.get('state'),

@@ -1,14 +1,15 @@
 import React from 'react'
 
-import FinalFormCheckbox from './../../common/FinalFormCheckbox';
+import FormikCheckbox from './../../common/FormikCheckbox';
 
 
-const ConfirmCorrectness = ({}) => {
+const ConfirmCorrectness = ({errors, touched, values, labelText}) => {
     return (
-        <FinalFormCheckbox name="confirm"
-            options={['I confirm that all the data and documents submitted are correct.']}
-            values={['Yes']}
-            required/>
+        <FormikCheckbox name="confirm"
+            value={values.confirm}
+            labelText={labelText}
+            errors={errors} 
+            touched={touched}/> 
     )
 }
 

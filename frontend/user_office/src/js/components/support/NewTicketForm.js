@@ -37,28 +37,27 @@ class NewTicketForm extends React.Component {
                     onSubmit={this.onSubmitHandler} 
                     render={({errors, touched, values}) => (
                         <StyledForm className="NewTicketForm" encType='multipart/form-data'>
-
                             <FormGroup>
                                 <label htmlFor="title">Subject</label>
                                 <Field component="input" 
-                                    className={errors.title && "isInvalid"} 
+                                    className={errors.title && touched.title && "isInvalid"} 
                                     value={values.title || ''} 
                                     type="text" 
                                     placeholder="Please describe topic of your issue.." 
                                     name="title"
                                 />
-                                {errors.title && <ErrorMessage text={errors.title}/>}
+                                {errors.title && touched.title && <ErrorMessage text={errors.title}/>}
                             </FormGroup>
 
                             <FormGroup>
                                 <label htmlFor="description">Detailed description</label>
                                 <Field component="textarea" 
-                                    className={errors.description && "isInvalid"} 
+                                    className={errors.description && touched.description && "isInvalid"} 
                                     value={values.description || ''} 
                                     placeholder="Please describe your issue in details." 
                                     name="description"
                                 />
-                                {errors.description && <ErrorMessage text={errors.description}/>}
+                                {errors.description && touched.description && <ErrorMessage text={errors.description}/>}
                             </FormGroup>
 
                             <div className="controls-container files-section files-section-newTicket">
@@ -143,7 +142,6 @@ const StyledForm = styled(Form)`
     }
     input, textarea {
         padding: 0 15px;
-        margin-bottom: 40px;
         &.isInvalid {
             border-color: rgb(242, 109, 109);
         }
@@ -185,4 +183,5 @@ const StyledForm = styled(Form)`
 
 const FormGroup = styled.div`
     position: relative;
+    margin-bottom: 40px;
 `;

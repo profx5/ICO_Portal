@@ -27,15 +27,15 @@ class NaturalPerson extends React.Component {
     }
 
     render() {
-        const {email, showModal} = this.props;
+        const {email, showModal, errors, touched, values, is_pep} = this.props;
 
         return (
             <Wrapper className="Verification__personData">
                 <Title>Personal Data</Title>
-                <NaturalPersonData email={email}/>
+                <NaturalPersonData errors={errors} touched={touched} values={values} email={email}/>
 
-                <ConfirmAsInvestor showModalHandler={showModal} iconQuestion={iconQuestion}/>
-                <ConfirmNaturalPEP showModalHandler={showModal} iconQuestion={iconQuestion}/>
+                <ConfirmAsInvestor errors={errors} touched={touched} values={values} showModalHandler={showModal} iconQuestion={iconQuestion} labelText="I confirm that the investor is a beneficial owner"/>
+                <ConfirmNaturalPEP showModalHandler={showModal} iconQuestion={iconQuestion} is_pep={is_pep}/>
 
             </Wrapper>
         )

@@ -2,33 +2,29 @@ import React from 'react';
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
-import { FastField } from 'formik';
+import { Field } from 'formik';
+
+import ErrorMessage from './ErrorMessage';
 
 
-const FinalFormField = ({labelText, placeholder, options, name, value, disabled, required, type, onChangeHandler, initialValue}) => {
-
-    let CleaveInput = (field) => {
-
-        return <StyledCleave {...field.input} placeholder={placeholder} type={type} required={required} options={field.options} />
-    }
+const FormikField = ({errors, touched, labelText, placeholder, options, name, value, disabled, required, onChangeHandler}) => {
 
     return (
         <Wrapper>
             <StyledLabel htmlFor={name}>{labelText}{required && <span> *</span>}</StyledLabel>
-            <FastField
-                options={options}
-                className="Field"
-                component={CleaveInput}
-                placeholder={placeholder}
-                value={value}
-                type="text"
-                name={name}/>
+            <Field
+                name={name}
+                render={({field}) => (
+                    <StyledCleave className={(errors[name] && touched[name]) && 'isInvalid'} {...field} placeholder={placeholder} type="text" options={options || {delimiter: ''}}/>
+                )}
+            />
+            {errors[name] && touched[name] && <ErrorMessage text={errors[name]}/>}
         </Wrapper>
     );
 }
 
 
-export default FinalFormField;
+export default FormikField;
 
 const Wrapper = styled.div`
     position: relative;
@@ -102,5 +98,8 @@ const StyledCleave = styled(Cleave)`
     }
     &::-webkit-input-placeholder {
         color: rgba(10,10,10,.4);
+    }
+    &.isInvalid {
+        border-color: rgb(242, 109, 109);
     }
 `;
