@@ -1,17 +1,24 @@
 import React from 'react'
 import styled from 'styled-components';
+
 import { Field } from 'formik';
+import ErrorMessage from './ErrorMessage';
 
 import iconCheck from './../../../img/icons/icon_check.svg';
 
 
-const FinalFormRadio = ({labelText, name, values, options}) => {
-
+const FormikRadio = ({labelText, name, values, options, is_pep}) => {
     function generateRadio(data, name) {
         return data.map((item, index) => {
             return (
                 <React.Fragment key={index}>
-                    <RadioInput component="input" type="radio" name={name} value={values[index]} id={`radio-${item}`} hidden />
+                    <RadioInput component="input" 
+                        type="radio" 
+                        name={name} 
+                        value={values[index]} 
+                        hidden
+                        id={`radio-${item}`} 
+                        defaultChecked={(index === 0 && is_pep) || (index === 1 && !is_pep)} />
                     <RadioLabel htmlFor={`radio-${item}`}>{item}</RadioLabel>
                 </React.Fragment>
             )
@@ -28,7 +35,7 @@ const FinalFormRadio = ({labelText, name, values, options}) => {
 }
 
 
-export default FinalFormRadio;
+export default FormikRadio;
 
 const Wrapper = styled.div`
     position: relative;

@@ -1,25 +1,26 @@
 import React from 'react'
 import styled from 'styled-components';
 
-import FinalFormCheckbox from './../../common/FinalFormCheckbox';
+import FormikCheckbox from './../../common/FormikCheckbox';
 
 
-const ConfirmAsInvestor = ({showModalHandler, iconQuestion}) => {
+const ConfirmAsInvestor = ({showModalHandler, iconQuestion, errors, touched, values, labelText, setFieldValue, validateField, validateForm}) => {
     return (
         <RadioSet className="RadioSet RadioSet-1">
-            <FinalFormCheckbox name="confirmInvestor" icon={iconQuestion}
-                            handler={showModalHandler.bind(this, {
-                                modalHead: 'Beneficial owner',
-                                modalContent: `Beneficial owner means a natural person who, taking advantage of their influence,
-                                makes a transaction, act, action, operation or step or otherwise exercises control
-                                over a
-                                transaction, act, action, operation or step or over another person and in whose
-                                interests or favour or on whose account a transaction or act, action, operation or
-                                step is made.`
-                            })}
-                            options={['I confirm that the investor is a beneficial owner']}
-                            values={['Yes']}
-                            required/>
+            <FormikCheckbox name="confirmInvestor" icon={iconQuestion}
+                value={values.confirmInvestor}
+                labelText={labelText}
+                errors={errors} 
+                touched={touched} 
+                handler={showModalHandler.bind(this, {
+                    modalHead: 'Beneficial owner',
+                    modalContent: `Beneficial owner means a natural person who, taking advantage of their influence,
+                    makes a transaction, act, action, operation or step or otherwise exercises control
+                    over a
+                    transaction, act, action, operation or step or over another person and in whose
+                    interests or favour or on whose account a transaction or act, action, operation or
+                    step is made.`
+                })}/>
         </RadioSet>
     )
 }

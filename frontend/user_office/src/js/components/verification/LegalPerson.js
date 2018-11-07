@@ -44,22 +44,26 @@ class LegalPerson extends React.Component {
             addRepresentationFile,
             removeRepresentationFile,
             onAttachClickHandler,
-            showModal
+            showModal,
+            errors,
+            touched,
+            values,
+            is_pep
         } = this.props;
 
         return (
             <Wrapper className="Verification__personData">
                 <Title>Legal Person Data</Title>
 
-                <LegalPersonData/>
+                <LegalPersonData errors={errors} touched={touched} values={values}/>
                 <RepresentationFiles files={representationFiles} 
                     onAttachClickHandler={onAttachClickHandler.bind(this, 'basis_doc')} 
                     uploadFileHandler={addRepresentationFile} 
                     removeFileHandler={removeRepresentationFile} 
                     name="basis_doc" 
                     filesWrapper={document.querySelector('.files-section-basis')}/>
-                <LegalOwnerData showModalHandler={showModal}/>
-                <ConfirmLegalPEP/>
+                <LegalOwnerData errors={errors} touched={touched} values={values} showModalHandler={showModal}/>
+                <ConfirmLegalPEP errors={errors} touched={touched} is_pep={is_pep}/>
 
             </Wrapper>
         )

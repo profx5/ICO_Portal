@@ -1,17 +1,22 @@
 import React from 'react'
 import styled from 'styled-components';
 
-import FinalFormRadio from './../../common/FinalFormRadio';
+import FormikRadio from './../../common/FormikRadio';
 
 
-const ConfirmLegalPEP = ({}) => {
+const ConfirmLegalPEP = ({errors, touched, is_pep}) => {
     return (
         <RadioSet>
             <p className="text">
                 Is the representative or any beneficial owner a politically exposed person (PEP), 
                 family member of PEP or person known to be close associate of PEP
             </p>
-            <FinalFormRadio name="is_pep" options={['Yes', 'No']} values={["True", "False"]}/>
+            <FormikRadio name="is_pep" 
+                values={["True", "False"]}
+                errors={errors} 
+                touched={touched}
+                is_pep={is_pep}
+                options={['Yes', 'No']}/>
         </RadioSet>
     )
 }

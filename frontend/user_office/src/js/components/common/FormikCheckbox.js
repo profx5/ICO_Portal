@@ -1,44 +1,37 @@
 import React from 'react'
 import styled from 'styled-components';
+
 import {Field} from 'formik';
+import ErrorMessage from './ErrorMessage';
 
 import iconCheck from './../../../img/icons/icon_check.svg';
 
 
-const FinalFormCheckbox = ({labelText, name, values, options, icon, handler, required}) => {
+const FormikCheckbox = ({value, name, labelText, errorStyle, errors, touched, options, icon, handler}) => {
 
     function handle(handler, event) {
         event.preventDefault();
         handler(1);
     }
 
-    function generateRadio(data) {
-        return data.map((item, index) => {
-            return (
-                <React.Fragment key={index}>
-                    <RadioInput component="input" type="checkbox" required={required} name={name} defaultChecked={values[index]} id={`radio-${item}`}/>
-                    <RadioLabel htmlFor={`radio-${item}`}>
-                        {item}
-                        {icon &&
-                            <IconImg onClick={handle.bind(this, handler)} src={icon}/>
-                        }
-                    </RadioLabel>
-                </React.Fragment>
-            )
-        });
-    }
-
     return (
         <Wrapper>
             <InputsWrapper>
-                {generateRadio(options)}
+                <CheckboxInput component="input" type="checkbox" checked={value} name={name} id={`checkbox-${name}`}/>
+                <CheckboxLabel htmlFor={`checkbox-${name}`} className={(errors[name] && touched[name]) ? 'isInvalid' : ''}>
+                    {labelText}
+                    {icon &&
+                        <IconImg onClick={handle.bind(this, handler)} src={icon}/>
+                    }
+                </CheckboxLabel>
+                {errors[name] && touched[name] && <ErrorMessage {...errorStyle} text={errors[name]}/>}
             </InputsWrapper>
         </Wrapper>
     );
 }
 
 
-export default FinalFormCheckbox;
+export default FormikCheckbox;
 
 const Wrapper = styled.div`
     position: relative;
@@ -48,10 +41,10 @@ const Wrapper = styled.div`
 const InputsWrapper = styled.div`
     height: 100%;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
 `;
 
-const RadioInput = styled(Field)`
+const CheckboxInput = styled(Field)`
     opacity: 0;
     pointer-events: none;
     position: absolute;
@@ -62,7 +55,7 @@ const RadioInput = styled(Field)`
     }
 `;
 
-const RadioLabel = styled.label`
+const CheckboxLabel = styled.label`
     font-size: 16px;
     letter-spacing: 0.5px;
     color: #0a0a0a;
@@ -76,6 +69,9 @@ const RadioLabel = styled.label`
         height: 20px;
         border: 1px solid #d6dfe6;
         margin-right: 8px;
+    }
+    &.isInvalid:before {
+        border-color: rgb(242,109,109);
     }
 `;
 

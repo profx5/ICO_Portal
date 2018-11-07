@@ -35,17 +35,17 @@ class TicketCommentForm extends React.Component {
                     validationSchema={ValidationSchema} 
                     onSubmit={this.onSubmitHandler} 
                     render={({errors, touched, values}) => (
-                        <Form className="TicketCommentForm" encType={'multipart/form-data'}>
+                        <Form className="TicketCommentForm" encType='multipart/form-data'>
                             <input type="hidden" name={'ticket'} value={selectedTicket.id}/>
 
                             <FormGroup>
                                 <CommentField component="textarea"
-                                    className={errors.comment && "isInvalid"}  
+                                    className={errors.comment && touched.comment && "isInvalid"}  
                                     value={values.comment || ''} 
                                     placeholder="Your message here..." 
                                     name="comment"
                                 />
-                                {errors.comment && <ErrorMessage text={errors.comment}/>}
+                                {errors.comment && touched.comment && <ErrorMessage text={errors.comment}/>}
                             </FormGroup>
 
                             <div className="controls-container files-section files-section-comment">

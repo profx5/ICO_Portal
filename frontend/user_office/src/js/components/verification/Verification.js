@@ -1,8 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {Form} from 'react-final-form'
+import {compose} from 'redux';
+import {Formik, Form} from 'formik';            
 import $ from 'jquery';
+import VerificationValidation from './utils/VerificationValidation';
 
 import KYCTabs from './components/KYCTabs';
 import NaturalPerson from './NaturalPerson';
@@ -12,101 +14,61 @@ import InvestorsDocuments from './InvestorsDocuments';
 
 import * as KYCActions from './../../actions/KYCActions';
 import * as UIActions from './../../actions/UIActions';
+import * as FilesActions from './../../actions/FilesActions';
 
 
 class Verification extends React.Component {
-    transformValues = values => {
-        const data = {...values};
-        data.is_pep = data.is_pep && data.is_pep !== null ? "True" : "False";
-        return data;
-    }
 
-    load = () => {
+    getInitialValues = () => {
         const {
-            state,
-            type,
-            firstname,
-            user_photo,
-            lastname,
-            birthdate,
-            country,
-            city,
-            registration_address,
-            postcode,
-            document_type,
-            document_no,
-            document_country,
-            document_date,
-            document_photo,
-            decline_reason,
-            uploaded_user_photo,
-            uploaded_doc_photo,
-            place_of_birth,
-            personal_id,
-            place_of_residence,
-            profession,
-            business_name,
-            registration_number,
-            registration_date,
-            phone_number,
-            director_firstname,
-            director_lastname,
-            basis_doc,
-            email,
-            address,
-            field_of_activity,
-            beneficial_fullname,
-            beneficial_personal_id,
-            beneficial_birthdate,
-            beneficial_place_of_birth,
-            beneficial_place_of_residence,
-            is_pep
+            state, type,
+            firstname, middlename,
+            lastname, place_of_birth,
+            birthdate, personal_id,
+            phone_number, email,
+            place_of_residence, profession,
+            business_name, registration_number,
+            registration_date, address,
+            field_of_activity, director_firstname,
+            director_lastname, beneficial_fullname,
+            beneficial_personal_id, beneficial_place_of_birth,
+            beneficial_birthdate, beneficial_place_of_residence, is_pep
         } = this.props;
-        return this.transformValues({
+        return {
             state: state,
             type: type,
             firstname: firstname,
-            user_photo: user_photo,
+            middlename: middlename,
             lastname: lastname,
-            birthdate: birthdate,
-            country: country,
-            city: city,
-            registration_address: registration_address,
-            postcode: postcode,
-            document_type: document_type,
-            document_no: document_no,
-            document_country: document_country,
-            document_date: document_date,
-            document_photo: document_photo,
-            decline_reason: decline_reason,
-            uploaded_user_photo: uploaded_user_photo,
-            uploaded_doc_photo: uploaded_doc_photo,
             place_of_birth: place_of_birth,
+            birthdate: birthdate,
             personal_id: personal_id,
+            phone_number: phone_number,
+            email: email,
             place_of_residence: place_of_residence,
             profession: profession,
+
             business_name: business_name,
             registration_number: registration_number,
             registration_date: registration_date,
-            phone_number: phone_number,
-            director_firstname: director_firstname,
-            director_lastname: director_lastname,
-            basis_doc: basis_doc,
-            email: email,
             address: address,
             field_of_activity: field_of_activity,
+            director_firstname: director_firstname,
+            director_lastname: director_lastname,
+
             beneficial_fullname: beneficial_fullname,
             beneficial_personal_id: beneficial_personal_id,
-            beneficial_birthdate: beneficial_birthdate,
             beneficial_place_of_birth: beneficial_place_of_birth,
+            beneficial_birthdate: beneficial_birthdate,
             beneficial_place_of_residence: beneficial_place_of_residence,
-            is_pep: is_pep,
+            is_pep: is_pep ? "True" : "False",
+            
             confirmInvestor: !!type,
             confirm: !!type
-        });
+        };
     };
 
-    tabClickHandler = (event) => {
+    tabClickHandler = (callback, event) => {
         const {activateKycTab, changeType} = this.props;
 
         if (event.target.id === 'kycTab1') {
@@ -116,15 +78,15 @@ class Verification extends React.Component {
             activateKycTab({id: 2});
             changeType('LEGAL');
         }
+        callback();
     }
 
     onSubmitHandler = (e) => {
-        const {activeKycTab, submitForm, showModal, state} = this.props;
-
-        e.preventDefault();
+        const {activeKycTab, submitForm, showModal, state, attachments, clearIdDocumentFile, clearUtilityBillFile, clearRepresentationFile} = this.props;
+        const form = document.querySelector('.VerificationForm');
 
         if (activeKycTab === 2) {
-            if (!$('[name="basis_doc"]').val()) {
+            if (!$('[name="basis_doc"]').val() && !attachments) {
                 showModal({
                     modalHead: 'Warning',
                     modalContent: 'Please, check if you\'ve attached the basis for representation!'
@@ -133,20 +95,25 @@ class Verification extends React.Component {
             }
         }
 
-        if (!($('[name="id_document_photo"]').val() && $('[name="bill_photo"]').val())) {
-
+        if (!$('[name="id_document_photo"]').val() && !attachments) {
             showModal({
                 modalHead: 'Warning',
-                modalContent: 'Please, check if you\'ve attached a copy of ID and Utility bill!'
+                modalContent: 'Please, check if you\'ve attached a copy of ID!'
+            });
+            return;
+        } else if (!$('[name="bill_photo"]').val() && !attachments) {
+            showModal({
+                modalHead: 'Warning',
+                modalContent: 'Please, check if you\'ve attached a copy of Utility bill!'
             });
             return;
         }
 
-        let data = new FormData(e.target);
         submitForm({
-            form: data,
+            form: new FormData(form),
             state: state
         });
+        compose(clearIdDocumentFile, clearUtilityBillFile, clearRepresentationFile)();
     }
 
     onAttachClickHandler = (name, event) => {
@@ -160,33 +127,40 @@ class Verification extends React.Component {
     }
 
     render() {
-        const {activeKycTab, state} = this.props;
-        const initial = this.load();
+        const {state, type, is_pep} = this.props;
+        let {activeKycTab} = this.props;
+
+        if (type) activeKycTab = type === 'LEGAL' ? 2 : 1;
 
         return (
             <div>
-                <Form
-                    onSubmit={this.onSubmitHandler}
-                    initialValues={initial}
-                    render={() => (
-                        <Wrapper onSubmit={this.onSubmitHandler} state={state} id="form" className="Verification">
+                <Formik
+                    initialValues={this.getInitialValues()} 
+                    validationSchema={activeKycTab === 1 ? VerificationValidation({type: 'Natural'}) : VerificationValidation({type: 'Legal'})} 
+                    validateOnChange={false} 
+                    validateOnBlur={true}
+                    enableReinitialize={true}
+                    onSubmit={this.onSubmitHandler} 
+                    render={({errors, touched, values, resetForm}) => (
+                        <Wrapper state={state} id="form" className="VerificationForm">
                             <Header>
                                 <HeaderInner>
                                     <Head>Verification (KYC)</Head>
-                                    <KYCTabs clickHandler={this.tabClickHandler} activeTab={activeKycTab}/>
+                                    <KYCTabs clickHandler={this.tabClickHandler.bind(this, resetForm)} activeTab={activeKycTab}/>
                                 </HeaderInner>
                             </Header>
                             <MainWrapper>
-                                {activeKycTab === 1 && <NaturalPerson/>}
-                                {activeKycTab === 2 && <LegalPerson onAttachClickHandler={this.onAttachClickHandler}/>}
-                                <InvestorsDocuments onAttachClickHandler={this.onAttachClickHandler}/>
+                                {!type && activeKycTab === 1 && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
+                                {!type && activeKycTab === 2 && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
+                                {type === "NATURAL" && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
+                                {type === "LEGAL" && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
+                                <InvestorsDocuments errors={errors} touched={touched} values={values} onAttachClickHandler={this.onAttachClickHandler}/>
                             </MainWrapper>
                             <div>
                                 <VerificationInfo
                                     btnText="Send data"
                                     verificationStages={['Verification__personData', 'Verification__investorsDocuments']}
-                                    stages={activeKycTab === 1 ? ['Personal Data', 'Investor\'s documents'] : ['Legal Person Data', 'Investor\'s documents']}
-                                />
+                                    stages={activeKycTab === 1 ? ['Personal Data', 'Investor\'s documents'] : ['Legal Person Data', 'Investor\'s documents']}/>
                             </div>
                         </Wrapper>
                     )}
@@ -238,6 +212,7 @@ const mapStateToProps = ({UI, KYC, user}) => ({
     beneficial_place_of_birth: KYC.get('beneficial_place_of_birth'),
     beneficial_place_of_residence: KYC.get('beneficial_place_of_residence'),
     is_pep: KYC.get('is_pep'),
+    attachments: KYC.get('attachments'),
     kyc_required: user.get('kyc_required'),
 });
 
@@ -256,12 +231,21 @@ const mapDispatchToProps = (dispatch) => ({
     },
     showModal(payload) {
         dispatch(UIActions.showModal(payload))
-    }
+    },
+    clearIdDocumentFile() {
+        dispatch(FilesActions.clearIdDocumentFile())
+    },
+    clearUtilityBillFile() {
+        dispatch(FilesActions.clearUtilityBillFile())
+    },
+    clearRepresentationFile() {
+        dispatch(FilesActions.clearRepresentationFile())
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Verification);
 
-const Wrapper = styled.form`
+const Wrapper = styled(Form)`
     flex: 1;
     height: calc(100% - 100px);
     margin-left: 60px;

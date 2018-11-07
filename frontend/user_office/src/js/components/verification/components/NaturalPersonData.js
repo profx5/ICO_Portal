@@ -1,53 +1,116 @@
 import React from 'react'
 import styled from 'styled-components';
 
-import FinalFormField from './../../common/FinalFormField';
+import FormikField from './../../common/FormikField';
 
 
-const NaturalPersonData = ({email}) => {
+const NaturalPersonData = ({email, errors, touched, values}) => {
+
     return (
         <InputSet>
             <input type="hidden" name='type' value='NATURAL'/>
             <InputWrapper>
-                <FinalFormField placeholder="John" labelText="First Name" required name="firstname" options={{delimiter: ''}}/>
+                <FormikField 
+                    value={values.firstname || ''} 
+                    name="firstname"
+                    placeholder="John" 
+                    labelText="First Name" 
+                    errors={errors} 
+                    touched={touched}
+                    required/> 
             </InputWrapper>
             <InputWrapper>
-                <FinalFormField placeholder="Fitzgerald" labelText="Middle Name" name="middlename" options={{delimiter: ''}}/>
+                <FormikField 
+                    value={values.middlename || ''} 
+                    name="middlename"
+                    placeholder="Fitzgerald"
+                    labelText="Middle Name" 
+                    errors={errors} 
+                    touched={touched}/> 
             </InputWrapper>
             <InputWrapper>
-                <FinalFormField placeholder="Kennedy" labelText="Last Name" required name="lastname" options={{delimiter: ''}}/>
+                <FormikField 
+                    value={values.lastname || ''} 
+                    name="lastname"
+                    placeholder="Kennedy" 
+                    labelText="Last Name"
+                    errors={errors} 
+                    touched={touched}
+                    required/> 
             </InputWrapper>
             <InputWrapper>
-                <FinalFormField placeholder="Brookline, Massachusetts, United States" required labelText="Place of birth" name="place_of_birth" options={{delimiter: ''}}/>
+                <FormikField 
+                    value={values.place_of_birth || ''} 
+                    name="place_of_birth"
+                    labelText="Place of birth" 
+                    placeholder="Brookline, Massachusetts, United States" 
+                    errors={errors} 
+                    touched={touched}
+                    required/>
             </InputWrapper>
             <InputWrapper>
-                <FinalFormField placeholder="1917/05/29" 
-                                labelText="Date of birth" 
-                                name="birthdate" 
-                                required
-                                options={{date: true, datePattern: ['Y', 'm', 'd'], delimiter: '-'}}/>
+                <FormikField 
+                    value={values.birthdate || ''} 
+                    name="birthdate" 
+                    placeholder="1917/05/29" 
+                    labelText="Date of birth" 
+                    errors={errors} 
+                    touched={touched}
+                    options={{date: true, datePattern: ['Y', 'm', 'd'], delimiter: '-'}}
+                    required/>
             </InputWrapper>
             <InputWrapper>
-                <FinalFormField placeholder="915344722819"
-                                labelText="Personal identification code" 
-                                name="personal_id" 
-                                required
-                                options={{delimiter: ''}}/>
+                <FormikField 
+                    value={values.personal_id || ''} 
+                    name="personal_id" 
+                    labelText="Personal identification code"
+                    placeholder="915344722819"
+                    errors={errors} 
+                    touched={touched}
+                    options={{numericOnly: true}}
+                    required/>
             </InputWrapper>
             <InputWrapper>
-                <FinalFormField placeholder="+15417543010" labelText="Phone number"
-                                required 
-                                options={{numericOnly: true, prefix: '+', noImmediatePrefix: true}} 
-                                name="phone_number"/>
+                <FormikField 
+                    value={values.phone_number || ''} 
+                    name="phone_number"
+                    placeholder="+15417543010" 
+                    labelText="Phone number"
+                    errors={errors} 
+                    touched={touched}
+                    options={{numericOnly: true, prefix: '+', noImmediatePrefix: true}}
+                    required/>
             </InputWrapper>
             <InputWrapper>
-                <FinalFormField placeholder="john@gmail.com" labelText="Email" required value={email} type="email" name="email" options={{delimiter: ''}}/>
+                <FormikField 
+                    value={values.email || ''} 
+                    name="email" 
+                    type="email" 
+                    placeholder="john@gmail.com" 
+                    labelText="Email" 
+                    errors={errors} 
+                    touched={touched}
+                    required/>
             </InputWrapper>
             <InputWrapper>
-                <FinalFormField placeholder="4150 Sydney Place Washington, DC 20521-4150" labelText="Place of residence" required name="place_of_residence" options={{delimiter: ''}}/>
+                <FormikField 
+                    value={values.place_of_residence || ''} 
+                    name="place_of_residence" 
+                    placeholder="4150 Sydney Place Washington, DC 20521-4150" 
+                    labelText="Place of residence"
+                    errors={errors} 
+                    touched={touched}
+                    required/>
             </InputWrapper>
             <InputWrapper>
-                <FinalFormField placeholder="Software developer" labelText="Profession or field of activity" required name="profession" options={{delimiter: ''}}/>
+                <FormikField 
+                    value={values.profession || ''} 
+                    name="profession" 
+                    placeholder="Software developer" 
+                    labelText="Profession or field of activity" 
+                    errors={errors} 
+                    touched={touched}
+                    required/>
             </InputWrapper>
         </InputSet>
     )
@@ -69,6 +132,7 @@ const InputSet = styled.div`
 const InputWrapper = styled.div`
     height: 45px;
     flex-basis: 48%;
+    position: relative;
     
     &:not(:last-child) {
         margin-bottom: 70px;
