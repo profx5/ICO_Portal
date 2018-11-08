@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import PasswordValidationSchema from './utils/PasswordValidationSchema';
 
+import { Formik, Form } from "formik";
 import InputLabel from './components/InputLabel';
 import InputText from './components/InputText';
 import Button from './../common/Button';
@@ -11,87 +13,61 @@ import * as UserActions from './../../actions/UserActions';
 
 class Password extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {
-            errortext: {
-                old_password: '',
-                new_password1: '',
-                new_password2: ''
-            },
-            passwordsEqual: false
-        };
-    }
+    onSubmitHandler = () => {
+        let data = new FormData();
+        const values = [{
+            name: 'old_password',
+            value: document.getElementById('old_password').value
+        }, {
+            name: 'new_password1',
+            value: document.getElementById('new_password1').value
+        }, {
+            name: 'new_password2',
+            value: document.getElementById('new_password2').value
+        }];
 
-    changePasswordHandler = (event) => {
-        event.preventDefault();
-
-        let isFormValid = true;
-
-        const passwordFields = [
-            document.querySelector('[name="new_password2"]'),
-            document.querySelector('[name="new_password1"]'),
-            document.querySelector('[name="old_password"]')
-        ];
-
-        if (passwordFields[0].value === passwordFields[1].value) {
-            this.setState({
-                errortext: {
-                    new_password2: ''
-                }
-            })
-        } else {
-            this.setState({
-                errortext: {
-                    new_password2: 'Passwords do not match!'
-                }
-            });
-            isFormValid = false;
-            return false;
+        for(let {name, value} of values) {
+            data.append(name, value);
         }
 
-        passwordFields.forEach(item => {
-            if (item.value.length === 0) {
-                this.setState({
-                    errortext: {
-                        [item.name]: 'The field is empty'
-                    }
-                });
-                isFormValid = false;
-            }
-        })
-
-        if (!isFormValid) return;
-
-        const data = new FormData(event.target);
         this.props.changePassword(data);
     }
 
     render() {
-        const {passwordsEqual, errortext} = this.state;
 
         return (
-            <Wrapper className="Settings__password" onSubmit={this.changePasswordHandler}>
-                <Title>Password</Title>
-                <InputSet>
-                    <InputWrapper>
-                        <InputLabel>Old password</InputLabel>
-                        <InputText type="password" errortext={errortext.old_password} name="old_password"/>
-                    </InputWrapper>
-                    <InputWrapper>
-                        <InputLabel>New password</InputLabel>
-                        <InputText type="password" equal={passwordsEqual} errortext={errortext.new_password1} name="new_password1"/>
-                    </InputWrapper>
-                    <InputWrapper>
-                        <InputLabel>Confirm password</InputLabel>
-                        <InputText type="password" errortext={errortext.new_password2} equal={passwordsEqual} name="new_password2"/>
-                    </InputWrapper>
-                    <InputWrapper>
-                        <InputLabel>&nbsp;</InputLabel>
-                        <Button text="Change password" submit={true}/>
-                    </InputWrapper>
-                </InputSet>
-            </Wrapper>
+            <Formik
+            initialValues={{
+                old_password: '',
+                new_password1: '',
+                new_password2: ''
+            }} 
+            validationSchema={PasswordValidationSchema} 
+            enableReinitialize={true}
+            onSubmit={this.onSubmitHandler} 
+            render={({errors, touched}) => (
+                <Wrapper className="Settings__password">
+                    <Title>Password</Title>
+                    <InputSet>
+                        <InputWrapper>
+                            <InputLabel htmlFor="old_password">Old password</InputLabel>
+                            <InputText errors={errors} touched={touched} type="password" name="old_password"/>
+                        </InputWrapper>
+                        <InputWrapper>
+                            <InputLabel htmlFor="old_password1">New password</InputLabel>
+                            <InputText errors={errors} touched={touched} type="password" name="new_password1"/>
+                        </InputWrapper>
+                        <InputWrapper>
+                            <InputLabel htmlFor="old_password2">Confirm password</InputLabel>
+                            <InputText errors={errors} touched={touched} type="password" name="new_password2"/>
+                        </InputWrapper>
+                        <InputWrapper>
+                            <InputLabel>&nbsp;</InputLabel>
+                            <Button text="Change password" submit={true}/>
+                        </InputWrapper>
+                    </InputSet>
+                </Wrapper>
+            )}/>
         )
     }
 };
@@ -110,7 +86,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Password)
 
 
-const Wrapper = styled.form`
+const Wrapper = styled(Form)`
     flex: 1;
     height: auto;
     padding: 42px 55px 70px;

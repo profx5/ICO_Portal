@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
 import { Field } from 'formik';
-
 import ErrorMessage from './ErrorMessage';
 
 
@@ -15,7 +14,7 @@ const FormikField = ({errors, touched, labelText, placeholder, options, name, va
             <Field
                 name={name}
                 render={({field}) => (
-                    <StyledCleave className={(errors[name] && touched[name]) && 'isInvalid'} {...field} placeholder={placeholder} type="text" options={options || {delimiter: ''}}/>
+                    <StyledCleave className={(errors[name] && touched[name]) && 'isInvalid'} id={name} {...field} placeholder={placeholder} type="text" options={options || {delimiter: ''}}/>
                 )}
             />
             {errors[name] && touched[name] && <ErrorMessage text={errors[name]}/>}

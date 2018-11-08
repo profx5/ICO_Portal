@@ -2,7 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import ClipboardJS from 'clipboard';
+import EmailValidationSchema from './utils/EmailValidationSchema';
 
+import { Formik, Form } from "formik";
 import InputText from './components/InputText';
 import InputLabel from './components/InputLabel';
 import Button from './../common/Button';
@@ -15,88 +17,72 @@ import copyIcon from './../../../img/icon_copy.svg';
 
 class AccountInfo extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {
-            errortext: {
-                email: ''
-            }
-        };
-    }
-
     componentDidMount() {
         new ClipboardJS('.CopyBtn');
     }
 
-    changeEmail = (event) => {
-        event.preventDefault();
+    onSubmitHandler = () => {
+        const value = document.getElementById('email').value;
+        let data = new FormData();
+        data.append('email', value);
 
-        let isFormValid = true;
-
-        const emailField = document.querySelector('[name="email"]');
-
-        if (emailField.value.length === 0) {
-            this.setState({
-                errortext: {
-                    email: 'The field is empty'
-                }
-            })
-            isFormValid = false;
-        } else {
-            this.setState({
-                errortext: {
-                    email: ''
-                }
-            });
-        }
-
-        if (!isFormValid) return;
-
-        const data = new FormData(event.target);
-        this.props.changeEmailRequest(data);
+        this.props.changeEmail(data);
     }
 
     render() {
 
         const {email, ethAccount, showSetAccountPopup} = this.props;
-        const {errortext} = this.state;
 
         return (
             <Wrapper className="Settings__accountInfo">
                 <Title>Account information</Title>
-                <form onSubmit={this.changeEmail}>
-                    <InputSet>
-                        <InputWrapper>
-                            <InputLabel>Email</InputLabel>
-                            <InputText disabled value={email}/>
-                        </InputWrapper>
-                        <InputWrapper>
-                            <InputLabel>New Email</InputLabel>
-                            <InputText errortext={errortext.email} type="email" name='email'/>
-                        </InputWrapper>
-                        <InputWrapper></InputWrapper>
-                        <InputWrapper>
-                            <Button text="Change Email" submit={true}/>
-                        </InputWrapper>
-                    </InputSet>
-                </form>
-                <InputSet>
-                    <InputWrapper fullWidth>
-                        <InputLabel>Ethereum wallet address</InputLabel>
-                        <StyledTextField className="field-ethAccount" id="EthAccount">
-                            {ethAccount || 'No address has been added!'}
-                            {ethAccount && <IconCopy className="CopyBtn" data-clipboard-target="#EthAccount" onClick={this.copyOnClickHandler}/>}
-                        </StyledTextField>
-                    </InputWrapper>
-                    {!ethAccount && 
+                <Formik 
+                    initialValues={{
+                        email: '',
+                        old_email: email
+                    }} 
+                    validationSchema={EmailValidationSchema(email)}
+                    enableReinitialize={true} 
+                    onSubmit={this.onSubmitHandler} 
+                    render={({errors, touched}) => (
                         <React.Fragment>
-                            <InputWrapper></InputWrapper>
-                            <InputWrapper>
-                                <Button text="Add ETH account" clickHandler={showSetAccountPopup} />
-                            </InputWrapper>
-                        </React.Fragment>
-                    }
-                </InputSet>
+                            <Form>
+                                <InputSet>
+                                    <InputWrapper>
+                                        <InputLabel htmlFor="old_email">Email</InputLabel>
+                                        <InputText errors={errors} touched={touched} disabled name="old_email" id="old_email"/>
+                                    </InputWrapper>
+                                    <InputWrapper>
+                                        <InputLabel htmlFor="email">New Email</InputLabel>
+                                        <InputText errors={errors} touched={touched} name='email'/>
+                                    </InputWrapper>
+                                    <InputWrapper></InputWrapper>
+                                    <InputWrapper>
+                                        <Button text="Change Email" submit={true}/>
+                                    </InputWrapper>
+                                </InputSet>
+                            </Form>
+                            <InputSet>
+                                <InputWrapper fullWidth>
+                                    <InputLabel>Ethereum wallet address</InputLabel>
+                                    <StyledTextField className="field-ethAccount" id="EthAccount">
+                                        {ethAccount || 'No address has been added!'}
+                                        {ethAccount && <IconCopy className="CopyBtn" data-clipboard-target="#EthAccount" onClick={this.copyOnClickHandler}/>}
+                                    </StyledTextField>
+                                </InputWrapper>
+                                {!ethAccount && 
+                                    <React.Fragment>
+                                        <InputWrapper></InputWrapper>
+                                        <InputWrapper>
+                                            <Button text="Add ETH account" clickHandler={showSetAccountPopup} />
+                                        </InputWrapper>
+                                    </React.Fragment>
+                                }
+                            </InputSet>
+                            </React.Fragment>
+                    )}
+
+                />
 
             </Wrapper>
         )
@@ -110,7 +96,7 @@ const mapStateToProps = ({user, UI}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    changeEmailRequest(data) {
+    changeEmail(data) {
         dispatch(UserActions.changeEmailRequest(data))
     },
     showSetAccountPopup() {
