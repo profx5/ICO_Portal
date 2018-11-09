@@ -19,7 +19,7 @@ export class UserSagas {
             })
 
             yield put(UserActions.setAccountSuccessfull());
-            // yield put(UIActions.hideSetAccountPopup());
+            yield put(UIActions.hideSetAccountPopup());
             yield put(UserActions.getUserRequest());
         } catch (e) {
             let error;
@@ -76,7 +76,7 @@ export class UserSagas {
         return
     }
 
-    static* changePassoword(action) {
+    static* changePassword(action) {
         try {
             const response = yield call(axios, {
                 url: Api.changePassword(),
@@ -110,7 +110,7 @@ export class UserSagas {
             yield put(UserActions.getUserRequest())
             yield put(UIActions.showModal({
                 modalHead: 'Congratulations',
-                modalContent: 'You\'ve successfully sent your request for change of email! Check your email and follow the attached link.'
+                modalContent: 'You\'ve successfully sent your request for change of email! Check your email and follow the instructions!'
             }));
         } catch (e) {
             yield put(UserActions.changeEmailFailed())
@@ -123,6 +123,6 @@ export function* saga() {
     yield takeEvery(UserActions.getUserRequest, UserSagas.getUser)
     yield takeEvery(UserActions.setAccountRequest, UserSagas.setAccount)
     yield takeEvery(UserActions.setMetaMaskAccountRequest, UserSagas.extractMetaMaskAccount)
-    yield takeEvery(UserActions.changePasswordRequest, UserSagas.changePassoword)
+    yield takeEvery(UserActions.changePasswordRequest, UserSagas.changePassword)
     yield takeEvery(UserActions.changeEmailRequest, UserSagas.changeEmail)
 }

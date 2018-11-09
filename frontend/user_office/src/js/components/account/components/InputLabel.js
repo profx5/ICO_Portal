@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components';
 
 
-const InputLabel = ({children}) => {
+const InputLabel = ({children, htmlFor}) => {
 
     return (
-        <StyledLabel>
+        <StyledLabel htmlFor={htmlFor}>
             {children}
         </StyledLabel>
     );

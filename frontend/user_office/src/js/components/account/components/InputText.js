@@ -2,21 +2,24 @@ import React from 'react'
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
+import { Field } from 'formik';
 
-const InputText = ({placeholder, options, name, value, disabled, type, errortext}) => {
+const InputText = ({placeholder, options, name, value, disabled, type, errors, touched}) => {
 
     return (
         <Wrapper>
-            <StyledInput 
-                value={value} 
-                placeholder={placeholder} 
-                className="Field" 
-                type={type || 'text'} 
+            <Field 
                 name={name} 
-                errortext={errortext} 
-                readOnly={disabled === true ? true : false} 
-                options={options}/> 
-            <StyledError>{errortext}</StyledError>
+                render={({field}) => (
+                    <StyledInput className={errors[name] && 'isInvalid'} 
+                        placeholder={placeholder} 
+                        type={type || 'text'} 
+                        id={name} 
+                        disabled={disabled ? true : false} 
+                        options={options || {delimiter: ''}} 
+                        {...field}/>
+                )}/> 
+            {errors[name] && <StyledError>{errors[name]}</StyledError>}
         </Wrapper>
     );
 }
@@ -42,6 +45,9 @@ const StyledInput = styled(Cleave)`
     border: 1px solid ${props => props.errortext ? 'rgb(242, 109, 109)' : '#EAEFF2'};
     &:read-only {
         color: rgba(35,53,57,.3);
+    }
+    &.isInvalid {
+        border-color: rgb(242, 109, 109);
     }
 `;
 
