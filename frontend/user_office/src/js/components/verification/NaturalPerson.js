@@ -13,19 +13,6 @@ import iconQuestion from './../../../img/icons/icon_faq.svg';
 
 class NaturalPerson extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {
-          dateOfBirth: ''
-        };
-    }
-
-    updateDate = (date) => {
-        this.setState({
-            dateOfBirth: date
-        })
-    }
-
     render() {
         const {email, showModal, errors, touched, values, is_pep} = this.props;
 

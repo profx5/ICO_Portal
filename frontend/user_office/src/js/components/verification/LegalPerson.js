@@ -17,27 +17,6 @@ const File = ({ input: {value: omitValue, ...inputProps }, meta: omitMeta, ...pr
 
 class LegalPerson extends React.Component {
 
-    constructor() {
-        super()
-
-        this.state = {
-          dateOfRegistration: '',
-          dateOfBirth: ''
-        };
-    }
-
-    updateDateOfRegistration = (date) => {
-        this.setState({
-            dateOfRegistration: date
-        })
-    }
-
-    updateDateOfBirth = (date) => {
-        this.setState({
-            dateOfBirth: date
-        })
-    }
-
     render() {
         const {
             representationFiles, 

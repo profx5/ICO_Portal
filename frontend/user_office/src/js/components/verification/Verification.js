@@ -252,7 +252,7 @@ const Wrapper = styled(Form)`
     padding-bottom: 90px;
     display: flex;
     flex-flow: row wrap;
-    input, button {
+    input, button, label {
         pointer-events: ${props => props.state === 'APPROVED' && 'none'};
     }
 `;
