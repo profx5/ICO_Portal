@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from "styled-components"
 import {Link} from 'react-router-dom';
 
 
@@ -57,6 +57,17 @@ const Dropdown = ({email, stepOnePassed, stepTwoPassed, stepThreePassed, showSet
 
 export default Dropdown;
 
+const reveal = keyframes`
+    from {
+        opacity: 0;
+        transform: translate3d(-50%,50px,0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(-50%,0,0);
+    }
+`;
+
 const Wrapper = styled.div`
     width: calc(100% + 38px);
     position: absolute;
@@ -68,6 +79,7 @@ const Wrapper = styled.div`
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     z-index: 0;
+    animation: ${reveal} .3s ease;
 `;
 
 const EmailInfo = styled.div`
