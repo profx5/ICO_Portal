@@ -123,9 +123,10 @@ const Header = styled.div`
         color: rgba(3,25,73,.4);
         font-size: 14px;
         img {
-            height: 36px;
-            width: auto;
-            margin-right: 15px;
+            height: auto;
+            width: 36px;
+            min-width: 36px;
+            margin: 0 15px
         }
     }
 `;
