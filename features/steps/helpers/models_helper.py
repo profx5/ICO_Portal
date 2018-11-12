@@ -14,9 +14,9 @@ def create_investor(email, password):
 def approve_kyc(email):
     kyc = Investor.objects.get(email=email).kyc
 
-    service = ApproveKYC(call_contract=False)
+    kyc.state = 'APPROVED'
 
-    service(kyc)
+    kyc.save()
 
 def create_ico_info(usd_per_eth, total_supply=0):
     ico_info = ICO_Info(usd_c_per_eth=usd_per_eth,

@@ -25,7 +25,7 @@ class TestChangePassword(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data, {
             'success': False,
-            'error': 'password_incorrect'
+            'error': ['password_incorrect']
         })
 
     def test_mismatch_new_password(self):
@@ -38,7 +38,7 @@ class TestChangePassword(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data, {
             'success': False,
-            'error': 'password_mismatch'
+            'error': ['password_mismatch']
         })
 
     def test_invalid_new_password(self):
@@ -53,7 +53,22 @@ class TestChangePassword(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data, {
             'success': False,
-            'error': 'invalid_password'
+            'error': ['password_too_short', 'password_entirely_numeric']
+        })
+
+    def test_email_as_password(self):
+        new_password = self.get_investor().email
+
+        response = self.client.post('/api/changePassword/', {
+            'old_password': self.password,
+            'new_password1': new_password,
+            'new_password2': new_password
+        })
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data, {
+            'success': False,
+            'error': ['password_too_similar']
         })
 
     def test_same_passowrd(self):
@@ -66,5 +81,5 @@ class TestChangePassword(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data, {
             'success': False,
-            'error': 'same_password'
+            'error': ['same_password']
         })

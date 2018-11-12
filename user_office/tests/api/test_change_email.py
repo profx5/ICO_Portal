@@ -49,6 +49,21 @@ class TestChangeEmail(_Base):
         sent_mails = django.core.mail.outbox
         self.assertEqual(len(sent_mails), 0)
 
+    def test_same_email(self):
+        response = self.client.post('/api/changeEmail/', {
+            'email': self.get_investor().email
+        })
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data, {
+            'success': False,
+            'error': 'same_email'
+        })
+
+        sent_mails = django.core.mail.outbox
+
+        self.assertEqual(len(sent_mails), 0)
+
 
 class TestConfirmEmailChange(_Base):
     def test_successful_cofirm(self):
