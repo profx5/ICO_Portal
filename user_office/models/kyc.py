@@ -32,6 +32,7 @@ class KYC(models.Model):
 
     # natural person
     firstname = models.CharField('First Name', max_length=30, null=True, blank=True)
+    middlename = models.CharField('Middle Name', max_length=30, null=True, blank=True)
     lastname = models.CharField('Last Name', max_length=30, null=True, blank=True)
 
     place_of_birth = models.CharField('Place of birth', max_length=50, null=True, blank=True)
