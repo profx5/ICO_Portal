@@ -36,6 +36,7 @@ class TestKYC(APITestCase):
             'firstname': 'John',
             'is_pep': None,
             'lastname': 'Doe',
+            'middlename': 'Joe',
             'personal_id': None,
             'phone_number': '+79999999999',
             'place_of_birth': 'Moscow, Russia',
@@ -86,6 +87,7 @@ class TestKYC(APITestCase):
             'firstname': None,
             'is_pep': True,
             'lastname': None,
+            'middlename': None,
             'personal_id': None,
             'phone_number': '88005553535',
             'place_of_birth': None,
@@ -128,6 +130,7 @@ class TestKYC(APITestCase):
             response = self.client.post('/api/kyc/', {
                 'type': 'NATURAL',
                 'firstname': 'John',
+                'middlename': 'Joe',
                 'lastname': 'Doe',
                 'place_of_birth': 'Moscow, Russia',
                 'birth_date': '1990-01-01',
@@ -192,6 +195,7 @@ class TestKYC(APITestCase):
             self.client.post('/api/kyc/', {
                 'type': 'NATURAL',
                 'firstname': 'John',
+                'middlename': 'Joe',
                 'lastname': 'Doe',
                 'place_of_birth': 'Moscow, Russia',
                 'birth_date': '1990-01-01',
@@ -220,6 +224,7 @@ class TestKYC(APITestCase):
             self.client.post('/api/kyc/', {
                 'type': 'NATURAL',
                 'firstname': 'John',
+                'middlename': 'Joe',
                 'lastname': 'Doe',
                 'place_of_birth': 'Moscow, Russia',
                 'birth_date': '1990-01-01',
@@ -239,6 +244,7 @@ class TestKYC(APITestCase):
             response = self.client.put('/api/kyc/', {
                 'type': 'NATURAL',
                 'firstname': 'John',
+                'middlename': 'Joe',
                 'lastname': 'Doe',
                 'place_of_birth': 'Moscow, Russia',
                 'birth_date': '1990-01-01',
@@ -260,6 +266,7 @@ class TestKYC(APITestCase):
             response = self.client.post('/api/kyc/', {
                 'type': 'NATURAL',
                 'firstname': 'John',
+                'middlename': 'Joe',
                 'lastname': 'Doe',
                 'place_of_birth': 'Moscow, Russia',
                 'birth_date': '1990-01-01',
@@ -314,6 +321,7 @@ class TestKYCAutoApprove(EthTesterAPITestCase):
             'email': 'gordon@ongrid.pro',
             'field_of_activity': None,
             'firstname': 'John',
+            'middlename': 'Joe',
             'is_pep': None,
             'lastname': 'Doe',
             'personal_id': None,
@@ -352,6 +360,7 @@ class TestKYCAutoApprove(EthTesterAPITestCase):
             response = self.client.post('/api/kyc/', {
                 'type': 'NATURAL',
                 'firstname': 'John',
+                'middlename': 'Joe',
                 'lastname': 'Doe',
                 'place_of_birth': 'Moscow, Russia',
                 'birth_date': '1990-01-01',
