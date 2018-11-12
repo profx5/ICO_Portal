@@ -10,21 +10,23 @@ class ChangePassword(ServiceObject):
         if context.investor.check_password(context.old_password):
             return self.success()
         else:
-            return self.fail('password_incorrect')
+            return self.fail(['password_incorrect'])
 
     def check_new_password(self, context):
         if (context.new_password1 and context.new_password2) and \
            context.new_password1 == context.new_password2:
             if context.old_password == context.new_password2:
-                return self.fail('same_password')
+                return self.fail(['same_password'])
             try:
                 validate_password(context.new_password2, context.investor)
 
                 return self.success()
             except ValidationError as e:
-                return self.fail('invalid_password')
+                errors = [e.code for e in e.args[0]]
 
-        return self.fail('password_mismatch')
+                return self.fail(errors)
+        else:
+            return self.fail(['password_mismatch'])
 
     def set_password(self, context):
         investor = context.investor

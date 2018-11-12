@@ -24,6 +24,8 @@ class CheckEmailMixin:
                 return self.success()
             except ValidationError:
                 return self.fail('invalid email address')
+        else:
+            return self.fail('same_email')
 
 
 class EmailResetTokenGenerator(PasswordResetTokenGenerator):

@@ -20,6 +20,8 @@ class ServiceObject(LoggerMixin):
             message = fail_obj
         elif isinstance(fail_obj, Exception):
             message = str(fail_obj.args)
+        else:
+            message = fail_obj
 
         self.logger.error(f'Failed with message: \'{message}\' and context {self._context}',
                           stack_info=True)
