@@ -5,7 +5,9 @@ import {compose} from 'redux';
 import {Formik, Form} from 'formik';            
 import $ from 'jquery';
 import VerificationValidation from './utils/VerificationValidation';
+import {media} from './../../utils/media';
 
+import Title from './../common/Title';
 import KYCTabs from './components/KYCTabs';
 import NaturalPerson from './NaturalPerson';
 import LegalPerson from './LegalPerson';
@@ -145,7 +147,7 @@ class Verification extends React.Component {
                         <Wrapper state={state} id="form" className="VerificationForm">
                             <Header>
                                 <HeaderInner>
-                                    <Head>Verification (KYC)</Head>
+                                    <Title className="Verification_head">Verification (KYC)</Title>
                                     <KYCTabs clickHandler={this.tabClickHandler.bind(this, resetForm)} activeTab={activeKycTab}/>
                                 </HeaderInner>
                             </Header>
@@ -255,6 +257,9 @@ const Wrapper = styled(Form)`
     input, button, label {
         pointer-events: ${props => props.state === 'APPROVED' && 'none'};
     }
+    ${media.xs} {
+        margin: 0 16px;
+    }
 `;
 
 const Header = styled.div`
@@ -268,14 +273,6 @@ const HeaderInner = styled.div`
     max-width: 720px;
     margin-top: 60px;
     margin-bottom: 40px;
-`;
-
-const Head = styled.h2`
-    font-size: 38px;
-    line-height: 1;
-    font-weight: 400;
-    color: #233539;
-    letter-spacing: 0.8px;
 `;
 
 const MainWrapper = styled.div`

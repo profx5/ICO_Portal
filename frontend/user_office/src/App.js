@@ -13,18 +13,14 @@ class App extends React.Component {
 
         return (
             <div>
-                <ContentWrapper 
-                    layout={<Layout/>}
-                />
+                <ContentWrapper layout={<Layout/>}/>
             </div>
         )
     }
 }
 
-const mapStateToProps = ({UI}) => ({
-})
+const mapStateToProps = ({}) => ({})
 
-const mapDispatchToProps = (dispatch) => ({
-})
+const mapDispatchToProps = () => ({})
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

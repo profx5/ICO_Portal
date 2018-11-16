@@ -20,6 +20,7 @@ const initialState = Map({
     modalOpened: false,
     modalHead: null,
     modalContent: null,
+    mobileSidebarOpened: false
 });
 
 
@@ -54,6 +55,8 @@ export const UIStateReducer = createReducer({
     [actions.setNewTicketFilesNull]: (state = initialState, payload) => state.set('newTicketFiles', []),
     [actions.setNewCommentFiles]: (state = initialState, payload) => state.set('newCommentFiles', payload.files),
     [actions.setNewCommentFilesNull]: (state = initialState, payload) => state.set('newCommentFiles', []),
+    [actions.openMobileSidebar]: (state = initialState, payload) => state.set('mobileSidebarOpened', true),
+    [actions.closeMobileSidebar]: (state = initialState, payload) => state.set('mobileSidebarOpened', false),
 }, initialState);
 
 

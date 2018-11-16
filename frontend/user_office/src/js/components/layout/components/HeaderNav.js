@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
+import {media} from './../../../utils/media';
 
 
 const navigationItems = [
@@ -14,15 +15,14 @@ const navigationItems = [
   },
 ];
 
-const HeaderNav = () => (
-  <Wrapper>
+const HeaderNav = ({className}) => (
+  <Wrapper className={className}>
     <NavList>
       {navigationItems.map(navigationItem => (
         <NavItem
             key={navigationItem.location}
             to={navigationItem.location}
-            activeClassName='active' isActive={navigationItem.isActive}
-        >
+            activeClassName='active' isActive={navigationItem.isActive}>
            {navigationItem.caption}
         </NavItem>
       ))}
@@ -35,6 +35,13 @@ export default HeaderNav;
 
 const Wrapper = styled.div`
     height: 100%;
+    ${media.xs} {
+      background: #F5F6FA;
+      padding-top: 15px;
+      padding-bottom: 6px;
+      height: 52px;
+      overflow-x: scroll;
+    }
 `;
 
 const NavList = styled.div`
@@ -46,12 +53,17 @@ const NavList = styled.div`
 
 const NavItem = styled(NavLink)`
     height: 100%;
+    font-weight: 400;
     color: #222121;
     margin-left: 38px;
     white-space: nowrap;
     display: inline-flex;
     align-items: center;
     position: relative;
+    ${media.xs} {
+      font-size: 14px;
+      margin-left: 16px;
+    }
     &.active {
         color: #3172fd;
         &:before {

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import {media} from './../../../utils/media';
 
 
 const SupportTabs = ({ticketsAmount, activeTab, isTicketOpened, tabClickHandler}) => {
@@ -17,6 +18,7 @@ export default SupportTabs;
 
 const Wrapper = styled.div`
     height: 56px;
+    margin-top: 30px;
 `;
 
 const Tab = styled.div`

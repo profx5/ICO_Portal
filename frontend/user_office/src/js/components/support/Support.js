@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
 import $ from 'jquery';
+import {media} from './../../utils/media';
 
+import Title from './../common/Title';
 import SupportTabs from './components/SupportTabs';
 import NewTicket from './NewTicket';
 import AllQuestions from './AllQuestions';
@@ -29,7 +31,7 @@ class Support extends React.Component {
 
         return (
             <Wrapper>
-                <Head>FAQ & Feedback</Head>
+                <Title>FAQ & Feedback</Title>
                 <SupportTabs tabClickHandler={activateSupportTab} ticketsAmount={tickets} activeTab={activeSupportTab} isTicketOpened={!!selectedTicket}/>
                 {!selectedTicket && activeSupportTab === 1 && <NewTicket onAttachClickHandler={this.onAttachClickHandler}/>}
                 {!selectedTicket && activeSupportTab === 2 && <AllQuestions/>}
@@ -57,17 +59,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(Support)
 const Wrapper = styled.div`
     flex: 1;
     height: calc(100% - 100px);
-    margin-left: 55px;
-    margin-right: 55px;
+    margin: 0 55px;
     padding-bottom: 73px;
-`;
-
-const Head = styled.h2`
-    font-size: 38px;
-    line-height: 1;
-    font-weight: 400;
-    color: #233539;
-    letter-spacing: 0.8px;
-    margin-top: 65px;
-    margin-bottom: 60px;
+    ${media.xs} {
+        margin: 0 16px;
+    }
 `;

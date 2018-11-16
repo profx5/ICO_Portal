@@ -32,7 +32,7 @@ class LegalPerson extends React.Component {
 
         return (
             <Wrapper className="Verification__personData">
-                <Title>Legal Person Data</Title>
+                <Head>Legal Person Data</Head>
 
                 <LegalPersonData errors={errors} touched={touched} values={values}/>
                 <RepresentationFiles files={representationFiles} 
@@ -92,17 +92,10 @@ const Wrapper = styled.div`
     }
 `;
 
-const Title = styled.h3`
+const Head = styled.h3`
     font-size: 20px;
     font-weight: 600;
     color: #323c47;
     letter-spacing: 0.1px;
     margin-bottom: 45px;
-`;
-
-const ButtonWrapper = styled.div`
-    width: 190px;
-    height: 45px;
-    margin-bottom: 50px;
-    margin-top: 15px;
 `;

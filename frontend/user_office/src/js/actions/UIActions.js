@@ -33,3 +33,6 @@ export const setNewTicketFilesNull = createAction('SET_NEW_TICKET_FILES_NULL');
 
 export const setNewCommentFiles = createAction('SET_NEW_COMMENT_FILES', (files => ({files})));
 export const setNewCommentFilesNull = createAction('SET_NEW_COMMENT_FILES_NULL');
+
+export const openMobileSidebar = createAction('OPEN_MOBILE_SIDEBAR');
+export const closeMobileSidebar = createAction('CLOSE_MOBILE_SIDEBAR');

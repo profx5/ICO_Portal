@@ -5,9 +5,12 @@ import {Route, Switch} from 'react-router-dom';
 import {withRouter} from 'react-router';
 import $ from 'jquery';
 import history from './../../utils/history';
+import {media} from './../../utils/media';
 
 import NavSidebar from './components/NavSidebar';
 import Nav from './components/Nav';
+import MobileNav from './components/MobileNav';
+import MobileNavSidebar from './MobileNavSidebar';
 import Header from './Header';
 
 import Dashboard from './../dashboard/Dashboard';
@@ -59,7 +62,7 @@ class Layout extends Component {
     }
 
     render() {
-        const {showSetAccountPopup, modalOpened, openedModalId, modalHead, modalContent, changeSupportActiveTab} = this.props;
+        const {showSetAccountPopup, closeMobileSidebar, modalOpened, openedModalId, modalHead, modalContent, changeSupportActiveTab, mobileSidebarOpened} = this.props;
 
         return (
             <Wrapper>
@@ -68,6 +71,11 @@ class Layout extends Component {
                     <NavSidebar>
                         <Nav changeSupportActiveTab={changeSupportActiveTab}/>
                     </NavSidebar>
+                    {mobileSidebarOpened &&                     
+                        <MobileNavSidebar>
+                            <MobileNav onClickHandler={closeMobileSidebar} changeSupportActiveTab={changeSupportActiveTab}/>
+                        </MobileNavSidebar>
+                    }
                     <Switch history={history}>
                         <Route exact path="/user_office" component={Dashboard}/>
                         <Route path="/user_office/transactions" component={Transactions}/>
@@ -96,7 +104,8 @@ const mapStateToProps = ({UI}) => ({
     openedModalId: UI.get('openedModalId'),
     modalHead: UI.get('modalHead'),
     modalContent: UI.get('modalContent'),
-    activeSupportTab: UI.get('activeSupportTab')
+    activeSupportTab: UI.get('activeSupportTab'),
+    mobileSidebarOpened: UI.get('mobileSidebarOpened')
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -117,6 +126,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     changeSupportActiveTab(payload) {
         dispatch(UIActions.changeActiveTab(payload))
+    },
+    closeMobileSidebar(payload) {
+        dispatch(UIActions.closeMobileSidebar(payload))
     }
 })
 

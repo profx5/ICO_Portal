@@ -1,12 +1,13 @@
 import React from 'react';
 import styled, { keyframes } from "styled-components"
 import {Link} from 'react-router-dom';
+import {media} from './../../../utils/media';
 
 
-const Dropdown = ({email, stepOnePassed, stepTwoPassed, stepThreePassed, showSetAccount, showSetAccountPopup, dropdownAccountClickHandler}) => {
+const Dropdown = ({email, stepOnePassed, stepTwoPassed, stepThreePassed, stepsPassed, showSetAccount, showSetAccountPopup, dropdownAccountClickHandler}) => {
     return (
         <Wrapper className="DropdownAccount" id='modal-dropdown'>
-
+            <StyledSteps>Steps completed: <span>{stepsPassed}/3</span></StyledSteps>
             <StepsList>
                 <StepsListItem passed={stepOnePassed} onClick={!stepOnePassed ? showSetAccountPopup : undefined}>
                     <span>1.&nbsp;&nbsp;Provide your ETH address</span>
@@ -80,6 +81,29 @@ const Wrapper = styled.div`
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     z-index: 0;
     animation: ${reveal} .3s ease;
+    ${media.xs} {
+        width: 274px;
+        left: unset;
+        right: -16px;
+        padding-top: 40px;
+        transform: unset;
+        animation: unset;
+    }
+`;
+
+const StyledSteps = styled.p`
+    color: #222121;
+    user-select: none;
+    padding-left: 22px;
+    margin-bottom: 32px;
+    span {
+        color: #00da36;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    ${media.smPlus} {
+        display: none;
+    }
 `;
 
 const EmailInfo = styled.div`

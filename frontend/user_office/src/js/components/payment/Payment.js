@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Route, Switch} from 'react-router-dom';
 import {withRouter} from 'react-router';
+import {media} from './../../utils/media';
 
+import Title from './../common/Title';
 import PaymentStepOne from './PaymentStepOne';
 import PaymentStepTwo from './PaymentStepTwo';
 import PaymentStepThree from './PaymentStepThree';
@@ -18,7 +20,7 @@ class Payment extends React.Component {
 
         return (
             <Wrapper>
-                <Head>Payment</Head>
+                <Title>Payment</Title>
                 <Steps step={step}/>
                 <Switch>
                     <Route exact path="/user_office/payment" component={PaymentStepOne}/>
@@ -47,14 +49,7 @@ const Wrapper = styled.div`
     margin-left: 55px;
     margin-right: 55px;
     padding-bottom: 73px;
-`;
-
-const Head = styled.h2`
-    font-size: 38px;
-    line-height: 1;
-    font-weight: 400;
-    color: #233539;
-    letter-spacing: 0.8px;
-    margin-top: 65px;
-    padding-bottom: 40px;
+    ${media.xs} {
+        margin: 0 16px;
+    }
 `;

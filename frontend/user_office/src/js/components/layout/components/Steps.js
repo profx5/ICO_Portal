@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 import arrowImg from './../../../../img/arrow-down.svg';
 import exclaimIcon from './../../../../img/icons/icon_exclaim.svg';
@@ -34,10 +35,14 @@ const Wrapper = styled.div`
 const StyledSteps = styled.p`
     color: #222121;
     user-select: none;
+    white-space: nowrap;
     span {
         color: #00da36;
         font-size: 16px;
         font-weight: 600;
+    }
+    ${media.xs} {
+        display: none;
     }
 `;
 
@@ -67,4 +72,7 @@ const ArrowImg = styled.img`
     position: relative;
     top: 1px;
     transform: ${props => props.up ? 'rotate(0)' : 'rotate(-180deg)'};
+    ${media.xs} {
+        margin-left: 9px;
+    }
 `;
