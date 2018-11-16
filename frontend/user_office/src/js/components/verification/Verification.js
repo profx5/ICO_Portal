@@ -259,6 +259,7 @@ const Wrapper = styled(Form)`
     }
     ${media.xs} {
         margin: 0 16px;
+        padding-bottom: 50px;
     }
 `;
 

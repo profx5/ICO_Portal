@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import $ from "jquery";
+import {media} from './../../utils/media';
 
 import Ticket from './components/Ticket';
 
@@ -67,15 +67,11 @@ const Wrapper = styled.div`
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
+    ${media.xs} {
+        padding: 32px 16px 20px;
+    }
 `;
 
 const TicketsList = styled.table`
     width: 100%;
-`;
-
-const Head = styled.h3`
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: 0.1px;
-    color: #323c47;
 `;

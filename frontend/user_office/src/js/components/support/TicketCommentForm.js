@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {connect} from 'react-redux'
 import { Formik, Field, Form } from "formik";
 import ValidationSchema from './utils/TicketCommentFormValidation';
+import {media} from './../../utils/media';
 
 import Button from './../common/Button';
 import FilesAttacher from './../../utils/FilesAttacher';
@@ -29,8 +30,7 @@ class TicketCommentForm extends React.Component {
             <Wrapper>
                 <Formik
                     initialValues={{
-                        title: '',
-                        description: ''
+                        comment: ''
                     }} 
                     validationSchema={ValidationSchema} 
                     onSubmit={this.onSubmitHandler} 
@@ -49,6 +49,7 @@ class TicketCommentForm extends React.Component {
                             </FormGroup>
 
                             <div className="controls-container files-section files-section-comment">
+                                {commentFiles.size > 0 && <div className="files-header">Uploaded:</div>}
                                 <div className="files-container">
                                     <FilesAttacher files={commentFiles} 
                                             name="attachment" 
@@ -100,23 +101,56 @@ const Wrapper = styled.div`
     padding: 42px 0 65px;
     background: white;
     border-radius: 6px;
+    ${media.xs} {
+        padding: 35px 0 0;
+    }
     .controls-container {
         overflow: auto;
     }
     .files-container {
-        float: left;
         overflow: auto;
+        ${media.smPlus} {
+            float: left;
+        }
+    }
+    .files-header {
+        font-size: 14px;
+        margin-bottom: 14px;
+        ${media.smPlus} {
+            display: none;
+        }
+        ${media.xs} {
+            margin-top: 8px;
+        }
+    }
+    .files-container {
+        overflow: auto;
+        ${media.smPlus} {
+            float: left;
+        }
+        ${media.xs} {
+            margin-bottom: 10px;
+        }
     }
     .buttons-container {
-        float: right;
+        ${media.smPlus} {
+            float: right;
+        }
     }
     .button-wrapper {
         height: 45px;
         border-radius: 2px;
         display: inline-block;
+        ${media.xs} {
+            width: 100% !important;
+        }
         &:first-of-type {
             width: 190px;
             margin-right: 12px;
+            ${media.xs} {
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
         }
         &:last-of-type {
             width: 165px;
@@ -133,7 +167,9 @@ const CommentField = styled(Field)`
     font-size: 16px;
     background: rgb(246, 246, 246);
     border: solid 1px rgb(214, 223, 230);
-    margin-bottom: 41px;
+    ${media.xs} {
+        height: 140px;
+    }
     &::placeholder {
         opacity: 0.4;
         font-size: 16px;
@@ -147,4 +183,8 @@ const CommentField = styled(Field)`
 
 const FormGroup = styled.div`
     position: relative;
+    margin-bottom: 40px;
+    ${media.xs} {
+        margin-bottom: 8px;
+    }
 `;

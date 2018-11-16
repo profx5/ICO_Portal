@@ -49,6 +49,7 @@ const Wrapper = styled.div`
     justify-content: flex-start;
     ${media.xs} {
         margin: 0 16px;
+        padding-bottom: 50px;
     }
 `;
 
