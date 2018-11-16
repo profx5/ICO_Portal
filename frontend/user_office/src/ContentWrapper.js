@@ -2,6 +2,7 @@ import React from 'react';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import {media} from './js/utils/media';
 
 import {isMetamaskAvailable} from './web3';
 
@@ -27,6 +28,10 @@ class ContentWrapper extends React.Component {
         const {getMe, getICOInfo, getKyc, getPhasesInfo, getDeposits, getCurrencies, getTickets} = this.props;
 
         compose(getMe, getKyc, getICOInfo, getPhasesInfo, getDeposits, getCurrencies, getTickets)();
+        window.addEventListener('resize', () => {
+            window.width = document.width.clientWidth;
+            window.height = document.width.clientHeight;
+        })
     }
 
     render() {
@@ -77,4 +82,7 @@ const Wrapper = styled.div`
     flex-flow: row nowrap;
     align-items: stretch;
     min-height: 100%;
+    ${media.xs} {
+        width: 100vw;
+    }
 `;

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
+import Title from './../common/Title';
 import ICOProgress from './ICOProgress';
 import BonusSheet from './components/BonusSheet';
 
@@ -11,7 +13,7 @@ const Dashboard = (props) => {
     return (
         <Wrapper>
             <BannerWrapper />
-            <Head>Dashboard</Head>
+            <Title>Dashboard</Title>
             <BonusSheet/>
             <ICOProgress/>
         </Wrapper>
@@ -27,15 +29,9 @@ const Wrapper = styled.div`
     margin-left: 55px;
     margin-right: 55px;
     padding-bottom: 73px;
-`;
-
-const Head = styled.h2`
-    font-size: 38px;
-    line-height: 1;
-    font-weight: 400;
-    color: #233539;
-    letter-spacing: 0.8px;
-    margin-top: 65px;
+    ${media.xs} {
+        margin: 0 16px;
+    }
 `;
 
 const BannerWrapper = styled.div`

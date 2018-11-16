@@ -12,8 +12,6 @@ import store from './js/store/index';
 import { BrowserRouter } from 'react-router-dom';
 
 
-
-
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 

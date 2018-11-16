@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
+import Title from './../common/Title';
 import ReferralInfo from './ReferralInfo';
 import ReferralList from './components/ReferralList';
 import ReferralRules from "./components/ReferralRules";
@@ -11,7 +13,7 @@ class ReferralTab extends React.Component {
     render() {
         return (
             <Wrapper>
-                <Head>Referrals</Head>
+                <Title>Referrals</Title>
                 <MainWrapper>
                     <ReferralInfo/>
                     <ReferralList/>
@@ -32,17 +34,9 @@ const Wrapper = styled.div`
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
-`;
-
-const Head = styled.h2`
-    font-size: 38px;
-    line-height: 1;
-    font-weight: 500;
-    color: #233539;
-    letter-spacing: -1.1px;
-    margin-top: 34px;
-    flex-basis: 100%;
-    margin-bottom: 45px;
+    ${media.xs} {
+        margin: 0 16px;
+    }
 `;
 
 const MainWrapper = styled.div`

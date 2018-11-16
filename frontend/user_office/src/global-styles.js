@@ -1,4 +1,5 @@
 import { injectGlobal } from 'styled-components';
+import {media} from './js/utils/media';
 
 import gilroyLightWoff from './fonts/Gilroy-Light.woff';
 import gilroyLightWoff2 from './fonts/Gilroy-Light.woff2';
@@ -309,7 +310,41 @@ injectGlobal`
     font-weight: 700;
   }
 
+  .hidden-xs {
+    ${media.xs} {
+      display: none;
+    }
+  }
 
+  .hidden-sm {
+    ${media.sm} {
+      display: none;
+    }
+  }
+
+  .hidden-smPlus {
+    ${media.smPlus} {
+      display: none;
+    }
+  }
+
+  .hidden-smMinus {
+    ${media.smMinus} {
+      display: none;
+    }
+  }
+  
+  .hidden-md {
+    ${media.md} {
+      display: none;
+    }
+  }
+
+  .hidden-lg {
+    ${media.lg} {
+      display: none;
+    }
+  }
 
   @font-face {
       font-family: 'gilroy';

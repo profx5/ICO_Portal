@@ -18,7 +18,7 @@ class NaturalPerson extends React.Component {
 
         return (
             <Wrapper className="Verification__personData">
-                <Title>Personal Data</Title>
+                <Head>Personal Data</Head>
                 <NaturalPersonData errors={errors} touched={touched} values={values} email={email}/>
 
                 <ConfirmAsInvestor errors={errors} touched={touched} values={values} showModalHandler={showModal} iconQuestion={iconQuestion} labelText="I confirm that the investor is a beneficial owner"/>
@@ -56,7 +56,7 @@ const Wrapper = styled.div`
     border-radius: 6px;
 `;
 
-const Title = styled.h3`
+const Head = styled.h3`
     font-size: 20px;
     font-weight: 600;
     color: #323c47;

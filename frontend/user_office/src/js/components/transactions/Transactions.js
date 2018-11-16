@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
+import Title from './../common/Title';
 import DepositTable from "./DepositTable";
 
 
@@ -11,7 +13,7 @@ class Transactions extends React.Component {
 
         return (
             <Wrapper>
-                <Head>Transactions</Head>
+                <Title>Transactions</Title>
                 <DepositTable/>
             </Wrapper>
         )
@@ -35,13 +37,7 @@ const Wrapper = styled.div`
     margin-left: 55px;
     margin-right: 55px;
     padding-bottom: 73px;
-`;
-
-const Head = styled.h2`
-    font-size: 38px;
-    line-height: 1;
-    font-weight: 400;
-    color: #233539;
-    letter-spacing: 0.8px;
-    margin-top: 50px;
+    ${media.xs} {
+        margin: 0 16px;
+    }
 `;

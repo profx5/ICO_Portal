@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
+import Title from './../common/Title';
 import AccountInfo from './AccountInfo';
 import Password from './Password';
 import VerificationInfo from './VerificationInfo';
@@ -14,7 +16,7 @@ class Settings extends React.Component {
         return (
             <Wrapper className="Verification">
                 <HeaderInner>
-                    <Head>Account setup</Head>
+                    <Title>Account setup</Title>
                 </HeaderInner>
                 <MainWrapper>
                     <AccountInfo/>
@@ -45,20 +47,15 @@ const Wrapper = styled.div`
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
+    ${media.xs} {
+        margin: 0 16px;
+    }
 `;
 
 const HeaderInner = styled.div`
     flex-basis: 100%;
     margin-top: 60px;
     margin-bottom: 40px;
-`;
-
-const Head = styled.h2`
-    font-size: 38px;
-    line-height: 1;
-    font-weight: 400;
-    color: #233539;
-    letter-spacing: -1.1px;
 `;
 
 const MainWrapper = styled.div`
