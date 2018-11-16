@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import $ from "jquery";
+import {media} from './../../utils/media';
 
 import NewTicketForm from './NewTicketForm';
 
@@ -36,6 +36,9 @@ const Wrapper = styled.div`
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
+    ${media.xs} {
+        padding: 32px 16px 32px;
+    }
 `;
 
 const Head = styled.h3`
@@ -45,4 +48,8 @@ const Head = styled.h3`
     color: #323c47;
     text-align: center;
     margin-bottom: 30px;
+    ${media.xs} {
+        font-size: 16px;
+        margin-bottom: 0;
+    }
 `;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {connect} from 'react-redux'
 import { Formik, Field, Form } from "formik";
 import ValidationSchema from './utils/NewTicketFormValidation';
+import {media} from './../../utils/media';
 
 import Button from './../common/Button';
 import ErrorMessage from './../common/ErrorMessage';
@@ -61,6 +62,7 @@ class NewTicketForm extends React.Component {
                             </FormGroup>
 
                             <div className="controls-container files-section files-section-newTicket">
+                                {newTicketFiles.size > 0 && <div className="files-header">Uploaded:</div>}
                                 <div className="files-container">
                                     <FilesAttacher files={newTicketFiles} 
                                         name="attachment" 
@@ -109,26 +111,57 @@ const Wrapper = styled.div`
     padding: 42px 0 65px;
     background: white;
     border-radius: 6px;
+    ${media.xs} {
+        padding: 35px 0 0;
+    }
     .controls-container {
         overflow: auto;
     }
     .files-container {
-        float: left;
         overflow: auto;
+        ${media.smPlus} {
+            float: left;
+        }
+        ${media.xs} {
+            margin-bottom: 10px;
+        }
     }
     .buttons-container {
         float: right;
+        ${media.xs} {
+            float: unset;
+        }
+    }
+    .files-header {
+        font-size: 14px;
+        margin-bottom: 14px;
+        ${media.smPlus} {
+            display: none;
+        }
+        ${media.xs} {
+            margin-top: 4px;
+        }
     }
     .button-wrapper {
         height: 45px;
         border-radius: 2px;
         display: inline-block;
+        ${media.xs} {
+            width: 100% !important;
+            margin-right: 0 !important;
+        }
         &:first-of-type {
             width: 190px;
             margin-right: 12px;
+            ${media.xs} {
+                margin-bottom: 16px;
+            }
         }
         &:last-of-type {
             width: 165px;
+            ${media.xs} {
+                margin-bottom: 10px;
+            }
         }
     }
 `;
@@ -145,22 +178,28 @@ const StyledForm = styled(Form)`
         &.isInvalid {
             border-color: rgb(242, 109, 109);
         }
-    }
-    label {
-        display: block;
-        margin-bottom: 14px;
-    }
-    input {
-        display: block;
-        height: 45px;
-        border: 1px solid #d6dfe6;
         &::placeholder {
             opacity: 0.4;
             font-family: Gilroy;
             font-size: 16px;
             font-weight: 400;
             color: #233539;
+            ${media.xs} {
+                font-size: 14px;
+            }
         }
+    }
+    label {
+        display: block;
+        margin-bottom: 14px;
+        ${media.xs} {
+            font-size: 12px;
+        }
+    }
+    input {
+        display: block;
+        height: 45px;
+        border: 1px solid #d6dfe6;
     }
     textarea {
         display: block;
@@ -168,12 +207,8 @@ const StyledForm = styled(Form)`
         border: 1px solid #d6dfe6;
         padding: 15px 15px;
         resize: none;
-        &::placeholder {
-            opacity: 0.4;
-            font-family: Gilroy;
-            font-size: 16px;
-            font-weight: 400;
-            color: #233539;
+        ${media.xs} {
+            height: 141px;
         }
     }
     input[type="file"] {
@@ -184,4 +219,14 @@ const StyledForm = styled(Form)`
 const FormGroup = styled.div`
     position: relative;
     margin-bottom: 40px;
+    &:nth-of-type(1) {
+        ${media.xs} {
+            margin-bottom: 15px;
+        }
+    }
+    &:nth-of-type(2) {
+        ${media.xs} {
+            margin-bottom: 10px;
+        }
+    }
 `;

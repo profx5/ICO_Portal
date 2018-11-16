@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
 import Utils from './../../utils/index';
 
@@ -35,12 +36,18 @@ const Wrapper = styled.div`
     float: left;
     clear: left;
     position: relative;
+    ${media.xs} {
+        width: 100%;
+    }
     .file-name {
         font-size: 16px;
         color: rgb(92, 141, 245);
         letter-spacing: 0.5px;
         font-weight: 600;
         line-height: 36px;
+        ${media.xs} {
+            font-size: 14px;
+        }
     }
     .file-size {
         font-size: 16px;

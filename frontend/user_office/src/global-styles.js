@@ -312,37 +312,79 @@ injectGlobal`
 
   .hidden-xs {
     ${media.xs} {
-      display: none;
+      display: none !important;
     }
   }
 
   .hidden-sm {
     ${media.sm} {
-      display: none;
+      display: none !important;
     }
   }
 
   .hidden-smPlus {
     ${media.smPlus} {
-      display: none;
+      display: none !important;
     }
   }
 
   .hidden-smMinus {
     ${media.smMinus} {
-      display: none;
+      display: none !important;
     }
   }
   
   .hidden-md {
     ${media.md} {
-      display: none;
+      display: none !important;
     }
   }
 
   .hidden-lg {
     ${media.lg} {
+      display: none !important;
+    }
+  }
+
+  .visible-xs {
       display: none;
+    ${media.xs} {
+      display: block !important;
+    }
+  }
+
+  .visible-sm {
+      display: none;
+    ${media.sm} {
+      display: block !important;
+    }
+  }
+
+  .visible-smPlus {
+    display: none;
+    ${media.smPlus} {
+      display: block !important;
+    }
+  }
+
+  .visible-smMinus {
+    display: none;
+    ${media.smMinus} {
+      display: block !important;
+    }
+  }
+  
+  .visible-md {
+    display: none;
+    ${media.md} {
+      display: block !important;
+    }
+  }
+
+  .visible-lg {
+    display: none;
+    ${media.lg} {
+      display: block !important;
     }
   }
 

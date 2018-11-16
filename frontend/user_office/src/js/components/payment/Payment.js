@@ -51,5 +51,6 @@ const Wrapper = styled.div`
     padding-bottom: 73px;
     ${media.xs} {
         margin: 0 16px;
+        padding-bottom: 50px;
     }
 `;

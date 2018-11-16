@@ -7,8 +7,8 @@ import {media} from './../../../utils/media';
 const SupportTabs = ({ticketsAmount, activeTab, isTicketOpened, tabClickHandler}) => {
     return (
         <Wrapper>
-            <Link to="/user_office/support"><Tab onClick={tabClickHandler.bind(this, 1)} active={!isTicketOpened && activeTab === 1 ? true : false}>New question</Tab></Link>
-            <Link to="/user_office/support"><Tab onClick={tabClickHandler.bind(this, 2)} active={isTicketOpened || activeTab === 2 ? true : false}>My questions {ticketsAmount.length}</Tab></Link>
+            <StyledLink to="/user_office/support"><Tab onClick={tabClickHandler.bind(this, 1)} active={!isTicketOpened && activeTab === 1 ? true : false}>New question</Tab></StyledLink>
+            <StyledLink to="/user_office/support"><Tab onClick={tabClickHandler.bind(this, 2)} active={isTicketOpened || activeTab === 2 ? true : false}>My questions {ticketsAmount.length}</Tab></StyledLink>
         </Wrapper>
     )
 }
@@ -19,6 +19,10 @@ export default SupportTabs;
 const Wrapper = styled.div`
     height: 56px;
     margin-top: 30px;
+    ${media.xs} {
+        display: flex;
+        height: 45px;
+    }
 `;
 
 const Tab = styled.div`
@@ -32,4 +36,15 @@ const Tab = styled.div`
     color: ${props => props.active ? '#3172fd' : '#323c47'};
     background: ${props => props.active ? '#fff' : 'transparent'};
     cursor: pointer;
+    ${media.xs} {
+        font-size: 14px;
+        line-height: 45px;
+        width: 100%;
+    }
+`;
+
+const StyledLink = styled(Link)`
+    ${media.xs} {
+        flex-basis: 50%;
+    }
 `;
