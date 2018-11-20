@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 import iconCheckGreen from './../../../../img/check-green.svg';
 
@@ -35,17 +36,12 @@ const TransactionsInfo = ({transferHashLink, payementHashLink, amount, currency,
                 <Part className="Info_part-1">
                     <div className="Info_head">Calculated token amount</div>
                     <div className="Info_partContent">
-
                         <div>{`${amount} ${currency} x ` + rateUSD + " USD = " + USDValue + " USD"}<br/></div>
                         <div>{`Phase bonus = ${bonus_percent}%`}<br/></div>
                         <div>{`Token base price = ${tokenPrice} USD`}<br/></div>
                         <div>{`Base tokens: ${USDValue} USD / ${tokenPrice} = ${baseTokens} OGD`}<br/></div>
                         <div>{`Bonus tokens: ${baseTokens} x ${bonus_percent}% = ${bonusTokens} OGD`}<br/></div>
                         <div>{`Total: ${tokens}`}<br/></div>
-
-                        
-
-
                     </div>
                 </Part>
                 <Part className="Info_part-2">
@@ -70,13 +66,13 @@ const Wrapper = styled.div`
     padding-left: 30px;
     display: flex;
     flex-flow: row wrap;
+    ${media.xs} {
+        padding-left: 14px;
+    }
 `;
 
 const InfoBlock = styled.div`
     flex-basis: 100%;
-    &:first-of-type {
-
-    }
     &:last-of-type {
         display: flex;
         border-top: 1px solid rgba(151, 151, 151, .2);
@@ -121,15 +117,15 @@ const Part = styled.div`
         .Info_partContent {
             div {
                 margin-bottom: 10px;
+                ${media.xs} {
+                    margin-bottom: 5px;
+                }
             }
         }
     }
     &.Info_part-2 {
         border-left: 1px solid rgba(151, 151, 151, .2);
         border-right: 1px solid rgba(151, 151, 151, .2);
-    }
-    &.Info_part-3 {
-
     }
     &.Info_part-2, &.Info_part-3 {
         position: relative;

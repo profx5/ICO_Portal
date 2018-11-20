@@ -143,4 +143,5 @@ const MainWrapper = styled.div`
     display: flex;
     background: #F5F6FA;
     min-height: calc(100vh - 90px);
+    overflow: hidden;
 `;

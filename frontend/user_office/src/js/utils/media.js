@@ -2,7 +2,7 @@ let window_height = document.body.clientHeight;
 let xsh_height = 415;
 let xsh_width = 737;
 let xs_width = 768;
-let sm_width = 1024;
+let sm_width = 1025;
 let lg_width = 1600;
 
 
