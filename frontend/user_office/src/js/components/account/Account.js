@@ -15,15 +15,13 @@ class Settings extends React.Component {
 
         return (
             <Wrapper className="Verification">
-                <HeaderInner>
-                    <Title>Account setup</Title>
-                </HeaderInner>
+                <Title>Account setup</Title>
                 <MainWrapper>
                     <AccountInfo/>
                     <Password/>
                 </MainWrapper>
                 <div>
-                    <VerificationInfo
+                    <VerificationInfo className="hidden-xs hidden-sm"
                         verificationStages={['Settings__accountInfo', 'Settings__password']} 
                         stages={['Account information', 'Password']}/>
                 </div>
@@ -51,15 +49,16 @@ const Wrapper = styled.div`
         margin: 0 16px;
         padding-bottom: 50px;
     }
-`;
-
-const HeaderInner = styled.div`
-    flex-basis: 100%;
-    margin-top: 60px;
-    margin-bottom: 40px;
+    ${media.sm} {
+        margin-right: 60px;
+    }
 `;
 
 const MainWrapper = styled.div`
     flex: 1;
     max-width: 720px;
+    margin-top: 30px;
+    ${media.xs} {
+        margin-top: 14px;
+    }
 `;

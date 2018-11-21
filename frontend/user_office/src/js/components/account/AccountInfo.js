@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 import ClipboardJS from 'clipboard';
 import EmailValidationSchema from './utils/EmailValidationSchema';
+import {media} from './../../utils/media';
 
 import { Formik, Form } from "formik";
 import InputText from './components/InputText';
@@ -114,6 +115,10 @@ const Wrapper = styled.div`
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
     margin-bottom: 30px;
+    ${media.xs} {
+        padding: 20px 16px;
+        margin-bottom: 16px;
+    }
 `;
 
 const Title = styled.h3`
@@ -122,6 +127,10 @@ const Title = styled.h3`
     color: #323c47;
     letter-spacing: 0.1px;
     margin-bottom: 45px;
+    ${media.xs} {
+        font-size: 16px;
+        margin-bottom: 35px;
+    }
 `;
 
 const InputSet = styled.div`
@@ -136,6 +145,18 @@ const InputWrapper = styled.div`
     flex-basis: ${props => props.fullWidth ? '100%' : '48%'};
     margin-bottom: 40px;
     position: relative;
+    ${media.xs} {
+        flex-basis: 100%;
+        margin-bottom: 16px;
+    }
+    &:nth-last-of-type(3) {
+        ${media.xs} {
+            margin-bottom: 16px;
+        }
+    }
+    &:empty {
+        margin-bottom: 0;
+    }
     &:only-child {
         margin-bottom: 0;
     }
@@ -159,8 +180,10 @@ const StyledTextField = styled.div`
     position: relative;
     word-break: break-all;
     min-height: 45px;
+    ${media.xs} {
+        font-size: 14px;
+    }
 `;
-
 
 const IconCopy = styled.span`
     display: block;

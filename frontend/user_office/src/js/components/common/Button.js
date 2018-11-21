@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
 const Button = ({text, className, clickHandler, submit, disabled, icon, style, attach, transparent, type}) => {
     const opts = {
@@ -55,6 +56,9 @@ const Btn = styled.button`
     position: relative;
     z-index: 1;
     cursor: pointer;
+    ${media.xs} {
+        font-size: 14px;
+    }
     &:disabled {
         color: #323c47;
     }
