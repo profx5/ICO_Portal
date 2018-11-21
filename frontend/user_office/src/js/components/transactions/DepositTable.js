@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import moment from "moment";
+import {media} from './../../utils/media';
 
 import * as UIActions from './../../actions/UIActions';
 
@@ -50,19 +51,23 @@ class DepositTable extends Component {
     render() {
         const {deposits} = this.props;
         return (
-            <Table>
-                    <Row>
-                        <div>Time</div>
-                        <div>Transaction</div>
-                        <div>Amount</div>
-                        <div>USD value</div>
-                        <div>OGD Tokens</div>
-                    </Row>
+            <Wrapper>
+                <Table>
+                    <HeadRow>
+                        <th></th>
+                        <th>Time</th>
+                        <th>Transaction</th>
+                        <th></th>
+                        <th>Amount</th>
+                        <th>USD value</th>
+                        <th>OGD Tokens</th>
+                    </HeadRow>
                     {deposits.size ?
                         this.renderRows(deposits) :
-                        <div className="Table_text">You have no transactions yet</div>
+                        <td colSpan="6" className="Table_text">You have no transactions yet</td>
                     }
-            </Table>
+                </Table>
+            </Wrapper>
         )
     }
 }
@@ -83,14 +88,28 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(DepositTable)
 
-const Table = styled.div`
-    display: flex;
-    flex-flow: row wrap;
+const Wrapper = styled.div`
+    @media (max-width: 1275px) {
+        overflow-x: scroll;
+        width: calc(100vw - 180px);
+    }
+    ${media.xs} {
+        width: calc(100vw - 28px);
+    }
+`;
+
+const Table = styled.table`
+    width: 100%;
     border-radius: 6px;
     background-color: #ffffff;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
-    padding-top: 42.2px;
+    padding-top: 50px;
     margin-top: 30px;
+    ${media.xs} {
+        min-width: 1030px;
+        margin-top: 15px;
+        padding-top: 20px;
+    }
     .Table_text {
         font-size: 16px;
         flex-basis: 100%;
@@ -100,30 +119,54 @@ const Table = styled.div`
     }
 `;
 
-const Row = styled.div`
+const HeadRow = styled.tr`
     flex-basis: 100%;
-    display: flex;
     margin-bottom: 23px;
-    div {
+    ${media.xs} {
+        flex-wrap: nowrap;
+        white-space: nowrap;
+    }
+    th {
         font-size: 16px;
+        font-weight: 500;
         color: rgba(10, 10, 10, .4);
-        text-align: center;
+        padding-bottom: 23px;
+        white-space: nowrap;
+        ${media.xs} {
+            padding-bottom: 15px;
+        }
     }
-    div:nth-of-type(1) {
-        flex-basis: 20%;
+    th:nth-of-type(1) {
+        ${media.smPlus} {
+            display: none;
+        }
+        ${media.xs} {
+            min-width: 15px;
+        }
     }
-    div:nth-of-type(2) {
-        flex-basis: 35%;
+    th:nth-of-type(2) {
+        width: 17%;
+        padding-left: 40px;
+        ${media.xs} {
+            padding-left: 0;
+            position: relative;
+            left: -26px;
+        }
     }
-    div:nth-of-type(3) {
-        flex-basis: 15%;
+    th:nth-of-type(3) {
+        width: 29%;
+        ${media.xs} {
+            padding-left: 3.7%;
+        }
     }
-    div:nth-of-type(4) {
-        flex-basis: 15%;
+    th:nth-of-type(4) {
+        ${media.xs} {
+            display: none;
+        }
     }
-    div:nth-of-type(5) {
-        flex-basis: 15%;
-        text-align: right;
-        padding-right: 40px;
+    th:nth-of-type(2), th:nth-of-type(3) {
+        ${media.xs} {
+            text-align: left;
+        }
     }
 `;
