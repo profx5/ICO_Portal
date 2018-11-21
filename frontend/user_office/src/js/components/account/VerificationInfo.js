@@ -53,7 +53,7 @@ class VerificationInfo extends React.Component {
     render() {
         const {verificationStages, stages} = this.props;
         return (
-            <Wrapper className="VerificationInfo">
+            <Wrapper className={`VerificationInfo ${this.props.className}`}>
                 <VerificationStages stageClickHandler={this.stageClickHandler} boundSections={verificationStages} stages={stages}/>
             </Wrapper>
         )
@@ -75,14 +75,8 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(VerificationInfo)
 
 const Wrapper = styled.div`
-    margin-left: 38px;
+    margin: 0 38px;
     max-width: 315px;
     position: sticky;
     top: 20px;
-`;
-
-const ButtonWrapper = styled.div`
-    width: 190px;
-    height: 45px;
-    margin-bottom: 60px;
 `;

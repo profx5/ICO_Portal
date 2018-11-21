@@ -17,7 +17,8 @@ const StyledTitle = styled.h2`
     font-weight: 400;
     color: #233539;
     letter-spacing: 0.8px;
-    margin-top: 50px;
+    margin-top: 60px;
+    flex-basis: 100%;
     &.Verification_head {
         margin-top: 0;
     }

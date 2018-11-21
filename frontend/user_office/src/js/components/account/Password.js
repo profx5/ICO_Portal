@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import PasswordValidationSchema from './utils/PasswordValidationSchema';
+import {media} from './../../utils/media';
 
 import { Formik, Form } from "formik";
 import InputLabel from './components/InputLabel';
@@ -93,6 +94,9 @@ const Wrapper = styled(Form)`
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
+    ${media.xs} {
+        padding: 20px 16px;
+    }
 `;
 
 const Title = styled.h3`
@@ -101,6 +105,10 @@ const Title = styled.h3`
     color: #323c47;
     letter-spacing: 0.1px;
     margin-bottom: 45px;
+    ${media.xs} {
+        font-size: 16px;
+        margin-bottom: 35px;
+    }
 `;
 
 const InputSet = styled.div`
@@ -115,8 +123,24 @@ const InputWrapper = styled.div`
     flex-basis: ${props => props.fullWidth ? '100%' : '48%'};
     margin-bottom: 40px;
     position: relative;
+    ${media.xs} {
+        flex-basis: 100%;
+        margin-bottom: 16px;
+    }
     &:nth-last-of-type(1), &:nth-last-of-type(2) {
         margin-bottom: 0;
+    }
+    &:nth-last-of-type(2) {
+        ${media.xs} {
+            margin-bottom: 16px;
+        }
+    }
+    &:last-of-type {
+        label {
+            ${media.xs} {
+                display: none;
+            }
+        }
     }
     input, button {
         min-height: 45px;

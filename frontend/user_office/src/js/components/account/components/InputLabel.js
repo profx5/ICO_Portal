@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 
 const InputLabel = ({children, htmlFor}) => {
@@ -19,4 +20,7 @@ const StyledLabel = styled.label`
     color: #0a0a0a;
     display: block;
     margin-bottom: 13px;
+    ${media.xs} {
+        font-size: 12px;
+    }
 `;
