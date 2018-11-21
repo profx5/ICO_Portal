@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 import FormikField from './../../common/FormikField';
 
@@ -127,15 +128,23 @@ const InputSet = styled.div`
     position: relative;
     margin-bottom: 35px;
     border-bottom: 1px solid rgba(151,151,151,.25);
+    ${media.xs} {
+        padding-bottom: 30px
+    }
 `;
 
 const InputWrapper = styled.div`
     height: 45px;
     flex-basis: 48%;
     position: relative;
-    
+    ${media.xs} {
+        flex-basis: 100%;
+    }
     &:not(:last-child) {
         margin-bottom: 70px;
+        ${media.xs} {
+            margin-bottom: 50px;
+        }
     }
     &:last-child {
         margin-bottom: 40px;

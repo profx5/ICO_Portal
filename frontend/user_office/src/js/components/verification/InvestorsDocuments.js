@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
 import ConfirmCorrectness from './components/ConfirmCorrectness';
 import Button from './../common/Button';
@@ -24,7 +25,7 @@ class InvestorsDocuments extends React.Component {
 
         return (
             <Wrapper className="Verification__investorsDocuments">
-                <Title>Investor's documents</Title>
+                <Head>Investor's documents</Head>
                 <IDFiles files={idDocumentFiles} 
                     onAttachClickHandler={onAttachClickHandler.bind(this, 'id_document_photo')} 
                     uploadFileHandler={addIdDocumentFile} 
@@ -85,6 +86,9 @@ const Wrapper = styled.div`
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
     margin-top: 20px;
+    ${media.xs} {
+        padding: 20px 16px;
+    }
     .text {
         font-size: 16px;
         color: #0a0a0a;
@@ -105,21 +109,15 @@ const Wrapper = styled.div`
     }
 `;
 
-const Title = styled.h3`
+const Head = styled.h3`
     font-size: 20px;
     font-weight: 600;
     color: #323c47;
     letter-spacing: 0.1px;
     margin-bottom: 45px;
-`;
-
-const SubTitle = styled.h4`
-    font-size: 16px;
-    color: #0a0a0a;
-    letter-spacing: 0.5px;
-    margin-bottom: 13px;
-    & + .text {
-        margin-bottom: 20px;
+    ${media.xs} {
+        font-size: 16px;
+        margin-bottom: 30px;
     }
 `;
 
@@ -128,4 +126,8 @@ const ButtonWrapper = styled.div`
     height: 45px;
     margin-bottom: 50px;
     margin-top: ${props => props.submitBtn ? '30px' : '0'};
+    ${media.xs} {
+        margin-bottom: 20px;
+        width: 100%;
+    }
 `;

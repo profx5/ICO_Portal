@@ -81,6 +81,7 @@ const StyledLabel = styled.label`
     font-size: 16px;
     display: block;
     margin-bottom: 13px;
+    white-space: nowrap;
     span {
         color: red;
     }

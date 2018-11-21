@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 
 const VerificationStages = ({stages, boundSections, stageClickHandler}) => {
@@ -23,6 +24,9 @@ const List = styled.ul`
     border-radius: 6px;
     overflow: hidden; 
     margin-bottom: 25px;
+    ${media.sm} {
+        display: none;
+    }
 `;
 
 const ListItem = styled.li`

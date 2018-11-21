@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
+import {media} from './../../utils/media';
 
 import { Field } from 'formik';
 import ErrorMessage from './ErrorMessage';
@@ -76,6 +77,10 @@ const StyledLabel = styled.label`
     font-size: 16px;
     display: block;
     margin-bottom: 13px;
+    white-space: nowrap;
+    ${media.xs} {
+        font-size: 12px;
+    }
     span {
         color: red;
     }
@@ -92,6 +97,9 @@ const StyledCleave = styled(Cleave)`
     background: #ffffff;
     border: 1px solid #d6dfe6;
     border-radius: 2px;
+    ${media.xs} {
+        font-size: 14px;
+    }
     &:read-only {
         color: rgba(35,53,57,.3);
     }

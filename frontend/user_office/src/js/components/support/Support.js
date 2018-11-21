@@ -64,5 +64,6 @@ const Wrapper = styled.div`
     ${media.xs} {
         margin: 0 16px;
         padding-bottom: 50px;
+        width: calc(100vw - 32px);
     }
 `;

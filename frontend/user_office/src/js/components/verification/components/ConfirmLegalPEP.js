@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 import FormikRadio from './../../common/FormikRadio';
 
@@ -31,5 +32,8 @@ const RadioSet = styled.div`
         letter-spacing: 0.5px;
         line-height: 1.44;
         margin-bottom: 15px;
+        ${media.xs} {
+            font-size: 12px;
+        }
     }
 `;

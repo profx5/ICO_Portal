@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 
 const KYCTabs = ({clickHandler, activeTab}) => {
@@ -18,6 +19,11 @@ const Wrapper = styled.div`
     display: flex;
     position: relative;
     left: 33px;
+    ${media.xs} {
+        margin-top: 12px;
+        flex-basis: 100%;
+        left: 0;
+    }
 `;
 
 const Tab = styled.div`
@@ -32,9 +38,20 @@ const Tab = styled.div`
     line-height: 45px;
     text-align: center;
     cursor: pointer;
+    ${media.xs} {
+        width: 50vw;
+        max-width: 220px;
+    }
+    ${media.smMinus} {
+        font-size: 14px;
+    }
+    ${media.sm} {
+        width: 164px;
+    }
     &.active {
         background: linear-gradient(81deg, #54a0f5, #3172fd);
         color: white;
+        z-index: 1;
     }
     &:last-of-type {
         position: relative;

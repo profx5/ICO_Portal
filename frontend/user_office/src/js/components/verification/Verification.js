@@ -9,6 +9,7 @@ import {media} from './../../utils/media';
 
 import Title from './../common/Title';
 import KYCTabs from './components/KYCTabs';
+import VerificationState from './components/VerificationState';
 import NaturalPerson from './NaturalPerson';
 import LegalPerson from './LegalPerson';
 import VerificationInfo from './VerificationInfo';
@@ -20,6 +21,12 @@ import * as FilesActions from './../../actions/FilesActions';
 
 
 class Verification extends React.Component {
+
+    getKYCTicket = () => {
+        const { tickets } = this.props;
+
+        return tickets.filter(item => item.title.startsWith('KYC request for user'));
+    }
 
     getInitialValues = () => {
         const {
@@ -133,6 +140,12 @@ class Verification extends React.Component {
         let {activeKycTab} = this.props;
 
         if (type) activeKycTab = type === 'LEGAL' ? 2 : 1;
+        let kycTicket = this.getKYCTicket();
+        let kycTicketId = null;
+        if (kycTicket[0]) {
+            kycTicketId = kycTicket[0].id;
+        }
+        let KYCStatus = type !== '' && state;
 
         return (
             <div>
@@ -150,6 +163,7 @@ class Verification extends React.Component {
                                     <Title className="Verification_head">Verification (KYC)</Title>
                                     <KYCTabs clickHandler={this.tabClickHandler.bind(this, resetForm)} activeTab={activeKycTab}/>
                                 </HeaderInner>
+                                <VerificationState className="visible-smMinus" kycState={KYCStatus} kycTicketId={kycTicketId}/>
                             </Header>
                             <MainWrapper>
                                 {!type && activeKycTab === 1 && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
@@ -158,12 +172,14 @@ class Verification extends React.Component {
                                 {type === "LEGAL" && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
                                 <InvestorsDocuments errors={errors} touched={touched} values={values} onAttachClickHandler={this.onAttachClickHandler}/>
                             </MainWrapper>
-                            <div>
+                            <VerificationInfoWrapper>
                                 <VerificationInfo
                                     btnText="Send data"
                                     verificationStages={['Verification__personData', 'Verification__investorsDocuments']}
-                                    stages={activeKycTab === 1 ? ['Personal Data', 'Investor\'s documents'] : ['Legal Person Data', 'Investor\'s documents']}/>
-                            </div>
+                                    stages={activeKycTab === 1 ? ['Personal Data', 'Investor\'s documents'] : ['Legal Person Data', 'Investor\'s documents']}
+                                    kycState={KYCStatus} 
+                                    kycTicketId={kycTicketId}/>
+                            </VerificationInfoWrapper>
                         </Wrapper>
                     )}
                 />
@@ -173,7 +189,7 @@ class Verification extends React.Component {
 };
 
 
-const mapStateToProps = ({UI, KYC, user}) => ({
+const mapStateToProps = ({UI, KYC, user, tickets}) => ({
     state: KYC.get('state'),
     type: KYC.get('type'),
     activeKycTab: UI.get('activeKycTab'),
@@ -216,6 +232,7 @@ const mapStateToProps = ({UI, KYC, user}) => ({
     is_pep: KYC.get('is_pep'),
     attachments: KYC.get('attachments'),
     kyc_required: user.get('kyc_required'),
+    tickets: tickets.get('results'),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -254,6 +271,12 @@ const Wrapper = styled(Form)`
     padding-bottom: 90px;
     display: flex;
     flex-flow: row wrap;
+    ${media.xs} {
+        width: calc(100vw - 32px);
+    }
+    ${media.sm} {
+        width: calc(100vw - 140px);
+    }
     input, button, label {
         pointer-events: ${props => props.state === 'APPROVED' && 'none'};
     }
@@ -265,6 +288,9 @@ const Wrapper = styled(Form)`
 
 const Header = styled.div`
     flex-basis: 100%;
+    ${media.smMinus} {
+        width: 100%;
+    }
 `;
 
 const HeaderInner = styled.div`
@@ -274,9 +300,29 @@ const HeaderInner = styled.div`
     max-width: 720px;
     margin-top: 60px;
     margin-bottom: 40px;
+    ${media.xs} {
+        flex-wrap: wrap;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+    ${media.sm} {
+        max-width: unset;
+        margin-right: 60px;
+    }
 `;
 
 const MainWrapper = styled.div`
     flex: 1;
     max-width: 720px;
+    ${media.sm} {
+        margin-right: 60px;
+        max-width: unset;
+    }
+`;
+
+const VerificationInfoWrapper = styled.div`
+    ${media.sm} {
+        flex-basis: 100%;
+        margin-right: 60px;
+    }
 `;

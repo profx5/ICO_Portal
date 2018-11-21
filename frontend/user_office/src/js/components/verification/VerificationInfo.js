@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
 import Utils from './../../utils/index';
+import {media} from './../../utils/media';
 
 import VerificationStages from './components/VerificationStages';
 import VerificationState from './components/VerificationState';
@@ -48,31 +49,19 @@ class VerificationInfo extends React.Component {
         $(window).on('scroll', Utils.throttle(this.stageTracker,30));
     }
 
-    getKYCTicket = () => {
-        const { tickets } = this.props;
-
-        return tickets.filter(item => item.title.startsWith('KYC request for user'));
-    }
-
     render() {
-        const {status, verificationStages, stages, btnText, isSubmiting, type} = this.props;
-        let kycTicket = this.getKYCTicket();
-        let kycTicketId = null;
-        if (kycTicket[0]) {
-            kycTicketId = kycTicket[0].id;
-        }
+        const {status, verificationStages, stages, btnText, isSubmiting, kycState, kycTicketId} = this.props;
         let btn_text = !isSubmiting ? status === 'WAITING' ? 'Update data' : btnText : 'Submitting...';
-        let KYCStatus = type !== '' && status;
         return (
             <Wrapper className="VerificationInfo">
                 <VerificationStages stageClickHandler={this.stageClickHandler} boundSections={verificationStages} stages={stages}/>
                     {status !== 'APPROVED' &&
                     
-                    <ButtonWrapper>
-                        <Button type="submit" text={btn_text} icon={isSubmiting && PreloadIcon}/>
-                    </ButtonWrapper>
+                        <ButtonWrapper>
+                            <Button type="submit" text={btn_text} icon={isSubmiting && PreloadIcon}/>
+                        </ButtonWrapper>
                     }
-                <VerificationState kycState={KYCStatus} kycTicketId={kycTicketId}/>
+                <VerificationState kycState={kycState} kycTicketId={kycTicketId}/>
             </Wrapper>
         )
     }
@@ -86,17 +75,18 @@ const mapStateToProps = ({KYC, tickets}) => ({
     type: KYC.get('type'),
 })
 
-const mapDispatchToProps = (dispatch) => ({
-
-})
+const mapDispatchToProps = (dispatch) => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(VerificationInfo)
 
 const Wrapper = styled.div`
-    margin-left: 38px;
+    margin: 0 38px;
     max-width: 315px;
     position: sticky;
     top: 20px;
+    ${media.smMinus} {
+        display: none;
+    }
 `;
 
 const ButtonWrapper = styled.div`
