@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {canSendTransaction} from './../../../web3';
 import QRCode from 'qrcode';
+import {media} from './../../utils/media';
 
 import Button from './../common/Button';
 
@@ -30,17 +31,17 @@ class PaymentStepTwo extends React.Component {
         const {investCurrency, crowdsaleAddress, altCrowdsaleaddress} = this.props;
         let text = investCurrency === 'ETH' ? crowdsaleAddress : altCrowdsaleaddress;
         if (window.clipboardData && window.clipboardData.setData) {
-            // IE specific code path to prevent textarea being shown while dialog is visible.
+
             return window.clipboardData.setData("Text", text);
         }
         else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
             let textarea = document.createElement("textarea");
             textarea.textContent = text;
-            textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+            textarea.style.position = "fixed";
             document.body.appendChild(textarea);
             textarea.select();
             try {
-                return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+                return document.execCommand("copy");
             } catch (ex) {
                 console.warn("Copy to clipboard failed.", ex);
                 return false;
@@ -90,11 +91,11 @@ class PaymentStepTwo extends React.Component {
                             <div className="desc">Rate may change due to high volatility of crypto</div>
                         </RowPart>
                         <RowPart className="part">
-                            <Link to="/user_office/payment">
+                            <BtnLink to="/user_office/payment">
                                 <BtnWrapper>
                                     <Button text="Change amount"/>
                                 </BtnWrapper>
-                            </Link>
+                            </BtnLink>
                         </RowPart>
                     </Row>
                     {investCurrency === 'ETH' &&
@@ -103,26 +104,26 @@ class PaymentStepTwo extends React.Component {
                             <div className="text">
                                 To buy tokens just copy an address below (or scan QR code&nbsp;
                                 <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-                              <g fill="none" fillRule="evenodd">
-                                <path fill="#F5F6FA" d="M-717-723H723V517H-717z"/>
-                                <g fill="#000" fillRule="nonzero">
-                                  <path
-                                      d="M6.719 0H.469A.469.469 0 0 0 0 .469v6.25c0 .259.21.468.469.468h6.25c.259 0 .468-.21.468-.468V.469A.469.469 0 0 0 6.72 0zM6.25 6.25H.937V.937H6.25V6.25z"/>
-                                  <path
-                                      d="M4.531 2.188H2.656a.469.469 0 0 0-.469.468v1.875c0 .26.21.469.47.469H4.53c.261 0 .47-.21.47-.469V2.656a.469.469 0 0 0-.469-.469zm-.468 1.874h-.938v-.937h.938v.938zM15.531 0h-6.25a.469.469 0 0 0-.469.469v6.25c0 .259.21.468.47.468h6.25c.258 0 .468-.21.468-.468V.469A.469.469 0 0 0 15.531 0zm-.469 6.25H9.75V.937h5.313V6.25z"/>
-                                  <path
-                                      d="M13.344 2.188h-1.875a.469.469 0 0 0-.469.468v1.875c0 .26.21.469.469.469h1.875c.259 0 .469-.21.469-.469V2.656a.469.469 0 0 0-.47-.469zm-.469 1.874h-.938v-.937h.938v.938zM6.719 8.813H.469A.469.469 0 0 0 0 9.28v6.25c0 .26.21.469.469.469h6.25c.259 0 .468-.21.468-.469V9.28a.469.469 0 0 0-.468-.469zm-.469 6.25H.937V9.75H6.25v5.313z"/>
-                                  <path
-                                      d="M4.531 11H2.656a.469.469 0 0 0-.469.469v1.875c0 .259.21.469.47.469H4.53c.26 0 .469-.21.469-.47V11.47a.469.469 0 0 0-.468-.47zm-.468 1.875h-.938v-.938h.938v.938zm11.468.332h-2.656V11.47a.469.469 0 0 0-.938 0v2.207c0 .259.21.469.47.469h2.655v.918h-2.656a.469.469 0 0 0 0 .937h3.125c.26 0 .469-.21.469-.469v-1.855a.469.469 0 0 0-.469-.469zm0-4.394a.469.469 0 0 0-.469.468v2.188a.469.469 0 0 0 .938 0V9.28a.469.469 0 0 0-.469-.469zm-4.062 0H9.28a.469.469 0 0 0-.469.468v2.188a.469.469 0 0 0 .938 0V9.75h1.719a.469.469 0 0 0 0-.938zm-2.188 4.394a.469.469 0 0 0-.469.47v1.854a.469.469 0 0 0 .938 0v-1.855a.469.469 0 0 0-.469-.469z"/>
-                                </g>
-                              </g>
-                            </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+                                    <g fill="none" fillRule="evenodd">
+                                        <path fill="#F5F6FA" d="M-717-723H723V517H-717z"/>
+                                        <g fill="#000" fillRule="nonzero">
+                                        <path
+                                            d="M6.719 0H.469A.469.469 0 0 0 0 .469v6.25c0 .259.21.468.469.468h6.25c.259 0 .468-.21.468-.468V.469A.469.469 0 0 0 6.72 0zM6.25 6.25H.937V.937H6.25V6.25z"/>
+                                        <path
+                                            d="M4.531 2.188H2.656a.469.469 0 0 0-.469.468v1.875c0 .26.21.469.47.469H4.53c.261 0 .47-.21.47-.469V2.656a.469.469 0 0 0-.469-.469zm-.468 1.874h-.938v-.937h.938v.938zM15.531 0h-6.25a.469.469 0 0 0-.469.469v6.25c0 .259.21.468.47.468h6.25c.258 0 .468-.21.468-.468V.469A.469.469 0 0 0 15.531 0zm-.469 6.25H9.75V.937h5.313V6.25z"/>
+                                        <path
+                                            d="M13.344 2.188h-1.875a.469.469 0 0 0-.469.468v1.875c0 .26.21.469.469.469h1.875c.259 0 .469-.21.469-.469V2.656a.469.469 0 0 0-.47-.469zm-.469 1.874h-.938v-.937h.938v.938zM6.719 8.813H.469A.469.469 0 0 0 0 9.28v6.25c0 .26.21.469.469.469h6.25c.259 0 .468-.21.468-.469V9.28a.469.469 0 0 0-.468-.469zm-.469 6.25H.937V9.75H6.25v5.313z"/>
+                                        <path
+                                            d="M4.531 11H2.656a.469.469 0 0 0-.469.469v1.875c0 .259.21.469.47.469H4.53c.26 0 .469-.21.469-.47V11.47a.469.469 0 0 0-.468-.47zm-.468 1.875h-.938v-.938h.938v.938zm11.468.332h-2.656V11.47a.469.469 0 0 0-.938 0v2.207c0 .259.21.469.47.469h2.655v.918h-2.656a.469.469 0 0 0 0 .937h3.125c.26 0 .469-.21.469-.469v-1.855a.469.469 0 0 0-.469-.469zm0-4.394a.469.469 0 0 0-.469.468v2.188a.469.469 0 0 0 .938 0V9.28a.469.469 0 0 0-.469-.469zm-4.062 0H9.28a.469.469 0 0 0-.469.468v2.188a.469.469 0 0 0 .938 0V9.75h1.719a.469.469 0 0 0 0-.938zm-2.188 4.394a.469.469 0 0 0-.469.47v1.854a.469.469 0 0 0 .938 0v-1.855a.469.469 0 0 0-.469-.469z"/>
+                                        </g>
+                                    </g>
+                                    </svg>
                                     &nbsp; with any of your wallet apps) and transfer mentioned previously amount of
                                     crypto to this address. Tokens will arrive soon on your ETH account after
                                     transaction be mined. Also you can buy tokens for ETH&nbsp;
                                     <span onClick={this.sendTransactionInit} className="text-blue">via Metamask.</span>
-                        </span>
+                                </span>
                             </div>
                         </Row>
                         <Row className="PaymentRow-3">
@@ -196,12 +197,12 @@ class PaymentStepTwo extends React.Component {
                                 already paid!" button. This action will finish your purchase!
                             </div>
                         </RowPart>
-                        <RowPart>
-                            <Link to="/user_office/payment/finish">
+                        <RowPart className="part">
+                            <BtnLink to="/user_office/payment/finish">
                                 <BtnWrapper>
                                     <Button text="I already paid!"/>
                                 </BtnWrapper>
-                            </Link>
+                            </BtnLink>
                         </RowPart>
                     </Row>
                 </div>
@@ -213,11 +214,11 @@ class PaymentStepTwo extends React.Component {
                             <div className="head">Invalid invest amount</div>
                         </RowPart>
                         <RowPart className="part">
-                            <Link to="/user_office/payment/">
+                            <BtnLink to="/user_office/payment/">
                                 <BtnWrapper>
                                     <Button text="Select payment method"/>
                                 </BtnWrapper>
-                            </Link>
+                            </BtnLink>
                         </RowPart>
                     </Row>
                 </div>
@@ -263,6 +264,14 @@ const Wrapper = styled.div`
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
+    ${media.sm} {
+        width: calc(100vw - 192px);
+    }
+    ${media.xs} {
+        width: calc(100vw - 32px);
+        margin-top: 30px;
+        padding: 20px 15px 38px;
+    }
 `;
 
 const Head = styled.div`
@@ -276,33 +285,63 @@ const Head = styled.div`
 const Row = styled.div`
     display: flex;
     justify-content: space-between;
+    ${media.smMinus} {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
     .part:first-of-type {
         flex: 1;
     }
     .part:last-of-type {
         margin-left: 30px;
+        ${media.smMinus} {
+            margin-left: 0;
+            margin-top: 20px;
+            flex-basis: 100%;
+        }
+        ${media.xs} {
+           margin-top: 34px; 
+        }
     }
     &.PaymentRow {
         &-1 {
             margin-bottom: 65px;
+            padding-bottom: 65px;
+            border-bottom: 1px solid rgba(151,151,151,.2);
+            ${media.xs} {
+                margin-bottom: 38px;
+                padding-bottom: 38px;
+            }
             .part {
                 &:last-of-type {
                     display: flex;
                     align-items: center;
+                    ${media.smMinus} {
+                        flex-basis: 100%;
+                    }
                 }
             }
             .head {
                 font-size: 16px;
                 color: #000000;
                 margin-bottom: 15px;
+                ${media.xs} {
+                    margin-bottom: 5px;
+                }
             }
             .amount {
                 font-size: 45px;
                 color: #000000;
                 font-weight: 600;
                 margin-bottom: 15px;
+                ${media.xs} {
+                    font-size: 30px;
+                }
                 span {
                     font-size: 25px;
+                    ${media.xs} {
+                        font-size: 18px;
+                    }
                 }
             }
             .desc {
@@ -312,9 +351,10 @@ const Row = styled.div`
             }
         }
         &-2 {
-            padding-top: 60px;
-            border-top: 1px solid rgba(151,151,151,.2);
             margin-bottom: 45px;
+            ${media.xs} {
+                margin-bottom: 35px;
+            }
             div {
                 font-size: 16px;
                 color: #000000;
@@ -334,6 +374,10 @@ const Row = styled.div`
                 }
             }
             .text {
+                ${media.xs} {
+                    font-size: 14px;
+                    line-height: 22px;
+                }
                 &-blue {
                     color: #387bfc;
                 }
@@ -345,6 +389,13 @@ const Row = styled.div`
             border-bottom: 1px solid rgba(151,151,151,.2);
             margin-bottom: 80px;
             position: relative;
+            ${media.sm} {
+                margin-bottom: 60px;
+            }
+            ${media.xs} {
+                margin-bottom: 38px;
+                padding-bottom: 38px;
+            }
             .head {
                 color: #323c47;
                 font-size: 16px;
@@ -361,6 +412,15 @@ const Row = styled.div`
                 display: flex;
                 align-items: center;
                 position: relative;
+                ${media.sm} {
+                    font-size: 15px;
+                }
+                ${media.xs} {
+                    font-size: 14px;
+                    line-height: 24px;
+                    padding: 0 16px;
+                    word-break: break-all;
+                }
             }
             .qr_icon {
                 position: absolute;
@@ -373,6 +433,12 @@ const Row = styled.div`
                     visibility: visible;
                     transform: translate(100px, -100%);
                 }
+                ${media.xs} {
+                    display: none;
+                }
+            }
+            .part:first-of-type {
+                width: 100%;
             }
             .part:last-of-type {
                 display: flex;
@@ -380,6 +446,10 @@ const Row = styled.div`
             }
         }
         &-4 {
+            .part {
+                align-items: center;
+                display: inline-flex;
+            }
             .text {
                 font-size: 14px;
                 color: #000000;
@@ -387,7 +457,7 @@ const Row = styled.div`
                 position: relative;
                 line-height: 1.64;
                 padding-left: 15px;
-                padding-right: 150px;
+                padding-right: 20px;
                 span {
                     color: #3476fd;
                     text-decoration: underline;
@@ -454,7 +524,17 @@ const RowPart = styled.div`
     }
 `;
 
+const BtnLink = styled(Link)`
+    ${media.xs} {
+        width: 100%;
+    }
+`;
+
 const BtnWrapper = styled.div`
     width: 250px;
     height: 68px;
+    ${media.xs} {
+        height: 47px;
+        width: 100%;
+    }
 `;

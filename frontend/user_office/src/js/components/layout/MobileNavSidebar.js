@@ -57,9 +57,19 @@ const Sidebar = styled.aside`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 5;
     ${media.smPlus} {
         display: none;
+    }
+    &:before {
+        content: '';
+        display: block;
+        height: 1000px;
+        width: 1000px;
+        position: absolute;
+        top: 0;
+        left: 226px;
+        background: rgb(1, 7, 29, .3);
     }
 `;
 

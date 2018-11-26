@@ -170,7 +170,7 @@ const HeaderBlock = styled.header`
     justify-content: space-between;
     border-bottom: 1px solid #e6e8f2;
     position: relative;
-    z-index: 2;
+    z-index: 3;
     ${media.xs} {
         height: 64px;
         padding: 0 16px;
