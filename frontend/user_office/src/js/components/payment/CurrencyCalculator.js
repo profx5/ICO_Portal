@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import Utils from './../../utils';
+import {media} from './../../utils/media';
 
 import Button from './../common/Button';
 import InvestInput from './components/InvestInput';
@@ -176,16 +177,26 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyCalculator);
 
 const Wrapper = styled.div`
-    margin-top: 65px;
+
 `;
 
 const WrapperInner = styled.div`
     display: flex;
     justify-content: start;
     border-top: 1px solid rgba(151,151,151,.2);
-    // border-bottom: 1px solid rgba(151,151,151,.2);
+    border-bottom: 1px solid rgba(151,151,151,.2);
     padding-bottom: 50px;
     padding-top: 90px;
+    ${media.sm} {
+        margin-bottom: 40px;
+    }
+    ${media.smMinus} {
+        flex-wrap: wrap;
+    }
+    ${media.xs} {
+        padding: 63px 0 32px;
+        margin-bottom: 32px;
+    }
 `;
 
 const ButtonWrapper = styled(Link)`
@@ -196,6 +207,15 @@ const ButtonWrapper = styled(Link)`
     border-radius: 2px;
     border: 1px solid #d6dfe6;
     position: relative;
+    ${media.sm} {
+        width: 240px;
+    }
+    ${media.smMinus} {
+        max-width: unset;
+    }
+    ${media.xs} {
+        height: 49px;
+    }
 `;
 
 const CalculatedWrapper = styled.div`
@@ -204,6 +224,10 @@ const CalculatedWrapper = styled.div`
     letter-spacing: 0.5px;
     position: relative;
     padding-left: 15px;
+    ${media.xs} {
+        font-size: 14px;
+        line-height: 20px;
+    }
     & ul {
         font-weight: normal;
     }
@@ -227,6 +251,11 @@ const BonusDesc = styled.p`
     position: relative;
     padding-left: 15px;
     margin-top: 45px;
+    ${media.xs} {
+        font-size: 14px;
+        line-height: 20px;
+        margin-top: 35px;
+    }
     span {
         color: #3679fc;
     }
@@ -251,6 +280,13 @@ const TokensInputWrapper = styled.div`
     border: 1px solid #d6dfe6;
     position: relative;
     margin-right: 32px;
+    ${media.smMinus} {
+        width: 100%;
+        margin: 0 0 15px;
+    }
+    ${media.xs} {
+        height: 49px;
+    }
     .head {
         color: #0a0a0a;
         position: absolute;
@@ -269,6 +305,9 @@ const TokensInputWrapper = styled.div`
         right: 27px;
         top: 50%;
         transform: translateY(-50%);
+        ${media.xs} {
+            font-size: 14px;
+        }
     }
 `;
 
@@ -281,6 +320,11 @@ const TokensInput = styled.div`
     line-height: 70px;
     font-weight: 600;
     color: #b6b6b6;
+    ${media.xs} {
+        height: 49px;
+        font-size: 14px;
+        line-height: 49px;
+    }
     .bonus {
         color: #3476fd;
     }

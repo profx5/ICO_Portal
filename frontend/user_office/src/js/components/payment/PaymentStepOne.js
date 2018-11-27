@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
 import CurrencyCalculator from './CurrencyCalculator';
 import Currency from './Currency';
@@ -46,6 +47,14 @@ const Wrapper = styled.div`
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
+    ${media.sm} {
+        width: calc(100vw - 192px);
+    }
+    ${media.xs} {
+        width: calc(100vw - 32px);
+        margin-top: 30px;
+        padding: 20px 15px 38px;
+    }
 `;
 
 const Head = styled.div`
@@ -54,4 +63,8 @@ const Head = styled.div`
     font-weight: 500;
     text-align: center;
     margin-bottom: 55px;
+    ${media.xs} {
+        font-size: 16px;
+        margin-bottom: 35px;
+    }
 `;

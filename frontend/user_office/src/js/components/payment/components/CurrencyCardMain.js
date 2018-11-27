@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 
 const CurrencyCard = ({className, name, icon, rate, clickHandler, disabled}) => {
@@ -34,6 +35,12 @@ const Card = styled.div`
     will-change: transform;
     position: relative;
     pointer-events: ${props => props.disabled ? 'none' : 'unset'};
+    ${media.xs} {
+        width: 46%;
+        height: 112px;
+        min-height: unset;
+        margin-right: 0 !important;
+    }
     &:not(:last-of-type) {
         margin-right: 3%;
     }
@@ -59,18 +66,30 @@ const Card = styled.div`
         color: rgb(42,44,47);
         opacity: .5;
         text-align: center;
+        ${media.xs} {
+            font-size: 14px;
+            order: 2;
+        }
     }
     [class^="icon-"] {
         font-size: 50px;
         margin: 20px 0 5px;
         color: rgba(80,154,245,.5);
         transition: all .25s ease;
+        ${media.xs} {
+            margin: 0 0 5px;
+            order: 1;
+        }
     }
     .currency-rate {
         font-size: 13px;
         color: rgba(50,60,71,.6);
         transition: color .25s ease;
         white-space: nowrap;
+        ${media.xs} {
+            font-size: 12px;
+            order: 3;
+        }
     }
     .CurrencyCard_head, .CurrencyCard_desc {
         position: absolute;
