@@ -61,6 +61,12 @@ const Step = styled.div`
         }
     }
     &:nth-of-type(3) {
+        &:before {
+            display: none;
+            ${media.smMinus} {
+                display: block;
+            }
+        }
         ${media.smMinus} {
             display: ${props => props.step === 3 && 'block'};
         }
@@ -110,27 +116,24 @@ const Step = styled.div`
         z-index: 2;
         position: relative;
     }
-    &:not(:last-of-type) {
-        position: relative;
-        &:before {
-            content: '';
-            display: block;
-            width: 387px;
-            height: 2px;
-            background: ${props => props.to_next || media.isSmMinus ? '#1767f2': 'lightgrey'};
-            position: absolute;
-            bottom: 6px;
-            left: calc(50% + 27px);
-            transform: translateX(0);
-            ${media.smMinus} {
-                width: calc(100vw - 192px);;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            ${media.xs} {
-                width: 130%;
-                background: #419BF9;
-            }
+    &:before {
+        content: '';
+        display: block;
+        width: 387px;
+        height: 2px;
+        background: ${props => props.to_next || media.isSmMinus ? '#1767f2': 'lightgrey'};
+        position: absolute;
+        bottom: 6px;
+        left: calc(50% + 27px);
+        transform: translateX(0);
+        ${media.smMinus} {
+            width: calc(100vw - 192px);;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        ${media.xs} {
+            width: 130%;
+            background: #419BF9;
         }
     }
 `;

@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link, Redirect} from 'react-router-dom'
+import {media} from './../../utils/media';
 
 import Button from './../common/Button';
 
@@ -95,6 +96,14 @@ const Wrapper = styled.div`
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
+    ${media.sm} {
+        width: calc(100vw - 192px);
+    }
+    ${media.xs} {
+        width: calc(100vw - 32px);
+        margin-top: 30px;
+        padding: 20px 15px 38px;
+    }
 `;
 
 const Head = styled.div`
@@ -103,6 +112,10 @@ const Head = styled.div`
     font-weight: 500;
     text-align: center;
     margin-bottom: 55px;
+    ${media.xs} {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
 `;
 
 const Row = styled.div`
@@ -116,6 +129,9 @@ const Row = styled.div`
                 line-height: 1.64;
                 padding-left: 15px;
                 padding-right: 150px;
+                ${media.smMinus} {
+                    padding: 0 0 0 15px;
+                }
                 span {
                     color: #3476fd;
                     text-decoration: underline;
@@ -152,4 +168,8 @@ const BtnWrapper = styled(Link)`
     display: block;
     margin: 0 auto;
     margin-top: 32px;
+    ${media.xs} {
+        height: 47px;
+        width: 100%;
+    }
 `;

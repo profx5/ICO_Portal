@@ -31,7 +31,7 @@ class SetAccount extends Component {
                         <BtnClose onClick={hidePopup}>Close</BtnClose>
                         <StyledHead>Add your ETH account</StyledHead>
                         <form>
-                            <TextField type="text" value={metamaskEthAccount} innerRef={input => this.input = input}/>
+                            <TextField value={metamaskEthAccount} type="text" innerRef={input => this.input = input}/>
                             {set_eth_error &&
                             <ErrorSpan>
                                 {set_eth_error}
