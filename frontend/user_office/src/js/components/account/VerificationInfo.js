@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
 import Utils from './../../utils/index';
+import {media} from './../../utils/media';
 
 import VerificationStages from './components/VerificationStages';
 
@@ -68,9 +69,7 @@ const mapStateToProps = ({KYC, tickets}) => ({
     type: KYC.get('type'),
 })
 
-const mapDispatchToProps = (dispatch) => ({
-
-})
+const mapDispatchToProps = (dispatch) => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(VerificationInfo)
 
@@ -79,4 +78,7 @@ const Wrapper = styled.div`
     max-width: 315px;
     position: sticky;
     top: 20px;
+    ${media.sm} {
+        flex-basis: 100%;
+    }
 `;

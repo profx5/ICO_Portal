@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
 import LegalPersonData from './components/LegalPersonData';
 import RepresentationFiles from './components/RepresentationFiles';
@@ -77,6 +78,9 @@ const Wrapper = styled.div`
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
+    ${media.xs} {
+        padding: 20px 16px;
+    }
     .files-container {
         margin-bottom: 35px;
         padding-bottom: 35px;
@@ -98,4 +102,8 @@ const Head = styled.h3`
     color: #323c47;
     letter-spacing: 0.1px;
     margin-bottom: 45px;
+    ${media.xs} {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
 `;

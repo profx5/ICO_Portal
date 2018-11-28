@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 import Button from './../../common/Button';
 import FilesAttacher from './../../../utils/FilesAttacher';
@@ -34,6 +35,9 @@ const Wrapper = styled.div`
         color: #0a0a0a;
         letter-spacing: 0.5px;
         line-height: 1.44;
+        ${media.xs} {
+            font-size: 12px !important;
+        }
     }
     .files-container {
         margin-bottom: 35px;
@@ -43,6 +47,9 @@ const Wrapper = styled.div`
         overflow: auto;
         .files-head {
             margin-bottom: 13px;
+            ${media.xs} {
+                font-size: 12px;
+            }
         }
         &-filled {
             display: block;
@@ -65,4 +72,8 @@ const ButtonWrapper = styled.div`
     height: 45px;
     margin-bottom: 50px;
     margin-top: ${props => props.submitBtn ? '30px' : '0'};
+    ${media.xs} {
+        width: 100%;
+        margin-bottom: 20px;
+    }
 `;

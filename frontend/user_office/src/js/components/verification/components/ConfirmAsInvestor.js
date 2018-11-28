@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 import FormikCheckbox from './../../common/FormikCheckbox';
 
@@ -30,6 +31,9 @@ export default ConfirmAsInvestor;
 
 const RadioSet = styled.div`
     margin-bottom: 33px;
+    ${media.xs} {
+        margin-bottom: 15px;
+    }
     .text {
         font-size: 16px;
         color: #0a0a0a;

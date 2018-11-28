@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
 import {Field} from 'formik';
 import ErrorMessage from './ErrorMessage';
@@ -63,10 +64,15 @@ const CheckboxLabel = styled.label`
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+    ${media.xs} {
+        font-size: 12px;
+    }
     &:before {
         content: '';
         width: 20px;
+        min-width: 20px;
         height: 20px;
+        min-height: 20px;
         border: 1px solid #d6dfe6;
         margin-right: 8px;
     }

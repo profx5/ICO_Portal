@@ -58,7 +58,9 @@ const RadioLabel = styled.label`
     &:before {
         content: '';
         width: 20px;
+        min-width: 20px;
         height: 20px;
+        min-height: 20px;
         border: 1px solid #d6dfe6;
         margin-right: 8px;
     }

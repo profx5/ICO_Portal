@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import {media} from './../../../utils/media';
 
 
-const VerificationState = ({kycState,kycTicketId}) => {
+const VerificationState = ({kycState, kycTicketId, className}) => {
     return (
-        <div>
+        <Wrapper className={className}>
             {kycState === 'APPROVED' &&
                 <Content className="state-approved">
                     <p>Verification successful!</p>
@@ -27,12 +28,21 @@ const VerificationState = ({kycState,kycTicketId}) => {
                         system.</StyledLink>}
                 </Content>
             }
-        </div>
+        </Wrapper>
     )
 }
 
 
 export default VerificationState;
+
+const Wrapper = styled.div`
+    ${media.smMinus} {
+        margin-bottom: 16px;
+    }
+    ${media.sm} {
+        width: calc(100% - 60px);
+    }
+`;
 
 const StyledLink = styled(Link)`
     text-decoration: underline;

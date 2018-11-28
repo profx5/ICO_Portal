@@ -38,6 +38,7 @@ const Wrapper = styled.div`
     position: relative;
     ${media.xs} {
         width: 100%;
+        min-width: unset;
     }
     .file-name {
         font-size: 16px;

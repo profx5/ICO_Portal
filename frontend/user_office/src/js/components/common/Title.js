@@ -19,6 +19,7 @@ const StyledTitle = styled.h2`
     letter-spacing: 0.8px;
     margin-top: 60px;
     flex-basis: 100%;
+    white-space: nowrap;
     &.Verification_head {
         margin-top: 0;
     }

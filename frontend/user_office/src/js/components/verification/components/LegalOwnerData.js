@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 import FormikField from './../../common/FormikField';
 
@@ -101,8 +102,14 @@ const InputWrapper = styled.div`
     height: 45px;
     flex-basis: ${props => props.fullWidth ? '100%' : '48%'};
     position: relative;
+    ${media.xs} {
+        flex-basis: 100%;
+    }
     &:not(:last-child) {
         margin-bottom: 70px;
+        ${media.xs} {
+            margin-bottom: 50px;
+        }
     }
     &:last-child {
         margin-bottom: 40px;

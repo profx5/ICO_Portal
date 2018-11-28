@@ -162,6 +162,9 @@ const Message = styled.div`
     }
     &:last-of-type:not(:only-child) {
         margin-bottom: 46px;
+        ${media.xs} {
+            margin-bottom: 2px;
+        }
     }
     img {
         margin-right: 18px;
