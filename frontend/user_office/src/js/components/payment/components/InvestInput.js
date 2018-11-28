@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 
 const InvestInput = ({value, type, onChangeHandler, header, currency}) => {
@@ -22,13 +23,24 @@ const InputWrapper = styled.div`
     border: 1px solid #d6dfe6;
     position: relative;
     margin-right: 32px;
+    ${media.smMinus} {
+        width: 100%;
+        margin: 0 0 15px;
+    }
+    ${media.xs} {
+        font-size: 14px;
+        height: 49px;
+    }
     &:before {
         content: attr(data-header);
         color: #0a0a0a;
         position: absolute;
-        left: 0
+        left: 0;
         top: -35px;
         font-size: 16px;
+        ${media.xs} {
+            font-size: 12px;
+        }
     }
     &:after {
         content: attr(data-currency);
@@ -38,6 +50,9 @@ const InputWrapper = styled.div`
         right: 27px;
         top: 50%;
         transform: translateY(-50%);
+        ${media.xs} {
+            font-size: 14px;
+        }
     }
 `;
 

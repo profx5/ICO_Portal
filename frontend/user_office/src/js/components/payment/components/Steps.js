@@ -33,6 +33,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     flex-flow: row nowrap;
+    margin-top: 20px;
     ${media.sm} {
         margin-top: 30px;
     }

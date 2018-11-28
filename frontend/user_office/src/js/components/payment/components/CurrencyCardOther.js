@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 
 const CurrencyCard = ({rate, investCurrency, clickHandler, restCurrencies, disabled}) => {
@@ -12,14 +13,14 @@ const CurrencyCard = ({rate, investCurrency, clickHandler, restCurrencies, disab
     })
 
     return (
-        <Card disabled={disabled} onClick={clickHandler} className={selectedRestCode ? 'active' : ''}>
+        <Card disabled={disabled} onClick={clickHandler} selectedRestCode={selectedRestCode} className={selectedRestCode ? 'active' : ''}>
             <span className={selectedRestCode ? `icon-${selectedRestCode}-alt` : 'icon-other'}></span>
             <span className="currency-name">{selectedRestCode ? investCurrency : 'Other Crypto'}</span>
             <span className="currency-rate">{selectedRestCode ? `${currencyRate} $` : ''}&nbsp;</span>
             {selectedRestCode &&
                 <React.Fragment>
-                    <span className="CurrencyCard_head">Other crypto</span>
-                    <span className="CurrencyCard_desc">Click to select another<br/>crypto as a payment method</span>
+                    <span className="CurrencyCard_head hidden-smMinus">Other crypto</span>
+                    <span className="CurrencyCard_desc">Click to select another<br className="hidden-xs"/>crypto as a payment method</span>
                 </React.Fragment>
             }
         </Card>
@@ -45,8 +46,11 @@ const Card = styled.div`
     will-change: transform;
     position: relative;
     pointer-events: ${props => props.disabled ? 'none' : 'unset'};
-    &:not(:last-of-type) {
-        margin-right: 3%;
+    ${media.xs} {
+        width: 46%;
+        height: 112px;
+        min-height: unset;
+        margin-bottom: ${props => props.selectedRestCode ? '77px' : '30px'};
     }
     &:hover {
         [class^="icon-"] {
@@ -54,7 +58,6 @@ const Card = styled.div`
             transform: scale(1.05);
         }
     }
-
     &.active {
         box-shadow: 0 2px 25px 0 rgba(63, 123, 244, 0.33);
         transform: scale(1.05);
@@ -71,18 +74,27 @@ const Card = styled.div`
         color: rgb(42,44,47);
         opacity: .5;
         text-align: center;
+        ${media.xs} {
+            font-size: 14px;
+        }
     }
     [class^="icon-"] {
         font-size: 50px;
         margin: 20px 0 5px;
         color: rgba(80,154,245,.5);
         transition: all .25s ease;
+        ${media.xs} {
+            margin: ${props => props.selectedRestCode ? '0 0 5px' : '0 0 15px'};
+        }
     }
     .currency-rate {
         font-size: 13px;
         color: rgba(50,60,71,.6);
         transition: color .25s ease;
         white-space: nowrap;
+        ${media.xs} {
+            font-size: 12px;
+        }
     }
     .CurrencyCard_head, .CurrencyCard_desc {
         position: absolute;
@@ -100,5 +112,11 @@ const Card = styled.div`
         color: rgba(42,44,47,.6);
         text-align: center;
         bottom: -50px;
+        ${media.xs} {
+            font-size: 12px;
+            width: 115px;
+            white-space: normal;
+            bottom: -60px;
+        }
     }
 `;

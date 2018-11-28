@@ -42,7 +42,7 @@ const TransactionsRow = ({state, onIconClickHandler, openedTransaction, id, date
                 <Cell><img alt="State icon" src={state === 'ACTUAL' ? iconCheckGreen : iconReload}/></Cell>
                 <Cell>{date}&nbsp;&nbsp;&nbsp;{time}</Cell>
                 <Cell><a target="_blank" href={transferHashLink}>{txnHash}</a></Cell>
-                <Cell><img alt="State icon" src={state === 'ACTUAL' ? iconCheckGreen : iconReload}/></Cell>
+                <Cell className="hidden-xs"><img alt="State icon" src={state === 'ACTUAL' ? iconCheckGreen : iconReload}/></Cell>
                 <Cell>{amount}&nbsp;&nbsp;{currency}</Cell>
                 <Cell>{usdc_value}</Cell>
                 <Cell color={isTokenRise ? `rgb(17, 205, 86)` : `rgb(239, 32, 40)`}>
@@ -168,9 +168,7 @@ const Cell = styled.td`
     }
     &:nth-of-type(4) {
         width: 50px;
-        ${media.xs} {
-            display: none;
-        }
+        background: 2%;
         img {
             width: 22px;
             height: 22px;

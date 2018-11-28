@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
 import CurrencyCardMain from './components/CurrencyCardMain';
 import CurrencyCardOther from './components/CurrencyCardOther';
@@ -85,14 +86,10 @@ const Wrapper = styled.div`
     margin-top: 22px;
     background: white;
     border-radius: 6px;
-`;
-
-const Head = styled.h3`
-    font-size: 20px;
-    font-weight: 500;
-    color: #323c47;
-    letter-spacing: 0.1px;
-    margin-bottom: 30px;
+    margin-bottom: 65px;
+    ${media.xs} {
+        margin-bottom: 0;
+    }
 `;
 
 const Content = styled.div`
@@ -101,4 +98,14 @@ const Content = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    ${media.sm} {
+        justify-content: flex-start;
+    }}
+    ${media.smMinus} {
+        flex-wrap: wrap;
+    }
+    ${media.xs} {
+        justify-content: space-between;
+        margin-bottom: 0;
+    }
 `;

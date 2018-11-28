@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 
 const CurrencyCard = ({className, name, icon, rate, clickHandler}) => {
@@ -31,6 +32,12 @@ const Card = styled.div`
     transition: all .25s ease;
     cursor: pointer;
     will-change: transform;
+    ${media.xs} {
+        width: 46.7%;
+        height: 163px;
+        min-height: unset;
+        margin-right: 0 !important;
+    }
     &:hover {
         [class^="icon-"] {
             color: rgba(80,154,245,1) !important;

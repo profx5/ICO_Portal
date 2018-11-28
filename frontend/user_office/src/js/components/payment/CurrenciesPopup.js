@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
 import CurrencyCardRest from './components/CurrencyCardRest';
 
@@ -35,13 +36,12 @@ class CurrenciesPopup extends React.Component {
 
     render() {
         const {
-            currencies,
             hidePopup
         } = this.props;
         return (
             <Wrapper>
                 <WrapperInner>
-                    <Head>Select another crypto currency
+                    <Head>Select another<br className="visible-xs"/> crypto currency
                         <div onClick={hidePopup} className="close-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15">
                               <g fill="none" fillRule="evenodd">
@@ -104,12 +104,24 @@ const WrapperInner = styled.div`
     box-shadow: 0 9px 21px 0 rgba(173, 182, 217, 0.3);
     border-radius: 4px;
     background: white;
+    ${media.xs} {
+        width: calc(100vw - 32px);
+        max-height: calc(100% - 96px);
+        top: 48px;
+        left: 16px;
+        transform: unset;
+        overflow: scroll;
+    }
 `;
 
 const Content = styled.div`
     display: flex;
     flex-wrap: wrap;
     padding: 40px 60px;
+    ${media.xs} {
+        justify-content: space-between;
+        padding: 24px 16px 20px;
+    }
 `;
 
 const Head = styled.div`
@@ -120,11 +132,23 @@ const Head = styled.div`
     background: #f5f6fa;
     padding: 0 20px;
     position: relative;
+    ${media.xs} {
+        font-size: 20px;
+        line-height: 20px;
+        padding: 15px 50px;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
     .close-btn {
         position: absolute;
         right: 40px;
         top: 50%;
         transform: translateY(-50%);
         cursor: pointer;
+        ${media.xs} {
+            right: 19px;
+            top: 28px;
+        }
     }
 `;
