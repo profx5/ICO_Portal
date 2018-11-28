@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-const Timer = ({countdownTime}) => {
+const Timer = ({countdownTime, className}) => {
 
     return (
         <React.Fragment>
-            <Head>End of the first phase:</Head>
-            <Wrapper>
+            <Head className={className}>End of the first phase:</Head>
+            <Wrapper className={className}>
                 <TimeBlock data-time-unit="days">{countdownTime.days}</TimeBlock>
                 <TimeBlock data-time-unit="hours">{countdownTime.hours}</TimeBlock>
                 <TimeBlock data-time-unit="min">{countdownTime.minutes}</TimeBlock>

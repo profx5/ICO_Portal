@@ -30,6 +30,7 @@ const Wrapper = styled.div`
     margin-right: 55px;
     padding-bottom: 73px;
     ${media.xs} {
+        width: calc(100vw - 32px);
         margin: 0 16px;
         padding-bottom: 50px;
     }
@@ -42,4 +43,12 @@ const BannerWrapper = styled.div`
     background-size: cover;
     margin-top: 52px;
     border-radius: 3px;
+    ${media.sm} {
+        height: 200px;
+    }
+    ${media.xs} {
+        height: 112px;
+        margin-top: 12px;
+        margin-bottom: 30px;
+    }
 `;

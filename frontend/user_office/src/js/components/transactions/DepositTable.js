@@ -116,6 +116,9 @@ const Table = styled.table`
         background: rgb(246, 246, 246);
         padding: 10px;
         font-weight: 400;
+        ${media.xs} {
+            font-size: 14px;
+        }
     }
 `;
 

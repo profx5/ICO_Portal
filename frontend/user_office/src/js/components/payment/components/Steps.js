@@ -122,7 +122,7 @@ const Step = styled.div`
         display: block;
         width: 387px;
         height: 2px;
-        background: ${props => props.to_next || media.isSmMinus ? '#1767f2': 'lightgrey'};
+        background: ${props => props.to_next ? '#1767f2': 'lightgrey'};
         position: absolute;
         bottom: 6px;
         left: calc(50% + 27px);

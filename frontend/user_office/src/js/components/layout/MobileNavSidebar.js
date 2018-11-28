@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router';
+import {Link, withRouter} from 'react-router-dom';
 import {media} from './../../utils/media';
 
 import * as UIActions from './../../actions/UIActions';
@@ -23,7 +23,7 @@ class MobileNavSidebar extends React.Component {
                             <path d="M505.942 476.694L35.306 6.059c-8.076-8.077-21.172-8.077-29.248 0-8.077 8.076-8.077 21.171 0 29.248l470.636 470.636c4.038 4.039 9.332 6.058 14.625 6.058 5.293 0 10.587-2.019 14.624-6.057 8.075-8.078 8.075-21.173-.001-29.25z"/>
                         </svg>
                     </Cross>
-                    <Logo>
+                    <Logo to="/user_office" onClick={this.onClickCrossHandler}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
                             <g fill="#3172FD" fillRule="nonzero">
                                 <path d="M20 8.889c2.689 0 4.889-2 4.889-4.445C24.889 2 22.689 0 20 0s-4.889 2-4.889 4.444c0 2.445 2.2 4.445 4.889 4.445z"/>
@@ -82,7 +82,7 @@ const Header = styled.div`
     max-height: 63px;
 `;
 
-const Logo = styled.div`
+const Logo = styled(Link)`
     svg {
         height: 35px;
         width: auto;

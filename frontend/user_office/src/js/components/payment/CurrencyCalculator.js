@@ -76,13 +76,13 @@ class CurrencyCalculator extends React.Component {
         let ethSet = !!ethAccount;
         let kycApproved = kycState === 'APPROVED';
         let bonus = this.bonus;
-        let header = investCurrency ? "Amount, min " + (10 / investCurrencyRate).toFixed(3) + " " + investCurrency : 'Amount';
+        let investLabelText = investCurrency ? "Amount, min " + (10 / investCurrencyRate).toFixed(3) + " " + investCurrency : 'Amount';
         this.initialUpdate();
         return (
             <Wrapper>
                 <WrapperInner>
                     <InvestInput value={investAmount} type="text"
-                                 onChangeHandler={this.investOnChangeHandler} header={header}
+                                 onChangeHandler={this.investOnChangeHandler} investLabelText={investLabelText}
                                  currency={investCurrency}/>
                     <TokensInputWrapper data-currency="OGD">
                         <TokensInput>
@@ -185,8 +185,8 @@ const WrapperInner = styled.div`
     justify-content: start;
     border-top: 1px solid rgba(151,151,151,.2);
     border-bottom: 1px solid rgba(151,151,151,.2);
-    padding-bottom: 50px;
-    padding-top: 90px;
+    padding: 90px 0 50px;
+    margin-bottom: 40px;
     ${media.sm} {
         margin-bottom: 40px;
     }

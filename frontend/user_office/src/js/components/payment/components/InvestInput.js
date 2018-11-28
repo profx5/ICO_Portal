@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import {media} from './../../../utils/media';
 
 
-const InvestInput = ({value, type, onChangeHandler, header, currency}) => {
+const InvestInput = ({value, type, onChangeHandler, investLabelText, currency}) => {
 
     return (
-        <InputWrapper data-header={header} data-currency={currency}>
-            <Input value={value} type={type} onChange={onChangeHandler}/>
+        <InputWrapper data-currency={currency}>
+            <Label htmlFor="invest_input">{investLabelText}</Label>
+            <Input value={value} type={type} onChange={onChangeHandler} id="invest_input"/>
         </InputWrapper>
     )
 }
@@ -31,17 +32,6 @@ const InputWrapper = styled.div`
         font-size: 14px;
         height: 49px;
     }
-    &:before {
-        content: attr(data-header);
-        color: #0a0a0a;
-        position: absolute;
-        left: 0;
-        top: -35px;
-        font-size: 16px;
-        ${media.xs} {
-            font-size: 12px;
-        }
-    }
     &:after {
         content: attr(data-currency);
         color: rgba(10,10,10, 0.4);
@@ -53,6 +43,18 @@ const InputWrapper = styled.div`
         ${media.xs} {
             font-size: 14px;
         }
+    }
+`;
+
+const Label = styled.label`
+    color: #0a0a0a;
+    position: absolute;
+    left: 0;
+    top: -35px;
+    font-size: 16px;
+    ${media.xs} {
+        font-size: 12px;
+        top: -30px;
     }
 `;
 
