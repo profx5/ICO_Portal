@@ -18,6 +18,7 @@ const UtilityBill = ({files, name, filesWrapper, onAttachClickHandler, uploadFil
                 <Button clickHandler={onAttachClickHandler} text="Attach file" attach/>
             </ButtonWrapper>
             <div className={`files-container ${files.size > 0 ? "files-container-filled" : ''}`}>
+                <input class="file-input" type="file" name={name} hidden/>
                 <p className="files-head">Uploaded:</p>
                 <FilesAttacher files={files} name={name} filesWrapper={filesWrapper} uploadFileHandler={uploadFileHandler} removeFileHandler={removeFileHandler}/>
             </div>

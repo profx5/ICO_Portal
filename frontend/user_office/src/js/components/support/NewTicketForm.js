@@ -64,6 +64,7 @@ class NewTicketForm extends React.Component {
                             <div className="controls-container files-section files-section-newTicket">
                                 {newTicketFiles.size > 0 && <div className="files-header">Uploaded:</div>}
                                 <div className="files-container">
+                                    <input class="file-input" type="file" name='attachment' hidden/>
                                     <FilesAttacher files={newTicketFiles} 
                                         name="attachment" 
                                         filesWrapper={document.querySelector('.files-section-newTicket')} 
