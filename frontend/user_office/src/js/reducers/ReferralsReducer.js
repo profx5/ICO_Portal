@@ -12,11 +12,11 @@ const initialState = Map({
 
 
 export const ReferralsReducer = createReducer({
-    [actions.getReferralLinkRequest]: (state = initialState, payload) => state.setIn(['link', 'isLoading'], true),
+    [actions.getReferralLinkRequest]: (state = initialState) => state.setIn(['link', 'isLoading'], true),
     [actions.getReferralLinkSuccess]: (state = initialState, payload) => {
         return state
             .setIn(['link', 'url'], payload)
             .setIn(['link', 'isLoading'], false)
     },
-    [actions.getReferralLinkFailed]: (state = initialState, payload) => state.setIn(['link', 'isLoading'], false)
+    [actions.getReferralLinkFailed]: (state = initialState) => state.setIn(['link', 'isLoading'], false)
 }, initialState);

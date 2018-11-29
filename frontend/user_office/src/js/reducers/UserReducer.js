@@ -22,10 +22,10 @@ export const UserReducer = createReducer({
         }).set('userIsLoading', false)
     },
 
-    [actions.showSetAccountForm]: (state, payload) => state.set('showSetAccountForm', true),
-    [actions.hideSetAccountForm]: (state, payload) => state.set('showSetAccountForm', false),
-    [actions.setAccountRequest]: (state, payload) => state.set("setAccountSubmitting", true),
-    [actions.setAccountSuccessfull]: (state, payload) => state.set('setAccountSubmitting', false),
+    [actions.showSetAccountForm]: (state) => state.set('showSetAccountForm', true),
+    [actions.hideSetAccountForm]: (state) => state.set('showSetAccountForm', false),
+    [actions.setAccountRequest]: (state) => state.set("setAccountSubmitting", true),
+    [actions.setAccountSuccessfull]: (state) => state.set('setAccountSubmitting', false),
     [actions.setAccountFailed]: (state, payload) => state.set('set_eth_error', payload),
     [actions.setMetaMaskAccountSuccessfull]: (state, payload) => state.set('metamaskAccount', payload),
 

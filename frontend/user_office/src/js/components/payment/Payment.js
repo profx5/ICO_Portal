@@ -16,7 +16,7 @@ import Steps from './components/Steps';
 class Payment extends React.Component {
 
     render() {
-        const {isCurrenciesPopupVisible,step} = this.props;
+        const {showCurrenciesPopup,step} = this.props;
 
         return (
             <Wrapper>
@@ -27,7 +27,7 @@ class Payment extends React.Component {
                     <Route exact path="/user_office/payment/buy" component={PaymentStepTwo}/>
                     <Route exact path="/user_office/payment/finish" component={PaymentStepThree}/>
                 </Switch>
-                {isCurrenciesPopupVisible && <CurrenciesPopup/>}
+                {showCurrenciesPopup && <CurrenciesPopup/>}
             </Wrapper>
         )
     }
@@ -35,7 +35,7 @@ class Payment extends React.Component {
 
 
 const mapStateToProps = ({UI}) => ({
-    isCurrenciesPopupVisible: UI.get('showCurrenciesPopup'),
+    showCurrenciesPopup: UI.get('showCurrenciesPopup'),
     step: UI.get('step')
 })
 

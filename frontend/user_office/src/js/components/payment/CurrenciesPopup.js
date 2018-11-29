@@ -93,24 +93,21 @@ const Wrapper = styled.div`
     bottom: 0;
     background: rgba(1,7,29,.3);
     z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const WrapperInner = styled.div`
     width: 757px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     box-shadow: 0 9px 21px 0 rgba(173, 182, 217, 0.3);
     border-radius: 4px;
     background: white;
+    overflow-y: auto;
     ${media.xs} {
         width: calc(100vw - 32px);
         max-height: calc(100% - 96px);
-        top: 48px;
-        left: 16px;
-        transform: unset;
-        overflow: scroll;
     }
 `;
 

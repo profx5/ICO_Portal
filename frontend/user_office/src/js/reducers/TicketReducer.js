@@ -12,9 +12,9 @@ const initialState = Map({
 
 
 export const TicketsReducer = createReducer({
-    [actions.getTicketsRequest]: (state = initialState, payload) => state.set('isTicketsLoading', true),
+    [actions.getTicketsRequest]: (state = initialState) => state.set('isTicketsLoading', true),
     [actions.getTicketsSuccess]: (state = initialState, payload) => state.set('results', payload),
-    [actions.getSelectedTicket]: (state = initialState, payload) => state.set('isSelectedTicketLoading', true),
+    [actions.getSelectedTicket]: (state = initialState) => state.set('isSelectedTicketLoading', true),
     [actions.getSelectedTicketSuccess]: (state = initialState, payload) => state.set('selectedTicket', payload).set('isSelectedTicketLoading', false),
-    [actions.unselectTicket]: (state=initialState, payload) => state.set('selectedTicket', null),
+    [actions.unselectTicket]: (state=initialState) => state.set('selectedTicket', null),
 }, initialState);

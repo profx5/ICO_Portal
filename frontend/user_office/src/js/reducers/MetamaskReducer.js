@@ -10,6 +10,6 @@ const initialState = Map({
 
 
 export const MetamaskReducer = createReducer({
-    [actions.metamaskIsBlocked]: (state, payload) => state.set('metamaskIsBlocked', true),
-    [actions.showModalWithOptionsForEthAccount]: (state, payload) => state.set('showOptionsForSettingAccount', true)
+    [actions.metamaskIsBlocked]: (state) => state.set('metamaskIsBlocked', true),
+    [actions.showModalWithOptionsForEthAccount]: (state) => state.set('showOptionsForSettingAccount', true)
 }, initialState);

@@ -15,10 +15,10 @@ const initialState = Map({
 
 
 export const ICOInfoReducer = createReducer({
-    [actions.getICOInfoRequest]: (state, payload) => state,
+    [actions.getICOInfoRequest]: (state) => state,
     [actions.getICOInfoSuccess]: (state, payload) => state.merge(payload),
     [actions.humanizeEndTime]: (state, payload) => state.merge({humanizedEndTime: payload}),
     [actions.updateCountdown]: (state, payload) => state.set('countdownTime', payload),
-    [actions.getCryptoAccountRequest]: (state, payload) => state,
+    [actions.getCryptoAccountRequest]: (state) => state,
     [actions.getCryptoAccountSuccessful]: (state, payload) => state.set('alt_crowdsale_address', payload)
 }, initialState);

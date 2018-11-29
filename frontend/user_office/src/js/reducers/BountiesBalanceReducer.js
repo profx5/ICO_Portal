@@ -22,8 +22,8 @@ const initialState = Map({
 
 
 export const BountiesBalanceReducer = createReducer({
-    [actions.getBountiesRequest]: (state = initialState, payload) => state.set('isBountiesBalanceLoading', true),
-    [actions.getBountiesFailed]: (state = initialState, payload) => state.set('isBountiesBalanceLoading', false),
+    [actions.getBountiesRequest]: (state = initialState) => state.set('isBountiesBalanceLoading', true),
+    [actions.getBountiesFailed]: (state = initialState) => state.set('isBountiesBalanceLoading', false),
     [actions.getBountiesSuccess]: (state = initialState, payload) => {
         return state
             .get('bounties')
@@ -31,8 +31,8 @@ export const BountiesBalanceReducer = createReducer({
             .set('isBountiesBalanceLoading', false)
     },
 
-    [actions.postTransferRequest]: (state = initialState, payload) => state.set('transferIsLoading', true),
-    [actions.postTransferFailed]: (state = initialState, payload) => state.set('transferIsLoading', false),
+    [actions.postTransferRequest]: (state = initialState) => state.set('transferIsLoading', true),
+    [actions.postTransferFailed]: (state = initialState) => state.set('transferIsLoading', false),
     [actions.postTransferSuccess]: (state = initialState, payload) => {
         return state
             .set('transferIsLoading', false)

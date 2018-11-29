@@ -12,7 +12,7 @@ const initialState = Map({
 
 
 export const CurrencyReducer = createReducer({
-    [actions.getCurrenciesRequest]: (state, payload) => state,
+    [actions.getCurrenciesRequest]: (state) => state,
     [actions.getCurrenciesSuccess]: (state, payload) => {
         return state.set('currencies', payload)
             .set('investCurrency', payload[0].code)
