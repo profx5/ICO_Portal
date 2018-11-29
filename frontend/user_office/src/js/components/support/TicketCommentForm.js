@@ -98,7 +98,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(TicketCommentForm)
 
 const Wrapper = styled.div`
-    padding: 42px 0 65px;
+    padding: 0 0 65px;
     background: white;
     border-radius: 6px;
     ${media.xs} {

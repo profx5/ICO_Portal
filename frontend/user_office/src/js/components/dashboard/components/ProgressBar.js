@@ -147,6 +147,7 @@ const Point = styled.div`
         ${media.smMinus} {
             content: url(${arrow});
             top: -40px;
+            transform: translateX(-55%) rotate(90deg);
         }
     }
     &:after {

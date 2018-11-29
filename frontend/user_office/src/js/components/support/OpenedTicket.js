@@ -7,6 +7,7 @@ import {media} from './../../utils/media';
 
 import TicketCommentForm from './TicketCommentForm';
 import AttachedFile from './../common/AttachedFile';
+import TicketState from './components/TicketState';
 
 import * as TicketActions from './../../actions/TicketActions';
 
@@ -72,10 +73,13 @@ class OpenedTicket extends React.Component {
                         <div>{[3,4].includes(status) ? "Ticket is closed" : "Ticket is open"}</div>
                     </div>
                 </Header>
-                <div>
+                <MessageWrapper>
                     {this.renderMessages(public_follow_ups)}
-                </div>
-                <TicketCommentForm onAttachClickHandler={onAttachClickHandler}/>
+                </MessageWrapper>
+                {[3,4].includes(status) && 
+                    <TicketState/> ||
+                    <TicketCommentForm onAttachClickHandler={onAttachClickHandler}/>
+                }
             </Wrapper>
         )
     }
@@ -134,6 +138,7 @@ const Header = styled.div`
     }
     .Ticket_linkBack {
         color: inherit;
+        white-space: nowrap;
     }
     div:nth-of-type(2) {
         display: inline-flex;
@@ -147,6 +152,10 @@ const Header = styled.div`
             margin: 0 15px
         }
     }
+`;
+
+const MessageWrapper = styled.div`
+    margin-bottom: 42px;
 `;
 
 const Message = styled.div`
