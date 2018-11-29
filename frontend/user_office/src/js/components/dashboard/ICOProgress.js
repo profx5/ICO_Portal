@@ -251,12 +251,12 @@ const TimeBlock = styled.div`
     }
     &:not(:last-of-type) {
         padding-right: 15px;
-        &::after {
+        &:after {
             content: ':';
             display: block;
             color: #3476fc;
             position: absolute;
-            top: 3px;
+            top: -2px;
             right: 5px;
             ${media.xs} {
                 top: -1px;

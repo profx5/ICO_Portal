@@ -58,12 +58,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(Support)
 
 const Wrapper = styled.div`
     flex: 1;
-    height: calc(100% - 100px);
-    margin: 0 55px;
-    padding-bottom: 73px;
-    ${media.xs} {
-        margin: 0 16px;
-        padding-bottom: 50px;
-        width: calc(100vw - 32px);
-    }
 `;

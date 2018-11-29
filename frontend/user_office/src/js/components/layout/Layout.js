@@ -10,8 +10,9 @@ import {media} from './../../utils/media';
 import NavSidebar from './components/NavSidebar';
 import Nav from './components/Nav';
 import MobileNav from './components/MobileNav';
-import MobileNavSidebar from './MobileNavSidebar';
+import Footer from './components/Footer';
 import Header from './Header';
+import MobileNavSidebar from './MobileNavSidebar';
 
 import Dashboard from './../dashboard/Dashboard';
 import Transactions from './../transactions/Transactions'
@@ -76,16 +77,19 @@ class Layout extends Component {
                             <MobileNav onClickHandler={closeMobileSidebar} changeSupportActiveTab={changeSupportActiveTab}/>
                         </MobileNavSidebar>
                     }
-                    <Switch history={history}>
-                        <Route exact path="/user_office" component={Dashboard}/>
-                        <Route path="/user_office/transactions" component={Transactions}/>
-                        <Route path="/user_office/payment" component={Payment} />
-                        <Route path="/user_office/support/ticket/:ticket" component={Support}/>
-                        <Route path="/user_office/support" component={Support}/>
-                        <Route path="/user_office/verification" component={Verification}/>
-                        <Route path="/user_office/account" component={Account}/>
-                        <Route path="/user_office/referrals" component={Referrals}/>
-                    </Switch>
+                    <LayoutWrapper>
+                        <Switch history={history}>
+                                <Route exact path="/user_office" component={Dashboard}/>
+                                <Route path="/user_office/transactions" component={Transactions}/>
+                                <Route path="/user_office/payment" component={Payment} />
+                                <Route path="/user_office/support/ticket/:ticket" component={Support}/>
+                                <Route path="/user_office/support" component={Support}/>
+                                <Route path="/user_office/verification" component={Verification}/>
+                                <Route path="/user_office/account" component={Account}/>
+                                <Route path="/user_office/referrals" component={Referrals}/>
+                        </Switch>
+                        <Footer/>
+                    </LayoutWrapper>
                     {showSetAccountPopup && <SetAccount/>}
                     {modalOpened && modalHead && modalContent && <Modal/>}
                     {modalOpened && openedModalId && <CustomModals/>}
@@ -143,5 +147,21 @@ const MainWrapper = styled.div`
     display: flex;
     background: #F5F6FA;
     min-height: calc(100vh - 90px);
-    overflow: hidden;
+    ${media.xs} {
+        flex-wrap: wrap;
+    }
+`;
+
+const LayoutWrapper = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1;
+    height: calc(100% - 100px);
+    min-height: calc(100vh - 90px);
+    margin-left: 55px;
+    margin-right: 55px;
+    ${media.xs} {
+        width: calc(100vw - 32px);
+        margin: 0 16px;
+    }
 `;

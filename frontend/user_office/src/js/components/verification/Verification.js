@@ -148,42 +148,40 @@ class Verification extends React.Component {
         let KYCStatus = type !== '' && state;
 
         return (
-            <div>
-                <Formik
-                    initialValues={this.getInitialValues()} 
-                    validationSchema={activeKycTab === 1 ? VerificationValidation({type: 'Natural'}) : VerificationValidation({type: 'Legal'})} 
-                    validateOnChange={false} 
-                    validateOnBlur={true}
-                    enableReinitialize={true}
-                    onSubmit={this.onSubmitHandler} 
-                    render={({errors, touched, values, resetForm}) => (
-                        <Wrapper state={state} id="form" className="VerificationForm">
-                            <Header>
-                                <HeaderInner>
-                                    <Title className="Verification_head">Verification (KYC)</Title>
-                                    <KYCTabs clickHandler={this.tabClickHandler.bind(this, resetForm)} activeTab={activeKycTab}/>
-                                </HeaderInner>
-                                <VerificationState className="visible-smMinus" kycState={KYCStatus} kycTicketId={kycTicketId}/>
-                            </Header>
-                            <MainWrapper>
-                                {!type && activeKycTab === 1 && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
-                                {!type && activeKycTab === 2 && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
-                                {type === "NATURAL" && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
-                                {type === "LEGAL" && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
-                                <InvestorsDocuments errors={errors} touched={touched} values={values} onAttachClickHandler={this.onAttachClickHandler}/>
-                            </MainWrapper>
-                            <VerificationInfoWrapper>
-                                <VerificationInfo
-                                    btnText="Send data"
-                                    verificationStages={['Verification__personData', 'Verification__investorsDocuments']}
-                                    stages={activeKycTab === 1 ? ['Personal Data', 'Investor\'s documents'] : ['Legal Person Data', 'Investor\'s documents']}
-                                    kycState={KYCStatus} 
-                                    kycTicketId={kycTicketId}/>
-                            </VerificationInfoWrapper>
-                        </Wrapper>
-                    )}
-                />
-            </div>
+            <Formik
+                initialValues={this.getInitialValues()} 
+                validationSchema={activeKycTab === 1 ? VerificationValidation({type: 'Natural'}) : VerificationValidation({type: 'Legal'})} 
+                validateOnChange={false} 
+                validateOnBlur={true}
+                enableReinitialize={true}
+                onSubmit={this.onSubmitHandler} 
+                render={({errors, touched, values, resetForm}) => (
+                    <Wrapper state={state} id="form" className="VerificationForm">
+                        <Header>
+                            <HeaderInner>
+                                <Title className="Verification_head">Verification (KYC)</Title>
+                                <KYCTabs clickHandler={this.tabClickHandler.bind(this, resetForm)} activeTab={activeKycTab}/>
+                            </HeaderInner>
+                            <VerificationState className="visible-smMinus" kycState={KYCStatus} kycTicketId={kycTicketId}/>
+                        </Header>
+                        <MainWrapper>
+                            {!type && activeKycTab === 1 && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
+                            {!type && activeKycTab === 2 && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
+                            {type === "NATURAL" && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
+                            {type === "LEGAL" && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
+                            <InvestorsDocuments errors={errors} touched={touched} values={values} onAttachClickHandler={this.onAttachClickHandler}/>
+                        </MainWrapper>
+                        <VerificationInfoWrapper>
+                            <VerificationInfo
+                                btnText="Send data"
+                                verificationStages={['Verification__personData', 'Verification__investorsDocuments']}
+                                stages={activeKycTab === 1 ? ['Personal Data', 'Investor\'s documents'] : ['Legal Person Data', 'Investor\'s documents']}
+                                kycState={KYCStatus} 
+                                kycTicketId={kycTicketId}/>
+                        </VerificationInfoWrapper>
+                    </Wrapper>
+                )}
+            />
         )
     }
 };
@@ -267,8 +265,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Verification);
 const Wrapper = styled(Form)`
     flex: 1;
     height: calc(100% - 100px);
-    margin-left: 60px;
-    padding-bottom: 90px;
     display: flex;
     flex-flow: row wrap;
     ${media.xs} {
@@ -279,10 +275,6 @@ const Wrapper = styled(Form)`
     }
     input, button, label {
         pointer-events: ${props => props.state === 'APPROVED' && 'none'};
-    }
-    ${media.xs} {
-        margin: 0 16px;
-        padding-bottom: 50px;
     }
 `;
 
@@ -321,8 +313,8 @@ const MainWrapper = styled.div`
 `;
 
 const VerificationInfoWrapper = styled.div`
-    ${media.sm} {
+    /* ${media.sm} {
         flex-basis: 100%;
         margin-right: 60px;
-    }
+    } */
 `;
