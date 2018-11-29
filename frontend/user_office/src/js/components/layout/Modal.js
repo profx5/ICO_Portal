@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import {media} from './../../utils/media';
 
 import iconClose from './../../../img/icon_close.svg';
 
@@ -48,27 +49,32 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);
 
 const ModalWrapper = styled.div`
-    height: 100vh;
-    width: 100vw;
-    background: rgba(1, 7, 29, 0.3);
     position: fixed;
-    top: 0;
     left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(1, 7, 29, 0.3);
     z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const ModalInner = styled.div`
-    position: absolute;
-    top: 10%;
-    left: 20%;
+    position: relative;
     width: 60%;
     border-radius: 4px;
     background-color: white;
     box-shadow: 0 9px 21px 0 rgba(173, 182, 217, 0.3);
     z-index: 100;
     max-height: 64vh;
-    overflow: hidden;
+    overflow-y: auto;
     font-weight: normal;
+    ${media.xs} {
+        width: calc(100vw - 32px);
+        max-height: calc(100% - 96px);
+    }
 `;
 
 const ModalHeader = styled.div`
@@ -84,11 +90,25 @@ const ModalHeader = styled.div`
     background-color: #f5f6fa;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
+    ${media.xs} {
+        font-size: 20px;
+        line-height: 20px;
+        padding: 15px 40px;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        height: auto;
+        min-height: 49px;
+    }
     & img {
         position: absolute;
         top: 26px;
         right: 26px;
         cursor: pointer;
+        ${media.xs} {
+            right: 19px;
+            top: 19px;
+        }
     }
 `;
 
@@ -102,7 +122,11 @@ const ModalContent = styled.div`
     letter-spacing: 0.2px;
     color: #0a0a0a;
     overflow-y: auto;
-    max-height: 52.5vh;
+    ${media.xs} {
+        font-size: 14px;
+        line-height: 1.64;
+        padding: 15px 25px 24px;
+    }
     & span {
         font-weight: bold;
     }

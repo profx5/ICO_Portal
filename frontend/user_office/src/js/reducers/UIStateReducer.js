@@ -25,10 +25,10 @@ const initialState = Map({
 
 
 export const UIStateReducer = createReducer({
-    [actions.showAccountDropdown]: (state = initialState, payload) => state.set("accountDropdownShown", true),
-    [actions.hideAccountDropdown]: (state = initialState, payload) => state.set("accountDropdownShown", false),
-    [actions.showStepsDropdown]: (state = initialState, payload) => state.set("stepsDropdownShown", true),
-    [actions.hideStepsDropdown]: (state = initialState, payload) => state.set("stepsDropdownShown", false),
+    [actions.showAccountDropdown]: (state = initialState) => state.set("accountDropdownShown", true),
+    [actions.hideAccountDropdown]: (state = initialState) => state.set("accountDropdownShown", false),
+    [actions.showStepsDropdown]: (state = initialState) => state.set("stepsDropdownShown", true),
+    [actions.hideStepsDropdown]: (state = initialState) => state.set("stepsDropdownShown", false),
     [actions.showModal]: (state = initialState, payload) => {
         if (payload.id) {
             return state.set('modalOpened', true).set('openedModalId', payload.id).set('modalHead', null).set('modalContent', null);
@@ -40,23 +40,23 @@ export const UIStateReducer = createReducer({
     [actions.hideModal]: (state = initialState, payload) => {
         return state.set('openedModalId', null).set('modalHead', null).set('modalContent', null).set('modalOpened', false)
     },
-    [actions.showInvestOptions]: (state = initialState, payload) => state.set("showInvestOptions", true),
-    [actions.hideInvestOptions]: (state = initialState, payload) => state.set("showInvestOptions", false),
-    [actions.showSetAccountPopup]: (state = initialState, payload) => state.set("showSetAccountPopup", true),
-    [actions.hideSetAccountPopup]: (state = initialState, payload) => state.set("showSetAccountPopup", false),
-    [actions.showCurrenciesPopup]: (state = initialState, payload) => state.set("showCurrenciesPopup", true),
-    [actions.hideCurrenciesPopup]: (state = initialState, payload) => state.set("showCurrenciesPopup", false),
+    [actions.showInvestOptions]: (state = initialState) => state.set("showInvestOptions", true),
+    [actions.hideInvestOptions]: (state = initialState) => state.set("showInvestOptions", false),
+    [actions.showSetAccountPopup]: (state = initialState) => state.set("showSetAccountPopup", true),
+    [actions.hideSetAccountPopup]: (state = initialState) => state.set("showSetAccountPopup", false),
+    [actions.showCurrenciesPopup]: (state = initialState) => state.set("showCurrenciesPopup", true),
+    [actions.hideCurrenciesPopup]: (state = initialState) => state.set("showCurrenciesPopup", false),
     [actions.changeActiveTab]: (state = initialState, payload) => state.set("activeSupportTab", payload.tab),
     [actions.activateKycTab]: (state = initialState, payload) => state.set('activeKycTab', payload.id),
     [actions.openTransaction]: (state = initialState, payload) => state.set('openedTransaction', payload.id),
     [actions.setOpenedTip]: (state = initialState, payload) => state.set('openedTip', payload.id),
     [actions.setStep]: (state = initialState, payload) => state.set('step', payload.step),
     [actions.setNewTicketFiles]: (state = initialState, payload) => state.set('newTicketFiles', payload.files),
-    [actions.setNewTicketFilesNull]: (state = initialState, payload) => state.set('newTicketFiles', []),
+    [actions.setNewTicketFilesNull]: (state = initialState) => state.set('newTicketFiles', []),
     [actions.setNewCommentFiles]: (state = initialState, payload) => state.set('newCommentFiles', payload.files),
-    [actions.setNewCommentFilesNull]: (state = initialState, payload) => state.set('newCommentFiles', []),
-    [actions.openMobileSidebar]: (state = initialState, payload) => state.set('mobileSidebarOpened', true),
-    [actions.closeMobileSidebar]: (state = initialState, payload) => state.set('mobileSidebarOpened', false),
+    [actions.setNewCommentFilesNull]: (state = initialState) => state.set('newCommentFiles', []),
+    [actions.openMobileSidebar]: (state = initialState) => state.set('mobileSidebarOpened', true),
+    [actions.closeMobileSidebar]: (state = initialState) => state.set('mobileSidebarOpened', false),
 }, initialState);
 
 

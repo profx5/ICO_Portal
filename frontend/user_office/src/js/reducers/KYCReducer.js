@@ -48,20 +48,20 @@ const initialState = Map({
 
 
 export const KYCReducer = createReducer({
-    [actions.getKYCRequest]: (state, payload) => state,
+    [actions.getKYCRequest]: (state) => state,
     [actions.getKYCSuccessfull]: (state, payload) => {
         return state.merge(payload).set('isFetched', true)
     },
 
-    [actions.submitKYCRequest]: (state, payload) => state.set('isSubmiting', true),
-    [actions.submitKYCSuccessfull]: (state, payload) => {
+    [actions.submitKYCRequest]: (state) => state.set('isSubmiting', true),
+    [actions.submitKYCSuccessfull]: (state) => {
         return state
             .set('isSubmiting', false)
             .set('showForm', false)
     },
 
-    [actions.showForm]: (state, payload) => state.set('showForm', true),
-    [actions.hideForm]: (state, payload) => state.set('showForm', false),
+    [actions.showForm]: (state) => state.set('showForm', true),
+    [actions.hideForm]: (state) => state.set('showForm', false),
     [actions.changeType]: (state, payload) => state.set('showForm', payload),
 
     [actions.uploadPhoto]: (state, payload) => {

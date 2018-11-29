@@ -13,7 +13,7 @@ const initialState = Map({
 
 
 export const PhasesReducer = createReducer({
-    [actions.getPhasesRequest]: (state = initialState, payload) => state,
+    [actions.getPhasesRequest]: (state = initialState) => state,
     [actions.getPhasesSuccess]: (state = initialState, payload) => {
 
         let currentPhase;
