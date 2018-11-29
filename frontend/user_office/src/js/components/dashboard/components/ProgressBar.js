@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Utils from './../../../utils/index';
+import {media} from './../../../utils/media';
+
+import arrow from './../../../../img/arrow_roadmap.svg';
 
 
 const ProgressBar = ({children, raisedAmountNum, tokenPrice}) => {
@@ -15,31 +18,31 @@ const ProgressBar = ({children, raisedAmountNum, tokenPrice}) => {
                         <Point rate={`1 OGD = ${tokenPrice} USD`} data-raised-amount={Utils.splitDigits(Math.ceil(raisedAmountNum / 100)) + ' USD'}/>
                     </InnerBar>
                     <Stage>
-                        <div className="StageDesc">
+                        <div className="StageDesc hidden-smMinus">
                             <StageName>65 000 USD</StageName>
                             <StageState>Phase 1</StageState>
                         </div>
                     </Stage>
                     <Stage>
-                        <div className="StageDesc">
+                        <div className="StageDesc hidden-smMinus">
                             <StageName>130 000 USD</StageName>
                             <StageState>Phase 2</StageState>
                         </div>
                     </Stage>
                     <Stage>
-                        <div className="StageDesc">
+                        <div className="StageDesc hidden-smMinus">
                             <StageName>195 000 USD</StageName>
                             <StageState>Phase 3</StageState>
                         </div>
                     </Stage>
                     <Stage>
-                        <div className="StageDesc">
+                        <div className="StageDesc hidden-smMinus">
                             <StageName>260 000 USD</StageName>
                             <StageState>Hard cap</StageState>
                         </div>
                     </Stage>
                     <Stage>
-                        <div className="StageDesc StageDesc-alignLeft">
+                        <div className="StageDesc hidden-smMinus StageDesc-alignLeft">
                             <StageName>0 USD</StageName>
                             <StageState>Soft cap</StageState>
                         </div>
@@ -59,14 +62,31 @@ const Wrapper = styled.div`
     height: 350px;
     position: relative;
     background: #FAFCFF;
+    ${media.sm} {
+        padding: 150px 20px 20px;
+        margin-bottom: 32px;
+    }
+    ${media.smMinus} {
+        background: white;
+        height: auto;
+    }
+    ${media.xs} {
+        padding: 130px 15px 20px;
+        margin-bottom: 32px;
+    }
 `;
 
 const BarWrapper = styled.div`
     position: absolute;
     left: 50%;
     bottom: 120px;
-    width: 92%;
+    width: calc(100% - 80px);
     transform: translateX(-50%);
+    ${media.smMinus} {
+        width: calc(100% - 40px);
+        bottom: unset;
+        top: 80px;
+    }
 `;
 
 const Bar = styled.div`
@@ -74,6 +94,9 @@ const Bar = styled.div`
     height: 11px;
     background: rgba(49, 114, 253, .15);
     position: relative;
+    ${media.smMinus} {
+        height: 5px;
+    }
 `;
 
 const InnerBar = styled.div`
@@ -98,6 +121,15 @@ const Point = styled.div`
     border-radius: 100%;
     background: white;
     box-shadow: 0 0 0 11px rgba(57, 125, 255, 0.16);
+    ${media.smMinus} {
+        width: 13px;
+        height: 13px;
+        background: rgb(57, 125, 255);
+        right: -8px;
+    }
+    ${media.xs} {
+        box-shadow: 0 0 0 6px rgba(57, 125, 255, 0.16);
+    }
     &:after, &:before {
         position: absolute;
         left: 50%;
@@ -112,6 +144,10 @@ const Point = styled.div`
         letter-spacing: 0.3px;
         white-space: nowrap;
         top: -65px;
+        ${media.smMinus} {
+            content: url(${arrow});
+            top: -40px;
+        }
     }
     &:after {
         content: attr(data-raised-amount);
@@ -122,6 +158,11 @@ const Point = styled.div`
         letter-spacing: 0.4px;
         white-space: nowrap;
         top: -45px;
+        ${media.smMinus} {
+            content: 'You are here';
+            font-family: inherit;
+            top: -56px;
+        }
     }
 `;
 

@@ -3,14 +3,15 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Utils from './../../utils/index';
+import {media} from './../../utils/media';
 
 import ProgressBar from './components/ProgressBar';
 import Timer from './components/Timer';
+import PhasesInfo from './components/PhasesInfo';
 import CustomButton from './../common/CustomButton';
+import Button from './../common/Button';
 
 import * as ICOInfoActions from './../../actions/ICOInfoActions';
-
-import dotsIcon from './../../../img/dots.svg';
 
 
 class ICOProgress extends React.Component {
@@ -45,14 +46,25 @@ class ICOProgress extends React.Component {
                             <DescHead>Funds raised:</DescHead>
                             <Desc bold>{raisedAmountStr}</Desc>
                         </PartWrapper>
+                        <PartWrapper className="visible-smMinus">
+                            <DescHead>Remaining:</DescHead>
+                            <TimerWrapper>
+                                <TimeBlock bold>{countdownTime.days || '00'}d</TimeBlock>
+                                <TimeBlock bold>{countdownTime.hours || '00'}h</TimeBlock>
+                                <TimeBlock bold>{countdownTime.minutes || '00'}m</TimeBlock>
+                                <TimeBlock bold>{countdownTime.seconds || '00'}s</TimeBlock>
+                            </TimerWrapper>
+                        </PartWrapper>
                     </WrapperHeaderInfo>
                 </Header>
                 <ProgressBar tokenPrice={tokenPrice} raisedAmountNum={raisedAmountNum}>
-                    <Timer countdownTime={countdownTime}/>
+                    <Timer className="hidden-smMinus" countdownTime={countdownTime}/>
+                    <PhasesInfo rate={tokenPrice}/>
                 </ProgressBar>
                 <BonusInfoText>Bonuses are going to end up soon!</BonusInfoText>
                 <ButtonWrapper to="/user_office/payment">
-                    <CustomButton text="Buy token"/>
+                    <CustomButton className="hidden-smMinus" text="Buy token"/>
+                    <Button className="visible-smMinus" text="Buy token"/>
                 </ButtonWrapper>
             </Wrapper>
         )
@@ -89,12 +101,22 @@ const Wrapper = styled.div`
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
+    ${media.xs} {
+        padding: 20px 16px 32px;
+    }
 `;
 
 const Header = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
+    ${media.smMinus} {
+        flex-wrap: wrap;
+        margin-bottom: 0;
+    }
+    ${media.xs} {
+        font-size: 16px;
+    }
 `;
 
 const WrapperHeaderInfo = styled.div`
@@ -103,6 +125,12 @@ const WrapperHeaderInfo = styled.div`
     justify-content: flex-end;
     align-items: flex-start;
     margin-bottom: 46px;
+    ${media.smMinus} {
+        flex-basis: 100%;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-bottom: 30px;
+    }
 `;
 
 const Head = styled.h3`
@@ -110,30 +138,130 @@ const Head = styled.h3`
     font-weight: 500;
     color: #323c47;
     letter-spacing: 0.1px;
+    ${media.smMinus} {
+        flex-basis: 100%;
+        margin-bottom: 30px;
+    }
 `;
 
 const PartWrapper = styled.div`
     margin-left: 50px;
+    ${media.smMinus} {
+        margin-left: 0;
+        flex-basis: 50%;
+    }
     &:nth-of-type(2) {
         border-left: 1px solid rgb(233, 233, 233);
         border-right: 1px solid rgb(233, 233, 233);
         padding: 0 45px;
+        ${media.smMinus} {
+            border: none;
+            padding-right: 0;
+        }
+        ${media.xsh} {
+            min-width: 155px;
+            flex-basis: unset;
+        }
     }
+    &:nth-of-type(4) {
+        padding: 0 45px;
+        ${media.smMinus} {
+            padding-right: 0;
+        }
+        ${media.xsh} {
+            min-width: 155px;
+            flex-basis: unset;
+        }
+    }
+    &:nth-of-type(1), &:nth-of-type(2) {
+        ${media.xs} {
+            margin-bottom: 20px;
+        }
+    }
+    &:nth-of-type(1), &:nth-of-type(3) {
+        ${media.xs} {
+            flex: 1;
+        }
+    }
+    &:nth-of-type(2), &:nth-of-type(4) {
+        ${media.xs} {
+            padding: 0;
+            flex-basis: 50%;
+        }
+    }
+    &:nth-of-type(1), &:nth-of-type(2), &:nth-of-type(3), &:nth-of-type(4) {
+        ${media.xsh} {
+            flex: unset;
+            flex-basis: 100%;
+            margin-bottom: 20px;
+        }
+    }
+
 `;
 
 const DescHead = styled.div`
     font-size: 14px;
     color: #000000;
+    padding-bottom: 5px;
+    white-space: nowrap;
+    ${media.xs} {
+        font-size: 12px;
+        padding-bottom: 0;
+    }
 `;
 
 const Desc = styled.div`
     color: ${props => props.blue ? '#3476fc' : '#000000'};
     font-size: 18px;
     font-weight: ${props => props.bold ? '600' : '500'};
-    padding-top: 5px;
+    white-space: nowrap;
+    ${media.smMinus} {
+        color: #3476fc;
+    }
+    ${media.xs} {
+        font-size: 4vw;
+    }
+    ${media.xsh} {
+        font-size: 14px;
+    }
     & span {
         color: black;
         font-weight: ${props => props.bold ? '600' : '500'};
+        ${media.smMinus} {
+            color: #3476fc;
+        }
+    }
+`;
+
+const TimerWrapper = styled.div`
+    display: flex;
+    flex-flow: row nowrap;
+`;
+
+const TimeBlock = styled.div`
+    font-weight: ${props => props.bold ? '600' : '500'};
+    font-size: 18px;
+    color: #3476fc;
+    position: relative;
+    ${media.xs} {
+        font-size: 4vw;
+    }
+    ${media.xsh} {
+        font-size: 14px;
+    }
+    &:not(:last-of-type) {
+        padding-right: 15px;
+        &::after {
+            content: ':';
+            display: block;
+            color: #3476fc;
+            position: absolute;
+            top: 3px;
+            right: 5px;
+            ${media.xs} {
+                top: -1px;
+            }
+        }
     }
 `;
 
@@ -143,32 +271,19 @@ const BonusInfoText = styled.p`
     text-align: center;
     display: block;
     white-space: nowrap;
+    margin-bottom: 17px;
+    ${media.xs} {
+        font-size: 14px;
+    }
 `;
 
 const ButtonWrapper = styled(Link)`
     width: 250px;
     height: 68px;
-    margin: 17px auto 0;
+    margin: 0 auto 0;
     display: block;
-`;
-
-const StyledButton = styled.button`
-    background: rgb(248, 79, 119);
-    width: 100%;
-    height: 100%;
-    text-transform: uppercase;
-    border-radius: 100px;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    font-weight: 500;
-    position: relative;
-    cursor: pointer;
-    &:after {
-        content: url(${dotsIcon});
-        position: absolute;
-        top: 50%;
-        right: 25px;
-        transform: translateY(-50%);
+    ${media.xs} {
+        height: 47px;
+        width: 100%;
     }
 `;

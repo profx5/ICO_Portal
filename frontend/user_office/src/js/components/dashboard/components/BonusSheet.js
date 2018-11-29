@@ -1,6 +1,6 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import styled from 'styled-components';
+import {media} from './../../../utils/media';
 
 
 const BonusSheet = () => {
@@ -20,8 +20,8 @@ const BonusSheet = () => {
     )
 }
 
-export default BonusSheet;
 
+export default BonusSheet;
 
 const Wrapper = styled.div`
     flex: 1;
@@ -31,6 +31,10 @@ const Wrapper = styled.div`
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
+    ${media.xs} {
+        margin-top: 12px;
+        padding: 15px 17px 32px;
+    }
 `;
 
 const Head = styled.h3`
@@ -39,12 +43,26 @@ const Head = styled.h3`
     color: #323c47;
     letter-spacing: 0.1px;
     margin-bottom: 40px;
+    ${media.xs} {
+        font-size: 16px;
+        margin-bottom: 27px;
+    }
 `;
 
 const TableWrapper = styled.div`
     .row {
         display: flex;
         border-radius: 2px;
+        ${media.sm} {
+            height: 100px;
+        }
+        ${media.xs} {
+            height: 64px;
+        }
+        ${media.smMinus} {
+            flex-wrap: wrap;
+            border: 1px solid #d6dfe6;
+        }
         &:first-of-type {
             margin-bottom: 20px;
         }
@@ -55,10 +73,32 @@ const TableWrapper = styled.div`
             font-weight: 600;
             height: 70px;
             border: 1px solid #d6dfe6;
+            ${media.smMinus} {
+                flex-basis: 100%;
+                border: none;
+                text-align: center;
+                line-height: unset;
+                height: auto;
+                padding-left: 0;
+            }
+            ${media.xs} {
+                font-size: 13px;
+            }
             &:first-of-type {
                 color: #0a0a0a;
                 border-top-left-radius: 2px;
                 border-bottom-left-radius: 2px;
+                ${media.sm} {
+                    padding-top: 14px;
+                }
+                ${media.smMinus} {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                ${media.xs} {
+                    padding-top: 7px;
+                }
             }
             &:last-of-type {
                 color: #3375fc;
