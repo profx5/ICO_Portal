@@ -102,36 +102,38 @@
 
 <body>
 <div class="page-content">
-    <header class="Header">
-        <div class="container-fluid Header_container">
-            <a href="{% site_url %}">
-                <img width="200" src="{% static 'img/common/svg/ongrid.logo.svg' %}" alt="">
-                <span class="Header_backLink-desc">Blockchain and cryptocurrency services development and integration</span>
-            </a>
-            <nav class="Header_menu">
-                <ul class="Header_menuList">
-                    <li class="Header_menuItem">
-                        <a href="mailto:info@ongrid.pro" class="Header_menuLink">
-                            info@ongrid.pro
-                        </a>
-                    </li>
-                    <li class="Header_menuItem">
-                        <a href="tel:+79857695015" class="Header_menuLink">
-                            +7 985 769-50-15
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-        </div>
-    </header>
     <!-- MAIN SECTION START -->
     <section class="MainSection MainSection-entry" data-parallax-blur="350" id="MainSection">
-        <div class="MainSection_bg">
+    <header class="Header">
+            <div class="container-fluid Header_container">
+                <a href="{% site_url %}">
+                    <img width="200" src="{% static 'img/common/svg/ongrid.logo.svg' %}" alt="">
+                    <span class="Header_backLink-desc">Blockchain and cryptocurrency services development and integration</span>
+                </a>
+                <nav class="Header_menu">
+                    <ul class="Header_menuList">
+                        <li class="Header_menuItem">
+                            <a href="mailto:info@ongrid.pro" class="Header_menuLink">
+                                info@ongrid.pro
+                            </a>
+                        </li>
+                        <li class="Header_menuItem">
+                            <a href="tel:+79857695015" class="Header_menuLink">
+                                +7 985 769-50-15
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+    
+            </div>
+        </header>
+        <div class="MainSection_bg"></div>
             {% block content %}{% endblock %}
-        </div>
         <div class="container-fluid MainSection_container">
-            <div class="MainSection_infoWrapper"><span class="MainSection_websiteLink">© 2018 OnGrid System, LLC</span>
+            <div class="MainSection_infoWrapper">
+                <a href="tel:+79857695015" class="MainSection_footerPhone">+7 985 769-50-15</a>
+                <a href="mailto:info@ongrid.pro" class="MainSection_footerMail">info@ongrid.pro</a>
+                <span class="MainSection_websiteLink">© 2018 OnGrid System, LLC</span>
                 <div class="MainSection_socialWrapper">
                     <div class="MainSection_socialIcons">
                         <a class="MainSection_iconWrapper" target="blank" href="#">

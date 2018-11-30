@@ -17,10 +17,11 @@
       highlight: function(input) {
 
         $(input).closest('[class*="inputWrapper"]').addClass('error');
+        $(input).siblings('[class*="error"]').removeClass('empty');
       },
       unhighlight: function(input) {
-
         $(input).closest('[class*="inputWrapper"]').removeClass('error');
+        $(input).siblings('[class*="error"]').addClass('empty');
       },
       errorPlacement: function(error, input) {
         $(input).siblings('[class*="error"]').html(error.text());
@@ -52,14 +53,14 @@ $('.Signup_form').validate({
             required: true,
             email: true
         },
-        password: {
+        password1: {
             required: true,
             pwcheck: true,
             correct: true
         },
-        confirm: {
+        password2: {
             required: true,
-            equalTo: '#password'
+            equalTo: '#id_password1'
         },
         checkbox: {
             required: true
@@ -70,10 +71,14 @@ $('.Signup_form').validate({
             required: 'Obligatory field',
             email: 'Invalid email address'
         },
-        password: {
+        password1: {
             required: 'Obligatory field',
             pwcheck: 'Password must contain 6 letters or more',
             correct: 'Incorrect symbols'
+        },
+        password2: {
+            required: 'Obligatory field',
+            equalTo: 'The passwords do not match'
         },
         checkbox: {
             required: 'Obligatory field'

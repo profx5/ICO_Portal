@@ -430,7 +430,7 @@ body, html {
 }
 
 body {
-    font-family: Circe, Trebuchet MS, Tahoma, Arial, "sans-serif";
+    font-family: 'Gilroy', Trebuchet MS, Tahoma, Arial, "sans-serif";
     font-weight: 300;
     letter-spacing: .4px;
     font-size: 1.6rem;
@@ -480,7 +480,7 @@ section {
 }
 
 .HeaderPhantom {
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     color: #f5f5f5;
     font-size: 70px;
     font-weight: 800;
@@ -993,7 +993,7 @@ html.content-blured .HeaderSticky {
     font-size: 16px;
     line-height: 1;
     display: block;
-    font-family: Circe, Trebuchet MS, Tahoma, Arial, "sans-serif";
+    font-family: 'Gilroy', Trebuchet MS, Tahoma, Arial, "sans-serif";
     background: transparent;
     z-index: 20;
     -webkit-transition: all .3s ease;
@@ -1196,7 +1196,7 @@ html.content-blured .HeaderSticky {
 }
 
 .Btn:not(.Btn-animate) {
-    padding-top: 5px
+    padding-top: 0px
 }
 
 .Btn_icon {
@@ -1654,7 +1654,7 @@ html.content-blured .HeaderSticky {
     background: #fff;
     font-size: 16px;
     font-weight: 400;
-    font-family: Circe, Trebuchet MS, Tahoma, Arial, "sans-serif";
+    font-family: 'Gilroy', Trebuchet MS, Tahoma, Arial, "sans-serif";
     color: #000;
     line-height: unset;
     letter-spacing: .4px;
@@ -2045,7 +2045,7 @@ html.content-blured .HeaderSticky {
 
 .ContactSection_input, .ContactSection_textarea {
     font-size: 18px;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     font-weight: 400 !important;
     padding-left: 10px;
     padding-right: 10px;
@@ -2097,7 +2097,7 @@ html.content-blured .HeaderSticky {
     background: #fff;
     font-size: 16px;
     font-weight: 400;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     color: #000;
     line-height: 16px;
     letter-spacing: .4px;
@@ -2554,7 +2554,10 @@ html.content-blured .HeaderSticky {
 
 @media (max-width: 767px) {
     .Header {
-        height: 73px
+        position: static;
+        margin-bottom: 22px;
+        height: auto;
+        padding-top: 10px;
     }
 }
 
@@ -2572,7 +2575,7 @@ html.content-blured .HeaderSticky {
     -ms-flex-align: center;
     align-items: center;
     height: 100%;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     font-size: 40px;
     font-weight: 500;
     font-style: normal;
@@ -2596,7 +2599,7 @@ html.content-blured .HeaderSticky {
 }
 
 .Header_backLink {
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     font-size: 16px;
     font-weight: 600;
     color: #ffffff;
@@ -2621,11 +2624,36 @@ html.content-blured .HeaderSticky {
     float: right;
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+    .Header_menuList {
+        height: 25px;
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .Header_menuList {
+        display: none;
+    }
+}
+
 .Header_menuItem {
     height: 100%;
     color: #fff;
     list-style-type: none;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     font-size: 14px;
     display: inline-block;
     font-weight: 500;
@@ -2666,7 +2694,7 @@ html.content-blured .HeaderSticky {
 }
 
 .Header_menuItem a {
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     font-size: 16px;
     font-weight: lighter;
     font-style: normal;
@@ -2787,7 +2815,7 @@ html.content-blured .HeaderSticky {
 }
 
 .Header_backLink-desc {
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     font-size: 14px;
     font-weight: normal;
     font-style: normal;
@@ -2800,6 +2828,14 @@ html.content-blured .HeaderSticky {
     left: 250px;
     border-left: 1px solid rgba(255, 255, 255, .4);
     padding-left: 10px;
+}
+
+@media (max-width: 767px) {
+    .Header_backLink-desc {
+        display: block;
+        position: static;
+        font-size: 13px;
+    }
 }
 
 .HeaderSticky_menu {
@@ -3238,7 +3274,7 @@ ul.InstrSection_list .InstrSection_listItem:before {
     font-weight: 500;
     text-align: center;
     color: #316fdf;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     margin-bottom: 46px
 }
 
@@ -3282,7 +3318,7 @@ ul.InstrSection_list .InstrSection_listItem:before {
 .JoinPopup_input, .JoinPopup_textarea {
     width: 100%;
     font-size: 18px;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     font-weight: 400;
     color: #000;
     padding-left: 22px;
@@ -3325,7 +3361,7 @@ ul.InstrSection_list .InstrSection_listItem:before {
     position: absolute;
     top: -5px;
     right: -16px;
-    font-family: Gilroy
+    font-family: 'Gilroy'
 }
 
 .JoinPopup_inputWrapper-error .JoinPopup_input {
@@ -3481,7 +3517,7 @@ ul.InstrSection_list .InstrSection_listItem:before {
     font-weight: 500;
     text-align: center;
     color: #316fdf;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     margin-bottom: 30px
 }
 
@@ -3496,7 +3532,7 @@ ul.InstrSection_list .InstrSection_listItem:before {
     line-height: 1.5;
     font-weight: 400;
     text-align: center;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     color: #000;
     margin-bottom: 45px
 }
@@ -3520,7 +3556,7 @@ ul.InstrSection_list .InstrSection_listItem:before {
     border-radius: 100px;
     background: #f84f78;
     font-size: 16px;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     color: #fff;
     font-weight: 300;
     text-transform: uppercase;
@@ -3616,6 +3652,26 @@ ul.InstrSection_list .InstrSection_listItem:before {
     background-image: radial-gradient(circle at 55% 57%, #29459d, #0e297b 50%, #17317b);
 }
 
+.MainSection-entry {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+            align-items: center;
+}
+
+@media (max-width: 767px) {
+    .MainSection-entry {
+        height: auto !important;
+        min-height: 100vh;
+    }
+}
+
 .MainSection_dots {
     width: 100%;
     height: 100%;
@@ -3694,6 +3750,13 @@ ul.InstrSection_list .InstrSection_listItem:before {
     left: 2%;
 }
 
+/* @media (max-width: 767px) {
+    .MainSection_bg {
+        height: 100%;
+        margin: 0 auto;
+    }
+} */
+
 .MainSection_container {
     padding-top: 0;
     display: -webkit-box;
@@ -3710,6 +3773,44 @@ ul.InstrSection_list .InstrSection_listItem:before {
     align-items: center;
     height: 100%;
     z-index: 10
+}
+
+.MainSection_footerPhone, .MainSection_footerMail {
+    display: none;
+    text-align: center;
+    flex-basis: 100%;
+    font-family: 'Gilroy';
+    font-size: 16px;
+    font-weight: lighter;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: rgba(255, 255, 255, .7);
+    margin-bottom: 5px;
+}
+
+@media (max-width: 767px) {
+    .MainSection-entry {
+        overflow-y: auto;
+    }
+    .MainSection_container {
+        position: static;
+        height: auto !important;
+        padding-top: 115px;
+        margin: 0 auto;
+    }
+    .MainSection_infoWrapper {
+        position: static !important;
+        white-space: nowrap;
+        margin: 26px 0 17px;
+    }
+    .MainSection_footerPhone {
+        display: block;
+    }
+    .MainSection_footerMail {
+        display: block;
+    }
 }
 
 @media (max-width: 767px) {
@@ -3923,6 +4024,11 @@ ul.InstrSection_list .InstrSection_listItem:before {
         bottom: 87px;
         height: 65px
     }
+    .MainSection_websiteLink {
+        order: 4;
+        margin-bottom: 20px;
+        margin-top: 19px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -3962,6 +4068,12 @@ ul.InstrSection_list .InstrSection_listItem:before {
     align-items: flex-start
 }
 
+@media (max-width: 767px) {
+    .MainSection_socialWrapper {
+        margin-top: 20px;
+    }
+}
+
 .MainSection_socialText {
     letter-spacing: 0.3px;
     color: #000000;;
@@ -3993,6 +4105,12 @@ ul.InstrSection_list .InstrSection_listItem:before {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center
+}
+
+@media (max-width: 767px) {
+    .MainSection_socialIcons {
+
+    }
 }
 
 .MainSection_iconWrapper:hover svg path {
@@ -5278,19 +5396,14 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
         bottom: 0;
         left: 0;
         position: relative;
-        padding: 33px 18px
-    }
-}
-
-@media (max-width: 1025px) {
-    .Recover {
+        padding: 33px 18px;
         width: 92vw !important
     }
 }
 
 .Recover_head {
     font-size: 25px;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     line-height: normal;
     font-weight: 500;
     color: #0a1427;
@@ -5312,7 +5425,7 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
     width: 100%;
     height: 60px;
     font-size: 16px;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     color: #000;
     border-bottom: 3px solid hsla(0, 0%, 59%, .3)
 }
@@ -5334,7 +5447,7 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
 
 .Recover_forgotLink {
     font-size: 16px;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     color: #316fdf;
     float: right;
     margin-bottom: 40px
@@ -5422,7 +5535,7 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
     line-height: 1.38;
     font-size: 13px;
     font-weight: 400;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     margin-bottom: 15px
 }
 
@@ -6089,25 +6202,20 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
         -webkit-transform: unset;
         -ms-transform: unset;
         transform: unset;
-        margin: 0 auto 55px;
+        margin: 0 auto 0;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
         position: relative;
-        padding: 33px 18px
-    }
-}
-
-@media (max-width: 1025px) {
-    .Signin {
-        width: 92vw !important
+        padding: 33px 18px;
+        width: 92vw !important;
     }
 }
 
 .Signin_head {
     font-size: 25px;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     line-height: normal;
     font-weight: 500;
     color: #0a1427;
@@ -6129,7 +6237,7 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
     width: 100%;
     height: 40px;
     font-size: 16px;
-    font-family: Circe;
+    font-family: 'Gilroy';
     color: #000;
     border-bottom: 2px solid hsla(0, 0%, 59%, .3)
 }
@@ -6161,9 +6269,14 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
     transition: all .25s ease;
 }
 
+.Signin_error.empty, .Signup_error.empty, .Recover_error.empty {
+    display: none !important;
+}
+
 .Signin_forgotLink {
     font-size: 16px;
-    font-family: Circe;
+    font-weight: 400;
+    font-family: 'Gilroy';
     color: #0a1427;
     float: right;
     margin-bottom: 40px
@@ -6231,11 +6344,21 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
 }
 
 .Signin_btn {
+    font-weight: 400;
     margin: 0 auto 10px;
     background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #f84f77), color-stop(50%, #2d6dfb));
     background-image: -webkit-linear-gradient(left, #f84f77 50%, #2d6dfb 0);
     background-image: -o-linear-gradient(left, #f84f77 50%, #2d6dfb 50%);
     background-image: linear-gradient(90deg, #f84f77 50%, #2d6dfb 0)
+}
+
+@media (max-width: 1024px) {
+    .Signin_forgotLink {
+        margin-bottom: 15px;
+    }
+    .Signin_btn {
+        clear: both;
+    }
 }
 
 .Signin_btnIcon {
@@ -6247,13 +6370,20 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
 }
 
 .Signin_text {
-    font-family: Circe;
+    font-family: 'Gilroy';
     margin-bottom: 10px
 }
 
 .Signin_text, .Signin_tipText {
     text-align: center;
-    font-weight: 400
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+    .Signin_tipText {
+        font-size: 15px !important;
+    }
 }
 
 .Signin_tipLink {
@@ -6291,7 +6421,7 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
         -webkit-transform: unset;
         -ms-transform: unset;
         transform: unset;
-        margin: 0 auto 55px;
+        margin: 0 auto 0;
         top: 0;
         right: 0;
         bottom: 0;
@@ -6302,15 +6432,9 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    .Signup {
-        width: 49.5vw !important
-    }
-}
-
 .Signup_head {
     font-size: 25px;
-    font-family: Circe;
+    font-family: 'Gilroy';
     line-height: normal;
     font-weight: 500;
     color: #0a1427;
@@ -6346,7 +6470,7 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
     width: 100%;
     height: 45px;
     font-size: 16px;
-    font-family: Circe;
+    font-family: 'Gilroy';
     color: #000;
     border-bottom: 2px solid hsla(0, 0%, 59%, .3)
 }
@@ -6357,11 +6481,8 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
 
 .Signup_passwordComplexity {
     position: absolute;
-    top: 50%;
+    top: 17px;
     bottom: auto;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
     right: 0;
     display: -webkit-box;
     display: -webkit-flex;
@@ -6474,12 +6595,13 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
     letter-spacing: .4px;
     color: #000;
     position: relative;
-    cursor: pointer
+    cursor: pointer;
+    font-weight: 400;
 }
 
 @media (max-width: 767px) {
     .Signup_checkboxLabel {
-        font-size: 14px
+        font-size: 13px
     }
 }
 
@@ -6577,7 +6699,7 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
 }
 
 .Signup_text {
-    font-family: Circe
+    font-family: 'Gilroy'
 }
 
 .Signup_text, .Signup_tipText {
@@ -7535,7 +7657,8 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
     bottom: auto;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
+    width: 92vw;
 }
 
 @media (max-width: 767px) {
@@ -7553,15 +7676,15 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
     }
 }
 
-@media (max-width: 1025px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     .Terms {
-        width: 92vw !important
+        width: 520px !important
     }
 }
 
 .Terms_head {
     font-size: 25px;
-    font-family: Circe;
+    font-family: 'Gilroy';
     line-height: normal;
     font-weight: 500;
     color: #0a1427;
@@ -7576,7 +7699,8 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
 }
 
 .Terms_text {
-    font-size: 13px
+    font-size: 13px;
+    font-weight: 400;
 }
 
 .Terms_textWrapper {
