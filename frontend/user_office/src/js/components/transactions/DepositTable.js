@@ -64,7 +64,9 @@ class DepositTable extends Component {
                     </HeadRow>
                     {deposits.size ?
                         this.renderRows(deposits) :
-                        <td colSpan="6" className="Table_text">You have no transactions yet</td>
+                            <tr>
+                                <td colSpan="6" className="Table_text">You have no transactions yet</td>
+                            </tr>
                     }
                 </Table>
             </Wrapper>

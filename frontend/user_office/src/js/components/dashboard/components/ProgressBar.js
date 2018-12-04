@@ -104,7 +104,8 @@ const InnerBar = styled.div`
     top: 0;
     left: 0;
     height: 100%;
-    width: ${props => props.width ? props.width + '%' : '1%'};
+    min-width: 6px;
+    width: ${props => props.width ? `${props.width}%` : '1%'};
     background: #397dff;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;

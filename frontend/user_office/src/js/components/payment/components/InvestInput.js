@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import {media} from './../../../utils/media';
 
 
-const InvestInput = ({value, type, onChangeHandler, investLabelText, currency}) => {
+const InvestInput = ({value, type, onChangeHandler, onPasteHandler, investLabelText, currency}) => {
 
     return (
         <InputWrapper data-currency={currency}>
             <Label htmlFor="invest_input">{investLabelText}</Label>
-            <Input value={value} type={type} onChange={onChangeHandler} id="invest_input"/>
+            <Input value={value} type={type} onChange={onChangeHandler} onPaste={onPasteHandler} id="invest_input"/>
         </InputWrapper>
     )
 }
