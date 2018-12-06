@@ -42,6 +42,9 @@ const Wrapper = styled.div`
     ${media.sm} {
         width: calc(100% - 60px);
     }
+    ${media.xs} {
+        width: calc(100vw - 32px);
+    }
 `;
 
 const StyledLink = styled(Link)`

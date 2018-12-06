@@ -38,15 +38,16 @@ const Tab = styled.div`
     line-height: 45px;
     text-align: center;
     cursor: pointer;
-    ${media.xs} {
-        width: 50vw;
-        max-width: 220px;
-    }
     ${media.smMinus} {
         font-size: 14px;
     }
     ${media.sm} {
         width: 164px;
+    }
+    ${media.xs} {
+        width: 49.3vw;
+        max-width: 220px;
+        font-size: 13px;
     }
     &.active {
         background: linear-gradient(81deg, #54a0f5, #3172fd);
@@ -56,5 +57,8 @@ const Tab = styled.div`
     &:last-of-type {
         position: relative;
         left: -33px;
+        ${media.xs} {
+            left: -27px;
+        }
     }
 `;

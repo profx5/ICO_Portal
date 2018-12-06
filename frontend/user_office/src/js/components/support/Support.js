@@ -15,11 +15,16 @@ import * as UIActions from './../../actions/UIActions';
 
 class Support extends React.Component {
 
+    constructor() {
+        super();
+        this.currentFileId = 0;
+    }
+
     onAttachClickHandler = (name, event) => {
         event.preventDefault();
         const $filesBlock = $(event.target).closest('.files-section').find('.files-container');
 
-        const $newFileInput = $(`<input class="file-input" id=${Math.floor(Math.random() * (10000000 - 0 + 1)) + 0} type="file" name="${name}" hidden/>`);
+        const $newFileInput = $(`<input class="file-input" id=${this.currentFileId++} type="file" name="${name}" hidden/>`);
 
         $filesBlock.prepend($newFileInput);
         $newFileInput.click();

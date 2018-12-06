@@ -22,6 +22,11 @@ import * as FilesActions from './../../actions/FilesActions';
 
 class Verification extends React.Component {
 
+    constructor() {
+        super();
+        this.currentFileId = 0;
+    }
+
     getKYCTicket = () => {
         const { tickets } = this.props;
 
@@ -129,7 +134,7 @@ class Verification extends React.Component {
         event.preventDefault();
         const $filesBlock = $(event.target).closest('.files-section').find('.files-container');
 
-        const $newFileInput = $(`<input class="file-input" id=${Math.floor(Math.random() * (10000000 - 0 + 1)) + 0} type="file" name="${name}" hidden/>`);
+        const $newFileInput = $(`<input class="file-input" id=${this.currentFileId++} type="file" name="${name}" hidden/>`);
 
         $filesBlock.prepend($newFileInput);
         $newFileInput.click();

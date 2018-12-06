@@ -57,6 +57,7 @@ const Wrapper = styled.div`
     border-radius: 6px;
     ${media.xs} {
         padding: 20px 16px;
+        max-width: calc(100vw - 32px);
     }
 `;
 
