@@ -51,6 +51,7 @@ class TicketCommentForm extends React.Component {
                             <div className="controls-container files-section files-section-comment">
                                 {commentFiles.size > 0 && <div className="files-header">Uploaded:</div>}
                                 <div className="files-container">
+                                    <input class="file-input" type="file" name='attachment' hidden/>
                                     <FilesAttacher files={commentFiles} 
                                             name="attachment" 
                                             filesWrapper={document.querySelector('.files-section-comment')} 
@@ -106,12 +107,6 @@ const Wrapper = styled.div`
     }
     .controls-container {
         overflow: auto;
-    }
-    .files-container {
-        overflow: auto;
-        ${media.smPlus} {
-            float: left;
-        }
     }
     .files-header {
         font-size: 14px;

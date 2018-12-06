@@ -21,7 +21,7 @@ class Support extends React.Component {
 
         const $newFileInput = $(`<input class="file-input" id=${Math.floor(Math.random() * (10000000 - 0 + 1)) + 0} type="file" name="${name}" hidden/>`);
 
-        $filesBlock.append($newFileInput);
+        $filesBlock.prepend($newFileInput);
         $newFileInput.click();
     }
 
