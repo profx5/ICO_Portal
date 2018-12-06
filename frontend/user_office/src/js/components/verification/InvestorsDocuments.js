@@ -88,6 +88,7 @@ const Wrapper = styled.div`
     margin-top: 20px;
     ${media.xs} {
         padding: 20px 16px;
+        max-width: calc(100vw - 32px);
     }
     .text {
         font-size: 16px;

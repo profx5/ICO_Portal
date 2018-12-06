@@ -15,7 +15,7 @@ const ProgressBar = ({children, raisedAmountNum, tokenPrice}) => {
             <BarWrapper>
                 <Bar>
                     <InnerBar width={raisedAmountPercents >= 100 ? 100 : raisedAmountPercents}>
-                        <Point rate={`1 OGD = ${tokenPrice} USD`} data-raised-amount={Utils.splitDigits(Math.ceil(raisedAmountNum / 100)) + ' USD'}/>
+                        <Point xsTextHidden={raisedAmountPercents < 14} rate={`1 OGD = ${tokenPrice} USD`} data-raised-amount={Utils.splitDigits(Math.ceil(raisedAmountNum / 100)) + ' USD'}/>
                     </InnerBar>
                     <Stage>
                         <div className="StageDesc hidden-smMinus">
@@ -135,6 +135,9 @@ const Point = styled.div`
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+        ${media.xs} {
+            display: ${props => props.xsTextHidden && 'none'};
+        }
     }
     &:before {
         content: 'Collected:';
