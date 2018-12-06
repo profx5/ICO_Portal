@@ -104,9 +104,16 @@ const Utils = {
             callback('');
             return;
         }
+        
+        if (!Number.isInteger(+lastChar) && !lastChar.match(/[.,]/g)) {
+          return;
+        }
+
+        if (val.length > 1 && val.split('')[0] === '0' && !val.match(/[.,]/g)) {
+          return;
+        }
 
         if (lastChar.match(/[0-9.,]/g) === null) {
-
             let newVal = val.substr(0,val.length - 1);
             callback(newVal);
         } else callback(val);
@@ -169,7 +176,7 @@ const Utils = {
       var interval = setInterval(function() {
 
           time.seconds -= 1;
-          if (time.seconds <= 0) {
+          if (time.seconds < 0) {
             time.minutes -= 1;
             time.seconds = 59;
           }

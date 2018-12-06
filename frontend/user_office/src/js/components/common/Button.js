@@ -51,7 +51,7 @@ const Btn = styled.button`
     border-radius: 2px;
     color: ${props => props.transparent ? 'rgb(52, 118, 252)' : 'white'};
     font-size: ${props => props.attach ? '14px' : '16px'};
-    font-weight: ${props => props.attach ? '600' : '300'};
+    font-weight: ${props => props.attach ? '600' : '400'};
     text-align: center;
     position: relative;
     z-index: 1;

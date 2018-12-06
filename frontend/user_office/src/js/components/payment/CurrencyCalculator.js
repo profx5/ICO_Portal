@@ -51,6 +51,10 @@ class CurrencyCalculator extends React.Component {
         this.updateTotalTokens();
     };
 
+    investOnPasteHandler = event => {
+        event.preventDefault();
+    }
+
     investClickHandler = () => {
         const {investCurrency, showInvestOptions, getAltCryptoAccount} = this.props;
         showInvestOptions();
@@ -82,7 +86,9 @@ class CurrencyCalculator extends React.Component {
             <Wrapper>
                 <WrapperInner>
                     <InvestInput value={investAmount} type="text"
-                                 onChangeHandler={this.investOnChangeHandler} investLabelText={investLabelText}
+                                 onChangeHandler={this.investOnChangeHandler}
+                                 onPasteHandler={this.investOnPasteHandler}
+                                 investLabelText={investLabelText}
                                  currency={investCurrency}/>
                     <TokensInputWrapper data-currency="OGD">
                         <TokensInput>
