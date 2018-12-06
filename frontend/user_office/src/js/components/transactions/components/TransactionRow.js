@@ -92,9 +92,11 @@ const Row = styled.tr`
             transition: all .25s ease;
         }
         &:hover {
-            background: #4381FC;
-            text {
-                fill: white;
+            ${media.md} {
+                background: #4381FC;
+                text {
+                    fill: white;
+                }
             }
         }
     }

@@ -36,7 +36,7 @@ class AllQuestions extends React.Component {
                 <TicketsList>
                     <tbody>
                         {tickets.length && this.renderTickets() || 
-                            <tr><td>There are no tickets yet...</td></tr>
+                            <tr><td className="AllQuestions_warnText">There are no tickets yet...</td></tr>
                         }
                     </tbody>
                 </TicketsList>
@@ -74,4 +74,9 @@ const Wrapper = styled.div`
 
 const TicketsList = styled.table`
     width: 100%;
+    .AllQuestions_warnText {
+        ${media.xs} {
+            font-size: 14px;
+        }
+    }
 `;

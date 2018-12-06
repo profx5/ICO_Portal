@@ -44,13 +44,5 @@ const mapDispatchToProps = (dispatch) => ({})
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Payment));
 
 const Wrapper = styled.div`
-    flex: 1;
-    height: calc(100% - 100px);
-    margin-left: 55px;
-    margin-right: 55px;
-    padding-bottom: 73px;
-    ${media.xs} {
-        margin: 0 16px;
-        padding-bottom: 50px;
-    }
+
 `;

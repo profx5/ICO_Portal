@@ -20,11 +20,11 @@ class Settings extends React.Component {
                     <AccountInfo/>
                     <Password/>
                 </MainWrapper>
-                <div>
+                <VerificationInfoWrapper>
                     <VerificationInfo className="hidden-xs hidden-sm"
                         verificationStages={['Settings__accountInfo', 'Settings__password']} 
                         stages={['Account information', 'Password']}/>
-                </div>
+                </VerificationInfoWrapper>
             </Wrapper>
         )
     }
@@ -38,7 +38,9 @@ const mapDispatchToProps = (dispatch) => ({})
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
 
 const Wrapper = styled.div`
-    flex: 1;
+    display: flex;
+    flex-flow: row wrap;
+    /* flex: 1;
     height: calc(100% - 100px);
     margin-left: 60px;
     padding-bottom: 90px;
@@ -51,7 +53,7 @@ const Wrapper = styled.div`
     }
     ${media.sm} {
         margin-right: 60px;
-    }
+    } */
 `;
 
 const MainWrapper = styled.div`
@@ -61,4 +63,8 @@ const MainWrapper = styled.div`
     ${media.xs} {
         margin-top: 14px;
     }
+`;
+
+const VerificationInfoWrapper = styled.div`
+    margin-top: 30px;
 `;
