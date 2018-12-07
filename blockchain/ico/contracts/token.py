@@ -1,4 +1,3 @@
-from django.conf import settings
 from web3.utils.filters import LogFilter
 from web3.utils.events import get_event_data
 
@@ -6,9 +5,8 @@ from ico_portal.utils.datetime import datetime
 from .base import BaseContract
 
 
-
 class TokenContract(BaseContract):
-    compiled_file_path = '{BASE_DIR}/solidity-contracts/contracts/VeraCoin.json'
+    compiled_file_path = '{BASE_DIR}/solidity-contracts/contracts/TingesToken.json'
 
     def get_total_supply(self):
         return self.contract.functions.totalSupply().call()
@@ -18,7 +16,7 @@ class TokenContract(BaseContract):
 
         gas = 70000
 
-        return self.contract.functions.transfer(to, amount).buildTransaction({
+        return self.contract.functions.mint(to, amount).buildTransaction({
             'gas': gas
         })
 

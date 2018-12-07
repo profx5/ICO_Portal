@@ -24,13 +24,13 @@ class RetrieveKYCSerializer(ModelSerializer):
 
     class Meta:
         model = KYC
-        exclude = ('id', 'investor', 'approve_txn_id')
+        exclude = ('id', 'investor')
 
 
 class CreateKYCSerializer(ModelSerializer):
     class Meta:
         model = KYC
-        exclude = ('id', 'investor', 'state', 'decline_reason', 'ticket', 'approve_txn_id')
+        exclude = ('id', 'investor', 'state', 'decline_reason', 'ticket')
 
 
 class KYCViewSet(GenericViewSet):

@@ -115,7 +115,6 @@ class KYCFactory(factory.DjangoModelFactory):
         model = 'user_office.KYC'
 
     investor = factory.SubFactory(InvestorFactory)
-    approve_txn_id = UUID
 
     state = 'APPROVED'
     type = 'NATURAL'

@@ -23,29 +23,15 @@ class TokensPurchasedEvent:
 
 
 class CrowdsaleContract(BaseContract):
-    compiled_file_path = '{BASE_DIR}/solidity-contracts/contracts/VeraCrowdsale.json'
+    compiled_file_path = '{BASE_DIR}/solidity-contracts/contracts/TingesMinter.json'
 
     def get_cents_raised(self):
-        return self.contract.functions.centsRaised().call()
-
-    def pass_kyc(self, address):
-        gas = 50000
-
-        return self.contract.functions.addKycVerifiedInvestor(address).buildTransaction({
-            'gas': gas
-        })
+        return self.contract.functions.USDcRaised().call()
 
     def buy_tokens(self, to, usdc_value):
         gas = 150000
 
-        return self.contract.functions.buyTokensViaBackend(to, int(usdc_value)).buildTransaction({
-            'gas': gas
-        })
-
-    def add_bonuses(self, to, tokens_amount):
-        gas = 150000
-
-        return self.contract.functions.addBonuses(to, int(tokens_amount)).buildTransaction({
+        return self.contract.functions.process_payment(to, int(usdc_value)).buildTransaction({
             'gas': gas
         })
 

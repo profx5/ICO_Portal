@@ -36,19 +36,11 @@ class KYCAdmin(DjangoObjectActions, admin.ModelAdmin):
 
     def get_exclude(self, request, obj=None):
         if obj:
-            if obj.state in ('WAITING', 'DECLINED'):
-                return ('approve_txn_id',)
-            else:
+            if obj.state != 'APPROVED':
                 return ('decline_reason',)
 
     def get_readonly_fields(self, request, obj=None):
-        fields = ['state']
-
-        if obj:
-            if obj.state == 'APPROVED':
-                fields.append('approve_txn_id')
-
-        return fields
+        return ['state']
 
     def approve_kyc(self, request, kyc):
         result = ApproveKYC()(kyc)

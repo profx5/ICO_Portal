@@ -14,7 +14,7 @@ class GetDAITransfers(BaseGetEvents):
 
     def create_events_processing(self, context):
         try:
-            raw_filter = self.contract.get_filter(settings.CURRENCIES['DAI']['address'], context.from_block)
+            raw_filter = self.contract.get_filter(settings.CURRENCIES['DAI']['contract_address'], context.from_block)
         except ConnectionError as e:
             return self.fail(e)
 
