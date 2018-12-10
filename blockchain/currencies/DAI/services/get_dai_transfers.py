@@ -1,7 +1,6 @@
-from django.conf import settings
 from django.db import DatabaseError
 
-from blockchain.ico.contracts.dai import DAIContract, DAITransfersFilter
+from blockchain.currencies.DAI.contract import DAIContract, DAITransfersFilter
 from blockchain.ico.services.get_events import BaseGetEvents
 from user_office.models import EventsProcessing
 
@@ -9,12 +8,20 @@ from user_office.models import EventsProcessing
 class GetDAITransfers(BaseGetEvents):
     start_block = 0
     contract_class = DAIContract
-    from_contract = 'DAI'
     filter_class = DAITransfersFilter
+
+    def __init__(self, settings):
+        super().__init__()
+
+        self.settings = settings
+
+    @property
+    def from_contract(self):
+        return self.settings.code
 
     def create_events_processing(self, context):
         try:
-            raw_filter = self.contract.get_filter(settings.CURRENCIES['DAI']['address'], context.from_block)
+            raw_filter = self.contract.get_filter(self.settings.receiver_address, context.from_block)
         except ConnectionError as e:
             return self.fail(e)
 

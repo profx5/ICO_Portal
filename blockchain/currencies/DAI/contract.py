@@ -1,8 +1,7 @@
 from web3.utils.filters import LogFilter
 from web3.utils.events import get_event_data
-from django.conf import settings
 
-from .base import BaseContract
+from blockchain.ico.contracts.base import BaseContract
 from ico_portal.utils.datetime import datetime
 
 
