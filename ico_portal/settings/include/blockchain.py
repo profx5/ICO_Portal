@@ -20,6 +20,8 @@ PRICE_ORACLE = {
     'sensivity': 3  # percents
 }
 
+EXCHANGE_RATES = ['ETH', 'BTC']
+
 CURRENCIES = {
     'ethereum': {
         'module': 'ethereum',

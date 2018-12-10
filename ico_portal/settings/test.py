@@ -32,6 +32,8 @@ DAI_CONTRACT = {
     'address': '0x5265968c25D1F89788dca53c137a962F312AD4A8'
 }
 
+EXCHANGE_RATES = ['ETH', 'BTC', 'DOGE', 'LTC']
+
 CURRENCIES = {
     'ethereum': {
         'module': 'ethereum',

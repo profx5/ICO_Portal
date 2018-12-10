@@ -25,7 +25,7 @@ def sync_ico_info():
 def sync_exchange_rates():
     service = SyncExchangeRates()
 
-    result = service(settings.CURRENCIES_FOR_EXCHANE_RATE_SYNC)
+    result = service(settings.EXCHANGE_RATES)
 
     for currency, r in result.items():
         if isinstance(r, Right):
