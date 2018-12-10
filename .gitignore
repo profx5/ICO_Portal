@@ -29,3 +29,5 @@ ico_eth_chain/
 */share/
 pyvenv.cfg
 celerybeat-schedule.db
+.coverage
+htmlcov/

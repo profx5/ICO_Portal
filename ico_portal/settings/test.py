@@ -29,7 +29,7 @@ PRICE_ORACLE = {
     'sensivity': 3  # percents
 }
 DAI_CONTRACT = {
-    'address': '0x42ac0F356c84928258483631b740584E343B80b7'
+    'address': '0x5265968c25D1F89788dca53c137a962F312AD4A8'
 }
 
 CURRENCIES = {
@@ -70,9 +70,12 @@ CURRENCIES = {
         'module': 'DAI',
         'code': 'DAI',
         'name': 'DAI',
-        'address': '0x42ac0F356c84928258483631b740584E343B80b7',
-        'contract': 'DAI_CONTRACT',
-        'rate_usdc': 100
+        'receiver_address': '0x42ac0F356c84928258483631b740584E343B80b7',
+        'rate_usdc': 100,
+        'contract': {
+            'address': '0x5265968c25D1F89788dca53c137a962F312AD4A8',
+            'decimals': 18
+        }
     }
 }
 

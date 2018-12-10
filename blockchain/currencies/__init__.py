@@ -44,3 +44,9 @@ class Currencies:
                 return urls
 
         return reduce(reducer, cls._instances, [])
+
+    @classmethod
+    def register_tasks(cls, app):
+        for i in cls._instances:
+            if hasattr(i, 'register_tasks'):
+                i.register_tasks(app)
