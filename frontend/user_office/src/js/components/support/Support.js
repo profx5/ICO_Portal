@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
 import $ from 'jquery';
-import {media} from './../../utils/media';
 
 import Title from './../common/Title';
 import SupportTabs from './components/SupportTabs';

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import { Formik, Field, Form } from "formik";
 import ValidationSchema from './utils/NewTicketFormValidation';
 import {media} from './../../utils/media';
 
+import { Formik, Field, Form } from "formik";
 import Button from './../common/Button';
 import ErrorMessage from './../common/ErrorMessage';
 import FilesAttacher from './../../utils/FilesAttacher';

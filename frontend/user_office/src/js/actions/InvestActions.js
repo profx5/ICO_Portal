@@ -16,3 +16,5 @@ export const enableMetamaskOption = createAction('ENABLE_METAMASK_OPTION');
 export const disableMetamaskOption = createAction('DISABLE_METAMASK_OPTION');
 
 export const setQRCode = createAction('SET_QR_CODE');
+
+export const setInvestErrorText = createAction('SET_INVEST_ERROR_TEXT');
