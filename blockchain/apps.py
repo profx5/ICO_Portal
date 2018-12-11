@@ -25,6 +25,4 @@ class BlockchainConfig(AppConfig):
 
         app.autodiscover_tasks(['blockchain.ico'], force=True)
 
-        for currency in Currencies._instances:
-            if getattr(currency, 'tasks', False):
-                app.autodiscover_tasks([f'blockchain.currencies.{currency.module}'], force=True)
+        Currencies.register_tasks(app)

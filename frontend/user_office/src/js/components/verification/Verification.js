@@ -176,14 +176,14 @@ class Verification extends React.Component {
                             {type === "LEGAL" && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
                             <InvestorsDocuments errors={errors} touched={touched} values={values} onAttachClickHandler={this.onAttachClickHandler}/>
                         </MainWrapper>
-                        <VerificationInfoWrapper>
+                        <div>
                             <VerificationInfo
                                 btnText="Send data"
                                 verificationStages={['Verification__personData', 'Verification__investorsDocuments']}
                                 stages={activeKycTab === 1 ? ['Personal Data', 'Investor\'s documents'] : ['Legal Person Data', 'Investor\'s documents']}
                                 kycState={KYCStatus} 
                                 kycTicketId={kycTicketId}/>
-                        </VerificationInfoWrapper>
+                        </div>
                     </Wrapper>
                 )}
             />
@@ -281,6 +281,16 @@ const Wrapper = styled(Form)`
     input, button, label {
         pointer-events: ${props => props.state === 'APPROVED' && 'none'};
     }
+    input {
+        color: ${props => props.state === 'APPROVED' && '#9D9D9D'};
+    }
+    button {
+        background: ${props => props.state === 'APPROVED' && '#CACACA'};
+        border: ${props => props.state === 'APPROVED' && 'none'};
+        &:before, &:after {
+            display: ${props => props.state === 'APPROVED' && 'none'};
+        }
+    }
 `;
 
 const Header = styled.div`
@@ -315,11 +325,4 @@ const MainWrapper = styled.div`
         margin-right: 60px;
         max-width: unset;
     }
-`;
-
-const VerificationInfoWrapper = styled.div`
-    /* ${media.sm} {
-        flex-basis: 100%;
-        margin-right: 60px;
-    } */
 `;

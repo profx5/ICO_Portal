@@ -1,5 +1,5 @@
-from django.conf import settings
 from django.db import DatabaseError
+from decimal import Decimal
 
 from user_office.models import (
     Investor,
@@ -17,6 +17,18 @@ from blockchain.ico.services import (
 
 
 class ProcessDAITransfer(ServiceObject):
+    def __init__(self, settings):
+        self.settings = settings
+
+    def check_duplicate(self, context):
+        payment = Payment.objects.filter(currency=self.settings.code,
+                                         txn_id=context.event.txn_hash)
+
+        if payment.exists():
+            return self.fail(f'Payment with txn_id={context.event.txn_hash} is already processed')
+        else:
+            return self.success()
+
     def find_investor(self, context):
         investor = Investor.objects.filter(eth_account=context.event.from_account).first()
 
@@ -26,9 +38,10 @@ class ProcessDAITransfer(ServiceObject):
             return self.fail(f'Investor with {context.event.from_account} address not found!')
 
     def calc_usd_value(self, context):
-        amount = context.event.amount
-        amounti = amount * 10 ** 18
-        rate_usdc = settings.CURRENCIES['DAI']['rate_usdc']
+        amounti = Decimal(context.event.amount)
+
+        amount = amounti / 10 ** self.settings.contract['decimals']
+        rate_usdc = self.settings.rate_usdc
 
         usdc_value = amount * rate_usdc
 
@@ -47,11 +60,11 @@ class ProcessDAITransfer(ServiceObject):
     def create_tokens_move(self, context):
         return PrepareTokensMove()(investor=context.investor,
                                    buy_txn_id=context.buy_txn_id,
-                                   currency='DAI') | \
+                                   currency=self.settings.code) | \
                                    (lambda result: self.success(tokens_move=result.tokens_move))
 
     def create_payment(self, context):
-        payment = Payment(currency='DAI',
+        payment = Payment(currency=self.settings.code,
                           amount=context.amount,
                           amounti=context.amounti,
                           txn_id=context.event.txn_hash,
@@ -71,6 +84,7 @@ class ProcessDAITransfer(ServiceObject):
     @transactional
     def __call__(self, event):
         return self.success(event=event) | \
+            self.check_duplicate | \
             self.find_investor | \
             self.calc_usd_value | \
             self.create_transaction | \

@@ -25,11 +25,7 @@ def sync_ico_info():
 def sync_exchange_rates():
     service = SyncExchangeRates()
 
-    currencies_list = [
-        curr_dict['code'] for curr_dict in settings.CURRENCIES.values()
-    ]
-
-    result = service(currencies_list)
+    result = service(settings.EXCHANGE_RATES)
 
     for currency, r in result.items():
         if isinstance(r, Right):

@@ -20,6 +20,7 @@ DAI_CONTRACT = {
     'address': '0x012023eb1aae974631e6b21bb3b8537b07665215',
 }
 
+EXCHANGE_RATES = ['ETH', 'BTC']
 
 CURRENCIES = {
     'DAI': {
