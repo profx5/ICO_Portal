@@ -2,11 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {compose} from 'redux';
-import {Formik, Form} from 'formik';            
 import $ from 'jquery';
 import VerificationValidation from './utils/VerificationValidation';
 import {media} from './../../utils/media';
 
+import {Formik, Form} from 'formik';            
 import Title from './../common/Title';
 import KYCTabs from './components/KYCTabs';
 import VerificationState from './components/VerificationState';

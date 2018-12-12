@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import {media} from './../../../utils/media';
 
 
-const InvestInput = ({value, type, onChangeHandler, onPasteHandler, investLabelText, currency}) => {
+const InvestInput = ({children, value, type, onChangeHandler, onPasteHandler, investLabelText, currency, errorMessage}) => {
 
     return (
         <InputWrapper data-currency={currency}>
             <Label htmlFor="invest_input">{investLabelText}</Label>
-            <Input value={value} type={type} onChange={onChangeHandler} onPaste={onPasteHandler} id="invest_input"/>
+            <Input value={value} type={type} onChange={onChangeHandler} onPaste={onPasteHandler} name='invest_input' id="invest_input"/>
+            {children}
         </InputWrapper>
     )
 }
@@ -21,16 +22,15 @@ const InputWrapper = styled.div`
     width: 345px;
     height: 70px;
     border-radius: 2px;
-    border: 1px solid #d6dfe6;
     position: relative;
     margin-right: 32px;
     ${media.smMinus} {
         width: 100%;
         margin: 0 0 15px;
+        height: auto;
     }
     ${media.xs} {
         font-size: 14px;
-        height: 49px;
     }
     &:after {
         content: attr(data-currency);
@@ -38,10 +38,10 @@ const InputWrapper = styled.div`
         position: absolute;
         font-size: 18px;
         right: 27px;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 27px;
         ${media.xs} {
             font-size: 14px;
+            top: 18px;
         }
     }
 `;
@@ -61,8 +61,12 @@ const Label = styled.label`
 const Input = styled.input`
     display: block;
     font-weight: 600;
-    height: 100%;
+    height: 70px;
     width: 100%;
     padding-left: 18px;
     padding-right: 67px;
+    border: 1px solid #d6dfe6;
+    ${media.xs} {
+        height: 49px;
+    }
 `;
