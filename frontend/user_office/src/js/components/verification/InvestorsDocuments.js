@@ -1,15 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import ConfirmCorrectness from './components/ConfirmCorrectness';
-import Button from './../common/Button';
+import ConfirmCorrectness from 'js/components/verification/stateless/ConfirmCorrectness';
+import Button from 'js/components/common/Button';
 
-import IDFiles from './components/IDFiles';
-import UtilityBillFiles from './components/UtilityBillFiles';
+import IDFiles from 'js/components/verification/stateless/IDFiles';
+import UtilityBillFiles from 'js/components/verification/stateless/UtilityBillFiles';
 
-import * as FilesActions from './../../actions/FilesActions';
+import * as FilesActions from 'js/actions/FilesActions';
 
 
 class InvestorsDocuments extends React.Component {

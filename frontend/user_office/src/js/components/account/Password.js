@@ -1,15 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import PasswordValidationSchema from './utils/PasswordValidationSchema';
-import {media} from './../../utils/media';
+import PasswordValidationSchema from 'js/components/account/services/PasswordValidationSchema';
+import {media} from 'js/services/media';
 
 import { Formik, Form } from "formik";
-import InputLabel from './components/InputLabel';
-import InputText from './components/InputText';
-import Button from './../common/Button';
+import InputLabel from 'js/components/account/stateless/InputLabel';
+import InputText from 'js/components/account/stateless/InputText';
+import Button from 'js/components/common/Button';
 
-import * as UserActions from './../../actions/UserActions';
+import * as UserActions from 'js/actions/UserActions';
 
 
 class Password extends React.Component {

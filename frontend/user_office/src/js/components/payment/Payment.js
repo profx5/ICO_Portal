@@ -3,14 +3,13 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Route, Switch} from 'react-router-dom';
 import {withRouter} from 'react-router';
-import {media} from './../../utils/media';
 
-import Title from './../common/Title';
-import PaymentStepOne from './PaymentStepOne';
-import PaymentStepTwo from './PaymentStepTwo';
-import PaymentStepThree from './PaymentStepThree';
-import CurrenciesPopup from './CurrenciesPopup';
-import Steps from './components/Steps';
+import Title from 'js/components/common/Title';
+import PaymentStepOne from 'js/components/payment/PaymentStepOne';
+import PaymentStepTwo from 'js/components/payment/PaymentStepTwo';
+import PaymentStepThree from 'js/components/payment/PaymentStepThree';
+import CurrenciesPopup from 'js/components/payment/CurrenciesPopup';
+import Steps from 'js/components/payment/stateless/Steps';
 
 
 class Payment extends React.Component {

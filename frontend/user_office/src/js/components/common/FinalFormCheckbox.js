@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import {Field} from 'formik';
 
-import iconCheck from './../../../img/icons/icon_check.svg';
+import iconCheck from 'img/icons/icon_check.svg';
 
 
 const FinalFormCheckbox = ({labelText, name, values, options, icon, handler, required}) => {

@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import CurrencyCardRest from './components/CurrencyCardRest';
+import CurrencyCardRest from 'js/components/payment/stateless/CurrencyCardRest';
 
-import * as CurrencyActions from '../../actions/CurrencyActions.js';
-import * as UIActions from './../../actions/UIActions';
+import * as CurrencyActions from 'js/actions/CurrencyActions.js';
+import * as UIActions from 'js/actions/UIActions';
 
 
 class CurrenciesPopup extends React.Component {

@@ -2,22 +2,23 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import Utils from './../../utils';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import Button from './../common/Button';
-import InvestInput from './components/InvestInput';
+import * as Services from './services';
 
-import * as UIActions from './../../actions/UIActions';
-import * as InvestActions from './../../actions/InvestActions';
-import * as ICOInfoActions from './../../actions/ICOInfoActions';
+import ErrorMessage from 'js/components/common/ErrorMessage';
+import Button from 'js/components/common/Button';
+import InvestInput from 'js/components/payment/stateless/InvestInput';
+
+import * as UIActions from 'js/actions/UIActions';
+import * as InvestActions from 'js/actions/InvestActions';
+import * as ICOInfoActions from 'js/actions/ICOInfoActions';
 
 
 class CurrencyCalculator extends React.Component {
 
     constructor() {
         super();
-
         this.bonus = 0;
     }
 
@@ -41,14 +42,23 @@ class CurrencyCalculator extends React.Component {
         else if (totalUSD >= 150 && totalUSD < 1000) bonus = 20;
         else if (totalUSD >= 1000) bonus = 40;
         totalTokens += totalTokens / 100 * bonus;
+        this.bonus = bonus;
         setTokensAmount(totalTokens);
         setUSDAmount(totalUSD);
-        this.bonus = bonus;
     };
 
-    investOnChangeHandler = event => {
-        Utils.formatInputNumber(event, this.props.setInvestAmount);
-        this.updateTotalTokens();
+    onChangeHandler = event => {
+        let value = event.target.value;
+        let formatedValue = Services.formatInvestedValue(value);
+        
+        if (formatedValue !== false) {
+            this.props.setInvestAmount(formatedValue)
+            this.updateTotalTokens();
+            this.validateData({
+                name: 'invest_input',
+                value: formatedValue
+            });
+        }
     };
 
     investOnPasteHandler = event => {
@@ -65,6 +75,20 @@ class CurrencyCalculator extends React.Component {
         this.updateTotalTokens();
     };
 
+    validateData = ({name, value}) => {
+        const {setInvestErrorText} = this.props;
+        const schema = Services.getValidationSchema(name);
+
+        schema.validate({
+            [name]: value 
+        }).then(() => {
+            setInvestErrorText(null);
+        }).catch(err => {
+            setInvestErrorText(err.errors[0]);
+        })
+        
+    }
+
     render() {
         const {
             tokenPrice,
@@ -75,7 +99,9 @@ class CurrencyCalculator extends React.Component {
             tokensAmount,
             kycState,
             ethAccount,
+            investErrorText
         } = this.props;
+
 
         let ethSet = !!ethAccount;
         let kycApproved = kycState === 'APPROVED';
@@ -86,14 +112,15 @@ class CurrencyCalculator extends React.Component {
             <Wrapper>
                 <WrapperInner>
                     <InvestInput value={investAmount} type="text"
-                                 onChangeHandler={this.investOnChangeHandler}
-                                 onPasteHandler={this.investOnPasteHandler}
-                                 investLabelText={investLabelText}
-                                 currency={investCurrency}/>
+                        onChangeHandler={this.onChangeHandler}
+                        onPasteHandler={this.investOnPasteHandler}
+                        investLabelText={investLabelText}
+                        currency={investCurrency}>
+                            <ErrorMessage text={investErrorText}/>
+                        </InvestInput>
                     <TokensInputWrapper data-currency="OGD">
                         <TokensInput>
                             {tokensAmount && tokensAmount.toFixed(2) || 0}
-
                         </TokensInput>
                     </TokensInputWrapper>
 
@@ -156,7 +183,8 @@ const mapStateToProps = ({Currencies, Invest, UI, KYC, user}) => ({
     kycState: KYC.get('state'),
     openedTip: UI.get('openedTip'),
     ethAccount: user.get('eth_account'),
-    tokenPrice: Invest.get('tokenPrice')
+    tokenPrice: Invest.get('tokenPrice'),
+    investErrorText: Invest.get('investErrorText')
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -177,6 +205,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     showModal(payload) {
         dispatch(UIActions.showModal(payload))
+    },
+    setInvestErrorText(payload) {
+        dispatch(InvestActions.setInvestErrorText(payload))
     }
 })
 

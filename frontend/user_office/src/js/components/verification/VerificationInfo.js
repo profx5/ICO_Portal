@@ -2,14 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
-import Utils from './../../utils/index';
-import {media} from './../../utils/media';
+import Utils from 'js/services/index';
+import {media} from 'js/services/media';
 
-import VerificationStages from './components/VerificationStages';
-import VerificationState from './components/VerificationState';
-import Button from './../common/Button';
+import VerificationStages from 'js/components/verification/stateless/VerificationStages';
+import VerificationState from 'js/components/verification/stateless/VerificationState';
+import Button from 'js/components/common/Button';
 
-import PreloadIcon from './../../../img/preload-white.svg';
+import PreloadIcon from 'img/preload-white.svg';
 
 
 class VerificationInfo extends React.Component {

@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-act';
-import * as actions from './../actions/BountiesBalanceActions';
+import * as actions from 'js/actions/BountiesBalanceActions';
 import {Map} from 'immutable'
 
 

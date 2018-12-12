@@ -1,7 +1,7 @@
 import axios from 'axios'
-import Api from '../../api'
+import Api from 'api'
 import { takeEvery, call, put, select} from 'redux-saga/effects';
-import * as actions from './../actions/DepositsActions';
+import * as actions from 'js/actions/DepositsActions';
 
 export class DepositsSagas {
     static * getTokensMoves() {

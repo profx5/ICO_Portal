@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-act';
-import * as actions from './../actions/InvestActions';
+import * as actions from 'js/actions/InvestActions';
 import {Map} from 'immutable';
 
 
@@ -9,7 +9,8 @@ const initialState = Map({
     USDAmount: 0,
     tokensAmount: 0,
     isMetamaskEnabled: true,
-    qrcode: ''
+    qrcode: '',
+    investErrorText: '',
 })
 
 
@@ -32,5 +33,6 @@ export const InvestReducer = createReducer({
 
     [actions.enableMetamaskOption]: (state) => state.set('isMetamaskEnabled', true),
     [actions.disableMetamaskOption]: (state) => state.set('isMetamaskEnabled', false),
-    [actions.setQRCode]: (state, payload) => state.set('qrcode', payload)
+    [actions.setQRCode]: (state, payload) => state.set('qrcode', payload),
+    [actions.setInvestErrorText]: (state, payload) => state.set('investErrorText', payload),
 }, initialState);

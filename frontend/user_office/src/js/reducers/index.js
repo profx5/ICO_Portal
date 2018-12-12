@@ -1,20 +1,20 @@
 import {combineReducers} from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
-import {UserReducer} from './UserReducer';
-import {ICOInfoReducer} from './ICOInfoReducer';
-import {DepositsReducer} from './DepositsReducer';
-import {BountiesBalanceReducer} from './BountiesBalanceReducer';
-import {KYCReducer} from './KYCReducer';
-import {InvestReducer} from './InvestReducer.js';
-import {ReferralsReducer} from './ReferralsReducer.js';
-import {PhasesReducer} from './PhasesReducer.js';
-import {CurrencyReducer} from './CurrencyReducer.js';
-import {TimerReducer} from './TimerReducer.js';
-import {UIStateReducer} from './UIStateReducer.js';
-import {MetamaskReducer} from './MetamaskReducer.js';
-import {TicketsReducer} from "./TicketReducer.js";
-import {FilesReducer} from "./FilesReducer.js";
+import {UserReducer} from 'js/reducers/UserReducer';
+import {ICOInfoReducer} from 'js/reducers/ICOInfoReducer';
+import {DepositsReducer} from 'js/reducers/DepositsReducer';
+import {BountiesBalanceReducer} from 'js/reducers/BountiesBalanceReducer';
+import {KYCReducer} from 'js/reducers/KYCReducer';
+import {InvestReducer} from 'js/reducers/InvestReducer.js';
+import {ReferralsReducer} from 'js/reducers/ReferralsReducer.js';
+import {PhasesReducer} from 'js/reducers/PhasesReducer.js';
+import {CurrencyReducer} from 'js/reducers/CurrencyReducer.js';
+import {TimerReducer} from 'js/reducers/TimerReducer.js';
+import {UIStateReducer} from 'js/reducers/UIStateReducer.js';
+import {MetamaskReducer} from 'js/reducers/MetamaskReducer.js';
+import {TicketsReducer} from "js/reducers/TicketReducer.js";
+import {FilesReducer} from "js/reducers/FilesReducer.js";
 import { routerReducer } from 'react-router-redux'
 
 

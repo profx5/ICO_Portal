@@ -1,7 +1,7 @@
 import axios from 'axios'
-import Api from '../../api'
+import Api from 'api'
 import {put, call, takeEvery} from 'redux-saga/effects'
-import * as actions from '../actions/PhaseActions'
+import * as actions from 'js/actions/PhaseActions'
 
 export class PhaseSaga {
     static * getPhasesSaga(action){

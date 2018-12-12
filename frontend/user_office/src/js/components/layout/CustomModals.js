@@ -1,11 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {media} from './../../utils/media';
 
-import Modal from './Modal';
+import Modal from 'js/components/layout/Modal';
 
-import * as UIActions from './../../actions/UIActions';
+import * as UIActions from 'js/actions/UIActions';
 
 
 class CustomModals extends React.Component {

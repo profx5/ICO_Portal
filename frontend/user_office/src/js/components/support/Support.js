@@ -2,15 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
 import $ from 'jquery';
-import {media} from './../../utils/media';
 
-import Title from './../common/Title';
-import SupportTabs from './components/SupportTabs';
-import NewTicket from './NewTicket';
-import AllQuestions from './AllQuestions';
-import OpenedTicket from './OpenedTicket';
+import Title from 'js/components/common/Title';
+import SupportTabs from 'js/components/support/stateless/SupportTabs';
+import NewTicket from 'js/components/support/NewTicket';
+import AllQuestions from 'js/components/support/AllQuestions';
+import OpenedTicket from 'js/components/support/OpenedTicket';
 
-import * as UIActions from './../../actions/UIActions';
+import * as UIActions from 'js/actions/UIActions';
 
 
 class Support extends React.Component {

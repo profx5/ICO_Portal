@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import Utils from './../../utils/index';
+import Utils from 'js/services/index';
 
 
 const AttachedFile = ({fileName, fileSize, id, removable, onRemoveHandler, style}) => {

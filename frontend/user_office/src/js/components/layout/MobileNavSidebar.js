@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import * as UIActions from './../../actions/UIActions';
+import * as UIActions from 'js/actions/UIActions';
 
 
 class MobileNavSidebar extends React.Component {

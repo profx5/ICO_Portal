@@ -1,6 +1,6 @@
 import axios from 'axios'
-import Api from '../../api'
-import * as actions from './../actions/BountiesBalanceActions'
+import Api from 'api'
+import * as actions from 'js/actions/BountiesBalanceActions'
 import {takeEvery, call, put} from 'redux-saga/effects'
 
 class BountiesBalanceSagas {

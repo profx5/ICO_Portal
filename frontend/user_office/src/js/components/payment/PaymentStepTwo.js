@@ -2,16 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {canSendTransaction} from './../../../web3';
+import {canSendTransaction} from 'js/services/web3';
 import QRCode from 'qrcode';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import Button from './../common/Button';
+import Button from 'js/components/common/Button';
 
-import * as InvestActions from './../../actions/InvestActions';
-import * as UIActions from "./../../actions/UIActions";
+import * as InvestActions from 'js/actions/InvestActions';
+import * as UIActions from "js/actions/UIActions";
 
-import qrIcon from './../../../img/icon_qr_big.svg';
+import qrIcon from 'img/icon_qr_big.svg';
 
 
 class PaymentStepTwo extends React.Component {

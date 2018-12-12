@@ -2,22 +2,22 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {compose} from 'redux';
-import {Formik, Form} from 'formik';            
 import $ from 'jquery';
-import VerificationValidation from './utils/VerificationValidation';
-import {media} from './../../utils/media';
+import VerificationValidation from 'js/components/verification/services/VerificationValidation';
+import {media} from 'js/services/media';
 
-import Title from './../common/Title';
-import KYCTabs from './components/KYCTabs';
-import VerificationState from './components/VerificationState';
-import NaturalPerson from './NaturalPerson';
-import LegalPerson from './LegalPerson';
-import VerificationInfo from './VerificationInfo';
-import InvestorsDocuments from './InvestorsDocuments';
+import {Formik, Form} from 'formik';
+import Title from 'js/components/common/Title';
+import KYCTabs from 'js/components/verification/stateless/KYCTabs';
+import VerificationState from 'js/components/verification/stateless/VerificationState';
+import NaturalPerson from 'js/components/verification/NaturalPerson';
+import LegalPerson from 'js/components/verification/LegalPerson';
+import VerificationInfo from 'js/components/verification/VerificationInfo';
+import InvestorsDocuments from 'js/components/verification/InvestorsDocuments';
 
-import * as KYCActions from './../../actions/KYCActions';
-import * as UIActions from './../../actions/UIActions';
-import * as FilesActions from './../../actions/FilesActions';
+import * as KYCActions from 'js/actions/KYCActions';
+import * as UIActions from 'js/actions/UIActions';
+import * as FilesActions from 'js/actions/FilesActions';
 
 
 class Verification extends React.Component {

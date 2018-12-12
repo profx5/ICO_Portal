@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-act';
-import * as actions from './../actions/KYCActions';
+import * as actions from 'js/actions/KYCActions';
 import {Map} from 'immutable'
 
 

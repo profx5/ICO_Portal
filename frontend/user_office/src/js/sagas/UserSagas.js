@@ -1,11 +1,11 @@
-import Api from '../../api'
+import Api from 'api';
 import axios from 'axios'
-import {extractAccount} from '../../web3'
+import {extractAccount} from 'js/services/web3'
 import {call, cps, put, select, takeEvery} from 'redux-saga/effects'
-import * as UserActions from '../actions/UserActions'
-import * as UIActions from '../actions/UIActions'
-import * as MetamaskActions from '../actions/MetamaskActions'
-import Utils from '../utils/index'
+import * as UserActions from 'js/actions/UserActions'
+import * as UIActions from 'js/actions/UIActions'
+import * as MetamaskActions from 'js/actions/MetamaskActions'
+import Utils from 'js/services/index'
 
 export class UserSagas {
     static* setAccount(action) {

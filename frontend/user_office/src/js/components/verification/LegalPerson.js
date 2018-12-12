@@ -1,15 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import LegalPersonData from './components/LegalPersonData';
-import RepresentationFiles from './components/RepresentationFiles';
-import LegalOwnerData from './components/LegalOwnerData';
-import ConfirmLegalPEP from './components/ConfirmLegalPEP';
+import LegalPersonData from 'js/components/verification/stateless/LegalPersonData';
+import RepresentationFiles from 'js/components/verification/stateless/RepresentationFiles';
+import LegalOwnerData from 'js/components/verification/stateless/LegalOwnerData';
+import ConfirmLegalPEP from 'js/components/verification/stateless/ConfirmLegalPEP';
 
-import * as FilesActions from './../../actions/FilesActions';
-import * as UIActions from "./../../actions/UIActions";
+import * as FilesActions from 'js/actions/FilesActions';
+import * as UIActions from "js/actions/UIActions";
 
 const File = ({ input: {value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
   <input type='file' {...inputProps} {...props} />

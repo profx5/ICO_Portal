@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-act';
-import * as actions from './../actions/TimerActions';
+import * as actions from 'js/actions/TimerActions';
 import {Map} from 'immutable';
 
 

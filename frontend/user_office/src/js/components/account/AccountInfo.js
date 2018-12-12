@@ -2,18 +2,18 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import ClipboardJS from 'clipboard';
-import EmailValidationSchema from './utils/EmailValidationSchema';
-import {media} from './../../utils/media';
+import EmailValidationSchema from 'js/components/account/services/EmailValidationSchema';
+import {media} from 'js/services/media';
 
 import { Formik, Form } from "formik";
-import InputText from './components/InputText';
-import InputLabel from './components/InputLabel';
-import Button from './../common/Button';
+import InputText from 'js/components/account/stateless/InputText';
+import InputLabel from 'js/components/account/stateless/InputLabel';
+import Button from 'js/components/common/Button';
 
-import * as UserActions from './../../actions/UserActions';
-import * as UIActions from './../../actions/UIActions';
+import * as UserActions from 'js/actions/UserActions';
+import * as UIActions from 'js/actions/UIActions';
 
-import copyIcon from './../../../img/icon_copy.svg';
+import copyIcon from 'img/icon_copy.svg';
 
 
 class AccountInfo extends React.Component {

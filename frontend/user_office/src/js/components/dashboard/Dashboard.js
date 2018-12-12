@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import Title from './../common/Title';
-import ICOProgress from './ICOProgress';
-import BonusSheet from './components/BonusSheet';
+import Title from 'js/components/common/Title';
+import ICOProgress from 'js/components/dashboard/ICOProgress';
+import BonusSheet from 'js/components/dashboard/stateless/BonusSheet';
 
-import Banner from './../../../img/banner.jpg';
+import Banner from 'img/banner.jpg';
 
 
 const Dashboard = (props) => {

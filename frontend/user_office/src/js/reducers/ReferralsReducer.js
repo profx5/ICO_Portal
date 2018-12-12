@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-act';
-import * as actions from './../actions/ReferralsActions';
+import * as actions from 'js/actions/ReferralsActions';
 import {Map} from 'immutable'
 
 

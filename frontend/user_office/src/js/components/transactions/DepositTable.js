@@ -2,11 +2,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import moment from "moment";
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import * as UIActions from './../../actions/UIActions';
+import * as UIActions from 'js/actions/UIActions';
 
-import TransactionRow from './components/TransactionRow';
+import TransactionRow from 'js/components/transactions/stateless/TransactionRow';
 
 
 class DepositTable extends Component {

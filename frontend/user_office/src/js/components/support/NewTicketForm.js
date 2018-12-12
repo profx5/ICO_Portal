@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
+
+import ValidationSchema from 'js/components/support/services/NewTicketFormValidation';
+import {media} from 'js/services/media';
+
 import { Formik, Field, Form } from "formik";
-import ValidationSchema from './utils/NewTicketFormValidation';
-import {media} from './../../utils/media';
+import Button from 'js/components/common/Button';
+import ErrorMessage from 'js/components/common/ErrorMessage';
+import FilesAttacher from 'js/services/FilesAttacher';
 
-import Button from './../common/Button';
-import ErrorMessage from './../common/ErrorMessage';
-import FilesAttacher from './../../utils/FilesAttacher';
-
-import * as TicketActions from './../../actions/TicketActions';
-import * as FilesActions from './../../actions/FilesActions';
+import * as TicketActions from 'js/actions/TicketActions';
+import * as FilesActions from 'js/actions/FilesActions';
 
 
 class NewTicketForm extends React.Component {
