@@ -5,6 +5,10 @@ from user_office.models import (
     Investor,
     Payment
 )
+from user_office.tasks import (
+    send_support_email,
+    send_mail
+)
 from ico_portal.utils.service_object import (
     ServiceObject,
     service_call,
@@ -33,8 +37,21 @@ class ProcessDAITransfer(ServiceObject):
         investor = Investor.objects.filter(eth_account=context.event.from_account).first()
 
         if investor:
-            return self.success(investor=investor)
+            if investor.kyc.approved:
+                return self.success(investor=investor)
+            else:
+                send_mail.delay("You didn't pass KYC", investor.email, 'mail/dai/didnt_pass_kyc.html', {
+                    'txn_hash': context.event.txn_hash,
+                    'address': context.event.from_account
+                })
+
+                return self.fail(f"{investor} didn't pass KYC")
         else:
+            send_support_email.delay('Unrecognized transfer', 'mail/dai/investor_not_found.html', {
+                'txn_hash': context.event.txn_hash,
+                'address': context.event.from_account
+            })
+
             return self.fail(f'Investor with {context.event.from_account} address not found!')
 
     def calc_usd_value(self, context):

@@ -4,11 +4,7 @@ from .base import BaseContract
 
 class TokensPurchasedEvent:
     def __init__(self, event, value):
-        self.investor = event['args']['investor']
-        self.eth_price_in_cents = event['args']['ethPriceInCents']
-        self.value_in_cents = event['args']['valueInCents']
-        self.bonus_percent = event['args']['bonusPercent']
-        self.bonus_ids = event['args']['bonusIds']
+        self.investor = event['args']['payer']
         self.txn_hash = event['transactionHash'].hex()
         self.contract_address = event['address']
         self.block_hash = event['blockHash'].hex()
@@ -31,7 +27,7 @@ class CrowdsaleContract(BaseContract):
     def buy_tokens(self, to, usdc_value):
         gas = 150000
 
-        return self.contract.functions.process_payment(to, int(usdc_value)).buildTransaction({
+        return self.contract.functions.processPayment(to, int(usdc_value)).buildTransaction({
             'gas': gas
         })
 

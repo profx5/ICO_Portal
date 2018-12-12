@@ -55,7 +55,7 @@ class TestProcessIPN(BlockChainTestCase):
         transaction = transactions.first()
 
         self.assertEqual(transaction.data,
-                         '0xa3fc81cb00000000000000000000000073015966604928a312f79f7e69291a656cb'
+                         '0x0b63fe9500000000000000000000000073015966604928a312f79f7e69291a656cb'
                          '886020000000000000000000000000000000000000000000000000000000000561d94')
         self.assertIsNone(transaction.nonce)
         self.assertEqual(transaction.value, Decimal('0'))

@@ -11,7 +11,7 @@ interface IMintable {
 contract TingesMinter is Ownable {
   using SafeMath for uint256;
 
-  event TokensPurchased(address indexed payer, uint256 USDcAmount, uint256 tokensAmount);
+  event TokenPurchase(address indexed payer, uint256 USDcAmount, uint256 tokensAmount);
 
   IMintable Mintable;
 
@@ -31,6 +31,6 @@ contract TingesMinter is Ownable {
 
     Mintable.mint(payer, tokensAmount);
 
-    emit TokensPurchased(payer, USDcAmount, tokensAmount);
+    emit TokenPurchase(payer, USDcAmount, tokensAmount);
   }
 }

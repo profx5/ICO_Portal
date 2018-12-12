@@ -19,17 +19,6 @@ class TestApproveMinedKYC(BlockChainTestCase):
         result = ApproveKYC()(kyc)
         self.assertIsInstance(result, Right)
 
-        SendPreparedTxns()()
-
-        result = TrackTransactions()()
-
-        self.assertEqual(result[0].value.txn_object.txn_type, "PASS_KYC")
-        self.assertEqual(result[0].value.txn_object.state, "MINED")
-
-        self.assertTrue(
-            self.crowdsale_contract.functions.hasRole(account, 'kycVerified').call()
-        )
-
         kyc.refresh_from_db()
 
         self.assertEqual(kyc.state, 'APPROVED')
@@ -53,7 +42,7 @@ class TestApproveMinedKYC(BlockChainTestCase):
 
 
 class TestDeclineKYC(BlockChainTestCase):
-    def test_approve_kyc(self):
+    def test_decline_kyc(self):
         investor = InvestorFactory()
         kyc = KYCFactory(investor=investor, state='WAITING')
 

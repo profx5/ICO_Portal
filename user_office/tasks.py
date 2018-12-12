@@ -23,3 +23,8 @@ def send_mail(subject, receiver, template, context):
     )
 
     logger.info(f'Sent mail to {receiver} with subject {subject}')
+
+
+@shared_task
+def send_support_email(subject, template, context):
+    send_mail.apply(subject, settings.SUPPORT_EMAIL, template, context)

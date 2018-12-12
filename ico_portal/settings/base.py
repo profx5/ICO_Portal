@@ -108,5 +108,8 @@ VERA_SITE_URL = 'https://vera.jobs/'
 
 SIGNUP_CLOSED = True
 
-#KYC settings
+# KYC settings
 AUTO_APPROVE_KYC = False
+
+# Email for special events report
+SUPPORT_EMAIL = 'support@ongrid.pro'

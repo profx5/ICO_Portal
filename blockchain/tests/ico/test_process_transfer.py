@@ -17,9 +17,7 @@ class TestProcessTransfer(BlockChainTestCase):
     setup_contracts = ['price_oracle', 'token', 'crowdsale']
 
     def setup_purchase(self, recipient):
-        self.pass_KYC(recipient.eth_account)
-
-        txn_hash = self.call_crowsdsale_fallback(recipient.eth_account, int(20 * 10 ** 18))  # 20 ETH
+        txn_hash = self.process_payment(recipient.eth_account, 2000)
         event = self.get_transfer_event(txn_hash)
 
         result = ProcessTransfer()(event)
@@ -235,7 +233,7 @@ class TestProcessTransfer(BlockChainTestCase):
         self.assertEqual(Transfer.objects.first(), transfer)
         self.assertEqual(transfer.txn_hash, txn_hash)
         self.assertEqual(transfer.to_account, receipt_account)
-        self.assertEqual(transfer.from_account, self.account['address'])
+        self.assertEqual(transfer.from_account, '0x0000000000000000000000000000000000000000')
         self.assertEqual(transfer.amount, Decimal('94735'))
         self.assertEqual(transfer.block_hash, self.eth_tester.get_transaction_by_hash(txn_hash)['block_hash'])
         self.assertEqual(transfer.block_number, self.eth_tester.get_transaction_by_hash(txn_hash)['block_number'])

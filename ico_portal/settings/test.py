@@ -28,9 +28,6 @@ PRICE_ORACLE = {
     'address': '0x42ac0F356c84928258483631b740584E343B80b7',
     'sensivity': 3  # percents
 }
-DAI_CONTRACT = {
-    'address': '0x5265968c25D1F89788dca53c137a962F312AD4A8'
-}
 
 EXCHANGE_RATES = ['ETH', 'BTC', 'DOGE', 'LTC']
 

@@ -14,7 +14,7 @@ from user_office.models import (
     Transaction,
     TokensMove
 )
-from user_office.factories import InvestorFactory
+from user_office.factories import InvestorFactory, KYCFactory
 
 
 class DAIBlockchainTestCase(BlockChainTestCase):
@@ -116,9 +116,12 @@ class DAIGetTransfersTestCase(DAIBlockchainTestCase):
 class DAIProcessingTestCase(DAIBlockchainTestCase):
     setup_contracts = ['price_oracle', 'token', 'crowdsale', 'dai']
 
+    
+
     def test_successful_processing(self):
         sender_account = self.account['address']
         investor = InvestorFactory(eth_account=sender_account)
+        
 
         self.mint_tokens(sender_account, 9 * 10 ** 18)
 

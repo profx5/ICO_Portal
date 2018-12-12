@@ -24,6 +24,22 @@ class ProcessTransfer(ServiceObject):
         else:
             return self.success(transaction=None)
 
+    def find_existing_transfer(self, context):
+        transfer = Transfer.objects.filter(txn_hash=context.event.txn_hash).first()
+
+        if transfer:
+            return self.success(transfer=transfer)
+        else:
+            transaction = Transaction.objects.filter(txn_hash=context.event.txn_hash).first()
+
+            if transaction:
+                transfer = Transfer.objects.filter(buy_txn_id=transaction.txn_id).first()
+
+                if transfer:
+                    return self.success(transfer=transfer)
+
+            return self.success(transfer=None)
+
     def get_transfer(self, context):
         event = context.event
 
@@ -37,12 +53,7 @@ class ProcessTransfer(ServiceObject):
             'created_at': event.accepted_at,
         }
 
-        transaction = context.transaction
-
-        if transaction:
-            transfer = Transfer.objects.filter(buy_txn_id=transaction.txn_id).first()
-        else:
-            transfer = Transfer.objects.filter(txn_hash=fields['txn_hash']).first()
+        transfer = context.transfer
 
         if transfer:
             if transfer.actual:

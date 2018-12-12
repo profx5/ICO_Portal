@@ -331,7 +331,7 @@ class TestKYCAutoApprove(EthTesterAPITestCase):
             'profession': 'Medic',
             'registration_date': None,
             'registration_number': None,
-            'state': 'MINING',
+            'state': 'APPROVED',
             'ticket': None,
             'type': 'NATURAL'
         })
@@ -379,9 +379,3 @@ class TestKYCAutoApprove(EthTesterAPITestCase):
 
         self.assertEqual(response.status_code, 201)
         self.assert_response_natural(response)
-
-        SendPreparedTxns()()
-
-        self.assertTrue(
-            self.crowdsale_contract.functions.hasRole(self.get_investor().eth_account, 'kycVerified').call()
-        )

@@ -41,9 +41,9 @@ class BlockChainTestCase(TestCase):
 
     @classmethod
     def _setup_token(cls):
-        VeraCoin = cls.web3.eth.contract(abi=TokenContract.get_compiled()['abi'],
-                                         bytecode=TokenContract.get_compiled()['bin'])
-        tx_hash = VeraCoin.constructor().transact()
+        Coin = cls.web3.eth.contract(abi=TokenContract.get_compiled()['abi'],
+                                     bytecode=TokenContract.get_compiled()['bin'])
+        tx_hash = Coin.constructor().transact()
         tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
         cls.token_contract = cls.web3.eth.contract(address=tx_receipt.contractAddress,
                                                    abi=TokenContract.get_compiled()['abi'])
@@ -52,18 +52,12 @@ class BlockChainTestCase(TestCase):
 
     @classmethod
     def _setup_crowdsale(cls):
-        VeraCrowdsale = cls.web3.eth.contract(abi=CrowdsaleContract.get_compiled()['abi'],
-                                              bytecode=CrowdsaleContract.get_compiled()['bin'])
-        tx_hash = VeraCrowdsale.constructor(cls.token_contract.address,
-                                            cls.price_oracle.address,
-                                            cls.account['address']).transact()
+        Crowdsale = cls.web3.eth.contract(abi=CrowdsaleContract.get_compiled()['abi'],
+                                          bytecode=CrowdsaleContract.get_compiled()['bin'])
+        tx_hash = Crowdsale.constructor(cls.token_contract.address, 100).transact()
         tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
         cls.crowdsale_contract = cls.web3.eth.contract(address=tx_receipt.contractAddress,
                                                        abi=CrowdsaleContract.get_compiled()['abi'])
-
-        cls.crowdsale_contract.functions.addBackend(cls.account['address']).transact()
-
-        cls.token_contract.functions.transfer(cls.crowdsale_contract.address, cls.crowdsale_tokens_amount).transact()
 
         CrowdsaleContract.init({'address': cls.crowdsale_contract.address})
 
@@ -132,21 +126,23 @@ class BlockChainTestCase(TestCase):
     def pass_KYC(self, address):
         self.crowdsale_contract.functions.addKycVerifiedInvestor(address).transact()
 
-    def call_crowsdsale_fallback(self, sender, value):
-        return self.web3.eth.sendTransaction({
-            'from': sender,
-            'to': self.crowdsale_contract.address,
-            'value': value
-        }).hex()
-
     def mint_tokens(self, to, amount):
-        return self.transfer_tokens(from_acc=self.account['address'], to_acc=to, amount=amount)
+        return self.token_contract.functions.mint(to, amount).transact({
+            'gas': 100000,
+            'from': self.account['address']
+        }).hex()
 
     def transfer_tokens(self, from_acc, to_acc, amount):
         return self.token_contract.functions.transfer(to_acc, amount).transact({
             'gas': 100000,
             'from': from_acc
         }).hex()
+
+    def process_payment(self, payer, usdc_amount):
+        return self.crowdsale_contract.functions.processPayment(payer, usdc_amount).transact({
+            'gas': 100000,
+            'from': self.account['address']
+        })
 
     def get_transfer_event(self, txn_hash):
         receipt = self.web3.eth.getTransactionReceipt(txn_hash)
