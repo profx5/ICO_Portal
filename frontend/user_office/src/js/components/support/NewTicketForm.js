@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-
 import ValidationSchema from 'js/components/support/services/NewTicketFormValidation';
 import {media} from 'js/services/media';
 

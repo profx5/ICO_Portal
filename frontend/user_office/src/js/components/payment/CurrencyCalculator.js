@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {media} from 'js/services/media';
 
-import * as Services from './services';
+import * as Services from 'js/components/payment/services';
 
 import ErrorMessage from 'js/components/common/ErrorMessage';
 import Button from 'js/components/common/Button';
