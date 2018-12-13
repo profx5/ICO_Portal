@@ -1,7 +1,7 @@
 import axios from 'axios'
-import Api from '../../api'
+import Api from 'api'
 import {put, call, takeEvery} from 'redux-saga/effects'
-import * as actions from '../actions/ICOInfoActions'
+import * as actions from 'js/actions/ICOInfoActions'
 
 export class ICOInfoSagas {
     static * getPhaseStatsSaga(action){

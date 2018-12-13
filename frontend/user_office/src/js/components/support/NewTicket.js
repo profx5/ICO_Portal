@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import NewTicketForm from './NewTicketForm';
+import NewTicketForm from 'js/components/support/NewTicketForm';
 
 
 class NewTicket extends React.Component {

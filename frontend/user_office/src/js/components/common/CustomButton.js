@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from "styled-components"
 
-import dotsIcon from './../../../img/dots.svg';
+import dotsIcon from 'img/dots.svg';
 
 
 const CustomButton = ({text, className, clickHandler, submit, disabled, icon}) => {

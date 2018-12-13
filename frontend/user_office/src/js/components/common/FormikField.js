@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
 import { Field } from 'formik';
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from 'js/components/common/ErrorMessage';
 
 
 const FormikField = ({errors, touched, labelText, placeholder, options, name, value, disabled, required, onChangeHandler}) => {

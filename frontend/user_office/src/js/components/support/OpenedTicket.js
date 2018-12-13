@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom';
 import moment from "moment/moment";
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import TicketCommentForm from './TicketCommentForm';
-import AttachedFile from './../common/AttachedFile';
-import TicketState from './components/TicketState';
+import AttachedFile from 'js/components/common/AttachedFile';
+import TicketCommentForm from 'js/components/support/TicketCommentForm';
+import TicketState from 'js/components/support/stateless/TicketState';
 
-import * as TicketActions from './../../actions/TicketActions';
+import * as TicketActions from 'js/actions/TicketActions';
 
-import iconUser from './../../../img/user.svg';
-import iconResolved from './../../../img/check-green.svg';
-import iconPending from './../../../img/icon_transit-amber.svg';
-import breadcrumbsArrow from './../../../img/arrow_roadmap.svg';
+import iconUser from 'img/user.svg';
+import iconResolved from 'img/check-green.svg';
+import iconPending from 'img/icon_transit-amber.svg';
+import breadcrumbsArrow from 'img/arrow_roadmap.svg';
 
 
 class OpenedTicket extends React.Component {

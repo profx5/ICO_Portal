@@ -1,35 +1,30 @@
 import { injectGlobal } from 'styled-components';
-import {media} from './js/utils/media';
+import {media} from 'js/services/media';
 
-import gilroyLightWoff from './fonts/Gilroy-Light.woff';
-import gilroyLightWoff2 from './fonts/Gilroy-Light.woff2';
-import gilroyLightTtf from './fonts/Gilroy-Light.ttf';
+import gilroyLightWoff from 'fonts/Gilroy-Light.woff';
+import gilroyLightWoff2 from 'fonts/Gilroy-Light.woff2';
+import gilroyLightTtf from 'fonts/Gilroy-Light.ttf';
 
-import gilroyRegularWoff from './fonts/Gilroy-Regular.woff';
-import gilroyRegularWoff2 from './fonts/Gilroy-Regular.woff2';
-import gilroyRegularTtf from './fonts/Gilroy-Regular.ttf';
+import gilroyRegularWoff from 'fonts/Gilroy-Regular.woff';
+import gilroyRegularWoff2 from 'fonts/Gilroy-Regular.woff2';
+import gilroyRegularTtf from 'fonts/Gilroy-Regular.ttf';
 
-import gilroyMediumWoff from './fonts/Gilroy-Medium.woff';
-import gilroyMediumWoff2 from './fonts/Gilroy-Medium.woff2';
-import gilroyMediumTtf from './fonts/Gilroy-Medium.ttf';
+import gilroyMediumWoff from 'fonts/Gilroy-Medium.woff';
+import gilroyMediumWoff2 from 'fonts/Gilroy-Medium.woff2';
+import gilroyMediumTtf from 'fonts/Gilroy-Medium.ttf';
 
-import gilroyBoldWoff from './fonts/Gilroy-Bold.woff';
-import gilroyBoldWoff2 from './fonts/Gilroy-Bold.woff2';
-import gilroyBoldTtf from './fonts/Gilroy-Bold.ttf';
+import gilroyBoldWoff from 'fonts/Gilroy-Bold.woff';
+import gilroyBoldWoff2 from 'fonts/Gilroy-Bold.woff2';
+import gilroyBoldTtf from 'fonts/Gilroy-Bold.ttf';
 
-import robotoRegularWoff from './fonts/Roboto-Regular.woff';
-import robotoRegularWoff2 from './fonts/Roboto-Regular.woff2';
-import robotoRegularTtf from './fonts/Roboto-Regular.ttf';
+import robotoRegularWoff from 'fonts/Roboto-Regular.woff';
+import robotoRegularWoff2 from 'fonts/Roboto-Regular.woff2';
+import robotoRegularTtf from 'fonts/Roboto-Regular.ttf';
 
-import robotoMediumWoff from './fonts/Roboto-Medium.woff';
-import robotoMediumWoff2 from './fonts/Roboto-Medium.woff2';
-import robotoMediumTtf from './fonts/Roboto-Medium.ttf';
+import robotoMediumWoff from 'fonts/Roboto-Medium.woff';
+import robotoMediumWoff2 from 'fonts/Roboto-Medium.woff2';
+import robotoMediumTtf from 'fonts/Roboto-Medium.ttf';
 
-
-import icomoonEot from './fonts/icomoon.eot';
-import icomoonWoff from './fonts/icomoon.woff';
-import icomoonTtf from './fonts/icomoon.ttf';
-import icomoonSvg from './fonts/icomoon.svg';
 
 injectGlobal`
 

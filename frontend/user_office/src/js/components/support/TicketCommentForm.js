@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import ValidationSchema from './utils/TicketCommentFormValidation';
-import {media} from './../../utils/media';
+import ValidationSchema from 'js/components/support/services/TicketCommentFormValidation';
+import {media} from 'js/services/media';
 
 import { Formik, Field, Form } from "formik";
-import Button from './../common/Button';
-import FilesAttacher from './../../utils/FilesAttacher';
-import ErrorMessage from './../common/ErrorMessage';
+import Button from 'js/components/common/Button';
+import FilesAttacher from 'js/services/FilesAttacher';
+import ErrorMessage from 'js/components/common/ErrorMessage';
 
-import * as TicketActions from './../../actions/TicketActions';
-import * as FilesActions from './../../actions/FilesActions';
+import * as TicketActions from 'js/actions/TicketActions';
+import * as FilesActions from 'js/actions/FilesActions';
 
 
 class TicketCommentForm extends React.Component {

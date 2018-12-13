@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import Ticket from './components/Ticket';
+import Ticket from 'js/components/support/stateless/Ticket';
 
-import * as TicketActions from './../../actions/TicketActions';
+import * as TicketActions from 'js/actions/TicketActions';
 
 
 class AllQuestions extends React.Component {

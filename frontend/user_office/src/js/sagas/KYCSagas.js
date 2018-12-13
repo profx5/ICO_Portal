@@ -1,7 +1,7 @@
 import axios from 'axios'
-import Api from '../../api'
-import * as KYCActions from './../actions/KYCActions'
-import * as UIActions from './../actions/UIActions'
+import Api from 'api'
+import * as KYCActions from 'js/actions/KYCActions'
+import * as UIActions from 'js/actions/UIActions'
 import {call, put, takeEvery} from 'redux-saga/effects'
 
 export class KYCSagas {

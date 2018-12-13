@@ -2,16 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Utils from './../../utils/index';
-import {media} from './../../utils/media';
+import Utils from 'js/services/index';
+import {media} from 'js/services/media';
 
-import ProgressBar from './components/ProgressBar';
-import Timer from './components/Timer';
-import PhasesInfo from './components/PhasesInfo';
-import CustomButton from './../common/CustomButton';
-import Button from './../common/Button';
+import ProgressBar from 'js/components/dashboard/stateless/ProgressBar';
+import Timer from 'js/components/dashboard/stateless/Timer';
+import PhasesInfo from 'js/components/dashboard/stateless/PhasesInfo';
+import CustomButton from 'js/components/common/CustomButton';
+import Button from 'js/components/common/Button';
 
-import * as ICOInfoActions from './../../actions/ICOInfoActions';
+import * as ICOInfoActions from 'js/actions/ICOInfoActions';
 
 
 class ICOProgress extends React.Component {

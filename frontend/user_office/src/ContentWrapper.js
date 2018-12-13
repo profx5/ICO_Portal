@@ -2,18 +2,18 @@ import React from 'react';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {media} from './js/utils/media';
+import {media} from 'js/services/media';
 
-import {isMetamaskAvailable} from './web3';
+import {isMetamaskAvailable} from 'js/services/web3';
 
-import * as UserActions from './js/actions/UserActions';
-import * as ICOInfoActions from './js/actions/ICOInfoActions';
-import * as DepositsActions from './js/actions/DepositsActions';
-import * as KYCActions from './js/actions/KYCActions';
-import * as PhaseActions from './js/actions/PhaseActions';
-import * as CurrencyActions from './js/actions/CurrencyActions';
-import * as MetamaskActions from './js/actions/MetamaskActions';
-import * as TicketsActions from './js/actions/TicketActions';
+import * as UserActions from 'js/actions/UserActions';
+import * as ICOInfoActions from 'js/actions/ICOInfoActions';
+import * as DepositsActions from 'js/actions/DepositsActions';
+import * as KYCActions from 'js/actions/KYCActions';
+import * as PhaseActions from 'js/actions/PhaseActions';
+import * as CurrencyActions from 'js/actions/CurrencyActions';
+import * as MetamaskActions from 'js/actions/MetamaskActions';
+import * as TicketsActions from 'js/actions/TicketActions';
 
 
 

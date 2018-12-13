@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
-import Utils from './../../utils/index';
-import {media} from './../../utils/media';
+import Utils from 'js/services/index';
+import {media} from 'js/services/media';
 
-import VerificationStages from './components/VerificationStages';
+import VerificationStages from 'js/components/account/stateless/VerificationStages';
 
 
 class VerificationInfo extends React.Component {

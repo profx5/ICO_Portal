@@ -1,11 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import iconClose from './../../../img/icon_close.svg';
+import iconClose from 'img/icon_close.svg';
 
-import * as UIActions from './../../actions/UIActions';
+import * as UIActions from 'js/actions/UIActions';
 
 
 class Modal extends React.Component {

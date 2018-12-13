@@ -1,6 +1,6 @@
 import axios from 'axios'
-import Api from '../../api'
-import * as actions from './../actions/CurrencyActions'
+import Api from 'api'
+import * as actions from 'js/actions/CurrencyActions'
 import {takeEvery, call, put} from 'redux-saga/effects'
 
 class CurrencySagas {

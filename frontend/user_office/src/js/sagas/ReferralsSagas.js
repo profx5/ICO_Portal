@@ -1,7 +1,7 @@
-import axios from 'axios'
-import api from '../../api'
-import {takeLatest, put, call} from 'redux-saga/effects'
-import * as actions from '../actions/ReferralsActions'
+import axios from 'axios';
+import api from 'api';
+import {takeLatest, put, call} from 'redux-saga/effects';
+import * as actions from 'js/actions/ReferralsActions';
 
 export class ReferralsSagas {
     static * getReferralLink(action) {

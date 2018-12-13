@@ -2,17 +2,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import * as Services from './services';
+import * as Services from 'js/components/payment/services';
 
-import ErrorMessage from './../common/ErrorMessage';
-import Button from './../common/Button';
-import InvestInput from './components/InvestInput';
+import ErrorMessage from 'js/components/common/ErrorMessage';
+import Button from 'js/components/common/Button';
+import InvestInput from 'js/components/payment/stateless/InvestInput';
 
-import * as UIActions from './../../actions/UIActions';
-import * as InvestActions from './../../actions/InvestActions';
-import * as ICOInfoActions from './../../actions/ICOInfoActions';
+import * as UIActions from 'js/actions/UIActions';
+import * as InvestActions from 'js/actions/InvestActions';
+import * as ICOInfoActions from 'js/actions/ICOInfoActions';
 
 
 class CurrencyCalculator extends React.Component {

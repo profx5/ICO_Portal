@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import CurrencyCardMain from './components/CurrencyCardMain';
-import CurrencyCardOther from './components/CurrencyCardOther';
+import CurrencyCardMain from 'js/components/payment/stateless/CurrencyCardMain';
+import CurrencyCardOther from 'js/components/payment/stateless/CurrencyCardOther';
 
-import * as CurrencyActions from '../../actions/CurrencyActions.js';
-import * as UIActions from './../../actions/UIActions';
+import * as CurrencyActions from 'js/actions/CurrencyActions.js';
+import * as UIActions from 'js/actions/UIActions';
 
 
 class Currency extends React.Component {

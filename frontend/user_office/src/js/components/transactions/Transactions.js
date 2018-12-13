@@ -1,10 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
-import {media} from './../../utils/media';
 
-import Title from './../common/Title';
-import DepositTable from "./DepositTable";
+import Title from 'js/components/common/Title';
+import DepositTable from "js/components/transactions/DepositTable";
 
 
 class Transactions extends React.Component {

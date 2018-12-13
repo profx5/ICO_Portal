@@ -1,15 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import NaturalPersonData from './components/NaturalPersonData';
-import ConfirmNaturalPEP from './components/ConfirmNaturalPEP';
-import ConfirmAsInvestor from './components/ConfirmAsInvestor';
+import NaturalPersonData from 'js/components/verification/stateless/NaturalPersonData';
+import ConfirmNaturalPEP from 'js/components/verification/stateless/ConfirmNaturalPEP';
+import ConfirmAsInvestor from 'js/components/verification/stateless/ConfirmAsInvestor';
 
-import * as UIActions from "./../../actions/UIActions";
+import * as UIActions from "js/actions/UIActions";
 
-import iconQuestion from './../../../img/icons/icon_faq.svg';
+import iconQuestion from 'img/icons/icon_faq.svg';
 
 
 class NaturalPerson extends React.Component {

@@ -1,5 +1,5 @@
 import {createReducer} from 'redux-act';
-import * as actions from './../actions/CurrencyActions';
+import * as actions from 'js/actions/CurrencyActions';
 import {Map} from 'immutable';
 
 

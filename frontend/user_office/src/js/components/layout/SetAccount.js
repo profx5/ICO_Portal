@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/services/media';
 
-import Button from './../common/Button';
+import Button from 'js/components/common/Button';
 
-import * as UserActions from './../../actions/UserActions';
-import * as UIActions from './../../actions/UIActions';
+import * as UserActions from 'js/actions/UserActions';
+import * as UIActions from 'js/actions/UIActions';
 
 
 class SetAccount extends Component {
