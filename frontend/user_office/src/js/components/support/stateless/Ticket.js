@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import moment from "moment/moment";
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import iconUser from 'img/user.svg';
 import iconResolved from 'img/check-green.svg';

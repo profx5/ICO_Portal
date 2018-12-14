@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom';
 import moment from "moment/moment";
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import AttachedFile from 'js/components/common/AttachedFile';
 import TicketCommentForm from 'js/components/support/TicketCommentForm';

@@ -23,7 +23,7 @@ class Support extends React.Component {
         event.preventDefault();
         const $filesBlock = $(event.target).closest('.files-section').find('.files-container');
 
-        const $newFileInput = $(`<input class="file-input" id=${this.currentFileId++} type="file" name="${name}" hidden/>`);
+        const $newFileInput = $(`<input className="file-input" id=${this.currentFileId++} type="file" name="${name}" hidden/>`);
 
         $filesBlock.prepend($newFileInput);
         $newFileInput.click();

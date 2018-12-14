@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import CurrencyCardRest from 'js/components/payment/stateless/CurrencyCardRest';
 

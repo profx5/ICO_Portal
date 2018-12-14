@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import * as UIActions from 'js/actions/UIActions';
 

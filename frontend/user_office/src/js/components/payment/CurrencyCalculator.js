@@ -2,9 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
-import * as Services from 'js/components/payment/services';
+import getValidationSchema from 'js/utils/getValidationSchema';
+import formatInvestedValue from 'js/components/payment/utils/formatInvestedValue';
 
 import ErrorMessage from 'js/components/common/ErrorMessage';
 import Button from 'js/components/common/Button';
@@ -49,13 +50,13 @@ class CurrencyCalculator extends React.Component {
 
     onChangeHandler = event => {
         let value = event.target.value;
-        let formatedValue = Services.formatInvestedValue(value);
+        let formatedValue = formatInvestedValue(value);
         
         if (formatedValue !== false) {
             this.props.setInvestAmount(formatedValue)
             this.updateTotalTokens();
             this.validateData({
-                name: 'invest_input',
+                name: 'investInput',
                 value: formatedValue
             });
         }
@@ -77,7 +78,7 @@ class CurrencyCalculator extends React.Component {
 
     validateData = ({name, value}) => {
         const {setInvestErrorText} = this.props;
-        const schema = Services.getValidationSchema(name);
+        const schema = getValidationSchema(name);
 
         schema.validate({
             [name]: value 
