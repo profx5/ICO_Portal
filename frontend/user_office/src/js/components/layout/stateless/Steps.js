@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import arrowImg from 'img/arrow-down.svg';
 import exclaimIcon from 'img/icons/icon_exclaim.svg';

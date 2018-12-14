@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 
 const VerificationState = ({kycState, kycTicketId, className}) => {

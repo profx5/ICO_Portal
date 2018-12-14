@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import Button from 'js/components/common/Button';
 
@@ -22,8 +22,8 @@ class SetAccount extends React.Component {
     }
 
     getMetaMaskAccount = () => {
-        if (typeof window.web3 !== 'undefined') {
-            return window.web3.eth.defaultAccount;
+        if (typeof window.globalWeb3 !== 'undefined') {
+            return window.globalWeb3.eth.defaultAccount;
         }
     }
 

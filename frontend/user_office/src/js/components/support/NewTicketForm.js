@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import ValidationSchema from 'js/components/support/services/NewTicketFormValidation';
-import {media} from 'js/services/media';
+
+import {media} from 'js/utils/media';
+import getValidationSchema from 'js/utils/getValidationSchema';
 
 import { Formik, Field, Form } from "formik";
 import Button from 'js/components/common/Button';
 import ErrorMessage from 'js/components/common/ErrorMessage';
-import FilesAttacher from 'js/services/FilesAttacher';
+import FilesAttacher from 'js/components/common/FilesAttacher';
 
 import * as TicketActions from 'js/actions/TicketActions';
 import * as FilesActions from 'js/actions/FilesActions';
@@ -34,7 +35,7 @@ class NewTicketForm extends React.Component {
                         title: '',
                         description: ''
                     }} 
-                    validationSchema={ValidationSchema} 
+                    validationSchema={getValidationSchema('newTicket')} 
                     onSubmit={this.onSubmitHandler} 
                     render={({errors, touched, values}) => (
                         <StyledForm className="NewTicketForm" encType='multipart/form-data'>
@@ -64,7 +65,7 @@ class NewTicketForm extends React.Component {
                             <div className="controls-container files-section files-section-newTicket">
                                 {newTicketFiles.size > 0 && <div className="files-header">Uploaded:</div>}
                                 <div className="files-container">
-                                    <input class="file-input" type="file" name='attachment' hidden/>
+                                    <input className="file-input" type="file" name='attachment' hidden/>
                                     <FilesAttacher files={newTicketFiles} 
                                         name="attachment" 
                                         filesWrapper={document.querySelector('.files-section-newTicket')} 

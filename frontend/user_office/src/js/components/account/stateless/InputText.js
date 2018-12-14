@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import ErrorMessage from 'js/components/common/ErrorMessage';
 import { Field } from 'formik';

@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import axios from 'axios';
 import {Provider} from 'react-redux'
 
-import 'global-styles';
+import 'globalStyles';
 import 'index.css';
 
 import App from 'App';

@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
-import Utils from 'js/services/index';
-import {media} from 'js/services/media';
+import _ from 'lodash';
+import {media} from 'js/utils/media';
 
 import VerificationStages from 'js/components/verification/stateless/VerificationStages';
 import VerificationState from 'js/components/verification/stateless/VerificationState';
@@ -46,7 +46,7 @@ class VerificationInfo extends React.Component {
     }
 
     componentDidMount() {
-        $(window).on('scroll', Utils.throttle(this.stageTracker,30));
+        $(window).on('scroll', _.throttle(this.stageTracker,30));
     }
 
     render() {

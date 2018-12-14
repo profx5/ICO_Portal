@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from "styled-components"
 import {Link} from 'react-router-dom';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 
 const Dropdown = ({email, stepOnePassed, stepTwoPassed, stepThreePassed, stepsPassed, showSetAccount, showSetAccountPopup, dropdownAccountClickHandler}) => {

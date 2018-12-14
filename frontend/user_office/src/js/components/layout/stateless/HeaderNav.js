@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 
 const navigationItems = [
