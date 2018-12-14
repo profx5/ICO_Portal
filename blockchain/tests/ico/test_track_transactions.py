@@ -151,6 +151,35 @@ class TestTrackTransactions(_Base):
         self.assertIsInstance(result[0], Right)
         self.assertIsInstance(result[1], Right)
 
+    def test_limited_resend_quantity(self):
+        self.eth_tester.disable_auto_mine_transactions()
+
+        transaction = Transaction(
+            to_account='0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',
+            gas=40000,
+            data=self.txn_data
+        )
+        transaction.save()
+        result = SendPreparedTxns()()
+        transaction.refresh_from_db()
+
+        self.assertEqual(Transaction.objects.count(), 1)
+
+        for txns_quantity in range(2, 7):
+            utcnow = datetime.utcnow() + timedelta(hours=1)
+            self.stub_datetime_utcnow(utcnow)
+
+            result = TrackTransactions()()
+            self.assertEqual(Transaction.objects.count(), txns_quantity)
+
+        utcnow = datetime.utcnow() + timedelta(hours=1)
+        self.stub_datetime_utcnow(utcnow)
+
+        result = TrackTransactions()()
+        expected_result = 'Transaction resended 5 of 5 times'
+        self.assertEqual(Transaction.objects.count(), 6)
+        self.assertEqual(result[-1].value.result, expected_result)
+
     def test_mined_transaction(self):
         transaction = Transaction(to_account='0x2feB9363a9bb1E16Ab90F6d4007264774e959F34',
                                   gas=40000,

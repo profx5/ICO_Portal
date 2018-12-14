@@ -184,7 +184,7 @@ class DAIProcessingTestCase(DAIBlockchainTestCase):
 
     def test_same_payment_processing(self):
         sender_account = self.account['address']
-        investor = InvestorFactory(eth_account=sender_account)
+        investor = InvestorFactory(eth_account=sender_account)  # noqa: F841
 
         self.mint_tokens(sender_account, 9 * 10 ** 18)
 
