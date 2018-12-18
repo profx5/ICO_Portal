@@ -1,15 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
-import Utils from 'js/services/index';
+import formatFileSize from 'js/utils/formatFileSize';
 
 
 const AttachedFile = ({fileName, fileSize, id, removable, onRemoveHandler, style}) => {
     return (
         <Wrapper className="attached-file" id={id} style={style}>
             <span className="file-name">{fileName}</span>
-            {fileSize && <span className="file-size"> ({Utils.formatFileSize(fileSize).size} {Utils.formatFileSize(fileSize).units})</span>}
+            {fileSize && <span className="file-size"> ({formatFileSize(fileSize).size} {formatFileSize(fileSize).units})</span>}
             {removable && 
                 <div onClick={onRemoveHandler} className="file-close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">

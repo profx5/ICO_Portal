@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import ValidationSchema from 'js/components/support/services/TicketCommentFormValidation';
-import {media} from 'js/services/media';
+
+import {media} from 'js/utils/media';
+import getValidationSchema from 'js/utils/getValidationSchema';
 
 import { Formik, Field, Form } from "formik";
 import Button from 'js/components/common/Button';
-import FilesAttacher from 'js/services/FilesAttacher';
+import FilesAttacher from 'js/components/common/FilesAttacher';
 import ErrorMessage from 'js/components/common/ErrorMessage';
 
 import * as TicketActions from 'js/actions/TicketActions';
@@ -32,7 +33,7 @@ class TicketCommentForm extends React.Component {
                     initialValues={{
                         comment: ''
                     }} 
-                    validationSchema={ValidationSchema} 
+                    validationSchema={getValidationSchema('newComment')}
                     onSubmit={this.onSubmitHandler} 
                     render={({errors, touched, values}) => (
                         <Form className="TicketCommentForm" encType='multipart/form-data'>
@@ -51,7 +52,7 @@ class TicketCommentForm extends React.Component {
                             <div className="controls-container files-section files-section-comment">
                                 {commentFiles.size > 0 && <div className="files-header">Uploaded:</div>}
                                 <div className="files-container">
-                                    <input class="file-input" type="file" name='attachment' hidden/>
+                                    <input className="file-input" type="file" name='attachment' hidden/>
                                     <FilesAttacher files={commentFiles} 
                                             name="attachment" 
                                             filesWrapper={document.querySelector('.files-section-comment')} 

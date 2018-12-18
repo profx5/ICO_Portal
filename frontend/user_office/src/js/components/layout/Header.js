@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link, withRouter} from 'react-router-dom';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import HeaderNav from 'js/components/layout/stateless/HeaderNav';
 import Balance from 'js/components/layout/stateless/Balance';

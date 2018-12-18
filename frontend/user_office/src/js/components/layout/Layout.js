@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import {Route, Switch} from 'react-router-dom';
 import {withRouter} from 'react-router';
 import $ from 'jquery';
-import history from 'js/services/history';
-import {media} from 'js/services/media';
+import history from 'js/utils/getBrowserHistory';
+import {media} from 'js/utils/media';
 
 import NavSidebar from 'js/components/layout/stateless/NavSidebar';
 import Nav from 'js/components/layout/stateless/Nav';

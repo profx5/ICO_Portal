@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Api from 'api'
+import API from 'api'
 import { takeEvery, call, put, select} from 'redux-saga/effects';
 import * as actions from 'js/actions/DepositsActions';
 
@@ -10,7 +10,7 @@ export class DepositsSagas {
 
             const response = yield call(axios, {
                 method: 'GET',
-                url: Api.getDeposits()
+                url: API.getDeposits()
             })
 
             yield put(actions.getDepositsSuccess(response.data))
@@ -24,7 +24,7 @@ export class DepositsSagas {
             const {value, txnHash, currency} = action.payload;
 
             yield call(axios, {
-                url: Api.prepareDeposits(),
+                url: API.prepareDeposits(),
                 method: 'POST',
                 data: {
                     value: value,

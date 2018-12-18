@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import Button from 'js/components/common/Button';
-import FilesAttacher from 'js/services/FilesAttacher';
+import FilesAttacher from 'js/components/common/FilesAttacher';
 
 
 const UtilityBill = ({files, name, filesWrapper, onAttachClickHandler, uploadFileHandler, removeFileHandler}) => {
@@ -18,7 +18,7 @@ const UtilityBill = ({files, name, filesWrapper, onAttachClickHandler, uploadFil
                 <Button clickHandler={onAttachClickHandler} text="Attach file" attach/>
             </ButtonWrapper>
             <div className={`files-container ${files.size > 0 ? "files-container-filled" : ''}`}>
-                <input class="file-input" type="file" name={name} hidden/>
+                <input className="file-input" type="file" name={name} hidden/>
                 <p className="files-head">Uploaded:</p>
                 <FilesAttacher files={files} name={name} filesWrapper={filesWrapper} uploadFileHandler={uploadFileHandler} removeFileHandler={removeFileHandler}/>
             </div>

@@ -1,18 +1,16 @@
-import Api from 'api';
+import API from 'api';
 import axios from 'axios'
-import {extractAccount} from 'js/services/web3'
-import {call, cps, put, select, takeEvery} from 'redux-saga/effects'
+import {extractAccount} from 'globalWeb3'
+import {call, cps, put, takeEvery} from 'redux-saga/effects'
 import * as UserActions from 'js/actions/UserActions'
 import * as UIActions from 'js/actions/UIActions'
-import * as MetamaskActions from 'js/actions/MetamaskActions'
-import Utils from 'js/services/index'
 
 export class UserSagas {
     static* setAccount(action) {
         try {
             yield call(axios, {
                 method: 'POST',
-                url: Api.setEthAccount(),
+                url: API.setEthAccount(),
                 data: {
                     'eth_account': action.payload
                 }
@@ -37,7 +35,7 @@ export class UserSagas {
     static* getUser() {
         try {
             const response = yield call(axios, {
-                url: Api.getMe(),
+                url: API.getMe(),
                 method: 'GET'
             })
 
@@ -59,27 +57,10 @@ export class UserSagas {
         }
     }
 
-    static* detectMetaMaskAccount() {
-        if (Utils.path(window, 'web3')) {
-            yield UserSagas.extractMetaMaskAccount({})
-            const metamaskAcc = yield select((state) => state.user.get('metamaskAccount'))
-
-            if (typeof metamaskAcc === 'string' && metamaskAcc.length > 0) {
-                yield put(MetamaskActions.showModalWithOptionsForEthAccount())
-                return
-            }
-            yield put(MetamaskActions.metamaskIsBlocked())
-            return
-        }
-
-        yield put(MetamaskActions.showModalWithOptionsForEthAccount())
-        return
-    }
-
     static* changePassword(action) {
         try {
             const response = yield call(axios, {
-                url: Api.changePassword(),
+                url: API.changePassword(),
                 method: 'POST',
                 data: action.payload
             })
@@ -101,7 +82,7 @@ export class UserSagas {
     static * changeEmail(action) {
         try {
             yield call(axios, {
-                url: Api.changeEmail(),
+                url: API.changeEmail(),
                 method: 'POST',
                 data: action.payload
             })

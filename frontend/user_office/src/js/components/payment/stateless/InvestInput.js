@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 
 const InvestInput = ({children, value, type, onChangeHandler, onPasteHandler, investLabelText, currency, errorMessage}) => {
 
     return (
         <InputWrapper data-currency={currency}>
-            <Label htmlFor="invest_input">{investLabelText}</Label>
+            <Label htmlFor="investInput">{investLabelText}</Label>
             <Input value={value} type={type} onChange={onChangeHandler} onPaste={onPasteHandler} name='invest_input' id="invest_input"/>
             {children}
         </InputWrapper>

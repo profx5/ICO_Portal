@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import CurrencyCalculator from 'js/components/payment/CurrencyCalculator';
 import Currency from 'js/components/payment/Currency';

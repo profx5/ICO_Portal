@@ -1,5 +1,5 @@
 import { injectGlobal } from 'styled-components';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import gilroyLightWoff from 'fonts/Gilroy-Light.woff';
 import gilroyLightWoff2 from 'fonts/Gilroy-Light.woff2';
