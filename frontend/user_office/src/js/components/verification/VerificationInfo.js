@@ -50,7 +50,7 @@ class VerificationInfo extends React.Component {
     }
 
     render() {
-        const {status, verificationStages, stages, btnText, isSubmiting, kycState, kycTicketId} = this.props;
+        const {status, verificationStages, stages, btnText, isSubmiting, kycStatus, kycTicketId} = this.props;
         let btn_text = !isSubmiting ? status === 'WAITING' ? 'Update data' : btnText : 'Submitting...';
         return (
             <Wrapper className="VerificationInfo">
@@ -58,10 +58,10 @@ class VerificationInfo extends React.Component {
                     {status !== 'APPROVED' &&
                     
                         <ButtonWrapper>
-                            <Button type="submit" text={btn_text} icon={isSubmiting && PreloadIcon}/>
+                            <Button type="submit" text={btn_text} isSubmiting={isSubmiting}/>
                         </ButtonWrapper>
                     }
-                <VerificationState kycState={kycState} kycTicketId={kycTicketId}/>
+                <VerificationState kycStatus={kycStatus} kycTicketId={kycTicketId}/>
             </Wrapper>
         )
     }

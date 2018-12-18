@@ -25,12 +25,12 @@ class NewTicketForm extends React.Component {
     };
 
     render() {
-        const {newTicketFiles, addNewTicketFile, removeNewTicketFile} = this.props;
+        const {newTicketFiles, addNewTicketFile, removeNewTicketFile, isSubmitting} = this.props;
 
         return (
 
             <Wrapper>
-                <Formik
+                <Formik 
                     initialValues={{
                         title: '',
                         description: ''
@@ -77,7 +77,7 @@ class NewTicketForm extends React.Component {
                                         <Button text="Attach file" clickHandler={this.props.onAttachClickHandler.bind(this,'attachment')} attach transparent/>
                                     </div>
                                     <div className="button-wrapper">
-                                        <Button type="submit" text="Send"/>
+                                        <Button type="submit" text="Send" isSubmitting={isSubmitting}/>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +92,8 @@ class NewTicketForm extends React.Component {
 
 const mapStateToProps = ({tickets, user, Files}) => ({
     email: user.get('email'),
-    newTicketFiles: Files.get('newTicketFiles')
+    newTicketFiles: Files.get('newTicketFiles'),
+    isSubmitting: tickets.get('isNewTicketSubmitting')
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -103,7 +104,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(FilesActions.removeNewTicketFile(payload))
     },
     createNewTicket(payload) {
-        dispatch(TicketActions.createNewTicket(payload))
+        dispatch(TicketActions.createNewTicketRequest(payload))
     }
 });
 

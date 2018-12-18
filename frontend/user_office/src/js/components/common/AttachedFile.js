@@ -28,7 +28,7 @@ const AttachedFile = ({fileName, fileSize, id, removable, onRemoveHandler, style
 export default AttachedFile;
 
 const Wrapper = styled.div`
-    min-width: 240px;
+    width: 285px;
     background: rgb(245, 245, 245);
     padding: 0 35px 0 13px;
     height: 36px;
@@ -36,6 +36,8 @@ const Wrapper = styled.div`
     float: left;
     clear: left;
     position: relative;
+    display: flex;
+    justify-content: flex-start;
     ${media.xs} {
         width: 100%;
         min-width: unset;
@@ -46,6 +48,10 @@ const Wrapper = styled.div`
         letter-spacing: 0.5px;
         font-weight: 600;
         line-height: 36px;
+        display: block;
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
         ${media.xs} {
             font-size: 14px;
         }
@@ -53,6 +59,8 @@ const Wrapper = styled.div`
     .file-size {
         font-size: 16px;
         line-height: 36px;
+        width: 83px;
+        margin-left: 6px;
     }
     .file-close {
         position: absolute;

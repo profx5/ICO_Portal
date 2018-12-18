@@ -20,7 +20,7 @@ class InvestorsDocuments extends React.Component {
             addIdDocumentFile, addUtilityBillFile,
             removeIdDocumentFile, removeUtilityBillFile,
             onAttachClickHandler, status,
-            errors, touched, values
+            errors, touched, values, isSubmiting
         } = this.props;
 
         return (
@@ -43,7 +43,7 @@ class InvestorsDocuments extends React.Component {
                 
                 {status !== 'APPROVED' && 
                     <ButtonWrapper submitBtn>
-                        <Button type="submit" text={status === 'WAITING' ? 'Update data' : 'Send data'}/>
+                        <Button type="submit" text={status === 'WAITING' ? 'Update data' : 'Send data'} isSubmiting={isSubmiting}/>
                     </ButtonWrapper>
                 }
             </Wrapper>

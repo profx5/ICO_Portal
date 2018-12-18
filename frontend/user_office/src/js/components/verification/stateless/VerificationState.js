@@ -4,15 +4,15 @@ import {Link} from 'react-router-dom';
 import {media} from 'js/utils/media';
 
 
-const VerificationState = ({kycState, kycTicketId, className}) => {
+const VerificationState = ({kycStatus, kycTicketId, className}) => {
     return (
         <Wrapper className={className}>
-            {kycState === 'APPROVED' &&
+            {kycStatus === 'APPROVED' &&
                 <Content className="state-approved">
                     <p>Verification successful!</p>
                 </Content>
             }
-            {kycState === 'WAITING' &&
+            {kycStatus === 'WAITING' &&
                 <Content className="state-waiting">
                     <p>Thank you for your application! Our managers are validating your data now.</p>
                     {kycTicketId &&
@@ -20,7 +20,7 @@ const VerificationState = ({kycState, kycTicketId, className}) => {
                         here!</StyledLink>}
                 </Content>
             }
-            {kycState === 'DECLINED' &&
+            {kycStatus === 'DECLINED' &&
                 <Content className="state-declined">
                     <p>Sorry, your application was declined.</p>
                     {kycTicketId &&
