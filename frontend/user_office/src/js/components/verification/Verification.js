@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {compose} from 'redux';
 import $ from 'jquery';
-import VerificationValidation from 'js/components/verification/services/VerificationValidation';
-import {media} from 'js/services/media';
+
+import {media} from 'js/utils/media';
+import getValidationSchema from 'js/utils/getValidationSchema';
 
 import {Formik, Form} from 'formik';
 import Title from 'js/components/common/Title';
@@ -134,7 +135,7 @@ class Verification extends React.Component {
         event.preventDefault();
         const $filesBlock = $(event.target).closest('.files-section').find('.files-container');
 
-        const $newFileInput = $(`<input class="file-input" id=${this.currentFileId++} type="file" name="${name}" hidden/>`);
+        const $newFileInput = $(`<input className="file-input" id=${this.currentFileId++} type="file" name="${name}" hidden/>`);
 
         $filesBlock.prepend($newFileInput);
         $newFileInput.click();
@@ -155,7 +156,7 @@ class Verification extends React.Component {
         return (
             <Formik
                 initialValues={this.getInitialValues()} 
-                validationSchema={activeKycTab === 1 ? VerificationValidation({type: 'Natural'}) : VerificationValidation({type: 'Legal'})} 
+                validationSchema={activeKycTab === 1 ? getValidationSchema('kycNatural') : getValidationSchema('kycLegal')} 
                 validateOnChange={false} 
                 validateOnBlur={true}
                 enableReinitialize={true}

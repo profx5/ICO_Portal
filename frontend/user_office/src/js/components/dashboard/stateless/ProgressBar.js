@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Utils from 'js/services/index';
-import {media} from 'js/services/media';
+import splitDigits from 'js/utils/splitDigits';
+import {media} from 'js/utils/media';
 
 import arrow from 'img/arrow_roadmap.svg';
 
@@ -15,7 +15,7 @@ const ProgressBar = ({children, raisedAmountNum, tokenPrice}) => {
             <BarWrapper>
                 <Bar>
                     <InnerBar width={raisedAmountPercents >= 100 ? 100 : raisedAmountPercents}>
-                        <Point xsTextHidden={raisedAmountPercents < 14} rate={`1 OGD = ${tokenPrice} USD`} data-raised-amount={Utils.splitDigits(Math.ceil(raisedAmountNum / 100)) + ' USD'}/>
+                        <Point xsTextHidden={raisedAmountPercents < 14} rate={`1 OGD = ${tokenPrice} USD`} data-raised-amount={splitDigits(Math.ceil(raisedAmountNum / 100)) + ' USD'}/>
                     </InnerBar>
                     <Stage>
                         <div className="StageDesc hidden-smMinus">

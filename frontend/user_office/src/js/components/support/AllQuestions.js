@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import Ticket from 'js/components/support/stateless/Ticket';
 

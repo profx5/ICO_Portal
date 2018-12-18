@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import styled from 'styled-components';
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import iconCheckGreen from 'img/check-green.svg';
 

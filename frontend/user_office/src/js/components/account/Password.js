@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import PasswordValidationSchema from 'js/components/account/services/PasswordValidationSchema';
-import {media} from 'js/services/media';
+
+import {media} from 'js/utils/media';
+import getValidationSchema from 'js/utils/getValidationSchema';
 
 import { Formik, Form } from "formik";
 import InputLabel from 'js/components/account/stateless/InputLabel';
@@ -43,7 +44,7 @@ class Password extends React.Component {
                 new_password1: '',
                 new_password2: ''
             }} 
-            validationSchema={PasswordValidationSchema} 
+            validationSchema={getValidationSchema('password')} 
             enableReinitialize={true}
             onSubmit={this.onSubmitHandler} 
             render={({errors, touched}) => (

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import moment from "moment";
-import {media} from 'js/services/media';
+import {media} from 'js/utils/media';
 
 import * as UIActions from 'js/actions/UIActions';
 
@@ -36,10 +36,10 @@ class DepositTable extends Component {
                     time={moment(item.get('created_at')).format('HH:mm:ss')}
                     transferTxnHash={item.getIn(['transfer', 'txn_hash'])}
                     paymentTxnId={item.getIn(['payment', '0', 'txn_id'])}
-                    amount={parseFloat(item.getIn(['payment', '0', 'amount'])).toFixed(2)}
+                    amount={parseFloat(item.getIn(['payment', '0', 'amount'])).toFixed(2) || 0.00}
                     currency={item.getIn(['payment', '0', 'currency'])}
-                    usdc_value={parseFloat(item.getIn(['payment', '0', 'usdc_value']) / 100).toFixed(2)}
-                    tokens={parseFloat(item.get('amount') / 10 ** 18).toFixed(2)}
+                    usdc_value={parseFloat(item.getIn(['payment', '0', 'usdc_value']) / 100).toFixed(2) || 0.00}
+                    tokens={parseFloat(item.get('amount') / 10 ** 18).toFixed(2) || 0.00}
                     rate_usdc={item.getIn(['payment', '0', 'rate_usdc'])}
                     bonus_percent={item.getIn(['payment', '0', 'bonus_percent'])}
                     tokenPrice={tokenPrice}>

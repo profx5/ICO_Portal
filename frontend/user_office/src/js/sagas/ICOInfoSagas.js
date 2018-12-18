@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Api from 'api'
+import API from 'api'
 import {put, call, takeEvery} from 'redux-saga/effects'
 import * as actions from 'js/actions/ICOInfoActions'
 
@@ -8,7 +8,7 @@ export class ICOInfoSagas {
         try {
             const response = yield call(axios,{
                 method: "GET",
-                url: Api.getICOInfo()
+                url: API.getICOInfo()
             })
 
             yield put(actions.getICOInfoSuccess(response.data))
@@ -20,7 +20,7 @@ export class ICOInfoSagas {
     static * getCryptoAccount(action) {
         try {
             const response = yield call(axios, {
-                url: Api.getAccount(),
+                url: API.getAccount(),
                 method: "GET",
                 params: {
                     "currency": action.payload

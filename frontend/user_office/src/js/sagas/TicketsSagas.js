@@ -1,17 +1,17 @@
 import axios from 'axios'
-import Api from 'api'
+import API from 'api'
 import {call, put, takeEvery} from 'redux-saga/effects';
 import * as ticketActions from 'js/actions/TicketActions';
 import * as UIActions from 'js/actions/UIActions';
 import * as FilesActions from 'js/actions/FilesActions';
-import history from 'js/services/history';
+import history from 'js/utils/getBrowserHistory';
 
 export class TicketsSagas {
     static* getTickets() {
         try {
             const response = yield call(axios, {
                 method: 'GET',
-                url: Api.getTickets(),
+                url: API.getTickets(),
             });
             yield put(ticketActions.getTicketsSuccess(response.data))
         } catch (e) {
@@ -23,7 +23,7 @@ export class TicketsSagas {
         try {
             const res = yield call(axios, {
                 method: 'GET',
-                url: Api.getTicket(id.payload),
+                url: API.getTicket(id.payload),
             });
             yield put(ticketActions.getSelectedTicketSuccess(res.data))
         } catch (e) {
@@ -36,7 +36,7 @@ export class TicketsSagas {
         try {
             const res = yield call(axios, {
                 method: 'POST',
-                url: Api.newTicket(),
+                url: API.newTicket(),
                 data: ticket.payload
             });
             yield put(ticketActions.getTicketsRequest());
@@ -53,7 +53,7 @@ export class TicketsSagas {
         try {
             yield call(axios, {
                 method: 'POST',
-                url: Api.newComment(comment.payload.get('ticket')),
+                url: API.newComment(comment.payload.get('ticket')),
                 data: comment.payload
             });
             yield put(ticketActions.createNewCommentSuccess());

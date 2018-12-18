@@ -2,8 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import ClipboardJS from 'clipboard';
-import EmailValidationSchema from 'js/components/account/services/EmailValidationSchema';
-import {media} from 'js/services/media';
+
+import {media} from 'js/utils/media';
+import getValidationSchema from 'js/utils/getValidationSchema';
 
 import { Formik, Form } from "formik";
 import InputText from 'js/components/account/stateless/InputText';
@@ -42,7 +43,7 @@ class AccountInfo extends React.Component {
                         email: '',
                         old_email: email
                     }} 
-                    validationSchema={EmailValidationSchema(email)}
+                    validationSchema={getValidationSchema('email')}
                     enableReinitialize={true} 
                     onSubmit={this.onSubmitHandler} 
                     render={({errors, touched}) => (
