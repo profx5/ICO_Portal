@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-// import calcDatesDiff from 'js/utils/calcDatesDiff';
 import splitDigits from 'js/utils/splitDigits';
 import {media} from 'js/utils/media';
 
