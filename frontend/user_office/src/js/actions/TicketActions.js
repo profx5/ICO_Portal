@@ -11,10 +11,11 @@ export const getSelectedTicketFailed = createAction('GET_SELECTED_TICKET_FAILED'
 
 export const unselectTicket = createAction('UNSELECT_TICKET');
 
-export const createNewTicket = createAction('CREATE_NEW_TICKET');
+export const createNewTicketRequest = createAction('CREATE_NEW_TICKET_REQUEST');
+export const createNewTicketSuccess = createAction('CREATE_NEW_TICKET_SUCCESS');
 export const createNewTicketFailed = createAction("CREATE_NEW_TICKET_FAILED");
 
 
-export const createNewComment = createAction('CREATE_NEW_COMMENT');
+export const createNewCommentRequest = createAction('CREATE_NEW_COMMENT_REQUEST');
 export const createNewCommentSuccess = createAction("CREATE_NEW_COMMENT_SUCCESS");
 export const createNewCommentFailed = createAction("CREATE_NEW_COMMENT_FAILED");

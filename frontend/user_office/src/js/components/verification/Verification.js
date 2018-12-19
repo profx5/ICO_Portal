@@ -142,7 +142,7 @@ class Verification extends React.Component {
     }
 
     render() {
-        const {state, type, is_pep} = this.props;
+        const {state, type, is_pep, isSubmiting} = this.props;
         let {activeKycTab} = this.props;
 
         if (type) activeKycTab = type === 'LEGAL' ? 2 : 1;
@@ -151,7 +151,7 @@ class Verification extends React.Component {
         if (kycTicket[0]) {
             kycTicketId = kycTicket[0].id;
         }
-        let KYCStatus = type !== '' && state;
+        let KYCState = type !== '' && state;
 
         return (
             <Formik
@@ -168,21 +168,22 @@ class Verification extends React.Component {
                                 <Title className="Verification_head">Verification (KYC)</Title>
                                 <KYCTabs clickHandler={this.tabClickHandler.bind(this, resetForm)} activeTab={activeKycTab}/>
                             </HeaderInner>
-                            <VerificationState className="visible-smMinus" kycState={KYCStatus} kycTicketId={kycTicketId}/>
+                            <VerificationState className="visible-smMinus" kycStatus={KYCState} kycTicketId={kycTicketId}/>
                         </Header>
                         <MainWrapper>
-                            {!type && activeKycTab === 1 && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
+                            {!type && activeKycTab === 1 && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} kycStatus={KYCState}/>}
                             {!type && activeKycTab === 2 && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
-                            {type === "NATURAL" && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
+                            {type === "NATURAL" && <NaturalPerson kycStatus={KYCState} errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
                             {type === "LEGAL" && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
-                            <InvestorsDocuments errors={errors} touched={touched} values={values} onAttachClickHandler={this.onAttachClickHandler}/>
+                            <InvestorsDocuments errors={errors} touched={touched} values={values} onAttachClickHandler={this.onAttachClickHandler} isSubmiting={isSubmiting}/>
                         </MainWrapper>
                         <div>
                             <VerificationInfo
                                 btnText="Send data"
+                                isSubmiting={isSubmiting}
                                 verificationStages={['Verification__personData', 'Verification__investorsDocuments']}
                                 stages={activeKycTab === 1 ? ['Personal Data', 'Investor\'s documents'] : ['Legal Person Data', 'Investor\'s documents']}
-                                kycState={KYCStatus} 
+                                kycStatus={KYCState} 
                                 kycTicketId={kycTicketId}/>
                         </div>
                     </Wrapper>
@@ -237,6 +238,7 @@ const mapStateToProps = ({UI, KYC, user, tickets}) => ({
     attachments: KYC.get('attachments'),
     kyc_required: user.get('kyc_required'),
     tickets: tickets.get('results'),
+    isSubmiting: KYC.get('isSubmiting')
 });
 
 const mapDispatchToProps = (dispatch) => ({

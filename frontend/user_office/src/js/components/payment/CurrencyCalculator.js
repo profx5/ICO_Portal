@@ -49,6 +49,7 @@ class CurrencyCalculator extends React.Component {
     };
 
     onChangeHandler = event => {
+        event.preventDefault();
         let value = event.target.value;
         let formatedValue = formatInvestedValue(value);
         

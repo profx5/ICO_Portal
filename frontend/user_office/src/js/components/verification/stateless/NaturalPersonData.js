@@ -5,7 +5,7 @@ import {media} from 'js/utils/media';
 import FormikField from 'js/components/common/FormikField';
 
 
-const NaturalPersonData = ({email, errors, touched, values}) => {
+const NaturalPersonData = ({email, errors, touched, values, kycStatus}) => {
 
     return (
         <InputSet>
@@ -24,7 +24,7 @@ const NaturalPersonData = ({email, errors, touched, values}) => {
                 <FormikField 
                     value={values.middlename || ''} 
                     name="middlename"
-                    placeholder="Fitzgerald"
+                    placeholder={(kycStatus !== "WAITING" || kycStatus !== "APPROVED") && "Fitzgerald" || ""}
                     labelText="Middle Name" 
                     errors={errors} 
                     touched={touched}/> 

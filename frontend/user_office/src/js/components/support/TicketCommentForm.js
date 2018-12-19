@@ -25,7 +25,7 @@ class TicketCommentForm extends React.Component {
     };
 
     render() {
-        const {selectedTicket, commentFiles, addCommentFile, removeCommentFile} = this.props;
+        const {selectedTicket, commentFiles, addCommentFile, removeCommentFile, isSubmitting} = this.props;
 
         return (
             <Wrapper>
@@ -64,7 +64,7 @@ class TicketCommentForm extends React.Component {
                                         <Button text="Attach file" clickHandler={this.props.onAttachClickHandler.bind(this,'attachment')} attach transparent/>
                                     </div>
                                     <div className="button-wrapper">
-                                        <Button type="submit" text="Send"/>
+                                        <Button type="submit" text="Send" isSubmitting={isSubmitting}/>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,8 @@ class TicketCommentForm extends React.Component {
 
 const mapStateToProps = ({tickets, user, Files}) => ({
     selectedTicket: tickets.get('selectedTicket'),
-    commentFiles: Files.get('commentFiles')
+    commentFiles: Files.get('commentFiles'),
+    isSubmitting: tickets.get('isNewCommentSubmitting')
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -93,7 +94,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(FilesActions.removeCommentFile(payload))
     },
     createNewComment(payload) {
-        dispatch(TicketActions.createNewComment(payload))
+        dispatch(TicketActions.createNewCommentRequest(payload))
     }
 });
 

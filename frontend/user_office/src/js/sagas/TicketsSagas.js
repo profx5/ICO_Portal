@@ -39,6 +39,7 @@ export class TicketsSagas {
                 url: API.newTicket(),
                 data: ticket.payload
             });
+            yield put(ticketActions.createNewTicketSuccess());
             yield put(ticketActions.getTicketsRequest());
             yield history.push('/user_office/support/ticket/' + res.data.id);
             yield put(ticketActions.getSelectedTicket(res.data.id));
@@ -68,6 +69,6 @@ export class TicketsSagas {
 export function* saga() {
     yield takeEvery(ticketActions.getTicketsRequest, TicketsSagas.getTickets);
     yield takeEvery(ticketActions.getSelectedTicket, TicketsSagas.getSelectedTicket);
-    yield takeEvery(ticketActions.createNewTicket, TicketsSagas.createNewTicket);
-    yield takeEvery(ticketActions.createNewComment, TicketsSagas.createNewComment);
+    yield takeEvery(ticketActions.createNewTicketRequest, TicketsSagas.createNewTicket);
+    yield takeEvery(ticketActions.createNewCommentRequest, TicketsSagas.createNewComment);
 }

@@ -15,16 +15,14 @@ import iconQuestion from 'img/icons/icon_faq.svg';
 class NaturalPerson extends React.Component {
 
     render() {
-        const {email, showModal, errors, touched, values, is_pep} = this.props;
+        const {email, showModal, errors, touched, values, is_pep, kycStatus} = this.props;
 
         return (
             <Wrapper className="Verification__personData">
                 <Head>Personal Data</Head>
-                <NaturalPersonData errors={errors} touched={touched} values={values} email={email}/>
-
+                <NaturalPersonData errors={errors} touched={touched} values={values} email={email} kycStatus={kycStatus}/>
                 <ConfirmAsInvestor errors={errors} touched={touched} values={values} showModalHandler={showModal} iconQuestion={iconQuestion} labelText="I confirm that the investor is a beneficial owner"/>
                 <ConfirmNaturalPEP showModalHandler={showModal} iconQuestion={iconQuestion} is_pep={is_pep}/>
-
             </Wrapper>
         )
     }

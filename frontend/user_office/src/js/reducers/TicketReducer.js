@@ -5,16 +5,18 @@ import {List, Map} from 'immutable';
 
 const initialState = Map({
     results: List(),
-    isTicketsLoading: false,
     selectedTicket: null,
-    isSelectedTicketLoading: false
+    isNewTicketSubmitting: false,
+    isNewCommentSubmitting: false
 });
 
 
 export const TicketsReducer = createReducer({
-    [actions.getTicketsRequest]: (state = initialState) => state.set('isTicketsLoading', true),
     [actions.getTicketsSuccess]: (state = initialState, payload) => state.set('results', payload),
-    [actions.getSelectedTicket]: (state = initialState) => state.set('isSelectedTicketLoading', true),
-    [actions.getSelectedTicketSuccess]: (state = initialState, payload) => state.set('selectedTicket', payload).set('isSelectedTicketLoading', false),
+    [actions.getSelectedTicketSuccess]: (state = initialState, payload) => state.set('selectedTicket', payload),
     [actions.unselectTicket]: (state=initialState) => state.set('selectedTicket', null),
+    [actions.createNewTicketRequest]: (state=initialState) => state.set('isNewTicketSubmitting', true),
+    [actions.createNewTicketSuccess]: (state=initialState) => state.set('isNewTicketSubmitting', false),
+    [actions.createNewCommentRequest]: (state=initialState) => state.set('isNewCommentSubmitting', true),
+    [actions.createNewCommentSuccess]: (state=initialState) => state.set('isNewCommentSubmitting', false),
 }, initialState);
