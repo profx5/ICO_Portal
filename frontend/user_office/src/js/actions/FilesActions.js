@@ -17,6 +17,6 @@ export const addUtilityBillFile = createAction('ADD_UTILITY_BILL_FILE');
 export const removeUtilityBillFile = createAction('REMOVE_UTILITY_BILL_FILE');
 export const clearUtilityBillFile = createAction('CLEAR_UTILITY_BILL_FILE');
 
-export const addRepresentationFile = createAction('ADD_REPRESENTATION_FILE');
-export const removeRepresentationFile = createAction('REMOVE_REPRESENTATION_FILE');
-export const clearRepresentationFile = createAction('CLEAR_REPRESENTATION_FILE');
+export const addBasisFile = createAction('ADD_BASIS_FILE');
+export const removeBasisFile = createAction('REMOVE_BASIS_FILE');
+export const clearBasisFile = createAction('CLEAR_BASIS_FILE');

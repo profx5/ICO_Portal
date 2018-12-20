@@ -24,7 +24,7 @@ import Account from 'js/components/account/Account';
 import SetAccount from 'js/components/layout/SetAccount';
 
 import CustomModals from 'js/components/layout/CustomModals';
-import Modal from 'js/components/layout/Modal';
+import Modal from 'js/components/common/Modal';
 
 import * as UIActions from 'js/actions/UIActions';
 import * as TicketActions from 'js/actions/TicketActions';

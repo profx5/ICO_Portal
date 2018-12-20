@@ -9,8 +9,6 @@ import VerificationStages from 'js/components/verification/stateless/Verificatio
 import VerificationState from 'js/components/verification/stateless/VerificationState';
 import Button from 'js/components/common/Button';
 
-import PreloadIcon from 'img/preload-white.svg';
-
 
 class VerificationInfo extends React.Component {
 

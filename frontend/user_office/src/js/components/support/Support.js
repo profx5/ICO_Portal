@@ -19,17 +19,6 @@ class Support extends React.Component {
         this.currentFileId = 0;
     }
 
-    onAttachClickHandler = (name, event) => {
-        event.preventDefault();
-        const $filesBlock = $(event.target).closest('.files-section').find('.files-container');
-
-        const $newFileInput = $(`<input className="file-input" id=${this.currentFileId++} type="file" name="${name}" hidden/>`);
-
-        $filesBlock.prepend($newFileInput);
-        $newFileInput.click();
-    }
-
-
     render() {
         const {tickets, selectedTicket, activeSupportTab, activateSupportTab} = this.props;
 
@@ -37,9 +26,9 @@ class Support extends React.Component {
             <Wrapper>
                 <Title>FAQ & Feedback</Title>
                 <SupportTabs tabClickHandler={activateSupportTab} ticketsAmount={tickets} activeTab={activeSupportTab} isTicketOpened={!!selectedTicket}/>
-                {!selectedTicket && activeSupportTab === 1 && <NewTicket onAttachClickHandler={this.onAttachClickHandler}/>}
+                {!selectedTicket && activeSupportTab === 1 && <NewTicket/>}
                 {!selectedTicket && activeSupportTab === 2 && <AllQuestions/>}
-                {selectedTicket && <OpenedTicket onAttachClickHandler={this.onAttachClickHandler}/>}
+                {selectedTicket && <OpenedTicket/>}
             </Wrapper>
         )
     }

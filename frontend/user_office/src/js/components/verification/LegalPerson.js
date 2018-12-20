@@ -4,26 +4,17 @@ import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
 import LegalPersonData from 'js/components/verification/stateless/LegalPersonData';
-import RepresentationFiles from 'js/components/verification/stateless/RepresentationFiles';
 import LegalOwnerData from 'js/components/verification/stateless/LegalOwnerData';
 import ConfirmLegalPEP from 'js/components/verification/stateless/ConfirmLegalPEP';
 
 import * as FilesActions from 'js/actions/FilesActions';
 import * as UIActions from "js/actions/UIActions";
 
-const File = ({ input: {value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
-  <input type='file' {...inputProps} {...props} />
-);
-
 
 class LegalPerson extends React.Component {
 
     render() {
         const {
-            representationFiles, 
-            addRepresentationFile,
-            removeRepresentationFile,
-            onAttachClickHandler,
             showModal,
             errors,
             touched,
@@ -36,12 +27,7 @@ class LegalPerson extends React.Component {
                 <Head>Legal Person Data</Head>
 
                 <LegalPersonData errors={errors} touched={touched} values={values}/>
-                <RepresentationFiles files={representationFiles} 
-                    onAttachClickHandler={onAttachClickHandler.bind(this, 'basis_doc')} 
-                    uploadFileHandler={addRepresentationFile} 
-                    removeFileHandler={removeRepresentationFile} 
-                    name="basis_doc" 
-                    filesWrapper={document.querySelector('.files-section-basis')}/>
+                {this.props.children}
                 <LegalOwnerData errors={errors} touched={touched} values={values} showModalHandler={showModal}/>
                 <ConfirmLegalPEP errors={errors} touched={touched} is_pep={is_pep}/>
 
@@ -52,20 +38,13 @@ class LegalPerson extends React.Component {
 
 
 const mapStateToProps = ({Files}) => ({
-    representationFiles: Files.get('representationFiles'),
+    basisFiles: Files.get('basisFiles'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
     showModal(payload) {
         dispatch(UIActions.showModal(payload))
-    },
-    addRepresentationFile(payload) {
-        dispatch(FilesActions.addRepresentationFile(payload))
-    },
-    removeRepresentationFile(payload) {
-        dispatch(FilesActions.removeRepresentationFile(payload))
-    },
-
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LegalPerson)

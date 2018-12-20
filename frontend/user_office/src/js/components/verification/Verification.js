@@ -15,6 +15,9 @@ import NaturalPerson from 'js/components/verification/NaturalPerson';
 import LegalPerson from 'js/components/verification/LegalPerson';
 import VerificationInfo from 'js/components/verification/VerificationInfo';
 import InvestorsDocuments from 'js/components/verification/InvestorsDocuments';
+import IDFiles from 'js/components/verification/IDFiles';
+import UtilityBillFiles from 'js/components/verification/UtilityBillFiles';
+import BasisFiles from 'js/components/verification/BasisFiles';
 
 import * as KYCActions from 'js/actions/KYCActions';
 import * as UIActions from 'js/actions/UIActions';
@@ -26,6 +29,17 @@ class Verification extends React.Component {
     constructor() {
         super();
         this.currentFileId = 0;
+        this.state = {
+            basisFilesError: '',
+            idFilesError: '',
+            utiliyBillFilesError: '',
+        }
+    }
+
+    componentWillUnmount() {
+        const {clearIdDocumentFile, clearUtilityBillFile, clearBasisFile} = this.props;
+
+        compose(clearIdDocumentFile, clearUtilityBillFile, clearBasisFile)();
     }
 
     getKYCTicket = () => {
@@ -97,52 +111,57 @@ class Verification extends React.Component {
     }
 
     onSubmitHandler = (e) => {
-        const {activeKycTab, submitForm, showModal, state, attachments, clearIdDocumentFile, clearUtilityBillFile, clearRepresentationFile} = this.props;
+        const {activeKycTab, submitForm, state, attachments, clearIdDocumentFile, clearUtilityBillFile, clearBasisFile} = this.props;
         const form = document.querySelector('.VerificationForm');
+        let filesUploaded = true;
+
 
         if (activeKycTab === 2) {
             if (!$('[name="basis_doc"]').val() && !attachments) {
-                showModal({
-                    modalHead: 'Warning',
-                    modalContent: 'Please, check if you\'ve attached the basis for representation!'
-                });
-                return; 
+                filesUploaded = false;
+                this.setState(() => {
+                    return {
+                        basisFilesError: 'You must attach a basis for representation!'
+                    }
+                })
             }
         }
 
         if (!$('[name="id_document_photo"]').val() && !attachments) {
-            showModal({
-                modalHead: 'Warning',
-                modalContent: 'Please, check if you\'ve attached a copy of ID!'
-            });
-            return;
-        } else if (!$('[name="bill_photo"]').val() && !attachments) {
-            showModal({
-                modalHead: 'Warning',
-                modalContent: 'Please, check if you\'ve attached a copy of Utility bill!'
-            });
-            return;
+            filesUploaded = false;
+            this.setState(() => {
+                return {
+                    idFilesError: 'You must attach a photo of your ID!'
+                }
+            })
         }
-
-        submitForm({
-            form: new FormData(form),
-            state: state
-        });
-        compose(clearIdDocumentFile, clearUtilityBillFile, clearRepresentationFile)();
-    }
-
-    onAttachClickHandler = (name, event) => {
-        event.preventDefault();
-        const $filesBlock = $(event.target).closest('.files-section').find('.files-container');
-
-        const $newFileInput = $(`<input className="file-input" id=${this.currentFileId++} type="file" name="${name}" hidden/>`);
-
-        $filesBlock.prepend($newFileInput);
-        $newFileInput.click();
+      
+        if (!$('[name="bill_photo"]').val() && !attachments) {
+            filesUploaded = false;
+            this.setState(() => {
+                return {
+                    utiliyBillFilesError: 'You must attach a copy of Utility bill!'
+                }
+            })
+        }
+        if(filesUploaded) {
+            submitForm({
+                form: new FormData(form),
+                state: state
+            });
+            this.setState(() => {
+                return {
+                    basisFilesError: '',
+                    idFilesError: '',
+                    utiliyBillFilesError: ''
+                }
+            })
+            compose(clearIdDocumentFile, clearUtilityBillFile, clearBasisFile)();
+        }
     }
 
     render() {
-        const {state, type, is_pep, isSubmiting} = this.props;
+        const {state, type, is_pep, isSubmiting, basisFiles, idDocumentFiles, utilityBillFiles} = this.props;
         let {activeKycTab} = this.props;
 
         if (type) activeKycTab = type === 'LEGAL' ? 2 : 1;
@@ -172,10 +191,24 @@ class Verification extends React.Component {
                         </Header>
                         <MainWrapper>
                             {!type && activeKycTab === 1 && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} kycStatus={KYCState}/>}
-                            {!type && activeKycTab === 2 && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
+                            {!type && activeKycTab === 2 && 
+                                <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}>
+                                    <BasisFiles errorMessage={!basisFiles.size && this.state.basisFilesError}/>
+                                </LegalPerson>
+                            }
                             {type === "NATURAL" && <NaturalPerson kycStatus={KYCState} errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
-                            {type === "LEGAL" && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
-                            <InvestorsDocuments errors={errors} touched={touched} values={values} onAttachClickHandler={this.onAttachClickHandler} isSubmiting={isSubmiting}/>
+                            {type === "LEGAL" && 
+                                <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}>
+                                    <BasisFiles errorMessage={!basisFiles.size && this.state.basisFilesError}/>
+                                </LegalPerson>
+                            }
+                            <InvestorsDocuments 
+                                errors={errors} 
+                                touched={touched} 
+                                values={values}>
+                                <IDFiles errorMessage={!idDocumentFiles.size && this.state.idFilesError}/>
+                                <UtilityBillFiles errorMessage={!utilityBillFiles.size && this.state.utiliyBillFilesError}/>
+                            </InvestorsDocuments>
                         </MainWrapper>
                         <div>
                             <VerificationInfo
@@ -194,7 +227,7 @@ class Verification extends React.Component {
 };
 
 
-const mapStateToProps = ({UI, KYC, user, tickets}) => ({
+const mapStateToProps = ({UI, KYC, user, tickets, Files}) => ({
     state: KYC.get('state'),
     type: KYC.get('type'),
     activeKycTab: UI.get('activeKycTab'),
@@ -238,7 +271,10 @@ const mapStateToProps = ({UI, KYC, user, tickets}) => ({
     attachments: KYC.get('attachments'),
     kyc_required: user.get('kyc_required'),
     tickets: tickets.get('results'),
-    isSubmiting: KYC.get('isSubmiting')
+    isSubmiting: KYC.get('isSubmiting'),
+    basisFiles: Files.get('basisFiles'),
+    idDocumentFiles: Files.get('idDocumentFiles'),
+    utilityBillFiles: Files.get('utilityBillFiles'),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -263,8 +299,8 @@ const mapDispatchToProps = (dispatch) => ({
     clearUtilityBillFile() {
         dispatch(FilesActions.clearUtilityBillFile())
     },
-    clearRepresentationFile() {
-        dispatch(FilesActions.clearRepresentationFile())
+    clearBasisFile() {
+        dispatch(FilesActions.clearBasisFile())
     },
 });
 
@@ -329,3 +365,5 @@ const MainWrapper = styled.div`
         max-width: unset;
     }
 `;
+
+//TODO: Validation errors go after each other, it appears only if fields are filled

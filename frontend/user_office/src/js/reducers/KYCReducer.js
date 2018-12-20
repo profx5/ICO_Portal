@@ -4,7 +4,7 @@ import {Map} from 'immutable'
 
 
 const initialState = Map({
-    state: "",
+    state: "DECLINED",
     user_photo: null,
     type: '',
     firstname: "",

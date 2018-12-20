@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
+import PreloadIcon from 'img/preload-white.svg';
+
 
 const Button = ({text, className, clickHandler, submit, disabled, icon, style, attach, transparent, type, isSubmitting}) => {
     const opts = {
@@ -10,7 +12,8 @@ const Button = ({text, className, clickHandler, submit, disabled, icon, style, a
         disabled: disabled,
         attach: attach,
         transparent: transparent,
-        type: type
+        type: type,
+        style: style
     }
 
     if (submit) {

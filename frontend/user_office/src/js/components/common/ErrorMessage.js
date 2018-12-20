@@ -18,8 +18,10 @@ const Message = styled.span`
     margin-top: 10px;
     font-size: 14px;
     color: rgb(242, 109, 109);
+    white-space: nowrap;
     ${media.xs} {
         font-size: 12px;
         margin-top: 5px;
+        white-space: unset;
     }
 `;

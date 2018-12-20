@@ -8,7 +8,7 @@ const initialState = Map({
     newTicketFiles: List(),
     idDocumentFiles: List(),
     utilityBillFiles: List(),
-    representationFiles: List(),
+    basisFiles: List(),
 });
 
 
@@ -25,8 +25,8 @@ export const FilesReducer = createReducer({
     [actions.addUtilityBillFile]: (state = initialState, payload) => {
         return state.update('utilityBillFiles', utilityBillFiles => utilityBillFiles.push(payload))
     },
-    [actions.addRepresentationFile]: (state = initialState, payload) => {
-        return state.update('representationFiles', representationFiles => representationFiles.push(payload))
+    [actions.addBasisFile]: (state = initialState, payload) => {
+        return state.update('basisFiles', basisFiles => basisFiles.push(payload))
     },
 
     [actions.removeCommentFile]: (state = initialState, payload) => {
@@ -53,11 +53,11 @@ export const FilesReducer = createReducer({
         });
         return state.set('utilityBillFiles', updatedCommentFiles);
     },
-    [actions.removeRepresentationFile]: (state = initialState, payload) => {
-        let updatedCommentFiles = state.get('representationFiles').filter(item => {
+    [actions.removeBasisFile]: (state = initialState, payload) => {
+        let updatedCommentFiles = state.get('basisFiles').filter(item => {
             return item.id !== payload;
         });
-        return state.set('representationFiles', updatedCommentFiles);
+        return state.set('basisFiles', updatedCommentFiles);
     },
 
     [actions.clearCommentFiles]: (state = initialState) => {
@@ -72,7 +72,7 @@ export const FilesReducer = createReducer({
     [actions.clearUtilityBillFile]: (state = initialState) => {
         return state.update('utilityBillFiles', utilityBillFiles => utilityBillFiles.clear())
     },
-    [actions.clearRepresentationFile]: (state = initialState) => {
-        return state.update('representationFiles', representationFiles => representationFiles.clear())
+    [actions.clearBasisFile]: (state = initialState) => {
+        return state.update('basisFiles', basisFiles => basisFiles.clear())
     },
 }, initialState);

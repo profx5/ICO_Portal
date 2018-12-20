@@ -5,7 +5,7 @@ import {media} from 'js/utils/media';
 import FormikField from 'js/components/common/FormikField';
 
 
-const NaturalPersonData = ({email, errors, touched, values, kycStatus}) => {
+const NaturalPersonData = ({errors, touched, values, kycStatus}) => {
 
     return (
         <InputSet>
