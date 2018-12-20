@@ -16,14 +16,6 @@ class ProcessTransfer(ServiceObject):
         else:
             return self.success()
 
-    def find_transaction(self, context):
-        transaction = Transaction.objects.filter(txn_hash=context.event.txn_hash)
-
-        if transaction.exists():
-            return self.success(transaction=transaction.first())
-        else:
-            return self.success(transaction=None)
-
     def find_existing_transfer(self, context):
         transfer = Transfer.objects.filter(txn_hash=context.event.txn_hash).first()
 
@@ -83,16 +75,6 @@ class ProcessTransfer(ServiceObject):
             lambda result: self.success(outgoing_TM=result.tokens_move)
         )
 
-    def maybe_process_purchase(self, context):
-        purchase_event = CrowdsaleContract().get_event_from_txn_hash(context.event.txn_hash)
-
-        if purchase_event and context.incoming_TM:
-            return process_purchase.ProcessPurchase()(context.incoming_TM, purchase_event) | (
-                lambda result: self.success(payment=result.payment)
-            )
-        else:
-            return self.success()
-
     def create_referral_bonus(self, context):
         if 'payment' in context:
             return AddReferralBonus()(payment=context.payment) | (lambda result: self.success())
@@ -104,9 +86,8 @@ class ProcessTransfer(ServiceObject):
     def __call__(self, event):
         return self.success(event=event) | \
             self.check_event | \
-            self.find_transaction | \
+            self.find_existing_transfer | \
             self.get_transfer | \
             self.process_incoming_tokens_move | \
             self.process_outgoing_tokens_move | \
-            self.maybe_process_purchase | \
             self.create_referral_bonus

@@ -4,7 +4,7 @@ from .fields import DocFileField
 
 
 KYC_STATE_CHOICES = (('WAITING', 'Waiting for approval'),
-                     ('MINING', 'Waiting to be mined'),
+                     ('DEPLOYING', 'Deploying mediator contract'),
                      ('DECLINED', 'Declined'),
                      ('APPROVED', 'Approved'))
 
@@ -28,6 +28,7 @@ class KYC(models.Model):
 
     ticket = models.ForeignKey('helpdesk.Ticket', on_delete=models.SET_NULL,
                                null=True, blank=True, related_name='kyc')
+    deploy_txn_id = models.UUIDField(blank=True, null=True)
 
     # natural person
     firstname = models.CharField('First Name', max_length=30, null=True, blank=True)

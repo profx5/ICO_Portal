@@ -5,7 +5,7 @@ from django.conf import settings
 
 import blockchain.web3
 from ico_portal.utils.datetime import datetime
-from blockchain.ico.contracts import CrowdsaleContract, PriceOracle
+from blockchain.ico.contracts import CrowdsaleContract, PriceOracle, TokensMediator
 from blockchain.ico.contracts.token import TokenContract, TransferEvent
 from django.apps import apps
 
@@ -54,12 +54,13 @@ class BlockChainTestCase(TestCase):
     def _setup_crowdsale(cls):
         Crowdsale = cls.web3.eth.contract(abi=CrowdsaleContract.get_compiled()['abi'],
                                           bytecode=CrowdsaleContract.get_compiled()['bin'])
-        tx_hash = Crowdsale.constructor(cls.token_contract.address, 100).transact()
+        tx_hash = Crowdsale.constructor(100, cls.token_contract.address).transact()
         tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
         cls.crowdsale_contract = cls.web3.eth.contract(address=tx_receipt.contractAddress,
                                                        abi=CrowdsaleContract.get_compiled()['abi'])
 
         CrowdsaleContract.init({'address': cls.crowdsale_contract.address})
+        TokensMediator.init({'endpoint_address': cls.crowdsale_contract.address})
 
     @classmethod
     def _setup_price_oracle(cls):

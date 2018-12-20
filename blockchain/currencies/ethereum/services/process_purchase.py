@@ -20,10 +20,7 @@ class ProcessPurchase(ServiceObject):
                               amounti=event.value,
                               txn_id=event.txn_hash,
                               tokens_move=tokens_move,
-                              usdc_value=event.value_in_cents,
-                              rate_usdc=event.eth_price_in_cents,
-                              bonus_percent=event.bonus_percent,
-                              bonus_ids=event.bonus_ids)
+                              usdc_value=event.value_in_cents)
 
         try:
             payment.save()

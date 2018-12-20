@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 from django.conf import settings
 
-from .ico.contracts import CrowdsaleContract, TokenContract
+from .ico.contracts import CrowdsaleContract, TokenContract, TokensMediator
 from .currencies import Currencies
 
 
@@ -16,6 +16,7 @@ class BlockchainConfig(AppConfig):
     def init_contracts(self):
         CrowdsaleContract.init(settings.CROWDSALE_CONTRACT)
         TokenContract.init(settings.TOKEN_CONTRACT)
+        TokensMediator.init(settings.MEDIATOR_CONTRACT)
 
     def init_currencies(self):
         Currencies.init(settings.CURRENCIES)

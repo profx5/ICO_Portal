@@ -13,5 +13,6 @@ from .sync_ico_info import SyncICOInfo
 from .track_transactions import SendPreparedTxns, TrackTransactions
 from .update_price_oracle import UpdatePriceOracle
 from .calc_usd_value import CalcUSDValue
-from .kyc import ApproveKYC, DeclineKYC
+from .kyc import ApproveKYC, DeclineKYC, ApproveMinedKYC
 from .collect_referral_bonuses import CollectReferralBonuses
+from .create_mediator_contract import CreateMediatorContract

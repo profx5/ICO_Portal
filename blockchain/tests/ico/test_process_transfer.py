@@ -24,62 +24,6 @@ class TestProcessTransfer(BlockChainTestCase):
         self.assertTrue(isinstance(result, Right))
         return txn_hash
 
-    def test_purchase_tokens(self):
-        recipient = InvestorFactory.create(eth_account=self.eth_tester.get_accounts()[0])
-        txn_hash = self.setup_purchase(recipient)
-
-        recipient.refresh_from_db()
-        self.assertEqual(recipient.tokens_amount, TOKENS_FOR_20_ETH)
-
-        self.assertEqual(Transfer.objects.count(), 1)
-        transfer = Transfer.objects.first()
-        self.assertEqual(transfer.txn_hash, txn_hash)
-        self.assertEqual(transfer.to_account, recipient.eth_account)
-        self.assertEqual(transfer.from_account, self.crowdsale_contract.address)
-        self.assertEqual(transfer.amount, TOKENS_FOR_20_ETH)
-        self.assertEqual(transfer.block_hash, self.eth_tester.get_transaction_by_hash(txn_hash)['block_hash'])
-        self.assertEqual(transfer.block_number, self.eth_tester.get_transaction_by_hash(txn_hash)['block_number'])
-        self.assertEqual(transfer.created_at, self.utcnow)
-        self.assertEqual(transfer.actualized_at, self.utcnow)
-        self.assertEqual(transfer.state, 'ACTUAL')
-
-        self.assertEqual(TokensMove.objects.count(), 2)
-        tokens_move_in = TokensMove.objects.filter(direction='IN').first()
-        self.assertEqual(tokens_move_in.investor, recipient)
-        self.assertEqual(tokens_move_in.investor_id, recipient.eth_account)
-        self.assertEqual(tokens_move_in.amount, TOKENS_FOR_20_ETH)
-        self.assertEqual(tokens_move_in.created_at, self.utcnow)
-        self.assertEqual(tokens_move_in.actualized_at, self.utcnow)
-        self.assertEqual(tokens_move_in.transfer, transfer)
-        self.assertEqual(tokens_move_in.state, 'ACTUAL')
-        self.assertEqual(tokens_move_in.direction, 'IN')
-
-        tokens_move_out = TokensMove.objects.filter(direction='OUT').first()
-        self.assertEqual(tokens_move_out.investor_id, self.crowdsale_contract.address)
-        self.assertEqual(tokens_move_out.amount, TOKENS_FOR_20_ETH)
-        self.assertEqual(tokens_move_out.created_at, self.utcnow)
-        self.assertEqual(tokens_move_out.actualized_at, self.utcnow)
-        self.assertEqual(tokens_move_out.transfer, transfer)
-        self.assertEqual(tokens_move_out.state, 'ACTUAL')
-        self.assertEqual(tokens_move_out.direction, 'OUT')
-
-        self.assertEqual(Payment.objects.count(), 1)
-        payment = Payment.objects.first()
-        self.assertEqual(payment.currency, 'ETH')
-        self.assertEqual(payment.payer_account, recipient.eth_account)
-        self.assertEqual(payment.amount, Decimal('20'))
-        self.assertEqual(payment.amounti, Decimal('20000000000000000000'))
-        self.assertEqual(payment.txn_id, txn_hash)
-        self.assertEqual(payment.tokens_move, tokens_move_in)
-        self.assertEqual(payment.usdc_value, Decimal('1100300'))
-        self.assertEqual(payment.rate_usdc, self.oracle_inital_price)
-        self.assertEqual(payment.bonus_percent, 20)
-        self.assertEqual(payment.bonus_ids, 1)
-
-        sent_mails = django.core.mail.outbox
-        self.assertEqual(len(sent_mails), 1)
-        self.assertEqual(sent_mails[0].subject, 'Incoming tokens')
-
     def test_transfer_tokens_to_existing_account(self):
         sender_account = self.eth_tester.get_accounts()[0]
         sender = InvestorFactory(eth_account=sender_account)
@@ -254,7 +198,6 @@ class TestProcessTransfer(BlockChainTestCase):
 
     def test_find_transfer_by_txn_id(self):
         receipt_account = self.account['address']
-        self.pass_KYC(receipt_account)
         recepient = InvestorFactory.create(eth_account=receipt_account)
 
         txn_id = BuyTokens()(receipt_account, 900000).value.transaction.txn_id

@@ -16,6 +16,10 @@ TOKEN_CONTRACT = {
     'address': '0x5917dDC7cCdA1A8F8a14f065BE7CD08616c066F1',
 }
 
+MEDIATOR_CONTRACT = {
+    'endpoint_address': '0x73015966604928A312F79F7E69291a656Cb88602'
+}
+
 EXCHANGE_RATES = ['ETH']
 
 CURRENCIES = {
@@ -23,7 +27,6 @@ CURRENCIES = {
         'module': 'DAI',
         'code': 'DAI',
         'name': 'DAI',
-        'receiver_address': '0x42ac0F356c84928258483631b740584E343B80b7',
         'rate_usdc': 100,
         'contract': {
             'address': '0x365E44150e248ea0f51756E2475ce5AF30542301',

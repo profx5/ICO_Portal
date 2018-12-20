@@ -8,6 +8,11 @@ interface IMintable {
   function mint(address to, uint256 value) external returns (bool);
 }
 
+interface ITokensMediator {
+  function investor() external view returns (address);
+  function transferToken(address tokenAddress, uint256 amount) external;
+}
+
 contract TingesMinter is Ownable {
   using SafeMath for uint256;
 
@@ -18,19 +23,24 @@ contract TingesMinter is Ownable {
   uint256 USDcRate;
   uint256 public USDcRaised;
 
-  constructor(address _TokenAddress, uint256 _USDcRate) public {
-    Mintable = IMintable(_TokenAddress);
+  constructor(uint256 _USDcRate, address mintableAddress) public {
     USDcRate = _USDcRate;
     USDcRaised = 0;
+
+    Mintable = IMintable(mintableAddress);
   }
 
-  function processPayment(address payer, uint256 USDcAmount) public onlyOwner {
+  function processPayment(
+                          address mediatorAddress,
+                          address tokenAddress,
+                          uint256 tokemsAmount,
+                          uint256 USDcAmount
+                          ) public onlyOwner {
     USDcRaised = USDcRaised + USDcAmount;
 
-    uint256 tokensAmount = USDcAmount * USDcRate;
+    ITokensMediator mediator = ITokensMediator(mediatorAddress);
+    mediator.transferToken(tokenAddress, tokemsAmount);
 
-    Mintable.mint(payer, tokensAmount);
-
-    emit TokenPurchase(payer, USDcAmount, tokensAmount);
+    Mintable.mint(mediator.investor(), USDcRate * USDcAmount * 100000000000000);
   }
 }
