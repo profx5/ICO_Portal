@@ -50,11 +50,10 @@ class Settings(BaseSettings):
             result = self.transfers_processor(event)
 
             if isinstance(result, Right):
-                self.tasks_logger.info(f'Transfer with txn_hash {event.txn_hash} '
-                                       'successfully processed (transfer_id={result.value.transfer.id}).')
+                self.tasks_logger.info(f'Transfer with txn_hash {event.txn_hash} successfully processed (transfer_id={result.value.transfer.id}).')
             else:
                 self.tasks_logger.info(f'Transfer with txn_hash {event.txn_hash} '
-                                       'processing failed with {result.value}')
+                                       f'processing failed with {result.value}')
         self.process_dai_transfer = process_dai_transfer
 
         @app.task(name=f'blockchain.ico.currencies.dai.tasks.check_dai_transfers({self.code})')
@@ -66,6 +65,6 @@ class Settings(BaseSettings):
                     self.tasks_logger.info(f'Got event with transactionHash={event.txn_hash} from DAI contract')
 
                     process_dai_transfer.delay(event)
-                else:
-                    self.tasks_logger.info(f'Getting of DAI events failed with {result.value}')
+            else:
+                self.tasks_logger.info(f'Getting of DAI events failed with {result.value}')
         self.check_dai_transfers = check_dai_transfers

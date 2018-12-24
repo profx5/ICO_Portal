@@ -6,7 +6,7 @@ import iconCheckGreen from './../../../../img/check-green.svg';
 
 
 const TransactionsInfo = ({transferHashLink, payementHashLink, amount, currency, rate_usdc, usdc_value, bonus_percent, tokens, tokenPrice}) => {
-    
+
     const rateUSD = (rate_usdc / 100).toFixed(2),
         USDValue = usdc_value.toFixed(2),
         baseTokens = (USDValue / tokenPrice).toFixed(2),
@@ -22,7 +22,7 @@ const TransactionsInfo = ({transferHashLink, payementHashLink, amount, currency,
                         <div className="TransactionContent_propertyLink"><a target="_blank" href={payementHashLink}>{payementHashLink}</a></div>
                         <div className="TransactionContent_propertyIconWrapper"><img alt="" src={iconCheckGreen}/></div>
                     </div>
-                    {transferHashLink && 
+                    {transferHashLink &&
                         <div className="TransactionContent_info">
                             <div className="TransactionContent_propertyName">Transfer:</div>
                             <div className="TransactionContent_propertyLink"><a target="_blank" href={transferHashLink}>{transferHashLink}</a></div>
@@ -31,26 +31,15 @@ const TransactionsInfo = ({transferHashLink, payementHashLink, amount, currency,
                     }
                 </div>
             </InfoBlock>
-            
+
             <InfoBlock>
                 <Part className="Info_part-1">
                     <div className="Info_head">Calculated token amount</div>
                     <div className="Info_partContent">
                         <div>{`${amount} ${currency} x ` + rateUSD + " USD = " + USDValue + " USD"}<br/></div>
-                        <div>{`Phase bonus = ${bonus_percent}%`}<br/></div>
-                        <div>{`Token base price = ${tokenPrice} USD`}<br/></div>
-                        <div>{`Base tokens: ${USDValue} USD / ${tokenPrice} = ${baseTokens} OGD`}<br/></div>
-                        <div>{`Bonus tokens: ${baseTokens} x ${bonus_percent}% = ${bonusTokens} OGD`}<br/></div>
+                        <div>{`Token price = ${tokenPrice} USD`}<br/></div>
                         <div>{`Total: ${tokens}`}<br/></div>
                     </div>
-                </Part>
-                <Part className="Info_part-2">
-                    <div className="Info_head">Referral bonuses</div>
-                    <div className="Info_partContent">—</div>
-                </Part>
-                <Part className="Info_part-3">
-                    <div className="Info_head">Withdrawal</div>
-                    <div className="Info_partContent">—</div>
                 </Part>
             </InfoBlock>
         </Wrapper>

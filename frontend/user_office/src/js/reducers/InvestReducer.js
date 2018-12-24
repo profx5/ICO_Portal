@@ -4,7 +4,7 @@ import {Map} from 'immutable';
 
 
 const initialState = Map({
-    tokenPrice: 2,
+    tokenPrice: 1,
     investAmount: 0,
     USDAmount: 0,
     tokensAmount: 0,

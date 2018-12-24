@@ -35,7 +35,7 @@ class ProcessDAITransfer(ServiceObject):
         if account:
             return self.success(account=account)
         else:
-            return self.fail_with(AccountNotFound(f'Account with address {account_address}'))
+            return self.fail_with(AccountNotFound(f'Account with address {account_address} not found'))
 
     def check_duplicate(self, context):
         payment = Payment.objects.filter(currency=self.settings.code,

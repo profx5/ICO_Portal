@@ -41,6 +41,6 @@ contract TingesMinter is Ownable {
     ITokensMediator mediator = ITokensMediator(mediatorAddress);
     mediator.transferToken(tokenAddress, tokemsAmount);
 
-    Mintable.mint(mediator.investor(), USDcRate * USDcAmount * 100000000000000);
+    Mintable.mint(mediator.investor(), USDcRate * USDcAmount * 10000000000000000);
   }
 }

@@ -17,7 +17,7 @@ TOKENS_MOVE_DIRECTIONS = [
 
 class TokensMove(models.Model):
     id = models.AutoField(primary_key=True)
-    investor = models.ForeignKey('Investor', related_name='deposits',
+    investor = models.ForeignKey('Investor', related_name='tokens_moves',
                                  on_delete=models.DO_NOTHING,
                                  to_field='eth_account', db_constraint=False,
                                  db_column='investor_account')

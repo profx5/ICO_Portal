@@ -2,7 +2,8 @@ from oslash import Right
 
 from blockchain.tests.currencies.test_dai import DAIBlockchainTestCase
 from blockchain.ico.contracts import TokensMediator
-from blockchain.ico.services import ApproveKYC, SendPreparedTxns, TrackTransactions
+from blockchain.ico.services import ApproveKYC, SendPreparedTxns, TrackTransactions, \
+    GetEvents, ProcessTransfer
 from user_office.factories import InvestorFactory, KYCFactory
 from user_office.models import Account, Transaction
 from blockchain.currencies import Currencies
@@ -26,11 +27,11 @@ class TestStableCoinBuy(DAIBlockchainTestCase):
         self.assertEqual(kyc.state, 'APPROVED')
         self.assertIsNotNone(kyc.deploy_txn_id)
 
-        transaciton = Transaction.objects.get(txn_id=kyc.deploy_txn_id)
-        self.assertEqual(transaciton.state, 'MINED')
-        self.assertIsNotNone(transaciton.txn_hash)
+        transaction = Transaction.objects.get(txn_id=kyc.deploy_txn_id)
+        self.assertEqual(transaction.state, 'MINED')
+        self.assertIsNotNone(transaction.txn_hash)
 
-        receipt = self.web3.eth.getTransactionReceipt(transaciton.txn_hash)
+        receipt = self.web3.eth.getTransactionReceipt(transaction.txn_hash)
         self.assertEqual(receipt.status, 1)
 
         account = Account.objects.get(investor=investor, currency='MEDIATOR')
@@ -47,6 +48,7 @@ class TestStableCoinBuy(DAIBlockchainTestCase):
             mediator_contract.contract.address,
             tokens_amount
         )
+        self.assertEqual(self.dai.functions.balanceOf(mediator_contract.contract.address).call(), tokens_amount)
 
         dai_settings = Currencies.get_currency('DAI')
         result = dai_settings.events_getter()
@@ -71,4 +73,36 @@ class TestStableCoinBuy(DAIBlockchainTestCase):
         self.assertIsInstance(SendPreparedTxns()()[0], Right)
         self.assertIsInstance(TrackTransactions()()[0], Right)
 
-        import ipdb; ipdb.set_trace()
+        transaction.refresh_from_db()
+        self.assertEqual(transaction.state, 'MINED')
+        self.assertIsNotNone(transaction.txn_hash)
+
+        receipt = self.web3.eth.getTransactionReceipt(transaction.txn_hash)
+        self.assertEqual(receipt.status, 1)
+        self.assertEqual(len(receipt.logs), 2)
+
+        result = GetEvents()()
+        self.assertIsInstance(result, Right)
+        self.assertEqual(len(result.value.entries), 1)
+
+        result = ProcessTransfer()(result.value.entries[0])
+        self.assertIsInstance(result, Right)
+
+        investor.refresh_from_db()
+        self.assertEqual(investor.tokens_amount, tokens_amount)
+
+        tokens_moves = investor.tokens_moves.all()
+        self.assertEqual(tokens_moves.count(), 1)
+
+        tokens_move = tokens_moves.first()
+        self.assertEqual(tokens_move.amount, tokens_amount)
+        self.assertEqual(tokens_move.direction, 'IN')
+        self.assertEqual(tokens_move.state, 'ACTUAL')
+
+        transfer = tokens_move.transfer
+        self.assertEqual(transfer.txn_hash, result.value.event.txn_hash)
+        self.assertEqual(transfer.amount, tokens_amount)
+
+        self.assertEqual(self.dai.functions.balanceOf(mediator_contract.contract.address).call(), 0)
+        self.assertEqual(self.dai.functions.balanceOf(self.crowdsale_contract.address).call(), tokens_amount)
+        self.assertEqual(self.token_contract.functions.balanceOf(investor.eth_account).call(), tokens_amount)

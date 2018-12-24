@@ -8,25 +8,33 @@ const VerificationState = ({kycState, kycTicketId, className}) => {
     return (
         <Wrapper className={className}>
             {kycState === 'APPROVED' &&
-                <Content className="state-approved">
-                    <p>Verification successful!</p>
-                </Content>
+             <Content className="state-approved">
+                 <p>Verification successful!</p>
+             </Content>
             }
             {kycState === 'WAITING' &&
-                <Content className="state-waiting">
-                    <p>Thank you for your application! Our managers are validating your data now.</p>
-                    {kycTicketId &&
-                    <StyledLink to={`/user_office/support/ticket/${kycTicketId}`}>Check the status of your application
-                        here!</StyledLink>}
-                </Content>
+             <Content className="state-waiting">
+                 <p>Thank you for your application! Our managers are validating your data now.</p>
+                 {kycTicketId &&
+                  <StyledLink to={`/user_office/support/ticket/${kycTicketId}`}>Check the status of your application
+                      here!</StyledLink>}
+             </Content>
+            }
+            {kycState === 'DEPLOYING' &&
+             <Content className="state-waiting">
+                 <p>Thank you for your application! Our managers are validating your data now.</p>
+                 {kycTicketId &&
+                  <StyledLink to={`/user_office/support/ticket/${kycTicketId}`}>Check the status of your application
+                      here!</StyledLink>}
+             </Content>
             }
             {kycState === 'DECLINED' &&
-                <Content className="state-declined">
-                    <p>Sorry, your application was declined.</p>
-                    {kycTicketId &&
-                    <StyledLink to={`/user_office/support/ticket/${kycTicketId}`}>Please contact our support via the ticket
-                        system.</StyledLink>}
-                </Content>
+             <Content className="state-declined">
+                 <p>Sorry, your application was declined.</p>
+                 {kycTicketId &&
+                  <StyledLink to={`/user_office/support/ticket/${kycTicketId}`}>Please contact our support via the ticket
+                      system.</StyledLink>}
+             </Content>
             }
         </Wrapper>
     )

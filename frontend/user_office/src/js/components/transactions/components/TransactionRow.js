@@ -20,7 +20,7 @@ const TransactionsRow = ({state, onIconClickHandler, openedTransaction, id, date
     let txnHash = transferTxnHash || null;
     let txnId = paymentTxnId || null;
 
-    if (currency === "ETH") {
+    if (currency === "ETH" || currency === "DAI") {
         payementHashLink = `${chainResolver.ETH}${txnHash}`
         transferHashLink = `${chainResolver.ETH}${txnId}`
     } else if (currency === "BTC") {

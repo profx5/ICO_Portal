@@ -54,7 +54,7 @@ class BlockChainTestCase(TestCase):
     def _setup_crowdsale(cls):
         Crowdsale = cls.web3.eth.contract(abi=CrowdsaleContract.get_compiled()['abi'],
                                           bytecode=CrowdsaleContract.get_compiled()['bin'])
-        tx_hash = Crowdsale.constructor(100, cls.token_contract.address).transact()
+        tx_hash = Crowdsale.constructor(1, cls.token_contract.address).transact()
         tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
         cls.crowdsale_contract = cls.web3.eth.contract(address=tx_receipt.contractAddress,
                                                        abi=CrowdsaleContract.get_compiled()['abi'])
