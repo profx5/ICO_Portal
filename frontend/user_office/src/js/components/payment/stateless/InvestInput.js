@@ -7,7 +7,7 @@ const InvestInput = ({children, value, type, onChangeHandler, onPasteHandler, in
 
     return (
         <InputWrapper data-currency={currency}>
-            <Label htmlFor="investInput">{investLabelText}</Label>
+            <Label htmlFor="invest_input">{investLabelText}</Label>
             <Input value={value} type={type} onChange={onChangeHandler} onPaste={onPasteHandler} name='invest_input' id="invest_input"/>
             {children}
         </InputWrapper>

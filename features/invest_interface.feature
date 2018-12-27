@@ -4,6 +4,9 @@ Feature: Invest form
     Given investor gordon@example.com/q123q123q123
     And   investor has eth account "0xb79D16cE900cCb086C4D1b2c0aE44bDD1be5eE9f"
     And   exchange rate for currency "ETH" with rate "300"
+    And   exchange rate for currency "LTC" with rate "300"
+    And   exchange rate for currency "DOGE" with rate "300"
+    And   exchange rate for currency "BTC" with rate "300"
     And   logged in as gordon@example.com/q123q123q123
     And   ico info with total supply "51050"
     And   phase with name "Current phase" and bonus "40%"
