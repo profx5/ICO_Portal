@@ -83,6 +83,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SIGNUP_CLOSED = False
 
+
 try:
     from .local import *
 except ImportError:

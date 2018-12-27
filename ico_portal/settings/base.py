@@ -33,7 +33,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -104,7 +103,7 @@ RAVEN_CONFIG = {
 # VERA site settings
 VERA_SITE_URL = 'https://vera.jobs/'
 
-# Authorasation settings
+# Authorization settings
 
 SIGNUP_CLOSED = True
 

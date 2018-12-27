@@ -10,9 +10,9 @@ const ConfirmNaturalPEP = ({showModalHandler, iconQuestion, errors, touched, is_
         <RadioSet className="RadioSet RadioSet-2">
             <p className="text">Are you a <span onClick={showModalHandler.bind(this, {id: 1})}>politically exposed person</span> (PEP),
                 family member of PEP or person known to be close associate of PEP? <IconImg onClick={showModalHandler.bind(this, {id: 1})} src={iconQuestion}/></p>
-            <FormikRadio name="is_pep" 
+            <FormikRadio name="is_pep"
                 values={["True", "False"]}
-                errors={errors} 
+                errors={errors}
                 touched={touched}
                 is_pep={is_pep}
                 options={['Yes', 'No']}/>

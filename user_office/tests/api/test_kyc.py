@@ -1,4 +1,4 @@
-from shutil import rmtree  # noqa
+from shutil import rmtree
 from django.conf import settings
 from django.test.utils import override_settings
 
@@ -63,8 +63,8 @@ class TestKYC(APITestCase):
                 'mime_type': 'image/jpeg',
                 'size': 9566,
                 'type': 'bill_photo'
-            }
-            ])
+            }]
+        )
 
     def assert_response_legal(self, response):
         ticket_id = Ticket.objects.last().id
@@ -126,7 +126,7 @@ class TestKYC(APITestCase):
 
     def test_create_natural_kyc(self):
         with open(fixture_path('document.jpg'), 'rb') as photo, \
-             open(fixture_path('bill.jpg'), 'rb') as bill:
+                open(fixture_path('bill.jpg'), 'rb') as bill:
             response = self.client.post('/api/kyc/', {
                 'type': 'NATURAL',
                 'firstname': 'John',
@@ -155,8 +155,8 @@ class TestKYC(APITestCase):
 
     def test_create_legal_kyc(self):
         with open(fixture_path('document.jpg'), 'rb') as photo, \
-             open(fixture_path('bill.jpg'), 'rb') as bill, \
-             open(fixture_path('basis.jpg'), 'rb') as basis:
+                open(fixture_path('bill.jpg'), 'rb') as bill, \
+                open(fixture_path('basis.jpg'), 'rb') as basis:
             response = self.client.post('/api/kyc/', {
                 'type': 'LEGAL',
                 'business_name': 'Vector',
@@ -191,7 +191,7 @@ class TestKYC(APITestCase):
 
     def test_get_created_kyc(self):
         with open(fixture_path('document.jpg'), 'rb') as photo, \
-             open(fixture_path('bill.jpg'), 'rb') as bill:
+                open(fixture_path('bill.jpg'), 'rb') as bill:
             self.client.post('/api/kyc/', {
                 'type': 'NATURAL',
                 'firstname': 'John',
@@ -262,7 +262,7 @@ class TestKYC(APITestCase):
 
     def test_upload_multiple_files(self):
         with open(fixture_path('document.jpg'), 'rb') as photo, \
-             open(fixture_path('bill.jpg'), 'rb') as bill:
+                open(fixture_path('bill.jpg'), 'rb') as bill:
             response = self.client.post('/api/kyc/', {
                 'type': 'NATURAL',
                 'firstname': 'John',
@@ -350,13 +350,13 @@ class TestKYCAutoApprove(EthTesterAPITestCase):
                 'mime_type': 'image/jpeg',
                 'size': 9566,
                 'type': 'bill_photo'
-            }
-            ])
+            }]
+        )
 
     @override_settings(AUTO_APPROVE_KYC=True)
     def test_create_approved_kyc(self):
         with open(fixture_path('document.jpg'), 'rb') as photo, \
-             open(fixture_path('bill.jpg'), 'rb') as bill:
+                open(fixture_path('bill.jpg'), 'rb') as bill:
             response = self.client.post('/api/kyc/', {
                 'type': 'NATURAL',
                 'firstname': 'John',

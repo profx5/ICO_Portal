@@ -1,17 +1,10 @@
-from helpers import *
-from behave import *
+from behave import use_step_matcher, when, given
+
+from features.steps.helpers import is_logged_in
 
 
 use_step_matcher('parse')
 
-@given('investor {email}/{password}')
-def step_impl(context, email, password):
-    context.investor = create_investor(email, password)
-
-@given('investor has eth account "{address}"')
-def step_impl(context, address):
-    context.investor.eth_account = address
-    context.investor.save()
 
 @given('logged in as {email}/{password}')
 def step_impl(context, email, password):
@@ -21,18 +14,20 @@ def step_impl(context, email, password):
 
     form = context.browser.find_element_by_tag_name('form')
 
-    form.find_element_by_id('email').send_keys(email)
-    form.find_element_by_id('password').send_keys(password)
+    form.find_element_by_xpath('//*[@name="email"]').send_keys(email)
+    form.find_element_by_xpath('//*[@name="password"]').send_keys(password)
 
     form.submit()
 
     context.test.assertTrue(is_logged_in(context.browser))
+
 
 @when('I visit "{url}"')
 def step_impl(context, url):
     full_path = context.get_url(url)
 
     context.browser.get(full_path)
+
 
 @when('I refresh page')
 def step_impl(context):
