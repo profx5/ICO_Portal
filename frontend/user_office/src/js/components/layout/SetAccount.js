@@ -55,7 +55,7 @@ class SetAccount extends React.Component {
                                 <Button clickHandler={this.onSubmitHandler} type="submit" text="Send"/>
                             </ButtonWrapper>
                         }
-                        {this.metamaskEthAccount && 
+                        {this.metamaskEthAccount &&
                             <MetamaskWarning>We've detected Metamask in use. Metamask account has been put into the field in advance.</MetamaskWarning>
                         }
                     </form>

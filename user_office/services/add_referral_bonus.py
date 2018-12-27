@@ -68,8 +68,8 @@ class AddReferralBonus(ServiceObject):
 
         number_of_payments = Payment.objects.filter(tokens_move__investor=investor).exclude(id=payment.id).count()
         if (
-            settings.REFERRAL_MAX_NUMBER_OF_PAYMENTS is not None
-            and settings.REFERRAL_MAX_NUMBER_OF_PAYMENTS <= number_of_payments
+                settings.REFERRAL_MAX_NUMBER_OF_PAYMENTS is not None and
+                settings.REFERRAL_MAX_NUMBER_OF_PAYMENTS <= number_of_payments
         ):
             self.logger.debug(
                 f'The investor {investor.id} has exceeded the number of payments that are subject to referral bonuses')

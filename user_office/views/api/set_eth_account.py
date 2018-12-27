@@ -29,8 +29,7 @@ class SetETHAccount(APIView):
         if isinstance(result, Right):
             return Response(data={'success': True})
         else:
-            status = 422 if isinstance(result, set_eth_account.InvalidAddress) \
-                     else 500
+            status = 422 if isinstance(result, set_eth_account.InvalidAddress) else 500
 
             return Response(data={'success': False,
                                   'error': result.value},
