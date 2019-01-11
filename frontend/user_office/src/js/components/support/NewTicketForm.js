@@ -8,13 +8,30 @@ import getValidationSchema from 'js/utils/getValidationSchema';
 import { Formik, Field, Form } from "formik";
 import Button from 'js/components/common/Button';
 import ErrorMessage from 'js/components/common/ErrorMessage';
-import FilesAttacher from 'js/components/common/FilesAttacher';
+import CreateFileAttacher from 'js/components/common/CreateFileAttacher';
+import AttachedFileRenderer from 'js/components/common/AttachedFileRenderer';
 
 import * as TicketActions from 'js/actions/TicketActions';
 import * as FilesActions from 'js/actions/FilesActions';
+import * as UIActions from 'js/actions/UIActions';
 
 
 class NewTicketForm extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            attacherReady: false
+        }
+    }
+
+    componentDidMount() {
+        this.setState(() => {
+            return {
+                attacherReady: true
+            }
+        })
+    }
 
     onSubmitHandler = (values, {resetForm}) => {
         const form = document.querySelector('.NewTicketForm');
@@ -25,7 +42,9 @@ class NewTicketForm extends React.Component {
     };
 
     render() {
-        const {newTicketFiles, addNewTicketFile, removeNewTicketFile, isSubmitting} = this.props;
+        const {newTicketFiles, addNewTicketFile, removeNewTicketFile, isSubmitting, showModal} = this.props;
+
+        const ButtonAttacher = CreateFileAttacher(Button);
 
         return (
 
@@ -64,20 +83,29 @@ class NewTicketForm extends React.Component {
 
                             <div className="controls-container files-section files-section-newTicket">
                                 {newTicketFiles.size > 0 && <div className="files-header">Uploaded:</div>}
-                                <div className="files-container">
+                                <div className="files-container" ref={fileWrapper => this.fileWrapper = fileWrapper}>
                                     <input className="file-input" type="file" name='attachment' hidden/>
-                                    <FilesAttacher files={newTicketFiles} 
-                                        name="attachment" 
-                                        filesWrapper={document.querySelector('.files-section-newTicket')} 
-                                        uploadFileHandler={addNewTicketFile} 
-                                        removeFileHandler={removeNewTicketFile}/>
+                                    <AttachedFileRenderer files={newTicketFiles} removeFileHandler={removeNewTicketFile} removable={true}/>
                                 </div>
                                 <div className="buttons-container">
                                     <div className="button-wrapper">
-                                        <Button text="Attach file" clickHandler={this.props.onAttachClickHandler.bind(this,'attachment')} attach transparent/>
+                                        {this.state.attacherReady &&                                         
+                                            <ButtonAttacher 
+                                                text={'Attach file'} 
+                                                attach={true} 
+                                                transparent={true} 
+                                                name="attachment"
+                                                limit={40000000} 
+                                                filesToValidate={[newTicketFiles]}
+                                                fileWrapper={this.fileWrapper} 
+                                                uploadFileHandler={addNewTicketFile}
+                                                isReady={this.state.attacherReady}
+                                                showModal={showModal}
+                                                style={{height: 45}}/>
+                                        }
                                     </div>
                                     <div className="button-wrapper">
-                                        <Button type="submit" text="Send" isSubmitting={isSubmitting}/>
+                                        <Button type="submit" text="Send" isSubmitting={isSubmitting} style={{height: 45}}/>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +118,7 @@ class NewTicketForm extends React.Component {
 }
 
 
-const mapStateToProps = ({tickets, user, Files}) => ({
+const mapStateToProps = ({tickets, user, Files, UI}) => ({
     email: user.get('email'),
     newTicketFiles: Files.get('newTicketFiles'),
     isSubmitting: tickets.get('isNewTicketSubmitting')
@@ -105,20 +133,20 @@ const mapDispatchToProps = (dispatch) => ({
     },
     createNewTicket(payload) {
         dispatch(TicketActions.createNewTicketRequest(payload))
+    },
+    showModal(payload) {
+        dispatch(UIActions.showModal(payload))
     }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewTicketForm)
 
 const Wrapper = styled.div`
-    padding: 42px 0 65px;
+    padding: 42px 0 0;
     background: white;
     border-radius: 6px;
     ${media.xs} {
         padding: 35px 0 0;
-    }
-    .controls-container {
-        overflow: auto;
     }
     .files-container {
         overflow: auto;
@@ -134,6 +162,9 @@ const Wrapper = styled.div`
         ${media.xs} {
             float: unset;
         }
+        ${media.smPlus} {
+            display: flex;
+        }
     }
     .files-header {
         font-size: 14px;
@@ -146,8 +177,6 @@ const Wrapper = styled.div`
         }
     }
     .button-wrapper {
-        height: 45px;
-        border-radius: 2px;
         display: inline-block;
         ${media.xs} {
             width: 100% !important;

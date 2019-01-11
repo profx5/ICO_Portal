@@ -100,10 +100,11 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(OpenedTicket)
 
 const Wrapper = styled.div`
-    padding: 42px 50px 65px;
+    padding: 42px 50px 100px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
+    overflow: auto;
     ${media.xs} {
         padding: 0 16px 32px;
     }

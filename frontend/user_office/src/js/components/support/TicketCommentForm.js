@@ -7,14 +7,31 @@ import getValidationSchema from 'js/utils/getValidationSchema';
 
 import { Formik, Field, Form } from "formik";
 import Button from 'js/components/common/Button';
-import FilesAttacher from 'js/components/common/FilesAttacher';
 import ErrorMessage from 'js/components/common/ErrorMessage';
+import AttachedFileRenderer from 'js/components/common/AttachedFileRenderer';
+import CreateFileAttacher from 'js/components/common/CreateFileAttacher';
 
 import * as TicketActions from 'js/actions/TicketActions';
 import * as FilesActions from 'js/actions/FilesActions';
+import * as UIActions from 'js/actions/UIActions';
 
 
 class TicketCommentForm extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            attacherReady: false
+        }
+    }
+
+    componentDidMount() {
+        this.setState(() => {
+            return {
+                attacherReady: true
+            }
+        })
+    }
 
     onSubmitHandler = (values, {resetForm}) => {
         const form = document.querySelector('.TicketCommentForm');
@@ -25,7 +42,8 @@ class TicketCommentForm extends React.Component {
     };
 
     render() {
-        const {selectedTicket, commentFiles, addCommentFile, removeCommentFile, isSubmitting} = this.props;
+        const {selectedTicket, commentFiles, addCommentFile, removeCommentFile, isSubmitting, showModal} = this.props;
+        const ButtonAttacher = CreateFileAttacher(Button)
 
         return (
             <Wrapper>
@@ -51,20 +69,28 @@ class TicketCommentForm extends React.Component {
 
                             <div className="controls-container files-section files-section-comment">
                                 {commentFiles.size > 0 && <div className="files-header">Uploaded:</div>}
-                                <div className="files-container">
+                                <div className="files-container" ref={fileWrapper => this.fileWrapper = fileWrapper}>
                                     <input className="file-input" type="file" name='attachment' hidden/>
-                                    <FilesAttacher files={commentFiles} 
-                                            name="attachment" 
-                                            filesWrapper={document.querySelector('.files-section-comment')} 
-                                            uploadFileHandler={addCommentFile} 
-                                            removeFileHandler={removeCommentFile}/>
+                                    <AttachedFileRenderer files={commentFiles} removeFileHandler={removeCommentFile} removable={true}/>
                                 </div>
                                 <div className="buttons-container">
                                     <div className="button-wrapper">
-                                        <Button text="Attach file" clickHandler={this.props.onAttachClickHandler.bind(this,'attachment')} attach transparent/>
+                                    {this.state.attacherReady &&                                     
+                                        <ButtonAttacher 
+                                                text={'Attach file'} 
+                                                attach={true} 
+                                                transparent={true} 
+                                                name="attachment"
+                                                limit={40000000} 
+                                                filesToValidate={[commentFiles]}
+                                                fileWrapper={this.fileWrapper} 
+                                                uploadFileHandler={addCommentFile}
+                                                showModal={showModal}
+                                                style={{height: 45}}/>
+                                    }
                                     </div>
                                     <div className="button-wrapper">
-                                        <Button type="submit" text="Send" isSubmitting={isSubmitting}/>
+                                        <Button type="submit" text="Send" isSubmitting={isSubmitting} style={{height: 45}}/>
                                     </div>
                                 </div>
                             </div>
@@ -95,20 +121,20 @@ const mapDispatchToProps = (dispatch) => ({
     },
     createNewComment(payload) {
         dispatch(TicketActions.createNewCommentRequest(payload))
+    },
+    showModal(payload) {
+        dispatch(UIActions.showModal(payload))
     }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TicketCommentForm)
 
 const Wrapper = styled.div`
-    padding: 0 0 65px;
+    padding: 0 0 0;
     background: white;
     border-radius: 6px;
     ${media.xs} {
         padding: 35px 0 0;
-    }
-    .controls-container {
-        overflow: auto;
     }
     .files-header {
         font-size: 14px;
@@ -133,10 +159,11 @@ const Wrapper = styled.div`
         ${media.smPlus} {
             float: right;
         }
+        ${media.smPlus} {
+            display: flex;
+        }
     }
     .button-wrapper {
-        height: 45px;
-        border-radius: 2px;
         display: inline-block;
         ${media.xs} {
             width: 100% !important;

@@ -12,7 +12,8 @@ const Button = ({text, className, clickHandler, submit, disabled, icon, style, a
         disabled: disabled,
         attach: attach,
         transparent: transparent,
-        type: type
+        type: type,
+        style: style
     }
 
     if (submit) {

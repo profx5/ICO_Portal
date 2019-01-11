@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
-import Modal from 'js/components/layout/Modal';
+import Modal from 'js/components/common/Modal';
 
 import * as UIActions from 'js/actions/UIActions';
 
