@@ -16,7 +16,7 @@ import * as FilesActions from 'js/actions/FilesActions';
 import * as UIActions from 'js/actions/UIActions';
 
 
-class TicketCommentForm extends React.Component {
+class NewCommentForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -34,7 +34,7 @@ class TicketCommentForm extends React.Component {
     }
 
     onSubmitHandler = (values, {resetForm}) => {
-        const form = document.querySelector('.TicketCommentForm');
+        const form = document.querySelector('.NewCommentForm');
         const formData = new FormData(form);
 
         this.props.createNewComment(formData);
@@ -54,7 +54,7 @@ class TicketCommentForm extends React.Component {
                     validationSchema={getValidationSchema('newComment')}
                     onSubmit={this.onSubmitHandler} 
                     render={({errors, touched, values}) => (
-                        <Form className="TicketCommentForm" encType='multipart/form-data'>
+                        <Form className="NewCommentForm" encType='multipart/form-data'>
                             <input type="hidden" name={'ticket'} value={selectedTicket.id}/>
 
                             <FormGroup>
@@ -127,7 +127,7 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TicketCommentForm)
+export default connect(mapStateToProps, mapDispatchToProps)(NewCommentForm)
 
 const Wrapper = styled.div`
     padding: 0 0 0;

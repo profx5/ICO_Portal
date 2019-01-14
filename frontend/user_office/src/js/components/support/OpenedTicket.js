@@ -6,7 +6,7 @@ import moment from "moment/moment";
 import {media} from 'js/utils/media';
 
 import AttachedFile from 'js/components/common/AttachedFile';
-import TicketCommentForm from 'js/components/support/TicketCommentForm';
+import NewCommentForm from 'js/components/support/NewCommentForm';
 import TicketState from 'js/components/support/stateless/TicketState';
 
 import * as TicketActions from 'js/actions/TicketActions';
@@ -78,7 +78,7 @@ class OpenedTicket extends React.Component {
                 </MessageWrapper>
                 {[3,4].includes(status) && 
                     <TicketState/> ||
-                    <TicketCommentForm onAttachClickHandler={onAttachClickHandler}/>
+                    <NewCommentForm onAttachClickHandler={onAttachClickHandler}/>
                 }
             </Wrapper>
         )
