@@ -8,7 +8,7 @@ import Ticket from 'js/components/support/stateless/Ticket';
 import * as TicketActions from 'js/actions/TicketActions';
 
 
-class AllQuestions extends React.Component {
+class AllTickets extends React.Component {
 
     renderTickets = () => {
         const {tickets, email, getSelectedTicket} = this.props;
@@ -36,7 +36,7 @@ class AllQuestions extends React.Component {
                 <TicketsList>
                     <tbody>
                         {tickets.length && this.renderTickets() || 
-                            <tr><td className="AllQuestions_warnText">There are no tickets yet...</td></tr>
+                            <tr><td className="AllTickets_warnText">There are no tickets yet...</td></tr>
                         }
                     </tbody>
                 </TicketsList>
@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllQuestions)
+export default connect(mapStateToProps, mapDispatchToProps)(AllTickets)
 
 const Wrapper = styled.div`
     flex: 1;
@@ -74,7 +74,7 @@ const Wrapper = styled.div`
 
 const TicketsList = styled.table`
     width: 100%;
-    .AllQuestions_warnText {
+    .AllTickets_warnText {
         ${media.xs} {
             font-size: 14px;
         }

@@ -6,7 +6,7 @@ import $ from 'jquery';
 import Title from 'js/components/common/Title';
 import SupportTabs from 'js/components/support/stateless/SupportTabs';
 import NewTicket from 'js/components/support/NewTicket';
-import AllQuestions from 'js/components/support/AllQuestions';
+import AllTickets from 'js/components/support/AllTickets';
 import OpenedTicket from 'js/components/support/OpenedTicket';
 
 import * as UIActions from 'js/actions/UIActions';
@@ -27,7 +27,7 @@ class Support extends React.Component {
                 <Title>FAQ & Feedback</Title>
                 <SupportTabs tabClickHandler={activateSupportTab} ticketsAmount={tickets} activeTab={activeSupportTab} isTicketOpened={!!selectedTicket}/>
                 {!selectedTicket && activeSupportTab === 1 && <NewTicket/>}
-                {!selectedTicket && activeSupportTab === 2 && <AllQuestions/>}
+                {!selectedTicket && activeSupportTab === 2 && <AllTickets/>}
                 {selectedTicket && <OpenedTicket/>}
             </Wrapper>
         )

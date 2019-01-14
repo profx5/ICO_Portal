@@ -41,7 +41,9 @@ export class TicketsSagas {
             });
             yield put(ticketActions.createNewTicketSuccess());
             yield put(ticketActions.getTicketsRequest());
-            yield history.push('/user_office/support/ticket/' + res.data.id);
+            yield () => {
+                history.push('/user_office/support/ticket/' + res.data.id);
+            }
             yield put(ticketActions.getSelectedTicket(res.data.id));
             yield put(UIActions.changeActiveTab(2));
             yield put(FilesActions.clearNewTicketFiles());
