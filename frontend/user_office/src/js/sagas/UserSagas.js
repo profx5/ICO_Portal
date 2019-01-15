@@ -72,10 +72,27 @@ export class UserSagas {
             }));
         } catch (e) {
             yield put(UserActions.changePasswordFailed())
-            yield put(UIActions.showModal({
-                modalHead: 'Warning',
-                modalContent: 'Something went wrong... Please, check if the passwords are valid!'
-            }));
+            if (e.response.data.error.includes('password_incorrect')) {
+                yield put(UIActions.showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'New password is incorrect. Please, check if it\'s typed right!'
+                }));
+            } else if (e.response.data.error.includes('same_password')) {
+                yield put(UIActions.showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'New password matches the old password. Please, try another one!'
+                }));
+            } else if (e.response.data.error.includes('password_too_short')) {
+                yield put(UIActions.showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'New password is too short. It must be not less than 8 symbols!'
+                }));
+            } else if (e.response.data.error.includes('password_mismatch')) {
+                yield put(UIActions.showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'Passwords don\'t match. Please, confirm the password correctly!'
+                }));
+            }
         }
     }
 
@@ -95,6 +112,17 @@ export class UserSagas {
             }));
         } catch (e) {
             yield put(UserActions.changeEmailFailed())
+            if (e.response.data.error === 'invalid email address') {
+                yield put(UIActions.showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'New email is incorrect. Please, check if it\'s typed right!'
+                }));
+            } else if (e.response.data.error === 'same_email') {
+                yield put(UIActions.showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'New email matches the old email. Please, try another one!'
+                }));
+            }
         }
     }
 }
