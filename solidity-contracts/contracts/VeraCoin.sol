@@ -1,1 +1,0 @@
-../veracoin/contracts/VeraCoin.sol

@@ -1,8 +1,8 @@
 -r requirements.txt
 behave-django==1.1.0
 coreapi==2.3.3
-eth-tester==0.1.0b28
-py-evm==0.2.0a18
+eth-tester==0.1.0b33
+py-evm==0.2.0a37
 factory_boy==2.11.1
 flake8==3.5.0
 honcho==1.0.1

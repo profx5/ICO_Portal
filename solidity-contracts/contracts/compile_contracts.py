@@ -40,9 +40,9 @@ def compile_contract(contract_name):
 
 
 def main():
-    compile_contract('VeraCoin')
-    compile_contract('VeraCrowdsale')
-    compile_contract('PriceOracle')
+    # compile_contract('TingesToken')
+    compile_contract('TingesMinter')
+    compile_contract('TokensMediator')
 
 
 if __name__ == '__main__':

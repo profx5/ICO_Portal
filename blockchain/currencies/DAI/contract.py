@@ -8,11 +8,10 @@ from ico_portal.utils.datetime import datetime
 class DAIContract(BaseContract):
     compiled_file_path = '{BASE_DIR}/solidity-contracts/contracts/DSToken.json'
 
-    def get_filter(self, dst, from_block, to_block=None):
+    def get_filter(self, from_block, to_block=None):
         return self.contract.events.Transfer.createFilter(
             fromBlock=from_block,
             toBlock=to_block,
-            argument_filters={'dst': dst}
         )
 
     @property

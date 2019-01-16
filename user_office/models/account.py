@@ -7,7 +7,7 @@ class Account(models.Model):
     id = models.AutoField(primary_key=True)
     investor = models.ForeignKey('Investor', on_delete=models.CASCADE,
                                  related_name='accounts')
-    currency = CurrencyField()
+    currency = models.CharField(max_length=10)
     address = models.CharField(max_length=100)
 
     objects = models.Manager()

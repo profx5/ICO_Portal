@@ -4,12 +4,9 @@ from .base import BaseContract
 
 class TokensPurchasedEvent:
     def __init__(self, event, value):
-        self.investor = event['args']['investor']
-        self.eth_price_in_cents = event['args']['ethPriceInCents']
-        self.value_in_cents = event['args']['valueInCents']
-        self.bonus_percent = event['args']['bonusPercent']
-        self.bonus_ids = event['args']['bonusIds']
+        self.investor = event['args']['payer']
         self.txn_hash = event['transactionHash'].hex()
+        self.value_in_cents = event['args']['USDcAmount']
         self.contract_address = event['address']
         self.block_hash = event['blockHash'].hex()
         self.block_number = event['blockNumber']
@@ -23,31 +20,20 @@ class TokensPurchasedEvent:
 
 
 class CrowdsaleContract(BaseContract):
-    compiled_file_path = '{BASE_DIR}/solidity-contracts/contracts/VeraCrowdsale.json'
+    compiled_file_path = '{BASE_DIR}/solidity-contracts/contracts/TingesMinter.json'
 
     def get_cents_raised(self):
-        return self.contract.functions.centsRaised().call()
+        return self.contract.functions.USDcRaised().call()
 
-    def pass_kyc(self, address):
-        gas = 50000
-
-        return self.contract.functions.addKycVerifiedInvestor(address).buildTransaction({
-            'gas': gas
-        })
-
-    def buy_tokens(self, to, usdc_value):
+    def buy_tokens(self, mediator_address, token_address, tokens_amount, usdc_amount):
         gas = 150000
 
-        return self.contract.functions.buyTokensViaBackend(to, int(usdc_value)).buildTransaction({
-            'gas': gas
-        })
-
-    def add_bonuses(self, to, tokens_amount):
-        gas = 150000
-
-        return self.contract.functions.addBonuses(to, int(tokens_amount)).buildTransaction({
-            'gas': gas
-        })
+        return self.contract.functions.processPayment(
+            mediator_address,
+            token_address,
+            tokens_amount,
+            usdc_amount
+        ).buildTransaction({'gas': gas})
 
     def get_event_from_txn_hash(self, txn_hash):
         receipt = self.web3.eth.getTransactionReceipt(txn_hash)

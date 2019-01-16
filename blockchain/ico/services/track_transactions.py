@@ -48,11 +48,13 @@ class SendPreparedTxns(_Base):
         aggregated = Transaction.objects.all().aggregate(Max('nonce'))
 
         if aggregated['nonce__max'] is not None:
-            nonce = aggregated['nonce__max'] + 1
+            db_nonce = aggregated['nonce__max'] + 1
         else:
-            nonce = self.web3.eth.getTransactionCount(settings.ETH_ACCOUNT['address'])
+            db_nonce = 0
 
-        return self.success(nonce=nonce)
+        blockchain_nonce = self.web3.eth.getTransactionCount(settings.ETH_ACCOUNT['address'])
+
+        return self.success(nonce=max(db_nonce, blockchain_nonce))
 
     def build_txn_data(self, context):
         txn_object = context.txn_object

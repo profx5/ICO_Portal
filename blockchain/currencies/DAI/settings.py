@@ -1,5 +1,5 @@
 from decimal import Decimal
-from oslash import Right
+from oslash import Right, Left
 from celery.utils.log import get_task_logger
 
 from ico_portal.utils import memoized_property
@@ -7,6 +7,7 @@ from blockchain.currencies.base_settings import BaseSettings
 from .contract import DAIContract
 from .services.get_dai_transfers import GetDAITransfers
 from .services.process_dai_transfer import ProcessDAITransfer
+from user_office.models import Account
 
 
 class Settings(BaseSettings):
@@ -18,8 +19,13 @@ class Settings(BaseSettings):
     def init_contract(self):
         DAIContract.init(self.contract)
 
-    def get_pay_address(self, _):
-        return Right(self.receiver_address)
+    def get_pay_address(self, investor):
+        acc = Account.objects.filter(investor=investor, currency='MEDIATOR').first()
+
+        if acc:
+            return Right(acc.address)
+        else:
+            return Left('account not found')
 
     @property
     def exchange_rate(self):
@@ -44,11 +50,11 @@ class Settings(BaseSettings):
             result = self.transfers_processor(event)
 
             if isinstance(result, Right):
-                self.tasks_logger.info(f'Transfer with txn_hash {event.txn_hash} '
-                                       'successfully processed (transfer_id={result.value.transfer.id}).')
+                self.tasks_logger.info(f'Transfer with txn_hash {event.txn_hash} successfully processed (transfer_id={result.value.transfer.id}).')
             else:
                 self.tasks_logger.info(f'Transfer with txn_hash {event.txn_hash} '
-                                       'processing failed with {result.value}')
+                                       f'processing failed with {result.value}')
+        self.process_dai_transfer = process_dai_transfer
 
         @app.task(name=f'blockchain.ico.currencies.dai.tasks.check_dai_transfers({self.code})')
         def check_dai_transfers():
@@ -59,5 +65,6 @@ class Settings(BaseSettings):
                     self.tasks_logger.info(f'Got event with transactionHash={event.txn_hash} from DAI contract')
 
                     process_dai_transfer.delay(event)
-                else:
-                    self.tasks_logger.info(f'Getting of DAI events failed with {result.value}')
+            else:
+                self.tasks_logger.info(f'Getting of DAI events failed with {result.value}')
+        self.check_dai_transfers = check_dai_transfers

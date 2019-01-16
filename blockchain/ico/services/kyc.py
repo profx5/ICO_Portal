@@ -3,10 +3,10 @@ from django.conf import settings
 from django.urls import reverse
 from user_office.tasks import send_mail
 
-from blockchain.ico.contracts import CrowdsaleContract
+from blockchain.web3 import get_web3
 from blockchain.ico import services
 from ico_portal.utils.service_object import service_call, transactional, ServiceObject
-from user_office.models import KYC
+from user_office.models import KYC, Account
 
 
 class ApproveKYC(ServiceObject):
@@ -16,22 +16,17 @@ class ApproveKYC(ServiceObject):
         else:
             return self.fail('KYC already approved')
 
-    def get_txn_data(self, context):
-        txn_data = CrowdsaleContract().pass_kyc(context.kyc.investor.eth_account)
-
-        return self.success(txn_data=txn_data)
-
-    def create_transaction(self, context):
-        return services.CreateTransaction()(context.txn_data, "PASS_KYC") | \
+    def create_contract(self, context):
+        return services.CreateMediatorContract()(context.kyc.investor) | \
             (lambda result: self.success(txn=result.txn))
 
-    def set_approve_txn_id(self, context):
-        context.kyc.approve_txn_id = context.txn.txn_id
+    def set_deploy_txn_id(self, context):
+        context.kyc.deploy_txn_id = context.txn.txn_id
 
         return self.success(kyc=context.kyc)
 
     def set_state(self, context):
-        context.kyc.state = 'MINING'
+        context.kyc.state = 'DEPLOYING'
 
         return self.success(kyc=context.kyc)
 
@@ -48,9 +43,8 @@ class ApproveKYC(ServiceObject):
     def __call__(self, kyc):
         return self.success(kyc=kyc) | \
             self.check_state | \
-            self.get_txn_data | \
-            self.create_transaction | \
-            self.set_approve_txn_id | \
+            self.create_contract | \
+            self.set_deploy_txn_id | \
             self.set_state | \
             self.save_kyc
 
@@ -106,14 +100,14 @@ class ApproveMinedKYC(ServiceObject):
             return self.fail('Transaction is not mined')
 
     def check_txn_type(self, context):
-        if context.txn_object.txn_type == 'PASS_KYC':
+        if context.txn_object.txn_type == 'CREATE_MEDIATOR':
             return self.success()
         else:
-            return self.fail('Transaction type is not pass_kyc')
+            return self.fail('Invalid transction type')
 
     def get_kyc(self, context):
         try:
-            kyc = KYC.objects.get(approve_txn_id=context.txn_object.txn_id)
+            kyc = KYC.objects.get(deploy_txn_id=context.txn_object.txn_id)
 
             return self.success(kyc=kyc)
         except KYC.DoesNotExist:
@@ -144,6 +138,22 @@ class ApproveMinedKYC(ServiceObject):
 
         return self.success()
 
+    def create_account(self, context):
+        web3 = get_web3()
+
+        contract_address = web3.eth.getTransactionReceipt(context.txn_object.txn_hash).contractAddress
+
+        try:
+            account = Account(
+                investor=context.kyc.investor,
+                currency="MEDIATOR",
+                address=contract_address
+            )
+
+            account.save()
+        except DatabaseError as e:
+            self.fail(e)
+
     @service_call
     @transactional
     def __call__(self, txn_object):
@@ -152,4 +162,5 @@ class ApproveMinedKYC(ServiceObject):
             self.check_txn_type | \
             self.get_kyc | \
             self.mark_as_approved | \
-            self.send_mail
+            self.send_mail | \
+            self.create_account

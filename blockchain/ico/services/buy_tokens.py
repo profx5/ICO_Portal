@@ -5,7 +5,12 @@ from ico_portal.utils.service_object import ServiceObject, service_call
 
 class BuyTokens(ServiceObject):
     def create_txn_data(self, context):
-        txn_data = CrowdsaleContract().buy_tokens(to=context.to, usdc_value=context.usdc_value)
+        txn_data = CrowdsaleContract().buy_tokens(
+            mediator_address=context.mediator_address,
+            token_address=context.token_address,
+            tokens_amount=context.tokens_amount,
+            usdc_amount=int(context.usdc_amount)
+        )
 
         return self.success(txn_data=txn_data)
 
@@ -14,7 +19,11 @@ class BuyTokens(ServiceObject):
             (lambda result: self.success(transaction=result.txn))
 
     @service_call
-    def __call__(self, to, usdc_value):
-        return self.success(to=to, usdc_value=usdc_value) | \
-            self.create_txn_data | \
+    def __call__(self, mediator_address, token_address, tokens_amount, usdc_amount):
+        return self.success(
+            mediator_address=mediator_address,
+            token_address=token_address,
+            tokens_amount=tokens_amount,
+            usdc_amount=usdc_amount
+        ) | self.create_txn_data | \
             self.create_transaction

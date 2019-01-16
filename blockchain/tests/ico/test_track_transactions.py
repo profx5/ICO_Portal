@@ -144,7 +144,7 @@ class TestTrackTransactions(_Base):
         self.assertEqual(old_transaction.from_account, new_transaction.from_account)
         self.assertEqual(old_transaction.to_account, new_transaction.to_account)
         self.assertEqual(old_transaction.gas, new_transaction.gas)
-        self.assertEqual(new_transaction.gas_price, Decimal('22000000000'))
+        self.assertEqual(new_transaction.gas_price, Decimal('30000000000'))
 
         result = TrackTransactions()()
         self.assertEqual(len(result), 2)
