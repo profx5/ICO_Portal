@@ -187,6 +187,9 @@ class TrackTransactions(_Base):
     def _get_transaction(self, txn_hash):
         return self.web3.eth.getTransaction(txn_hash)
 
+    def _get_sended_transactions_quantity(self, txn_id):
+        return Transaction.objects.filter(txn_id=txn_id).count()
+
     def failed_due_mined(self, txn_object, mined):
         fail_reason = f'Other transaction with txn_hash={mined.txn_hash} already mined'
 
@@ -219,6 +222,20 @@ class TrackTransactions(_Base):
     def no_txn_data(self, txn_object):
         return self.success(txn_object=txn_object, result='Cant get transaction data, seems like txn with same txn_id was mined')
 
+    def maybe_resend_transaction(self, txn_object):
+        if datetime.utcnow() - txn_object.created_at > self._resend_timedelta:
+            resended_txns_quantity = self._get_sended_transactions_quantity(txn_object.txn_id) - 1
+
+            if resended_txns_quantity < settings.MAX_TXNS_RESEND_QUANTITY:
+                return ResendTransaction()(txn_object)
+
+            return self.success(
+                txn_object=txn_object,
+                result=f'Transaction resended {resended_txns_quantity} of {settings.MAX_TXNS_RESEND_QUANTITY} times'
+            )
+
+        return self.nothing_to_do(txn_object)
+
     @service_call
     @transactional
     def track_transaction(self, txn_object):
@@ -235,10 +252,7 @@ class TrackTransactions(_Base):
             return self.no_txn_data(txn_object)
 
         if txn_data.blockNumber is None:
-            if datetime.utcnow() - txn_object.created_at > self._resend_timedelta:
-                return ResendTransaction()(txn_object)
-            else:
-                return self.nothing_to_do(txn_object)
+            return self.maybe_resend_transaction(txn_object)
         else:
             return self.mark_as_mined(txn_object, txn_data)
 

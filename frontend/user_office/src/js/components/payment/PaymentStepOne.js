@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/utils/media';
 
-import CurrencyCalculator from './CurrencyCalculator';
-import Currency from './Currency';
+import CurrencyCalculator from 'js/components/payment/CurrencyCalculator';
+import Currency from 'js/components/payment/Currency';
 
-import * as UIActions from './../../actions/UIActions';
+import * as UIActions from 'js/actions/UIActions';
 
 
 class PaymentStepOne extends React.Component {

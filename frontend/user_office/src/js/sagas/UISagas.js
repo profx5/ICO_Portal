@@ -1,11 +1,7 @@
-import axios from 'axios'
-import Api from '../../api'
-import {call, put, takeEvery} from 'redux-saga/effects';
-import { push } from 'react-router-redux';
-import * as ticketActions from './../actions/TicketActions';
-import * as UIActions from './../actions/UIActions';
-import * as FilesActions from './../actions/FilesActions';
-import history from './../utils/history';
+import {put, takeEvery} from 'redux-saga/effects';
+import * as ticketActions from 'js/actions/TicketActions';
+import * as UIActions from 'js/actions/UIActions';
+import * as FilesActions from 'js/actions/FilesActions';
 
 export class UISagas {
     static * ChangeSupportTab() {

@@ -1,15 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/utils/media';
 
-import Button from './../common/Button';
+import Button from 'js/components/common/Button';
 
-import * as UserActions from './../../actions/UserActions';
-import * as UIActions from './../../actions/UIActions';
+import * as UserActions from 'js/actions/UserActions';
+import * as UIActions from 'js/actions/UIActions';
 
 
-class SetAccount extends Component {
+class SetAccount extends React.Component {
+    constructor(props) {
+        super(props);
+        this.metamaskEthAccount = this.getMetaMaskAccount();
+    }
+
     onSubmitHandler = event => {
         event.preventDefault();
         let data = this.input.value;
@@ -17,21 +22,26 @@ class SetAccount extends Component {
     }
 
     getMetaMaskAccount = () => {
-        if (typeof window.web3 !== 'undefined') {
-            return window.web3.eth.defaultAccount;
+        if (typeof window.globalWeb3 !== 'undefined') {
+            return window.globalWeb3.eth.defaultAccount;
         }
+    }
+
+    componentDidMount() {
+
+        if (this.metamaskEthAccount) this.input.value = this.metamaskEthAccount;
     }
 
     render() {
         const {hidePopup, set_eth_error, eth_account} = this.props;
-        let metamaskEthAccount = this.getMetaMaskAccount();
+
         return (
             <PopupWrapper>
                 <Popup>
                     <BtnClose onClick={hidePopup}>Close</BtnClose>
                     <Label htmlFor="eth_account">Add your ETH account</Label>
                     <form>
-                        <TextField value={metamaskEthAccount} type="text" id="eth_account" innerRef={input => this.input = input}/>
+                        <TextField type="text" id="eth_account" innerRef={input => this.input = input}/>
                         {set_eth_error &&
                             <ErrorSpan>{set_eth_error}</ErrorSpan>
                         }
@@ -45,10 +55,13 @@ class SetAccount extends Component {
                                 <Button clickHandler={this.onSubmitHandler} type="submit" text="Send"/>
                             </ButtonWrapper>
                         }
-
+                        {this.metamaskEthAccount &&
+                            <MetamaskWarning>We've detected Metamask in use. Metamask account has been put into the field in advance.</MetamaskWarning>
+                        }
                     </form>
 
-                    <Desc><span>IMPORTANT NOTICE:</span><br/>
+                    <Desc>
+                        <span>IMPORTANT NOTICE:</span><br/>
                         ADD ONLY YOUR OWN ETH ACCOUNT YOU HAVE A SECRET KEY FROM! DO NOT ADD ACCOUNTS FROM
                         EXCHANGES, THIS WILL CAUSE YOU TO LOOSE ALL THE TOKENS!
                         ALSO YOUR WALLET SHOULD SUPPORT ERC 20 TOKENS!
@@ -180,4 +193,12 @@ const ButtonWrapper = styled.div`
     border-radius: 2px;
     border: 1px solid #d6dfe6;
     position: relative;
+`;
+
+const MetamaskWarning = styled.div`
+    font-size: 12px;
+    margin-top: 10px;
+    ${media.xs} {
+        font-size: 10px;
+    }
 `;

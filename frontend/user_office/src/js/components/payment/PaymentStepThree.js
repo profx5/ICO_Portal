@@ -2,11 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link, Redirect} from 'react-router-dom'
-import {media} from './../../utils/media';
+import {media} from 'js/utils/media';
 
-import Button from './../common/Button';
+import Button from 'js/components/common/Button';
 
-import * as UIActions from "./../../actions/UIActions";
+import * as UIActions from "js/actions/UIActions";
 
 
 class PaymentStepThree extends React.Component {

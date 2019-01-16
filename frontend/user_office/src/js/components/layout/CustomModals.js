@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {media} from './../../utils/media';
 
-import Modal from './Modal';
+import Modal from 'js/components/common/Modal';
 
-import * as UIActions from './../../actions/UIActions';
+import * as UIActions from 'js/actions/UIActions';
 
 
 class CustomModals extends React.Component {
@@ -60,16 +60,16 @@ class CustomModals extends React.Component {
                     <Modal head="Verification required" content={
                         <React.Fragment>
                             {!kycSended &&
-                                <p>Sorry, but you are not allowed to buy tokens yet. Please <Link className='link' onClick={hideModal} to='/user_office/verification/'>pass
-                                KYC</Link> procedure first!</p>
+                                <p>Sorry, but you are not allowed to buy tokens yet. Please <StyledLink className='link' onClick={hideModal} to='/user_office/verification/'>pass
+                                KYC</StyledLink> procedure first!</p>
                             }
                             {kycSended && kycState === 'WAITING' &&
                                 <p>Sorry, but you are not allowed to buy tokens yet. Please wait while we validate info you
                                 provided.</p>
                             }
                             {kycSended && kycState === 'DECLINED' &&
-                                <p>Sorry, but you are not allowed to buy tokens yet. Your KYC was declined. Please <Link className='link'
-                            onClick={hideModal} to='/user_office/support/'>contact our support</Link>.</p>
+                                <p>Sorry, but you are not allowed to buy tokens yet. Your KYC was declined. Please <StyledLink className='link'
+                            onClick={hideModal} to='/user_office/support/'>contact our support</StyledLink>.</p>
                             }
                         </React.Fragment>
                     }/>
@@ -102,3 +102,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomModals);
+
+const StyledLink = styled(Link)`
+    color: #3375fc;
+`;

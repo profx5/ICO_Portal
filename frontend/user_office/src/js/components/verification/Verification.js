@@ -2,22 +2,26 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {compose} from 'redux';
-import {Formik, Form} from 'formik';            
 import $ from 'jquery';
-import VerificationValidation from './utils/VerificationValidation';
-import {media} from './../../utils/media';
 
-import Title from './../common/Title';
-import KYCTabs from './components/KYCTabs';
-import VerificationState from './components/VerificationState';
-import NaturalPerson from './NaturalPerson';
-import LegalPerson from './LegalPerson';
-import VerificationInfo from './VerificationInfo';
-import InvestorsDocuments from './InvestorsDocuments';
+import {media} from 'js/utils/media';
+import getValidationSchema from 'js/utils/getValidationSchema';
 
-import * as KYCActions from './../../actions/KYCActions';
-import * as UIActions from './../../actions/UIActions';
-import * as FilesActions from './../../actions/FilesActions';
+import {Formik, Form} from 'formik';
+import Title from 'js/components/common/Title';
+import KYCTabs from 'js/components/verification/stateless/KYCTabs';
+import VerificationState from 'js/components/verification/stateless/VerificationState';
+import NaturalPerson from 'js/components/verification/NaturalPerson';
+import LegalPerson from 'js/components/verification/LegalPerson';
+import VerificationInfo from 'js/components/verification/VerificationInfo';
+import InvestorsDocuments from 'js/components/verification/InvestorsDocuments';
+import IDFiles from 'js/components/verification/IDFiles';
+import UtilityBillFiles from 'js/components/verification/UtilityBillFiles';
+import BasisFiles from 'js/components/verification/BasisFiles';
+
+import * as KYCActions from 'js/actions/KYCActions';
+import * as UIActions from 'js/actions/UIActions';
+import * as FilesActions from 'js/actions/FilesActions';
 
 
 class Verification extends React.Component {
@@ -25,6 +29,17 @@ class Verification extends React.Component {
     constructor() {
         super();
         this.currentFileId = 0;
+        this.state = {
+            basisFilesError: '',
+            idFilesError: '',
+            utiliyBillFilesError: '',
+        }
+    }
+
+    componentWillUnmount() {
+        const {clearIdDocumentFile, clearUtilityBillFile, clearBasisFile} = this.props;
+
+        compose(clearIdDocumentFile, clearUtilityBillFile, clearBasisFile)();
     }
 
     getKYCTicket = () => {
@@ -96,52 +111,57 @@ class Verification extends React.Component {
     }
 
     onSubmitHandler = (e) => {
-        const {activeKycTab, submitForm, showModal, state, attachments, clearIdDocumentFile, clearUtilityBillFile, clearRepresentationFile} = this.props;
+        const {activeKycTab, submitForm, state, attachments, clearIdDocumentFile, clearUtilityBillFile, clearBasisFile} = this.props;
         const form = document.querySelector('.VerificationForm');
+        let filesUploaded = true;
+
 
         if (activeKycTab === 2) {
             if (!$('[name="basis_doc"]').val() && !attachments) {
-                showModal({
-                    modalHead: 'Warning',
-                    modalContent: 'Please, check if you\'ve attached the basis for representation!'
-                });
-                return; 
+                filesUploaded = false;
+                this.setState(() => {
+                    return {
+                        basisFilesError: 'You must attach a basis for representation!'
+                    }
+                })
             }
         }
 
         if (!$('[name="id_document_photo"]').val() && !attachments) {
-            showModal({
-                modalHead: 'Warning',
-                modalContent: 'Please, check if you\'ve attached a copy of ID!'
-            });
-            return;
-        } else if (!$('[name="bill_photo"]').val() && !attachments) {
-            showModal({
-                modalHead: 'Warning',
-                modalContent: 'Please, check if you\'ve attached a copy of Utility bill!'
-            });
-            return;
+            filesUploaded = false;
+            this.setState(() => {
+                return {
+                    idFilesError: 'You must attach a photo of your ID!'
+                }
+            })
         }
-
-        submitForm({
-            form: new FormData(form),
-            state: state
-        });
-        compose(clearIdDocumentFile, clearUtilityBillFile, clearRepresentationFile)();
-    }
-
-    onAttachClickHandler = (name, event) => {
-        event.preventDefault();
-        const $filesBlock = $(event.target).closest('.files-section').find('.files-container');
-
-        const $newFileInput = $(`<input class="file-input" id=${this.currentFileId++} type="file" name="${name}" hidden/>`);
-
-        $filesBlock.prepend($newFileInput);
-        $newFileInput.click();
+      
+        if (!$('[name="bill_photo"]').val() && !attachments) {
+            filesUploaded = false;
+            this.setState(() => {
+                return {
+                    utiliyBillFilesError: 'You must attach a copy of Utility bill!'
+                }
+            })
+        }
+        if(filesUploaded) {
+            submitForm({
+                form: new FormData(form),
+                state: state
+            });
+            this.setState(() => {
+                return {
+                    basisFilesError: '',
+                    idFilesError: '',
+                    utiliyBillFilesError: ''
+                }
+            })
+            compose(clearIdDocumentFile, clearUtilityBillFile, clearBasisFile)();
+        }
     }
 
     render() {
-        const {state, type, is_pep} = this.props;
+        const {state, type, is_pep, isSubmiting, basisFiles, idDocumentFiles, utilityBillFiles} = this.props;
         let {activeKycTab} = this.props;
 
         if (type) activeKycTab = type === 'LEGAL' ? 2 : 1;
@@ -150,12 +170,12 @@ class Verification extends React.Component {
         if (kycTicket[0]) {
             kycTicketId = kycTicket[0].id;
         }
-        let KYCStatus = type !== '' && state;
+        let KYCState = type !== '' && state;
 
         return (
             <Formik
                 initialValues={this.getInitialValues()} 
-                validationSchema={activeKycTab === 1 ? VerificationValidation({type: 'Natural'}) : VerificationValidation({type: 'Legal'})} 
+                validationSchema={activeKycTab === 1 ? getValidationSchema('kycNatural') : getValidationSchema('kycLegal')} 
                 validateOnChange={false} 
                 validateOnBlur={true}
                 enableReinitialize={true}
@@ -167,21 +187,36 @@ class Verification extends React.Component {
                                 <Title className="Verification_head">Verification (KYC)</Title>
                                 <KYCTabs clickHandler={this.tabClickHandler.bind(this, resetForm)} activeTab={activeKycTab}/>
                             </HeaderInner>
-                            <VerificationState className="visible-smMinus" kycState={KYCStatus} kycTicketId={kycTicketId}/>
+                            <VerificationState className="visible-smMinus" kycStatus={KYCState} kycTicketId={kycTicketId}/>
                         </Header>
                         <MainWrapper>
-                            {!type && activeKycTab === 1 && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
-                            {!type && activeKycTab === 2 && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
-                            {type === "NATURAL" && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
-                            {type === "LEGAL" && <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} onAttachClickHandler={this.onAttachClickHandler}/>}
-                            <InvestorsDocuments errors={errors} touched={touched} values={values} onAttachClickHandler={this.onAttachClickHandler}/>
+                            {!type && activeKycTab === 1 && <NaturalPerson errors={errors} touched={touched} values={values} is_pep={is_pep} kycStatus={KYCState}/>}
+                            {!type && activeKycTab === 2 && 
+                                <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}>
+                                    <BasisFiles errorMessage={!basisFiles.size && this.state.basisFilesError}/>
+                                </LegalPerson>
+                            }
+                            {type === "NATURAL" && <NaturalPerson kycStatus={KYCState} errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
+                            {type === "LEGAL" && 
+                                <LegalPerson errors={errors} touched={touched} values={values} is_pep={is_pep}>
+                                    <BasisFiles errorMessage={!basisFiles.size && this.state.basisFilesError}/>
+                                </LegalPerson>
+                            }
+                            <InvestorsDocuments 
+                                errors={errors} 
+                                touched={touched} 
+                                values={values}>
+                                <IDFiles errorMessage={!idDocumentFiles.size && this.state.idFilesError}/>
+                                <UtilityBillFiles errorMessage={!utilityBillFiles.size && this.state.utiliyBillFilesError}/>
+                            </InvestorsDocuments>
                         </MainWrapper>
                         <div>
                             <VerificationInfo
                                 btnText="Send data"
+                                isSubmiting={isSubmiting}
                                 verificationStages={['Verification__personData', 'Verification__investorsDocuments']}
                                 stages={activeKycTab === 1 ? ['Personal Data', 'Investor\'s documents'] : ['Legal Person Data', 'Investor\'s documents']}
-                                kycState={KYCStatus} 
+                                kycStatus={KYCState} 
                                 kycTicketId={kycTicketId}/>
                         </div>
                     </Wrapper>
@@ -192,7 +227,7 @@ class Verification extends React.Component {
 };
 
 
-const mapStateToProps = ({UI, KYC, user, tickets}) => ({
+const mapStateToProps = ({UI, KYC, user, tickets, Files}) => ({
     state: KYC.get('state'),
     type: KYC.get('type'),
     activeKycTab: UI.get('activeKycTab'),
@@ -236,6 +271,10 @@ const mapStateToProps = ({UI, KYC, user, tickets}) => ({
     attachments: KYC.get('attachments'),
     kyc_required: user.get('kyc_required'),
     tickets: tickets.get('results'),
+    isSubmiting: KYC.get('isSubmiting'),
+    basisFiles: Files.get('basisFiles'),
+    idDocumentFiles: Files.get('idDocumentFiles'),
+    utilityBillFiles: Files.get('utilityBillFiles'),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -260,8 +299,8 @@ const mapDispatchToProps = (dispatch) => ({
     clearUtilityBillFile() {
         dispatch(FilesActions.clearUtilityBillFile())
     },
-    clearRepresentationFile() {
-        dispatch(FilesActions.clearRepresentationFile())
+    clearBasisFile() {
+        dispatch(FilesActions.clearBasisFile())
     },
 });
 
@@ -326,3 +365,5 @@ const MainWrapper = styled.div`
         max-width: unset;
     }
 `;
+
+//TODO: Validation errors go after each other, it appears only if fields are filled

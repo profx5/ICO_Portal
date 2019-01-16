@@ -18,7 +18,7 @@ export const setMetaMaskAccountFailed = createAction('SET_METAMASK_ACCOUNT_FAILE
 
 export const changePasswordRequest = createAction('CHANGE_PASSWORD_REQUEST');
 export const changePasswordSuccessfull = createAction('CHANGE_PASSWORD_SUCCESSFULL');
-export const changePasswordFailed = createAction('CHANGE_PASSWORD_FaILED');
+export const changePasswordFailed = createAction('CHANGE_PASSWORD_FAILED');
 
 export const changeEmailRequest = createAction('CHANGE_EMAIL_REQUEST');
 export const changeEmailSuccessfull = createAction('CHANGE_EMAIL_SUCCESSFULL');

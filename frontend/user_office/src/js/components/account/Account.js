@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/utils/media';
 
-import Title from './../common/Title';
-import AccountInfo from './AccountInfo';
-import Password from './Password';
-import VerificationInfo from './VerificationInfo';
+import Title from 'js/components/common/Title';
+import AccountInfo from 'js/components/account/AccountInfo';
+import Password from 'js/components/account/Password';
+import VerificationInfo from 'js/components/account/VerificationInfo';
 
 
 class Settings extends React.Component {
@@ -40,20 +40,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Settings);
 const Wrapper = styled.div`
     display: flex;
     flex-flow: row wrap;
-    /* flex: 1;
-    height: calc(100% - 100px);
-    margin-left: 60px;
-    padding-bottom: 90px;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start;
-    ${media.xs} {
-        margin: 0 16px;
-        padding-bottom: 50px;
-    }
-    ${media.sm} {
-        margin-right: 60px;
-    } */
 `;
 
 const MainWrapper = styled.div`

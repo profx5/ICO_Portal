@@ -1,10 +1,10 @@
 import {createStore, applyMiddleware} from 'redux'
 import Immutable from 'immutable'
 import createSagaMiddleware from 'redux-saga'
-import rootSaga from './../../saga'
+import rootSaga from 'js/sagas'
 import {createLogger} from 'redux-logger'
 
-import reducer from './../reducers'
+import reducer from 'js/reducers'
 
 
 const sagaMiddleware = createSagaMiddleware()

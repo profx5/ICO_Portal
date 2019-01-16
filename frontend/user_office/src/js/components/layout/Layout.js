@@ -4,31 +4,30 @@ import styled from 'styled-components';
 import {Route, Switch} from 'react-router-dom';
 import {withRouter} from 'react-router';
 import $ from 'jquery';
-import history from './../../utils/history';
-import {media} from './../../utils/media';
+import history from 'js/utils/getBrowserHistory';
+import {media} from 'js/utils/media';
 
-import NavSidebar from './components/NavSidebar';
-import Nav from './components/Nav';
-import MobileNav from './components/MobileNav';
-import Footer from './components/Footer';
-import Header from './Header';
-import MobileNavSidebar from './MobileNavSidebar';
+import NavSidebar from 'js/components/layout/stateless/NavSidebar';
+import Nav from 'js/components/layout/stateless/Nav';
+import MobileNav from 'js/components/layout/stateless/MobileNav';
+import Footer from 'js/components/layout/stateless/Footer';
+import Header from 'js/components/layout/Header';
+import MobileNavSidebar from 'js/components/layout/MobileNavSidebar';
 
-import Dashboard from './../dashboard/Dashboard';
-import Transactions from './../transactions/Transactions'
-import Payment from './../payment/Payment';
-import Support from './../support/Support';
-import Verification from './../verification/Verification';
-import Account from './../account/Account';
-import Referrals from './../referrals/Referrals';
+import Dashboard from 'js/components/dashboard/Dashboard';
+import Transactions from 'js/components/transactions/Transactions'
+import Payment from 'js/components/payment/Payment';
+import Support from 'js/components/support/Support';
+import Verification from 'js/components/verification/Verification';
+import Account from 'js/components/account/Account';
 
-import SetAccount from './SetAccount';
+import SetAccount from 'js/components/layout/SetAccount';
 
-import CustomModals from './CustomModals';
-import Modal from './Modal';
+import CustomModals from 'js/components/layout/CustomModals';
+import Modal from 'js/components/common/Modal';
 
-import * as UIActions from './../../actions/UIActions';
-import * as TicketActions from './../../actions/TicketActions';
+import * as UIActions from 'js/actions/UIActions';
+import * as TicketActions from 'js/actions/TicketActions';
 
 
 class Layout extends Component {
@@ -86,7 +85,6 @@ class Layout extends Component {
                                 <Route path="/user_office/support" component={Support}/>
                                 <Route path="/user_office/verification" component={Verification}/>
                                 <Route path="/user_office/account" component={Account}/>
-                                <Route path="/user_office/referrals" component={Referrals}/>
                         </Switch>
                         <Footer/>
                     </LayoutWrapper>

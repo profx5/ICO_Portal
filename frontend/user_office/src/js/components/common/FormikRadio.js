@@ -2,9 +2,8 @@ import React from 'react'
 import styled from 'styled-components';
 
 import { Field } from 'formik';
-import ErrorMessage from './ErrorMessage';
 
-import iconCheck from './../../../img/icons/icon_check.svg';
+import iconCheck from 'img/icons/icon_check.svg';
 
 
 const FormikRadio = ({labelText, name, values, options, is_pep}) => {

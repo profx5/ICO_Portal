@@ -1,7 +1,7 @@
 import axios from 'axios'
-import Api from '../../api'
-import * as KYCActions from './../actions/KYCActions'
-import * as UIActions from './../actions/UIActions'
+import API from 'api'
+import * as KYCActions from 'js/actions/KYCActions'
+import * as UIActions from 'js/actions/UIActions'
 import {call, put, takeEvery} from 'redux-saga/effects'
 
 export class KYCSagas {
@@ -11,7 +11,7 @@ export class KYCSagas {
         const method = type !== 'WAITING' ? "POST" : "PUT";
         try {
             yield call(axios, {
-                url: Api.kyc(),
+                url: API.kyc(),
                 method: method,
                 data: action.payload.form
             });
@@ -43,7 +43,7 @@ export class KYCSagas {
     static * getKYC() {
         try {
             const response = yield call(axios, {
-                url: Api.kyc(),
+                url: API.kyc(),
                 method: 'GET'
             })
             yield put(KYCActions.getKYCSuccessfull(response.data))

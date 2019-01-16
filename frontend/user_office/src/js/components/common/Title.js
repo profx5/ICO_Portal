@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/utils/media';
 
 const Title = ({children, className}) => {
     return (

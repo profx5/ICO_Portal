@@ -2,14 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
-import Utils from './../../utils/index';
-import {media} from './../../utils/media';
+import _ from 'lodash';
+import {media} from 'js/utils/media';
 
-import VerificationStages from './components/VerificationStages';
-import VerificationState from './components/VerificationState';
-import Button from './../common/Button';
-
-import PreloadIcon from './../../../img/preload-white.svg';
+import VerificationStages from 'js/components/verification/stateless/VerificationStages';
+import VerificationState from 'js/components/verification/stateless/VerificationState';
+import Button from 'js/components/common/Button';
 
 
 class VerificationInfo extends React.Component {
@@ -46,11 +44,11 @@ class VerificationInfo extends React.Component {
     }
 
     componentDidMount() {
-        $(window).on('scroll', Utils.throttle(this.stageTracker,30));
+        $(window).on('scroll', _.throttle(this.stageTracker,30));
     }
 
     render() {
-        const {status, verificationStages, stages, btnText, isSubmiting, kycState, kycTicketId} = this.props;
+        const {status, verificationStages, stages, btnText, isSubmiting, kycStatus, kycTicketId} = this.props;
         let btn_text = !isSubmiting ? status === 'WAITING' ? 'Update data' : btnText : 'Submitting...';
         return (
             <Wrapper className="VerificationInfo">
@@ -58,10 +56,10 @@ class VerificationInfo extends React.Component {
                     {status !== 'APPROVED' &&
                     
                         <ButtonWrapper>
-                            <Button type="submit" text={btn_text} icon={isSubmiting && PreloadIcon}/>
+                            <Button type="submit" text={btn_text} isSubmiting={isSubmiting}/>
                         </ButtonWrapper>
                     }
-                <VerificationState kycState={kycState} kycTicketId={kycTicketId}/>
+                <VerificationState kycStatus={kycStatus} kycTicketId={kycTicketId}/>
             </Wrapper>
         )
     }

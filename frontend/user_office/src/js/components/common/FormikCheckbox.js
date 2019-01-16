@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/utils/media';
 
 import {Field} from 'formik';
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from 'js/components/common/ErrorMessage';
 
-import iconCheck from './../../../img/icons/icon_check.svg';
+import iconCheck from 'img/icons/icon_check.svg';
 
 
 const FormikCheckbox = ({value, name, labelText, errorStyle, errors, touched, options, icon, handler}) => {

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import {media} from './../../utils/media';
+import {media} from 'js/utils/media';
 
-import NewTicketForm from './NewTicketForm';
+import NewTicketForm from 'js/components/support/NewTicketForm';
 
 
 class NewTicket extends React.Component {
@@ -31,11 +31,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(NewTicket)
 const Wrapper = styled.div`
     flex: 1;
     height: auto;
-    padding: 42px 50px 65px;
+    padding: 42px 50px 100px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
+    overflow: auto;
     ${media.xs} {
         padding: 32px 16px 32px;
     }

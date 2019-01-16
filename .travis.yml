@@ -1,8 +1,8 @@
 dist: trusty
 sudo: required
 
-# addons:
-#   chrome: stable
+addons:
+  chrome: stable
 
 language: python
 python:
@@ -14,34 +14,25 @@ services:
 
 before_install:
   - mysql -e 'CREATE DATABASE ico_portal CHARACTER SET utf8 COLLATE utf8_bin;'
-  # - nvm install 9.5.0
+  - nvm install 9.5.0
 
 install:
   - pip install -r requirements-dev.txt
-  ## - cd solidity-contracts && npm install && cd ..
-  # - npm install
-  # # chromedriver
-  # - wget -N http://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip -P ~/
-  # - unzip ~/chromedriver_linux64.zip -d ~/
-  # - rm ~/chromedriver_linux64.zip
-  # - sudo mv -f ~/chromedriver /usr/local/share/
-  # - sudo chmod +x /usr/local/share/chromedriver
-  # - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+  - npm install
+  # chromedriver
+  - wget -N http://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip -P ~/
+  - unzip ~/chromedriver_linux64.zip -d ~/
+  - rm ~/chromedriver_linux64.zip
+  - sudo mv -f ~/chromedriver /usr/local/share/
+  - sudo chmod +x /usr/local/share/chromedriver
+  - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 env:
   - DJANGO_SETTINGS_MODULE='ico_portal.settings.travis'
 
 script:
-  # - whereis google-chrome-stable
-  # - whereis chromedriver
-  # - CI=false npm run build
   - ./manage.py test
   - flake8
-  # - "./manage.py behave -D SELENIUM_CHROME_HEADLESS"
-  ## - cd solidity-contracts
-  ## - ./scripts/test.sh
-  ## - npm run lint:sol
-deploy:
-  provider: script
-  script: bash docker-build.sh ongridpro1/ico_master ${TRAVIS_COMMIT:0:8}
-  on:
-    branch: master
+  - whereis google-chrome-stable
+  - whereis chromedriver
+  - CI=false npm run build
+  - "./manage.py behave -D SELENIUM_CHROME_HEADLESS"

@@ -3,11 +3,11 @@ import {render} from 'react-dom';
 import axios from 'axios';
 import {Provider} from 'react-redux'
 
-import './global-styles';
-import './index.css';
+import 'globalStyles';
+import 'index.css';
 
-import App from './App';
-import store from './js/store/index';
+import App from 'App';
+import store from 'js/store/index';
 
 import { BrowserRouter } from 'react-router-dom';
 

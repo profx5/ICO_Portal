@@ -38,6 +38,7 @@ CURRENCIES = {
 
 TXN_TRACKER_RESEND_SECONDS = 600  # 10 minutes
 RESEND_GAS_PRICE_FACTOR = 1.5
+MAX_TXNS_RESEND_QUANTITY = 5
 
 # Celery
 CELERY_BROKER_URL = 'amqp://ico_portal:read_manual@localhost:5672/ico_portal_vhost'

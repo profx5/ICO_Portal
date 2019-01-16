@@ -2,14 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link, withRouter} from 'react-router-dom';
-import {media} from './../../utils/media';
+import {media} from 'js/utils/media';
 
-import HeaderNav from './components/HeaderNav';
-import Balance from './components/Balance';
-import Steps from './components/Steps';
-import Dropdown from './components/Dropdown';
+import HeaderNav from 'js/components/layout/stateless/HeaderNav';
+import Balance from 'js/components/layout/stateless/Balance';
+import Steps from 'js/components/layout/stateless/Steps';
+import Dropdown from 'js/components/layout/stateless/Dropdown';
 
-import * as UIActions from './../../actions/UIActions';
+import * as UIActions from 'js/actions/UIActions';
 
 
 class Header extends React.Component {

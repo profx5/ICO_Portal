@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-act';
-import * as actions from './../actions/UserActions';
+import * as actions from 'js/actions/UserActions';
 import {Map} from 'immutable';
 
 
@@ -10,7 +10,7 @@ const initialState = Map({
     "tokens_amount": 0.00,
     "kyc_required": false,
     "investment_threshold": 0,
-    "state": "WAITING"
+    "state": ""
 });
 
 

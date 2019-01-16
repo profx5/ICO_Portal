@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom';
 import moment from "moment/moment";
-import {media} from './../../utils/media';
+import {media} from 'js/utils/media';
 
-import TicketCommentForm from './TicketCommentForm';
-import AttachedFile from './../common/AttachedFile';
-import TicketState from './components/TicketState';
+import AttachedFile from 'js/components/common/AttachedFile';
+import NewCommentForm from 'js/components/support/NewCommentForm';
+import TicketState from 'js/components/support/stateless/TicketState';
 
-import * as TicketActions from './../../actions/TicketActions';
+import * as TicketActions from 'js/actions/TicketActions';
 
-import iconUser from './../../../img/user.svg';
-import iconResolved from './../../../img/check-green.svg';
-import iconPending from './../../../img/icon_transit-amber.svg';
-import breadcrumbsArrow from './../../../img/arrow_roadmap.svg';
+import iconUser from 'img/user.svg';
+import iconResolved from 'img/check-green.svg';
+import iconPending from 'img/icon_transit-amber.svg';
+import breadcrumbsArrow from 'img/arrow_roadmap.svg';
 
 
 class OpenedTicket extends React.Component {
@@ -78,7 +78,7 @@ class OpenedTicket extends React.Component {
                 </MessageWrapper>
                 {[3,4].includes(status) && 
                     <TicketState/> ||
-                    <TicketCommentForm onAttachClickHandler={onAttachClickHandler}/>
+                    <NewCommentForm onAttachClickHandler={onAttachClickHandler}/>
                 }
             </Wrapper>
         )
@@ -100,10 +100,11 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(OpenedTicket)
 
 const Wrapper = styled.div`
-    padding: 42px 50px 65px;
+    padding: 42px 50px 100px;
     background: white;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
     border-radius: 6px;
+    overflow: auto;
     ${media.xs} {
         padding: 0 16px 32px;
     }

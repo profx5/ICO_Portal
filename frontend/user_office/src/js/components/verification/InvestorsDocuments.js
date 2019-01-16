@@ -1,49 +1,27 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {media} from './../../utils/media';
+import {media} from 'js/utils/media';
 
-import ConfirmCorrectness from './components/ConfirmCorrectness';
-import Button from './../common/Button';
-
-import IDFiles from './components/IDFiles';
-import UtilityBillFiles from './components/UtilityBillFiles';
-
-import * as FilesActions from './../../actions/FilesActions';
+import ConfirmCorrectness from 'js/components/verification/stateless/ConfirmCorrectness';
+import Button from 'js/components/common/Button';
 
 
 class InvestorsDocuments extends React.Component {
 
     render() {
-        const {
-            idDocumentFiles, utilityBillFiles, 
-            addIdDocumentFile, addUtilityBillFile,
-            removeIdDocumentFile, removeUtilityBillFile,
-            onAttachClickHandler, status,
-            errors, touched, values
-        } = this.props;
+        const {status, errors, touched, values, isSubmiting} = this.props;
 
         return (
             <Wrapper className="Verification__investorsDocuments">
                 <Head>Investor's documents</Head>
-                <IDFiles files={idDocumentFiles} 
-                    onAttachClickHandler={onAttachClickHandler.bind(this, 'id_document_photo')} 
-                    uploadFileHandler={addIdDocumentFile} 
-                    removeFileHandler={removeIdDocumentFile} 
-                    name="id_document_photo"
-                    filesWrapper={document.querySelector('.files-section-id')}/>
-                <UtilityBillFiles files={utilityBillFiles} 
-                    onAttachClickHandler={onAttachClickHandler.bind(this, 'bill_photo')} 
-                    uploadFileHandler={addUtilityBillFile} 
-                    removeFileHandler={removeUtilityBillFile} 
-                    name="bill_photo"
-                    filesWrapper={document.querySelector('.files-section-utility')}/>
+                {this.props.children}
 
                 <ConfirmCorrectness values={values} errors={errors} touched={touched} labelText="I confirm that all the data and documents submitted are correct."/>
-                
+
                 {status !== 'APPROVED' && 
                     <ButtonWrapper submitBtn>
-                        <Button type="submit" text={status === 'WAITING' ? 'Update data' : 'Send data'}/>
+                        <Button type="submit" text={status === 'WAITING' ? 'Update data' : 'Send data'} isSubmiting={isSubmiting}/>
                     </ButtonWrapper>
                 }
             </Wrapper>
@@ -55,27 +33,10 @@ class InvestorsDocuments extends React.Component {
 const mapStateToProps = ({KYC, Files}) => ({
     status: KYC.get('state'),
     type: KYC.get('type'),
-    idDocumentFiles: Files.get('idDocumentFiles'),
-    utilityBillFiles: Files.get('utilityBillFiles'),
-    representationFiles: Files.get('representationFiles'),
+    isSubmiting: KYC.get('isSubmiting')
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    addIdDocumentFile(payload) {
-        dispatch(FilesActions.addIdDocumentFile(payload))
-    },
-    addUtilityBillFile(payload) {
-        dispatch(FilesActions.addUtilityBillFile(payload))
-    },
-    removeIdDocumentFile(payload) {
-        dispatch(FilesActions.removeIdDocumentFile(payload))
-    },
-    removeUtilityBillFile(payload) {
-        dispatch(FilesActions.removeUtilityBillFile(payload))
-    }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(InvestorsDocuments)
+export default connect(mapStateToProps)(InvestorsDocuments)
 
 
 const Wrapper = styled.div`

@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-act';
-import * as actions from './../actions/ICOInfoActions';
+import * as actions from 'js/actions/ICOInfoActions';
 import {Map} from 'immutable';
 
 

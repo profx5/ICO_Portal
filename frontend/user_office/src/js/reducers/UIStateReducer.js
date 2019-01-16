@@ -1,5 +1,5 @@
 import {createReducer} from 'redux-act';
-import * as actions from './../actions/UIActions';
+import * as actions from 'js/actions/UIActions';
 import {Map} from 'immutable';
 
 

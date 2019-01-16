@@ -1,17 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
-import {media} from './../../utils/media';
-
-import Utils from './../../utils/index';
+import {media} from 'js/utils/media';
 
 
-const AttachedFile = ({fileName, fileSize, id, removable, onRemoveHandler, style}) => {
+const AttachedFile = ({fileName, fileSize, sizeUnits, id, removable, removeHandler, style}) => {
     return (
         <Wrapper className="attached-file" id={id} style={style}>
             <span className="file-name">{fileName}</span>
-            {fileSize && <span className="file-size"> ({Utils.formatFileSize(fileSize).size} {Utils.formatFileSize(fileSize).units})</span>}
+            {fileSize && <span className="file-size"> ({fileSize} {sizeUnits})</span>}
             {removable && 
-                <div onClick={onRemoveHandler} className="file-close">
+                <div onClick={removeHandler} className="file-close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
                         <g fill="#C8C8C8" fillRule="evenodd">
                             <path d="M.05 1.464L1.464.05 9.95 8.536 8.536 9.95z"/>
@@ -28,7 +26,7 @@ const AttachedFile = ({fileName, fileSize, id, removable, onRemoveHandler, style
 export default AttachedFile;
 
 const Wrapper = styled.div`
-    min-width: 240px;
+    width: 285px;
     background: rgb(245, 245, 245);
     padding: 0 35px 0 13px;
     height: 36px;
@@ -36,6 +34,8 @@ const Wrapper = styled.div`
     float: left;
     clear: left;
     position: relative;
+    display: flex;
+    justify-content: flex-start;
     ${media.xs} {
         width: 100%;
         min-width: unset;
@@ -46,6 +46,10 @@ const Wrapper = styled.div`
         letter-spacing: 0.5px;
         font-weight: 600;
         line-height: 36px;
+        display: block;
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
         ${media.xs} {
             font-size: 14px;
         }
@@ -53,6 +57,9 @@ const Wrapper = styled.div`
     .file-size {
         font-size: 16px;
         line-height: 36px;
+        width: 83px;
+        margin-left: 6px;
+        white-space: nowrap;
     }
     .file-close {
         position: absolute;

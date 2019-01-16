@@ -1,6 +1,6 @@
 import axios from 'axios'
-import Api from '../../api'
-import * as actions from './../actions/CurrencyActions'
+import API from 'api'
+import * as actions from 'js/actions/CurrencyActions'
 import {takeEvery, call, put} from 'redux-saga/effects'
 
 class CurrencySagas {
@@ -8,7 +8,7 @@ class CurrencySagas {
         try {
             const response = yield call(axios, {
                 method: 'GET',
-                url: Api.getAvailableCurrencies()
+                url: API.getAvailableCurrencies()
             })
 
             yield put(actions.getCurrenciesSuccess(response.data))

@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 //containers
-import ContentWrapper from './ContentWrapper';
-import Layout from './js/components/layout/Layout';
+import ContentWrapper from 'ContentWrapper';
+import Layout from 'js/components/layout/Layout';
 
 import { withRouter } from 'react-router';
 

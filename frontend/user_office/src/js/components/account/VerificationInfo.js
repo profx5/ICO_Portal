@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import $ from 'jquery';
-import Utils from './../../utils/index';
-import {media} from './../../utils/media';
+import _ from 'lodash';
+import {media} from 'js/utils/media';
 
-import VerificationStages from './components/VerificationStages';
+import VerificationStages from 'js/components/account/stateless/VerificationStages';
 
 
 class VerificationInfo extends React.Component {
@@ -42,7 +42,7 @@ class VerificationInfo extends React.Component {
     }
 
     componentDidMount() {
-        $(window).on('scroll', Utils.throttle(this.stageTracker,30));
+        $(window).on('scroll', _.throttle(this.stageTracker,30));
     }
 
     getKYCTicket = () => {

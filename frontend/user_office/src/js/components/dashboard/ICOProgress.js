@@ -2,32 +2,34 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Utils from './../../utils/index';
-import {media} from './../../utils/media';
 
-import ProgressBar from './components/ProgressBar';
-import Timer from './components/Timer';
-import PhasesInfo from './components/PhasesInfo';
-import CustomButton from './../common/CustomButton';
-import Button from './../common/Button';
+import splitDigits from 'js/utils/splitDigits';
+import {media} from 'js/utils/media';
 
-import * as ICOInfoActions from './../../actions/ICOInfoActions';
+import Countdown from 'js/components/common/Countdown';
+import ProgressBar from 'js/components/dashboard/stateless/ProgressBar';
+import Timer from 'js/components/dashboard/stateless/Timer';
+import PhasesInfo from 'js/components/dashboard/stateless/PhasesInfo';
+import CustomButton from 'js/components/common/CustomButton';
+import Button from 'js/components/common/Button';
+
+import * as ICOInfoActions from 'js/actions/ICOInfoActions';
 
 
 class ICOProgress extends React.Component {
 
-    componentDidMount() {
-        const {startTime, endTime, countdownTime, updateCountdown} = this.props;
-        if (countdownTime === '') Utils.setTimer(startTime, endTime, updateCountdown);
+    constructor(props) {
+        super(props);
+        this.isCountdownSet = false
     }
 
     getPhasePercents = (current, goal) => current / goal * 100;
 
     render() {
-        const {gainedMoney, countdownTime, tokenPrice} = this.props;
+        const {gainedMoney, startTime, endTime, tokenPrice} = this.props;
 
         const raisedAmountNum = Math.ceil(parseInt(gainedMoney, 10));
-        const raisedAmountStr = Utils.splitDigits(Math.ceil(parseInt(gainedMoney, 10)/100)) + ' USD';
+        const raisedAmountStr = splitDigits(Math.ceil(parseInt(gainedMoney, 10)/100)) + ' USD';
 
         return (
             <Wrapper>
@@ -48,17 +50,28 @@ class ICOProgress extends React.Component {
                         </PartWrapper>
                         <PartWrapper className="visible-smMinus">
                             <DescHead>Remaining:</DescHead>
-                            <TimerWrapper>
-                                <TimeBlock bold>{countdownTime.days || '00'}d</TimeBlock>
-                                <TimeBlock bold>{countdownTime.hours || '00'}h</TimeBlock>
-                                <TimeBlock bold>{countdownTime.minutes || '00'}m</TimeBlock>
-                                <TimeBlock bold>{countdownTime.seconds || '00'}s</TimeBlock>
-                            </TimerWrapper>
+                            <Countdown startTime={startTime} endTime={endTime}>
+                                {(days, hours, minutes, seconds) => (
+                                    <TimerWrapper>
+                                        <TimeBlock bold>{days || '00'}d</TimeBlock>
+                                        <TimeBlock bold>{hours || '00'}h</TimeBlock>
+                                        <TimeBlock bold>{minutes || '00'}m</TimeBlock>
+                                        <TimeBlock bold>{seconds || '00'}s</TimeBlock>
+                                    </TimerWrapper>
+                                )}
+                            </Countdown>
                         </PartWrapper>
                     </WrapperHeaderInfo>
                 </Header>
                 <ProgressBar tokenPrice={tokenPrice} raisedAmountNum={raisedAmountNum}>
-                    <Timer className="hidden-smMinus" countdownTime={countdownTime}/>
+                    <Countdown startTime={startTime} endTime={endTime}>
+                        {(days, hours, minutes, seconds) => (
+                            <React.Fragment>
+                                <Timer className="hidden-smMinus" countdownTime={{days, hours, minutes, seconds}}/>
+                            </React.Fragment>
+                        )}
+                    </Countdown>
+                    
                     <PhasesInfo rate={tokenPrice}/>
                 </ProgressBar>
                 <BonusInfoText>Bonuses are going to end up soon!</BonusInfoText>

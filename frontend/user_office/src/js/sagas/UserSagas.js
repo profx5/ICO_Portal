@@ -1,18 +1,16 @@
-import Api from '../../api'
+import API from 'api';
 import axios from 'axios'
-import {extractAccount} from '../../web3'
-import {call, cps, put, select, takeEvery} from 'redux-saga/effects'
-import * as UserActions from '../actions/UserActions'
-import * as UIActions from '../actions/UIActions'
-import * as MetamaskActions from '../actions/MetamaskActions'
-import Utils from '../utils/index'
+import {extractAccount} from 'globalWeb3'
+import {call, cps, put, takeEvery} from 'redux-saga/effects'
+import * as UserActions from 'js/actions/UserActions'
+import * as UIActions from 'js/actions/UIActions'
 
 export class UserSagas {
     static* setAccount(action) {
         try {
             yield call(axios, {
                 method: 'POST',
-                url: Api.setEthAccount(),
+                url: API.setEthAccount(),
                 data: {
                     'eth_account': action.payload
                 }
@@ -37,7 +35,7 @@ export class UserSagas {
     static* getUser() {
         try {
             const response = yield call(axios, {
-                url: Api.getMe(),
+                url: API.getMe(),
                 method: 'GET'
             })
 
@@ -59,27 +57,10 @@ export class UserSagas {
         }
     }
 
-    static* detectMetaMaskAccount() {
-        if (Utils.path(window, 'web3')) {
-            yield UserSagas.extractMetaMaskAccount({})
-            const metamaskAcc = yield select((state) => state.user.get('metamaskAccount'))
-
-            if (typeof metamaskAcc === 'string' && metamaskAcc.length > 0) {
-                yield put(MetamaskActions.showModalWithOptionsForEthAccount())
-                return
-            }
-            yield put(MetamaskActions.metamaskIsBlocked())
-            return
-        }
-
-        yield put(MetamaskActions.showModalWithOptionsForEthAccount())
-        return
-    }
-
     static* changePassword(action) {
         try {
             const response = yield call(axios, {
-                url: Api.changePassword(),
+                url: API.changePassword(),
                 method: 'POST',
                 data: action.payload
             })
@@ -91,17 +72,34 @@ export class UserSagas {
             }));
         } catch (e) {
             yield put(UserActions.changePasswordFailed())
-            yield put(UIActions.showModal({
-                modalHead: 'Warning',
-                modalContent: 'Something went wrong... Please, check if the passwords are valid!'
-            }));
+            if (e.response.data.error.includes('password_incorrect')) {
+                yield put(UIActions.showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'New password is incorrect. Please, check if it\'s typed right!'
+                }));
+            } else if (e.response.data.error.includes('same_password')) {
+                yield put(UIActions.showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'New password matches the old password. Please, try another one!'
+                }));
+            } else if (e.response.data.error.includes('password_too_short')) {
+                yield put(UIActions.showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'New password is too short. It must be not less than 8 symbols!'
+                }));
+            } else if (e.response.data.error.includes('password_mismatch')) {
+                yield put(UIActions.showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'Passwords don\'t match. Please, confirm the password correctly!'
+                }));
+            }
         }
     }
 
     static * changeEmail(action) {
         try {
             yield call(axios, {
-                url: Api.changeEmail(),
+                url: API.changeEmail(),
                 method: 'POST',
                 data: action.payload
             })
@@ -114,6 +112,17 @@ export class UserSagas {
             }));
         } catch (e) {
             yield put(UserActions.changeEmailFailed())
+            if (e.response.data.error === 'invalid email address') {
+                yield put(UIActions.showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'New email is incorrect. Please, check if it\'s typed right!'
+                }));
+            } else if (e.response.data.error === 'same_email') {
+                yield put(UIActions.showModal({
+                    modalHead: 'Warning',
+                    modalContent: 'New email matches the old email. Please, try another one!'
+                }));
+            }
         }
     }
 }

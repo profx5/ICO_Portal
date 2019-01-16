@@ -1,7 +1,7 @@
-import {sendTransaction, ethToWei} from '../../web3';
+import {sendTransaction, ethToWei} from 'globalWeb3';
 import {cps, takeEvery, put} from 'redux-saga/effects';
-import * as InvestActions from '../actions/InvestActions';
-import * as DepositsActions from '../actions/DepositsActions';
+import * as InvestActions from 'js/actions/InvestActions';
+import * as DepositsActions from 'js/actions/DepositsActions';
 
 
 
