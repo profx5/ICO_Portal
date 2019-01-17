@@ -18,31 +18,18 @@ class Currency extends React.Component {
     }
 
     generateCurrencyCards = (data) => {
-        const mainCurrenciesNum = 4;
 
         return data.map((item, index) => {
             let {code, rate, name} = item;
-            const {investCurrency, investCurrencyRate, showPopup} = this.props;
+            const {investCurrency} = this.props;
 
-            if (index < mainCurrenciesNum) {
-                return  <CurrencyCardMain
-                            className={investCurrency === code ? 'active' : ''}
-                            name={name}
-                            icon={'icon-' + code}
-                            rate={rate}
-                            key={index} 
-                            disabled={index !== 0 ? true : false}
-                            clickHandler={this.cardClickHandler.bind(this, code, rate)}/>
-            } else if (index === mainCurrenciesNum) {
-                return  <CurrencyCardOther
-                            rate={investCurrencyRate}
-                            key={index} 
-                            disabled
-                            investCurrency={investCurrency}
-                            restCurrencies={data.slice(mainCurrenciesNum)}
-                            clickHandler={showPopup}>
-                        </CurrencyCardOther>
-            } else return;
+            return  <CurrencyCardMain
+                        className={investCurrency === code ? 'active' : ''}
+                        name={name}
+                        icon={'icon-' + code}
+                        rate={rate}
+                        key={index} 
+                        clickHandler={this.cardClickHandler.bind(this, code, rate)}/>
 
         })
     }

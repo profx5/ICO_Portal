@@ -6377,7 +6377,6 @@ a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] 
 .Signin_text, .Signin_tipText {
     text-align: center;
     font-weight: 400;
-    white-space: nowrap;
 }
 
 @media (max-width: 767px) {
