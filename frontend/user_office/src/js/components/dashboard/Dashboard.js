@@ -4,7 +4,6 @@ import {media} from 'js/utils/media';
 
 import Title from 'js/components/common/Title';
 import ICOProgress from 'js/components/dashboard/ICOProgress';
-import BonusSheet from 'js/components/dashboard/stateless/BonusSheet';
 
 import Banner from 'img/banner.jpg';
 
@@ -14,7 +13,6 @@ const Dashboard = (props) => {
         <Wrapper>
             <BannerWrapper />
             <Title>Dashboard</Title>
-            <BonusSheet/>
             <ICOProgress/>
         </Wrapper>
     )
