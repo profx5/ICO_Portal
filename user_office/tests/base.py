@@ -48,7 +48,7 @@ class APITestCase(TestCase):
 
 class EthTesterAPITestCase(APITestCase, BlockChainTestCase):
     setup_eth_tester = True
-    setup_contracts = ['price_oracle', 'token', 'crowdsale']
+    setup_contracts = ['token', 'crowdsale']
 
     def setUp(self):
         BlockChainTestCase.setUp(self)

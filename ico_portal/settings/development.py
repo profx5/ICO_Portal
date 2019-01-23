@@ -21,15 +21,10 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.handlers.SentryHandler',
-            'dsn': 'https://98e586745597476dafda3ea15296e38f:1495fcec1c6d4d55afeeed1dce5f05bd@sentry.io/1236224',
-        },
     },
     'loggers': {
         '': {
-            'handlers': ['console', 'sentry'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': False,
         },

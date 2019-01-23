@@ -17,7 +17,7 @@ class ApproveKYC(ServiceObject):
             return self.fail('KYC already approved')
 
     def create_contract(self, context):
-        return services.CreateMediatorContract()(context.kyc.investor) | \
+        return services.CreateDepositProxy()(context.kyc.investor) | \
             (lambda result: self.success(txn=result.txn))
 
     def set_deploy_txn_id(self, context):
@@ -100,7 +100,7 @@ class ApproveMinedKYC(ServiceObject):
             return self.fail('Transaction is not mined')
 
     def check_txn_type(self, context):
-        if context.txn_object.txn_type == 'CREATE_MEDIATOR':
+        if context.txn_object.txn_type == 'CREATE_PROXY':
             return self.success()
         else:
             return self.fail('Invalid transction type')
@@ -146,7 +146,7 @@ class ApproveMinedKYC(ServiceObject):
         try:
             account = Account(
                 investor=context.kyc.investor,
-                currency="MEDIATOR",
+                currency="PROXY",
                 address=contract_address
             )
 

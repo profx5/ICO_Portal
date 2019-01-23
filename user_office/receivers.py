@@ -7,5 +7,5 @@ from blockchain.ico.services import ApproveMinedKYC
 def txn_mined_callback(sender, **kwargs):
     txn_object = kwargs['transaction']
 
-    if txn_object.txn_type == 'CREATE_MEDIATOR':
+    if txn_object.txn_type == 'CREATE_PROXY':
         ApproveMinedKYC()(txn_object)

@@ -1,7 +1,7 @@
 from oslash import Right
 
-from blockchain.tests.currencies.test_dai import DAIBlockchainTestCase
-from blockchain.ico.contracts import TokensMediator
+from blockchain.tests.currencies.test_erc20 import ERC20BlockchainTestCase
+from blockchain.ico.contracts import DepositProxy
 from blockchain.ico.services import ApproveKYC, SendPreparedTxns, TrackTransactions, \
     GetEvents, ProcessTransfer
 from user_office.factories import InvestorFactory, KYCFactory
@@ -9,9 +9,9 @@ from user_office.models import Account, Transaction
 from blockchain.currencies import Currencies
 
 
-class TestStableCoinBuy(DAIBlockchainTestCase):
+class TestStableCoinBuy(ERC20BlockchainTestCase):
     setup_eth_tester = True
-    setup_contracts = ['dai', 'token', 'crowdsale']
+    setup_contracts = ['erc20', 'token', 'crowdsale']
 
     def test_successful_buy(self):
         investor = InvestorFactory(eth_account=self.eth_tester.get_accounts()[-1])
@@ -27,6 +27,7 @@ class TestStableCoinBuy(DAIBlockchainTestCase):
         self.assertEqual(kyc.state, 'APPROVED')
         self.assertIsNotNone(kyc.deploy_txn_id)
 
+        # PROXY
         transaction = Transaction.objects.get(txn_id=kyc.deploy_txn_id)
         self.assertEqual(transaction.state, 'MINED')
         self.assertIsNotNone(transaction.txn_hash)
@@ -34,34 +35,35 @@ class TestStableCoinBuy(DAIBlockchainTestCase):
         receipt = self.web3.eth.getTransactionReceipt(transaction.txn_hash)
         self.assertEqual(receipt.status, 1)
 
-        account = Account.objects.get(investor=investor, currency='MEDIATOR')
+        account = Account.objects.get(investor=investor, currency='PROXY')
         self.assertEqual(account.address, receipt.contractAddress)
 
-        mediator_contract = TokensMediator(account.address)
-        self.assertEqual(mediator_contract.contract.functions.investor().call(), investor.eth_account)
-        self.assertEqual(mediator_contract.contract.functions.endPoint().call(), self.crowdsale_contract.address)
+        proxy_contract = DepositProxy(account.address)
+        self.assertEqual(proxy_contract.contract.functions.investor().call(), investor.eth_account)
+        self.assertEqual(proxy_contract.contract.functions.endPoint().call(), self.crowdsale_contract.address)
 
+        # Process transfer
         tokens_amount = 150 * 10 ** 18
         self.mint_tokens(investor.eth_account, tokens_amount)
         transfer_txn_hash = self.transfer_tokens(
             investor.eth_account,
-            mediator_contract.contract.address,
+            proxy_contract.contract.address,
             tokens_amount
         )
-        self.assertEqual(self.dai.functions.balanceOf(mediator_contract.contract.address).call(), tokens_amount)
+        self.assertEqual(self.erc20.functions.balanceOf(proxy_contract.contract.address).call(), tokens_amount)
 
         dai_settings = Currencies.get_currency('DAI')
         result = dai_settings.events_getter()
         self.assertIsInstance(result, Right)
-        self.assertEqual(len(result.value.entries), 1)
+        self.assertEqual(len(result.value.entries), 2)
 
-        result = dai_settings.transfers_processor(result.value.entries[0])
+        result = dai_settings.transfers_processor(result.value.entries[1])
         self.assertIsInstance(result, Right)
 
         payment = result.value.payment
 
         self.assertEqual(payment.currency, 'DAI')
-        self.assertEqual(payment.payer_account, mediator_contract.contract.address)
+        self.assertEqual(payment.payer_account, proxy_contract.contract.address)
         self.assertEqual(payment.amount, 150)
         self.assertEqual(payment.amounti, tokens_amount)
         self.assertEqual(payment.external_id, transfer_txn_hash)
@@ -103,6 +105,6 @@ class TestStableCoinBuy(DAIBlockchainTestCase):
         self.assertEqual(transfer.txn_hash, result.value.event.txn_hash)
         self.assertEqual(transfer.amount, tokens_amount)
 
-        self.assertEqual(self.dai.functions.balanceOf(mediator_contract.contract.address).call(), 0)
-        self.assertEqual(self.dai.functions.balanceOf(self.crowdsale_contract.address).call(), tokens_amount)
+        self.assertEqual(self.erc20.functions.balanceOf(proxy_contract.contract.address).call(), 0)
+        self.assertEqual(self.erc20.functions.balanceOf(self.crowdsale_contract.address).call(), tokens_amount)
         self.assertEqual(self.token_contract.functions.balanceOf(investor.eth_account).call(), tokens_amount)

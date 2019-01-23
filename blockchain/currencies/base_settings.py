@@ -1,5 +1,4 @@
 from ico_portal.utils.logger import LoggerMixin
-from user_office.models import ExchangeRate
 
 
 class BaseSettings(LoggerMixin):
@@ -19,11 +18,4 @@ class BaseSettings(LoggerMixin):
 
     @property
     def exchange_rate(self):
-        obj = ExchangeRate.objects.get_rate_by_currency(self.code)
-
-        if obj:
-            return obj.rate
-        else:
-            self.logger.error(f"Exchange rate for currency {self.code} not found")
-
-            return 0
+        raise NotImplementedError()

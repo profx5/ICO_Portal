@@ -6,7 +6,7 @@ register = template.Library()
 
 @register.simple_tag
 def site_url():
-    return settings.VERA_SITE_URL
+    return settings.HOME_URL
 
 
 @register.simple_tag

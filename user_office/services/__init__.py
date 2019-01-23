@@ -1,6 +1,5 @@
 # flake8: noqa
 from .recalc_balance import RecalcBalance
-from .add_referral_bonus import AddReferralBonus
 from .set_eth_account import SetETHAccount
 from .change_password import ChangePassword
 from .change_email import SendChangeEmailConfirm, SetEmail

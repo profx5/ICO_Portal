@@ -2,7 +2,6 @@ from django.db import DatabaseError
 
 from blockchain.currencies.ethereum.services import process_purchase
 from user_office.models import Transfer, Transaction
-from user_office.services import AddReferralBonus
 from .process_tokens_moves import ProcessIncomingTokensMove, \
     ProcessOutgoingTokensMove
 from ico_portal.utils.service_object import ServiceObject, service_call, transactional
@@ -75,12 +74,6 @@ class ProcessTransfer(ServiceObject):
             lambda result: self.success(outgoing_TM=result.tokens_move)
         )
 
-    def create_referral_bonus(self, context):
-        if 'payment' in context:
-            return AddReferralBonus()(payment=context.payment) | (lambda result: self.success())
-
-        return self.success()
-
     @service_call
     @transactional
     def __call__(self, event):
@@ -89,5 +82,4 @@ class ProcessTransfer(ServiceObject):
             self.find_existing_transfer | \
             self.get_transfer | \
             self.process_incoming_tokens_move | \
-            self.process_outgoing_tokens_move | \
-            self.create_referral_bonus
+            self.process_outgoing_tokens_move
