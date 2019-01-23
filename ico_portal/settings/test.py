@@ -22,57 +22,42 @@ CROWDSALE_CONTRACT = {
 TOKEN_CONTRACT = {
     'address': '0xDf86D26bD790fBae51A3C3abf07f77D6DC691A19',
 }
-PRICE_ORACLE = {
-    'address': '0x42ac0F356c84928258483631b740584E343B80b7',
-    'sensivity': 3  # percents
+DEPOSIT_PROXY = {
+    'endpoint_address': '0x198a3D74F6c15C54Ae52818642CE2e93dE5150CD'
 }
 
-EXCHANGE_RATES = ['ETH', 'BTC', 'DOGE', 'LTC']
-
 CURRENCIES = {
-    'ethereum': {
-        'module': 'ethereum',
-        'code': 'ETH',
-        'name': 'Ethereum',
-        'rpc_url': WEB3_RPC_URL,
-    },
-    'litecoin': {
-        'module': 'coinpayments',
-        'code': 'LTC',
-        'name': 'Litecoin',
-        'merchant': '69d94a11a25bc1245847e2c5175cd254',
-        'ipn_secret': 'q123q123q123',
-        'public_key': '3eaf230a98bd62a69305f1d06ca50f69095be5d23bef32c06b328eb0f134129f',
-        'private_key': '87cbfc69BAB5fbdC910e9080b363d63352fc4fAdcDad46280b80767537849e24'
-    },
-    'dogecoin': {
-        'module': 'coinpayments',
-        'code': 'DOGE',
-        'name': 'Dogecoin',
-        'merchant': '69d94a11a25bc1245847e2c5175cd254',
-        'ipn_secret': 'q123q123q123',
-        'public_key': '3eaf230a98bd62a69305f1d06ca50f69095be5d23bef32c06b328eb0f134129f',
-        'private_key': '87cbfc69BAB5fbdC910e9080b363d63352fc4fAdcDad46280b80767537849e24'
-    },
-    'bitcoin': {
-        'module': 'cpg',
-        'code': 'BTC',
-        'name': 'Bitcoin',
-        'cpg_url': 'http://cpg_host:8080',
-        'api_key': 'KBMwMKJ748JH5v0CTHJ71Q',
-        'secret': '5ET4lEfvKLHcWOo3DyWgJodPFZG9udptq8cDzgyYPaFWILZOEWV+FjvQ60jVsCBoIzkz//Tp99joFo0S0cF1ig',
-        'decimals': 8
-    },
     'DAI': {
-        'module': 'DAI',
+        'module': 'erc20',
         'code': 'DAI',
         'name': 'DAI',
-        'receiver_address': '0x42ac0F356c84928258483631b740584E343B80b7',
         'rate_usdc': 100,
-        'contract': {
-            'address': '0x5265968c25D1F89788dca53c137a962F312AD4A8',
-            'decimals': 18
-        }
+        'token_address': '0x0000000000000000000000000000000000000000',
+        'decimals': 18
+    },
+    'USDC': {
+        'module': 'erc20',
+        'code': 'USDC',
+        'name': 'USDC',
+        'rate_usdc': 100,
+        'token_address': '0x0000000000000000000000000000000000000000',
+        'decimals': 18
+    },
+    'USDT': {
+        'module': 'erc20',
+        'code': 'USDT',
+        'name': 'USDT',
+        'rate_usdc': 100,
+        'token_address': '0x0000000000000000000000000000000000000000',
+        'decimals': 18
+    },
+    'TUSD': {
+        'module': 'erc20',
+        'code': 'TUSD',
+        'name': 'TUSD',
+        'rate_usdc': 100,
+        'token_address': '0x0000000000000000000000000000000000000000',
+        'decimals': 18
     }
 }
 

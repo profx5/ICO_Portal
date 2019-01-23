@@ -75,15 +75,6 @@ class PhaseFactory(factory.DjangoModelFactory):
     hard_cap = fuzzy.FuzzyInteger(low=0)
 
 
-class ExchangeRateFactory(factory.DjangoModelFactory):
-    class Meta:
-        model = 'user_office.ExchangeRate'
-
-    currency = CurrencyFuzzy
-    rate = fuzzy.FuzzyDecimal(low=0, high=10000, precision=8)
-    timestamp = factory.LazyFunction(lambda: int(datetime.utcnow().timestamp()))
-
-
 class AccountFactory(factory.DjangoModelFactory):
     class Meta:
         model = 'user_office.Account'
@@ -154,20 +145,3 @@ class TransactionFactory(factory.DjangoModelFactory):
 
     created_at = UTCNow
     txn_id = UUID
-
-
-class BonusesFactory(factory.DjangoModelFactory):
-    class Meta:
-        model = 'user_office.Bonus'
-
-    id_contract = fuzzy.FuzzyText(length=10)
-    description = fuzzy.FuzzyText(length=100)
-
-
-class ReferralBonusFactory(factory.DjangoModelFactory):
-    class Meta:
-        model = 'user_office.ReferralBonus'
-
-    beneficiary = factory.SubFactory(InvestorFactory)
-    amount = fuzzy.FuzzyDecimal(low=0, high=1000000)
-    created_from = factory.SubFactory(PaymentFactory)

@@ -6,13 +6,11 @@ from rest_framework.documentation import include_docs_urls
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from landing import views as landing_views
 from user_office import views as user_office_views
 from user_office.api_urls import api_urlpatterns
 
 
 urlpatterns = [
-    path('', landing_views.IndexPage.as_view()),
     path('', include('social_django.urls', namespace='social')),
     path('', include('blockchain.urls', namespace='blockchain')),
 

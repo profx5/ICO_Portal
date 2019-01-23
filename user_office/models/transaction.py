@@ -11,7 +11,7 @@ TRANSACTION_STATE_CHOICES = (('SENT', 'Sent'),
 
 TRANSACTION_TYPE_CHOICES = (
     ('PASS_KYC', 'pass kyc'),
-    ('CREATE_MEDIATOR', 'create tokens mediator contract'),
+    ('CREATE_PROXY', 'create tokens mediator contract'),
 )
 
 

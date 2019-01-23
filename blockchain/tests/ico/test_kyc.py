@@ -27,7 +27,7 @@ class TestApproveMinedKYC(BlockChainTestCase):
         self.assertIsInstance(result[0], Right)
         transaction = result[0].value.txn_object
 
-        self.assertEqual(transaction.txn_type, "CREATE_MEDIATOR")
+        self.assertEqual(transaction.txn_type, "CREATE_PROXY")
         self.assertEqual(transaction.state, "MINED")
 
         kyc.refresh_from_db()
@@ -45,7 +45,7 @@ class TestApproveMinedKYC(BlockChainTestCase):
 
         account = accounts.first()
         self.assertEqual(account.address, contract_address)
-        self.assertEqual(account.currency, 'MEDIATOR')
+        self.assertEqual(account.currency, 'PROXY')
         self.assertEqual(account.investor, investor)
 
     def test_already_approved_kyc(self):

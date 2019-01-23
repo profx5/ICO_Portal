@@ -1,3 +1,4 @@
+import json
 from django.test import TestCase
 from web3 import Web3, HTTPProvider, EthereumTesterProvider
 from eth_tester import EthereumTester
@@ -5,7 +6,7 @@ from django.conf import settings
 
 import blockchain.web3
 from ico_portal.utils.datetime import datetime
-from blockchain.ico.contracts import CrowdsaleContract, PriceOracle, TokensMediator
+from blockchain.ico.contracts import CrowdsaleContract, DepositProxy
 from blockchain.ico.contracts.token import TokenContract, TransferEvent
 from django.apps import apps
 
@@ -13,18 +14,19 @@ from django.apps import apps
 class BlockChainTestCase(TestCase):
     crowdsale_tokens_amount = 10 ** 24
 
-    oracle_inital_price = 55015
-    oracle_allowed_change = 10
-    oracle_sensivity = 3
-
     setup_eth_tester = False
-    setup_contracts = []  # token, crowdsale, price_oracle
+    setup_contracts = []  # token, crowdsale, price_oracle, dai
 
     def stub_datetime_now(self, dt):
         datetime.stubed_now = dt
 
     def stub_datetime_utcnow(self, dt):
         datetime.stubed_utcnow = dt
+
+    @staticmethod
+    def _get_compiled(filename):
+        with open(f'{settings.BASE_DIR}/blockchain/tests/contracts/{filename}') as f:
+            return json.load(f)
 
     @classmethod
     def _setup_account(cls):
@@ -41,39 +43,29 @@ class BlockChainTestCase(TestCase):
 
     @classmethod
     def _setup_token(cls):
-        Coin = cls.web3.eth.contract(abi=TokenContract.get_compiled()['abi'],
-                                     bytecode=TokenContract.get_compiled()['bin'])
-        tx_hash = Coin.constructor().transact()
+        compiled = cls._get_compiled('token.json')
+
+        Token = cls.web3.eth.contract(abi=compiled['abi'], bytecode=compiled['bin'])
+        tx_hash = Token.constructor().transact()
         tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
         cls.token_contract = cls.web3.eth.contract(address=tx_receipt.contractAddress,
-                                                   abi=TokenContract.get_compiled()['abi'])
+                                                   abi=compiled['abi'])
 
         TokenContract.init({'address': cls.token_contract.address})
 
     @classmethod
     def _setup_crowdsale(cls):
-        Crowdsale = cls.web3.eth.contract(abi=CrowdsaleContract.get_compiled()['abi'],
-                                          bytecode=CrowdsaleContract.get_compiled()['bin'])
+        compiled = cls._get_compiled('crowdsale.json')
+
+        Crowdsale = cls.web3.eth.contract(abi=compiled['abi'], bytecode=compiled['bin'])
         tx_hash = Crowdsale.constructor(1, cls.token_contract.address).transact()
         tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
         cls.crowdsale_contract = cls.web3.eth.contract(address=tx_receipt.contractAddress,
-                                                       abi=CrowdsaleContract.get_compiled()['abi'])
+                                                       abi=compiled['abi'])
 
         CrowdsaleContract.init({'address': cls.crowdsale_contract.address})
-        TokensMediator.init({'endpoint_address': cls.crowdsale_contract.address})
+        DepositProxy.init({'endpoint_address': cls.crowdsale_contract.address})
 
-    @classmethod
-    def _setup_price_oracle(cls):
-        oracle = cls.web3.eth.contract(abi=PriceOracle.get_compiled()['abi'],
-                                       bytecode=PriceOracle.get_compiled()['bin'])
-        tx_hash = oracle.constructor(cls.oracle_inital_price, cls.oracle_allowed_change).transact()
-        tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
-        cls.price_oracle = cls.web3.eth.contract(address=tx_receipt.contractAddress,
-                                                 abi=PriceOracle.get_compiled()['abi'])
-        cls.price_oracle.functions.addOracle(cls.web3.eth.defaultAccount).transact()
-
-        PriceOracle.init({'address': cls.price_oracle.address,
-                          'sensivity': cls.oracle_sensivity})
 
     @classmethod
     def _setup_contracts(cls):
@@ -123,9 +115,6 @@ class BlockChainTestCase(TestCase):
 
         self.utcnow = datetime.utcnow()
         self.stub_datetime_utcnow(self.utcnow)
-
-    def pass_KYC(self, address):
-        self.crowdsale_contract.functions.addKycVerifiedInvestor(address).transact()
 
     def mint_tokens(self, to, amount):
         return self.token_contract.functions.mint(to, amount).transact({

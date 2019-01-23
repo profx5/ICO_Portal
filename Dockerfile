@@ -23,8 +23,6 @@ COPY --from=frontend /tmp/webpack-stats.prod.json webpack-stats.prod.json
 COPY manage.py   manage.py
 COPY scripts     scripts
 COPY helpdesk    helpdesk
-COPY landing     landing
-COPY solidity-contracts solidity-contracts
 COPY ico_portal  ico_portal
 COPY blockchain  blockchain
 COPY user_office user_office
@@ -35,9 +33,8 @@ RUN ./manage.py collectstatic --no-input
 RUN mkdir /static && mv assets/* /static
 RUN mkdir /media_data
 
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY build/docker-entrypoint.sh /usr/local/bin/
 
 ENV DJANGO_SETTINGS_MODULE "ico_portal.settings.production"
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["/usr/src/app/scripts/start_server.sh"]

@@ -3,7 +3,6 @@ from django.contrib.auth.models import Group
 
 from .investor import *
 from .kyc import *
-from .exchange_rates import *
 from .transfer import *
 from .tokens_move import *
 from .payment import *

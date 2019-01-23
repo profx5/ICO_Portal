@@ -1,20 +1,22 @@
 from web3.utils.filters import LogFilter
 from web3.utils.events import get_event_data
 
+from blockchain.ico.contracts.base import BaseContract
 from ico_portal.utils.datetime import datetime
-from .base import BaseContract
 
 
-class TokenContract(BaseContract):
-    abi = '[{"constant": true, "inputs": [], "name":"totalSupply", "outputs":[{"name": "", "type": "uint256"}], "payable": false, "stateMutability": "view", "type": "function"}, ' \
-          '{"anonymous": false, "inputs": [{"indexed": true, "name": "from", "type": "address"}, {"indexed": true, "name": "to", "type": "address"}, ' \
+class ERC20Token(BaseContract):
+    abi = '[{"anonymous": false, "inputs": [{"indexed": true, "name": "from", "type": "address"}, {"indexed": true, "name": "to", "type": "address"},' \
           '{"indexed": false, "name": "value", "type": "uint256"}], "name": "Transfer", "type": "event"}]'
 
-    def get_total_supply(self):
-        return self.contract.functions.totalSupply().call()
+    def __init__(self, settings):
+        self.contract_address = settings.token_address
 
     def get_filter(self, from_block, to_block=None):
-        return self.contract.events.Transfer.createFilter(fromBlock=from_block, toBlock=to_block)
+        return self.contract.events.Transfer.createFilter(
+            fromBlock=from_block,
+            toBlock=to_block,
+        )
 
     @property
     def transfer_abi(self):
@@ -40,7 +42,12 @@ class TransferEvent:
 
 
 class TransfersFilter(LogFilter):
+    def __init__(self, contract, *args, **kwargs):
+        self.contract = contract
+
+        super().__init__(*args, **kwargs)
+
     def log_entry_formatter(self, entry):
-        data = get_event_data(TokenContract().transfer_abi, entry)
+        data = get_event_data(self.contract.transfer_abi, entry)
 
         return TransferEvent(data)

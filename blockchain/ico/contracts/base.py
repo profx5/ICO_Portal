@@ -6,12 +6,8 @@ from ico_portal.utils.logger import LoggerMixin
 
 class BaseContract(LoggerMixin):
     @classmethod
-    def get_compiled(cls):
-        if not hasattr(cls, '_compiled'):
-            with open(cls.compiled_file_path.format(BASE_DIR=settings.BASE_DIR)) as f:
-                cls._compiled = json.load(f)
-
-        return cls._compiled
+    def get_abi(cls):
+        return cls.abi
 
     @classmethod
     def init(cls, settings):
@@ -24,5 +20,5 @@ class BaseContract(LoggerMixin):
 
     @property
     def contract(self):
-        return self.web3.eth.contract(abi=self.get_compiled()['abi'],
+        return self.web3.eth.contract(abi=self.get_abi(),
                                       address=self.contract_address)

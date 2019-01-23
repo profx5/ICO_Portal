@@ -31,3 +31,5 @@ pyvenv.cfg
 celerybeat-schedule.db
 .coverage
 htmlcov/
+
+.vscode/
