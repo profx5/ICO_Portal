@@ -20,19 +20,19 @@ const ProgressBar = ({children, raisedAmountNum, tokenPrice}) => {
                     <Stage>
                         <div className="StageDesc hidden-smMinus">
                             <StageName>65 000 USD</StageName>
-                            <StageState>Phase 1</StageState>
+                            <StageState>&nbsp;</StageState>
                         </div>
                     </Stage>
                     <Stage>
                         <div className="StageDesc hidden-smMinus">
                             <StageName>130 000 USD</StageName>
-                            <StageState>Phase 2</StageState>
+                            <StageState>&nbsp;</StageState>
                         </div>
                     </Stage>
                     <Stage>
                         <div className="StageDesc hidden-smMinus">
                             <StageName>195 000 USD</StageName>
-                            <StageState>Phase 3</StageState>
+                            <StageState>&nbsp;</StageState>
                         </div>
                     </Stage>
                     <Stage>
@@ -236,4 +236,6 @@ const StageState = styled.div`
     letter-spacing: 0.3px;
     font-family: 'roboto';
     font-weight: 500;
+    position: relative;
+    top: -145px;
 `;
