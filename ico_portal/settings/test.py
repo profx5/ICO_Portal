@@ -61,6 +61,8 @@ CURRENCIES = {
     }
 }
 
+INITIAL_BLOCK_FOR_SCAN = 0
+
 EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 
 LOGGING = {

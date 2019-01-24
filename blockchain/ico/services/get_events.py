@@ -1,5 +1,6 @@
 from oslash import Left
 from django.db import DatabaseError
+from django.conf import settings
 
 from user_office.models import EventsProcessing
 from blockchain.ico.contracts.token import TokenContract, TransfersFilter
@@ -13,13 +14,16 @@ class FilterNotFound(Left):
 
 
 class BaseGetEvents(ServiceObject):
-    start_block = 0
     contract_class = None
     from_contract = None
     filter_class = None
 
     def __init__(self):
         self.contract = self.contract_class()
+
+    @property
+    def start_block(self):
+        return settings.INITIAL_BLOCK_FOR_SCAN
 
     def find_events_processing(self):
         return EventsProcessing.objects \
@@ -121,6 +125,5 @@ class BaseGetEvents(ServiceObject):
 
 
 class GetEvents(BaseGetEvents):
-    start_block = 0
     contract_class = TokenContract
     filter_class = TransfersFilter
