@@ -66,7 +66,6 @@ class BlockChainTestCase(TestCase):
         CrowdsaleContract.init({'address': cls.crowdsale_contract.address})
         DepositProxy.init({'endpoint_address': cls.crowdsale_contract.address})
 
-
     @classmethod
     def _setup_contracts(cls):
         cls.web3.eth.defaultAccount = cls.account['address']

@@ -1,4 +1,4 @@
-from oslash import Right, Left
+from oslash import Right
 from unittest.mock import Mock
 from django.conf import settings
 

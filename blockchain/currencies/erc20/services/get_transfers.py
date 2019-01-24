@@ -1,6 +1,6 @@
 from django.db import DatabaseError
 
-from blockchain.currencies.erc20.contract import ERC20Token, TransfersFilter
+from blockchain.currencies.erc20.contract import TransfersFilter
 from blockchain.ico.services.get_events import BaseGetEvents
 from user_office.models import EventsProcessing
 

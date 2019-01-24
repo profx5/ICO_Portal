@@ -1,12 +1,10 @@
 from shutil import rmtree
 from django.conf import settings
-from django.test.utils import override_settings
 
 from .helpers.fixture import fixture_path
-from ..base import EthTesterAPITestCase, APITestCase
+from ..base import APITestCase
 from user_office.models import KYC
 from helpdesk.models import Ticket
-from blockchain.ico.services import SendPreparedTxns
 
 
 class TestKYC(APITestCase):

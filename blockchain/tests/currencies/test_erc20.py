@@ -15,10 +15,6 @@ from user_office.factories import InvestorFactory, KYCFactory
 class ERC20BlockchainTestCase(BlockChainTestCase):
     setup_eth_tester = True
 
-    @property
-    def currencie_settings(self):
-        return Currencies.get_currency('DAI')
-
     @classmethod
     def _setup_erc20(cls):
         compiled = cls._get_compiled('token.json')
@@ -97,6 +93,8 @@ class TestGetTransfers(ERC20BlockchainTestCase):
     def test_max_block_getting(self):
         last_block_number_node = self.eth_tester.get_block_by_number('latest')["number"]
         result = GetTransfers(self.currencie_settings)()
+
+        self.assertIsInstance(result, Right)
 
         last_block_number_db = EventsProcessing.objects.aggregate(Max('last_processed_block'))['last_processed_block__max']
 

@@ -1,6 +1,6 @@
 from blockchain.ico.contracts import DepositProxy
 from .create_transaction import CreateTransaction
-from ico_portal.utils.service_object import ServiceObject, service_call, transactional
+from ico_portal.utils.service_object import ServiceObject, service_call
 
 
 class CreateDepositProxy(ServiceObject):

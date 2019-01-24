@@ -1,11 +1,9 @@
 from django.db import DatabaseError
 
-from blockchain.currencies.ethereum.services import process_purchase
 from user_office.models import Transfer, Transaction
 from .process_tokens_moves import ProcessIncomingTokensMove, \
     ProcessOutgoingTokensMove
 from ico_portal.utils.service_object import ServiceObject, service_call, transactional
-from blockchain.ico.contracts import CrowdsaleContract
 
 
 class ProcessTransfer(ServiceObject):

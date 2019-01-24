@@ -68,7 +68,6 @@ class BaseGetEvents(ServiceObject):
             else:
                 return self.fail(f'Error while getting all entries {e}')
         except Exception as e:
-            import ipdb; ipdb.set_trace()
             return self.fail(f'Error while getting all entries {e}')
 
     def save_max_block(self, context):

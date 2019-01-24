@@ -1,7 +1,5 @@
 from django.db import models
 
-from .fields import CurrencyField
-
 
 class Account(models.Model):
     id = models.AutoField(primary_key=True)

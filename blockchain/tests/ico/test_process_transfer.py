@@ -1,12 +1,10 @@
-from django.test import override_settings
 from oslash import Right
 from decimal import Decimal
-import django.core.mail
 
 from ..base import BlockChainTestCase
 from user_office.factories import InvestorFactory, TokensMoveFactory, TransferFactory
-from user_office.models import Transfer, TokensMove, Payment, Investor
-from blockchain.ico.services import ProcessTransfer, SendPreparedTxns
+from user_office.models import Transfer, TokensMove, Investor
+from blockchain.ico.services import ProcessTransfer
 
 
 # TOKENS_FOR_20_ETH = Decimal('6601800000000000000000')

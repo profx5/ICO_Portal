@@ -1,5 +1,4 @@
 from decimal import Decimal
-import time
 
 from ..base import APITestCase
 
