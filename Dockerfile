@@ -26,7 +26,6 @@ COPY helpdesk    helpdesk
 COPY ico_portal  ico_portal
 COPY blockchain  blockchain
 COPY user_office user_office
-COPY sync_events.py sync_events.py
 
 RUN ./manage.py collectstatic --no-input
 
