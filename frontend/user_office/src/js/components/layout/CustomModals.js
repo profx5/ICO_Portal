@@ -60,7 +60,7 @@ class CustomModals extends React.Component {
                     <Modal head="Verification required" content={
                         <React.Fragment>
                             {!kycSended &&
-                                <p>Sorry, but you are not allowed to buy tokens yet. Please <StyledLink className='link' onClick={hideModal} to='/user_office/verification/'>pass
+                                <p>Sorry, but you are not allowed to buy tokens yet. Please <StyledLink className='link' onClick={hideModal} to='/user_office/payment/verification'>pass
                                 KYC</StyledLink> procedure first!</p>
                             }
                             {kycSended && kycState === 'WAITING' &&

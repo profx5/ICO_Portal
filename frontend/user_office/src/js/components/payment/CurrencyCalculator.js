@@ -182,7 +182,7 @@ const mapStateToProps = ({Currencies, Invest, UI, KYC, user}) => ({
     tokensAmount: Invest.get('tokensAmount'),
     USDAmount: Invest.get('USDAmount'),
     bonusPercent: 0,
-    kycState: KYC.get('state'),
+    kycState: 'APPROVED',
     openedTip: UI.get('openedTip'),
     ethAccount: user.get('eth_account'),
     tokenPrice: Invest.get('tokenPrice'),

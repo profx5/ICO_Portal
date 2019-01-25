@@ -9,16 +9,21 @@ const Steps = ({step}) => {
         <Wrapper>
             <Step step={step} passed={1 <= step} to_next={2<=step}>
                 <div className="Step__head">Step 1</div>
-                <div className="Step__desc">Select payment method</div>
+                <div className="Step__desc">Verification (KYC)</div>
                 <div className="Step__pointerBg"></div>
             </Step>
             <Step step={step} passed={2 <= step} to_next={3<=step}>
                 <div className="Step__head">Step 2</div>
+                <div className="Step__desc">Select payment method</div>
+                <div className="Step__pointerBg"></div>
+            </Step>
+            <Step step={step} passed={3 <= step} to_next={4<=step}>
+                <div className="Step__head">Step 3</div>
                 <div className="Step__desc">Buying tokens</div>
                 <div className="Step__pointerBg"></div>
             </Step>
-            <Step step={step} passed={3 <= step}>
-                <div className="Step__head">Step 3</div>
+            <Step step={step} passed={4 <= step}>
+                <div className="Step__head">Step 4</div>
                 <div className="Step__desc">Transaction mining</div>
                 <div className="Step__pointerBg"></div>
             </Step>
@@ -31,14 +36,19 @@ export default Steps;
 
 const Wrapper = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-flow: row nowrap;
     margin-top: 20px;
-    ${media.sm} {
-        margin-top: 30px;
-    }
     ${media.xs} {
         margin-top: 15px;
+    }
+    ${media.smMinus} {
+        margin-bottom: 30px;
+    }
+    ${media.sm} {
+        margin-top: 30px;
+        /* position: relative;
+        right: 29px; */
     }
 `;
 
@@ -55,13 +65,20 @@ const Step = styled.div`
         }
     }
     &:nth-of-type(2) {
-        margin: 0 250px;
+        margin: 0 110px;
         ${media.smMinus} {
             margin: 0;
             display: ${props => props.step === 2 && 'block'};
         }
     }
     &:nth-of-type(3) {
+        margin-right: 110px;
+        ${media.smMinus} {
+            margin: 0;
+            display: ${props => props.step === 3 && 'block'};
+        }
+    }
+    &:nth-of-type(4) {
         &:before {
             display: none;
             ${media.smMinus} {
@@ -69,11 +86,11 @@ const Step = styled.div`
             }
         }
         ${media.smMinus} {
-            display: ${props => props.step === 3 && 'block'};
+            display: ${props => props.step === 4 && 'block'};
         }
     }
     .Step__head {
-        color: #3679fc;
+        color: ${props => props.passed ? '#3679fc' : 'rgba(31, 31, 31,.3)'};
         font-size: 20px;
         font-weight: 500;
         letter-spacing: 0.5px;
@@ -81,7 +98,7 @@ const Step = styled.div`
         margin-bottom: 5px;
     }
     .Step__desc {
-        color: #000000;
+        color: ${props => props.passed ? '#000000' : 'rgba(31, 31, 31,.3)'};
         letter-spacing: 0.4px;
         font-weight: 500;
         text-align: center;
@@ -109,9 +126,9 @@ const Step = styled.div`
         display: block;
         width: 16px;
         height: 16px;
-        background: ${props => props.passed ? '#1767f2': 'lightgrey'};
+        background: ${props => props.passed ? '#1767f2': 'rgba(0, 0, 0, .3)'};
         border: 2px solid white;
-        box-shadow: 0 0 0 12px rgba(23,103,242,0.07);
+        box-shadow: 0 0 0 12px ${props => props.passed ? 'rgba(23, 103, 242, .07)': 'rgba(0, 0, 0, .02)'};
         border-radius: 100%;
         margin: 0 auto;
         z-index: 2;
@@ -120,7 +137,7 @@ const Step = styled.div`
     &:before {
         content: '';
         display: block;
-        width: 387px;
+        width: 247px;
         height: 2px;
         background: ${props => props.to_next ? '#1767f2': 'lightgrey'};
         position: absolute;

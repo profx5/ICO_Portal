@@ -5,7 +5,7 @@ import {Map} from 'immutable';
 
 const initialState = Map({
     "email": "",
-    "eth_account": null,
+    "eth_account": '',
     "set_eth_error": null,
     "tokens_amount": 0.00,
     "kyc_required": false,

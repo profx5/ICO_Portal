@@ -7,7 +7,7 @@ import arrow from 'img/arrow_roadmap.svg';
 
 
 const ProgressBar = ({children, raisedAmountNum, tokenPrice}) => {
-    const raisedAmountPercents =  raisedAmountNum / 260000;
+    const raisedAmountPercents =  raisedAmountNum ? raisedAmountNum / 260000 : 0;
 
     return (
         <Wrapper>

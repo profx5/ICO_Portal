@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="50">
-  <text fill="#FFC839" fill-rule="evenodd" font-family="Gilroy-Semibold, Gilroy" font-size="70" font-weight="500" transform="translate(-815 -575)">
+  <text fill="#FFC839" fillRule="evenodd" font-family="Gilroy-Semibold, Gilroy" font-size="70" font-weight="500" transform="translate(-815 -575)">
     <tspan x="812" y="624">!</tspan>
   </text>
 </svg>

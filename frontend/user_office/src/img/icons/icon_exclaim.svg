@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="4" height="10">
-  <text fill="#FFF" fill-rule="evenodd" font-family="Arial-Black, Arial Black" font-size="13" font-weight="700" transform="translate(-210 -38)">
+  <text fill="#FFF" fillRule="evenodd" font-family="Arial-Black, Arial Black" font-size="13" font-weight="700" transform="translate(-210 -38)">
     <tspan x="210" y="48">!</tspan>
   </text>
 </svg>

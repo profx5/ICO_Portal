@@ -57,7 +57,7 @@ function CreateFileAttacher (Component) {
 
             let attr = {
                 type: 'file',
-                class: 'file-input',
+                class: 'file-input Verification_requiredField',
                 name: name,
                 id: `${name}_${Math.random() * (999999999 - 1) + 1}`,
                 hidden: true

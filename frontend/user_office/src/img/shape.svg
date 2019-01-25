@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="12px" height="16px" viewBox="0 0 12 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fillRule="evenodd">
         <g id="Dashboard-NEW_2_1-Transactions" transform="translate(-725.000000, -457.000000)">
-            <g id="Group-11" transform="translate(720.000000, 454.000000)" fill="#818CA4" fill-rule="nonzero">
+            <g id="Group-11" transform="translate(720.000000, 454.000000)" fill="#818CA4" fillRule="nonzero">
                 <path d="M11,5.18181818 L11,3 L8,5.90909091 L11,8.81818182 L11,6.63636364 C13.475,6.63636364 15.5,8.6 15.5,11 C15.5,11.7272727 15.275,12.4545455 14.975,13.0363636 L16.1,14.1272727 C16.625,13.1818182 17,12.1636364 17,11 C17,7.8 14.3,5.18181818 11,5.18181818 Z M11,15.3636364 C8.525,15.3636364 6.5,13.4 6.5,11 C6.5,10.2727273 6.725,9.54545455 7.025,8.96363636 L5.9,7.87272727 C5.375,8.81818182 5,9.83636364 5,11 C5,14.2 7.7,16.8181818 11,16.8181818 L11,19 L14,16.0909091 L11,13.1818182 L11,15.3636364 Z" id="Shape"></path>
             </g>
         </g>

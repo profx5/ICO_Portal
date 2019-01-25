@@ -4,21 +4,18 @@ import {Link} from 'react-router-dom';
 import {media} from 'js/utils/media';
 
 
-const Dropdown = ({email, stepOnePassed, stepTwoPassed, stepThreePassed, stepsPassed, showSetAccount, showSetAccountPopup, dropdownAccountClickHandler}) => {
+const Dropdown = ({email, stepOnePassed, stepTwoPassed, stepsPassed, showSetAccount, showSetAccountPopup, dropdownAccountClickHandler}) => {
     return (
         <Wrapper className="DropdownAccount" id='modal-dropdown'>
-            <StyledSteps>Steps completed: <span>{stepsPassed}/3</span></StyledSteps>
+            <StyledSteps>Steps completed: <span>{stepsPassed}/2</span></StyledSteps>
             <StepsList>
-                <StepsListItem passed={stepOnePassed} onClick={!stepOnePassed ? showSetAccountPopup : undefined}>
-                    <span>1.&nbsp;&nbsp;Provide your ETH address</span>
+            <StepsListItem passed={stepOnePassed}>
+                    {!stepOnePassed && <Link onClick={dropdownAccountClickHandler} to='/user_office/payment/verification'><span>Submit KYC and add ETH address</span></Link>}
+                    {stepOnePassed && <span>Submit KYC and add ETH address</span>}
                 </StepsListItem>
                 <StepsListItem passed={stepOnePassed ? stepTwoPassed : false}>
-                    {stepOnePassed && <Link onClick={dropdownAccountClickHandler} to='/user_office/verification/'><span>2.&nbsp;&nbsp;Submit KYC</span></Link>}
-                    {!stepOnePassed && <span onClick={showSetAccount}>2.&nbsp;&nbsp;Submit KYC</span>}
-                </StepsListItem>
-                <StepsListItem passed={stepTwoPassed ? stepThreePassed : false}>
-                    <Link onClick={dropdownAccountClickHandler} to='/user_office/payment/'>
-                        <span>3.&nbsp;&nbsp;Buy tokens</span>
+                    <Link onClick={dropdownAccountClickHandler} to='/user_office/payment/method'>
+                        <span>Buy tokens</span>
                     </Link>
                 </StepsListItem>
             </StepsList>
@@ -33,7 +30,7 @@ const Dropdown = ({email, stepOnePassed, stepTwoPassed, stepThreePassed, stepsPa
                     <Link to="/user_office/account">Account settings</Link>
                 </NavListItem>
                 <NavListItem onClick={dropdownAccountClickHandler}>
-                    {stepOnePassed && <Link to="/user_office/verification">Verification</Link>}
+                    {stepOnePassed && <Link to="/user_office/payment/verification">Verification</Link>}
                     {!stepOnePassed && <span onClick={showSetAccount}>Verification</span>}
                 </NavListItem>
             </NavList>
@@ -116,16 +113,13 @@ const EmailInfo = styled.div`
     .text {
         opacity: .5;
     }
-    .email {
-
-    }
 `;
 
-const StepsList = styled.ul`
+const StepsList = styled.ol`
     border-bottom: 1px solid rgba(193,193,193,.3);
     padding-bottom: 23px;
     margin-bottom: 20px;
-    padding: 0 23px 23px;
+    padding: 0 23px 23px 36px;
 `;
 
 const StepsListItem = styled.li`

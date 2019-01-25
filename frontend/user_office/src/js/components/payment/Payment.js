@@ -5,9 +5,10 @@ import {Route, Switch} from 'react-router-dom';
 import {withRouter} from 'react-router';
 
 import Title from 'js/components/common/Title';
-import PaymentStepOne from 'js/components/payment/PaymentStepOne';
+import Verification from 'js/components/payment/Verification';
 import PaymentStepTwo from 'js/components/payment/PaymentStepTwo';
 import PaymentStepThree from 'js/components/payment/PaymentStepThree';
+import PaymentStepFour from 'js/components/payment/PaymentStepFour';
 import CurrenciesPopup from 'js/components/payment/CurrenciesPopup';
 import Steps from 'js/components/payment/stateless/Steps';
 
@@ -22,9 +23,10 @@ class Payment extends React.Component {
                 <Title>Payment</Title>
                 <Steps step={step}/>
                 <Switch>
-                    <Route exact path="/user_office/payment" component={PaymentStepOne}/>
-                    <Route exact path="/user_office/payment/buy" component={PaymentStepTwo}/>
-                    <Route exact path="/user_office/payment/finish" component={PaymentStepThree}/>
+                    <Route exact path="/user_office/payment/verification" component={Verification}/>
+                    <Route exact path="/user_office/payment/method" component={PaymentStepTwo}/>
+                    <Route exact path="/user_office/payment/buy" component={PaymentStepThree}/>
+                    <Route exact path="/user_office/payment/finish" component={PaymentStepFour}/>
                 </Switch>
                 {showCurrenciesPopup && <CurrenciesPopup/>}
             </Wrapper>

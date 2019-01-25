@@ -8,7 +8,7 @@ import ErrorMessage from 'js/components/common/ErrorMessage';
 import iconCheck from 'img/icons/icon_check.svg';
 
 
-const FormikCheckbox = ({value, name, labelText, errorStyle, errors, touched, options, icon, handler}) => {
+const FormikCheckbox = ({value, name, labelText, errorStyle, errors, touched, className, icon, handler}) => {
 
     function handle(handler, event) {
         event.preventDefault();
@@ -18,7 +18,7 @@ const FormikCheckbox = ({value, name, labelText, errorStyle, errors, touched, op
     return (
         <Wrapper>
             <InputsWrapper>
-                <CheckboxInput component="input" type="checkbox" checked={value} name={name} id={`checkbox-${name}`}/>
+                <CheckboxInput component="input" type="checkbox" className={className} checked={value} name={name} id={`checkbox-${name}`}/>
                 <CheckboxLabel htmlFor={`checkbox-${name}`} className={(errors[name] && touched[name]) ? 'isInvalid' : ''}>
                     {labelText}
                     {icon &&

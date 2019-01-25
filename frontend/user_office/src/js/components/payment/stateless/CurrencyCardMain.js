@@ -10,16 +10,7 @@ const CurrencyCard = ({className, name, icon, rate, clickHandler, disabled}) => 
     return (
         <Card disabled={disabled} onClick={clickHandler} className={className}>
             <span className="currency-name">{name}</span>
-            <span className={icon}>
-                <span className="path1"></span>
-                <span className="path2"></span>
-                <span className="path3"></span>
-                <span className="path4"></span>
-                <span className="path5"></span>
-                <span className="path6"></span>
-                <span className="path7"></span>
-                <span className="path8"></span>
-            </span>
+            <span className={`${icon}-alt`}></span>
             <span className="currency-rate">{`${rate} $`}&nbsp;</span>
         </Card>
     )
@@ -65,7 +56,6 @@ const Card = styled.div`
         [class^="icon-"] {
             color: rgba(80,154,245,1) !important;
             transform: scale(1.05);
-            opacity: 1;
         }
         .currency-name {
             opacity: 1;
@@ -84,7 +74,7 @@ const Card = styled.div`
     [class^="icon-"] {
         font-size: 50px;
         margin: 20px 0 5px;
-        opacity: 0.5;
+        color: rgba(80,154,245,.5);
         transition: all .25s ease;
         ${media.xs} {
             margin: 0 0 5px;
