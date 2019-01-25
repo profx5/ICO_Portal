@@ -22,8 +22,8 @@ class SetAccount extends React.Component {
     }
 
     getMetaMaskAccount = () => {
-        if (typeof window.globalWeb3 !== 'undefined') {
-            return window.globalWeb3.eth.defaultAccount;
+        if (typeof window.ethereum !== 'undefined') {
+            return window.ethereum.selectedAddress;
         }
     }
 

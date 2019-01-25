@@ -21,11 +21,13 @@ class GetMMToken(ServiceObject):
     def get_secret_key(self, context):
         return self.success(secret_key=settings.SECRET_KEY)
 
-    def return_token(self, context):
+    def make_token(self, context):
         text = '%s,%s' % (context.rounded_ts, context.secret_key)
         hashed = Web3.sha3(text=text).hex()
 
-        return self.success(token=hashed)
+        message = f'Auth token: {hashed}'
+
+        return self.success(token=message)
 
     @service_call
     def __call__(self, timestamp=None):
@@ -35,13 +37,17 @@ class GetMMToken(ServiceObject):
         return self.success(timestamp=timestamp) | \
             self.round_timestamp | \
             self.get_secret_key | \
-            self.return_token
+            self.make_token
 
 
 class CheckMMSignature(ServiceObject):
+    @staticmethod
+    def _get_message_hash(token):
+        return Web3.sha3(text="\x19Ethereum Signed Message:\n" + str(len(token)) + token).hex()
+
     def _check_signature(self, timestamp):
         token = GetMMToken()(timestamp).value.token
-        recovered_accout = Account.recoverHash(message_hash=token,
+        recovered_accout = Account.recoverHash(message_hash=self._get_message_hash(token),
                                                signature=self.signature)
 
         return recovered_accout == self.account

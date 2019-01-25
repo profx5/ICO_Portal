@@ -1,12 +1,12 @@
 $(function() {
     var account = '';
 
-    function sendMetamaskLoginForm(err, signature) {
+    function sendMetamaskLoginForm(err, result) {
         if (err) {
-            return {}
+            console.error(err)
         } else {
             $('#metamask_account').val(account);
-            $('#metamask_signature').val(signature);
+            $('#metamask_signature').val(result.result);
 
             $('#metamsk-login-form').submit()
         }
@@ -14,17 +14,24 @@ $(function() {
     }
 
     function loginViaMetamask() {
-        account = web3.eth.accounts[0];
+        ethereum.enable().catch(console.error);
+
+        account = ethereum.selectedAddress;
         var token = $('#metamask-login-token').val()
 
-        var signature = web3.eth.sign(account, token, sendMetamaskLoginForm)
+
+        web3.currentProvider.sendAsync({
+          method: "personal_sign",
+          params: [token, account],
+          from: account
+        }, sendMetamaskLoginForm);
     }
 
     var metamaskButton = $('.metamask-login');
 
-    if (typeof web3 !== 'undefined' && web3.eth.accounts.length > 0) {
-        metamaskButton.show();
+    if (typeof window.ethereum !== "undefined" && typeof ethereum.selectedAddress === "string") {
+      metamaskButton.show();
 
-        metamaskButton.click(loginViaMetamask);
+      metamaskButton.click(loginViaMetamask);
     }
 })
