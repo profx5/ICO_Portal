@@ -24,9 +24,6 @@ const List = styled.ul`
     border-radius: 6px;
     overflow: hidden; 
     margin-bottom: 25px;
-    @media (max-width: 1230px) {
-        width: 260px;
-    }
 `;
 
 const ListItem = styled.li`

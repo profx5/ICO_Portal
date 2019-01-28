@@ -207,10 +207,6 @@ const Stage = styled.div`
             transform: translateX(0);
         }
     }
-    &:nth-of-type(3) .StageDesc {
-        right: 0 !important;
-        left: unset !important;
-    }
     &:before {
         content: attr(data-rate);
         font-size: 18px;
