@@ -45,6 +45,7 @@ const getValidationSchema = (schemaName) => {
             profession: Yup.string().nullable().required(`This field must be filled!`),
             confirmInvestor: Yup.boolean().oneOf([true],`You must confirm the statement!`),
             confirm: Yup.boolean().oneOf([true],`You must confirm the statement!`),
+            eth_account: Yup.string().nullable().required('This field must be filled!'),
         },
         kycLegal: {
             business_name: Yup.string().nullable().required(`This field must be filled!`),
@@ -62,8 +63,8 @@ const getValidationSchema = (schemaName) => {
             beneficial_place_of_birth: Yup.string().nullable().required(`This field must be filled!`),
             beneficial_birthdate: Yup.string().nullable().required(`This field must be filled!`).min(10, 'Please, write full date!'),
             beneficial_place_of_residence: Yup.string().nullable().required(`This field must be filled!`),
-        
             confirm: Yup.boolean().oneOf([true],`You must confirm the statement!`),
+            eth_account: Yup.string().nullable().required('This field must be filled!'),
         },
     }
 

@@ -72,14 +72,6 @@ class AccountInfo extends React.Component {
                                         {ethAccount && <IconCopy className="CopyBtn" data-clipboard-target="#EthAccount" onClick={this.copyOnClickHandler}/>}
                                     </StyledTextField>
                                 </InputWrapper>
-                                {!ethAccount && 
-                                    <React.Fragment>
-                                        <InputWrapper></InputWrapper>
-                                        <InputWrapper>
-                                            <Button text="Add ETH account" clickHandler={showSetAccountPopup} />
-                                        </InputWrapper>
-                                    </React.Fragment>
-                                }
                             </InputSet>
                             </React.Fragment>
                     )}

@@ -28,8 +28,8 @@ class ICOProgress extends React.Component {
     render() {
         const {gainedMoney, startTime, endTime, tokenPrice} = this.props;
 
-        const raisedAmountNum = Math.ceil(parseInt(gainedMoney, 10));
-        const raisedAmountStr = splitDigits(Math.ceil(parseInt(gainedMoney, 10)/100)) + ' USD';
+        const raisedAmountNum = Math.ceil(parseInt(gainedMoney, 10)) || 0;
+        const raisedAmountStr = gainedMoney ? splitDigits(Math.ceil(parseInt(gainedMoney, 10)/100)) + ' USD' : 0.00;
 
         return (
             <Wrapper>
@@ -75,7 +75,7 @@ class ICOProgress extends React.Component {
                     <PhasesInfo rate={tokenPrice}/>
                 </ProgressBar>
                 <BonusInfoText>Bonuses are going to end up soon!</BonusInfoText>
-                <ButtonWrapper to="/user_office/payment">
+                <ButtonWrapper to="/user_office/payment/verification">
                     <CustomButton className="hidden-smMinus" text="Buy token"/>
                     <Button className="visible-smMinus" text="Buy token"/>
                 </ButtonWrapper>

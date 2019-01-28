@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38">
-  <g fill="none" fill-rule="evenodd" stroke="#11cd56" transform="translate(1 1)">
+  <g fill="none" fillRule="evenodd" stroke="#11cd56" transform="translate(1 1)">
     <circle cx="18" cy="18" r="18"/>
     <path stroke-linecap="square" stroke-width="2" d="M11 19l5.5 5.5m0 0l11.5109-11.5109"/>
   </g>

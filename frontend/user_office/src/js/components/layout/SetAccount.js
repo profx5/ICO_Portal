@@ -22,13 +22,12 @@ class SetAccount extends React.Component {
     }
 
     getMetaMaskAccount = () => {
-        if (typeof window.ethereum !== 'undefined') {
-            return window.ethereum.selectedAddress;
+        if (typeof window.web3 !== 'undefined') {
+            return window.web3.eth.defaultAccount;
         }
     }
 
     componentDidMount() {
-
         if (this.metamaskEthAccount) this.input.value = this.metamaskEthAccount;
     }
 

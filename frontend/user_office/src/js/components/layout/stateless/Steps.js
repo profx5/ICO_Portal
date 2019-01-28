@@ -11,8 +11,8 @@ import userPlaceholder from 'img/user.svg';
 const Steps = ({stepsPassed, onClickHandler, isDropdownAccountOpen}) => {
     return (
         <Wrapper className="DropdownAccountTrigger" onClick={onClickHandler}>
-            <StyledSteps>Steps completed: <span>{stepsPassed}/3</span></StyledSteps>
-            <UserImg approved={stepsPassed === 3}/>
+            <StyledSteps>Steps completed: <span>{stepsPassed}/2</span></StyledSteps>
+            <UserImg approved={stepsPassed === 2}/>
             <ArrowImg up={isDropdownAccountOpen} src={arrowImg}/>
         </Wrapper>
     )

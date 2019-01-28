@@ -9,7 +9,7 @@ const Button = ({text, className, clickHandler, submit, disabled, icon, style, a
     const opts = {
         className: className,
         onClick: clickHandler,
-        disabled: disabled,
+        isDisabled: disabled,
         attach: attach,
         transparent: transparent,
         type: type,
@@ -59,11 +59,14 @@ const Btn = styled.button`
     position: relative;
     z-index: 1;
     cursor: pointer;
+    color: ${props => props.isDisabled && 'white'};
+    border-color: ${props => props.isDisabled && 'rgb(166, 166, 166)'};
     ${media.xs} {
         font-size: 14px;
     }
-    &:disabled {
-        color: #323c47;
+    &.isDisabled {
+        color: white;
+        border-color: rgb(166, 166, 166);
     }
     &:hover {
         color: ${props => props.transparent && '#ffffff'};
@@ -86,12 +89,12 @@ const Btn = styled.button`
     }
     &:before {
         opacity: ${props => props.transparent ? '0' : '1'};
-        background: ${props => props.disabled ? '#f5f6fa' : 'linear-gradient(80deg, #54a0f5, #3172fd)'};
+        background: ${props => props.isDisabled ? 'rgb(166, 166, 166)' : 'linear-gradient(80deg, #54a0f5, #3172fd)'};
         z-index: -1;
     }
     &:after {
         opacity: ${props => props.transparent ? '0' : '1'};
-        background: ${props => props.disabled ? '#f5f6fa' : 'linear-gradient(80deg, #3172fd, #54a0f5)'};
+        background: ${props => props.isDisabled ? 'rgb(166, 166, 166)' : 'linear-gradient(80deg, #3172fd, #54a0f5)'};
         z-index: -2;
     }
     &:hover:before {

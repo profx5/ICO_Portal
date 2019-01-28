@@ -18,7 +18,6 @@ import Dashboard from 'js/components/dashboard/Dashboard';
 import Transactions from 'js/components/transactions/Transactions'
 import Payment from 'js/components/payment/Payment';
 import Support from 'js/components/support/Support';
-import Verification from 'js/components/verification/Verification';
 import Account from 'js/components/account/Account';
 
 import SetAccount from 'js/components/layout/SetAccount';
@@ -83,7 +82,6 @@ class Layout extends Component {
                                 <Route path="/user_office/payment" component={Payment} />
                                 <Route path="/user_office/support/ticket/:ticket" component={Support}/>
                                 <Route path="/user_office/support" component={Support}/>
-                                <Route path="/user_office/verification" component={Verification}/>
                                 <Route path="/user_office/account" component={Account}/>
                         </Switch>
                         <Footer/>

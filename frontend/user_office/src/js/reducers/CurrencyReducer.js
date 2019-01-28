@@ -4,29 +4,8 @@ import {Map} from 'immutable';
 
 
 const initialState = Map({
-    currencies: [
-        {
-            code: 'DAI',
-            name: 'DAI',
-            rate: 1.0,
-        },
-        {
-            code: 'TUSD',
-            name: 'TUSD',
-            rate: 2.0,
-        },
-        {
-            code: 'USDC',
-            name: 'USDC',
-            rate: 3.0,
-        },
-        {
-            code: 'USDT',
-            name: 'USDT',
-            rate: 4.0,
-        },
-    ],
-    investCurrency: 'DAI',
+    currencies: [],
+    investCurrency: '',
     investCurrencyRate: 0.00,
     spreadedCurrencyCards: false
 });
@@ -34,6 +13,11 @@ const initialState = Map({
 
 export const CurrencyReducer = createReducer({
     [actions.getCurrenciesRequest]: (state) => state,
+    [actions.getCurrenciesSuccess]: (state, payload) => {
+        return state.set('currencies', payload)
+            .set('investCurrency', payload[0].code)
+            .set('investCurrencyRate', payload[0].rate);
+    },
     [actions.setInvestCurrency]: (state, payload) => {
         return state.merge({
             investCurrency: payload
