@@ -12,7 +12,7 @@ const VerificationState = ({kycStatus, kycTicketId, className}) => {
                     <p>Verification successful!</p>
                 </Content>
             }
-            {kycStatus === 'WAITING' &&
+            {kycStatus === 'WAITING' || kycStatus === 'DEPLOYING' &&
                 <Content className="state-waiting">
                     <p>Thank you for your application! Our managers are validating your data now.</p>
                     {kycTicketId &&

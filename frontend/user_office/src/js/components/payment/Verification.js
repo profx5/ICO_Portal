@@ -126,7 +126,7 @@ class Verification extends React.Component {
         if (state === 'APPROVED') {
             e.preventDefault();
             this.toNextStep();
-        } else if (state === 'WAITING') {
+        } else if (state === 'WAITING' || state === 'DEPLOYING') {
             e.preventDefault();
             showModal({
                 modalHead: 'Warning',
@@ -206,7 +206,6 @@ class Verification extends React.Component {
                 }
             })
             compose(clearIdDocumentFile, clearUtilityBillFile, clearBasisFile)();
-            this.toNextStep();
         }
     }
 
@@ -373,10 +372,10 @@ const Wrapper = styled(Form)`
         width: calc(100vw - 196px);
     }
     input, label, button:not([type="submit"]) {
-        pointer-events: ${props => props.state === 'WAITING' || props.state === 'APPROVED' ? 'none' : 'auto'};
+        pointer-events: ${props => props.state === 'WAITING' || props.state === 'DEPLOYING' || props.state === 'APPROVED' ? 'none' : 'auto'};
     }
     input {
-        color: ${props => props.state === 'WAITING' || props.state === 'APPROVED' && '#9D9D9D'};
+        color: ${props => props.state === 'WAITING' || props.state === 'DEPLOYING' || props.state === 'APPROVED' && '#9D9D9D'};
     }
 `;
 

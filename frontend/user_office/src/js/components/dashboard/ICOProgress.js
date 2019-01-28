@@ -76,8 +76,7 @@ class ICOProgress extends React.Component {
                 </ProgressBar>
                 <BonusInfoText>Bonuses are going to end up soon!</BonusInfoText>
                 <ButtonWrapper to="/user_office/payment/verification">
-                    <CustomButton className="hidden-smMinus" text="Buy token"/>
-                    <Button className="visible-smMinus" text="Buy token"/>
+                    <Button text="BUY TOKEN"/>
                 </ButtonWrapper>
             </Wrapper>
         )

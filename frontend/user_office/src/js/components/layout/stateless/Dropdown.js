@@ -4,19 +4,18 @@ import {Link} from 'react-router-dom';
 import {media} from 'js/utils/media';
 
 
-const Dropdown = ({email, stepOnePassed, stepTwoPassed, stepsPassed, showSetAccount, showSetAccountPopup, dropdownAccountClickHandler}) => {
+const Dropdown = ({email, stepOnePassed, stepTwoPassed, stepsPassed, dropdownAccountClickHandler}) => {
     return (
         <Wrapper className="DropdownAccount" id='modal-dropdown'>
             <StyledSteps>Steps completed: <span>{stepsPassed}/2</span></StyledSteps>
             <StepsList>
-            <StepsListItem passed={stepOnePassed}>
+                <StepsListItem passed={stepOnePassed}>
                     {!stepOnePassed && <Link onClick={dropdownAccountClickHandler} to='/user_office/payment/verification'><span>Submit KYC and add ETH address</span></Link>}
                     {stepOnePassed && <span>Submit KYC and add ETH address</span>}
                 </StepsListItem>
                 <StepsListItem passed={stepOnePassed ? stepTwoPassed : false}>
-                    <Link onClick={dropdownAccountClickHandler} to='/user_office/payment/method'>
-                        <span>Buy tokens</span>
-                    </Link>
+                    {(!stepOnePassed || stepTwoPassed) && <span>Buy tokens</span>}
+                    {stepOnePassed && !stepTwoPassed && <Link onClick={dropdownAccountClickHandler} to='/user_office/payment/method'><span>Buy tokens</span></Link>}
                 </StepsListItem>
             </StepsList>
             
@@ -30,8 +29,7 @@ const Dropdown = ({email, stepOnePassed, stepTwoPassed, stepsPassed, showSetAcco
                     <Link to="/user_office/account">Account settings</Link>
                 </NavListItem>
                 <NavListItem onClick={dropdownAccountClickHandler}>
-                    {stepOnePassed && <Link to="/user_office/payment/verification">Verification</Link>}
-                    {!stepOnePassed && <span onClick={showSetAccount}>Verification</span>}
+                    <Link to="/user_office/payment/verification">Verification</Link>
                 </NavListItem>
             </NavList>
             <LogoutLink href='/logout/'>
@@ -108,7 +106,6 @@ const EmailInfo = styled.div`
     font-size: 16px;
     letter-spacing: 0.5px;
     color: #222121;
-    border-bottom: 1px solid rgba(193,193,193,.3);
     margin-bottom: 8px;
     .text {
         opacity: .5;
@@ -134,7 +131,6 @@ const LogoutLink = styled.a`
     height: 70px;
     align-items: center;
     display: flex;
-    border-top: 1px solid rgba(193,193,193,.3);
     transition: all .25s ease;
     padding: 0 23px;
     svg {
@@ -153,6 +149,8 @@ const LogoutLink = styled.a`
 `;
 
 const NavList = styled.ul`
+    border-top: 1px solid rgba(193,193,193,.3);
+    border-bottom: 1px solid rgba(193,193,193,.3);
 `;
 
 const NavListItem = styled.li`
@@ -160,9 +158,6 @@ const NavListItem = styled.li`
     padding: 0 23px;
     &:hover {
         background: rgba(216,216,216,.4);
-    }
-    &:last-of-type {
-        margin-bottom: 7px;
     }
     a {
         height: 100%;

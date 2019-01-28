@@ -28,11 +28,6 @@ class Header extends React.Component {
         } else hideStepsDropdown();
     }
 
-    showSetAccount = () => {
-        const {showSetAccountPopup} = this.props;
-        showSetAccountPopup();
-    };
-
     onClickHamburgerHandler = () => {
         this.props.openMobileSidebar();
     }
@@ -41,13 +36,12 @@ class Header extends React.Component {
         const {
             email,
             accountDropdownShown,
-            showSetAccountPopup,
             ethAccount,
             kycState,
             tokensAmount,
         } = this.props;
 
-        let stepOnePassed = (kycState === 'APPROVED' || kycState === 'WAITING') && ethAccount ? true : false;
+        let stepOnePassed = (kycState === 'APPROVED' || kycState === 'WAITING' || kycState === 'DEPLOYING') && ethAccount ? true : false;
         let stepTwoPassed = stepOnePassed ? tokensAmount > 0 : false;
 
         let passedStepsNumber = [stepOnePassed, stepTwoPassed].reduce((acc, c) => acc + c);
@@ -77,8 +71,6 @@ class Header extends React.Component {
                                 <Dropdown email={email}
                                     stepOnePassed={stepOnePassed}
                                     stepTwoPassed={stepTwoPassed}
-                                    showSetAccount={this.showSetAccount}
-                                    showSetAccountPopup={showSetAccountPopup}
                                     dropdownAccountClickHandler={this.dropdownAccountClickHandler}
                                     stepsPassed={passedStepsNumber}/>
                             }
@@ -120,9 +112,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
     hideStepsDropdown() {
         dispatch(UIActions.hideStepsDropdown())
-    },
-    showSetAccountPopup() {
-        dispatch(UIActions.showSetAccountPopup())
     },
     openMobileSidebar() {
         dispatch(UIActions.openMobileSidebar())
