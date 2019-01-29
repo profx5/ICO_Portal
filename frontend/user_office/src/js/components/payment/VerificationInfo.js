@@ -6,7 +6,6 @@ import _ from 'lodash';
 import {media} from 'js/utils/media';
 
 import VerificationStages from 'js/components/payment/stateless/VerificationStages';
-import VerificationState from 'js/components/payment/stateless/VerificationState';
 import Button from 'js/components/common/Button';
 
 
@@ -59,7 +58,6 @@ class VerificationInfo extends React.Component {
                             <Button type="submit" text={btnText} isSubmiting={isSubmiting} clickHandler={clickHandler}/>
                         </ButtonWrapper>
                     }
-                <VerificationState className="hidden-smMinus" kycStatus={kycStatus} kycTicketId={kycTicketId}/>
             </Wrapper>
         )
     }
