@@ -3,13 +3,11 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {compose} from 'redux';
 import $ from 'jquery';
-import history from 'js/utils/getBrowserHistory';
 
 import {media} from 'js/utils/media';
 import getValidationSchema from 'js/utils/getValidationSchema';
 
 import {Formik, Form} from 'formik';
-import VerificationState from 'js/components/payment/stateless/VerificationState';
 import NaturalPerson from 'js/components/payment/NaturalPerson';
 import LegalPerson from 'js/components/payment/LegalPerson';
 import VerificationInfo from 'js/components/payment/VerificationInfo';
@@ -18,6 +16,9 @@ import AddWallet from 'js/components/payment/AddWallet';
 import IDFiles from 'js/components/payment/IDFiles';
 import UtilityBillFiles from 'js/components/payment/UtilityBillFiles';
 import BasisFiles from 'js/components/payment/BasisFiles';
+import KYCApproved from 'js/components/payment/stateless/KYCApproved';
+import KYCProcessed from 'js/components/payment/stateless/KYCProcessed';
+import KYCDeclined from 'js/components/payment/stateless/KYCDeclined';
 
 import * as KYCActions from 'js/actions/KYCActions';
 import * as UserActions from 'js/actions/UserActions';
@@ -122,24 +123,7 @@ class Verification extends React.Component {
     }
 
     btnClickHandler = (e) => {
-        const {state, showModal} = this.props;
-        if (state === 'APPROVED') {
-            e.preventDefault();
-            this.toNextStep();
-        } else if (state === 'WAITING' || state === 'DEPLOYING') {
-            e.preventDefault();
-            showModal({
-                modalHead: 'Warning',
-                modalContent: 'Your data is being processed. Please, wait for verification to get to next step!'
-            })
-        } else if (state === 'DECLINED') {
-            showModal({
-                modalHead: 'Warning',
-                modalContent: 'Your data has been declined. Please, contact our support to resolve the issue!'
-            })
-        } else {
-            this.validateUploadedFiles();
-        }
+        this.validateUploadedFiles();
     }
 
     getEthAccount = () => {
@@ -210,7 +194,7 @@ class Verification extends React.Component {
     }
 
     render() {
-        const {state, type, is_pep, isSubmiting, basisFiles, idDocumentFiles, utilityBillFiles} = this.props;
+        const {state, type, is_pep, isSubmiting, basisFiles, idDocumentFiles, utilityBillFiles, isLoading} = this.props;
         let {activeKycTab} = this.props;
 
         if (type) activeKycTab = type === 'LEGAL' ? 2 : 1;
@@ -231,41 +215,45 @@ class Verification extends React.Component {
                 onSubmit={this.onSubmitHandler} 
                 render={({errors, touched, values, resetForm}) => (
                     <Wrapper state={state} id="form" className="VerificationForm">
-                        <Header>
-                            <VerificationState className="visible-smMinus" kycStatus={KYCState} kycTicketId={kycTicketId}/>
-                        </Header>
-                        <MainWrapper>
-                            {!type && activeKycTab === 1 && <NaturalPerson tabClickHandler={this.tabClickHandler.bind(this, resetForm)} errors={errors} touched={touched} values={values} is_pep={is_pep} kycStatus={KYCState}/>}
-                            {!type && activeKycTab === 2 && 
-                                <LegalPerson tabClickHandler={this.tabClickHandler.bind(this, resetForm)} errors={errors} touched={touched} values={values} is_pep={is_pep}>
-                                    <BasisFiles errorMessage={!basisFiles.size && this.state.basisFilesError}/>
-                                </LegalPerson>
-                            }
-                            {type === "NATURAL" && <NaturalPerson tabClickHandler={this.tabClickHandler.bind(this, resetForm)} kycStatus={KYCState} errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
-                            {type === "LEGAL" && 
-                                <LegalPerson tabClickHandler={this.tabClickHandler.bind(this, resetForm)} errors={errors} touched={touched} values={values} is_pep={is_pep}>
-                                    <BasisFiles errorMessage={!basisFiles.size && this.state.basisFilesError}/>
-                                </LegalPerson>
-                            }
-                            <InvestorsDocuments 
-                                errors={errors} 
-                                touched={touched} 
-                                values={values}>
-                                <IDFiles errorMessage={!idDocumentFiles.size && this.state.idFilesError}/>
-                                <UtilityBillFiles errorMessage={!utilityBillFiles.size && this.state.utiliyBillFilesError}/>
-                            </InvestorsDocuments>
-                            <AddWallet errors={errors} touched={touched} values={values}/>
-                        </MainWrapper>
-                        <VerificationInfoWrapper>
-                            <VerificationInfo
-                                btnText="Send data"
-                                isSubmiting={isSubmiting}
-                                verificationStages={['Verification__personData', 'Verification__investorsDocuments', 'Verification_addEth']}
-                                stages={activeKycTab === 1 ? ['Personal Data', 'Investor\'s documents', 'ETH account'] : ['Legal Person Data', 'Investor\'s documents', 'ETH account']}
-                                kycStatus={KYCState} 
-                                kycTicketId={kycTicketId}
-                                clickHandler={this.btnClickHandler}/>
-                        </VerificationInfoWrapper>
+                        {state === 'APPROVED' && <KYCApproved/>}
+                        {state === 'DECLINED' && <KYCDeclined/>}
+                        {(state === 'WAITING' || state === 'DEPLOYING') && <KYCProcessed/>}
+                        {!isLoading && !state && 
+                            <React.Fragment>
+                                <MainWrapper>
+                                    {!type && activeKycTab === 1 && <NaturalPerson tabClickHandler={this.tabClickHandler.bind(this, resetForm)} errors={errors} touched={touched} values={values} is_pep={is_pep} kycStatus={KYCState}/>}
+                                    {!type && activeKycTab === 2 && 
+                                        <LegalPerson tabClickHandler={this.tabClickHandler.bind(this, resetForm)} errors={errors} touched={touched} values={values} is_pep={is_pep}>
+                                            <BasisFiles errorMessage={!basisFiles.size && this.state.basisFilesError}/>
+                                        </LegalPerson>
+                                    }
+                                    {type === "NATURAL" && <NaturalPerson tabClickHandler={this.tabClickHandler.bind(this, resetForm)} kycStatus={KYCState} errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
+                                    {type === "LEGAL" && 
+                                        <LegalPerson tabClickHandler={this.tabClickHandler.bind(this, resetForm)} errors={errors} touched={touched} values={values} is_pep={is_pep}>
+                                            <BasisFiles errorMessage={!basisFiles.size && this.state.basisFilesError}/>
+                                        </LegalPerson>
+                                    }
+                                    <InvestorsDocuments 
+                                        errors={errors} 
+                                        touched={touched} 
+                                        values={values}>
+                                        <IDFiles errorMessage={!idDocumentFiles.size && this.state.idFilesError}/>
+                                        <UtilityBillFiles errorMessage={!utilityBillFiles.size && this.state.utiliyBillFilesError}/>
+                                    </InvestorsDocuments>
+                                    <AddWallet errors={errors} touched={touched} values={values}/>
+                                </MainWrapper>
+                                <VerificationInfoWrapper>
+                                    <VerificationInfo
+                                        btnText="Send data"
+                                        isSubmiting={isSubmiting}
+                                        verificationStages={['Verification__personData', 'Verification__investorsDocuments', 'Verification_addEth']}
+                                        stages={activeKycTab === 1 ? ['Personal Data', 'Investor\'s documents', 'ETH account'] : ['Legal Person Data', 'Investor\'s documents', 'ETH account']}
+                                        kycStatus={KYCState} 
+                                        kycTicketId={kycTicketId}
+                                        clickHandler={this.btnClickHandler}/>
+                                </VerificationInfoWrapper>
+                            </React.Fragment>
+                        }
                     </Wrapper>
                 )}
             />
@@ -322,7 +310,8 @@ const mapStateToProps = ({UI, KYC, user, tickets, Files}) => ({
     basisFiles: Files.get('basisFiles'),
     idDocumentFiles: Files.get('idDocumentFiles'),
     utilityBillFiles: Files.get('utilityBillFiles'),
-    eth_account: user.get('eth_account')
+    eth_account: user.get('eth_account'),
+    isLoading: KYC.get('isLoading'),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -369,20 +358,13 @@ const Wrapper = styled(Form)`
         width: calc(100vw - 32px);
     }
     ${media.sm} {
-        width: calc(100vw - 196px);
+        width: calc(100vw - 189px);
     }
     input, label, button:not([type="submit"]) {
         pointer-events: ${props => props.state === 'WAITING' || props.state === 'DEPLOYING' || props.state === 'APPROVED' ? 'none' : 'auto'};
     }
     input {
-        color: ${props => props.state === 'WAITING' || props.state === 'DEPLOYING' || props.state === 'APPROVED' && '#9D9D9D'};
-    }
-`;
-
-const Header = styled.div`
-    flex-basis: 100%;
-    ${media.smMinus} {
-        max-width: 100%;
+        color: ${props => (props.state === 'WAITING' || props.state === 'DEPLOYING' || props.state === 'APPROVED') && '#9D9D9D'};
     }
 `;
 

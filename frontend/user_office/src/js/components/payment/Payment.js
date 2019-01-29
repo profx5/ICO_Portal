@@ -16,12 +16,12 @@ import Steps from 'js/components/payment/stateless/Steps';
 class Payment extends React.Component {
 
     render() {
-        const {showCurrenciesPopup,step} = this.props;
+        const {showCurrenciesPopup, step, state} = this.props;
 
         return (
             <Wrapper>
                 <Title>Payment</Title>
-                <Steps step={step}/>
+                <Steps step={step} className={state && 'centered'}/>
                 <Switch>
                     <Route exact path="/user_office/payment/verification" component={Verification}/>
                     <Route exact path="/user_office/payment/method" component={PaymentStepTwo}/>
@@ -35,9 +35,10 @@ class Payment extends React.Component {
 };
 
 
-const mapStateToProps = ({UI}) => ({
+const mapStateToProps = ({UI, KYC}) => ({
     showCurrenciesPopup: UI.get('showCurrenciesPopup'),
-    step: UI.get('step')
+    step: UI.get('step'),
+    state: KYC.get('state'),
 })
 
 const mapDispatchToProps = (dispatch) => ({})
@@ -45,5 +46,5 @@ const mapDispatchToProps = (dispatch) => ({})
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Payment));
 
 const Wrapper = styled.div`
-
+    flex-basis: 100%;
 `;

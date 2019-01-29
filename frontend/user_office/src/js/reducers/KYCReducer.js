@@ -4,8 +4,7 @@ import {Map} from 'immutable'
 
 
 const initialState = Map({
-    state: "",
-    user_photo: null,
+    state: null,
     type: '',
     firstname: "",
     lastname: "",
@@ -20,8 +19,6 @@ const initialState = Map({
     document_date: "",
     document_photo: "",
     decline_reason: "",
-    uploaded_user_photo: null,
-    uploaded_doc_photo: null,
     place_of_birth: "",
     personal_id: "",
     place_of_residence: "",
@@ -32,7 +29,6 @@ const initialState = Map({
     phone_number: "",
     director_firstname: "",
     director_lastname: "",
-    basis_doc: null,
     email: "",
     address: "",
     field_of_activity: "",
@@ -43,14 +39,15 @@ const initialState = Map({
     beneficial_place_of_residence: "",
     is_pep: false,
     attachments: null,
-    isSubmiting: false
+    isSubmiting: false,
+    isLoading: false
 });
 
 
 export const KYCReducer = createReducer({
-    [actions.getKYCRequest]: (state) => state,
+    [actions.getKYCRequest]: (state) => state.set('isLoading', true),
     [actions.getKYCSuccessfull]: (state, payload) => {
-        return state.merge(payload).set('isFetched', true)
+        return state.merge(payload).set('isFetched', true).set('isLoading', false)
     },
 
     [actions.submitKYCRequest]: (state) => state.set('isSubmiting', true),

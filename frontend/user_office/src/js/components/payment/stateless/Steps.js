@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
 
-const Steps = ({step}) => {
+const Steps = ({step, className}) => {
 
     return (
-        <Wrapper>
+        <Wrapper className={className}>
             <Step step={step} passed={1 <= step} to_next={2<=step}>
                 <div className="Step__head">Step 1</div>
                 <div className="Step__desc">Verification (KYC)</div>
@@ -39,16 +39,16 @@ const Wrapper = styled.div`
     justify-content: flex-start;
     flex-flow: row nowrap;
     margin-top: 20px;
+    margin-bottom: 45px;
+    &.centered {
+        justify-content: center;
+    }
     ${media.xs} {
         margin-top: 15px;
-    }
-    ${media.smMinus} {
-        margin-bottom: 30px;
+        margin-bottom: 7px;
     }
     ${media.sm} {
         margin-top: 30px;
-        /* position: relative;
-        right: 29px; */
     }
 `;
 
