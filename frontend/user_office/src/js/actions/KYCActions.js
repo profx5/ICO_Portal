@@ -6,6 +6,7 @@ export const hideForm = createAction('HIDE_KYC_FORM');
 
 export const getKYCRequest = createAction('GET_KYC_REQUEST');
 export const getKYCSuccessfull = createAction('GET_KYC_SUCCESSFULL');
+export const getKYCFailed = createAction('GET_KYC_FAILED');
 
 
 export const uploadPhoto = createAction('UPLOAD_PHOTO');

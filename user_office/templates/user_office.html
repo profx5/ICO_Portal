@@ -13,10 +13,191 @@
     <meta name="HandheldFriendly" content="true">
     <title>User office</title>
     <link rel="icon" type="image/png" href="{% static "favicon.png" %}"/>
+    <style>
+        .Preloader {
+            background: white;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all .25s ease;
+            z-index: 10;
+        }
+
+        .Preloader-active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .Preloader.hidden {
+            display: none !important;
+            visibility: none !important;
+        }
+
+        .filter {
+            position: absolute;
+            visibility: hidden;
+        }
+
+        .Preloader_dotsWrapper {
+            filter: url(#gooeyness);
+            padding: 30px;
+        }
+
+        .Preloader_dot {
+            background: #3172FD;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 20px;
+            width: 32px;
+            height: 32px;
+        }
+
+        @media (max-width: 767px) {
+            .Preloader_dot {
+                width: 26px;
+                height: 26px;
+            }
+        }
+
+        .Preloader-animated .Preloader_dot:first-child {
+            animation: FirstDot 3s infinite;
+        }
+
+        .Preloader-animated .Preloader_dot:nth-child(2) {
+            animation: SecondDot 3s infinite;
+        }
+
+        .Preloader-animated .Preloader_dot:nth-child(3) {
+            animation: ThirdDot 3s infinite;
+        }
+
+        .Preloader-animated .Preloader_dot:nth-child(4) {
+            animation: FourthDot 3s infinite;
+        }
+
+        .Preloader-animated .Preloader_dot:nth-child(5) {
+            animation: FifthDot 3s infinite;
+        }
+
+        @keyframes FirstDot {
+            0% {
+                transform: scale3d(1,1,1) translate3d(0, 0, 0);
+            }
+            25% {
+                transform: scale3d(2.5, 2.5, 2.5) translate3d(0, 0, 0);
+            }
+            50% {
+                transform: scale3d(1,1,1) translate3d(0, 0, 0);
+            }
+            83% {
+                transform: scale3d(1,1,1) translate3d(240px, 0, 0);
+            }
+            100% {
+                transform: scale3d(1,1,1) translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes SecondDot {
+            0% {
+                transform: translate3d(0px, 0, 0);
+            }
+            27% {
+                transform: translate3d(-40px, 0, 0);
+            }
+            50% {
+                transform: translate3d(0px, 0, 0);
+            }
+            81% {
+                transform: translate3d(180px, 0, 0);
+            }
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes ThirdDot {
+            0% {
+                transform: translate3d(0px, 0, 0);
+            }
+            29% {
+                transform: translate3d(-100px, 0, 0);
+            }
+            50% {
+                transform: translate3d(0px, 0, 0);
+            }
+            79% {
+                transform: translate3d(120px, 0, 0);
+            }
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes FourthDot {
+            0% {
+                transform: translate3d(0px, 0, 0);
+            }
+            31% {
+                transform: translate3d(-160px, 0, 0);
+            }
+            50% {
+                transform: translate3d(0px, 0, 0);
+            }
+            77% {
+                transform: translate3d(60px, 0, 0);
+            }
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes FifthDot {
+            0% {
+                transform: scale3d(1,1,1) translate3d(0, 0, 0);
+            }
+            33% {
+                transform: scale3d(1,1,1) translate3d(-220px, 0, 0);
+            }
+            50% {
+                transform: scale3d(1,1,1) translate3d(0, 0, 0);
+            }
+            75% {
+                transform: scale3d(2.5, 2.5, 2.5) translate3d(0, 0, 0);
+            }
+            100% {
+                transform: scale3d(1,1,1) translate3d(0, 0, 0);
+            }
+        }
+
+    </style>
 </head>
 <body>
-<div id="root">
+<div class="Preloader Preloader-active Preloader-animated">
+    <svg class="filter" version="1.1">
+        <defs>
+        <filter id="gooeyness">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="gooeyness" />
+            <feComposite in="SourceGraphic" in2="gooeyness" operator="atop" />
+        </filter>
+        </defs>
+    </svg>
+    <div class="Preloader_dotsWrapper">
+        <div class="Preloader_dot"></div>
+        <div class="Preloader_dot"></div>
+        <div class="Preloader_dot"></div>
+        <div class="Preloader_dot"></div>
+        <div class="Preloader_dot"></div>
+    </div>
 </div>
+<div id="root"></div>
     {% render_bundle 'main' %}
 </body>
 </html>

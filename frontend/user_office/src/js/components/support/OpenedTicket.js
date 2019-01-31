@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom';
 import moment from "moment/moment";
 import {media} from 'js/utils/media';
+import changeLocation from 'js/utils/changeLocation';
 
 import AttachedFile from 'js/components/common/AttachedFile';
 import NewCommentForm from 'js/components/support/NewCommentForm';
@@ -18,6 +18,11 @@ import breadcrumbsArrow from 'img/arrow_roadmap.svg';
 
 
 class OpenedTicket extends React.Component {
+
+    onReturnClickHandler = () => {
+        changeLocation('/user_office/support');
+        this.props.unselectTicket();
+    }
 
     renderAttachedFiles = (attachments) => {
         return attachments.map((file, index) => {
@@ -56,17 +61,17 @@ class OpenedTicket extends React.Component {
     }
 
     render() {
-        const {selectedTicket, unselectTicket, onAttachClickHandler} = this.props;
+        const {selectedTicket, onAttachClickHandler} = this.props;
         const {title, status, public_follow_ups} = selectedTicket;
 
         return (
             <Wrapper>
                 <Header>
                     <div>
-                        <Link className="hidden-xs Ticket_linkBack" to="/user_office/support" onClick={unselectTicket}>My questions</Link>
+                        <div className="hidden-xs Ticket_linkBack" onClick={this.onReturnClickHandler}>My questions</div>
                         <img src={breadcrumbsArrow} alt="Arrow icon"/>
                         <span className="hidden-xs">{title}</span>
-                        <Link className="Ticket_linkBack visible-xs" to="/user_office/support" onClick={unselectTicket}>Back</Link>
+                        <div className="Ticket_linkBack hidden-smPlus" onClick={this.onReturnClickHandler}>Back</div>
                     </div>
                     <div className="hidden-xs">
                         <img src={[3,4].includes(status) ? iconResolved : iconPending} alt="Ticket status icon"/>
@@ -140,6 +145,7 @@ const Header = styled.div`
     .Ticket_linkBack {
         color: inherit;
         white-space: nowrap;
+        cursor: pointer;
     }
     div:nth-of-type(2) {
         display: inline-flex;

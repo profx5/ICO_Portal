@@ -48,7 +48,7 @@ export class KYCSagas {
             })
             yield put(KYCActions.getKYCSuccessfull(response.data))
         } catch(e) {
-            console.log("CANT GET KYC", {e})
+            yield put(KYCActions.getKYCFailed())
         }
     }
 }

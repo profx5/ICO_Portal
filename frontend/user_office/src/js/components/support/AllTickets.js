@@ -23,7 +23,7 @@ class AllTickets extends React.Component {
                 lastReplyBy={item.last_reply_by}
                 lastReplyAt={item.last_reply_at}
                 created={item.created}
-                onClickHandler={getSelectedTicket}
+                getSelectedTicket={getSelectedTicket}
             />
         })
     }

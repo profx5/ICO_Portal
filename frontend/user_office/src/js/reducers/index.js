@@ -1,5 +1,4 @@
 import {combineReducers} from 'redux';
-import { reducer as formReducer } from 'redux-form';
 
 import {UserReducer} from 'js/reducers/UserReducer';
 import {ICOInfoReducer} from 'js/reducers/ICOInfoReducer';
@@ -25,7 +24,6 @@ const reducers = combineReducers({
     Currencies: CurrencyReducer,
     Timer: TimerReducer,
     UI: UIStateReducer,
-    form: formReducer,
     router: routerReducer,
     tickets: TicketsReducer,
     Files: FilesReducer
