@@ -20,7 +20,7 @@ const initialState = Map({
     modalOpened: false,
     modalHead: null,
     modalContent: null,
-    mobileSidebarOpened: false
+    mobileSidebarOpened: false,
 });
 
 

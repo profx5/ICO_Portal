@@ -1,20 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
 import moment from "moment/moment";
 import {media} from 'js/utils/media';
+import changeLocation from 'js/utils/changeLocation';
 
 import iconUser from 'img/user.svg';
 import iconResolved from 'img/check-green.svg';
 import iconPending from 'img/icon_transit-amber.svg';
 
 
-const Ticket = ({email, id, status, title, lastReplyBy, lastReplyAt, created, onClickHandler}) => {
+const Ticket = ({email, id, status, title, lastReplyBy, created, getSelectedTicket}) => {
+    
+    function onClickHandler() {
+        changeLocation(`/user_office/support/ticket/${id}`);
+        getSelectedTicket(id);
+    }
 
     return (
-        <StyledTicket>
+        <StyledTicket onClick={onClickHandler}>
             <td callspan="1">
-                <TicketLink to={`/user_office/support/ticket/${id}`} onClick={onClickHandler.bind(this, id)}>
+                <TicketInfo>
                     <div>
                         <img src={[3,4].includes(status) ? iconResolved : iconPending} alt="Ticket status"/>
                     </div>
@@ -22,9 +27,9 @@ const Ticket = ({email, id, status, title, lastReplyBy, lastReplyAt, created, on
                         <span>{title}</span>
                         <span>{[3,4].includes(status) ? 'Answer received' : 'Pending'}</span>
                     </div>
-                </TicketLink>
+                </TicketInfo>
             </td>
-            <TicketInfo callspan="1">
+            <TicketDetails callspan="1">
                 <div>
                     <img src={iconUser} alt="User thumbnail"/>
                 </div>
@@ -34,7 +39,7 @@ const Ticket = ({email, id, status, title, lastReplyBy, lastReplyAt, created, on
                         {`${lastReplyBy !== email ? "Replied" : "Message sent"} ${moment(created).format('DD MMMM YYYY')}`}
                     </span>
                 </div>
-            </TicketInfo>
+            </TicketDetails>
         </StyledTicket>
     )
 }
@@ -46,6 +51,7 @@ const StyledTicket = styled.tr`
     display: flex;
     justify-content: space-between;
     border-top: 1px solid rgb(151,151,151,.2);
+    cursor: pointer;
     &:last-of-type {
         border-bottom: 1px solid rgb(151,151,151,.2);
     }
@@ -54,7 +60,7 @@ const StyledTicket = styled.tr`
     }
 `;
 
-const TicketLink = styled(Link)`
+const TicketInfo = styled.div`
     display: inline-flex;
     flex-flow: row nowrap;
     ${media.smPlus} {
@@ -90,7 +96,7 @@ const TicketLink = styled(Link)`
     }
 `;
 
-const TicketInfo = styled.td`
+const TicketDetails = styled.td`
     display: inline-flex;
     flex-flow: row nowrap;
     ${media.smPlus} {

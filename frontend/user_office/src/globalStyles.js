@@ -295,14 +295,20 @@ injectGlobal`
     scroll-behavior: smooth;
   }
 
+  .no-overflow {
+      overflow: hidden !important;
+  }
       
   strong {
-
     font-weight: 600;
   }
-  b {
 
+  b {
     font-weight: 700;
+  }
+
+  .component-enter {
+    display: none !important;
   }
 
   .hidden-xs {

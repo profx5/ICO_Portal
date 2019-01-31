@@ -46,11 +46,13 @@ const initialState = Map({
 
 export const KYCReducer = createReducer({
     [actions.getKYCRequest]: (state) => state.set('isLoading', true),
+    [actions.getKYCFailed]: (state) => state.set('isLoading', false),
     [actions.getKYCSuccessfull]: (state, payload) => {
         return state.merge(payload).set('isFetched', true).set('isLoading', false)
     },
 
     [actions.submitKYCRequest]: (state) => state.set('isSubmiting', true),
+    [actions.submitKYCFailed]: (state) => state.set('isSubmiting', false),
     [actions.submitKYCSuccessfull]: (state) => {
         return state
             .set('isSubmiting', false)

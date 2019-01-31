@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router';
 import {media} from 'js/utils/media';
 
 import Title from 'js/components/common/Title';
@@ -8,10 +10,11 @@ import ICOProgress from 'js/components/dashboard/ICOProgress';
 import Banner from 'img/banner.jpg';
 
 
-const Dashboard = (props) => {
+const Dashboard = () => {
+
     return (
         <Wrapper>
-            <BannerWrapper />
+            <BannerWrapper/>
             <Title>Dashboard</Title>
             <ICOProgress/>
         </Wrapper>
@@ -19,7 +22,7 @@ const Dashboard = (props) => {
 };
 
 
-export default Dashboard;
+export default withRouter(Dashboard);
 
 const Wrapper = styled.div`
     flex: 1;
