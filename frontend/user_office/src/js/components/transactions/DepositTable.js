@@ -53,21 +53,25 @@ class DepositTable extends Component {
         return (
             <Wrapper>
                 <Table>
-                    <HeadRow>
-                        <th></th>
-                        <th>Time</th>
-                        <th>Transaction</th>
-                        <th></th>
-                        <th>Amount</th>
-                        <th>USD value</th>
-                        <th>OGD Tokens</th>
-                    </HeadRow>
-                    {deposits.size ?
-                        this.renderRows(deposits) :
-                            <tr>
-                                <td colSpan="6" className="Table_text">You have no transactions yet</td>
-                            </tr>
-                    }
+                    <thead>
+                        <HeadRow>
+                            <th></th>
+                            <th>Time</th>
+                            <th>Transaction</th>
+                            <th></th>
+                            <th>Amount</th>
+                            <th>USD value</th>
+                            <th>OGD Tokens</th>
+                        </HeadRow>
+                    </thead>
+                    <tbody>
+                        {deposits.size ?
+                            this.renderRows(deposits) :
+                                <tr>
+                                    <td colSpan="6" className="Table_text">You have no transactions yet</td>
+                                </tr>
+                        }
+                    </tbody>
                 </Table>
             </Wrapper>
         )

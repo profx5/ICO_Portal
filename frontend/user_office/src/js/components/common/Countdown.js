@@ -11,11 +11,16 @@ class Countdown extends React.Component {
             hours: '00',
             minutes: '00',
             seconds: '00'
-        }
+        };
+        this.countdown = null;
     }
 
     componentDidMount() {
         this.startCountdown();
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.countdown);
     }
     
     calcDiff = (start, end) => {
@@ -67,7 +72,7 @@ class Countdown extends React.Component {
     startCountdown = () => {
         var time = this.getTime();
 
-        var interval = setInterval(() => {
+        this.countdown = setInterval(() => {
 
             time.seconds -= 1;
             if (time.seconds < 0) {
@@ -86,7 +91,7 @@ class Countdown extends React.Component {
             }
         
             if (time.seconds <= 0 && time.minutes <= 0 && time.hours <= 0 && time.days <= 0) {
-                clearInterval(interval);
+                clearInterval(this.countdown);
                 console.error('Countdown has been reached it\'s end!');
                 this.setState(() => {
                     return {
