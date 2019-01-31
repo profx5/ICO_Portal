@@ -26,9 +26,9 @@ const logger = createLogger({
 });
 
 
-export const store = createStore(
-    reducer, 
-    applyMiddleware(sagaMiddleware, logger))
+
+
+export const store = process.env.NODE_ENV === 'development' ? createStore(reducer, applyMiddleware(sagaMiddleware, logger)) : createStore(reducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga)
 
