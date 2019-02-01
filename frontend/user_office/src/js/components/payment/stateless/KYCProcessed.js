@@ -4,9 +4,10 @@ import {media} from 'js/utils/media';
 import {Link} from 'react-router-dom';
 
 import Loader from 'js/components/common/Loader';
+import Button from 'js/components/common/Button';
 
 
-const KYCProcessed = () => {
+const KYCProcessed = ({clickHandler}) => {
     return (
         <Wrapper>
             <InfoWrapper>
@@ -16,6 +17,9 @@ const KYCProcessed = () => {
             <LoaderWrapper>
                 <Loader amount={12} size={18} bgColor="rgb(23, 103, 242)"/>
             </LoaderWrapper>
+            <ButtonWrapper>
+                <Button type="button" text="Check status" clickHandler={clickHandler} className={'Btn-checkKyc'}/>
+            </ButtonWrapper>
         </Wrapper>
     )
 }
@@ -49,11 +53,18 @@ const LoaderWrapper = styled.div`
     border-radius: 18px;
     padding: 5px 7px;
     width: 720px;
-    margin: 0 auto;
+    margin: 0 auto 50px;
     ${media.smMinus} {
         width: 100%;
     }
     ${media.xs} {
         width: 85%;
     }
+`;
+
+const ButtonWrapper = styled.div`
+    width: 250px;
+    height: 68px;
+    margin: 0 auto;
+    display: block;
 `;

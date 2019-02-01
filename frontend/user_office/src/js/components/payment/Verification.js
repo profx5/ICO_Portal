@@ -30,7 +30,6 @@ class Verification extends React.Component {
 
     constructor() {
         super();
-        this.currentFileId = 0;
         this.state = {
             basisFilesError: '',
             idFilesError: '',
@@ -47,16 +46,6 @@ class Verification extends React.Component {
         const {clearIdDocumentFile, clearUtilityBillFile, clearBasisFile} = this.props;
 
         compose(clearIdDocumentFile, clearUtilityBillFile, clearBasisFile)();
-    }
-
-    getKYCTicket = () => {
-        const { tickets } = this.props;
-
-        return tickets.filter(item => item.title.startsWith('KYC request for user'));
-    }
-
-    toNextStep = () => {
-        this.props.history.push('/user_office/payment/method');
     }
 
     getInitialValues = () => {
@@ -109,7 +98,19 @@ class Verification extends React.Component {
         };
     };
 
-    tabClickHandler = (callback, event) => {
+    getKYCTicket = () => {
+        const { tickets } = this.props;
+
+        return tickets.filter(item => item.title.startsWith('KYC request for user'));
+    }
+
+    updateKYCStatus = () => {
+        const {getKyc, isLoading} = this.props;
+
+        if (!isLoading) getKyc();
+    }
+
+    tabClickHandler = (event) => {
         const {activateKycTab, changeType} = this.props;
 
         if (event.target.id === 'kycTab1') {
@@ -119,7 +120,6 @@ class Verification extends React.Component {
             activateKycTab({id: 2});
             changeType('LEGAL');
         }
-        callback();
     }
 
     btnClickHandler = (e) => {
@@ -213,23 +213,23 @@ class Verification extends React.Component {
                 validateOnBlur={true}
                 enableReinitialize={true}
                 onSubmit={this.onSubmitHandler} 
-                render={({errors, touched, values, resetForm}) => (
+                render={({errors, touched, values}) => (
                     <Wrapper state={state} id="form" className="VerificationForm">
                         {state === 'APPROVED' && <KYCApproved/>}
                         {state === 'DECLINED' && <KYCDeclined/>}
-                        {(state === 'WAITING' || state === 'DEPLOYING') && <KYCProcessed/>}
+                        {(state === 'WAITING' || state === 'DEPLOYING') && <KYCProcessed clickHandler={this.updateKYCStatus}/>}
                         {!isLoading && !state && 
                             <React.Fragment>
                                 <MainWrapper>
-                                    {!type && activeKycTab === 1 && <NaturalPerson tabClickHandler={this.tabClickHandler.bind(this, resetForm)} errors={errors} touched={touched} values={values} is_pep={is_pep} kycStatus={KYCState}/>}
+                                    {!type && activeKycTab === 1 && <NaturalPerson tabClickHandler={this.tabClickHandler} errors={errors} touched={touched} values={values} is_pep={is_pep} kycStatus={KYCState}/>}
                                     {!type && activeKycTab === 2 && 
-                                        <LegalPerson tabClickHandler={this.tabClickHandler.bind(this, resetForm)} errors={errors} touched={touched} values={values} is_pep={is_pep}>
+                                        <LegalPerson tabClickHandler={this.tabClickHandler} errors={errors} touched={touched} values={values} is_pep={is_pep}>
                                             <BasisFiles errorMessage={!basisFiles.size && this.state.basisFilesError}/>
                                         </LegalPerson>
                                     }
-                                    {type === "NATURAL" && <NaturalPerson tabClickHandler={this.tabClickHandler.bind(this, resetForm)} kycStatus={KYCState} errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
+                                    {type === "NATURAL" && <NaturalPerson tabClickHandler={this.tabClickHandler} kycStatus={KYCState} errors={errors} touched={touched} values={values} is_pep={is_pep}/>}
                                     {type === "LEGAL" && 
-                                        <LegalPerson tabClickHandler={this.tabClickHandler.bind(this, resetForm)} errors={errors} touched={touched} values={values} is_pep={is_pep}>
+                                        <LegalPerson tabClickHandler={this.tabClickHandler} errors={errors} touched={touched} values={values} is_pep={is_pep}>
                                             <BasisFiles errorMessage={!basisFiles.size && this.state.basisFilesError}/>
                                         </LegalPerson>
                                     }
@@ -266,23 +266,15 @@ const mapStateToProps = ({UI, KYC, user, tickets, Files}) => ({
     state: KYC.get('state'),
     type: KYC.get('type'),
     activeKycTab: UI.get('activeKycTab'),
-    openedTip: UI.get('openedTip'),
     firstname: KYC.get('firstname'),
-    user_photo: KYC.get('user_photo'),
     lastname: KYC.get('lastname'),
     birthdate: KYC.get('birthdate'),
-    country: KYC.get('country'),
-    city: KYC.get('city'),
     registration_address: KYC.get('registration_address'),
-    postcode: KYC.get('postcode'),
     document_type: KYC.get('document_type'),
     document_no: KYC.get('document_no'),
     document_country: KYC.get('document_country'),
     document_date: KYC.get('document_date'),
     document_photo: KYC.get('document_photo'),
-    decline_reason: KYC.get('decline_reason'),
-    uploaded_user_photo: KYC.get('uploaded_user_photo'),
-    uploaded_doc_photo: KYC.get('uploaded_doc_photo'),
     place_of_birth: KYC.get('place_of_birth'),
     personal_id: KYC.get('personal_id'),
     place_of_residence: KYC.get('place_of_residence'),
@@ -303,8 +295,6 @@ const mapStateToProps = ({UI, KYC, user, tickets, Files}) => ({
     beneficial_place_of_birth: KYC.get('beneficial_place_of_birth'),
     beneficial_place_of_residence: KYC.get('beneficial_place_of_residence'),
     is_pep: KYC.get('is_pep'),
-    attachments: KYC.get('attachments'),
-    kyc_required: user.get('kyc_required'),
     tickets: tickets.get('results'),
     isSubmiting: KYC.get('isSubmiting'),
     basisFiles: Files.get('basisFiles'),
@@ -327,14 +317,8 @@ const mapDispatchToProps = (dispatch) => ({
     activateKycTab(payload) {
         dispatch(UIActions.activateKycTab(payload))
     },
-    setOpenedTip(id) {
-        dispatch(UIActions.setOpenedTip(id))
-    },
     changeType(type) {
         dispatch(KYCActions.changeType(type))
-    },
-    showModal(payload) {
-        dispatch(UIActions.showModal(payload))
     },
     clearIdDocumentFile() {
         dispatch(FilesActions.clearIdDocumentFile())
@@ -344,6 +328,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     clearBasisFile() {
         dispatch(FilesActions.clearBasisFile())
+    },
+    getKyc() {
+        dispatch(KYCActions.getKYCRequest())
     },
 });
 
@@ -360,7 +347,7 @@ const Wrapper = styled(Form)`
     ${media.sm} {
         width: calc(100vw - 189px);
     }
-    input, label, button:not([type="submit"]) {
+    input, label, button:not([type="submit"]):not([type="button"]) {
         pointer-events: ${props => props.state === 'WAITING' || props.state === 'DEPLOYING' || props.state === 'APPROVED' ? 'none' : 'auto'};
     }
     input {

@@ -9,15 +9,10 @@ import iconResolved from 'img/check-green.svg';
 import iconPending from 'img/icon_transit-amber.svg';
 
 
-const Ticket = ({email, id, status, title, lastReplyBy, created, getSelectedTicket}) => {
-    
-    function onClickHandler() {
-        changeLocation(`/user_office/support/ticket/${id}`);
-        getSelectedTicket(id);
-    }
+const Ticket = ({email, id, status, title, lastReplyBy, created, onClickHandler}) => {
 
     return (
-        <StyledTicket onClick={onClickHandler}>
+        <StyledLink to={`/user_office/support/ticket/${id}`} onClick={onClickHandler.bind(this, id)}>
             <td callspan="1">
                 <TicketInfo>
                     <div>
@@ -40,14 +35,14 @@ const Ticket = ({email, id, status, title, lastReplyBy, created, getSelectedTick
                     </span>
                 </div>
             </TicketDetails>
-        </StyledTicket>
+        </StyledLink>
     )
 }
 
 
 export default Ticket;
 
-const StyledTicket = styled.tr`
+const StyledLink = styled.tr`
     display: flex;
     justify-content: space-between;
     border-top: 1px solid rgb(151,151,151,.2);

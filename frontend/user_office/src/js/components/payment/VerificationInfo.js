@@ -53,11 +53,9 @@ class VerificationInfo extends React.Component {
         return (
             <Wrapper className="VerificationInfo">
                 <VerificationStages stageClickHandler={this.stageClickHandler} boundSections={verificationStages} stages={stages}/>
-                    {status !== 'APPROVED' &&
-                        <ButtonWrapper>
-                            <Button type="submit" text={btnText} isSubmiting={isSubmiting} clickHandler={clickHandler}/>
-                        </ButtonWrapper>
-                    }
+                <ButtonWrapper>
+                    <Button type="submit" text={btnText} isSubmiting={isSubmiting} clickHandler={clickHandler}/>
+                </ButtonWrapper>
             </Wrapper>
         )
     }
