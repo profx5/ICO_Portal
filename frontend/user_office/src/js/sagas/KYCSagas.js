@@ -17,10 +17,6 @@ export class KYCSagas {
             });
             yield put(KYCActions.submitKYCSuccessfull());
             yield call(KYCSagas.getKYC);
-            yield put(UIActions.showModal({
-                modalHead: 'Congratulations',
-                modalContent: 'You\'ve successfully send your data! Our managers are validating your data. Soon the status will be updated!'
-            }));
 
         } catch(e) {
             yield put(KYCActions.submitKYCFailed())

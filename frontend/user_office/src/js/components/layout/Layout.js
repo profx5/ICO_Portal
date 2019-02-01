@@ -51,7 +51,9 @@ class Layout extends Component {
     componentDidMount() {
         const {hideAccountDropdown, hideModal} = this.props;
 
-        this.deactivatePreloader();
+        setTimeout(() => {
+            this.deactivatePreloader()
+        }, 250);
         $(document).click(function(e) {
             if ($(e.target).hasClass('ModalWrapper')) {
                 hideModal();
@@ -97,24 +99,15 @@ class Layout extends Component {
                         </MobileNavSidebar>
                     }
                     <LayoutWrapper>
-                        <TransitionGroup component={null}>
-                            <CSSTransition
-                                classNames="component"
-                                key={this.props.history.location.key}
-                                timeout={{exit: 1100, enter: 1100}}
-                                onExiting={this.activatePreloader}
-                                onEntered={this.deactivatePreloader}>
-                                <Switch history={history} location={this.props.history.location}>
-                                    <Route exact path="/user_office" component={Dashboard}/>
-                                    <Route path="/user_office/transactions" component={Transactions}/>
-                                    <Route path="/user_office/payment" component={Payment} />
-                                    <Route path={'/user_office/support'} component={Support}/>
-                                    <Route path={'/user_office/support/ticket/:ticket'} component={Support}/>
-                                    <Route path="/user_office/account" component={Account}/>
-                                </Switch>
-                            </CSSTransition>
-                            <Footer/>
-                        </TransitionGroup>
+                        <Switch history={history}>
+                            <Route exact path="/user_office" component={Dashboard}/>
+                            <Route path="/user_office/transactions" component={Transactions}/>
+                            <Route path="/user_office/payment" component={Payment} />
+                            <Route path={'/user_office/support'} component={Support}/>
+                            <Route path={'/user_office/support/ticket/:ticket'} component={Support}/>
+                            <Route path="/user_office/account" component={Account}/>
+                        </Switch>
+                        <Footer/>
                     </LayoutWrapper>
                     {showSetAccountPopup && <SetAccount/>}
                     {modalOpened && modalHead && modalContent && <Modal/>}
@@ -136,7 +129,6 @@ const mapStateToProps = ({UI}) => ({
     modalContent: UI.get('modalContent'),
     activeSupportTab: UI.get('activeSupportTab'),
     mobileSidebarOpened: UI.get('mobileSidebarOpened'),
-    preloaderActive: UI.get('preloaderActive')
 })
 
 const mapDispatchToProps = (dispatch) => ({

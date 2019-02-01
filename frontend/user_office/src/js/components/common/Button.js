@@ -47,7 +47,7 @@ const Img = styled.img`
 `;
 
 const Btn = styled.button`
-    border: ${props => props.transparent ? 'solid 1px rgb(49, 114, 253)' : 'solid 1px #4da1ffb3;'};
+    border: ${props => props.transparent ? 'solid 1px rgb(49, 114, 253)' : 'none'};
     background: transparent;
     height: 100%;
     width: 100%;
