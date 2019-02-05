@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import {Route, Switch} from 'react-router-dom';
 import {withRouter} from 'react-router';
 import $ from 'jquery';
-import {TransitionGroup, CSSTransition } from 'react-transition-group';
 import history from 'js/utils/getBrowserHistory';
 import {media} from 'js/utils/media';
+import {TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import NavSidebar from 'js/components/layout/stateless/NavSidebar';
 import Nav from 'js/components/layout/stateless/Nav';
@@ -23,8 +23,8 @@ import Account from 'js/components/account/Account';
 
 import SetAccount from 'js/components/layout/SetAccount';
 
-import CustomModals from 'js/components/layout/CustomModals';
-import Modal from 'js/components/common/Modal';
+import CustomModal from 'js/components/common/CustomModal';
+import SimpleModal from 'js/components/common/SimpleModal';
 
 import * as UIActions from 'js/actions/UIActions';
 import * as TicketActions from 'js/actions/TicketActions';
@@ -84,7 +84,7 @@ class Layout extends Component {
     }
 
     render() {
-        const {showSetAccountPopup, closeMobileSidebar, modalOpened, openedModalId, modalHead, modalContent, changeSupportActiveTab, mobileSidebarOpened} = this.props;
+        const {showSetAccountPopup, closeMobileSidebar, changeSupportActiveTab, mobileSidebarOpened} = this.props;
 
         return (
             <Wrapper>
@@ -93,11 +93,9 @@ class Layout extends Component {
                     <NavSidebar>
                         <Nav changeSupportActiveTab={changeSupportActiveTab}/>
                     </NavSidebar>
-                    {mobileSidebarOpened &&                     
-                        <MobileNavSidebar>
-                            <MobileNav onClickHandler={closeMobileSidebar} changeSupportActiveTab={changeSupportActiveTab}/>
-                        </MobileNavSidebar>
-                    }
+                    <MobileNavSidebar onClickHandler={closeMobileSidebar} opened={mobileSidebarOpened}>
+                        <MobileNav onClickHandler={closeMobileSidebar} changeSupportActiveTab={changeSupportActiveTab}/>
+                    </MobileNavSidebar>
                     <LayoutWrapper>
                         <Switch history={history}>
                             <Route exact path="/user_office" component={Dashboard}/>
@@ -110,8 +108,8 @@ class Layout extends Component {
                         <Footer/>
                     </LayoutWrapper>
                     {showSetAccountPopup && <SetAccount/>}
-                    {modalOpened && modalHead && modalContent && <Modal/>}
-                    {modalOpened && openedModalId && <CustomModals/>}
+                    <SimpleModal/>
+                    <CustomModal/>
                 </MainWrapper>
             </Wrapper>
         )
@@ -121,20 +119,10 @@ class Layout extends Component {
 
 const mapStateToProps = ({UI}) => ({
     showSetAccountPopup: UI.get('showSetAccountPopup'),
-    openedTip: UI.get('openedTip'),
-    accountDropdownShown: UI.get('accountDropdownShown'),
-    modalOpened: UI.get('modalOpened'),
-    openedModalId: UI.get('openedModalId'),
-    modalHead: UI.get('modalHead'),
-    modalContent: UI.get('modalContent'),
-    activeSupportTab: UI.get('activeSupportTab'),
     mobileSidebarOpened: UI.get('mobileSidebarOpened'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    closeOpenedTip() {
-        dispatch(UIActions.setOpenedTip(null))
-    },
     hideAccountDropdown() {
         dispatch(UIActions.hideAccountDropdown())
     },
