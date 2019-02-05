@@ -2,33 +2,37 @@ import React from 'react'
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {media} from 'js/utils/media';
+import {CSSTransition } from 'react-transition-group';
 
 import iconClose from 'img/icon_close.svg';
 
 import * as UIActions from 'js/actions/UIActions';
 
 
-class Modal extends React.Component {
+class SimpleModal extends React.Component {
 
     render() {
-        const {modalOpened, modalHead, modalContent, hideModal} = this.props;
+        const {modalOpened, modalHead, modalContent, hideModal, clearModalInfo} = this.props;
 
         return(
-            <React.Fragment>
-                {modalOpened && 
-                    <ModalWrapper className="ModalWrapper">
-                        <ModalInner>
-                            <ModalHeader>
-                                {this.props.head || modalHead}
-                                <img onClick={hideModal} src={iconClose} alt=""/>
-                            </ModalHeader>
-                            <ModalContent>
-                                {this.props.content || modalContent}
-                            </ModalContent>
-                        </ModalInner>
-                    </ModalWrapper>
-                }
-            </React.Fragment>
+            <CSSTransition
+                timeout={300}
+                in={(modalOpened && !!modalHead && !!modalContent)}
+                classNames="modal"
+                onExited={clearModalInfo}
+                unmountOnExit> 
+                <ModalWrapper className="Modal">
+                    <ModalInner className='Modal_inner'>
+                        <ModalHeader>
+                            {modalHead}
+                            <img onClick={hideModal} src={iconClose} alt=""/>
+                        </ModalHeader>
+                        <ModalContent>
+                            {modalContent}
+                        </ModalContent>
+                    </ModalInner>
+                </ModalWrapper>
+            </CSSTransition>
         )
     }
 }
@@ -43,10 +47,13 @@ const mapStateToProps = ({UI}) => ({
 const mapDispatchToProps = (dispatch) => ({
     hideModal() {
         dispatch(UIActions.hideModal())
+    },
+    clearModalInfo() {
+        dispatch(UIActions.clearModalInfo())
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleModal);
 
 const ModalWrapper = styled.div`
     position: fixed;
@@ -59,6 +66,21 @@ const ModalWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all .3s ease;
+    &.modal-enter, &.modal-exit-active {
+        opacity: 0;
+    }
+    &.modal-enter-active {
+        opacity: 1;
+    }
+    &.modal-enter .Modal_inner, &.modal-exit-active .Modal_inner {
+        opacity: 0;
+        transform: translate3d(0, 50px, 0);
+    }
+    .modal-enter-active .Modal_inner {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 `;
 
 const ModalInner = styled.div`
@@ -71,6 +93,7 @@ const ModalInner = styled.div`
     max-height: 64vh;
     overflow-y: auto;
     font-weight: normal;
+    transition: all .35s ease;
     ${media.xs} {
         width: calc(100vw - 32px);
         max-height: calc(100% - 96px);

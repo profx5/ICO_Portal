@@ -38,7 +38,10 @@ export const UIStateReducer = createReducer({
         }).set('modalOpened', true)
     },
     [actions.hideModal]: (state = initialState, payload) => {
-        return state.set('openedModalId', null).set('modalHead', null).set('modalContent', null).set('modalOpened', false)
+        return state.set('modalOpened', false)
+    },
+    [actions.clearModalInfo]: (state = initialState, payload) => {
+        return state.set('openedModalId', null).set('modalHead', null).set('modalContent', null);
     },
     [actions.showInvestOptions]: (state = initialState) => state.set("showInvestOptions", true),
     [actions.hideInvestOptions]: (state = initialState) => state.set("showInvestOptions", false),
