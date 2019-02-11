@@ -7,7 +7,6 @@ dist
 package-lock.json
 .DS_Store
 *.psd
-yarn.lock
 *.rar
 *.zip
 webpack-stats.dev.json
