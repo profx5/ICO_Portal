@@ -19,3 +19,7 @@ class BaseSettings(LoggerMixin):
     @property
     def exchange_rate(self):
         raise NotImplementedError()
+
+    @property
+    def contract_address(self):
+        return ''

@@ -18,6 +18,7 @@ class GetAvailableCurrencies(APIView, LoggerMixin):
             [
                 {"code": c.code,
                  "name": c.name,
+                 "contract_address": c.contract_address,
                  "rate": c.exchange_rate}
                 for c in Currencies.get_currencies()
             ]

@@ -23,7 +23,14 @@ class ERC20BlockchainTestCase(BlockChainTestCase):
         tx_hash = ERC20.constructor().transact({'from': cls.account['address']})
         tx_receipt = cls.web3.eth.getTransactionReceipt(tx_hash)
         cls.erc20 = cls.web3.eth.contract(address=tx_receipt.contractAddress, abi=compiled['abi'])
+        cls.old_dai_token_address = Currencies.get_currency('DAI').token_address
         Currencies.get_currency('DAI').token_address = tx_receipt.contractAddress
+
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+
+        Currencies.get_currency('DAI').token_address = cls.old_dai_token_address
 
     def transfer_tokens(self, from_acc, to_acc, amount):
         return self.erc20.functions.transfer(to_acc, amount).transact({

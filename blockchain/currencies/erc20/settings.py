@@ -27,6 +27,10 @@ class Settings(BaseSettings):
     def contract(self):
         return ERC20Token(self)
 
+    @property
+    def contract_address(self):
+        return self.token_address
+
     # TASKS
     @memoized_property
     def transfers_processor(self):

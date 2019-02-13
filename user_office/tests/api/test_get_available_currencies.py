@@ -9,8 +9,6 @@ class TestGetAvailableCurrencies(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, [
-            {'code': 'DAI', 'name': 'DAI', 'rate': Decimal('1')},
-            {'code': 'USDC', 'name': 'USDC', 'rate': Decimal('1')},
-            {'code': 'USDT', 'name': 'USDT', 'rate': Decimal('1')},
-            {'code': 'TUSD', 'name': 'TUSD', 'rate': Decimal('1')}
+            {'code': c, 'name': c, 'contract_address': '0x0000000000000000000000000000000000000000', 'rate': Decimal('1')}
+            for c in ['DAI', 'USDC', 'USDT', 'TUSD']
         ])
