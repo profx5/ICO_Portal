@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {canSendTransaction} from 'globalWeb3';
+import {canSendTransaction} from 'GlobalWeb3';
 import QRCode from 'qrcode';
 import {media} from 'js/utils/media';
 
