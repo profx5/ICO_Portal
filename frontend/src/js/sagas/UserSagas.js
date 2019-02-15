@@ -1,6 +1,6 @@
 import API from 'api';
 import axios from 'axios'
-import {extractAccount} from 'globalWeb3'
+import {extractAccount} from 'GlobalWeb3'
 import {call, cps, put, takeEvery} from 'redux-saga/effects'
 import * as UserActions from 'js/actions/UserActions'
 import * as UIActions from 'js/actions/UIActions'
