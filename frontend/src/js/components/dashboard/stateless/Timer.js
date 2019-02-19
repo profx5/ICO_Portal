@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 
 const Timer = ({countdownTime, className}) => {
@@ -15,6 +16,10 @@ const Timer = ({countdownTime, className}) => {
             </Wrapper>
         </React.Fragment>
     )
+}
+
+Timer.propTypes = {
+    countdownTime: PropTypes.object.isRequired,
 }
 
 

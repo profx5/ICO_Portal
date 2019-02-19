@@ -1,0 +1,2798 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless ProgressBar 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ProgressBar />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        undefined,
+        <ForwardRef>
+          <ForwardRef>
+            <ForwardRef
+              width={0}
+            >
+              <ForwardRef
+                data-raised-amount="NaN USD"
+                rate="1 OGD = undefined USD"
+                xsTextHidden={true}
+              />
+            </ForwardRef>
+            <ForwardRef>
+              <div
+                className="StageDesc hidden-smMinus"
+              >
+                <ForwardRef>
+                  65 000 USD
+                </ForwardRef>
+                <ForwardRef>
+                   
+                </ForwardRef>
+              </div>
+            </ForwardRef>
+            <ForwardRef>
+              <div
+                className="StageDesc hidden-smMinus"
+              >
+                <ForwardRef>
+                  130 000 USD
+                </ForwardRef>
+                <ForwardRef>
+                   
+                </ForwardRef>
+              </div>
+            </ForwardRef>
+            <ForwardRef>
+              <div
+                className="StageDesc hidden-smMinus"
+              >
+                <ForwardRef>
+                  195 000 USD
+                </ForwardRef>
+                <ForwardRef>
+                   
+                </ForwardRef>
+              </div>
+            </ForwardRef>
+            <ForwardRef>
+              <div
+                className="StageDesc hidden-smMinus"
+              >
+                <ForwardRef>
+                  260 000 USD
+                </ForwardRef>
+                <ForwardRef>
+                  Hard cap
+                </ForwardRef>
+              </div>
+            </ForwardRef>
+            <ForwardRef>
+              <div
+                className="StageDesc hidden-smMinus StageDesc-alignLeft"
+              >
+                <ForwardRef>
+                  0 USD
+                </ForwardRef>
+                <ForwardRef>
+                  Soft cap
+                </ForwardRef>
+              </div>
+            </ForwardRef>
+          </ForwardRef>
+        </ForwardRef>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      undefined,
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": <ForwardRef>
+            <ForwardRef
+              width={0}
+            >
+              <ForwardRef
+                data-raised-amount="NaN USD"
+                rate="1 OGD = undefined USD"
+                xsTextHidden={true}
+              />
+            </ForwardRef>
+            <ForwardRef>
+              <div
+                className="StageDesc hidden-smMinus"
+              >
+                <ForwardRef>
+                  65 000 USD
+                </ForwardRef>
+                <ForwardRef>
+                   
+                </ForwardRef>
+              </div>
+            </ForwardRef>
+            <ForwardRef>
+              <div
+                className="StageDesc hidden-smMinus"
+              >
+                <ForwardRef>
+                  130 000 USD
+                </ForwardRef>
+                <ForwardRef>
+                   
+                </ForwardRef>
+              </div>
+            </ForwardRef>
+            <ForwardRef>
+              <div
+                className="StageDesc hidden-smMinus"
+              >
+                <ForwardRef>
+                  195 000 USD
+                </ForwardRef>
+                <ForwardRef>
+                   
+                </ForwardRef>
+              </div>
+            </ForwardRef>
+            <ForwardRef>
+              <div
+                className="StageDesc hidden-smMinus"
+              >
+                <ForwardRef>
+                  260 000 USD
+                </ForwardRef>
+                <ForwardRef>
+                  Hard cap
+                </ForwardRef>
+              </div>
+            </ForwardRef>
+            <ForwardRef>
+              <div
+                className="StageDesc hidden-smMinus StageDesc-alignLeft"
+              >
+                <ForwardRef>
+                  0 USD
+                </ForwardRef>
+                <ForwardRef>
+                  Soft cap
+                </ForwardRef>
+              </div>
+            </ForwardRef>
+          </ForwardRef>,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <ForwardRef
+                width={0}
+              >
+                <ForwardRef
+                  data-raised-amount="NaN USD"
+                  rate="1 OGD = undefined USD"
+                  xsTextHidden={true}
+                />
+              </ForwardRef>,
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    65 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                     
+                  </ForwardRef>
+                </div>
+              </ForwardRef>,
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    130 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                     
+                  </ForwardRef>
+                </div>
+              </ForwardRef>,
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    195 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                     
+                  </ForwardRef>
+                </div>
+              </ForwardRef>,
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    260 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                    Hard cap
+                  </ForwardRef>
+                </div>
+              </ForwardRef>,
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus StageDesc-alignLeft"
+                >
+                  <ForwardRef>
+                    0 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                    Soft cap
+                  </ForwardRef>
+                </div>
+              </ForwardRef>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <ForwardRef
+                  data-raised-amount="NaN USD"
+                  rate="1 OGD = undefined USD"
+                  xsTextHidden={true}
+                />,
+                "width": 0,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "data-raised-amount": "NaN USD",
+                  "rate": "1 OGD = undefined USD",
+                  "xsTextHidden": true,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "attrs": Array [],
+                  "componentStyle": ComponentStyle {
+                    "componentId": "sc-ifAKCX",
+                    "isStatic": false,
+                    "rules": Array [
+                      "
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 3px;
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    background: white;
+    box-shadow: 0 0 0 11px rgba(57, 125, 255, 0.16);
+    ",
+                      "@media (max-width: 1025px)",
+                      " {
+        width: 13px;
+        height: 13px;
+        background: rgb(57, 125, 255);
+        right: -8px;
+    }
+    ",
+                      "@media (max-width: 767px)",
+                      " {
+        box-shadow: 0 0 0 6px rgba(57, 125, 255, 0.16);
+    }
+    &:after, &:before {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        ",
+                      "@media (max-width: 767px)",
+                      " {
+            display: ",
+                      [Function],
+                      ";
+        }
+    }
+    &:before {
+        content: 'Collected:';
+        font-family: 'roboto';
+        font-weight: 500;
+        font-size: 14px;
+        color: rgb(31, 31, 31);
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        top: -65px;
+        ",
+                      "@media (max-width: 1025px)",
+                      " {
+            content: url(",
+                      "arrow_roadmap.svg",
+                      ");
+            top: -40px;
+            transform: translateX(-55%) rotate(90deg);
+        }
+    }
+    &:after {
+        content: attr(data-raised-amount);
+        font-family: 'roboto';
+        font-weight: 500;
+        font-size: 16px;
+        color: rgb(49, 114, 253);
+        letter-spacing: 0.4px;
+        white-space: nowrap;
+        top: -45px;
+        ",
+                      "@media (max-width: 1025px)",
+                      " {
+            content: 'You are here';
+            font-family: inherit;
+            top: -56px;
+        }
+    }
+",
+                    ],
+                  },
+                  "displayName": "styled.div",
+                  "foldedComponentIds": Array [],
+                  "render": [Function],
+                  "styledComponentId": "sc-ifAKCX",
+                  "target": "div",
+                  "toString": [Function],
+                  "warnTooManyClasses": [Function],
+                  "withComponent": [Function],
+                },
+              },
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-bxivhb",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    min-width: 6px;
+    width: ",
+                    [Function],
+                    ";
+    background: #397dff;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    transition: width .5s ease .5s;
+",
+                  ],
+                },
+                "displayName": "styled.div",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-bxivhb",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    65 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                     
+                  </ForwardRef>
+                </div>,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <ForwardRef>
+                      65 000 USD
+                    </ForwardRef>,
+                    <ForwardRef>
+                       
+                    </ForwardRef>,
+                  ],
+                  "className": "StageDesc hidden-smMinus",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "children": "65 000 USD",
+                    },
+                    "ref": null,
+                    "rendered": "65 000 USD",
+                    "type": Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-bZQynM",
+                        "isStatic": true,
+                        "rules": Array [
+                          "
+    color: rgb(31, 31, 31);
+    letter-spacing: 0.2px;
+    font-size: 16px;
+    margin-bottom: 3px;
+    font-weight: 600;
+",
+                        ],
+                      },
+                      "displayName": "styled.div",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-bZQynM",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    },
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "children": " ",
+                    },
+                    "ref": null,
+                    "rendered": " ",
+                    "type": Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-gzVnrw",
+                        "isStatic": true,
+                        "rules": Array [
+                          "
+    color: rgb(31, 31, 31);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    font-family: 'roboto';
+    font-weight: 500;
+    position: relative;
+    top: -145px;
+",
+                        ],
+                      },
+                      "displayName": "styled.div",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-gzVnrw",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    },
+                  },
+                ],
+                "type": "div",
+              },
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-EHOje",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    width: 2px;
+    height: 30px;
+    background: rgb(49, 114, 253);
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    &:nth-child(1) {
+        left: 0%;
+    }
+    &:nth-child(2) {
+        left: 25%;
+    }
+    &:nth-child(3) {
+        left: 50%;
+    }
+    &:nth-child(4) {
+        left: 75%;
+    }
+    &:nth-child(5) {
+        left: 100%;
+    }
+    .StageDesc {
+        position: absolute;
+        bottom: -50px;
+        left: -50%;
+        transform: translateX(calc(-100% + 3px));
+        text-align: right;
+        div {
+            white-space: nowrap;
+        }
+        &-alignLeft {
+            text-align: left;
+            transform: translateX(0);
+        }
+    }
+    &:before {
+        content: attr(data-rate);
+        font-size: 18px;
+        color: ",
+                    [Function],
+                    ";
+        position: absolute;
+        left: 0;
+        top: -85px;
+        white-space: nowrap;
+    }
+",
+                  ],
+                },
+                "displayName": "styled.div",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-EHOje",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    130 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                     
+                  </ForwardRef>
+                </div>,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <ForwardRef>
+                      130 000 USD
+                    </ForwardRef>,
+                    <ForwardRef>
+                       
+                    </ForwardRef>,
+                  ],
+                  "className": "StageDesc hidden-smMinus",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "children": "130 000 USD",
+                    },
+                    "ref": null,
+                    "rendered": "130 000 USD",
+                    "type": Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-bZQynM",
+                        "isStatic": true,
+                        "rules": Array [
+                          "
+    color: rgb(31, 31, 31);
+    letter-spacing: 0.2px;
+    font-size: 16px;
+    margin-bottom: 3px;
+    font-weight: 600;
+",
+                        ],
+                      },
+                      "displayName": "styled.div",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-bZQynM",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    },
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "children": " ",
+                    },
+                    "ref": null,
+                    "rendered": " ",
+                    "type": Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-gzVnrw",
+                        "isStatic": true,
+                        "rules": Array [
+                          "
+    color: rgb(31, 31, 31);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    font-family: 'roboto';
+    font-weight: 500;
+    position: relative;
+    top: -145px;
+",
+                        ],
+                      },
+                      "displayName": "styled.div",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-gzVnrw",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    },
+                  },
+                ],
+                "type": "div",
+              },
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-EHOje",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    width: 2px;
+    height: 30px;
+    background: rgb(49, 114, 253);
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    &:nth-child(1) {
+        left: 0%;
+    }
+    &:nth-child(2) {
+        left: 25%;
+    }
+    &:nth-child(3) {
+        left: 50%;
+    }
+    &:nth-child(4) {
+        left: 75%;
+    }
+    &:nth-child(5) {
+        left: 100%;
+    }
+    .StageDesc {
+        position: absolute;
+        bottom: -50px;
+        left: -50%;
+        transform: translateX(calc(-100% + 3px));
+        text-align: right;
+        div {
+            white-space: nowrap;
+        }
+        &-alignLeft {
+            text-align: left;
+            transform: translateX(0);
+        }
+    }
+    &:before {
+        content: attr(data-rate);
+        font-size: 18px;
+        color: ",
+                    [Function],
+                    ";
+        position: absolute;
+        left: 0;
+        top: -85px;
+        white-space: nowrap;
+    }
+",
+                  ],
+                },
+                "displayName": "styled.div",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-EHOje",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    195 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                     
+                  </ForwardRef>
+                </div>,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <ForwardRef>
+                      195 000 USD
+                    </ForwardRef>,
+                    <ForwardRef>
+                       
+                    </ForwardRef>,
+                  ],
+                  "className": "StageDesc hidden-smMinus",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "children": "195 000 USD",
+                    },
+                    "ref": null,
+                    "rendered": "195 000 USD",
+                    "type": Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-bZQynM",
+                        "isStatic": true,
+                        "rules": Array [
+                          "
+    color: rgb(31, 31, 31);
+    letter-spacing: 0.2px;
+    font-size: 16px;
+    margin-bottom: 3px;
+    font-weight: 600;
+",
+                        ],
+                      },
+                      "displayName": "styled.div",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-bZQynM",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    },
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "children": " ",
+                    },
+                    "ref": null,
+                    "rendered": " ",
+                    "type": Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-gzVnrw",
+                        "isStatic": true,
+                        "rules": Array [
+                          "
+    color: rgb(31, 31, 31);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    font-family: 'roboto';
+    font-weight: 500;
+    position: relative;
+    top: -145px;
+",
+                        ],
+                      },
+                      "displayName": "styled.div",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-gzVnrw",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    },
+                  },
+                ],
+                "type": "div",
+              },
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-EHOje",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    width: 2px;
+    height: 30px;
+    background: rgb(49, 114, 253);
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    &:nth-child(1) {
+        left: 0%;
+    }
+    &:nth-child(2) {
+        left: 25%;
+    }
+    &:nth-child(3) {
+        left: 50%;
+    }
+    &:nth-child(4) {
+        left: 75%;
+    }
+    &:nth-child(5) {
+        left: 100%;
+    }
+    .StageDesc {
+        position: absolute;
+        bottom: -50px;
+        left: -50%;
+        transform: translateX(calc(-100% + 3px));
+        text-align: right;
+        div {
+            white-space: nowrap;
+        }
+        &-alignLeft {
+            text-align: left;
+            transform: translateX(0);
+        }
+    }
+    &:before {
+        content: attr(data-rate);
+        font-size: 18px;
+        color: ",
+                    [Function],
+                    ";
+        position: absolute;
+        left: 0;
+        top: -85px;
+        white-space: nowrap;
+    }
+",
+                  ],
+                },
+                "displayName": "styled.div",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-EHOje",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    260 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                    Hard cap
+                  </ForwardRef>
+                </div>,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <ForwardRef>
+                      260 000 USD
+                    </ForwardRef>,
+                    <ForwardRef>
+                      Hard cap
+                    </ForwardRef>,
+                  ],
+                  "className": "StageDesc hidden-smMinus",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "children": "260 000 USD",
+                    },
+                    "ref": null,
+                    "rendered": "260 000 USD",
+                    "type": Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-bZQynM",
+                        "isStatic": true,
+                        "rules": Array [
+                          "
+    color: rgb(31, 31, 31);
+    letter-spacing: 0.2px;
+    font-size: 16px;
+    margin-bottom: 3px;
+    font-weight: 600;
+",
+                        ],
+                      },
+                      "displayName": "styled.div",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-bZQynM",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    },
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "children": "Hard cap",
+                    },
+                    "ref": null,
+                    "rendered": "Hard cap",
+                    "type": Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-gzVnrw",
+                        "isStatic": true,
+                        "rules": Array [
+                          "
+    color: rgb(31, 31, 31);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    font-family: 'roboto';
+    font-weight: 500;
+    position: relative;
+    top: -145px;
+",
+                        ],
+                      },
+                      "displayName": "styled.div",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-gzVnrw",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    },
+                  },
+                ],
+                "type": "div",
+              },
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-EHOje",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    width: 2px;
+    height: 30px;
+    background: rgb(49, 114, 253);
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    &:nth-child(1) {
+        left: 0%;
+    }
+    &:nth-child(2) {
+        left: 25%;
+    }
+    &:nth-child(3) {
+        left: 50%;
+    }
+    &:nth-child(4) {
+        left: 75%;
+    }
+    &:nth-child(5) {
+        left: 100%;
+    }
+    .StageDesc {
+        position: absolute;
+        bottom: -50px;
+        left: -50%;
+        transform: translateX(calc(-100% + 3px));
+        text-align: right;
+        div {
+            white-space: nowrap;
+        }
+        &-alignLeft {
+            text-align: left;
+            transform: translateX(0);
+        }
+    }
+    &:before {
+        content: attr(data-rate);
+        font-size: 18px;
+        color: ",
+                    [Function],
+                    ";
+        position: absolute;
+        left: 0;
+        top: -85px;
+        white-space: nowrap;
+    }
+",
+                  ],
+                },
+                "displayName": "styled.div",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-EHOje",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <div
+                  className="StageDesc hidden-smMinus StageDesc-alignLeft"
+                >
+                  <ForwardRef>
+                    0 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                    Soft cap
+                  </ForwardRef>
+                </div>,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <ForwardRef>
+                      0 USD
+                    </ForwardRef>,
+                    <ForwardRef>
+                      Soft cap
+                    </ForwardRef>,
+                  ],
+                  "className": "StageDesc hidden-smMinus StageDesc-alignLeft",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "children": "0 USD",
+                    },
+                    "ref": null,
+                    "rendered": "0 USD",
+                    "type": Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-bZQynM",
+                        "isStatic": true,
+                        "rules": Array [
+                          "
+    color: rgb(31, 31, 31);
+    letter-spacing: 0.2px;
+    font-size: 16px;
+    margin-bottom: 3px;
+    font-weight: 600;
+",
+                        ],
+                      },
+                      "displayName": "styled.div",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-bZQynM",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    },
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "children": "Soft cap",
+                    },
+                    "ref": null,
+                    "rendered": "Soft cap",
+                    "type": Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-gzVnrw",
+                        "isStatic": true,
+                        "rules": Array [
+                          "
+    color: rgb(31, 31, 31);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    font-family: 'roboto';
+    font-weight: 500;
+    position: relative;
+    top: -145px;
+",
+                        ],
+                      },
+                      "displayName": "styled.div",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-gzVnrw",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    },
+                  },
+                ],
+                "type": "div",
+              },
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-EHOje",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    width: 2px;
+    height: 30px;
+    background: rgb(49, 114, 253);
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    &:nth-child(1) {
+        left: 0%;
+    }
+    &:nth-child(2) {
+        left: 25%;
+    }
+    &:nth-child(3) {
+        left: 50%;
+    }
+    &:nth-child(4) {
+        left: 75%;
+    }
+    &:nth-child(5) {
+        left: 100%;
+    }
+    .StageDesc {
+        position: absolute;
+        bottom: -50px;
+        left: -50%;
+        transform: translateX(calc(-100% + 3px));
+        text-align: right;
+        div {
+            white-space: nowrap;
+        }
+        &-alignLeft {
+            text-align: left;
+            transform: translateX(0);
+        }
+    }
+    &:before {
+        content: attr(data-rate);
+        font-size: 18px;
+        color: ",
+                    [Function],
+                    ";
+        position: absolute;
+        left: 0;
+        top: -85px;
+        white-space: nowrap;
+    }
+",
+                  ],
+                },
+                "displayName": "styled.div",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-EHOje",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-htpNat",
+              "isStatic": true,
+              "rules": Array [
+                "
+    width: 100%;
+    height: 11px;
+    background: rgba(49, 114, 253, .15);
+    position: relative;
+    ",
+                "@media (max-width: 1025px)",
+                " {
+        height: 5px;
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-htpNat",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+    position: absolute;
+    left: 50%;
+    bottom: 120px;
+    width: calc(100% - 80px);
+    transform: translateX(-50%);
+    ",
+              "@media (max-width: 1025px)",
+              " {
+        width: calc(100% - 40px);
+        bottom: unset;
+        top: 80px;
+    }
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+    ],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": true,
+        "rules": Array [
+          "
+    border: 1px solid rgba(151,151,151,.2);
+    margin-bottom: 80px;
+    height: 350px;
+    position: relative;
+    background: #FAFCFF;
+    ",
+          "@media (min-width: 768px) and (max-width: 1024px)",
+          " {
+        padding: 150px 20px 20px;
+        margin-bottom: 32px;
+    }
+    ",
+          "@media (max-width: 1025px)",
+          " {
+        background: white;
+        height: auto;
+    }
+    ",
+          "@media (max-width: 767px)",
+          " {
+        padding: 130px 15px 20px;
+        margin-bottom: 32px;
+    }
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          undefined,
+          <ForwardRef>
+            <ForwardRef>
+              <ForwardRef
+                width={0}
+              >
+                <ForwardRef
+                  data-raised-amount="NaN USD"
+                  rate="1 OGD = undefined USD"
+                  xsTextHidden={true}
+                />
+              </ForwardRef>
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    65 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                     
+                  </ForwardRef>
+                </div>
+              </ForwardRef>
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    130 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                     
+                  </ForwardRef>
+                </div>
+              </ForwardRef>
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    195 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                     
+                  </ForwardRef>
+                </div>
+              </ForwardRef>
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    260 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                    Hard cap
+                  </ForwardRef>
+                </div>
+              </ForwardRef>
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus StageDesc-alignLeft"
+                >
+                  <ForwardRef>
+                    0 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                    Soft cap
+                  </ForwardRef>
+                </div>
+              </ForwardRef>
+            </ForwardRef>
+          </ForwardRef>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        undefined,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <ForwardRef>
+              <ForwardRef
+                width={0}
+              >
+                <ForwardRef
+                  data-raised-amount="NaN USD"
+                  rate="1 OGD = undefined USD"
+                  xsTextHidden={true}
+                />
+              </ForwardRef>
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    65 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                     
+                  </ForwardRef>
+                </div>
+              </ForwardRef>
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    130 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                     
+                  </ForwardRef>
+                </div>
+              </ForwardRef>
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    195 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                     
+                  </ForwardRef>
+                </div>
+              </ForwardRef>
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus"
+                >
+                  <ForwardRef>
+                    260 000 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                    Hard cap
+                  </ForwardRef>
+                </div>
+              </ForwardRef>
+              <ForwardRef>
+                <div
+                  className="StageDesc hidden-smMinus StageDesc-alignLeft"
+                >
+                  <ForwardRef>
+                    0 USD
+                  </ForwardRef>
+                  <ForwardRef>
+                    Soft cap
+                  </ForwardRef>
+                </div>
+              </ForwardRef>
+            </ForwardRef>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": Array [
+                <ForwardRef
+                  width={0}
+                >
+                  <ForwardRef
+                    data-raised-amount="NaN USD"
+                    rate="1 OGD = undefined USD"
+                    xsTextHidden={true}
+                  />
+                </ForwardRef>,
+                <ForwardRef>
+                  <div
+                    className="StageDesc hidden-smMinus"
+                  >
+                    <ForwardRef>
+                      65 000 USD
+                    </ForwardRef>
+                    <ForwardRef>
+                       
+                    </ForwardRef>
+                  </div>
+                </ForwardRef>,
+                <ForwardRef>
+                  <div
+                    className="StageDesc hidden-smMinus"
+                  >
+                    <ForwardRef>
+                      130 000 USD
+                    </ForwardRef>
+                    <ForwardRef>
+                       
+                    </ForwardRef>
+                  </div>
+                </ForwardRef>,
+                <ForwardRef>
+                  <div
+                    className="StageDesc hidden-smMinus"
+                  >
+                    <ForwardRef>
+                      195 000 USD
+                    </ForwardRef>
+                    <ForwardRef>
+                       
+                    </ForwardRef>
+                  </div>
+                </ForwardRef>,
+                <ForwardRef>
+                  <div
+                    className="StageDesc hidden-smMinus"
+                  >
+                    <ForwardRef>
+                      260 000 USD
+                    </ForwardRef>
+                    <ForwardRef>
+                      Hard cap
+                    </ForwardRef>
+                  </div>
+                </ForwardRef>,
+                <ForwardRef>
+                  <div
+                    className="StageDesc hidden-smMinus StageDesc-alignLeft"
+                  >
+                    <ForwardRef>
+                      0 USD
+                    </ForwardRef>
+                    <ForwardRef>
+                      Soft cap
+                    </ForwardRef>
+                  </div>
+                </ForwardRef>,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": <ForwardRef
+                    data-raised-amount="NaN USD"
+                    rate="1 OGD = undefined USD"
+                    xsTextHidden={true}
+                  />,
+                  "width": 0,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "data-raised-amount": "NaN USD",
+                    "rate": "1 OGD = undefined USD",
+                    "xsTextHidden": true,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": Object {
+                    "$$typeof": Symbol(react.forward_ref),
+                    "attrs": Array [],
+                    "componentStyle": ComponentStyle {
+                      "componentId": "sc-ifAKCX",
+                      "isStatic": false,
+                      "rules": Array [
+                        "
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 3px;
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    background: white;
+    box-shadow: 0 0 0 11px rgba(57, 125, 255, 0.16);
+    ",
+                        "@media (max-width: 1025px)",
+                        " {
+        width: 13px;
+        height: 13px;
+        background: rgb(57, 125, 255);
+        right: -8px;
+    }
+    ",
+                        "@media (max-width: 767px)",
+                        " {
+        box-shadow: 0 0 0 6px rgba(57, 125, 255, 0.16);
+    }
+    &:after, &:before {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        ",
+                        "@media (max-width: 767px)",
+                        " {
+            display: ",
+                        [Function],
+                        ";
+        }
+    }
+    &:before {
+        content: 'Collected:';
+        font-family: 'roboto';
+        font-weight: 500;
+        font-size: 14px;
+        color: rgb(31, 31, 31);
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        top: -65px;
+        ",
+                        "@media (max-width: 1025px)",
+                        " {
+            content: url(",
+                        "arrow_roadmap.svg",
+                        ");
+            top: -40px;
+            transform: translateX(-55%) rotate(90deg);
+        }
+    }
+    &:after {
+        content: attr(data-raised-amount);
+        font-family: 'roboto';
+        font-weight: 500;
+        font-size: 16px;
+        color: rgb(49, 114, 253);
+        letter-spacing: 0.4px;
+        white-space: nowrap;
+        top: -45px;
+        ",
+                        "@media (max-width: 1025px)",
+                        " {
+            content: 'You are here';
+            font-family: inherit;
+            top: -56px;
+        }
+    }
+",
+                      ],
+                    },
+                    "displayName": "styled.div",
+                    "foldedComponentIds": Array [],
+                    "render": [Function],
+                    "styledComponentId": "sc-ifAKCX",
+                    "target": "div",
+                    "toString": [Function],
+                    "warnTooManyClasses": [Function],
+                    "withComponent": [Function],
+                  },
+                },
+                "type": Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "attrs": Array [],
+                  "componentStyle": ComponentStyle {
+                    "componentId": "sc-bxivhb",
+                    "isStatic": false,
+                    "rules": Array [
+                      "
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    min-width: 6px;
+    width: ",
+                      [Function],
+                      ";
+    background: #397dff;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    transition: width .5s ease .5s;
+",
+                    ],
+                  },
+                  "displayName": "styled.div",
+                  "foldedComponentIds": Array [],
+                  "render": [Function],
+                  "styledComponentId": "sc-bxivhb",
+                  "target": "div",
+                  "toString": [Function],
+                  "warnTooManyClasses": [Function],
+                  "withComponent": [Function],
+                },
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": <div
+                    className="StageDesc hidden-smMinus"
+                  >
+                    <ForwardRef>
+                      65 000 USD
+                    </ForwardRef>
+                    <ForwardRef>
+                       
+                    </ForwardRef>
+                  </div>,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <ForwardRef>
+                        65 000 USD
+                      </ForwardRef>,
+                      <ForwardRef>
+                         
+                      </ForwardRef>,
+                    ],
+                    "className": "StageDesc hidden-smMinus",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": "65 000 USD",
+                      },
+                      "ref": null,
+                      "rendered": "65 000 USD",
+                      "type": Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-bZQynM",
+                          "isStatic": true,
+                          "rules": Array [
+                            "
+    color: rgb(31, 31, 31);
+    letter-spacing: 0.2px;
+    font-size: 16px;
+    margin-bottom: 3px;
+    font-weight: 600;
+",
+                          ],
+                        },
+                        "displayName": "styled.div",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-bZQynM",
+                        "target": "div",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      },
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": " ",
+                      },
+                      "ref": null,
+                      "rendered": " ",
+                      "type": Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-gzVnrw",
+                          "isStatic": true,
+                          "rules": Array [
+                            "
+    color: rgb(31, 31, 31);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    font-family: 'roboto';
+    font-weight: 500;
+    position: relative;
+    top: -145px;
+",
+                          ],
+                        },
+                        "displayName": "styled.div",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-gzVnrw",
+                        "target": "div",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      },
+                    },
+                  ],
+                  "type": "div",
+                },
+                "type": Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "attrs": Array [],
+                  "componentStyle": ComponentStyle {
+                    "componentId": "sc-EHOje",
+                    "isStatic": false,
+                    "rules": Array [
+                      "
+    width: 2px;
+    height: 30px;
+    background: rgb(49, 114, 253);
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    &:nth-child(1) {
+        left: 0%;
+    }
+    &:nth-child(2) {
+        left: 25%;
+    }
+    &:nth-child(3) {
+        left: 50%;
+    }
+    &:nth-child(4) {
+        left: 75%;
+    }
+    &:nth-child(5) {
+        left: 100%;
+    }
+    .StageDesc {
+        position: absolute;
+        bottom: -50px;
+        left: -50%;
+        transform: translateX(calc(-100% + 3px));
+        text-align: right;
+        div {
+            white-space: nowrap;
+        }
+        &-alignLeft {
+            text-align: left;
+            transform: translateX(0);
+        }
+    }
+    &:before {
+        content: attr(data-rate);
+        font-size: 18px;
+        color: ",
+                      [Function],
+                      ";
+        position: absolute;
+        left: 0;
+        top: -85px;
+        white-space: nowrap;
+    }
+",
+                    ],
+                  },
+                  "displayName": "styled.div",
+                  "foldedComponentIds": Array [],
+                  "render": [Function],
+                  "styledComponentId": "sc-EHOje",
+                  "target": "div",
+                  "toString": [Function],
+                  "warnTooManyClasses": [Function],
+                  "withComponent": [Function],
+                },
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": <div
+                    className="StageDesc hidden-smMinus"
+                  >
+                    <ForwardRef>
+                      130 000 USD
+                    </ForwardRef>
+                    <ForwardRef>
+                       
+                    </ForwardRef>
+                  </div>,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <ForwardRef>
+                        130 000 USD
+                      </ForwardRef>,
+                      <ForwardRef>
+                         
+                      </ForwardRef>,
+                    ],
+                    "className": "StageDesc hidden-smMinus",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": "130 000 USD",
+                      },
+                      "ref": null,
+                      "rendered": "130 000 USD",
+                      "type": Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-bZQynM",
+                          "isStatic": true,
+                          "rules": Array [
+                            "
+    color: rgb(31, 31, 31);
+    letter-spacing: 0.2px;
+    font-size: 16px;
+    margin-bottom: 3px;
+    font-weight: 600;
+",
+                          ],
+                        },
+                        "displayName": "styled.div",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-bZQynM",
+                        "target": "div",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      },
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": " ",
+                      },
+                      "ref": null,
+                      "rendered": " ",
+                      "type": Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-gzVnrw",
+                          "isStatic": true,
+                          "rules": Array [
+                            "
+    color: rgb(31, 31, 31);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    font-family: 'roboto';
+    font-weight: 500;
+    position: relative;
+    top: -145px;
+",
+                          ],
+                        },
+                        "displayName": "styled.div",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-gzVnrw",
+                        "target": "div",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      },
+                    },
+                  ],
+                  "type": "div",
+                },
+                "type": Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "attrs": Array [],
+                  "componentStyle": ComponentStyle {
+                    "componentId": "sc-EHOje",
+                    "isStatic": false,
+                    "rules": Array [
+                      "
+    width: 2px;
+    height: 30px;
+    background: rgb(49, 114, 253);
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    &:nth-child(1) {
+        left: 0%;
+    }
+    &:nth-child(2) {
+        left: 25%;
+    }
+    &:nth-child(3) {
+        left: 50%;
+    }
+    &:nth-child(4) {
+        left: 75%;
+    }
+    &:nth-child(5) {
+        left: 100%;
+    }
+    .StageDesc {
+        position: absolute;
+        bottom: -50px;
+        left: -50%;
+        transform: translateX(calc(-100% + 3px));
+        text-align: right;
+        div {
+            white-space: nowrap;
+        }
+        &-alignLeft {
+            text-align: left;
+            transform: translateX(0);
+        }
+    }
+    &:before {
+        content: attr(data-rate);
+        font-size: 18px;
+        color: ",
+                      [Function],
+                      ";
+        position: absolute;
+        left: 0;
+        top: -85px;
+        white-space: nowrap;
+    }
+",
+                    ],
+                  },
+                  "displayName": "styled.div",
+                  "foldedComponentIds": Array [],
+                  "render": [Function],
+                  "styledComponentId": "sc-EHOje",
+                  "target": "div",
+                  "toString": [Function],
+                  "warnTooManyClasses": [Function],
+                  "withComponent": [Function],
+                },
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": <div
+                    className="StageDesc hidden-smMinus"
+                  >
+                    <ForwardRef>
+                      195 000 USD
+                    </ForwardRef>
+                    <ForwardRef>
+                       
+                    </ForwardRef>
+                  </div>,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <ForwardRef>
+                        195 000 USD
+                      </ForwardRef>,
+                      <ForwardRef>
+                         
+                      </ForwardRef>,
+                    ],
+                    "className": "StageDesc hidden-smMinus",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": "195 000 USD",
+                      },
+                      "ref": null,
+                      "rendered": "195 000 USD",
+                      "type": Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-bZQynM",
+                          "isStatic": true,
+                          "rules": Array [
+                            "
+    color: rgb(31, 31, 31);
+    letter-spacing: 0.2px;
+    font-size: 16px;
+    margin-bottom: 3px;
+    font-weight: 600;
+",
+                          ],
+                        },
+                        "displayName": "styled.div",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-bZQynM",
+                        "target": "div",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      },
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": " ",
+                      },
+                      "ref": null,
+                      "rendered": " ",
+                      "type": Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-gzVnrw",
+                          "isStatic": true,
+                          "rules": Array [
+                            "
+    color: rgb(31, 31, 31);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    font-family: 'roboto';
+    font-weight: 500;
+    position: relative;
+    top: -145px;
+",
+                          ],
+                        },
+                        "displayName": "styled.div",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-gzVnrw",
+                        "target": "div",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      },
+                    },
+                  ],
+                  "type": "div",
+                },
+                "type": Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "attrs": Array [],
+                  "componentStyle": ComponentStyle {
+                    "componentId": "sc-EHOje",
+                    "isStatic": false,
+                    "rules": Array [
+                      "
+    width: 2px;
+    height: 30px;
+    background: rgb(49, 114, 253);
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    &:nth-child(1) {
+        left: 0%;
+    }
+    &:nth-child(2) {
+        left: 25%;
+    }
+    &:nth-child(3) {
+        left: 50%;
+    }
+    &:nth-child(4) {
+        left: 75%;
+    }
+    &:nth-child(5) {
+        left: 100%;
+    }
+    .StageDesc {
+        position: absolute;
+        bottom: -50px;
+        left: -50%;
+        transform: translateX(calc(-100% + 3px));
+        text-align: right;
+        div {
+            white-space: nowrap;
+        }
+        &-alignLeft {
+            text-align: left;
+            transform: translateX(0);
+        }
+    }
+    &:before {
+        content: attr(data-rate);
+        font-size: 18px;
+        color: ",
+                      [Function],
+                      ";
+        position: absolute;
+        left: 0;
+        top: -85px;
+        white-space: nowrap;
+    }
+",
+                    ],
+                  },
+                  "displayName": "styled.div",
+                  "foldedComponentIds": Array [],
+                  "render": [Function],
+                  "styledComponentId": "sc-EHOje",
+                  "target": "div",
+                  "toString": [Function],
+                  "warnTooManyClasses": [Function],
+                  "withComponent": [Function],
+                },
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": <div
+                    className="StageDesc hidden-smMinus"
+                  >
+                    <ForwardRef>
+                      260 000 USD
+                    </ForwardRef>
+                    <ForwardRef>
+                      Hard cap
+                    </ForwardRef>
+                  </div>,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <ForwardRef>
+                        260 000 USD
+                      </ForwardRef>,
+                      <ForwardRef>
+                        Hard cap
+                      </ForwardRef>,
+                    ],
+                    "className": "StageDesc hidden-smMinus",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": "260 000 USD",
+                      },
+                      "ref": null,
+                      "rendered": "260 000 USD",
+                      "type": Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-bZQynM",
+                          "isStatic": true,
+                          "rules": Array [
+                            "
+    color: rgb(31, 31, 31);
+    letter-spacing: 0.2px;
+    font-size: 16px;
+    margin-bottom: 3px;
+    font-weight: 600;
+",
+                          ],
+                        },
+                        "displayName": "styled.div",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-bZQynM",
+                        "target": "div",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      },
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": "Hard cap",
+                      },
+                      "ref": null,
+                      "rendered": "Hard cap",
+                      "type": Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-gzVnrw",
+                          "isStatic": true,
+                          "rules": Array [
+                            "
+    color: rgb(31, 31, 31);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    font-family: 'roboto';
+    font-weight: 500;
+    position: relative;
+    top: -145px;
+",
+                          ],
+                        },
+                        "displayName": "styled.div",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-gzVnrw",
+                        "target": "div",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      },
+                    },
+                  ],
+                  "type": "div",
+                },
+                "type": Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "attrs": Array [],
+                  "componentStyle": ComponentStyle {
+                    "componentId": "sc-EHOje",
+                    "isStatic": false,
+                    "rules": Array [
+                      "
+    width: 2px;
+    height: 30px;
+    background: rgb(49, 114, 253);
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    &:nth-child(1) {
+        left: 0%;
+    }
+    &:nth-child(2) {
+        left: 25%;
+    }
+    &:nth-child(3) {
+        left: 50%;
+    }
+    &:nth-child(4) {
+        left: 75%;
+    }
+    &:nth-child(5) {
+        left: 100%;
+    }
+    .StageDesc {
+        position: absolute;
+        bottom: -50px;
+        left: -50%;
+        transform: translateX(calc(-100% + 3px));
+        text-align: right;
+        div {
+            white-space: nowrap;
+        }
+        &-alignLeft {
+            text-align: left;
+            transform: translateX(0);
+        }
+    }
+    &:before {
+        content: attr(data-rate);
+        font-size: 18px;
+        color: ",
+                      [Function],
+                      ";
+        position: absolute;
+        left: 0;
+        top: -85px;
+        white-space: nowrap;
+    }
+",
+                    ],
+                  },
+                  "displayName": "styled.div",
+                  "foldedComponentIds": Array [],
+                  "render": [Function],
+                  "styledComponentId": "sc-EHOje",
+                  "target": "div",
+                  "toString": [Function],
+                  "warnTooManyClasses": [Function],
+                  "withComponent": [Function],
+                },
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": <div
+                    className="StageDesc hidden-smMinus StageDesc-alignLeft"
+                  >
+                    <ForwardRef>
+                      0 USD
+                    </ForwardRef>
+                    <ForwardRef>
+                      Soft cap
+                    </ForwardRef>
+                  </div>,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <ForwardRef>
+                        0 USD
+                      </ForwardRef>,
+                      <ForwardRef>
+                        Soft cap
+                      </ForwardRef>,
+                    ],
+                    "className": "StageDesc hidden-smMinus StageDesc-alignLeft",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": "0 USD",
+                      },
+                      "ref": null,
+                      "rendered": "0 USD",
+                      "type": Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-bZQynM",
+                          "isStatic": true,
+                          "rules": Array [
+                            "
+    color: rgb(31, 31, 31);
+    letter-spacing: 0.2px;
+    font-size: 16px;
+    margin-bottom: 3px;
+    font-weight: 600;
+",
+                          ],
+                        },
+                        "displayName": "styled.div",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-bZQynM",
+                        "target": "div",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      },
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": "Soft cap",
+                      },
+                      "ref": null,
+                      "rendered": "Soft cap",
+                      "type": Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-gzVnrw",
+                          "isStatic": true,
+                          "rules": Array [
+                            "
+    color: rgb(31, 31, 31);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    font-family: 'roboto';
+    font-weight: 500;
+    position: relative;
+    top: -145px;
+",
+                          ],
+                        },
+                        "displayName": "styled.div",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-gzVnrw",
+                        "target": "div",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      },
+                    },
+                  ],
+                  "type": "div",
+                },
+                "type": Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "attrs": Array [],
+                  "componentStyle": ComponentStyle {
+                    "componentId": "sc-EHOje",
+                    "isStatic": false,
+                    "rules": Array [
+                      "
+    width: 2px;
+    height: 30px;
+    background: rgb(49, 114, 253);
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    &:nth-child(1) {
+        left: 0%;
+    }
+    &:nth-child(2) {
+        left: 25%;
+    }
+    &:nth-child(3) {
+        left: 50%;
+    }
+    &:nth-child(4) {
+        left: 75%;
+    }
+    &:nth-child(5) {
+        left: 100%;
+    }
+    .StageDesc {
+        position: absolute;
+        bottom: -50px;
+        left: -50%;
+        transform: translateX(calc(-100% + 3px));
+        text-align: right;
+        div {
+            white-space: nowrap;
+        }
+        &-alignLeft {
+            text-align: left;
+            transform: translateX(0);
+        }
+    }
+    &:before {
+        content: attr(data-rate);
+        font-size: 18px;
+        color: ",
+                      [Function],
+                      ";
+        position: absolute;
+        left: 0;
+        top: -85px;
+        white-space: nowrap;
+    }
+",
+                    ],
+                  },
+                  "displayName": "styled.div",
+                  "foldedComponentIds": Array [],
+                  "render": [Function],
+                  "styledComponentId": "sc-EHOje",
+                  "target": "div",
+                  "toString": [Function],
+                  "warnTooManyClasses": [Function],
+                  "withComponent": [Function],
+                },
+              },
+            ],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": true,
+                "rules": Array [
+                  "
+    width: 100%;
+    height: 11px;
+    background: rgba(49, 114, 253, .15);
+    position: relative;
+    ",
+                  "@media (max-width: 1025px)",
+                  " {
+        height: 5px;
+    }
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+    position: absolute;
+    left: 50%;
+    bottom: 120px;
+    width: calc(100% - 80px);
+    transform: translateX(-50%);
+    ",
+                "@media (max-width: 1025px)",
+                " {
+        width: calc(100% - 40px);
+        bottom: unset;
+        top: 80px;
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": true,
+          "rules": Array [
+            "
+    border: 1px solid rgba(151,151,151,.2);
+    margin-bottom: 80px;
+    height: 350px;
+    position: relative;
+    background: #FAFCFF;
+    ",
+            "@media (min-width: 768px) and (max-width: 1024px)",
+            " {
+        padding: 150px 20px 20px;
+        margin-bottom: 32px;
+    }
+    ",
+            "@media (max-width: 1025px)",
+            " {
+        background: white;
+        height: auto;
+    }
+    ",
+            "@media (max-width: 767px)",
+            " {
+        padding: 130px 15px 20px;
+        margin-bottom: 32px;
+    }
+",
+          ],
+        },
+        "displayName": "styled.div",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

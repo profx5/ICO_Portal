@@ -1,0 +1,1390 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless PhasesInfo 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <PhasesInfo />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <ForwardRef>
+          Chronology of phases:
+        </ForwardRef>,
+        <ForwardRef
+          active={false}
+          next={false}
+          passed={true}
+        >
+          <div
+            className="PhasesInfo_phaseName"
+          >
+            Soft cap
+          </div>
+          <div
+            className="PhasesInfo_phaseRate"
+          >
+            1 OGD = 2 USD
+          </div>
+        </ForwardRef>,
+        <ForwardRef
+          active={true}
+          next={false}
+          passed={false}
+        >
+          <div
+            className="PhasesInfo_phaseName"
+          >
+            Phase 1
+          </div>
+          <div
+            className="PhasesInfo_phaseRate"
+          >
+            1 OGD = 2 USD
+          </div>
+        </ForwardRef>,
+        <ForwardRef
+          active={false}
+          next={true}
+          passed={false}
+        >
+          <div
+            className="PhasesInfo_phaseName"
+          >
+            Phase 2
+          </div>
+          <div
+            className="PhasesInfo_phaseRate"
+          >
+            1 OGD = 2 USD
+          </div>
+        </ForwardRef>,
+        <ForwardRef
+          active={false}
+          next={false}
+          passed={false}
+        >
+          <div
+            className="PhasesInfo_phaseName"
+          >
+            Phase 3
+          </div>
+          <div
+            className="PhasesInfo_phaseRate"
+          >
+            1 OGD = 2 USD
+          </div>
+        </ForwardRef>,
+        <ForwardRef
+          active={false}
+          next={false}
+          passed={false}
+        >
+          <div
+            className="PhasesInfo_phaseName"
+          >
+            Hard cap
+          </div>
+          <div
+            className="PhasesInfo_phaseRate"
+          >
+            1 OGD = 2 USD
+          </div>
+        </ForwardRef>,
+      ],
+      "className": "visible-smMinus",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": "Chronology of phases:",
+        },
+        "ref": null,
+        "rendered": "Chronology of phases:",
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": true,
+            "rules": Array [
+              "
+    color: rgba(0, 0, 0, .7);
+    font-size: 16px;
+    margin-bottom: 20px;
+    ",
+              "@media (max-width: 767px)",
+              " {
+        font-size: 12px;
+    }
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "active": false,
+          "children": Array [
+            <div
+              className="PhasesInfo_phaseName"
+            >
+              Soft cap
+            </div>,
+            <div
+              className="PhasesInfo_phaseRate"
+            >
+              1 OGD = 2 USD
+            </div>,
+          ],
+          "next": false,
+          "passed": true,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Soft cap",
+              "className": "PhasesInfo_phaseName",
+            },
+            "ref": null,
+            "rendered": "Soft cap",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "1 OGD = 2 USD",
+              "className": "PhasesInfo_phaseRate",
+            },
+            "ref": null,
+            "rendered": "1 OGD = 2 USD",
+            "type": "div",
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": false,
+            "rules": Array [
+              "
+    position: relative;
+    &:not(:last-of-type) {
+        margin-bottom: 20px;
+    }
+    &:after {
+        content: '",
+              [Function],
+              "';
+        font-size: 16px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: ",
+              [Function],
+              ";
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseName {
+        font-size: 16px;
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseRate {
+        color: ",
+              [Function],
+              ";
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 14px;
+        }
+    }
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "active": true,
+          "children": Array [
+            <div
+              className="PhasesInfo_phaseName"
+            >
+              Phase 1
+            </div>,
+            <div
+              className="PhasesInfo_phaseRate"
+            >
+              1 OGD = 2 USD
+            </div>,
+          ],
+          "next": false,
+          "passed": false,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Phase 1",
+              "className": "PhasesInfo_phaseName",
+            },
+            "ref": null,
+            "rendered": "Phase 1",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "1 OGD = 2 USD",
+              "className": "PhasesInfo_phaseRate",
+            },
+            "ref": null,
+            "rendered": "1 OGD = 2 USD",
+            "type": "div",
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": false,
+            "rules": Array [
+              "
+    position: relative;
+    &:not(:last-of-type) {
+        margin-bottom: 20px;
+    }
+    &:after {
+        content: '",
+              [Function],
+              "';
+        font-size: 16px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: ",
+              [Function],
+              ";
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseName {
+        font-size: 16px;
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseRate {
+        color: ",
+              [Function],
+              ";
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 14px;
+        }
+    }
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "active": false,
+          "children": Array [
+            <div
+              className="PhasesInfo_phaseName"
+            >
+              Phase 2
+            </div>,
+            <div
+              className="PhasesInfo_phaseRate"
+            >
+              1 OGD = 2 USD
+            </div>,
+          ],
+          "next": true,
+          "passed": false,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Phase 2",
+              "className": "PhasesInfo_phaseName",
+            },
+            "ref": null,
+            "rendered": "Phase 2",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "1 OGD = 2 USD",
+              "className": "PhasesInfo_phaseRate",
+            },
+            "ref": null,
+            "rendered": "1 OGD = 2 USD",
+            "type": "div",
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": false,
+            "rules": Array [
+              "
+    position: relative;
+    &:not(:last-of-type) {
+        margin-bottom: 20px;
+    }
+    &:after {
+        content: '",
+              [Function],
+              "';
+        font-size: 16px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: ",
+              [Function],
+              ";
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseName {
+        font-size: 16px;
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseRate {
+        color: ",
+              [Function],
+              ";
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 14px;
+        }
+    }
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "active": false,
+          "children": Array [
+            <div
+              className="PhasesInfo_phaseName"
+            >
+              Phase 3
+            </div>,
+            <div
+              className="PhasesInfo_phaseRate"
+            >
+              1 OGD = 2 USD
+            </div>,
+          ],
+          "next": false,
+          "passed": false,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Phase 3",
+              "className": "PhasesInfo_phaseName",
+            },
+            "ref": null,
+            "rendered": "Phase 3",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "1 OGD = 2 USD",
+              "className": "PhasesInfo_phaseRate",
+            },
+            "ref": null,
+            "rendered": "1 OGD = 2 USD",
+            "type": "div",
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": false,
+            "rules": Array [
+              "
+    position: relative;
+    &:not(:last-of-type) {
+        margin-bottom: 20px;
+    }
+    &:after {
+        content: '",
+              [Function],
+              "';
+        font-size: 16px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: ",
+              [Function],
+              ";
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseName {
+        font-size: 16px;
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseRate {
+        color: ",
+              [Function],
+              ";
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 14px;
+        }
+    }
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "active": false,
+          "children": Array [
+            <div
+              className="PhasesInfo_phaseName"
+            >
+              Hard cap
+            </div>,
+            <div
+              className="PhasesInfo_phaseRate"
+            >
+              1 OGD = 2 USD
+            </div>,
+          ],
+          "next": false,
+          "passed": false,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Hard cap",
+              "className": "PhasesInfo_phaseName",
+            },
+            "ref": null,
+            "rendered": "Hard cap",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "1 OGD = 2 USD",
+              "className": "PhasesInfo_phaseRate",
+            },
+            "ref": null,
+            "rendered": "1 OGD = 2 USD",
+            "type": "div",
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": false,
+            "rules": Array [
+              "
+    position: relative;
+    &:not(:last-of-type) {
+        margin-bottom: 20px;
+    }
+    &:after {
+        content: '",
+              [Function],
+              "';
+        font-size: 16px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: ",
+              [Function],
+              ";
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseName {
+        font-size: 16px;
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseRate {
+        color: ",
+              [Function],
+              ";
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 14px;
+        }
+    }
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <ForwardRef>
+            Chronology of phases:
+          </ForwardRef>,
+          <ForwardRef
+            active={false}
+            next={false}
+            passed={true}
+          >
+            <div
+              className="PhasesInfo_phaseName"
+            >
+              Soft cap
+            </div>
+            <div
+              className="PhasesInfo_phaseRate"
+            >
+              1 OGD = 2 USD
+            </div>
+          </ForwardRef>,
+          <ForwardRef
+            active={true}
+            next={false}
+            passed={false}
+          >
+            <div
+              className="PhasesInfo_phaseName"
+            >
+              Phase 1
+            </div>
+            <div
+              className="PhasesInfo_phaseRate"
+            >
+              1 OGD = 2 USD
+            </div>
+          </ForwardRef>,
+          <ForwardRef
+            active={false}
+            next={true}
+            passed={false}
+          >
+            <div
+              className="PhasesInfo_phaseName"
+            >
+              Phase 2
+            </div>
+            <div
+              className="PhasesInfo_phaseRate"
+            >
+              1 OGD = 2 USD
+            </div>
+          </ForwardRef>,
+          <ForwardRef
+            active={false}
+            next={false}
+            passed={false}
+          >
+            <div
+              className="PhasesInfo_phaseName"
+            >
+              Phase 3
+            </div>
+            <div
+              className="PhasesInfo_phaseRate"
+            >
+              1 OGD = 2 USD
+            </div>
+          </ForwardRef>,
+          <ForwardRef
+            active={false}
+            next={false}
+            passed={false}
+          >
+            <div
+              className="PhasesInfo_phaseName"
+            >
+              Hard cap
+            </div>
+            <div
+              className="PhasesInfo_phaseRate"
+            >
+              1 OGD = 2 USD
+            </div>
+          </ForwardRef>,
+        ],
+        "className": "visible-smMinus",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": "Chronology of phases:",
+          },
+          "ref": null,
+          "rendered": "Chronology of phases:",
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bdVaJa",
+              "isStatic": true,
+              "rules": Array [
+                "
+    color: rgba(0, 0, 0, .7);
+    font-size: 16px;
+    margin-bottom: 20px;
+    ",
+                "@media (max-width: 767px)",
+                " {
+        font-size: 12px;
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bdVaJa",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "active": false,
+            "children": Array [
+              <div
+                className="PhasesInfo_phaseName"
+              >
+                Soft cap
+              </div>,
+              <div
+                className="PhasesInfo_phaseRate"
+              >
+                1 OGD = 2 USD
+              </div>,
+            ],
+            "next": false,
+            "passed": true,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Soft cap",
+                "className": "PhasesInfo_phaseName",
+              },
+              "ref": null,
+              "rendered": "Soft cap",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "1 OGD = 2 USD",
+                "className": "PhasesInfo_phaseRate",
+              },
+              "ref": null,
+              "rendered": "1 OGD = 2 USD",
+              "type": "div",
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": false,
+              "rules": Array [
+                "
+    position: relative;
+    &:not(:last-of-type) {
+        margin-bottom: 20px;
+    }
+    &:after {
+        content: '",
+                [Function],
+                "';
+        font-size: 16px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: ",
+                [Function],
+                ";
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseName {
+        font-size: 16px;
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseRate {
+        color: ",
+                [Function],
+                ";
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 14px;
+        }
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "active": true,
+            "children": Array [
+              <div
+                className="PhasesInfo_phaseName"
+              >
+                Phase 1
+              </div>,
+              <div
+                className="PhasesInfo_phaseRate"
+              >
+                1 OGD = 2 USD
+              </div>,
+            ],
+            "next": false,
+            "passed": false,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Phase 1",
+                "className": "PhasesInfo_phaseName",
+              },
+              "ref": null,
+              "rendered": "Phase 1",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "1 OGD = 2 USD",
+                "className": "PhasesInfo_phaseRate",
+              },
+              "ref": null,
+              "rendered": "1 OGD = 2 USD",
+              "type": "div",
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": false,
+              "rules": Array [
+                "
+    position: relative;
+    &:not(:last-of-type) {
+        margin-bottom: 20px;
+    }
+    &:after {
+        content: '",
+                [Function],
+                "';
+        font-size: 16px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: ",
+                [Function],
+                ";
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseName {
+        font-size: 16px;
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseRate {
+        color: ",
+                [Function],
+                ";
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 14px;
+        }
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "active": false,
+            "children": Array [
+              <div
+                className="PhasesInfo_phaseName"
+              >
+                Phase 2
+              </div>,
+              <div
+                className="PhasesInfo_phaseRate"
+              >
+                1 OGD = 2 USD
+              </div>,
+            ],
+            "next": true,
+            "passed": false,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Phase 2",
+                "className": "PhasesInfo_phaseName",
+              },
+              "ref": null,
+              "rendered": "Phase 2",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "1 OGD = 2 USD",
+                "className": "PhasesInfo_phaseRate",
+              },
+              "ref": null,
+              "rendered": "1 OGD = 2 USD",
+              "type": "div",
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": false,
+              "rules": Array [
+                "
+    position: relative;
+    &:not(:last-of-type) {
+        margin-bottom: 20px;
+    }
+    &:after {
+        content: '",
+                [Function],
+                "';
+        font-size: 16px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: ",
+                [Function],
+                ";
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseName {
+        font-size: 16px;
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseRate {
+        color: ",
+                [Function],
+                ";
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 14px;
+        }
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "active": false,
+            "children": Array [
+              <div
+                className="PhasesInfo_phaseName"
+              >
+                Phase 3
+              </div>,
+              <div
+                className="PhasesInfo_phaseRate"
+              >
+                1 OGD = 2 USD
+              </div>,
+            ],
+            "next": false,
+            "passed": false,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Phase 3",
+                "className": "PhasesInfo_phaseName",
+              },
+              "ref": null,
+              "rendered": "Phase 3",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "1 OGD = 2 USD",
+                "className": "PhasesInfo_phaseRate",
+              },
+              "ref": null,
+              "rendered": "1 OGD = 2 USD",
+              "type": "div",
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": false,
+              "rules": Array [
+                "
+    position: relative;
+    &:not(:last-of-type) {
+        margin-bottom: 20px;
+    }
+    &:after {
+        content: '",
+                [Function],
+                "';
+        font-size: 16px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: ",
+                [Function],
+                ";
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseName {
+        font-size: 16px;
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseRate {
+        color: ",
+                [Function],
+                ";
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 14px;
+        }
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "active": false,
+            "children": Array [
+              <div
+                className="PhasesInfo_phaseName"
+              >
+                Hard cap
+              </div>,
+              <div
+                className="PhasesInfo_phaseRate"
+              >
+                1 OGD = 2 USD
+              </div>,
+            ],
+            "next": false,
+            "passed": false,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Hard cap",
+                "className": "PhasesInfo_phaseName",
+              },
+              "ref": null,
+              "rendered": "Hard cap",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "1 OGD = 2 USD",
+                "className": "PhasesInfo_phaseRate",
+              },
+              "ref": null,
+              "rendered": "1 OGD = 2 USD",
+              "type": "div",
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": false,
+              "rules": Array [
+                "
+    position: relative;
+    &:not(:last-of-type) {
+        margin-bottom: 20px;
+    }
+    &:after {
+        content: '",
+                [Function],
+                "';
+        font-size: 16px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: ",
+                [Function],
+                ";
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseName {
+        font-size: 16px;
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 12px;
+        }
+    }
+    .PhasesInfo_phaseRate {
+        color: ",
+                [Function],
+                ";
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 14px;
+        }
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

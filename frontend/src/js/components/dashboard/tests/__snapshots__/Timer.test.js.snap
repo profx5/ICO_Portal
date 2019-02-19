@@ -1,0 +1,847 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless Timer 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Timer
+    countdownTime={
+      Object {
+        "days": 0,
+        "hours": 0,
+        "minutes": 0,
+        "seconds": 0,
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <ForwardRef>
+          End of the first phase:
+        </ForwardRef>,
+        <ForwardRef>
+          <ForwardRef
+            data-time-unit="days"
+          >
+            0
+          </ForwardRef>
+          <ForwardRef
+            data-time-unit="hours"
+          >
+            0
+          </ForwardRef>
+          <ForwardRef
+            data-time-unit="min"
+          >
+            0
+          </ForwardRef>
+          <ForwardRef
+            data-time-unit="sec"
+          >
+            0
+          </ForwardRef>
+        </ForwardRef>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": "End of the first phase:",
+          "className": undefined,
+        },
+        "ref": null,
+        "rendered": "End of the first phase:",
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": true,
+            "rules": Array [
+              "
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    display: block;
+",
+            ],
+          },
+          "displayName": "styled.span",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "span",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <ForwardRef
+              data-time-unit="days"
+            >
+              0
+            </ForwardRef>,
+            <ForwardRef
+              data-time-unit="hours"
+            >
+              0
+            </ForwardRef>,
+            <ForwardRef
+              data-time-unit="min"
+            >
+              0
+            </ForwardRef>,
+            <ForwardRef
+              data-time-unit="sec"
+            >
+              0
+            </ForwardRef>,
+          ],
+          "className": undefined,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": 0,
+              "data-time-unit": "days",
+            },
+            "ref": null,
+            "rendered": 0,
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": true,
+                "rules": Array [
+                  "
+    width: 65px;
+    height: 65px;
+    border-radius: 3px;
+    background-color: rgb(52, 78, 172);
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding-top: 7px;
+    &:not(:first-of-type) {
+        margin-left: 23px;
+    }
+    &:not(:first-of-type):before {
+        content: ':';
+        font-weight: 500;
+        font-size: 24px;
+        color: rgb(31, 31, 31);
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &:after {
+        content: attr(data-time-unit);
+        font-size: 12px;
+        font-weight: 400;
+        color: white;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        bottom: 9px;
+        transform: translateX(-50%);
+    }
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": 0,
+              "data-time-unit": "hours",
+            },
+            "ref": null,
+            "rendered": 0,
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": true,
+                "rules": Array [
+                  "
+    width: 65px;
+    height: 65px;
+    border-radius: 3px;
+    background-color: rgb(52, 78, 172);
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding-top: 7px;
+    &:not(:first-of-type) {
+        margin-left: 23px;
+    }
+    &:not(:first-of-type):before {
+        content: ':';
+        font-weight: 500;
+        font-size: 24px;
+        color: rgb(31, 31, 31);
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &:after {
+        content: attr(data-time-unit);
+        font-size: 12px;
+        font-weight: 400;
+        color: white;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        bottom: 9px;
+        transform: translateX(-50%);
+    }
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": 0,
+              "data-time-unit": "min",
+            },
+            "ref": null,
+            "rendered": 0,
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": true,
+                "rules": Array [
+                  "
+    width: 65px;
+    height: 65px;
+    border-radius: 3px;
+    background-color: rgb(52, 78, 172);
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding-top: 7px;
+    &:not(:first-of-type) {
+        margin-left: 23px;
+    }
+    &:not(:first-of-type):before {
+        content: ':';
+        font-weight: 500;
+        font-size: 24px;
+        color: rgb(31, 31, 31);
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &:after {
+        content: attr(data-time-unit);
+        font-size: 12px;
+        font-weight: 400;
+        color: white;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        bottom: 9px;
+        transform: translateX(-50%);
+    }
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": 0,
+              "data-time-unit": "sec",
+            },
+            "ref": null,
+            "rendered": 0,
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": true,
+                "rules": Array [
+                  "
+    width: 65px;
+    height: 65px;
+    border-radius: 3px;
+    background-color: rgb(52, 78, 172);
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding-top: 7px;
+    &:not(:first-of-type) {
+        margin-left: 23px;
+    }
+    &:not(:first-of-type):before {
+        content: ':';
+        font-weight: 500;
+        font-size: 24px;
+        color: rgb(31, 31, 31);
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &:after {
+        content: attr(data-time-unit);
+        font-size: 12px;
+        font-weight: 400;
+        color: white;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        bottom: 9px;
+        transform: translateX(-50%);
+    }
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+    display: flex;
+    justify-content: center;
+    margin-bottom: 84px;
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <ForwardRef>
+            End of the first phase:
+          </ForwardRef>,
+          <ForwardRef>
+            <ForwardRef
+              data-time-unit="days"
+            >
+              0
+            </ForwardRef>
+            <ForwardRef
+              data-time-unit="hours"
+            >
+              0
+            </ForwardRef>
+            <ForwardRef
+              data-time-unit="min"
+            >
+              0
+            </ForwardRef>
+            <ForwardRef
+              data-time-unit="sec"
+            >
+              0
+            </ForwardRef>
+          </ForwardRef>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": "End of the first phase:",
+            "className": undefined,
+          },
+          "ref": null,
+          "rendered": "End of the first phase:",
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bdVaJa",
+              "isStatic": true,
+              "rules": Array [
+                "
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    display: block;
+",
+              ],
+            },
+            "displayName": "styled.span",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bdVaJa",
+            "target": "span",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <ForwardRef
+                data-time-unit="days"
+              >
+                0
+              </ForwardRef>,
+              <ForwardRef
+                data-time-unit="hours"
+              >
+                0
+              </ForwardRef>,
+              <ForwardRef
+                data-time-unit="min"
+              >
+                0
+              </ForwardRef>,
+              <ForwardRef
+                data-time-unit="sec"
+              >
+                0
+              </ForwardRef>,
+            ],
+            "className": undefined,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": 0,
+                "data-time-unit": "days",
+              },
+              "ref": null,
+              "rendered": 0,
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-htpNat",
+                  "isStatic": true,
+                  "rules": Array [
+                    "
+    width: 65px;
+    height: 65px;
+    border-radius: 3px;
+    background-color: rgb(52, 78, 172);
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding-top: 7px;
+    &:not(:first-of-type) {
+        margin-left: 23px;
+    }
+    &:not(:first-of-type):before {
+        content: ':';
+        font-weight: 500;
+        font-size: 24px;
+        color: rgb(31, 31, 31);
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &:after {
+        content: attr(data-time-unit);
+        font-size: 12px;
+        font-weight: 400;
+        color: white;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        bottom: 9px;
+        transform: translateX(-50%);
+    }
+",
+                  ],
+                },
+                "displayName": "styled.div",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-htpNat",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": 0,
+                "data-time-unit": "hours",
+              },
+              "ref": null,
+              "rendered": 0,
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-htpNat",
+                  "isStatic": true,
+                  "rules": Array [
+                    "
+    width: 65px;
+    height: 65px;
+    border-radius: 3px;
+    background-color: rgb(52, 78, 172);
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding-top: 7px;
+    &:not(:first-of-type) {
+        margin-left: 23px;
+    }
+    &:not(:first-of-type):before {
+        content: ':';
+        font-weight: 500;
+        font-size: 24px;
+        color: rgb(31, 31, 31);
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &:after {
+        content: attr(data-time-unit);
+        font-size: 12px;
+        font-weight: 400;
+        color: white;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        bottom: 9px;
+        transform: translateX(-50%);
+    }
+",
+                  ],
+                },
+                "displayName": "styled.div",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-htpNat",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": 0,
+                "data-time-unit": "min",
+              },
+              "ref": null,
+              "rendered": 0,
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-htpNat",
+                  "isStatic": true,
+                  "rules": Array [
+                    "
+    width: 65px;
+    height: 65px;
+    border-radius: 3px;
+    background-color: rgb(52, 78, 172);
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding-top: 7px;
+    &:not(:first-of-type) {
+        margin-left: 23px;
+    }
+    &:not(:first-of-type):before {
+        content: ':';
+        font-weight: 500;
+        font-size: 24px;
+        color: rgb(31, 31, 31);
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &:after {
+        content: attr(data-time-unit);
+        font-size: 12px;
+        font-weight: 400;
+        color: white;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        bottom: 9px;
+        transform: translateX(-50%);
+    }
+",
+                  ],
+                },
+                "displayName": "styled.div",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-htpNat",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": 0,
+                "data-time-unit": "sec",
+              },
+              "ref": null,
+              "rendered": 0,
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-htpNat",
+                  "isStatic": true,
+                  "rules": Array [
+                    "
+    width: 65px;
+    height: 65px;
+    border-radius: 3px;
+    background-color: rgb(52, 78, 172);
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding-top: 7px;
+    &:not(:first-of-type) {
+        margin-left: 23px;
+    }
+    &:not(:first-of-type):before {
+        content: ':';
+        font-weight: 500;
+        font-size: 24px;
+        color: rgb(31, 31, 31);
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &:after {
+        content: attr(data-time-unit);
+        font-size: 12px;
+        font-weight: 400;
+        color: white;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        bottom: 9px;
+        transform: translateX(-50%);
+    }
+",
+                  ],
+                },
+                "displayName": "styled.div",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-htpNat",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+    display: flex;
+    justify-content: center;
+    margin-bottom: 84px;
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
