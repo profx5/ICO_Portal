@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
@@ -10,6 +11,10 @@ const NavSidebar = ({children}) => {
             <Sidebar>{children}</Sidebar>
         </React.Fragment>
     );
+}
+
+NavSidebar.propTypes = {
+    children: PropTypes.element
 }
 
 

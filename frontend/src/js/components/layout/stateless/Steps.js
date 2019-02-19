@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
@@ -16,6 +17,12 @@ const Steps = ({stepsPassed, onClickHandler, isDropdownAccountOpen}) => {
             <ArrowImg up={isDropdownAccountOpen} src={arrowImg}/>
         </Wrapper>
     )
+}
+
+Steps.propTypes = {
+    stepsPassed: PropTypes.number,
+    onClickHandler: PropTypes.func,
+    isDropdownAccountOpen: PropTypes.bool
 }
 
 

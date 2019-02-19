@@ -1,0 +1,470 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless Steps 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Steps />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <ForwardRef>
+          Steps completed: 
+          <span>
+            /2
+          </span>
+        </ForwardRef>,
+        <ForwardRef
+          approved={false}
+        />,
+        <ForwardRef
+          src="arrow-down.svg"
+        />,
+      ],
+      "className": "DropdownAccountTrigger",
+      "onClick": undefined,
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            "Steps completed: ",
+            <span>
+              /2
+            </span>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "Steps completed: ",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                undefined,
+                "/2",
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              undefined,
+              "/2",
+            ],
+            "type": "span",
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+    color: #222121;
+    user-select: none;
+    white-space: nowrap;
+    span {
+        color: #00da36;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    ",
+              "@media (max-width: 767px)",
+              " {
+        display: none;
+    }
+",
+            ],
+          },
+          "displayName": "styled.p",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "p",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "approved": false,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-htpNat",
+            "isStatic": false,
+            "rules": Array [
+              "
+    width: 47px;
+    height: 47px;
+    margin-left: 20px;
+    position: relative;
+    z-index: 1;
+    background: url(",
+              "user.svg",
+              ") no-repeat center;
+    background-size: cover;
+    &:before {
+        content: '';
+        width: 18px;
+        height: 18px;
+        border-radius: 100%;
+        background: url(",
+              [Function],
+              ") no-repeat center, #f26d6d;
+        position: absolute;
+        bottom: -4px;
+        right: 0px;
+        border: 2px solid white;
+    }
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-htpNat",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "src": "arrow-down.svg",
+          "up": undefined,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bxivhb",
+            "isStatic": false,
+            "rules": Array [
+              "
+    margin-left: 20px;
+    position: relative;
+    top: 1px;
+    transform: ",
+              [Function],
+              ";
+    ",
+              "@media (max-width: 767px)",
+              " {
+        margin-left: 9px;
+    }
+",
+            ],
+          },
+          "displayName": "styled.img",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bxivhb",
+          "target": "img",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+    ],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": true,
+        "rules": Array [
+          "
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    & * {
+        pointer-events: none;
+    }
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <ForwardRef>
+            Steps completed: 
+            <span>
+              /2
+            </span>
+          </ForwardRef>,
+          <ForwardRef
+            approved={false}
+          />,
+          <ForwardRef
+            src="arrow-down.svg"
+          />,
+        ],
+        "className": "DropdownAccountTrigger",
+        "onClick": undefined,
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              "Steps completed: ",
+              <span>
+                /2
+              </span>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "Steps completed: ",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  undefined,
+                  "/2",
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                undefined,
+                "/2",
+              ],
+              "type": "span",
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+    color: #222121;
+    user-select: none;
+    white-space: nowrap;
+    span {
+        color: #00da36;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    ",
+                "@media (max-width: 767px)",
+                " {
+        display: none;
+    }
+",
+              ],
+            },
+            "displayName": "styled.p",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "p",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "approved": false,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-htpNat",
+              "isStatic": false,
+              "rules": Array [
+                "
+    width: 47px;
+    height: 47px;
+    margin-left: 20px;
+    position: relative;
+    z-index: 1;
+    background: url(",
+                "user.svg",
+                ") no-repeat center;
+    background-size: cover;
+    &:before {
+        content: '';
+        width: 18px;
+        height: 18px;
+        border-radius: 100%;
+        background: url(",
+                [Function],
+                ") no-repeat center, #f26d6d;
+        position: absolute;
+        bottom: -4px;
+        right: 0px;
+        border: 2px solid white;
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-htpNat",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "src": "arrow-down.svg",
+            "up": undefined,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bxivhb",
+              "isStatic": false,
+              "rules": Array [
+                "
+    margin-left: 20px;
+    position: relative;
+    top: 1px;
+    transform: ",
+                [Function],
+                ";
+    ",
+                "@media (max-width: 767px)",
+                " {
+        margin-left: 9px;
+    }
+",
+              ],
+            },
+            "displayName": "styled.img",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bxivhb",
+            "target": "img",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": true,
+          "rules": Array [
+            "
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    & * {
+        pointer-events: none;
+    }
+",
+          ],
+        },
+        "displayName": "styled.div",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { keyframes } from "styled-components"
 import {Link} from 'react-router-dom';
 import {media} from 'js/utils/media';
@@ -48,6 +49,14 @@ const Dropdown = ({email, stepOnePassed, stepTwoPassed, stepsPassed, dropdownAcc
 
         </Wrapper>
     )
+}
+
+Dropdown.propTypes = {
+    email: PropTypes.string,
+    stepOnePassed: PropTypes.bool,
+    stepTwoPassed: PropTypes.bool,
+    stepsPassed: PropTypes.bool,
+    dropdownAccountClickHandler: PropTypes.func
 }
 
 

@@ -4,7 +4,7 @@ import {media} from 'js/utils/media';
 
 import {Link} from 'react-router-dom';
 
-const Footer = ({}) => {
+const Footer = () => {
     return (
         <Wrapper>
             <ul>

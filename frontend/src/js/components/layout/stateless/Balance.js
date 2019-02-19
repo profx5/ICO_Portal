@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
@@ -11,10 +12,14 @@ const Balance = ({amount}) => {
             <p className="Balance_head">Balance</p>
             <div className="Balance_amountWrapper">
                 <img alt="Wallet icon" src={walletIcon}/>
-                <p className="Balance_amount">{(amount / 10 ** 18).toFixed(2)} <span>OGD</span></p>
+                <p className="Balance_amount">{(amount / 10 ** 18).toFixed(2) || 0.00} <span>OGD</span></p>
             </div>
         </Wrapper>
     )
+}
+
+Balance.propTypes = {
+    amount: PropTypes.number
 }
 
 
