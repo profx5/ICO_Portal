@@ -1,0 +1,1592 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless Dropdown 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Dropdown />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <ForwardRef>
+          Steps completed: 
+          <span>
+            /2
+          </span>
+        </ForwardRef>,
+        <ForwardRef>
+          <ForwardRef>
+            <Link
+              replace={false}
+              to="/user_office/payment/verification"
+            >
+              <span>
+                Submit KYC and add ETH address
+              </span>
+            </Link>
+          </ForwardRef>
+          <ForwardRef
+            passed={false}
+          >
+            <span>
+              Buy tokens
+            </span>
+          </ForwardRef>
+        </ForwardRef>,
+        <ForwardRef>
+          <div
+            className="text"
+          >
+            Your profile:
+          </div>
+          <div
+            className="email"
+          />
+        </ForwardRef>,
+        <ForwardRef>
+          <ForwardRef>
+            <Link
+              replace={false}
+              to="/user_office/account"
+            >
+              Account settings
+            </Link>
+          </ForwardRef>
+          <ForwardRef>
+            <Link
+              replace={false}
+              to="/user_office/payment/verification"
+            >
+              Verification
+            </Link>
+          </ForwardRef>
+        </ForwardRef>,
+        <ForwardRef
+          href="/logout/"
+        >
+          <svg
+            height="20"
+            width="19"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              fill="#858B91"
+              fillRule="nonzero"
+              stroke="#979797"
+              strokeWidth=".5"
+            >
+              <path
+                d="M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z"
+              />
+              <path
+                d="M17.8455 9.6131L14.5006 6.16c-.2066-.2133-.538-.2133-.7446 0s-.2066.5554 0 .7687l2.4483 2.5275H5.5263c-.2924 0-.5263.2414-.5263.5433 0 .3018.234.5433.5263.5433h10.678l-2.4483 2.5275c-.2066.2133-.2066.5554 0 .7687.1014.1047.2378.161.3704.161a.5057.5057 0 0 0 .3703-.161l3.345-3.4531c.2104-.2174.2104-.5635.0038-.7728z"
+              />
+            </g>
+          </svg>
+          Log out
+        </ForwardRef>,
+      ],
+      "className": "DropdownAccount",
+      "id": "modal-dropdown",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            "Steps completed: ",
+            <span>
+              /2
+            </span>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "Steps completed: ",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                undefined,
+                "/2",
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              undefined,
+              "/2",
+            ],
+            "type": "span",
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+    color: #222121;
+    user-select: none;
+    padding-left: 22px;
+    margin-bottom: 32px;
+    span {
+        color: #00da36;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    ",
+              "@media (min-width: 768px)",
+              " {
+        display: none;
+    }
+",
+            ],
+          },
+          "displayName": "styled.p",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "p",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <ForwardRef>
+              <Link
+                replace={false}
+                to="/user_office/payment/verification"
+              >
+                <span>
+                  Submit KYC and add ETH address
+                </span>
+              </Link>
+            </ForwardRef>,
+            <ForwardRef
+              passed={false}
+            >
+              <span>
+                Buy tokens
+              </span>
+            </ForwardRef>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": Array [
+                <Link
+                  replace={false}
+                  to="/user_office/payment/verification"
+                >
+                  <span>
+                    Submit KYC and add ETH address
+                  </span>
+                </Link>,
+                undefined,
+              ],
+              "passed": undefined,
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <span>
+                    Submit KYC and add ETH address
+                  </span>,
+                  "onClick": undefined,
+                  "replace": false,
+                  "to": "/user_office/payment/verification",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Submit KYC and add ETH address",
+                  },
+                  "ref": null,
+                  "rendered": "Submit KYC and add ETH address",
+                  "type": "span",
+                },
+                "type": [Function],
+              },
+              undefined,
+            ],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-ifAKCX",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    font-size: 15px;
+    color: ",
+                  [Function],
+                  ";
+    cursor: ",
+                  [Function],
+                  ";
+    margin-top: 16px;
+",
+                ],
+              },
+              "displayName": "styled.li",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-ifAKCX",
+              "target": "li",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": Array [
+                <span>
+                  Buy tokens
+                </span>,
+                undefined,
+              ],
+              "passed": false,
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Buy tokens",
+                },
+                "ref": null,
+                "rendered": "Buy tokens",
+                "type": "span",
+              },
+              undefined,
+            ],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-ifAKCX",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    font-size: 15px;
+    color: ",
+                  [Function],
+                  ";
+    cursor: ",
+                  [Function],
+                  ";
+    margin-top: 16px;
+",
+                ],
+              },
+              "displayName": "styled.li",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-ifAKCX",
+              "target": "li",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bxivhb",
+            "isStatic": true,
+            "rules": Array [
+              "
+    border-bottom: 1px solid rgba(193,193,193,.3);
+    padding-bottom: 23px;
+    margin-bottom: 20px;
+    padding: 0 23px 23px 36px;
+",
+            ],
+          },
+          "displayName": "styled.ol",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bxivhb",
+          "target": "ol",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <div
+              className="text"
+            >
+              Your profile:
+            </div>,
+            <div
+              className="email"
+            />,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Your profile:",
+              "className": "text",
+            },
+            "ref": null,
+            "rendered": "Your profile:",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": undefined,
+              "className": "email",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "div",
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-htpNat",
+            "isStatic": true,
+            "rules": Array [
+              "
+    padding: 0 23px 18px;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: #222121;
+    margin-bottom: 8px;
+    .text {
+        opacity: .5;
+    }
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-htpNat",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <ForwardRef>
+              <Link
+                replace={false}
+                to="/user_office/account"
+              >
+                Account settings
+              </Link>
+            </ForwardRef>,
+            <ForwardRef>
+              <Link
+                replace={false}
+                to="/user_office/payment/verification"
+              >
+                Verification
+              </Link>
+            </ForwardRef>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <Link
+                replace={false}
+                to="/user_office/account"
+              >
+                Account settings
+              </Link>,
+              "onClick": undefined,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Account settings",
+                "replace": false,
+                "to": "/user_office/account",
+              },
+              "ref": null,
+              "rendered": "Account settings",
+              "type": [Function],
+            },
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-gzVnrw",
+                "isStatic": true,
+                "rules": Array [
+                  "
+    line-height: 45px;
+    padding: 0 23px;
+    &:hover {
+        background: rgba(216,216,216,.4);
+    }
+    a {
+        height: 100%;
+        display: block;
+    }
+",
+                ],
+              },
+              "displayName": "styled.li",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-gzVnrw",
+              "target": "li",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <Link
+                replace={false}
+                to="/user_office/payment/verification"
+              >
+                Verification
+              </Link>,
+              "onClick": undefined,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Verification",
+                "replace": false,
+                "to": "/user_office/payment/verification",
+              },
+              "ref": null,
+              "rendered": "Verification",
+              "type": [Function],
+            },
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-gzVnrw",
+                "isStatic": true,
+                "rules": Array [
+                  "
+    line-height: 45px;
+    padding: 0 23px;
+    &:hover {
+        background: rgba(216,216,216,.4);
+    }
+    a {
+        height: 100%;
+        display: block;
+    }
+",
+                ],
+              },
+              "displayName": "styled.li",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-gzVnrw",
+              "target": "li",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bZQynM",
+            "isStatic": true,
+            "rules": Array [
+              "
+    border-top: 1px solid rgba(193,193,193,.3);
+    border-bottom: 1px solid rgba(193,193,193,.3);
+",
+            ],
+          },
+          "displayName": "styled.ul",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bZQynM",
+          "target": "ul",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <svg
+              height="20"
+              width="19"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g
+                fill="#858B91"
+                fillRule="nonzero"
+                stroke="#979797"
+                strokeWidth=".5"
+              >
+                <path
+                  d="M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z"
+                />
+                <path
+                  d="M17.8455 9.6131L14.5006 6.16c-.2066-.2133-.538-.2133-.7446 0s-.2066.5554 0 .7687l2.4483 2.5275H5.5263c-.2924 0-.5263.2414-.5263.5433 0 .3018.234.5433.5263.5433h10.678l-2.4483 2.5275c-.2066.2133-.2066.5554 0 .7687.1014.1047.2378.161.3704.161a.5057.5057 0 0 0 .3703-.161l3.345-3.4531c.2104-.2174.2104-.5635.0038-.7728z"
+                />
+              </g>
+            </svg>,
+            "Log out",
+          ],
+          "href": "/logout/",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <g
+                fill="#858B91"
+                fillRule="nonzero"
+                stroke="#979797"
+                strokeWidth=".5"
+              >
+                <path
+                  d="M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z"
+                />
+                <path
+                  d="M17.8455 9.6131L14.5006 6.16c-.2066-.2133-.538-.2133-.7446 0s-.2066.5554 0 .7687l2.4483 2.5275H5.5263c-.2924 0-.5263.2414-.5263.5433 0 .3018.234.5433.5263.5433h10.678l-2.4483 2.5275c-.2066.2133-.2066.5554 0 .7687.1014.1047.2378.161.3704.161a.5057.5057 0 0 0 .3703-.161l3.345-3.4531c.2104-.2174.2104-.5635.0038-.7728z"
+                />
+              </g>,
+              "height": "20",
+              "width": "19",
+              "xmlns": "http://www.w3.org/2000/svg",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <path
+                    d="M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z"
+                  />,
+                  <path
+                    d="M17.8455 9.6131L14.5006 6.16c-.2066-.2133-.538-.2133-.7446 0s-.2066.5554 0 .7687l2.4483 2.5275H5.5263c-.2924 0-.5263.2414-.5263.5433 0 .3018.234.5433.5263.5433h10.678l-2.4483 2.5275c-.2066.2133-.2066.5554 0 .7687.1014.1047.2378.161.3704.161a.5057.5057 0 0 0 .3703-.161l3.345-3.4531c.2104-.2174.2104-.5635.0038-.7728z"
+                  />,
+                ],
+                "fill": "#858B91",
+                "fillRule": "nonzero",
+                "stroke": "#979797",
+                "strokeWidth": ".5",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "d": "M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "path",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "d": "M17.8455 9.6131L14.5006 6.16c-.2066-.2133-.538-.2133-.7446 0s-.2066.5554 0 .7687l2.4483 2.5275H5.5263c-.2924 0-.5263.2414-.5263.5433 0 .3018.234.5433.5263.5433h10.678l-2.4483 2.5275c-.2066.2133-.2066.5554 0 .7687.1014.1047.2378.161.3704.161a.5057.5057 0 0 0 .3703-.161l3.345-3.4531c.2104-.2174.2104-.5635.0038-.7728z",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "path",
+                },
+              ],
+              "type": "g",
+            },
+            "type": "svg",
+          },
+          "Log out",
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-EHOje",
+            "isStatic": true,
+            "rules": Array [
+              "
+    height: 70px;
+    align-items: center;
+    display: flex;
+    transition: all .25s ease;
+    padding: 0 23px;
+    svg {
+        margin-right: 13px;
+        g {
+            transition: all .25s ease;
+        }
+    }
+    &:hover {
+        color: #dc3545;
+        & svg g{
+            stroke: #dc3545;
+            fill: #dc3545;
+        }
+    }
+",
+            ],
+          },
+          "displayName": "styled.a",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-EHOje",
+          "target": "a",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+    ],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": true,
+        "rules": Array [
+          "
+    width: calc(100% + 38px);
+    position: absolute;
+    left: 50%;
+    top: -25px;
+    padding: 75px 0 0;
+    transform: translateX(-50%);
+    border-radius: 6px;
+    background: white;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
+    z-index: 0;
+    animation: ",
+          Keyframes {
+            "id": "sc-keyframes-jcngeg",
+            "inject": [Function],
+            "name": "jcngeg",
+            "rules": Array [
+              "@-webkit-keyframes jcngeg{from{opacity:0;-webkit-transform:translate3d(-50%,50px,0);-ms-transform:translate3d(-50%,50px,0);transform:translate3d(-50%,50px,0);}to{opacity:1;-webkit-transform:translate3d(-50%,0,0);-ms-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0);}}",
+              "@keyframes jcngeg{from{opacity:0;-webkit-transform:translate3d(-50%,50px,0);-ms-transform:translate3d(-50%,50px,0);transform:translate3d(-50%,50px,0);}to{opacity:1;-webkit-transform:translate3d(-50%,0,0);-ms-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0);}}",
+            ],
+            "toString": [Function],
+          },
+          " .3s ease;
+    ",
+          "@media (max-width: 767px)",
+          " {
+        width: 274px;
+        left: unset;
+        right: -16px;
+        padding-top: 40px;
+        transform: unset;
+        animation: unset;
+    }
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <ForwardRef>
+            Steps completed: 
+            <span>
+              /2
+            </span>
+          </ForwardRef>,
+          <ForwardRef>
+            <ForwardRef>
+              <Link
+                replace={false}
+                to="/user_office/payment/verification"
+              >
+                <span>
+                  Submit KYC and add ETH address
+                </span>
+              </Link>
+            </ForwardRef>
+            <ForwardRef
+              passed={false}
+            >
+              <span>
+                Buy tokens
+              </span>
+            </ForwardRef>
+          </ForwardRef>,
+          <ForwardRef>
+            <div
+              className="text"
+            >
+              Your profile:
+            </div>
+            <div
+              className="email"
+            />
+          </ForwardRef>,
+          <ForwardRef>
+            <ForwardRef>
+              <Link
+                replace={false}
+                to="/user_office/account"
+              >
+                Account settings
+              </Link>
+            </ForwardRef>
+            <ForwardRef>
+              <Link
+                replace={false}
+                to="/user_office/payment/verification"
+              >
+                Verification
+              </Link>
+            </ForwardRef>
+          </ForwardRef>,
+          <ForwardRef
+            href="/logout/"
+          >
+            <svg
+              height="20"
+              width="19"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g
+                fill="#858B91"
+                fillRule="nonzero"
+                stroke="#979797"
+                strokeWidth=".5"
+              >
+                <path
+                  d="M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z"
+                />
+                <path
+                  d="M17.8455 9.6131L14.5006 6.16c-.2066-.2133-.538-.2133-.7446 0s-.2066.5554 0 .7687l2.4483 2.5275H5.5263c-.2924 0-.5263.2414-.5263.5433 0 .3018.234.5433.5263.5433h10.678l-2.4483 2.5275c-.2066.2133-.2066.5554 0 .7687.1014.1047.2378.161.3704.161a.5057.5057 0 0 0 .3703-.161l3.345-3.4531c.2104-.2174.2104-.5635.0038-.7728z"
+                />
+              </g>
+            </svg>
+            Log out
+          </ForwardRef>,
+        ],
+        "className": "DropdownAccount",
+        "id": "modal-dropdown",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              "Steps completed: ",
+              <span>
+                /2
+              </span>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "Steps completed: ",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  undefined,
+                  "/2",
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                undefined,
+                "/2",
+              ],
+              "type": "span",
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+    color: #222121;
+    user-select: none;
+    padding-left: 22px;
+    margin-bottom: 32px;
+    span {
+        color: #00da36;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    ",
+                "@media (min-width: 768px)",
+                " {
+        display: none;
+    }
+",
+              ],
+            },
+            "displayName": "styled.p",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "p",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <ForwardRef>
+                <Link
+                  replace={false}
+                  to="/user_office/payment/verification"
+                >
+                  <span>
+                    Submit KYC and add ETH address
+                  </span>
+                </Link>
+              </ForwardRef>,
+              <ForwardRef
+                passed={false}
+              >
+                <span>
+                  Buy tokens
+                </span>
+              </ForwardRef>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": Array [
+                  <Link
+                    replace={false}
+                    to="/user_office/payment/verification"
+                  >
+                    <span>
+                      Submit KYC and add ETH address
+                    </span>
+                  </Link>,
+                  undefined,
+                ],
+                "passed": undefined,
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <span>
+                      Submit KYC and add ETH address
+                    </span>,
+                    "onClick": undefined,
+                    "replace": false,
+                    "to": "/user_office/payment/verification",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Submit KYC and add ETH address",
+                    },
+                    "ref": null,
+                    "rendered": "Submit KYC and add ETH address",
+                    "type": "span",
+                  },
+                  "type": [Function],
+                },
+                undefined,
+              ],
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-ifAKCX",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    font-size: 15px;
+    color: ",
+                    [Function],
+                    ";
+    cursor: ",
+                    [Function],
+                    ";
+    margin-top: 16px;
+",
+                  ],
+                },
+                "displayName": "styled.li",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-ifAKCX",
+                "target": "li",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": Array [
+                  <span>
+                    Buy tokens
+                  </span>,
+                  undefined,
+                ],
+                "passed": false,
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Buy tokens",
+                  },
+                  "ref": null,
+                  "rendered": "Buy tokens",
+                  "type": "span",
+                },
+                undefined,
+              ],
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-ifAKCX",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    font-size: 15px;
+    color: ",
+                    [Function],
+                    ";
+    cursor: ",
+                    [Function],
+                    ";
+    margin-top: 16px;
+",
+                  ],
+                },
+                "displayName": "styled.li",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-ifAKCX",
+                "target": "li",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bxivhb",
+              "isStatic": true,
+              "rules": Array [
+                "
+    border-bottom: 1px solid rgba(193,193,193,.3);
+    padding-bottom: 23px;
+    margin-bottom: 20px;
+    padding: 0 23px 23px 36px;
+",
+              ],
+            },
+            "displayName": "styled.ol",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bxivhb",
+            "target": "ol",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <div
+                className="text"
+              >
+                Your profile:
+              </div>,
+              <div
+                className="email"
+              />,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Your profile:",
+                "className": "text",
+              },
+              "ref": null,
+              "rendered": "Your profile:",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": undefined,
+                "className": "email",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "div",
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-htpNat",
+              "isStatic": true,
+              "rules": Array [
+                "
+    padding: 0 23px 18px;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: #222121;
+    margin-bottom: 8px;
+    .text {
+        opacity: .5;
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-htpNat",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <ForwardRef>
+                <Link
+                  replace={false}
+                  to="/user_office/account"
+                >
+                  Account settings
+                </Link>
+              </ForwardRef>,
+              <ForwardRef>
+                <Link
+                  replace={false}
+                  to="/user_office/payment/verification"
+                >
+                  Verification
+                </Link>
+              </ForwardRef>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <Link
+                  replace={false}
+                  to="/user_office/account"
+                >
+                  Account settings
+                </Link>,
+                "onClick": undefined,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": "Account settings",
+                  "replace": false,
+                  "to": "/user_office/account",
+                },
+                "ref": null,
+                "rendered": "Account settings",
+                "type": [Function],
+              },
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-gzVnrw",
+                  "isStatic": true,
+                  "rules": Array [
+                    "
+    line-height: 45px;
+    padding: 0 23px;
+    &:hover {
+        background: rgba(216,216,216,.4);
+    }
+    a {
+        height: 100%;
+        display: block;
+    }
+",
+                  ],
+                },
+                "displayName": "styled.li",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-gzVnrw",
+                "target": "li",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <Link
+                  replace={false}
+                  to="/user_office/payment/verification"
+                >
+                  Verification
+                </Link>,
+                "onClick": undefined,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": "Verification",
+                  "replace": false,
+                  "to": "/user_office/payment/verification",
+                },
+                "ref": null,
+                "rendered": "Verification",
+                "type": [Function],
+              },
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-gzVnrw",
+                  "isStatic": true,
+                  "rules": Array [
+                    "
+    line-height: 45px;
+    padding: 0 23px;
+    &:hover {
+        background: rgba(216,216,216,.4);
+    }
+    a {
+        height: 100%;
+        display: block;
+    }
+",
+                  ],
+                },
+                "displayName": "styled.li",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-gzVnrw",
+                "target": "li",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bZQynM",
+              "isStatic": true,
+              "rules": Array [
+                "
+    border-top: 1px solid rgba(193,193,193,.3);
+    border-bottom: 1px solid rgba(193,193,193,.3);
+",
+              ],
+            },
+            "displayName": "styled.ul",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bZQynM",
+            "target": "ul",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <svg
+                height="20"
+                width="19"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  fill="#858B91"
+                  fillRule="nonzero"
+                  stroke="#979797"
+                  strokeWidth=".5"
+                >
+                  <path
+                    d="M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z"
+                  />
+                  <path
+                    d="M17.8455 9.6131L14.5006 6.16c-.2066-.2133-.538-.2133-.7446 0s-.2066.5554 0 .7687l2.4483 2.5275H5.5263c-.2924 0-.5263.2414-.5263.5433 0 .3018.234.5433.5263.5433h10.678l-2.4483 2.5275c-.2066.2133-.2066.5554 0 .7687.1014.1047.2378.161.3704.161a.5057.5057 0 0 0 .3703-.161l3.345-3.4531c.2104-.2174.2104-.5635.0038-.7728z"
+                  />
+                </g>
+              </svg>,
+              "Log out",
+            ],
+            "href": "/logout/",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <g
+                  fill="#858B91"
+                  fillRule="nonzero"
+                  stroke="#979797"
+                  strokeWidth=".5"
+                >
+                  <path
+                    d="M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z"
+                  />
+                  <path
+                    d="M17.8455 9.6131L14.5006 6.16c-.2066-.2133-.538-.2133-.7446 0s-.2066.5554 0 .7687l2.4483 2.5275H5.5263c-.2924 0-.5263.2414-.5263.5433 0 .3018.234.5433.5263.5433h10.678l-2.4483 2.5275c-.2066.2133-.2066.5554 0 .7687.1014.1047.2378.161.3704.161a.5057.5057 0 0 0 .3703-.161l3.345-3.4531c.2104-.2174.2104-.5635.0038-.7728z"
+                  />
+                </g>,
+                "height": "20",
+                "width": "19",
+                "xmlns": "http://www.w3.org/2000/svg",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <path
+                      d="M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z"
+                    />,
+                    <path
+                      d="M17.8455 9.6131L14.5006 6.16c-.2066-.2133-.538-.2133-.7446 0s-.2066.5554 0 .7687l2.4483 2.5275H5.5263c-.2924 0-.5263.2414-.5263.5433 0 .3018.234.5433.5263.5433h10.678l-2.4483 2.5275c-.2066.2133-.2066.5554 0 .7687.1014.1047.2378.161.3704.161a.5057.5057 0 0 0 .3703-.161l3.345-3.4531c.2104-.2174.2104-.5635.0038-.7728z"
+                    />,
+                  ],
+                  "fill": "#858B91",
+                  "fillRule": "nonzero",
+                  "stroke": "#979797",
+                  "strokeWidth": ".5",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "d": "M9.3825 17.9686H4.486c-1.3307 0-2.4104-1.039-2.4104-2.3111V4.3425c0-1.2759 1.0837-2.311 2.4104-2.311h4.976c.2989 0 .5379-.2293.5379-.5158C10 1.2292 9.761 1 9.4622 1H4.486C2.5618 1 1 2.5013 1 4.3425v11.315C1 17.5025 2.5657 19 4.486 19h4.8965c.2988 0 .5378-.2292.5378-.5157 0-.2865-.243-.5157-.5378-.5157z",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "path",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "d": "M17.8455 9.6131L14.5006 6.16c-.2066-.2133-.538-.2133-.7446 0s-.2066.5554 0 .7687l2.4483 2.5275H5.5263c-.2924 0-.5263.2414-.5263.5433 0 .3018.234.5433.5263.5433h10.678l-2.4483 2.5275c-.2066.2133-.2066.5554 0 .7687.1014.1047.2378.161.3704.161a.5057.5057 0 0 0 .3703-.161l3.345-3.4531c.2104-.2174.2104-.5635.0038-.7728z",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "path",
+                  },
+                ],
+                "type": "g",
+              },
+              "type": "svg",
+            },
+            "Log out",
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-EHOje",
+              "isStatic": true,
+              "rules": Array [
+                "
+    height: 70px;
+    align-items: center;
+    display: flex;
+    transition: all .25s ease;
+    padding: 0 23px;
+    svg {
+        margin-right: 13px;
+        g {
+            transition: all .25s ease;
+        }
+    }
+    &:hover {
+        color: #dc3545;
+        & svg g{
+            stroke: #dc3545;
+            fill: #dc3545;
+        }
+    }
+",
+              ],
+            },
+            "displayName": "styled.a",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-EHOje",
+            "target": "a",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": true,
+          "rules": Array [
+            "
+    width: calc(100% + 38px);
+    position: absolute;
+    left: 50%;
+    top: -25px;
+    padding: 75px 0 0;
+    transform: translateX(-50%);
+    border-radius: 6px;
+    background: white;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
+    z-index: 0;
+    animation: ",
+            Keyframes {
+              "id": "sc-keyframes-jcngeg",
+              "inject": [Function],
+              "name": "jcngeg",
+              "rules": Array [
+                "@-webkit-keyframes jcngeg{from{opacity:0;-webkit-transform:translate3d(-50%,50px,0);-ms-transform:translate3d(-50%,50px,0);transform:translate3d(-50%,50px,0);}to{opacity:1;-webkit-transform:translate3d(-50%,0,0);-ms-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0);}}",
+                "@keyframes jcngeg{from{opacity:0;-webkit-transform:translate3d(-50%,50px,0);-ms-transform:translate3d(-50%,50px,0);transform:translate3d(-50%,50px,0);}to{opacity:1;-webkit-transform:translate3d(-50%,0,0);-ms-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0);}}",
+              ],
+              "toString": [Function],
+            },
+            " .3s ease;
+    ",
+            "@media (max-width: 767px)",
+            " {
+        width: 274px;
+        left: unset;
+        right: -16px;
+        padding-top: 40px;
+        transform: unset;
+        animation: unset;
+    }
+",
+          ],
+        },
+        "displayName": "styled.div",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

@@ -10,7 +10,6 @@ import Countdown from 'js/components/common/Countdown';
 import ProgressBar from 'js/components/dashboard/stateless/ProgressBar';
 import Timer from 'js/components/dashboard/stateless/Timer';
 import PhasesInfo from 'js/components/dashboard/stateless/PhasesInfo';
-import CustomButton from 'js/components/common/CustomButton';
 import Button from 'js/components/common/Button';
 
 import * as ICOInfoActions from 'js/actions/ICOInfoActions';

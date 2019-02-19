@@ -1,0 +1,432 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless Balance 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Balance />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <p
+          className="Balance_head"
+        >
+          Balance
+        </p>,
+        <div
+          className="Balance_amountWrapper"
+        >
+          <img
+            alt="Wallet icon"
+            src="icon_wallet.svg"
+          />
+          <p
+            className="Balance_amount"
+          >
+            NaN
+             
+            <span>
+              OGD
+            </span>
+          </p>
+        </div>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Balance",
+          "className": "Balance_head",
+        },
+        "ref": null,
+        "rendered": "Balance",
+        "type": "p",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <img
+              alt="Wallet icon"
+              src="icon_wallet.svg"
+            />,
+            <p
+              className="Balance_amount"
+            >
+              NaN
+               
+              <span>
+                OGD
+              </span>
+            </p>,
+          ],
+          "className": "Balance_amountWrapper",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "alt": "Wallet icon",
+              "src": "icon_wallet.svg",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "img",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                "NaN",
+                " ",
+                <span>
+                  OGD
+                </span>,
+              ],
+              "className": "Balance_amount",
+            },
+            "ref": null,
+            "rendered": Array [
+              "NaN",
+              " ",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "OGD",
+                },
+                "ref": null,
+                "rendered": "OGD",
+                "type": "span",
+              },
+            ],
+            "type": "p",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": true,
+        "rules": Array [
+          "
+    position: relative;
+    padding: 0 23px;
+    ",
+          "@media (min-width: 768px) and (max-width: 1024px)",
+          " {
+        padding-right: 0;
+    }
+    ",
+          "@media (max-width: 767px)",
+          " {
+        flex-wrap: wrap;
+    }
+    img {
+        margin-right: 15px;
+        ",
+          "@media (max-width: 767px)",
+          " {
+            height: 14px;
+            width: auto;
+            margin-right: 8px;
+        }
+    }
+    a {
+        color: #3172fd;
+        font-weight: 600;
+        font-size: 20px;
+    }
+    span {
+        font-weight: 400;
+    }
+    .Balance_head {
+        ",
+          "@media (max-width: 767px)",
+          " {
+            font-size: 12px;
+            display: block;
+            text-align: right;
+            margin-bottom: 6px;
+        }
+        ",
+          "@media (min-width: 768px)",
+          " {
+            display: none;
+        }
+    }
+    .Balance_amountWrapper {
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+    }
+    .Balance_amount {
+        color: #3172fd;
+        ",
+          "@media (max-width: 767px)",
+          " {
+            font-size: 14px;
+            white-space: nowrap;
+        }   
+    }
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <p
+            className="Balance_head"
+          >
+            Balance
+          </p>,
+          <div
+            className="Balance_amountWrapper"
+          >
+            <img
+              alt="Wallet icon"
+              src="icon_wallet.svg"
+            />
+            <p
+              className="Balance_amount"
+            >
+              NaN
+               
+              <span>
+                OGD
+              </span>
+            </p>
+          </div>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Balance",
+            "className": "Balance_head",
+          },
+          "ref": null,
+          "rendered": "Balance",
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <img
+                alt="Wallet icon"
+                src="icon_wallet.svg"
+              />,
+              <p
+                className="Balance_amount"
+              >
+                NaN
+                 
+                <span>
+                  OGD
+                </span>
+              </p>,
+            ],
+            "className": "Balance_amountWrapper",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Wallet icon",
+                "src": "icon_wallet.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  "NaN",
+                  " ",
+                  <span>
+                    OGD
+                  </span>,
+                ],
+                "className": "Balance_amount",
+              },
+              "ref": null,
+              "rendered": Array [
+                "NaN",
+                " ",
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "OGD",
+                  },
+                  "ref": null,
+                  "rendered": "OGD",
+                  "type": "span",
+                },
+              ],
+              "type": "p",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": true,
+          "rules": Array [
+            "
+    position: relative;
+    padding: 0 23px;
+    ",
+            "@media (min-width: 768px) and (max-width: 1024px)",
+            " {
+        padding-right: 0;
+    }
+    ",
+            "@media (max-width: 767px)",
+            " {
+        flex-wrap: wrap;
+    }
+    img {
+        margin-right: 15px;
+        ",
+            "@media (max-width: 767px)",
+            " {
+            height: 14px;
+            width: auto;
+            margin-right: 8px;
+        }
+    }
+    a {
+        color: #3172fd;
+        font-weight: 600;
+        font-size: 20px;
+    }
+    span {
+        font-weight: 400;
+    }
+    .Balance_head {
+        ",
+            "@media (max-width: 767px)",
+            " {
+            font-size: 12px;
+            display: block;
+            text-align: right;
+            margin-bottom: 6px;
+        }
+        ",
+            "@media (min-width: 768px)",
+            " {
+            display: none;
+        }
+    }
+    .Balance_amountWrapper {
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+    }
+    .Balance_amount {
+        color: #3172fd;
+        ",
+            "@media (max-width: 767px)",
+            " {
+            font-size: 14px;
+            white-space: nowrap;
+        }   
+    }
+",
+          ],
+        },
+        "displayName": "styled.div",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

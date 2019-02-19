@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
 
-const PhasesInfo = ({rate}) => {
+const PhasesInfo = () => {
 
     return (
         <div className="visible-smMinus">

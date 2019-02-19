@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import splitDigits from 'js/utils/splitDigits';
 import {media} from 'js/utils/media';
@@ -6,7 +7,7 @@ import {media} from 'js/utils/media';
 import arrow from 'img/arrow_roadmap.svg';
 
 
-const ProgressBar = ({children, raisedAmountNum, tokenPrice}) => {
+const ProgressBar = ({raisedAmountNum, tokenPrice, children}) => {
     const raisedAmountPercents =  raisedAmountNum ? raisedAmountNum / 260000 : 0;
 
     return (
@@ -51,6 +52,12 @@ const ProgressBar = ({children, raisedAmountNum, tokenPrice}) => {
             </BarWrapper>
         </Wrapper>
     )
+}
+
+ProgressBar.propTypes = {
+    raisedAmountNum: PropTypes.number,
+    tokenPrice: PropTypes.number,
+    children: PropTypes.element
 }
 
 
