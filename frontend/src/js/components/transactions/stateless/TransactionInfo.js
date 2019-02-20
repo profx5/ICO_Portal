@@ -1,16 +1,15 @@
-import React, {Component} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
 import iconCheckGreen from 'img/check-green.svg';
 
 
-const TransactionsInfo = ({transferHashLink, payementHashLink, amount, currency, rate_usdc, usdc_value, bonus_percent, tokens, tokenPrice}) => {
+const TransactionsInfo = ({transferHashLink, payementHashLink, amount, currency, rate_usdc = 0, usdc_value = 0, tokens, tokenPrice}) => {
 
     const rateUSD = (rate_usdc / 100).toFixed(2),
-        USDValue = usdc_value.toFixed(2),
-        baseTokens = (USDValue / tokenPrice).toFixed(2),
-        bonusTokens = (USDValue / tokenPrice * bonus_percent / 100).toFixed(2)
+        USDValue = usdc_value.toFixed(2);
 
     return (
         <Wrapper>
@@ -46,6 +45,17 @@ const TransactionsInfo = ({transferHashLink, payementHashLink, amount, currency,
     )
 }
 
+
+TransactionsInfo.propTypes = {
+    transferHashLink: PropTypes.string,
+    payementHashLink: PropTypes.string,
+    amount: PropTypes.number,
+    currency: PropTypes.string,
+    rate_usdc: PropTypes.number,
+    usdc_value: PropTypes.number,
+    tokens: PropTypes.number,
+    tokenPrice: PropTypes.number
+}
 
 export default TransactionsInfo;
 

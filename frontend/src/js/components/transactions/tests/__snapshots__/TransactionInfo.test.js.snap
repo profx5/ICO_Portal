@@ -1,0 +1,1336 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless TransactionInfo 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <TransactionsInfo />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <ForwardRef>
+          <div
+            className="TransactionContent_head"
+          >
+            Blockchain transactions
+          </div>
+          <div>
+            <div
+              className="TransactionContent_info"
+            >
+              <div
+                className="TransactionContent_propertyName"
+              >
+                Payment:
+              </div>
+              <div
+                className="TransactionContent_propertyLink"
+              >
+                <a
+                  target="_blank"
+                />
+              </div>
+              <div
+                className="TransactionContent_propertyIconWrapper"
+              >
+                <img
+                  alt=""
+                  src="check-green.svg"
+                />
+              </div>
+            </div>
+          </div>
+        </ForwardRef>,
+        <ForwardRef>
+          <ForwardRef
+            className="Info_part-1"
+          >
+            <div
+              className="Info_head"
+            >
+              Calculated token amount
+            </div>
+            <div
+              className="Info_partContent"
+            >
+              <div>
+                undefined undefined x 0.00 USD = 0.00 USD
+                <br />
+              </div>
+              <div>
+                Token price = undefined USD
+                <br />
+              </div>
+              <div>
+                Total: undefined
+                <br />
+              </div>
+            </div>
+          </ForwardRef>
+        </ForwardRef>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <div
+              className="TransactionContent_head"
+            >
+              Blockchain transactions
+            </div>,
+            <div>
+              <div
+                className="TransactionContent_info"
+              >
+                <div
+                  className="TransactionContent_propertyName"
+                >
+                  Payment:
+                </div>
+                <div
+                  className="TransactionContent_propertyLink"
+                >
+                  <a
+                    target="_blank"
+                  />
+                </div>
+                <div
+                  className="TransactionContent_propertyIconWrapper"
+                >
+                  <img
+                    alt=""
+                    src="check-green.svg"
+                  />
+                </div>
+              </div>
+            </div>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Blockchain transactions",
+              "className": "TransactionContent_head",
+            },
+            "ref": null,
+            "rendered": "Blockchain transactions",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="TransactionContent_info"
+                >
+                  <div
+                    className="TransactionContent_propertyName"
+                  >
+                    Payment:
+                  </div>
+                  <div
+                    className="TransactionContent_propertyLink"
+                  >
+                    <a
+                      target="_blank"
+                    />
+                  </div>
+                  <div
+                    className="TransactionContent_propertyIconWrapper"
+                  >
+                    <img
+                      alt=""
+                      src="check-green.svg"
+                    />
+                  </div>
+                </div>,
+                undefined,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <div
+                      className="TransactionContent_propertyName"
+                    >
+                      Payment:
+                    </div>,
+                    <div
+                      className="TransactionContent_propertyLink"
+                    >
+                      <a
+                        target="_blank"
+                      />
+                    </div>,
+                    <div
+                      className="TransactionContent_propertyIconWrapper"
+                    >
+                      <img
+                        alt=""
+                        src="check-green.svg"
+                      />
+                    </div>,
+                  ],
+                  "className": "TransactionContent_info",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Payment:",
+                      "className": "TransactionContent_propertyName",
+                    },
+                    "ref": null,
+                    "rendered": "Payment:",
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": <a
+                        target="_blank"
+                      />,
+                      "className": "TransactionContent_propertyLink",
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": undefined,
+                        "href": undefined,
+                        "target": "_blank",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": "a",
+                    },
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": <img
+                        alt=""
+                        src="check-green.svg"
+                      />,
+                      "className": "TransactionContent_propertyIconWrapper",
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "alt": "",
+                        "src": "check-green.svg",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": "img",
+                    },
+                    "type": "div",
+                  },
+                ],
+                "type": "div",
+              },
+              undefined,
+            ],
+            "type": "div",
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+    flex-basis: 100%;
+    &:last-of-type {
+        display: flex;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        border-bottom: 1px solid rgba(151, 151, 151, .2);
+        padding: 35px 0 10px;
+        margin-top: 20px;
+        margin-bottom: 35px;
+    }
+    .TransactionContent_head {
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    .TransactionContent_info {
+        flex-basis: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    .TransactionContent_propertyName {
+        min-width: 80px;
+    }
+    .TransactionContent_propertyLink {
+        flex: 1;
+    }
+    .TransactionContent_propertyIconWrapper {
+        width: 35px;
+        img {
+            width: 22px;
+            height: auto;
+            float: right;
+        }
+    }
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": <ForwardRef
+            className="Info_part-1"
+          >
+            <div
+              className="Info_head"
+            >
+              Calculated token amount
+            </div>
+            <div
+              className="Info_partContent"
+            >
+              <div>
+                undefined undefined x 0.00 USD = 0.00 USD
+                <br />
+              </div>
+              <div>
+                Token price = undefined USD
+                <br />
+              </div>
+              <div>
+                Total: undefined
+                <br />
+              </div>
+            </div>
+          </ForwardRef>,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <div
+                className="Info_head"
+              >
+                Calculated token amount
+              </div>,
+              <div
+                className="Info_partContent"
+              >
+                <div>
+                  undefined undefined x 0.00 USD = 0.00 USD
+                  <br />
+                </div>
+                <div>
+                  Token price = undefined USD
+                  <br />
+                </div>
+                <div>
+                  Total: undefined
+                  <br />
+                </div>
+              </div>,
+            ],
+            "className": "Info_part-1",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Calculated token amount",
+                "className": "Info_head",
+              },
+              "ref": null,
+              "rendered": "Calculated token amount",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div>
+                    undefined undefined x 0.00 USD = 0.00 USD
+                    <br />
+                  </div>,
+                  <div>
+                    Token price = undefined USD
+                    <br />
+                  </div>,
+                  <div>
+                    Total: undefined
+                    <br />
+                  </div>,
+                ],
+                "className": "Info_partContent",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      "undefined undefined x 0.00 USD = 0.00 USD",
+                      <br />,
+                    ],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    "undefined undefined x 0.00 USD = 0.00 USD",
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {},
+                      "ref": null,
+                      "rendered": null,
+                      "type": "br",
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      "Token price = undefined USD",
+                      <br />,
+                    ],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    "Token price = undefined USD",
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {},
+                      "ref": null,
+                      "rendered": null,
+                      "type": "br",
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      "Total: undefined",
+                      <br />,
+                    ],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    "Total: undefined",
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {},
+                      "ref": null,
+                      "rendered": null,
+                      "type": "br",
+                    },
+                  ],
+                  "type": "div",
+                },
+              ],
+              "type": "div",
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-htpNat",
+              "isStatic": true,
+              "rules": Array [
+                "
+    flex-basis: 33.33333%;
+    &.Info_part-1 {
+        padding-right: 15px;
+        .Info_partContent {
+            div {
+                margin-bottom: 10px;
+                ",
+                "@media (max-width: 767px)",
+                " {
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
+    &.Info_part-2 {
+        border-left: 1px solid rgba(151, 151, 151, .2);
+        border-right: 1px solid rgba(151, 151, 151, .2);
+    }
+    &.Info_part-2, &.Info_part-3 {
+        position: relative;
+        .Info_head {
+            padding-left: 35px;
+        }
+        .Info_partContent {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .Info_head {
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+    .Info_head ~ div {
+        margin-bottom: 10px;
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-htpNat",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+    flex-basis: 100%;
+    &:last-of-type {
+        display: flex;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        border-bottom: 1px solid rgba(151, 151, 151, .2);
+        padding: 35px 0 10px;
+        margin-top: 20px;
+        margin-bottom: 35px;
+    }
+    .TransactionContent_head {
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    .TransactionContent_info {
+        flex-basis: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    .TransactionContent_propertyName {
+        min-width: 80px;
+    }
+    .TransactionContent_propertyLink {
+        flex: 1;
+    }
+    .TransactionContent_propertyIconWrapper {
+        width: 35px;
+        img {
+            width: 22px;
+            height: auto;
+            float: right;
+        }
+    }
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+    ],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": true,
+        "rules": Array [
+          "
+    flex-basis: 100%;
+    border-left: 2px solid rgb(67, 129, 252);
+    padding-left: 30px;
+    display: flex;
+    flex-flow: row wrap;
+    ",
+          "@media (max-width: 767px)",
+          " {
+        padding-left: 14px;
+    }
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <ForwardRef>
+            <div
+              className="TransactionContent_head"
+            >
+              Blockchain transactions
+            </div>
+            <div>
+              <div
+                className="TransactionContent_info"
+              >
+                <div
+                  className="TransactionContent_propertyName"
+                >
+                  Payment:
+                </div>
+                <div
+                  className="TransactionContent_propertyLink"
+                >
+                  <a
+                    target="_blank"
+                  />
+                </div>
+                <div
+                  className="TransactionContent_propertyIconWrapper"
+                >
+                  <img
+                    alt=""
+                    src="check-green.svg"
+                  />
+                </div>
+              </div>
+            </div>
+          </ForwardRef>,
+          <ForwardRef>
+            <ForwardRef
+              className="Info_part-1"
+            >
+              <div
+                className="Info_head"
+              >
+                Calculated token amount
+              </div>
+              <div
+                className="Info_partContent"
+              >
+                <div>
+                  undefined undefined x 0.00 USD = 0.00 USD
+                  <br />
+                </div>
+                <div>
+                  Token price = undefined USD
+                  <br />
+                </div>
+                <div>
+                  Total: undefined
+                  <br />
+                </div>
+              </div>
+            </ForwardRef>
+          </ForwardRef>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <div
+                className="TransactionContent_head"
+              >
+                Blockchain transactions
+              </div>,
+              <div>
+                <div
+                  className="TransactionContent_info"
+                >
+                  <div
+                    className="TransactionContent_propertyName"
+                  >
+                    Payment:
+                  </div>
+                  <div
+                    className="TransactionContent_propertyLink"
+                  >
+                    <a
+                      target="_blank"
+                    />
+                  </div>
+                  <div
+                    className="TransactionContent_propertyIconWrapper"
+                  >
+                    <img
+                      alt=""
+                      src="check-green.svg"
+                    />
+                  </div>
+                </div>
+              </div>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Blockchain transactions",
+                "className": "TransactionContent_head",
+              },
+              "ref": null,
+              "rendered": "Blockchain transactions",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="TransactionContent_info"
+                  >
+                    <div
+                      className="TransactionContent_propertyName"
+                    >
+                      Payment:
+                    </div>
+                    <div
+                      className="TransactionContent_propertyLink"
+                    >
+                      <a
+                        target="_blank"
+                      />
+                    </div>
+                    <div
+                      className="TransactionContent_propertyIconWrapper"
+                    >
+                      <img
+                        alt=""
+                        src="check-green.svg"
+                      />
+                    </div>
+                  </div>,
+                  undefined,
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <div
+                        className="TransactionContent_propertyName"
+                      >
+                        Payment:
+                      </div>,
+                      <div
+                        className="TransactionContent_propertyLink"
+                      >
+                        <a
+                          target="_blank"
+                        />
+                      </div>,
+                      <div
+                        className="TransactionContent_propertyIconWrapper"
+                      >
+                        <img
+                          alt=""
+                          src="check-green.svg"
+                        />
+                      </div>,
+                    ],
+                    "className": "TransactionContent_info",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Payment:",
+                        "className": "TransactionContent_propertyName",
+                      },
+                      "ref": null,
+                      "rendered": "Payment:",
+                      "type": "div",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <a
+                          target="_blank"
+                        />,
+                        "className": "TransactionContent_propertyLink",
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": undefined,
+                          "href": undefined,
+                          "target": "_blank",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": "a",
+                      },
+                      "type": "div",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <img
+                          alt=""
+                          src="check-green.svg"
+                        />,
+                        "className": "TransactionContent_propertyIconWrapper",
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "alt": "",
+                          "src": "check-green.svg",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": "img",
+                      },
+                      "type": "div",
+                    },
+                  ],
+                  "type": "div",
+                },
+                undefined,
+              ],
+              "type": "div",
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+    flex-basis: 100%;
+    &:last-of-type {
+        display: flex;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        border-bottom: 1px solid rgba(151, 151, 151, .2);
+        padding: 35px 0 10px;
+        margin-top: 20px;
+        margin-bottom: 35px;
+    }
+    .TransactionContent_head {
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    .TransactionContent_info {
+        flex-basis: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    .TransactionContent_propertyName {
+        min-width: 80px;
+    }
+    .TransactionContent_propertyLink {
+        flex: 1;
+    }
+    .TransactionContent_propertyIconWrapper {
+        width: 35px;
+        img {
+            width: 22px;
+            height: auto;
+            float: right;
+        }
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <ForwardRef
+              className="Info_part-1"
+            >
+              <div
+                className="Info_head"
+              >
+                Calculated token amount
+              </div>
+              <div
+                className="Info_partContent"
+              >
+                <div>
+                  undefined undefined x 0.00 USD = 0.00 USD
+                  <br />
+                </div>
+                <div>
+                  Token price = undefined USD
+                  <br />
+                </div>
+                <div>
+                  Total: undefined
+                  <br />
+                </div>
+              </div>
+            </ForwardRef>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="Info_head"
+                >
+                  Calculated token amount
+                </div>,
+                <div
+                  className="Info_partContent"
+                >
+                  <div>
+                    undefined undefined x 0.00 USD = 0.00 USD
+                    <br />
+                  </div>
+                  <div>
+                    Token price = undefined USD
+                    <br />
+                  </div>
+                  <div>
+                    Total: undefined
+                    <br />
+                  </div>
+                </div>,
+              ],
+              "className": "Info_part-1",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Calculated token amount",
+                  "className": "Info_head",
+                },
+                "ref": null,
+                "rendered": "Calculated token amount",
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <div>
+                      undefined undefined x 0.00 USD = 0.00 USD
+                      <br />
+                    </div>,
+                    <div>
+                      Token price = undefined USD
+                      <br />
+                    </div>,
+                    <div>
+                      Total: undefined
+                      <br />
+                    </div>,
+                  ],
+                  "className": "Info_partContent",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": Array [
+                        "undefined undefined x 0.00 USD = 0.00 USD",
+                        <br />,
+                      ],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      "undefined undefined x 0.00 USD = 0.00 USD",
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {},
+                        "ref": null,
+                        "rendered": null,
+                        "type": "br",
+                      },
+                    ],
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": Array [
+                        "Token price = undefined USD",
+                        <br />,
+                      ],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      "Token price = undefined USD",
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {},
+                        "ref": null,
+                        "rendered": null,
+                        "type": "br",
+                      },
+                    ],
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": Array [
+                        "Total: undefined",
+                        <br />,
+                      ],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      "Total: undefined",
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {},
+                        "ref": null,
+                        "rendered": null,
+                        "type": "br",
+                      },
+                    ],
+                    "type": "div",
+                  },
+                ],
+                "type": "div",
+              },
+            ],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": true,
+                "rules": Array [
+                  "
+    flex-basis: 33.33333%;
+    &.Info_part-1 {
+        padding-right: 15px;
+        .Info_partContent {
+            div {
+                margin-bottom: 10px;
+                ",
+                  "@media (max-width: 767px)",
+                  " {
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
+    &.Info_part-2 {
+        border-left: 1px solid rgba(151, 151, 151, .2);
+        border-right: 1px solid rgba(151, 151, 151, .2);
+    }
+    &.Info_part-2, &.Info_part-3 {
+        position: relative;
+        .Info_head {
+            padding-left: 35px;
+        }
+        .Info_partContent {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .Info_head {
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+    .Info_head ~ div {
+        margin-bottom: 10px;
+    }
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+    flex-basis: 100%;
+    &:last-of-type {
+        display: flex;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        border-bottom: 1px solid rgba(151, 151, 151, .2);
+        padding: 35px 0 10px;
+        margin-top: 20px;
+        margin-bottom: 35px;
+    }
+    .TransactionContent_head {
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    .TransactionContent_info {
+        flex-basis: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    .TransactionContent_propertyName {
+        min-width: 80px;
+    }
+    .TransactionContent_propertyLink {
+        flex: 1;
+    }
+    .TransactionContent_propertyIconWrapper {
+        width: 35px;
+        img {
+            width: 22px;
+            height: auto;
+            float: right;
+        }
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": true,
+          "rules": Array [
+            "
+    flex-basis: 100%;
+    border-left: 2px solid rgb(67, 129, 252);
+    padding-left: 30px;
+    display: flex;
+    flex-flow: row wrap;
+    ",
+            "@media (max-width: 767px)",
+            " {
+        padding-left: 14px;
+    }
+",
+          ],
+        },
+        "displayName": "styled.div",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
