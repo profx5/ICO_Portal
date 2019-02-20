@@ -1,0 +1,858 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless Ticket 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Ticket
+    onClickHandler={[MockFunction]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <td
+          callspan="1"
+        >
+          <ForwardRef>
+            <div>
+              <img
+                alt="Ticket status"
+                src="icon_transit-amber.svg"
+              />
+            </div>
+            <div>
+              <span>
+                
+              </span>
+              <span>
+                Pending
+              </span>
+            </div>
+          </ForwardRef>
+        </td>,
+        <ForwardRef
+          callspan="1"
+        >
+          <div>
+            <img
+              alt="User thumbnail"
+              src="user.svg"
+            />
+          </div>
+          <div
+            className="hidden-xs"
+          >
+            <span>
+              You
+            </span>
+            <span>
+              Message sent Invalid date
+            </span>
+          </div>
+        </ForwardRef>,
+      ],
+      "onClick": [Function],
+      "to": "/user_office/support/ticket/null",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "callspan": "1",
+          "children": <ForwardRef>
+            <div>
+              <img
+                alt="Ticket status"
+                src="icon_transit-amber.svg"
+              />
+            </div>
+            <div>
+              <span>
+                
+              </span>
+              <span>
+                Pending
+              </span>
+            </div>
+          </ForwardRef>,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <div>
+                <img
+                  alt="Ticket status"
+                  src="icon_transit-amber.svg"
+                />
+              </div>,
+              <div>
+                <span>
+                  
+                </span>
+                <span>
+                  Pending
+                </span>
+              </div>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <img
+                  alt="Ticket status"
+                  src="icon_transit-amber.svg"
+                />,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Ticket status",
+                  "src": "icon_transit-amber.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <span>
+                    
+                  </span>,
+                  <span>
+                    Pending
+                  </span>,
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "",
+                  },
+                  "ref": null,
+                  "rendered": "",
+                  "type": "span",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Pending",
+                  },
+                  "ref": null,
+                  "rendered": "Pending",
+                  "type": "span",
+                },
+              ],
+              "type": "div",
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+    display: inline-flex;
+    flex-flow: row nowrap;
+    ",
+                "@media (min-width: 768px)",
+                " {
+        height: 85px;
+        align-items: center;
+    }
+    img {
+        width: 40px;
+        height: auto;
+        margin-right: 16px;
+        ",
+                "@media (max-width: 767px)",
+                " {
+            margin-right: 10px;
+            width: 32px;
+        }
+    }
+    span:nth-of-type(1) {
+        color: #000000;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 3px;
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 14px;
+        }
+    }
+    span:nth-of-type(2) {
+        font-size: 14px;
+        color: rgb(31,31,31,.4);
+        letter-spacing: 0.3px;
+        display: block;
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 12px;
+        }
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        "type": "td",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "callspan": "1",
+          "children": Array [
+            <div>
+              <img
+                alt="User thumbnail"
+                src="user.svg"
+              />
+            </div>,
+            <div
+              className="hidden-xs"
+            >
+              <span>
+                You
+              </span>
+              <span>
+                Message sent Invalid date
+              </span>
+            </div>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <img
+                alt="User thumbnail"
+                src="user.svg"
+              />,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "User thumbnail",
+                "src": "user.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <span>
+                  You
+                </span>,
+                <span>
+                  Message sent Invalid date
+                </span>,
+              ],
+              "className": "hidden-xs",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "You",
+                },
+                "ref": null,
+                "rendered": "You",
+                "type": "span",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Message sent Invalid date",
+                },
+                "ref": null,
+                "rendered": "Message sent Invalid date",
+                "type": "span",
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-htpNat",
+            "isStatic": true,
+            "rules": Array [
+              "
+    display: inline-flex;
+    flex-flow: row nowrap;
+    ",
+              "@media (min-width: 768px)",
+              " {
+        height: 85px;
+        align-items: center;
+    }
+    img {
+        width: 40px;
+        height: auto;
+        margin-right: 13px;
+    }
+    span:nth-of-type(1) {
+        color: #000000;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 3px;
+        width: 20%;
+    }
+    span:nth-of-type(2) {
+        font-size: 14px;
+        color: #1f1f1f;
+        letter-spacing: 0.3px;
+        opacity: 0.4;
+        display: block;
+    }
+",
+            ],
+          },
+          "displayName": "styled.td",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-htpNat",
+          "target": "td",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+    ],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": true,
+        "rules": Array [
+          "
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgb(151,151,151,.2);
+    cursor: pointer;
+    &:last-of-type {
+        border-bottom: 1px solid rgb(151,151,151,.2);
+    }
+    ",
+          "@media (max-width: 767px)",
+          " {
+        padding: 15px 0;
+    }
+",
+        ],
+      },
+      "displayName": "styled.tr",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "tr",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <td
+            callspan="1"
+          >
+            <ForwardRef>
+              <div>
+                <img
+                  alt="Ticket status"
+                  src="icon_transit-amber.svg"
+                />
+              </div>
+              <div>
+                <span>
+                  
+                </span>
+                <span>
+                  Pending
+                </span>
+              </div>
+            </ForwardRef>
+          </td>,
+          <ForwardRef
+            callspan="1"
+          >
+            <div>
+              <img
+                alt="User thumbnail"
+                src="user.svg"
+              />
+            </div>
+            <div
+              className="hidden-xs"
+            >
+              <span>
+                You
+              </span>
+              <span>
+                Message sent Invalid date
+              </span>
+            </div>
+          </ForwardRef>,
+        ],
+        "onClick": [Function],
+        "to": "/user_office/support/ticket/null",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "callspan": "1",
+            "children": <ForwardRef>
+              <div>
+                <img
+                  alt="Ticket status"
+                  src="icon_transit-amber.svg"
+                />
+              </div>
+              <div>
+                <span>
+                  
+                </span>
+                <span>
+                  Pending
+                </span>
+              </div>
+            </ForwardRef>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": Array [
+                <div>
+                  <img
+                    alt="Ticket status"
+                    src="icon_transit-amber.svg"
+                  />
+                </div>,
+                <div>
+                  <span>
+                    
+                  </span>
+                  <span>
+                    Pending
+                  </span>
+                </div>,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <img
+                    alt="Ticket status"
+                    src="icon_transit-amber.svg"
+                  />,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "alt": "Ticket status",
+                    "src": "icon_transit-amber.svg",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "img",
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <span>
+                      
+                    </span>,
+                    <span>
+                      Pending
+                    </span>,
+                  ],
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "",
+                    },
+                    "ref": null,
+                    "rendered": "",
+                    "type": "span",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Pending",
+                    },
+                    "ref": null,
+                    "rendered": "Pending",
+                    "type": "span",
+                  },
+                ],
+                "type": "div",
+              },
+            ],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-bwzfXH",
+                "isStatic": true,
+                "rules": Array [
+                  "
+    display: inline-flex;
+    flex-flow: row nowrap;
+    ",
+                  "@media (min-width: 768px)",
+                  " {
+        height: 85px;
+        align-items: center;
+    }
+    img {
+        width: 40px;
+        height: auto;
+        margin-right: 16px;
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            margin-right: 10px;
+            width: 32px;
+        }
+    }
+    span:nth-of-type(1) {
+        color: #000000;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 3px;
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            font-size: 14px;
+        }
+    }
+    span:nth-of-type(2) {
+        font-size: 14px;
+        color: rgb(31,31,31,.4);
+        letter-spacing: 0.3px;
+        display: block;
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            font-size: 12px;
+        }
+    }
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-bwzfXH",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          "type": "td",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "callspan": "1",
+            "children": Array [
+              <div>
+                <img
+                  alt="User thumbnail"
+                  src="user.svg"
+                />
+              </div>,
+              <div
+                className="hidden-xs"
+              >
+                <span>
+                  You
+                </span>
+                <span>
+                  Message sent Invalid date
+                </span>
+              </div>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <img
+                  alt="User thumbnail"
+                  src="user.svg"
+                />,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "User thumbnail",
+                  "src": "user.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <span>
+                    You
+                  </span>,
+                  <span>
+                    Message sent Invalid date
+                  </span>,
+                ],
+                "className": "hidden-xs",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "You",
+                  },
+                  "ref": null,
+                  "rendered": "You",
+                  "type": "span",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Message sent Invalid date",
+                  },
+                  "ref": null,
+                  "rendered": "Message sent Invalid date",
+                  "type": "span",
+                },
+              ],
+              "type": "div",
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-htpNat",
+              "isStatic": true,
+              "rules": Array [
+                "
+    display: inline-flex;
+    flex-flow: row nowrap;
+    ",
+                "@media (min-width: 768px)",
+                " {
+        height: 85px;
+        align-items: center;
+    }
+    img {
+        width: 40px;
+        height: auto;
+        margin-right: 13px;
+    }
+    span:nth-of-type(1) {
+        color: #000000;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 3px;
+        width: 20%;
+    }
+    span:nth-of-type(2) {
+        font-size: 14px;
+        color: #1f1f1f;
+        letter-spacing: 0.3px;
+        opacity: 0.4;
+        display: block;
+    }
+",
+              ],
+            },
+            "displayName": "styled.td",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-htpNat",
+            "target": "td",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": true,
+          "rules": Array [
+            "
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgb(151,151,151,.2);
+    cursor: pointer;
+    &:last-of-type {
+        border-bottom: 1px solid rgb(151,151,151,.2);
+    }
+    ",
+            "@media (max-width: 767px)",
+            " {
+        padding: 15px 0;
+    }
+",
+          ],
+        },
+        "displayName": "styled.tr",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "tr",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

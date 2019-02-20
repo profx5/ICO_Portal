@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless TicketState 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <TicktetState />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        "Ticket was successfully closed. ",
+        <br
+          className="hidden-xs"
+        />,
+        "If you have another issue to submit - please create another ticket! Thank you!",
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      "Ticket was successfully closed. ",
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "className": "hidden-xs",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "br",
+      },
+      "If you have another issue to submit - please create another ticket! Thank you!",
+    ],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": true,
+        "rules": Array [
+          "
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.56;
+    background: rgb(246, 246, 246);
+    padding: 9px 18px 10px;
+    border: 2px solid rgba(0, 0, 0, 0.03);
+    ",
+          "@media (max-width: 767px)",
+          " {
+        font-size: 14px;
+        line-height: 1.21;
+        padding: 15px 12px;
+    }
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          "Ticket was successfully closed. ",
+          <br
+            className="hidden-xs"
+          />,
+          "If you have another issue to submit - please create another ticket! Thank you!",
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        "Ticket was successfully closed. ",
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "className": "hidden-xs",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "br",
+        },
+        "If you have another issue to submit - please create another ticket! Thank you!",
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": true,
+          "rules": Array [
+            "
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.56;
+    background: rgb(246, 246, 246);
+    padding: 9px 18px 10px;
+    border: 2px solid rgba(0, 0, 0, 0.03);
+    ",
+            "@media (max-width: 767px)",
+            " {
+        font-size: 14px;
+        line-height: 1.21;
+        padding: 15px 12px;
+    }
+",
+          ],
+        },
+        "displayName": "styled.div",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

@@ -38,7 +38,7 @@ class OpenedTicket extends React.Component {
                         <img src={iconUser} alt="User icon"/>
                     </div>
                     <MessageContent>
-                        <div className="comment-sender">{sender === email && "You" || sender}</div>
+                        <div className="comment-sender">{(sender === email && "You") || sender}</div>
                         <div className="comment-text">{comment}</div>
                         {attachments.length !== 0 && 
                             <React.Fragment>
