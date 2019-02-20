@@ -1,0 +1,2842 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless TransactionRow 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <TransactionsRow />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <ForwardRef
+          className="TransactionRow"
+        >
+          <ForwardRef>
+            <img
+              alt="State icon"
+              src="shape.svg"
+            />
+          </ForwardRef>
+          <ForwardRef>
+               
+          </ForwardRef>
+          <ForwardRef>
+            <a
+              href=""
+              target="_blank"
+            />
+          </ForwardRef>
+          <ForwardRef
+            className="hidden-xs"
+          >
+            <img
+              alt="State icon"
+              src="shape.svg"
+            />
+          </ForwardRef>
+          <ForwardRef>
+              
+          </ForwardRef>
+          <ForwardRef />
+          <ForwardRef
+            color="rgb(239, 32, 40)"
+          >
+            - undefined
+            <div
+              className="TransactionRow_extend active"
+            >
+              <svg
+                height="13"
+                width="6"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  fill="none"
+                  fillRule="evenodd"
+                >
+                  <path
+                    d="M-1319-321H121V822h-1440z"
+                    fill="transparent"
+                  />
+                  <text
+                    fill="#4381FC"
+                    fontFamily="Palatino-Bold, Palatino"
+                    fontSize="17"
+                    fontWeight="bold"
+                    letterSpacing=".523"
+                    transform="translate(-11 -5)"
+                  >
+                    <tspan
+                      x="11"
+                      y="18"
+                    >
+                      i
+                    </tspan>
+                  </text>
+                </g>
+              </svg>
+            </div>
+          </ForwardRef>
+        </ForwardRef>,
+        <ForwardRef>
+          <td
+            colspan="6"
+          >
+            <div
+              className="TransactionContent"
+            >
+              <TransactionsInfo
+                amount={NaN}
+                payementHashLink=""
+                rate_usdc={NaN}
+                transferHashLink=""
+                usdc_value={NaN}
+              />
+            </div>
+          </td>
+        </ForwardRef>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <ForwardRef>
+              <img
+                alt="State icon"
+                src="shape.svg"
+              />
+            </ForwardRef>,
+            <ForwardRef>
+                 
+            </ForwardRef>,
+            <ForwardRef>
+              <a
+                href=""
+                target="_blank"
+              />
+            </ForwardRef>,
+            <ForwardRef
+              className="hidden-xs"
+            >
+              <img
+                alt="State icon"
+                src="shape.svg"
+              />
+            </ForwardRef>,
+            <ForwardRef>
+                
+            </ForwardRef>,
+            <ForwardRef />,
+            <ForwardRef
+              color="rgb(239, 32, 40)"
+            >
+              - undefined
+              <div
+                className="TransactionRow_extend active"
+              >
+                <svg
+                  height="13"
+                  width="6"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    fill="none"
+                    fillRule="evenodd"
+                  >
+                    <path
+                      d="M-1319-321H121V822h-1440z"
+                      fill="transparent"
+                    />
+                    <text
+                      fill="#4381FC"
+                      fontFamily="Palatino-Bold, Palatino"
+                      fontSize="17"
+                      fontWeight="bold"
+                      letterSpacing=".523"
+                      transform="translate(-11 -5)"
+                    >
+                      <tspan
+                        x="11"
+                        y="18"
+                      >
+                        i
+                      </tspan>
+                    </text>
+                  </g>
+                </svg>
+              </div>
+            </ForwardRef>,
+          ],
+          "className": "TransactionRow",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <img
+                alt="State icon"
+                src="shape.svg"
+              />,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "State icon",
+                "src": "shape.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-ifAKCX",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                  "@media (min-width: 768px)",
+                  " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                  [Function],
+                  ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                ],
+              },
+              "displayName": "styled.td",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-ifAKCX",
+              "target": "td",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": Array [
+                undefined,
+                "   ",
+                undefined,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              undefined,
+              "   ",
+              undefined,
+            ],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-ifAKCX",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                  "@media (min-width: 768px)",
+                  " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                  [Function],
+                  ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                ],
+              },
+              "displayName": "styled.td",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-ifAKCX",
+              "target": "td",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <a
+                href=""
+                target="_blank"
+              />,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": null,
+                "href": "",
+                "target": "_blank",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "a",
+            },
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-ifAKCX",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                  "@media (min-width: 768px)",
+                  " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                  [Function],
+                  ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                ],
+              },
+              "displayName": "styled.td",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-ifAKCX",
+              "target": "td",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <img
+                alt="State icon"
+                src="shape.svg"
+              />,
+              "className": "hidden-xs",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "State icon",
+                "src": "shape.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-ifAKCX",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                  "@media (min-width: 768px)",
+                  " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                  [Function],
+                  ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                ],
+              },
+              "displayName": "styled.td",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-ifAKCX",
+              "target": "td",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": Array [
+                undefined,
+                "  ",
+                undefined,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              undefined,
+              "  ",
+              undefined,
+            ],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-ifAKCX",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                  "@media (min-width: 768px)",
+                  " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                  [Function],
+                  ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                ],
+              },
+              "displayName": "styled.td",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-ifAKCX",
+              "target": "td",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": undefined,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-ifAKCX",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                  "@media (min-width: 768px)",
+                  " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                  [Function],
+                  ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                ],
+              },
+              "displayName": "styled.td",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-ifAKCX",
+              "target": "td",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": Array [
+                "- undefined",
+                <div
+                  className="TransactionRow_extend active"
+                >
+                  <svg
+                    height="13"
+                    width="6"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g
+                      fill="none"
+                      fillRule="evenodd"
+                    >
+                      <path
+                        d="M-1319-321H121V822h-1440z"
+                        fill="transparent"
+                      />
+                      <text
+                        fill="#4381FC"
+                        fontFamily="Palatino-Bold, Palatino"
+                        fontSize="17"
+                        fontWeight="bold"
+                        letterSpacing=".523"
+                        transform="translate(-11 -5)"
+                      >
+                        <tspan
+                          x="11"
+                          y="18"
+                        >
+                          i
+                        </tspan>
+                      </text>
+                    </g>
+                  </svg>
+                </div>,
+              ],
+              "color": "rgb(239, 32, 40)",
+            },
+            "ref": null,
+            "rendered": Array [
+              "- undefined",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <svg
+                    height="13"
+                    width="6"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g
+                      fill="none"
+                      fillRule="evenodd"
+                    >
+                      <path
+                        d="M-1319-321H121V822h-1440z"
+                        fill="transparent"
+                      />
+                      <text
+                        fill="#4381FC"
+                        fontFamily="Palatino-Bold, Palatino"
+                        fontSize="17"
+                        fontWeight="bold"
+                        letterSpacing=".523"
+                        transform="translate(-11 -5)"
+                      >
+                        <tspan
+                          x="11"
+                          y="18"
+                        >
+                          i
+                        </tspan>
+                      </text>
+                    </g>
+                  </svg>,
+                  "className": "TransactionRow_extend active",
+                  "onClick": undefined,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <g
+                      fill="none"
+                      fillRule="evenodd"
+                    >
+                      <path
+                        d="M-1319-321H121V822h-1440z"
+                        fill="transparent"
+                      />
+                      <text
+                        fill="#4381FC"
+                        fontFamily="Palatino-Bold, Palatino"
+                        fontSize="17"
+                        fontWeight="bold"
+                        letterSpacing=".523"
+                        transform="translate(-11 -5)"
+                      >
+                        <tspan
+                          x="11"
+                          y="18"
+                        >
+                          i
+                        </tspan>
+                      </text>
+                    </g>,
+                    "height": "13",
+                    "width": "6",
+                    "xmlns": "http://www.w3.org/2000/svg",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": Array [
+                        <path
+                          d="M-1319-321H121V822h-1440z"
+                          fill="transparent"
+                        />,
+                        <text
+                          fill="#4381FC"
+                          fontFamily="Palatino-Bold, Palatino"
+                          fontSize="17"
+                          fontWeight="bold"
+                          letterSpacing=".523"
+                          transform="translate(-11 -5)"
+                        >
+                          <tspan
+                            x="11"
+                            y="18"
+                          >
+                            i
+                          </tspan>
+                        </text>,
+                      ],
+                      "fill": "none",
+                      "fillRule": "evenodd",
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "d": "M-1319-321H121V822h-1440z",
+                          "fill": "transparent",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": "path",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": <tspan
+                            x="11"
+                            y="18"
+                          >
+                            i
+                          </tspan>,
+                          "fill": "#4381FC",
+                          "fontFamily": "Palatino-Bold, Palatino",
+                          "fontSize": "17",
+                          "fontWeight": "bold",
+                          "letterSpacing": ".523",
+                          "transform": "translate(-11 -5)",
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "i",
+                            "x": "11",
+                            "y": "18",
+                          },
+                          "ref": null,
+                          "rendered": "i",
+                          "type": "tspan",
+                        },
+                        "type": "text",
+                      },
+                    ],
+                    "type": "g",
+                  },
+                  "type": "svg",
+                },
+                "type": "div",
+              },
+            ],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-ifAKCX",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                  "@media (min-width: 768px)",
+                  " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                  "@media (max-width: 767px)",
+                  " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                  [Function],
+                  ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                ],
+              },
+              "displayName": "styled.td",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-ifAKCX",
+              "target": "td",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bxivhb",
+            "isStatic": true,
+            "rules": Array [
+              "
+    .TransactionRow_extend {
+        cursor: pointer;
+        &, text {
+            transition: all .25s ease;
+        }
+        &:hover {
+            ",
+              "@media (min-width: 1025px)",
+              " {
+                background: #4381FC;
+                text {
+                    fill: white;
+                }
+            }
+        }
+    }
+    .TransactionRow_extend.active {
+        background: #4381FC;
+        text {
+            fill: white;
+        }
+    }
+    .TransactionContent {
+        flex-basis: 100%;
+        font-size: 16px;
+        height: auto;
+        background: rgba(174, 200, 255, .07);
+        padding: 35px 85px;
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 14px;
+            padding: 35px 28px 35px 15px;
+        }
+    }
+",
+            ],
+          },
+          "displayName": "styled.tr",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bxivhb",
+          "target": "tr",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": <td
+            colspan="6"
+          >
+            <div
+              className="TransactionContent"
+            >
+              <TransactionsInfo
+                amount={NaN}
+                payementHashLink=""
+                rate_usdc={NaN}
+                transferHashLink=""
+                usdc_value={NaN}
+              />
+            </div>
+          </td>,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="TransactionContent"
+            >
+              <TransactionsInfo
+                amount={NaN}
+                payementHashLink=""
+                rate_usdc={NaN}
+                transferHashLink=""
+                usdc_value={NaN}
+              />
+            </div>,
+            "colspan": "6",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <TransactionsInfo
+                amount={NaN}
+                payementHashLink=""
+                rate_usdc={NaN}
+                transferHashLink=""
+                usdc_value={NaN}
+              />,
+              "className": "TransactionContent",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "amount": NaN,
+                "currency": undefined,
+                "payementHashLink": "",
+                "rate_usdc": NaN,
+                "tokenPrice": undefined,
+                "tokens": undefined,
+                "transferHashLink": "",
+                "usdc_value": NaN,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          "type": "td",
+        },
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bxivhb",
+            "isStatic": true,
+            "rules": Array [
+              "
+    .TransactionRow_extend {
+        cursor: pointer;
+        &, text {
+            transition: all .25s ease;
+        }
+        &:hover {
+            ",
+              "@media (min-width: 1025px)",
+              " {
+                background: #4381FC;
+                text {
+                    fill: white;
+                }
+            }
+        }
+    }
+    .TransactionRow_extend.active {
+        background: #4381FC;
+        text {
+            fill: white;
+        }
+    }
+    .TransactionContent {
+        flex-basis: 100%;
+        font-size: 16px;
+        height: auto;
+        background: rgba(174, 200, 255, .07);
+        padding: 35px 85px;
+        ",
+              "@media (max-width: 767px)",
+              " {
+            font-size: 14px;
+            padding: 35px 28px 35px 15px;
+        }
+    }
+",
+            ],
+          },
+          "displayName": "styled.tr",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bxivhb",
+          "target": "tr",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <ForwardRef
+            className="TransactionRow"
+          >
+            <ForwardRef>
+              <img
+                alt="State icon"
+                src="shape.svg"
+              />
+            </ForwardRef>
+            <ForwardRef>
+                 
+            </ForwardRef>
+            <ForwardRef>
+              <a
+                href=""
+                target="_blank"
+              />
+            </ForwardRef>
+            <ForwardRef
+              className="hidden-xs"
+            >
+              <img
+                alt="State icon"
+                src="shape.svg"
+              />
+            </ForwardRef>
+            <ForwardRef>
+                
+            </ForwardRef>
+            <ForwardRef />
+            <ForwardRef
+              color="rgb(239, 32, 40)"
+            >
+              - undefined
+              <div
+                className="TransactionRow_extend active"
+              >
+                <svg
+                  height="13"
+                  width="6"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    fill="none"
+                    fillRule="evenodd"
+                  >
+                    <path
+                      d="M-1319-321H121V822h-1440z"
+                      fill="transparent"
+                    />
+                    <text
+                      fill="#4381FC"
+                      fontFamily="Palatino-Bold, Palatino"
+                      fontSize="17"
+                      fontWeight="bold"
+                      letterSpacing=".523"
+                      transform="translate(-11 -5)"
+                    >
+                      <tspan
+                        x="11"
+                        y="18"
+                      >
+                        i
+                      </tspan>
+                    </text>
+                  </g>
+                </svg>
+              </div>
+            </ForwardRef>
+          </ForwardRef>,
+          <ForwardRef>
+            <td
+              colspan="6"
+            >
+              <div
+                className="TransactionContent"
+              >
+                <TransactionsInfo
+                  amount={NaN}
+                  payementHashLink=""
+                  rate_usdc={NaN}
+                  transferHashLink=""
+                  usdc_value={NaN}
+                />
+              </div>
+            </td>
+          </ForwardRef>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <ForwardRef>
+                <img
+                  alt="State icon"
+                  src="shape.svg"
+                />
+              </ForwardRef>,
+              <ForwardRef>
+                   
+              </ForwardRef>,
+              <ForwardRef>
+                <a
+                  href=""
+                  target="_blank"
+                />
+              </ForwardRef>,
+              <ForwardRef
+                className="hidden-xs"
+              >
+                <img
+                  alt="State icon"
+                  src="shape.svg"
+                />
+              </ForwardRef>,
+              <ForwardRef>
+                  
+              </ForwardRef>,
+              <ForwardRef />,
+              <ForwardRef
+                color="rgb(239, 32, 40)"
+              >
+                - undefined
+                <div
+                  className="TransactionRow_extend active"
+                >
+                  <svg
+                    height="13"
+                    width="6"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g
+                      fill="none"
+                      fillRule="evenodd"
+                    >
+                      <path
+                        d="M-1319-321H121V822h-1440z"
+                        fill="transparent"
+                      />
+                      <text
+                        fill="#4381FC"
+                        fontFamily="Palatino-Bold, Palatino"
+                        fontSize="17"
+                        fontWeight="bold"
+                        letterSpacing=".523"
+                        transform="translate(-11 -5)"
+                      >
+                        <tspan
+                          x="11"
+                          y="18"
+                        >
+                          i
+                        </tspan>
+                      </text>
+                    </g>
+                  </svg>
+                </div>
+              </ForwardRef>,
+            ],
+            "className": "TransactionRow",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <img
+                  alt="State icon"
+                  src="shape.svg"
+                />,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "State icon",
+                  "src": "shape.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-ifAKCX",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                    "@media (min-width: 768px)",
+                    " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                    [Function],
+                    ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                  ],
+                },
+                "displayName": "styled.td",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-ifAKCX",
+                "target": "td",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": Array [
+                  undefined,
+                  "   ",
+                  undefined,
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                undefined,
+                "   ",
+                undefined,
+              ],
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-ifAKCX",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                    "@media (min-width: 768px)",
+                    " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                    [Function],
+                    ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                  ],
+                },
+                "displayName": "styled.td",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-ifAKCX",
+                "target": "td",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <a
+                  href=""
+                  target="_blank"
+                />,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": null,
+                  "href": "",
+                  "target": "_blank",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "a",
+              },
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-ifAKCX",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                    "@media (min-width: 768px)",
+                    " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                    [Function],
+                    ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                  ],
+                },
+                "displayName": "styled.td",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-ifAKCX",
+                "target": "td",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <img
+                  alt="State icon"
+                  src="shape.svg"
+                />,
+                "className": "hidden-xs",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "State icon",
+                  "src": "shape.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-ifAKCX",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                    "@media (min-width: 768px)",
+                    " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                    [Function],
+                    ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                  ],
+                },
+                "displayName": "styled.td",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-ifAKCX",
+                "target": "td",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": Array [
+                  undefined,
+                  "  ",
+                  undefined,
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                undefined,
+                "  ",
+                undefined,
+              ],
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-ifAKCX",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                    "@media (min-width: 768px)",
+                    " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                    [Function],
+                    ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                  ],
+                },
+                "displayName": "styled.td",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-ifAKCX",
+                "target": "td",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": undefined,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-ifAKCX",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                    "@media (min-width: 768px)",
+                    " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                    [Function],
+                    ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                  ],
+                },
+                "displayName": "styled.td",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-ifAKCX",
+                "target": "td",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": Array [
+                  "- undefined",
+                  <div
+                    className="TransactionRow_extend active"
+                  >
+                    <svg
+                      height="13"
+                      width="6"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g
+                        fill="none"
+                        fillRule="evenodd"
+                      >
+                        <path
+                          d="M-1319-321H121V822h-1440z"
+                          fill="transparent"
+                        />
+                        <text
+                          fill="#4381FC"
+                          fontFamily="Palatino-Bold, Palatino"
+                          fontSize="17"
+                          fontWeight="bold"
+                          letterSpacing=".523"
+                          transform="translate(-11 -5)"
+                        >
+                          <tspan
+                            x="11"
+                            y="18"
+                          >
+                            i
+                          </tspan>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>,
+                ],
+                "color": "rgb(239, 32, 40)",
+              },
+              "ref": null,
+              "rendered": Array [
+                "- undefined",
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <svg
+                      height="13"
+                      width="6"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g
+                        fill="none"
+                        fillRule="evenodd"
+                      >
+                        <path
+                          d="M-1319-321H121V822h-1440z"
+                          fill="transparent"
+                        />
+                        <text
+                          fill="#4381FC"
+                          fontFamily="Palatino-Bold, Palatino"
+                          fontSize="17"
+                          fontWeight="bold"
+                          letterSpacing=".523"
+                          transform="translate(-11 -5)"
+                        >
+                          <tspan
+                            x="11"
+                            y="18"
+                          >
+                            i
+                          </tspan>
+                        </text>
+                      </g>
+                    </svg>,
+                    "className": "TransactionRow_extend active",
+                    "onClick": undefined,
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": <g
+                        fill="none"
+                        fillRule="evenodd"
+                      >
+                        <path
+                          d="M-1319-321H121V822h-1440z"
+                          fill="transparent"
+                        />
+                        <text
+                          fill="#4381FC"
+                          fontFamily="Palatino-Bold, Palatino"
+                          fontSize="17"
+                          fontWeight="bold"
+                          letterSpacing=".523"
+                          transform="translate(-11 -5)"
+                        >
+                          <tspan
+                            x="11"
+                            y="18"
+                          >
+                            i
+                          </tspan>
+                        </text>
+                      </g>,
+                      "height": "13",
+                      "width": "6",
+                      "xmlns": "http://www.w3.org/2000/svg",
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": Array [
+                          <path
+                            d="M-1319-321H121V822h-1440z"
+                            fill="transparent"
+                          />,
+                          <text
+                            fill="#4381FC"
+                            fontFamily="Palatino-Bold, Palatino"
+                            fontSize="17"
+                            fontWeight="bold"
+                            letterSpacing=".523"
+                            transform="translate(-11 -5)"
+                          >
+                            <tspan
+                              x="11"
+                              y="18"
+                            >
+                              i
+                            </tspan>
+                          </text>,
+                        ],
+                        "fill": "none",
+                        "fillRule": "evenodd",
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "d": "M-1319-321H121V822h-1440z",
+                            "fill": "transparent",
+                          },
+                          "ref": null,
+                          "rendered": null,
+                          "type": "path",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": <tspan
+                              x="11"
+                              y="18"
+                            >
+                              i
+                            </tspan>,
+                            "fill": "#4381FC",
+                            "fontFamily": "Palatino-Bold, Palatino",
+                            "fontSize": "17",
+                            "fontWeight": "bold",
+                            "letterSpacing": ".523",
+                            "transform": "translate(-11 -5)",
+                          },
+                          "ref": null,
+                          "rendered": Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "i",
+                              "x": "11",
+                              "y": "18",
+                            },
+                            "ref": null,
+                            "rendered": "i",
+                            "type": "tspan",
+                          },
+                          "type": "text",
+                        },
+                      ],
+                      "type": "g",
+                    },
+                    "type": "svg",
+                  },
+                  "type": "div",
+                },
+              ],
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-ifAKCX",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+    text-align: center;
+    &:not(.TransactionContent) {
+        height: 66px;
+        white-space: nowrap;
+        font-size: 16px;
+        border-top: 1px solid rgba(151, 151, 151, .2);
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            font-size: 14px;
+        }
+    }
+    &:nth-of-type(1) {
+        padding-left: 20px;
+        ",
+                    "@media (min-width: 768px)",
+                    " {
+            display: none;
+        }
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    &:nth-of-type(2) {
+        padding-left: 40px;
+        ",
+                    "@media (max-width: 767px)",
+                    " {
+            padding-left: 15px;
+            text-align: left;
+        }
+    }
+    &:nth-of-type(3) {
+        a {
+            width: 85%;
+            display: block;
+            overflow-x: scroll;
+            margin: 0 auto;
+            height: 100%;
+            padding-top: 23px;
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 50px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,.1);
+                border-radius: 10px;
+                &:hover {
+                    background-color: rgba(0,0,0,.3);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        width: 50px;
+        background: 2%;
+        img {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            left: -30px;
+        }
+    }
+    &:nth-of-type(7) {
+        color: ",
+                    [Function],
+                    ";
+        position: relative;
+        right: 4px;
+        div {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(151, 151, 151, .5);
+            border-radius: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+",
+                  ],
+                },
+                "displayName": "styled.td",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-ifAKCX",
+                "target": "td",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+            },
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bxivhb",
+              "isStatic": true,
+              "rules": Array [
+                "
+    .TransactionRow_extend {
+        cursor: pointer;
+        &, text {
+            transition: all .25s ease;
+        }
+        &:hover {
+            ",
+                "@media (min-width: 1025px)",
+                " {
+                background: #4381FC;
+                text {
+                    fill: white;
+                }
+            }
+        }
+    }
+    .TransactionRow_extend.active {
+        background: #4381FC;
+        text {
+            fill: white;
+        }
+    }
+    .TransactionContent {
+        flex-basis: 100%;
+        font-size: 16px;
+        height: auto;
+        background: rgba(174, 200, 255, .07);
+        padding: 35px 85px;
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 14px;
+            padding: 35px 28px 35px 15px;
+        }
+    }
+",
+              ],
+            },
+            "displayName": "styled.tr",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bxivhb",
+            "target": "tr",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <td
+              colspan="6"
+            >
+              <div
+                className="TransactionContent"
+              >
+                <TransactionsInfo
+                  amount={NaN}
+                  payementHashLink=""
+                  rate_usdc={NaN}
+                  transferHashLink=""
+                  usdc_value={NaN}
+                />
+              </div>
+            </td>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <div
+                className="TransactionContent"
+              >
+                <TransactionsInfo
+                  amount={NaN}
+                  payementHashLink=""
+                  rate_usdc={NaN}
+                  transferHashLink=""
+                  usdc_value={NaN}
+                />
+              </div>,
+              "colspan": "6",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <TransactionsInfo
+                  amount={NaN}
+                  payementHashLink=""
+                  rate_usdc={NaN}
+                  transferHashLink=""
+                  usdc_value={NaN}
+                />,
+                "className": "TransactionContent",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "amount": NaN,
+                  "currency": undefined,
+                  "payementHashLink": "",
+                  "rate_usdc": NaN,
+                  "tokenPrice": undefined,
+                  "tokens": undefined,
+                  "transferHashLink": "",
+                  "usdc_value": NaN,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": "div",
+            },
+            "type": "td",
+          },
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bxivhb",
+              "isStatic": true,
+              "rules": Array [
+                "
+    .TransactionRow_extend {
+        cursor: pointer;
+        &, text {
+            transition: all .25s ease;
+        }
+        &:hover {
+            ",
+                "@media (min-width: 1025px)",
+                " {
+                background: #4381FC;
+                text {
+                    fill: white;
+                }
+            }
+        }
+    }
+    .TransactionRow_extend.active {
+        background: #4381FC;
+        text {
+            fill: white;
+        }
+    }
+    .TransactionContent {
+        flex-basis: 100%;
+        font-size: 16px;
+        height: auto;
+        background: rgba(174, 200, 255, .07);
+        padding: 35px 85px;
+        ",
+                "@media (max-width: 767px)",
+                " {
+            font-size: 14px;
+            padding: 35px 28px 35px 15px;
+        }
+    }
+",
+              ],
+            },
+            "displayName": "styled.tr",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bxivhb",
+            "target": "tr",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

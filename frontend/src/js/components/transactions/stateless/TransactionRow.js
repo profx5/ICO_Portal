@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
@@ -8,7 +9,7 @@ import iconCheckGreen from 'img/check-green.svg';
 import iconReload from 'img/shape.svg';
 
 
-const TransactionsRow = ({state, onIconClickHandler, openedTransaction, id, date, time, transferTxnHash, paymentTxnId, amount, currency, usdc_value, tokens, rate_usdc, bonus_percent, tokenPrice}) => {
+const TransactionsRow = ({state, onIconClickHandler, openedTransaction, id, date, time, transferTxnHash, paymentTxnId, amount, currency, usdc_value, tokens, rate_usdc, tokenPrice}) => {
     const isTokenRise = tokens > 0 ? true : false;
     const chainResolver = {
         ETH: 'https://rinkeby.etherscan.io/tx/',
@@ -71,7 +72,6 @@ const TransactionsRow = ({state, onIconClickHandler, openedTransaction, id, date
                                 currency={currency}
                                 rate_usdc={parseFloat(rate_usdc)}
                                 usdc_value={parseFloat(usdc_value)}
-                                bonus_percent={parseFloat(bonus_percent)}
                                 tokens={tokens}
                             />
                         </div>
@@ -82,6 +82,23 @@ const TransactionsRow = ({state, onIconClickHandler, openedTransaction, id, date
     )
 }
 
+
+TransactionsRow.propTypes = {
+    state: PropTypes.string,
+    onIconClickHandler: PropTypes.func,
+    openedTransaction: PropTypes.number,
+    id: PropTypes.number,
+    date: PropTypes.string,
+    time: PropTypes.string,
+    transferTxnHash: PropTypes.string,
+    paymentTxnId: PropTypes.string,
+    amount: PropTypes.number,
+    currency: PropTypes.string,
+    usdc_value: PropTypes.number,
+    tokens: PropTypes.number,
+    rate_usdc: PropTypes.number,
+    tokenPrice: PropTypes.number,
+}
 
 export default TransactionsRow;
 
