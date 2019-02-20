@@ -6,7 +6,7 @@ import {media} from 'js/utils/media';
 import iconCheckGreen from 'img/check-green.svg';
 
 
-const TransactionsInfo = ({transferHashLink, payementHashLink, amount, currency, rate_usdc = 0, usdc_value = 0, tokens, tokenPrice}) => {
+const TransactionsInfo = ({transferHashLink, payementHashLink, amount, currency, rate_usdc, usdc_value, tokens, tokenPrice}) => {
 
     const rateUSD = (rate_usdc / 100).toFixed(2),
         USDValue = usdc_value.toFixed(2);

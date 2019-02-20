@@ -9,7 +9,7 @@ import iconResolved from 'img/check-green.svg';
 import iconPending from 'img/icon_transit-amber.svg';
 
 
-const Ticket = ({email = '', id = null, status = '', title = '', lastReplyBy = '', created = null, onClickHandler}) => {
+const Ticket = ({email, id, status, title, lastReplyBy, created, onClickHandler}) => {
 
     return (
         <StyledLink to={`/user_office/support/ticket/${id}`} onClick={onClickHandler.bind(this, id)}>

@@ -3,7 +3,9 @@
 exports[`should render stateless TransactionInfo 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <TransactionsInfo />,
+  Symbol(enzyme.__unrendered__): <TransactionsInfo
+    usdc_value={0}
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -65,7 +67,7 @@ ShallowWrapper {
               className="Info_partContent"
             >
               <div>
-                undefined undefined x 0.00 USD = 0.00 USD
+                undefined undefined x NaN USD = 0.00 USD
                 <br />
               </div>
               <div>
@@ -348,7 +350,7 @@ ShallowWrapper {
               className="Info_partContent"
             >
               <div>
-                undefined undefined x 0.00 USD = 0.00 USD
+                undefined undefined x NaN USD = 0.00 USD
                 <br />
               </div>
               <div>
@@ -378,7 +380,7 @@ ShallowWrapper {
                 className="Info_partContent"
               >
                 <div>
-                  undefined undefined x 0.00 USD = 0.00 USD
+                  undefined undefined x NaN USD = 0.00 USD
                   <br />
                 </div>
                 <div>
@@ -414,7 +416,7 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <div>
-                    undefined undefined x 0.00 USD = 0.00 USD
+                    undefined undefined x NaN USD = 0.00 USD
                     <br />
                   </div>,
                   <div>
@@ -436,13 +438,13 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": Array [
-                      "undefined undefined x 0.00 USD = 0.00 USD",
+                      "undefined undefined x NaN USD = 0.00 USD",
                       <br />,
                     ],
                   },
                   "ref": null,
                   "rendered": Array [
-                    "undefined undefined x 0.00 USD = 0.00 USD",
+                    "undefined undefined x NaN USD = 0.00 USD",
                     Object {
                       "instance": null,
                       "key": undefined,
@@ -714,7 +716,7 @@ ShallowWrapper {
                 className="Info_partContent"
               >
                 <div>
-                  undefined undefined x 0.00 USD = 0.00 USD
+                  undefined undefined x NaN USD = 0.00 USD
                   <br />
                 </div>
                 <div>
@@ -997,7 +999,7 @@ ShallowWrapper {
                 className="Info_partContent"
               >
                 <div>
-                  undefined undefined x 0.00 USD = 0.00 USD
+                  undefined undefined x NaN USD = 0.00 USD
                   <br />
                 </div>
                 <div>
@@ -1027,7 +1029,7 @@ ShallowWrapper {
                   className="Info_partContent"
                 >
                   <div>
-                    undefined undefined x 0.00 USD = 0.00 USD
+                    undefined undefined x NaN USD = 0.00 USD
                     <br />
                   </div>
                   <div>
@@ -1063,7 +1065,7 @@ ShallowWrapper {
                 "props": Object {
                   "children": Array [
                     <div>
-                      undefined undefined x 0.00 USD = 0.00 USD
+                      undefined undefined x NaN USD = 0.00 USD
                       <br />
                     </div>,
                     <div>
@@ -1085,13 +1087,13 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "children": Array [
-                        "undefined undefined x 0.00 USD = 0.00 USD",
+                        "undefined undefined x NaN USD = 0.00 USD",
                         <br />,
                       ],
                     },
                     "ref": null,
                     "rendered": Array [
-                      "undefined undefined x 0.00 USD = 0.00 USD",
+                      "undefined undefined x NaN USD = 0.00 USD",
                       Object {
                         "instance": null,
                         "key": undefined,

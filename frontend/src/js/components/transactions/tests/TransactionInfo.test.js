@@ -8,6 +8,10 @@ import TransactionInfo from 'js/components/transactions/stateless/TransactionInf
 configure({ adapter: new Adapter() });
 
 it('should render stateless TransactionInfo', () => {
-    const component = shallow(<TransactionInfo/>);
+    const props = {
+        usdc_value: 0
+    }
+    const component = shallow(<TransactionInfo {...props}/>);
+
     expect(component).toMatchSnapshot();
 })
