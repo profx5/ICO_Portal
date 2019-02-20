@@ -5,6 +5,7 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <SupportTabs
     tabClickHandler={[MockFunction]}
+    ticketsAmount={0}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -22,7 +23,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <ForwardRef
-          active={true}
+          active={false}
           onClick={[Function]}
         >
           New question
@@ -42,7 +43,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "active": true,
+          "active": false,
           "children": "New question",
           "onClick": [Function],
         },
@@ -189,7 +190,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <ForwardRef
-            active={true}
+            active={false}
             onClick={[Function]}
           >
             New question
@@ -209,7 +210,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "active": true,
+            "active": false,
             "children": "New question",
             "onClick": [Function],
           },

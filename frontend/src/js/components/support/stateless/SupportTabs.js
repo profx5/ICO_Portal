@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
 
-const SupportTabs = ({ticketsAmount = 0, activeTab = 1, isTicketOpened = null, tabClickHandler}) => {
+const SupportTabs = ({ticketsAmount, activeTab, isTicketOpened, tabClickHandler}) => {
     return (
         <Wrapper>
             <Tab onClick={tabClickHandler.bind(this, 1)} active={!isTicketOpened && activeTab === 1 ? true : false}>New question</Tab>

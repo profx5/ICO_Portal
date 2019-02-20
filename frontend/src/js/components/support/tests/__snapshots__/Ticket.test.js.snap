@@ -32,9 +32,7 @@ ShallowWrapper {
               />
             </div>
             <div>
-              <span>
-                
-              </span>
+              <span />
               <span>
                 Pending
               </span>
@@ -57,13 +55,13 @@ ShallowWrapper {
               You
             </span>
             <span>
-              Message sent Invalid date
+              Message sent 20 February 2019
             </span>
           </div>
         </ForwardRef>,
       ],
       "onClick": [Function],
-      "to": "/user_office/support/ticket/null",
+      "to": "/user_office/support/ticket/undefined",
     },
     "ref": null,
     "rendered": Array [
@@ -81,9 +79,7 @@ ShallowWrapper {
               />
             </div>
             <div>
-              <span>
-                
-              </span>
+              <span />
               <span>
                 Pending
               </span>
@@ -104,9 +100,7 @@ ShallowWrapper {
                 />
               </div>,
               <div>
-                <span>
-                  
-                </span>
+                <span />
                 <span>
                   Pending
                 </span>
@@ -146,9 +140,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": Array [
-                  <span>
-                    
-                  </span>,
+                  <span />,
                   <span>
                     Pending
                   </span>,
@@ -161,10 +153,10 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": "",
+                    "children": undefined,
                   },
                   "ref": null,
-                  "rendered": "",
+                  "rendered": null,
                   "type": "span",
                 },
                 Object {
@@ -266,7 +258,7 @@ ShallowWrapper {
                 You
               </span>
               <span>
-                Message sent Invalid date
+                Message sent 20 February 2019
               </span>
             </div>,
           ],
@@ -308,7 +300,7 @@ ShallowWrapper {
                   You
                 </span>,
                 <span>
-                  Message sent Invalid date
+                  Message sent 20 February 2019
                 </span>,
               ],
               "className": "hidden-xs",
@@ -331,10 +323,10 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": "Message sent Invalid date",
+                  "children": "Message sent 20 February 2019",
                 },
                 "ref": null,
-                "rendered": "Message sent Invalid date",
+                "rendered": "Message sent 20 February 2019",
                 "type": "span",
               },
             ],
@@ -441,9 +433,7 @@ ShallowWrapper {
                 />
               </div>
               <div>
-                <span>
-                  
-                </span>
+                <span />
                 <span>
                   Pending
                 </span>
@@ -466,13 +456,13 @@ ShallowWrapper {
                 You
               </span>
               <span>
-                Message sent Invalid date
+                Message sent 20 February 2019
               </span>
             </div>
           </ForwardRef>,
         ],
         "onClick": [Function],
-        "to": "/user_office/support/ticket/null",
+        "to": "/user_office/support/ticket/undefined",
       },
       "ref": null,
       "rendered": Array [
@@ -490,9 +480,7 @@ ShallowWrapper {
                 />
               </div>
               <div>
-                <span>
-                  
-                </span>
+                <span />
                 <span>
                   Pending
                 </span>
@@ -513,9 +501,7 @@ ShallowWrapper {
                   />
                 </div>,
                 <div>
-                  <span>
-                    
-                  </span>
+                  <span />
                   <span>
                     Pending
                   </span>
@@ -555,9 +541,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": Array [
-                    <span>
-                      
-                    </span>,
+                    <span />,
                     <span>
                       Pending
                     </span>,
@@ -570,10 +554,10 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "host",
                     "props": Object {
-                      "children": "",
+                      "children": undefined,
                     },
                     "ref": null,
-                    "rendered": "",
+                    "rendered": null,
                     "type": "span",
                   },
                   Object {
@@ -675,7 +659,7 @@ ShallowWrapper {
                   You
                 </span>
                 <span>
-                  Message sent Invalid date
+                  Message sent 20 February 2019
                 </span>
               </div>,
             ],
@@ -717,7 +701,7 @@ ShallowWrapper {
                     You
                   </span>,
                   <span>
-                    Message sent Invalid date
+                    Message sent 20 February 2019
                   </span>,
                 ],
                 "className": "hidden-xs",
@@ -740,10 +724,10 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": "Message sent Invalid date",
+                    "children": "Message sent 20 February 2019",
                   },
                   "ref": null,
-                  "rendered": "Message sent Invalid date",
+                  "rendered": "Message sent 20 February 2019",
                   "type": "span",
                 },
               ],

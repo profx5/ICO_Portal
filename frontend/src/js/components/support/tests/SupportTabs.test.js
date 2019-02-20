@@ -10,7 +10,8 @@ configure({ adapter: new Adapter() });
 
 it('should render stateless SupportTabs', () => {
     const props = {
-        tabClickHandler: jest.fn()
+        tabClickHandler: jest.fn(),
+        ticketsAmount: 0
     }
     const component = shallow(<SupportTabs {...props}/>);
     expect(component).toMatchSnapshot();
