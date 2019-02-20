@@ -1,15 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import moment from "moment/moment";
 import {media} from 'js/utils/media';
-import changeLocation from 'js/utils/changeLocation';
 
 import iconUser from 'img/user.svg';
 import iconResolved from 'img/check-green.svg';
 import iconPending from 'img/icon_transit-amber.svg';
 
 
-const Ticket = ({email, id, status, title, lastReplyBy, created, onClickHandler}) => {
+const Ticket = ({email = '', id = null, status = '', title = '', lastReplyBy = '', created = null, onClickHandler}) => {
 
     return (
         <StyledLink to={`/user_office/support/ticket/${id}`} onClick={onClickHandler.bind(this, id)}>
@@ -39,6 +39,16 @@ const Ticket = ({email, id, status, title, lastReplyBy, created, onClickHandler}
     )
 }
 
+
+Ticket.propTypes = {
+    email: PropTypes.string,
+    id: PropTypes.number,
+    status: PropTypes.string,
+    title: PropTypes.string,
+    lastReplyBy: PropTypes.string,
+    created: PropTypes.object,
+    onClickHandler: PropTypes.func
+}
 
 export default Ticket;
 

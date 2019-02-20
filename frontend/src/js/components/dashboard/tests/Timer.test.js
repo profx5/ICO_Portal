@@ -16,6 +16,6 @@ it('should render stateless Timer', () => {
             seconds: 0
         }
     }
-    const component = shallow(<Timer countdownTime={props.countdownTime}/>);
+    const component = shallow(<Timer {...props}/>);
     expect(component).toMatchSnapshot();
 })

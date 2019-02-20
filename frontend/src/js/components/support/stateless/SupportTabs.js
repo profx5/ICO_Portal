@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
 
-const SupportTabs = ({ticketsAmount, activeTab, isTicketOpened, tabClickHandler}) => {
+const SupportTabs = ({ticketsAmount = 0, activeTab = 1, isTicketOpened = null, tabClickHandler}) => {
     return (
         <Wrapper>
             <Tab onClick={tabClickHandler.bind(this, 1)} active={!isTicketOpened && activeTab === 1 ? true : false}>New question</Tab>
@@ -12,6 +13,13 @@ const SupportTabs = ({ticketsAmount, activeTab, isTicketOpened, tabClickHandler}
     )
 }
 
+
+SupportTabs.propTypes = {
+    ticketsAmount: PropTypes.number,
+    activeTab: PropTypes.number,
+    isTicketOpened: PropTypes.number,
+    tabClickHandler: PropTypes.func,
+}
 
 export default SupportTabs;
 

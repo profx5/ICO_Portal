@@ -3,15 +3,15 @@ import {configure, shallow} from 'enzyme';
 import jest from 'jest-mock';
 import Adapter from 'enzyme-adapter-react-16';
 
-import MobileNav from 'js/components/layout/stateless/MobileNav';
+import Ticket from 'js/components/support/stateless/Ticket';
 
 
 configure({ adapter: new Adapter() });
 
-it('should render stateless MobileNav', () => {
+it('should render stateless Ticket', () => {
     const props = {
-        changeSupportActiveTab: jest.fn()
+        onClickHandler: jest.fn()
     }
-    const component = shallow(<MobileNav {...props}/>);
+    const component = shallow(<Ticket {...props}/>);
     expect(component).toMatchSnapshot();
 })

@@ -12,6 +12,6 @@ it('should render stateless Nav', () => {
     const props = {
         changeSupportActiveTab: jest.fn()
     }
-    const component = shallow(<Nav changeSupportActiveTab={props.changeSupportActiveTab}/>);
+    const component = shallow(<Nav {...props}/>);
     expect(component).toMatchSnapshot();
 })
