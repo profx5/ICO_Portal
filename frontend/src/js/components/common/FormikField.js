@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 import {media} from 'js/utils/media';
@@ -23,6 +24,17 @@ const FormikField = ({errors, touched, labelText, placeholder, className, option
     );
 }
 
+
+FormikField.propTypes = {
+    errors: PropTypes.object,
+    touched: PropTypes.object,
+    labelText: PropTypes.string,
+    placeholder: PropTypes.string,
+    className: PropTypes.string,
+    options: PropTypes.object,
+    name: PropTypes.string,
+    required: PropTypes.bool,
+}
 
 export default FormikField;
 

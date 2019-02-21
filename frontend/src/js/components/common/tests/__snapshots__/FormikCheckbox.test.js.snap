@@ -1,0 +1,439 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless FormikCheckbox 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <FormikCheckbox
+    errors={
+      Object {
+        "name": "name",
+      }
+    }
+    handler={[MockFunction]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": <ForwardRef>
+        <ForwardRef
+          component="input"
+          id="checkbox-undefined"
+          type="checkbox"
+        />
+        <ForwardRef
+          className=""
+          htmlFor="checkbox-undefined"
+        />
+      </ForwardRef>,
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <ForwardRef
+            component="input"
+            id="checkbox-undefined"
+            type="checkbox"
+          />,
+          <ForwardRef
+            className=""
+            htmlFor="checkbox-undefined"
+          />,
+          undefined,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "checked": undefined,
+            "className": undefined,
+            "component": "input",
+            "id": "checkbox-undefined",
+            "name": undefined,
+            "type": "checkbox",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "WrappedComponent": [Function],
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bxivhb",
+              "isStatic": true,
+              "rules": Array [
+                "
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    margin-left: 3px;
+    margin-top: 3px;
+    &:checked + label:before {
+        background: url(",
+                "icon_check.svg",
+                ") no-repeat center;
+    }
+",
+              ],
+            },
+            "displayName": "Styled(FormikConnect(FieldInner))",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bxivhb",
+            "target": [Function],
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+            Symbol(Symbol.hasInstance): [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              undefined,
+              undefined,
+            ],
+            "className": "",
+            "htmlFor": "checkbox-undefined",
+          },
+          "ref": null,
+          "rendered": Array [
+            undefined,
+            undefined,
+          ],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-ifAKCX",
+              "isStatic": true,
+              "rules": Array [
+                "
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: #0a0a0a;
+    margin-right: 20px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    ",
+                "@media (max-width: 767px)",
+                " {
+        font-size: 12px;
+    }
+    &:before {
+        content: '';
+        width: 20px;
+        min-width: 20px;
+        height: 20px;
+        min-height: 20px;
+        border: 1px solid #d6dfe6;
+        margin-right: 8px;
+    }
+    &.isInvalid:before {
+        border-color: rgb(242,109,109);
+    }
+",
+              ],
+            },
+            "displayName": "styled.label",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-ifAKCX",
+            "target": "label",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        undefined,
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-htpNat",
+          "isStatic": true,
+          "rules": Array [
+            "
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+",
+          ],
+        },
+        "displayName": "styled.div",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-htpNat",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bwzfXH",
+        "isStatic": true,
+        "rules": Array [
+          "
+    position: relative;
+    height: 100%;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bwzfXH",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": <ForwardRef>
+          <ForwardRef
+            component="input"
+            id="checkbox-undefined"
+            type="checkbox"
+          />
+          <ForwardRef
+            className=""
+            htmlFor="checkbox-undefined"
+          />
+        </ForwardRef>,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <ForwardRef
+              component="input"
+              id="checkbox-undefined"
+              type="checkbox"
+            />,
+            <ForwardRef
+              className=""
+              htmlFor="checkbox-undefined"
+            />,
+            undefined,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "checked": undefined,
+              "className": undefined,
+              "component": "input",
+              "id": "checkbox-undefined",
+              "name": undefined,
+              "type": "checkbox",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "WrappedComponent": [Function],
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-bxivhb",
+                "isStatic": true,
+                "rules": Array [
+                  "
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    margin-left: 3px;
+    margin-top: 3px;
+    &:checked + label:before {
+        background: url(",
+                  "icon_check.svg",
+                  ") no-repeat center;
+    }
+",
+                ],
+              },
+              "displayName": "Styled(FormikConnect(FieldInner))",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-bxivhb",
+              "target": [Function],
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+              Symbol(Symbol.hasInstance): [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": Array [
+                undefined,
+                undefined,
+              ],
+              "className": "",
+              "htmlFor": "checkbox-undefined",
+            },
+            "ref": null,
+            "rendered": Array [
+              undefined,
+              undefined,
+            ],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-ifAKCX",
+                "isStatic": true,
+                "rules": Array [
+                  "
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: #0a0a0a;
+    margin-right: 20px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    ",
+                  "@media (max-width: 767px)",
+                  " {
+        font-size: 12px;
+    }
+    &:before {
+        content: '';
+        width: 20px;
+        min-width: 20px;
+        height: 20px;
+        min-height: 20px;
+        border: 1px solid #d6dfe6;
+        margin-right: 8px;
+    }
+    &.isInvalid:before {
+        border-color: rgb(242,109,109);
+    }
+",
+                ],
+              },
+              "displayName": "styled.label",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-ifAKCX",
+              "target": "label",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          undefined,
+        ],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-htpNat",
+            "isStatic": true,
+            "rules": Array [
+              "
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-htpNat",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bwzfXH",
+          "isStatic": true,
+          "rules": Array [
+            "
+    position: relative;
+    height: 100%;
+",
+          ],
+        },
+        "displayName": "styled.div",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bwzfXH",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

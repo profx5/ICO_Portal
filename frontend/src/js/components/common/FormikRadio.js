@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Field } from 'formik';
@@ -33,6 +34,14 @@ const FormikRadio = ({labelText, name, values, options, is_pep}) => {
     );
 }
 
+
+FormikRadio.propTypes = {
+    labelText: PropTypes.string,
+    name: PropTypes.string,
+    values: PropTypes.string,
+    options: PropTypes.array.isRequired,
+    is_pep: PropTypes.bool  
+}
 
 export default FormikRadio;
 

@@ -1,0 +1,1184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless Loader 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Loader />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <ForwardRef>
+          <ForwardRef
+            animationDelay={0.1}
+            bgColor="#36b"
+            size={15}
+          />
+        </ForwardRef>,
+        <ForwardRef>
+          <ForwardRef
+            animationDelay={0.2}
+            bgColor="#36b"
+            size={15}
+          />
+        </ForwardRef>,
+        <ForwardRef>
+          <ForwardRef
+            animationDelay={0.30000000000000004}
+            bgColor="#36b"
+            size={15}
+          />
+        </ForwardRef>,
+        <ForwardRef>
+          <ForwardRef
+            animationDelay={0.4}
+            bgColor="#36b"
+            size={15}
+          />
+        </ForwardRef>,
+        <ForwardRef>
+          <ForwardRef
+            animationDelay={0.5}
+            bgColor="#36b"
+            size={15}
+          />
+        </ForwardRef>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": "1",
+        "nodeType": "function",
+        "props": Object {
+          "children": <ForwardRef
+            animationDelay={0.1}
+            bgColor="#36b"
+            size={15}
+          />,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "animationDelay": 0.1,
+            "bgColor": "#36b",
+            "size": 15,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-htpNat",
+              "isStatic": false,
+              "rules": Array [
+                "
+    border-radius: 100px;
+    background: ",
+                [Function],
+                ";
+    animation: ",
+                Keyframes {
+                  "id": "sc-keyframes-fNcrEv",
+                  "inject": [Function],
+                  "name": "fNcrEv",
+                  "rules": Array [
+                    "@-webkit-keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                    "@keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                  ],
+                  "toString": [Function],
+                },
+                " 1.5s infinite ",
+                [Function],
+                "s;
+    width: ",
+                [Function],
+                "px;
+    height: ",
+                [Function],
+                "px;
+    ",
+                "@media (max-width: 767px)",
+                " {
+        width: ",
+                [Function],
+                "px;
+        height: ",
+                [Function],
+                "px;
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-htpNat",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": "2",
+        "nodeType": "function",
+        "props": Object {
+          "children": <ForwardRef
+            animationDelay={0.2}
+            bgColor="#36b"
+            size={15}
+          />,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "animationDelay": 0.2,
+            "bgColor": "#36b",
+            "size": 15,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-htpNat",
+              "isStatic": false,
+              "rules": Array [
+                "
+    border-radius: 100px;
+    background: ",
+                [Function],
+                ";
+    animation: ",
+                Keyframes {
+                  "id": "sc-keyframes-fNcrEv",
+                  "inject": [Function],
+                  "name": "fNcrEv",
+                  "rules": Array [
+                    "@-webkit-keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                    "@keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                  ],
+                  "toString": [Function],
+                },
+                " 1.5s infinite ",
+                [Function],
+                "s;
+    width: ",
+                [Function],
+                "px;
+    height: ",
+                [Function],
+                "px;
+    ",
+                "@media (max-width: 767px)",
+                " {
+        width: ",
+                [Function],
+                "px;
+        height: ",
+                [Function],
+                "px;
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-htpNat",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": "3",
+        "nodeType": "function",
+        "props": Object {
+          "children": <ForwardRef
+            animationDelay={0.30000000000000004}
+            bgColor="#36b"
+            size={15}
+          />,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "animationDelay": 0.30000000000000004,
+            "bgColor": "#36b",
+            "size": 15,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-htpNat",
+              "isStatic": false,
+              "rules": Array [
+                "
+    border-radius: 100px;
+    background: ",
+                [Function],
+                ";
+    animation: ",
+                Keyframes {
+                  "id": "sc-keyframes-fNcrEv",
+                  "inject": [Function],
+                  "name": "fNcrEv",
+                  "rules": Array [
+                    "@-webkit-keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                    "@keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                  ],
+                  "toString": [Function],
+                },
+                " 1.5s infinite ",
+                [Function],
+                "s;
+    width: ",
+                [Function],
+                "px;
+    height: ",
+                [Function],
+                "px;
+    ",
+                "@media (max-width: 767px)",
+                " {
+        width: ",
+                [Function],
+                "px;
+        height: ",
+                [Function],
+                "px;
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-htpNat",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": "4",
+        "nodeType": "function",
+        "props": Object {
+          "children": <ForwardRef
+            animationDelay={0.4}
+            bgColor="#36b"
+            size={15}
+          />,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "animationDelay": 0.4,
+            "bgColor": "#36b",
+            "size": 15,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-htpNat",
+              "isStatic": false,
+              "rules": Array [
+                "
+    border-radius: 100px;
+    background: ",
+                [Function],
+                ";
+    animation: ",
+                Keyframes {
+                  "id": "sc-keyframes-fNcrEv",
+                  "inject": [Function],
+                  "name": "fNcrEv",
+                  "rules": Array [
+                    "@-webkit-keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                    "@keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                  ],
+                  "toString": [Function],
+                },
+                " 1.5s infinite ",
+                [Function],
+                "s;
+    width: ",
+                [Function],
+                "px;
+    height: ",
+                [Function],
+                "px;
+    ",
+                "@media (max-width: 767px)",
+                " {
+        width: ",
+                [Function],
+                "px;
+        height: ",
+                [Function],
+                "px;
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-htpNat",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": "5",
+        "nodeType": "function",
+        "props": Object {
+          "children": <ForwardRef
+            animationDelay={0.5}
+            bgColor="#36b"
+            size={15}
+          />,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "animationDelay": 0.5,
+            "bgColor": "#36b",
+            "size": 15,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-htpNat",
+              "isStatic": false,
+              "rules": Array [
+                "
+    border-radius: 100px;
+    background: ",
+                [Function],
+                ";
+    animation: ",
+                Keyframes {
+                  "id": "sc-keyframes-fNcrEv",
+                  "inject": [Function],
+                  "name": "fNcrEv",
+                  "rules": Array [
+                    "@-webkit-keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                    "@keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                  ],
+                  "toString": [Function],
+                },
+                " 1.5s infinite ",
+                [Function],
+                "s;
+    width: ",
+                [Function],
+                "px;
+    height: ",
+                [Function],
+                "px;
+    ",
+                "@media (max-width: 767px)",
+                " {
+        width: ",
+                [Function],
+                "px;
+        height: ",
+                [Function],
+                "px;
+    }
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-htpNat",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+    ],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": true,
+        "rules": Array [
+          "
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <ForwardRef>
+            <ForwardRef
+              animationDelay={0.1}
+              bgColor="#36b"
+              size={15}
+            />
+          </ForwardRef>,
+          <ForwardRef>
+            <ForwardRef
+              animationDelay={0.2}
+              bgColor="#36b"
+              size={15}
+            />
+          </ForwardRef>,
+          <ForwardRef>
+            <ForwardRef
+              animationDelay={0.30000000000000004}
+              bgColor="#36b"
+              size={15}
+            />
+          </ForwardRef>,
+          <ForwardRef>
+            <ForwardRef
+              animationDelay={0.4}
+              bgColor="#36b"
+              size={15}
+            />
+          </ForwardRef>,
+          <ForwardRef>
+            <ForwardRef
+              animationDelay={0.5}
+              bgColor="#36b"
+              size={15}
+            />
+          </ForwardRef>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": "1",
+          "nodeType": "function",
+          "props": Object {
+            "children": <ForwardRef
+              animationDelay={0.1}
+              bgColor="#36b"
+              size={15}
+            />,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "animationDelay": 0.1,
+              "bgColor": "#36b",
+              "size": 15,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    border-radius: 100px;
+    background: ",
+                  [Function],
+                  ";
+    animation: ",
+                  Keyframes {
+                    "id": "sc-keyframes-fNcrEv",
+                    "inject": [Function],
+                    "name": "fNcrEv",
+                    "rules": Array [
+                      "@-webkit-keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                      "@keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                    ],
+                    "toString": [Function],
+                  },
+                  " 1.5s infinite ",
+                  [Function],
+                  "s;
+    width: ",
+                  [Function],
+                  "px;
+    height: ",
+                  [Function],
+                  "px;
+    ",
+                  "@media (max-width: 767px)",
+                  " {
+        width: ",
+                  [Function],
+                  "px;
+        height: ",
+                  [Function],
+                  "px;
+    }
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": "2",
+          "nodeType": "function",
+          "props": Object {
+            "children": <ForwardRef
+              animationDelay={0.2}
+              bgColor="#36b"
+              size={15}
+            />,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "animationDelay": 0.2,
+              "bgColor": "#36b",
+              "size": 15,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    border-radius: 100px;
+    background: ",
+                  [Function],
+                  ";
+    animation: ",
+                  Keyframes {
+                    "id": "sc-keyframes-fNcrEv",
+                    "inject": [Function],
+                    "name": "fNcrEv",
+                    "rules": Array [
+                      "@-webkit-keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                      "@keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                    ],
+                    "toString": [Function],
+                  },
+                  " 1.5s infinite ",
+                  [Function],
+                  "s;
+    width: ",
+                  [Function],
+                  "px;
+    height: ",
+                  [Function],
+                  "px;
+    ",
+                  "@media (max-width: 767px)",
+                  " {
+        width: ",
+                  [Function],
+                  "px;
+        height: ",
+                  [Function],
+                  "px;
+    }
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": "3",
+          "nodeType": "function",
+          "props": Object {
+            "children": <ForwardRef
+              animationDelay={0.30000000000000004}
+              bgColor="#36b"
+              size={15}
+            />,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "animationDelay": 0.30000000000000004,
+              "bgColor": "#36b",
+              "size": 15,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    border-radius: 100px;
+    background: ",
+                  [Function],
+                  ";
+    animation: ",
+                  Keyframes {
+                    "id": "sc-keyframes-fNcrEv",
+                    "inject": [Function],
+                    "name": "fNcrEv",
+                    "rules": Array [
+                      "@-webkit-keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                      "@keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                    ],
+                    "toString": [Function],
+                  },
+                  " 1.5s infinite ",
+                  [Function],
+                  "s;
+    width: ",
+                  [Function],
+                  "px;
+    height: ",
+                  [Function],
+                  "px;
+    ",
+                  "@media (max-width: 767px)",
+                  " {
+        width: ",
+                  [Function],
+                  "px;
+        height: ",
+                  [Function],
+                  "px;
+    }
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": "4",
+          "nodeType": "function",
+          "props": Object {
+            "children": <ForwardRef
+              animationDelay={0.4}
+              bgColor="#36b"
+              size={15}
+            />,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "animationDelay": 0.4,
+              "bgColor": "#36b",
+              "size": 15,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    border-radius: 100px;
+    background: ",
+                  [Function],
+                  ";
+    animation: ",
+                  Keyframes {
+                    "id": "sc-keyframes-fNcrEv",
+                    "inject": [Function],
+                    "name": "fNcrEv",
+                    "rules": Array [
+                      "@-webkit-keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                      "@keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                    ],
+                    "toString": [Function],
+                  },
+                  " 1.5s infinite ",
+                  [Function],
+                  "s;
+    width: ",
+                  [Function],
+                  "px;
+    height: ",
+                  [Function],
+                  "px;
+    ",
+                  "@media (max-width: 767px)",
+                  " {
+        width: ",
+                  [Function],
+                  "px;
+        height: ",
+                  [Function],
+                  "px;
+    }
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": "5",
+          "nodeType": "function",
+          "props": Object {
+            "children": <ForwardRef
+              animationDelay={0.5}
+              bgColor="#36b"
+              size={15}
+            />,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "animationDelay": 0.5,
+              "bgColor": "#36b",
+              "size": 15,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": false,
+                "rules": Array [
+                  "
+    border-radius: 100px;
+    background: ",
+                  [Function],
+                  ";
+    animation: ",
+                  Keyframes {
+                    "id": "sc-keyframes-fNcrEv",
+                    "inject": [Function],
+                    "name": "fNcrEv",
+                    "rules": Array [
+                      "@-webkit-keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                      "@keyframes fNcrEv{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}50%{-webkit-transform:scale3d(0.2,0.2,0.2);-ms-transform:scale3d(0.2,0.2,0.2);transform:scale3d(0.2,0.2,0.2);opacity:0.75;}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1);}}",
+                    ],
+                    "toString": [Function],
+                  },
+                  " 1.5s infinite ",
+                  [Function],
+                  "s;
+    width: ",
+                  [Function],
+                  "px;
+    height: ",
+                  [Function],
+                  "px;
+    ",
+                  "@media (max-width: 767px)",
+                  " {
+        width: ",
+                  [Function],
+                  "px;
+        height: ",
+                  [Function],
+                  "px;
+    }
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": true,
+          "rules": Array [
+            "
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+",
+          ],
+        },
+        "displayName": "styled.div",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 import formatFileSize from 'js/utils/formatFileSize';
 
 import AttachedFile from 'js/components/common/AttachedFile';

@@ -1,0 +1,242 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless AttachedFile 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <AttachedFile
+    removeHandler={[MockFunction]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <span
+          className="file-name"
+        />,
+        undefined,
+        undefined,
+      ],
+      "className": "attached-file",
+      "id": undefined,
+      "style": undefined,
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": undefined,
+          "className": "file-name",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "span",
+      },
+      undefined,
+      undefined,
+    ],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": true,
+        "rules": Array [
+          "
+    width: 285px;
+    background: rgb(245, 245, 245);
+    padding: 0 35px 0 13px;
+    height: 36px;
+    margin-bottom: 4px;
+    float: left;
+    clear: left;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    ",
+          "@media (max-width: 767px)",
+          " {
+        width: 100%;
+        min-width: unset;
+    }
+    .file-name {
+        font-size: 16px;
+        color: rgb(92, 141, 245);
+        letter-spacing: 0.5px;
+        font-weight: 600;
+        line-height: 36px;
+        display: block;
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        ",
+          "@media (max-width: 767px)",
+          " {
+            font-size: 14px;
+        }
+    }
+    .file-size {
+        font-size: 16px;
+        line-height: 36px;
+        width: 83px;
+        margin-left: 6px;
+        white-space: nowrap;
+    }
+    .file-close {
+        position: absolute;
+        right: 13px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <span
+            className="file-name"
+          />,
+          undefined,
+          undefined,
+        ],
+        "className": "attached-file",
+        "id": undefined,
+        "style": undefined,
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": undefined,
+            "className": "file-name",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "span",
+        },
+        undefined,
+        undefined,
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": true,
+          "rules": Array [
+            "
+    width: 285px;
+    background: rgb(245, 245, 245);
+    padding: 0 35px 0 13px;
+    height: 36px;
+    margin-bottom: 4px;
+    float: left;
+    clear: left;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    ",
+            "@media (max-width: 767px)",
+            " {
+        width: 100%;
+        min-width: unset;
+    }
+    .file-name {
+        font-size: 16px;
+        color: rgb(92, 141, 245);
+        letter-spacing: 0.5px;
+        font-weight: 600;
+        line-height: 36px;
+        display: block;
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        ",
+            "@media (max-width: 767px)",
+            " {
+            font-size: 14px;
+        }
+    }
+    .file-size {
+        font-size: 16px;
+        line-height: 36px;
+        width: 83px;
+        margin-left: 6px;
+        white-space: nowrap;
+    }
+    .file-close {
+        position: absolute;
+        right: 13px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+",
+          ],
+        },
+        "displayName": "styled.div",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

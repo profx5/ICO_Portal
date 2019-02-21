@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {media} from 'js/utils/media';
@@ -37,6 +38,14 @@ class SimpleModal extends React.Component {
     }
 }
 
+
+SimpleModal.propTypes = {
+    modalOpened: PropTypes.bool,
+    modalHead: PropTypes.string,
+    modalContent: PropTypes.string,
+    hideModal: PropTypes.func.isRequired,
+    clearModalInfo: PropTypes.func.isRequired
+}
 
 const mapStateToProps = ({UI}) => ({
     modalOpened: UI.get('modalOpened'),
