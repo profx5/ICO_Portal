@@ -1,0 +1,359 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless VerificationStages 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <VerificationStages
+    boundSections={Array []}
+    stages={Array []}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <ForwardRef
+          className="active"
+        />,
+        <ForwardRef />,
+        undefined,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": undefined,
+          "className": "active",
+          "data-bind-to": undefined,
+          "onClick": undefined,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+    height: 56px;
+    color: #323c47;
+    border-left: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    &:not(:last-child) {
+        border-bottom: 2px solid rgba(151,151,151,.2);
+    }
+    &:first-child {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+    }
+    &:last-child {
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+    &.active {
+      color: #3172fd;
+      border-left-color: #3172fd;
+    }
+",
+            ],
+          },
+          "displayName": "styled.li",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "li",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": undefined,
+          "data-bind-to": undefined,
+          "onClick": undefined,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+    height: 56px;
+    color: #323c47;
+    border-left: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    &:not(:last-child) {
+        border-bottom: 2px solid rgba(151,151,151,.2);
+    }
+    &:first-child {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+    }
+    &:last-child {
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+    &.active {
+      color: #3172fd;
+      border-left-color: #3172fd;
+    }
+",
+            ],
+          },
+          "displayName": "styled.li",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "li",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      undefined,
+    ],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": true,
+        "rules": Array [
+          "
+    border-radius: 4px;
+    background: white;
+    width: 315px;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
+    border-radius: 6px;
+    overflow: hidden; 
+    margin-bottom: 25px;
+",
+        ],
+      },
+      "displayName": "styled.ul",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "ul",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <ForwardRef
+            className="active"
+          />,
+          <ForwardRef />,
+          undefined,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": undefined,
+            "className": "active",
+            "data-bind-to": undefined,
+            "onClick": undefined,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+    height: 56px;
+    color: #323c47;
+    border-left: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    &:not(:last-child) {
+        border-bottom: 2px solid rgba(151,151,151,.2);
+    }
+    &:first-child {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+    }
+    &:last-child {
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+    &.active {
+      color: #3172fd;
+      border-left-color: #3172fd;
+    }
+",
+              ],
+            },
+            "displayName": "styled.li",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "li",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": undefined,
+            "data-bind-to": undefined,
+            "onClick": undefined,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+    height: 56px;
+    color: #323c47;
+    border-left: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    &:not(:last-child) {
+        border-bottom: 2px solid rgba(151,151,151,.2);
+    }
+    &:first-child {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+    }
+    &:last-child {
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+    &.active {
+      color: #3172fd;
+      border-left-color: #3172fd;
+    }
+",
+              ],
+            },
+            "displayName": "styled.li",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "li",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        undefined,
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": true,
+          "rules": Array [
+            "
+    border-radius: 4px;
+    background: white;
+    width: 315px;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
+    border-radius: 6px;
+    overflow: hidden; 
+    margin-bottom: 25px;
+",
+          ],
+        },
+        "displayName": "styled.ul",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "ul",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

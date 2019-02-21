@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import {media} from 'js/utils/media';
 
 
 const VerificationStages = ({stages, boundSections, stageClickHandler}) => {

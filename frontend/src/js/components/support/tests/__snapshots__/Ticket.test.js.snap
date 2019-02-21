@@ -55,7 +55,7 @@ ShallowWrapper {
               You
             </span>
             <span>
-              Message sent 20 February 2019
+              Message sent 21 February 2019
             </span>
           </div>
         </ForwardRef>,
@@ -258,7 +258,7 @@ ShallowWrapper {
                 You
               </span>
               <span>
-                Message sent 20 February 2019
+                Message sent 21 February 2019
               </span>
             </div>,
           ],
@@ -300,7 +300,7 @@ ShallowWrapper {
                   You
                 </span>,
                 <span>
-                  Message sent 20 February 2019
+                  Message sent 21 February 2019
                 </span>,
               ],
               "className": "hidden-xs",
@@ -323,10 +323,10 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": "Message sent 20 February 2019",
+                  "children": "Message sent 21 February 2019",
                 },
                 "ref": null,
-                "rendered": "Message sent 20 February 2019",
+                "rendered": "Message sent 21 February 2019",
                 "type": "span",
               },
             ],
@@ -456,7 +456,7 @@ ShallowWrapper {
                 You
               </span>
               <span>
-                Message sent 20 February 2019
+                Message sent 21 February 2019
               </span>
             </div>
           </ForwardRef>,
@@ -659,7 +659,7 @@ ShallowWrapper {
                   You
                 </span>
                 <span>
-                  Message sent 20 February 2019
+                  Message sent 21 February 2019
                 </span>
               </div>,
             ],
@@ -701,7 +701,7 @@ ShallowWrapper {
                     You
                   </span>,
                   <span>
-                    Message sent 20 February 2019
+                    Message sent 21 February 2019
                   </span>,
                 ],
                 "className": "hidden-xs",
@@ -724,10 +724,10 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": "Message sent 20 February 2019",
+                    "children": "Message sent 21 February 2019",
                   },
                   "ref": null,
-                  "rendered": "Message sent 20 February 2019",
+                  "rendered": "Message sent 21 February 2019",
                   "type": "span",
                 },
               ],
