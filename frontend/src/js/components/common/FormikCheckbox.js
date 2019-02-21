@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
@@ -31,6 +32,18 @@ const FormikCheckbox = ({value, name, labelText, errorStyle, errors, touched, cl
     );
 }
 
+
+FormikCheckbox.propTypes = {
+    value: PropTypes.string,
+    name: PropTypes.string,
+    labelText: PropTypes.string,
+    errorStyle: PropTypes.object,
+    errors: PropTypes.object,
+    touched: PropTypes.object,
+    className: PropTypes.string,
+    icon: PropTypes.string,
+    handler: PropTypes.func.isRequired
+}
 
 export default FormikCheckbox;
 

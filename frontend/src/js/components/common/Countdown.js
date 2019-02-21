@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 
@@ -118,6 +119,12 @@ class Countdown extends React.Component {
         const {days, hours, minutes, seconds} = this.state;
         return this.props.children(days, hours, minutes, seconds);
     }
+}
+
+
+Countdown.propTypes = {
+    startTime: PropTypes.string.isRequired,
+    endTime: PropTypes.string.isRequired
 }
 
 export default Countdown;

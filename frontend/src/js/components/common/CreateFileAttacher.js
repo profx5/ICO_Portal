@@ -142,7 +142,7 @@ CreateFileAttacher.propTypes = {
     name: PropTypes.string.isRequired,
     fileWrapper: PropTypes.any.isRequired,
     uploadFileHandler: PropTypes.func.isRequired,
-    text: PropTypes.string.isRequired,
+    text: PropTypes.string,
     limit: PropTypes.number,
     filesToValidate: PropTypes.array,
     errorText: PropTypes.string

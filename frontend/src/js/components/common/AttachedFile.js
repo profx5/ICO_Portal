@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {media} from 'js/utils/media';
 
@@ -22,6 +23,16 @@ const AttachedFile = ({fileName, fileSize, sizeUnits, id, removable, removeHandl
     )
 }
 
+
+AttachedFile.propTypes = {
+    fileName: PropTypes.string,
+    fileSize: PropTypes.number,
+    sizeUnits: PropTypes.string,
+    id: PropTypes.number,
+    removable: PropTypes.bool,
+    removeHandler: PropTypes.func.isRequired,
+    style: PropTypes.object,
+}
 
 export default AttachedFile;
 

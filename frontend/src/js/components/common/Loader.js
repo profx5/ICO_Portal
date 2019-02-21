@@ -1,5 +1,5 @@
 import React from 'react'
-import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import styled, {keyframes} from 'styled-components';
 import {media} from 'js/utils/media';
 
@@ -21,6 +21,13 @@ const Loader = ({amount = 5, size = 15, bgColor = "#36b"}) =>  {
             {createBubles()}
         </Wrapper>
     )
+}
+
+
+Loader.propTypes = {
+    amount: PropTypes.number,
+    size: PropTypes.number,
+    bgColor: PropTypes.string,
 }
 
 export default Loader;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
@@ -104,6 +105,17 @@ class CustomModal extends React.Component {
     }
 }
 
+
+CustomModal.propTypes = {
+    modalOpened: PropTypes.bool.isRequired,
+    openedModalId: PropTypes.number,
+    modalHead: PropTypes.string,
+    modalContent: PropTypes.string,
+    hideModal: PropTypes.func.isRequired,
+    clearModalInfo: PropTypes.func,
+    kycState: PropTypes.string,
+    type: PropTypes.string
+}
 
 const mapStateToProps = ({UI, KYC}) => ({
     modalOpened: UI.get('modalOpened'),

@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { keyframes } from "styled-components"
 
 import dotsIcon from 'img/dots.svg';
@@ -22,6 +23,15 @@ const CustomButton = ({text, className, clickHandler, submit, disabled, icon}) =
     )
 }
 
+
+CustomButton.propTypes = {
+    text: PropTypes.string,
+    className: PropTypes.string,
+    clickHandler: PropTypes.func.isRequired,
+    submit: PropTypes.string,
+    disabled: PropTypes.bool,
+    icon: PropTypes.string
+}
 
 export default CustomButton;
 

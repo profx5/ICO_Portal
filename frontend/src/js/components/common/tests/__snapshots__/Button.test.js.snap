@@ -1,0 +1,346 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render stateless Button 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Button
+    clickHandler={[MockFunction]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "attach": undefined,
+      "children": Array [
+        undefined,
+        undefined,
+        undefined,
+      ],
+      "className": undefined,
+      "isDisabled": undefined,
+      "onClick": [MockFunction],
+      "style": undefined,
+      "transparent": undefined,
+      "type": undefined,
+    },
+    "ref": null,
+    "rendered": Array [
+      undefined,
+      undefined,
+      undefined,
+    ],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bwzfXH",
+        "isStatic": false,
+        "rules": Array [
+          "
+    border: ",
+          [Function],
+          ";
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    border-radius: 2px;
+    color: ",
+          [Function],
+          ";
+    font-size: ",
+          [Function],
+          ";
+    font-weight: ",
+          [Function],
+          ";
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    color: ",
+          [Function],
+          ";
+    border-color: ",
+          [Function],
+          ";
+    ",
+          "@media (max-width: 767px)",
+          " {
+        font-size: 14px;
+    }
+    &.isDisabled {
+        color: white;
+        border-color: rgb(166, 166, 166);
+    }
+    &:hover {
+        color: ",
+          [Function],
+          ";
+        svg path {
+            fill: ",
+          [Function],
+          ";
+        }
+    }
+    &:hover:before {
+        opacity: ",
+          [Function],
+          ";
+    }
+    &:before, &:after {
+        content: '';
+        display: ",
+          [Function],
+          ";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transition: all .25s ease;
+    }
+    &:before {
+        opacity: ",
+          [Function],
+          ";
+        background: ",
+          [Function],
+          ";
+        z-index: -1;
+    }
+    &:after {
+        opacity: ",
+          [Function],
+          ";
+        background: ",
+          [Function],
+          ";
+        z-index: -2;
+    }
+    &:hover:before {
+        opacity: ",
+          [Function],
+          ";
+    }
+    &.btn-white {
+        background: white;
+        color: #484643;
+        font-weight: 600;
+        border: none;
+        &:before, &:after {
+            content: unset;
+            display: none;
+        }
+    }
+    .button-iconAttach {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+        path {
+            transition: all .25s ease;
+            fill: ",
+          [Function],
+          ";
+        }
+    }
+",
+        ],
+      },
+      "displayName": "styled.button",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bwzfXH",
+      "target": "button",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "attach": undefined,
+        "children": Array [
+          undefined,
+          undefined,
+          undefined,
+        ],
+        "className": undefined,
+        "isDisabled": undefined,
+        "onClick": [MockFunction],
+        "style": undefined,
+        "transparent": undefined,
+        "type": undefined,
+      },
+      "ref": null,
+      "rendered": Array [
+        undefined,
+        undefined,
+        undefined,
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bwzfXH",
+          "isStatic": false,
+          "rules": Array [
+            "
+    border: ",
+            [Function],
+            ";
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    border-radius: 2px;
+    color: ",
+            [Function],
+            ";
+    font-size: ",
+            [Function],
+            ";
+    font-weight: ",
+            [Function],
+            ";
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    color: ",
+            [Function],
+            ";
+    border-color: ",
+            [Function],
+            ";
+    ",
+            "@media (max-width: 767px)",
+            " {
+        font-size: 14px;
+    }
+    &.isDisabled {
+        color: white;
+        border-color: rgb(166, 166, 166);
+    }
+    &:hover {
+        color: ",
+            [Function],
+            ";
+        svg path {
+            fill: ",
+            [Function],
+            ";
+        }
+    }
+    &:hover:before {
+        opacity: ",
+            [Function],
+            ";
+    }
+    &:before, &:after {
+        content: '';
+        display: ",
+            [Function],
+            ";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transition: all .25s ease;
+    }
+    &:before {
+        opacity: ",
+            [Function],
+            ";
+        background: ",
+            [Function],
+            ";
+        z-index: -1;
+    }
+    &:after {
+        opacity: ",
+            [Function],
+            ";
+        background: ",
+            [Function],
+            ";
+        z-index: -2;
+    }
+    &:hover:before {
+        opacity: ",
+            [Function],
+            ";
+    }
+    &.btn-white {
+        background: white;
+        color: #484643;
+        font-weight: 600;
+        border: none;
+        &:before, &:after {
+            content: unset;
+            display: none;
+        }
+    }
+    .button-iconAttach {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+        path {
+            transition: all .25s ease;
+            fill: ",
+            [Function],
+            ";
+        }
+    }
+",
+          ],
+        },
+        "displayName": "styled.button",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bwzfXH",
+        "target": "button",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
