@@ -45,10 +45,10 @@ class _Base(ServiceObject):
 
 class SendPreparedTxns(_Base):
     def get_nonce(self, context):
-        aggregated = Transaction.objects.all().aggregate(Max('nonce'))
+        aggregated = Transaction.objects.aggregate(nonce=Max('nonce'))
 
-        if aggregated['nonce__max'] is not None:
-            db_nonce = aggregated['nonce__max'] + 1
+        if aggregated['nonce'] is not None:
+            db_nonce = aggregated['nonce'] + 1
         else:
             db_nonce = 0
 
