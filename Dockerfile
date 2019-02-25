@@ -1,10 +1,11 @@
-FROM node:9-jessie as frontend
+FROM node:11.9.0-stretch as frontend
 
 WORKDIR /tmp
 
 COPY package.json /tmp/
 RUN npm install
 
+COPY .env /tmp/
 COPY frontend /tmp/frontend
 
 RUN npm run build
