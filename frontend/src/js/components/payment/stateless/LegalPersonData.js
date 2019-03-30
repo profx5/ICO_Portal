@@ -10,95 +10,94 @@ const LegalPersonData = ({errors, touched, values}) => {
         <InputSet>
             <input type="hidden" name='type' value='LEGAL'/>
             <InputWrapper>
-                <FormikField 
+                <FormikField
                     value={values.business_name || ''}
                     name="business_name"
-                    placeholder="Apple" 
-                    labelText="Business name" 
-                    errors={errors} 
+                    placeholder="Apple"
+                    labelText="Business name"
+                    errors={errors}
                     touched={touched}
                     required/>
             </InputWrapper>
             <InputWrapper>
-                <FormikField 
-                    value={values.registration_number || ''} 
+                <FormikField
+                    value={values.registration_number || ''}
                     name="registration_number"
-                    placeholder="3928818" 
-                    labelText="Registration number" 
-                    errors={errors} 
-                    touched={touched} 
+                    placeholder="3928818"
+                    labelText="Registration number"
+                    errors={errors}
+                    touched={touched}
                     options={{numericOnly: true}}
                     required/>
             </InputWrapper>
             <InputWrapper>
-                <FormikField 
-                    value={values.beneficial_fullname || ''} 
-                    name="registration_date" 
-                    placeholder="2011/03/08" 
-                    labelText="Date of registration" 
-                    errors={errors} 
-                    touched={touched} 
+                <FormikField
+                    value={values.beneficial_fullname || ''}
+                    name="registration_date"
+                    placeholder="2011/03/08"
+                    labelText="Date of registration"
+                    errors={errors}
+                    touched={touched}
                     options={{date: true, datePattern: ['Y', 'm', 'd'], delimiter: '-'}}
                     required/>
             </InputWrapper>
             <InputWrapper>
-                <FormikField 
-                    value={values.beneficial_fullname || ''} 
+                <FormikField
+                    value={values.beneficial_fullname || ''}
                     name="phone_number"
-                    placeholder="+15417543010" 
-                    labelText="Phone number" 
-                    errors={errors} 
-                    touched={touched} 
-                    options={{numericOnly: true, prefix:'+', noImmediatePrefix: true}}
+                    placeholder="+15417543010"
+                    labelText="Phone number"
+                    errors={errors}
+                    touched={touched}
                     required/>
             </InputWrapper>
             <InputWrapper>
-                <FormikField 
-                    value={values.beneficial_fullname || ''} 
+                <FormikField
+                    value={values.beneficial_fullname || ''}
                     name="director_firstname"
-                    placeholder="Steve" 
-                    labelText="First name of director" 
-                    errors={errors} 
+                    placeholder="Steve"
+                    labelText="First name of director"
+                    errors={errors}
                     touched={touched}
                     required/>
             </InputWrapper>
             <InputWrapper>
-                <FormikField 
-                    value={values.beneficial_fullname || ''} 
+                <FormikField
+                    value={values.beneficial_fullname || ''}
                     name="director_lastname"
-                    placeholder="Jobs" 
+                    placeholder="Jobs"
                     labelText="Last Name of director"
-                    errors={errors} 
+                    errors={errors}
                     touched={touched}
                     required/>
             </InputWrapper>
             <InputWrapper>
-                <FormikField 
-                    value={values.beneficial_fullname || ''} 
+                <FormikField
+                    value={values.beneficial_fullname || ''}
                     name="email"
-                    placeholder="apple@gmail.com" 
-                    labelText="Email" 
-                    errors={errors} 
+                    placeholder="apple@gmail.com"
+                    labelText="Email"
+                    errors={errors}
                     touched={touched}
-                    required/> 
+                    required/>
             </InputWrapper>
             <InputWrapper>
-                <FormikField 
-                    value={values.beneficial_fullname || ''} 
+                <FormikField
+                    value={values.beneficial_fullname || ''}
                     name="address"
-                    placeholder="4150 Sydney Place Washington, DC 20521-4150" 
-                    labelText="Address" 
-                    errors={errors} 
+                    placeholder="4150 Sydney Place Washington, DC 20521-4150"
+                    labelText="Address"
+                    errors={errors}
                     touched={touched}
-                    required/> 
+                    required/>
             </InputWrapper>
             <InputWrapper>
-                <FormikField 
-                    value={values.beneficial_fullname || ''} 
+                <FormikField
+                    value={values.beneficial_fullname || ''}
                     name="field_of_activity"
-                    placeholder="Production of electronics" 
-                    labelText="Field of activity" 
-                    errors={errors} 
+                    placeholder="Production of electronics"
+                    labelText="Field of activity"
+                    errors={errors}
                     touched={touched}
                     required/>
             </InputWrapper>
@@ -136,5 +135,3 @@ const InputWrapper = styled.div`
         margin-bottom: 40px;
     }
 `;
-
-
